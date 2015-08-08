@@ -38,7 +38,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.orderId = "2111";
             creditObj.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             
@@ -93,7 +93,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.orderSource = orderSourceType.ecommerce;
 
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
 
@@ -117,7 +117,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.processingInstructions = processingInstructionsObj;
             
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
 
@@ -135,7 +135,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.orderId = "<&'>";
             creditObj.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000<>0000001";
             card.expDate = "1210";
 

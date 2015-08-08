@@ -199,7 +199,7 @@ namespace Litle.Sdk.Test.Unit
             auth.orderSource = orderSourceType.ecommerce;
             auth.reportGroup = "Planets";
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.GC;
+            card.type = MethodOfPaymentTypeEnum.GC;
             card.number = "414100000000000000";
             card.expDate = "1210";
             auth.card = card;
@@ -259,7 +259,7 @@ namespace Litle.Sdk.Test.Unit
         {
             authorization auth = new authorization();
             auth.card = new cardType();
-            auth.card.type = methodOfPaymentTypeEnum.VI;
+            auth.card.type = MethodOfPaymentTypeEnum.VI;
             auth.card.number = "4100000000000001";
             auth.card.expDate = "1213";
             auth.orderId = "12344";
@@ -289,7 +289,7 @@ namespace Litle.Sdk.Test.Unit
         {
             authorization auth = new authorization();
             auth.card = new cardType();
-            auth.card.type = methodOfPaymentTypeEnum.VI;
+            auth.card.type = MethodOfPaymentTypeEnum.VI;
             auth.card.number = "4100000000000001";
             auth.card.expDate = "1213";
             auth.orderId = "12344";
@@ -344,7 +344,7 @@ namespace Litle.Sdk.Test.Unit
         {
             authorization auth = new authorization();
             auth.card = new cardType();
-            auth.card.type = methodOfPaymentTypeEnum.VI;
+            auth.card.type = MethodOfPaymentTypeEnum.VI;
             auth.card.number = "4100000000000001";
             auth.card.expDate = "1213";
             auth.orderId = "12344";
@@ -389,7 +389,7 @@ namespace Litle.Sdk.Test.Unit
         {
             authorization auth = new authorization();
             auth.card = new cardType();
-            auth.card.type = methodOfPaymentTypeEnum.VI;
+            auth.card.type = MethodOfPaymentTypeEnum.VI;
             auth.card.number = "4100000000000001";
             auth.card.expDate = "1213";
             auth.orderId = "12344";

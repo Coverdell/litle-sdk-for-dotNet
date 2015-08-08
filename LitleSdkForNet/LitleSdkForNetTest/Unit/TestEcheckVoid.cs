@@ -46,7 +46,7 @@ namespace Litle.Sdk.Test.Unit
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             forcecapture.card = card;

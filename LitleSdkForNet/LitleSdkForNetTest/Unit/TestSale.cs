@@ -83,7 +83,7 @@ namespace Litle.Sdk.Test.Unit
         {
             sale sale = new sale();
             sale.card = new cardType();
-            sale.card.type = methodOfPaymentTypeEnum.VI;
+            sale.card.type = MethodOfPaymentTypeEnum.VI;
             sale.card.number = "4100000000000001";
             sale.card.expDate = "1213";
             sale.orderId = "12344";
@@ -137,7 +137,7 @@ namespace Litle.Sdk.Test.Unit
         {
             sale sale = new sale();
             sale.card = new cardType();
-            sale.card.type = methodOfPaymentTypeEnum.VI;
+            sale.card.type = MethodOfPaymentTypeEnum.VI;
             sale.card.number = "4100000000000001";
             sale.card.expDate = "1213";
             sale.orderId = "12344";
@@ -160,7 +160,7 @@ namespace Litle.Sdk.Test.Unit
         {
             sale sale = new sale();
             sale.card = new cardType();
-            sale.card.type = methodOfPaymentTypeEnum.VI;
+            sale.card.type = MethodOfPaymentTypeEnum.VI;
             sale.card.number = "4100000000000001";
             sale.card.expDate = "1213";
             sale.orderId = "12344";
@@ -185,7 +185,7 @@ namespace Litle.Sdk.Test.Unit
         {
             sale sale = new sale();
             sale.card = new cardType();
-            sale.card.type = methodOfPaymentTypeEnum.VI;
+            sale.card.type = MethodOfPaymentTypeEnum.VI;
             sale.card.number = "4100000000000001";
             sale.card.expDate = "1213";
             sale.orderId = "12344";

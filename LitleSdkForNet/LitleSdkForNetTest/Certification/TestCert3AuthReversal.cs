@@ -49,7 +49,7 @@ namespace Litle.Sdk.Test.Certification
             card.number = "4457010000000009";
             card.expDate = "0112";
             card.cardValidationNum = "349";
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             auth.card = card;
 
             authorizationResponse authorizeResponse = litle.Authorize(auth);
@@ -93,7 +93,7 @@ namespace Litle.Sdk.Test.Certification
             card.number = "5112010000000003";
             card.expDate = "0212";
             card.cardValidationNum = "261";
-            card.type = methodOfPaymentTypeEnum.MC;
+            card.type = MethodOfPaymentTypeEnum.MC;
             auth.card = card;
             fraudCheckType fraud = new fraudCheckType();
             fraud.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
@@ -132,7 +132,7 @@ namespace Litle.Sdk.Test.Certification
             card.number = "6011010000000003";
             card.expDate = "0312";
             card.cardValidationNum = "758";
-            card.type = methodOfPaymentTypeEnum.DI;
+            card.type = MethodOfPaymentTypeEnum.DI;
             auth.card = card;
 
             authorizationResponse authorizeResponse = litle.Authorize(auth);
@@ -167,7 +167,7 @@ namespace Litle.Sdk.Test.Certification
             cardType card = new cardType();
             card.number = "375001000000005";
             card.expDate = "0412";
-            card.type = methodOfPaymentTypeEnum.AX;
+            card.type = MethodOfPaymentTypeEnum.AX;
             auth.card = card;
 
             authorizationResponse authorizeResponse = litle.Authorize(auth);
@@ -201,7 +201,7 @@ namespace Litle.Sdk.Test.Certification
             cardType card = new cardType();
             card.number = "375000026600004";
             card.expDate = "0512";
-            card.type = methodOfPaymentTypeEnum.AX;
+            card.type = MethodOfPaymentTypeEnum.AX;
             auth.card = card;
 
             authorizationResponse authorizeResponse = litle.Authorize(auth);

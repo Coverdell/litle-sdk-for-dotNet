@@ -623,10 +623,10 @@ namespace Litle.Sdk.Test.Unit
             authorizationResponse authorizationResponse = (authorizationResponse)serializer.Deserialize(reader);
             Assert.AreEqual("TheMessage", authorizationResponse.accountUpdater.extendedCardResponse.message);
             Assert.AreEqual("TheCode", authorizationResponse.accountUpdater.extendedCardResponse.code);
-            Assert.AreEqual(methodOfPaymentTypeEnum.VI, authorizationResponse.accountUpdater.newCardInfo.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.VI, authorizationResponse.accountUpdater.newCardInfo.type);
             Assert.AreEqual("4100000000000000", authorizationResponse.accountUpdater.newCardInfo.number);
             Assert.AreEqual("1000", authorizationResponse.accountUpdater.newCardInfo.expDate);
-            Assert.AreEqual(methodOfPaymentTypeEnum.MC, authorizationResponse.accountUpdater.originalCardInfo.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.MC, authorizationResponse.accountUpdater.originalCardInfo.type);
             Assert.AreEqual("5300000000000000", authorizationResponse.accountUpdater.originalCardInfo.number);
             Assert.AreEqual("1100", authorizationResponse.accountUpdater.originalCardInfo.expDate);
         }

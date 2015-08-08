@@ -44,7 +44,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.authInformation = authInfo;
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card = card;
@@ -92,7 +92,7 @@ namespace Litle.Sdk.Test.Functional
             cardtoken.litleToken = "123456789101112";
             cardtoken.expDate ="1210";
             cardtoken.cardValidationNum = "555";
-            cardtoken.type = methodOfPaymentTypeEnum.VI;
+            cardtoken.type = MethodOfPaymentTypeEnum.VI;
             capturegivenauth.token = cardtoken;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Approved", response.message);
@@ -120,7 +120,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.processingInstructions = processinginstructions;
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card = card;
@@ -147,7 +147,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.authInformation = authInfo;
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card=card;
@@ -172,7 +172,7 @@ namespace Litle.Sdk.Test.Functional
             cardtoken.litleToken = "123456789101112";
             cardtoken.expDate = "1210";
             cardtoken.cardValidationNum = "555";
-            cardtoken.type = methodOfPaymentTypeEnum.VI;
+            cardtoken.type = MethodOfPaymentTypeEnum.VI;
             capturegivenauth.token = cardtoken;
             captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual("Approved", response.message);
@@ -193,7 +193,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.authInformation = authInfo;
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000000";
             card.expDate = "1210";
             capturegivenauth.card = card;

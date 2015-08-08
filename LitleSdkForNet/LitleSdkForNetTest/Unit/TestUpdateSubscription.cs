@@ -34,7 +34,7 @@ namespace Litle.Sdk.Test.Unit
             cardType card = new cardType();
             card.number = "4100000000000001";
             card.expDate = "1215";
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             update.card = card;
             update.planCode = "abcdefg";
             update.subscriptionId = 12345;

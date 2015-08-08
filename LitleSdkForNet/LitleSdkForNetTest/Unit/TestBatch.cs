@@ -92,7 +92,7 @@ namespace Litle.Sdk.Test.Unit
             accountUpdate.reportGroup = "Planets";
             accountUpdate.orderId = "12344";
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000002";
             card.expDate = "1210";
             accountUpdate.card = card;
@@ -157,7 +157,7 @@ namespace Litle.Sdk.Test.Unit
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000002";
             card.expDate = "1210";
             authorization.card = card;
@@ -333,7 +333,7 @@ namespace Litle.Sdk.Test.Unit
             capturegivenauth.authInformation = authinfo;
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             capturegivenauth.card = card;
@@ -394,7 +394,7 @@ namespace Litle.Sdk.Test.Unit
             credit.amount = 106;
             credit.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             credit.card = card;
@@ -700,7 +700,7 @@ namespace Litle.Sdk.Test.Unit
             forcecapture.amount = 106;
             forcecapture.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             forcecapture.card = card;
@@ -761,7 +761,7 @@ namespace Litle.Sdk.Test.Unit
             sale.amount = 106;
             sale.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000002";
             card.expDate = "1210";
             sale.card = card;
@@ -933,7 +933,7 @@ namespace Litle.Sdk.Test.Unit
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000002";
             card.expDate = "1210";
             authorization.card = card;
@@ -995,7 +995,7 @@ namespace Litle.Sdk.Test.Unit
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000002";
             card.expDate = "1210";
             authorization.card = card;
@@ -1042,7 +1042,7 @@ namespace Litle.Sdk.Test.Unit
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000002";
             card.expDate = "1210";
             authorization.card = card;
@@ -1105,7 +1105,7 @@ namespace Litle.Sdk.Test.Unit
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000002";
             card.expDate = "1210";
             authorization.card = card;
@@ -1244,7 +1244,7 @@ namespace Litle.Sdk.Test.Unit
             cardType card = new cardType();
             card.number = "4100000000000001";
             card.expDate = "1215";
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             update.card = card;
             update.planCode = "abcdefg";
             update.subscriptionId = 12345;

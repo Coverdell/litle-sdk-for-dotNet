@@ -39,7 +39,7 @@ namespace Litle.Sdk.Test.Functional
             saleObj.orderId = "12344";
             saleObj.orderSource = orderSourceType.ecommerce;
             cardType cardObj = new cardType();
-            cardObj.type = methodOfPaymentTypeEnum.VI;
+            cardObj.type = MethodOfPaymentTypeEnum.VI;
             cardObj.number = "4100000000000000";
             cardObj.expDate = "1210";
             saleObj.card = cardObj;
@@ -124,7 +124,7 @@ namespace Litle.Sdk.Test.Functional
             saleObj.orderId = "12344";
             saleObj.orderSource = orderSourceType.ecommerce;
             cardType cardObj = new cardType();
-            cardObj.type = methodOfPaymentTypeEnum.VI;
+            cardObj.type = MethodOfPaymentTypeEnum.VI;
             cardObj.number = "4100000000000000";
             cardObj.expDate = "1210";
             saleObj.card = cardObj;

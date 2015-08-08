@@ -71,7 +71,7 @@ namespace Litle.Sdk.Test.Functional
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             authorization.card = card;
@@ -84,7 +84,7 @@ namespace Litle.Sdk.Test.Functional
             authorization2.amount = 106;
             authorization2.orderSource = orderSourceType.ecommerce;
             cardType card2 = new cardType();
-            card2.type = methodOfPaymentTypeEnum.VI;
+            card2.type = MethodOfPaymentTypeEnum.VI;
             card2.number = "4242424242424242";
             card2.expDate = "1210";
             authorization2.card = card2;
@@ -487,7 +487,7 @@ namespace Litle.Sdk.Test.Functional
             accountUpdate accountUpdate1 = new accountUpdate();
             accountUpdate1.orderId = "1111";
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "414100000000000000";
             card.expDate = "1210";
             accountUpdate1.card = card;
@@ -534,7 +534,7 @@ namespace Litle.Sdk.Test.Functional
             accountUpdate accountUpdate1 = new accountUpdate();
             accountUpdate1.orderId = "1111";
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4242424242424242";
             card.expDate = "1210";
             accountUpdate1.card = card;
@@ -610,7 +610,7 @@ namespace Litle.Sdk.Test.Functional
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "414100000000000000";
             card.expDate = "1210";
             authorization.card = card;
@@ -839,7 +839,7 @@ namespace Litle.Sdk.Test.Functional
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             authorization.card = card; //This needs to compile      
@@ -852,7 +852,7 @@ namespace Litle.Sdk.Test.Functional
             authorization2.amount = 106;
             authorization2.orderSource = orderSourceType.ecommerce;
             cardType card2 = new cardType();
-            card2.type = methodOfPaymentTypeEnum.VI;
+            card2.type = MethodOfPaymentTypeEnum.VI;
             card2.number = "4242424242424242";
             card2.expDate = "1210";
             authorization2.card = card2; //This needs to compile
@@ -1095,7 +1095,7 @@ namespace Litle.Sdk.Test.Functional
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             authorization.card = card; //This needs to compile      
@@ -1108,7 +1108,7 @@ namespace Litle.Sdk.Test.Functional
             authorization2.amount = 106;
             authorization2.orderSource = orderSourceType.ecommerce;
             cardType card2 = new cardType();
-            card2.type = methodOfPaymentTypeEnum.VI;
+            card2.type = MethodOfPaymentTypeEnum.VI;
             card2.number = "4242424242424242";
             card2.expDate = "1210";
             authorization2.card = card2; //This needs to compile
@@ -1345,7 +1345,7 @@ namespace Litle.Sdk.Test.Functional
             authorization.amount = 106;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             authorization.card = card;

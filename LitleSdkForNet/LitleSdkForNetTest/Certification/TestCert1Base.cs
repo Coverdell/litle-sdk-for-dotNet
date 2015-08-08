@@ -48,7 +48,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();            
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4457010000000009";
             card.expDate = "0112";
             card.cardValidationNum = "349";
@@ -96,7 +96,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4457010000000009";
             card.expDate = "0112";
             card.cardValidationNum = "349";
@@ -126,7 +126,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             sale.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4457010000000009";
             card.expDate = "0112";
             card.cardValidationNum = "349";
@@ -170,7 +170,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
+            card.type = MethodOfPaymentTypeEnum.MC;
             card.number = "5112010000000003";
             card.expDate = "0212";
             card.cardValidationNum = "261";
@@ -222,7 +222,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
+            card.type = MethodOfPaymentTypeEnum.MC;
             card.number = "5112010000000003";
             card.expDate = "0212";
             card.cardValidationNum = "261";
@@ -257,7 +257,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             sale.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
+            card.type = MethodOfPaymentTypeEnum.MC;
             card.number = "5112010000000003";
             card.expDate = "0212";
             card.cardValidationNum = "261";
@@ -302,7 +302,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
+            card.type = MethodOfPaymentTypeEnum.DI;
             card.number = "6011010000000003";
             card.expDate = "0312";
             card.cardValidationNum = "758";
@@ -350,7 +350,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
+            card.type = MethodOfPaymentTypeEnum.DI;
             card.number = "6011010000000003";
             card.expDate = "0312";
             card.cardValidationNum = "758";
@@ -381,7 +381,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             sale.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
+            card.type = MethodOfPaymentTypeEnum.DI;
             card.number = "6011010000000003";
             card.expDate = "0312";
             card.cardValidationNum = "758";
@@ -423,7 +423,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
+            card.type = MethodOfPaymentTypeEnum.AX;
             card.number = "375001000000005";
             card.expDate = "0412";
             card.cardValidationNum = "758";
@@ -470,7 +470,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
+            card.type = MethodOfPaymentTypeEnum.AX;
             card.number = "375001000000005";
             card.expDate = "0412";
             card.cardValidationNum = "758";
@@ -499,7 +499,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             sale.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
+            card.type = MethodOfPaymentTypeEnum.AX;
             card.number = "375001000000005";
             card.expDate = "0412";
             card.cardValidationNum = "758";
@@ -532,7 +532,7 @@ namespace Litle.Sdk.Test.Certification
             authorization.amount = 50050;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4457010200000007";
             card.expDate = "0512";
             card.cardValidationNum = "463";
@@ -575,7 +575,7 @@ namespace Litle.Sdk.Test.Certification
             authorization.amount = 0;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4457010200000007";
             card.expDate = "0512";
             card.cardValidationNum = "463";
@@ -600,7 +600,7 @@ namespace Litle.Sdk.Test.Certification
             sale.amount = 50050;
             sale.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4457010200000007";
             card.expDate = "0512";
             card.cardValidationNum = "463";
@@ -645,7 +645,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4457010100000008";
             card.expDate = "0612";
             card.cardValidationNum = "992";
@@ -674,7 +674,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             sale.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4457010100000008";
             card.expDate = "0612";
             card.cardValidationNum = "992";
@@ -709,7 +709,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
+            card.type = MethodOfPaymentTypeEnum.MC;
             card.number = "5112010100000002";
             card.expDate = "0712";
             card.cardValidationNum = "251";
@@ -738,7 +738,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
+            card.type = MethodOfPaymentTypeEnum.MC;
             card.number = "5112010100000002";
             card.expDate = "0712";
             card.cardValidationNum = "251";
@@ -767,7 +767,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             sale.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
+            card.type = MethodOfPaymentTypeEnum.MC;
             card.number = "5112010100000002";
             card.expDate = "0712";
             card.cardValidationNum = "251";
@@ -796,7 +796,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
+            card.type = MethodOfPaymentTypeEnum.DI;
             card.number = "6011010100000002";
             card.expDate = "0812";
             card.cardValidationNum = "184";
@@ -825,7 +825,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
+            card.type = MethodOfPaymentTypeEnum.DI;
             card.number = "6011010100000002";
             card.expDate = "0812";
             card.cardValidationNum = "184";
@@ -854,7 +854,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             sale.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
+            card.type = MethodOfPaymentTypeEnum.DI;
             card.number = "6011010100000002";
             card.expDate = "0812";
             card.cardValidationNum = "184";
@@ -883,7 +883,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
+            card.type = MethodOfPaymentTypeEnum.AX;
             card.number = "375001010000003";
             card.expDate = "0912";
             card.cardValidationNum = "0421";
@@ -911,7 +911,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             authorization.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
+            card.type = MethodOfPaymentTypeEnum.AX;
             card.number = "375001010000003";
             card.expDate = "0912";
             card.cardValidationNum = "0421";
@@ -939,7 +939,7 @@ namespace Litle.Sdk.Test.Certification
             contact.country = countryTypeEnum.US;
             sale.billToAddress = contact;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
+            card.type = MethodOfPaymentTypeEnum.AX;
             card.number = "375001010000003";
             card.expDate = "0912";
             card.cardValidationNum = "0421";
@@ -959,7 +959,7 @@ namespace Litle.Sdk.Test.Certification
             authorization.amount = 40000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4457010140000141";
             card.expDate = "0912";
             authorization.card = card;
@@ -979,7 +979,7 @@ namespace Litle.Sdk.Test.Certification
             authorization.amount = 60000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
+            card.type = MethodOfPaymentTypeEnum.MC;
             card.number = "5112010140000004";
             card.expDate = "1111";
             authorization.card = card;
@@ -999,7 +999,7 @@ namespace Litle.Sdk.Test.Certification
             authorization.amount = 50000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
+            card.type = MethodOfPaymentTypeEnum.AX;
             card.number = "375001014000009";
             card.expDate = "0412";
             authorization.card = card;
@@ -1019,7 +1019,7 @@ namespace Litle.Sdk.Test.Certification
             authorization.amount = 15000;
             authorization.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
+            card.type = MethodOfPaymentTypeEnum.DI;
             card.number = "6011010140000004";
             card.expDate = "0812";
             authorization.card = card;

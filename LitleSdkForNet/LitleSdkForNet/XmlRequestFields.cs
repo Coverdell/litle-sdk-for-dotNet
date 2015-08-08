@@ -1110,9 +1110,9 @@ namespace Litle.Sdk
         public string litleToken;
         public string expDate;
         public string cardValidationNum;
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
         private bool typeSet;
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get { return this.typeField; }
             set { this.typeField = value; typeSet = true; }
@@ -1123,7 +1123,7 @@ namespace Litle.Sdk
             string xml = "\r\n<litleToken>" + SecurityElement.Escape(litleToken) + "</litleToken>";
             if (expDate != null) xml += "\r\n<expDate>" + SecurityElement.Escape(expDate) + "</expDate>";
             if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
-            if (typeSet) xml += "\r\n<type>" + methodOfPaymentSerializer.Serialize(typeField) + "</type>";
+            if (typeSet) xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(typeField) + "</type>";
             return xml;
         }
     }
@@ -1133,9 +1133,9 @@ namespace Litle.Sdk
         public string paypageRegistrationId;
         public string expDate;
         public string cardValidationNum;
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
         private bool typeSet;
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get { return this.typeField; }
             set { this.typeField = value; typeSet = true; }
@@ -1146,7 +1146,7 @@ namespace Litle.Sdk
             string xml = "\r\n<paypageRegistrationId>" + SecurityElement.Escape(paypageRegistrationId) + "</paypageRegistrationId>";
             if (expDate != null) xml += "\r\n<expDate>" + SecurityElement.Escape(expDate) + "</expDate>";
             if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
-            if (typeSet) xml += "\r\n<type>" + methodOfPaymentSerializer.Serialize(typeField) + "</type>";
+            if (typeSet) xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(typeField) + "</type>";
             return xml;
         }
     }
@@ -3111,7 +3111,7 @@ namespace Litle.Sdk
 
     public partial class cardType
     {
-        public methodOfPaymentTypeEnum type;
+        public MethodOfPaymentTypeEnum type;
         public string number;
         public string expDate;
         public string track;
@@ -3122,7 +3122,7 @@ namespace Litle.Sdk
             string xml = "";
             if (track == null)
             {
-                xml += "\r\n<type>" + methodOfPaymentSerializer.Serialize(type) + "</type>";
+                xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(type) + "</type>";
                 if (number != null)
                 {
                     xml += "\r\n<number>" + SecurityElement.Escape(number) + "</number>";

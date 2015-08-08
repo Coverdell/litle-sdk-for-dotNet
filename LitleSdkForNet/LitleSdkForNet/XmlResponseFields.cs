@@ -1058,7 +1058,7 @@ namespace Litle.Sdk
 
         private string tokenMessageField;
 
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
 
         private bool typeFieldSpecified;
 
@@ -1106,7 +1106,7 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get
             {
@@ -1170,7 +1170,7 @@ namespace Litle.Sdk
 
         private string litleTokenField;
 
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
 
         private string expDateField;
 
@@ -1190,7 +1190,7 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get
             {
@@ -1278,14 +1278,14 @@ namespace Litle.Sdk
     public partial class cardAccountInfoType
     {
 
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
 
         private string numberField;
 
         private string expDateField;
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get
             {
@@ -1443,12 +1443,12 @@ namespace Litle.Sdk
     public partial class accountInfoType
     {
 
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
 
         private string numberField;
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get
             {
@@ -1640,7 +1640,7 @@ namespace Litle.Sdk
 
         private string binField;
 
-        private methodOfPaymentTypeEnum? typeField;
+        private MethodOfPaymentTypeEnum? typeField;
 
         private bool typeFieldSpecified;
 
@@ -1707,7 +1707,7 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum? type
+        public MethodOfPaymentTypeEnum? type
         {
             get
             {

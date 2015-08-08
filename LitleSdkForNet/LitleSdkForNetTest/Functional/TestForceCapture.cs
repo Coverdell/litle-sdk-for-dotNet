@@ -37,7 +37,7 @@ namespace Litle.Sdk.Test.Functional
             forcecapture.orderId = "12344";
             forcecapture.orderSource = orderSourceType.ecommerce;
             cardType card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
+            card.type = MethodOfPaymentTypeEnum.VI;
             card.number = "4100000000000001";
             card.expDate = "1210";
             forcecapture.card = card;
@@ -73,7 +73,7 @@ namespace Litle.Sdk.Test.Functional
             token.litleToken = "123456789101112";
             token.expDate = "1210";
             token.cardValidationNum = "555";
-            token.type = methodOfPaymentTypeEnum.VI;
+            token.type = MethodOfPaymentTypeEnum.VI;
             forcecapture.token = token;
             forceCaptureResponse response = litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.message); ;
