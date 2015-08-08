@@ -24,12 +24,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestMerchantData()
         {
-            echeckRedeposit echeckRedeposit = new echeckRedeposit();
+            EcheckRedeposit echeckRedeposit = new EcheckRedeposit();
             echeckRedeposit.litleTxnId = 1;
-            echeckRedeposit.merchantData = new merchantDataType();
-            echeckRedeposit.merchantData.campaign = "camp";
-            echeckRedeposit.merchantData.affiliate = "affil";
-            echeckRedeposit.merchantData.merchantGroupingId = "mgi";
+            echeckRedeposit.MerchantData = new MerchantDataType();
+            echeckRedeposit.MerchantData.Campaign = "camp";
+            echeckRedeposit.MerchantData.Affiliate = "affil";
+            echeckRedeposit.MerchantData.MerchantGroupingId = "mgi";
            
             var mock = new Mock<Communications>();
 

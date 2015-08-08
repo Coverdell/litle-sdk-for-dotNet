@@ -20,9 +20,9 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleEcheckCredit()
         {
-            echeckCredit echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.litleTxnId = 123456789101112L;
+            EcheckCredit echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.LitleTxnId = 123456789101112L;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
 
             Assert.AreEqual("Approved", response.message);
@@ -31,7 +31,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void noLitleTxnId()
         {
-            echeckCredit echeckcredit = new echeckCredit();
+            EcheckCredit echeckcredit = new EcheckCredit();
             try
             {
                 litle.EcheckCredit(echeckcredit);
@@ -46,22 +46,22 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void echeckCreditWithEcheck()
         {
-            echeckCredit echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.orderId = "12345";
-            echeckcredit.orderSource = orderSourceType.ecommerce;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echeckcredit.echeck = echeck;
-            contact billToAddress = new contact();
-            billToAddress.name = "Bob";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "litle.com";
-            echeckcredit.billToAddress = billToAddress;
+            EcheckCredit echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.OrderId = "12345";
+            echeckcredit.OrderSource = OrderSourceType.Ecommerce;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echeckcredit.Echeck = echeck;
+            Contact billToAddress = new Contact();
+            billToAddress.Name = "Bob";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "litle.com";
+            echeckcredit.BillToAddress = billToAddress;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
             Assert.AreEqual("Approved", response.message);
         }
@@ -69,22 +69,22 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void echeckCreditWithToken()
         {
-            echeckCredit echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.orderId = "12345";
-            echeckcredit.orderSource = orderSourceType.ecommerce;
-            echeckTokenType echeckToken = new echeckTokenType();
-            echeckToken.accType = echeckAccountTypeEnum.Checking;
-            echeckToken.litleToken = "1234565789012";
-            echeckToken.routingNum = "123456789";
-            echeckToken.checkNum = "123455";
-            echeckcredit.echeckToken = echeckToken;
-            contact billToAddress = new contact();
-            billToAddress.name = "Bob";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "litle.com";
-            echeckcredit.billToAddress = billToAddress;
+            EcheckCredit echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.OrderId = "12345";
+            echeckcredit.OrderSource = OrderSourceType.Ecommerce;
+            EcheckTokenType echeckToken = new EcheckTokenType();
+            echeckToken.AccType = echeckAccountTypeEnum.Checking;
+            echeckToken.LitleToken = "1234565789012";
+            echeckToken.RoutingNum = "123456789";
+            echeckToken.CheckNum = "123455";
+            echeckcredit.EcheckToken = echeckToken;
+            Contact billToAddress = new Contact();
+            billToAddress.Name = "Bob";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "litle.com";
+            echeckcredit.BillToAddress = billToAddress;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
             Assert.AreEqual("Approved", response.message);
         }
@@ -92,16 +92,16 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void missingBilling()
         {
-            echeckCredit echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.orderId = "12345";
-            echeckcredit.orderSource = orderSourceType.ecommerce;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echeckcredit.echeck = echeck;
+            EcheckCredit echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.OrderId = "12345";
+            echeckcredit.OrderSource = OrderSourceType.Ecommerce;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echeckcredit.Echeck = echeck;
             try
             {
                 litle.EcheckCredit(echeckcredit);
@@ -116,24 +116,24 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void echeckCreditWithSecondaryAmountWithOrderIdAndCcdPaymentInfo()
         {
-            echeckCredit echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.secondaryAmount = 50;
-            echeckcredit.orderId = "12345";
-            echeckcredit.orderSource = orderSourceType.ecommerce;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echeck.ccdPaymentInformation = "9876554";
-            echeckcredit.echeck = echeck;
-            contact billToAddress = new contact();
-            billToAddress.name = "Bob";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "litle.com";
-            echeckcredit.billToAddress = billToAddress;
+            EcheckCredit echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.SecondaryAmount = 50;
+            echeckcredit.OrderId = "12345";
+            echeckcredit.OrderSource = OrderSourceType.Ecommerce;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echeck.CcdPaymentInformation = "9876554";
+            echeckcredit.Echeck = echeck;
+            Contact billToAddress = new Contact();
+            billToAddress.Name = "Bob";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "litle.com";
+            echeckcredit.BillToAddress = billToAddress;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
             Assert.AreEqual("Approved", response.message);
         }
@@ -141,10 +141,10 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void echeckCreditWithSecondaryAmountWithLitleTxnId()
         {
-            echeckCredit echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.secondaryAmount = 50;
-            echeckcredit.litleTxnId = 12345L;
+            EcheckCredit echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.SecondaryAmount = 50;
+            echeckcredit.LitleTxnId = 12345L;
             echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
             Assert.AreEqual("Approved", response.message);
         }

@@ -23,10 +23,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimple()
         {
-            deactivateReversal deactivateReversal = new deactivateReversal();
+            DeactivateReversal deactivateReversal = new DeactivateReversal();
             deactivateReversal.id = "a";
             deactivateReversal.reportGroup = "b";
-            deactivateReversal.litleTxnId = "123";
+            deactivateReversal.LitleTxnId = "123";
 
             var mock = new Mock<Communications>();
 

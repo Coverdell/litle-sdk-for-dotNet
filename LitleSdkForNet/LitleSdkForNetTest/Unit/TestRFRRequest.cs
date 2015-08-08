@@ -110,11 +110,11 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            accountUpdateFileRequestData accountUpdateFileRequest = new accountUpdateFileRequestData(mockConfig);
-            accountUpdateFileRequestData accountUpdateFileRequestDefault = new accountUpdateFileRequestData();
+            AccountUpdateFileRequestData accountUpdateFileRequest = new AccountUpdateFileRequestData(mockConfig);
+            AccountUpdateFileRequestData accountUpdateFileRequestDefault = new AccountUpdateFileRequestData();
 
-            Assert.AreEqual(accountUpdateFileRequestDefault.merchantId, Properties.Settings.Default.merchantId);
-            Assert.AreEqual(accountUpdateFileRequest.merchantId, mockConfig["merchantId"]);
+            Assert.AreEqual(accountUpdateFileRequestDefault.MerchantId, Properties.Settings.Default.merchantId);
+            Assert.AreEqual(accountUpdateFileRequest.MerchantId, mockConfig["merchantId"]);
         }
     }
 }

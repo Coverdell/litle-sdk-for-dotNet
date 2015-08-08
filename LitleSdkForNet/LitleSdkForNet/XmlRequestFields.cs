@@ -1,263 +1,288 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Globalization;
 using System.Security;
 using System.Xml.Serialization;
+using Litle.Sdk.Properties;
 
 namespace Litle.Sdk
 {
-    public partial class litleOnlineRequest
+    public class LitleOnlineRequest
     {
-
-        public string merchantId;
-        public string merchantSdk;
-        public authentication authentication;
-        public authorization authorization;
-        public capture capture;
-        public credit credit;
-        public voidTxn voidTxn;
-        public sale sale;
-        public authReversal authReversal;
-        public echeckCredit echeckCredit;
-        public echeckVerification echeckVerification;
-        public echeckSale echeckSale;
-        public registerTokenRequestType registerTokenRequest;
-        public forceCapture forceCapture;
-        public captureGivenAuth captureGivenAuth;
-        public echeckRedeposit echeckRedeposit;
-        public echeckVoid echeckVoid;
-        public updateCardValidationNumOnToken updateCardValidationNumOnToken;
-        public updateSubscription updateSubscription;
-        public cancelSubscription cancelSubscription;
-        public activate activate;
-        public deactivate deactivate;
-        public load load;
-        public unload unload;
-        public balanceInquiry balanceInquiry;
-        public createPlan createPlan;
-        public updatePlan updatePlan;
-        public refundReversal refundReversal;
-        public loadReversal loadReversal;
-        public depositReversal depositReversal;
-        public activateReversal activateReversal;
-        public deactivateReversal deactivateReversal;
-        public unloadReversal unloadReversal;
+        public string MerchantId;
+        public string MerchantSdk;
+        public Authentication Authentication;
+        public Authorization Authorization;
+        public Capture Capture;
+        public Credit Credit;
+        public VoidTxn VoidTxn;
+        public Sale Sale;
+        public AuthReversal AuthReversal;
+        public EcheckCredit EcheckCredit;
+        public EcheckVerification EcheckVerification;
+        public EcheckSale EcheckSale;
+        public RegisterTokenRequestType RegisterTokenRequest;
+        public ForceCapture ForceCapture;
+        public CaptureGivenAuth CaptureGivenAuth;
+        public EcheckRedeposit EcheckRedeposit;
+        public EcheckVoid EcheckVoid;
+        public UpdateCardValidationNumOnToken UpdateCardValidationNumOnToken;
+        public UpdateSubscription UpdateSubscription;
+        public CancelSubscription CancelSubscription;
+        public Activate Activate;
+        public Deactivate Deactivate;
+        public Load Load;
+        public Unload Unload;
+        public BalanceInquiry BalanceInquiry;
+        public CreatePlan CreatePlan;
+        public UpdatePlan UpdatePlan;
+        public RefundReversal RefundReversal;
+        public LoadReversal LoadReversal;
+        public DepositReversal DepositReversal;
+        public ActivateReversal ActivateReversal;
+        public DeactivateReversal DeactivateReversal;
+        public UnloadReversal UnloadReversal;
 
         public string Serialize()
         {
-            string xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + merchantId + "\" version=\"9.3\" merchantSdk=\"" + merchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
-                + authentication.Serialize();
+            var xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + MerchantId +
+                         "\" version=\"9.3\" merchantSdk=\"" + MerchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
+                         + Authentication.Serialize();
 
-            if (authorization != null) xml += authorization.Serialize();
-            else if (capture != null) xml += capture.Serialize();
-            else if (credit != null) xml += credit.Serialize();
-            else if (voidTxn != null) xml += voidTxn.Serialize();
-            else if (sale != null) xml += sale.Serialize();
-            else if (authReversal != null) xml += authReversal.Serialize();
-            else if (echeckCredit != null) xml += echeckCredit.Serialize();
-            else if (echeckVerification != null) xml += echeckVerification.Serialize();
-            else if (echeckSale != null) xml += echeckSale.Serialize();
-            else if (registerTokenRequest != null) xml += registerTokenRequest.Serialize();
-            else if (forceCapture != null) xml += forceCapture.Serialize();
-            else if (captureGivenAuth != null) xml += captureGivenAuth.Serialize();
-            else if (echeckRedeposit != null) xml += echeckRedeposit.Serialize();
-            else if (echeckVoid != null) xml += echeckVoid.Serialize();
-            else if (updateCardValidationNumOnToken != null) xml += updateCardValidationNumOnToken.Serialize();
-            else if (updateSubscription != null) xml += updateSubscription.Serialize();
-            else if (cancelSubscription != null) xml += cancelSubscription.Serialize();
-            else if (activate != null) xml += activate.Serialize();
-            else if (deactivate != null) xml += deactivate.Serialize();
-            else if (load != null) xml += load.Serialize();
-            else if (unload != null) xml += unload.Serialize();
-            else if (balanceInquiry != null) xml += balanceInquiry.Serialize();
-            else if (createPlan != null) xml += createPlan.Serialize();
-            else if (updatePlan != null) xml += updatePlan.Serialize();
-            else if (refundReversal != null) xml += refundReversal.Serialize();
-            else if (loadReversal != null) xml += loadReversal.Serialize();
-            else if (depositReversal != null) xml += depositReversal.Serialize();
-            else if (activateReversal != null) xml += activateReversal.Serialize();
-            else if (deactivateReversal != null) xml += deactivateReversal.Serialize();
-            else if (unloadReversal != null) xml += unloadReversal.Serialize();
+            if (Authorization != null) xml += Authorization.Serialize();
+            else if (Capture != null) xml += Capture.Serialize();
+            else if (Credit != null) xml += Credit.Serialize();
+            else if (VoidTxn != null) xml += VoidTxn.Serialize();
+            else if (Sale != null) xml += Sale.Serialize();
+            else if (AuthReversal != null) xml += AuthReversal.Serialize();
+            else if (EcheckCredit != null) xml += EcheckCredit.Serialize();
+            else if (EcheckVerification != null) xml += EcheckVerification.Serialize();
+            else if (EcheckSale != null) xml += EcheckSale.Serialize();
+            else if (RegisterTokenRequest != null) xml += RegisterTokenRequest.Serialize();
+            else if (ForceCapture != null) xml += ForceCapture.Serialize();
+            else if (CaptureGivenAuth != null) xml += CaptureGivenAuth.Serialize();
+            else if (EcheckRedeposit != null) xml += EcheckRedeposit.Serialize();
+            else if (EcheckVoid != null) xml += EcheckVoid.Serialize();
+            else if (UpdateCardValidationNumOnToken != null) xml += UpdateCardValidationNumOnToken.Serialize();
+            else if (UpdateSubscription != null) xml += UpdateSubscription.Serialize();
+            else if (CancelSubscription != null) xml += CancelSubscription.Serialize();
+            else if (Activate != null) xml += Activate.Serialize();
+            else if (Deactivate != null) xml += Deactivate.Serialize();
+            else if (Load != null) xml += Load.Serialize();
+            else if (Unload != null) xml += Unload.Serialize();
+            else if (BalanceInquiry != null) xml += BalanceInquiry.Serialize();
+            else if (CreatePlan != null) xml += CreatePlan.Serialize();
+            else if (UpdatePlan != null) xml += UpdatePlan.Serialize();
+            else if (RefundReversal != null) xml += RefundReversal.Serialize();
+            else if (LoadReversal != null) xml += LoadReversal.Serialize();
+            else if (DepositReversal != null) xml += DepositReversal.Serialize();
+            else if (ActivateReversal != null) xml += ActivateReversal.Serialize();
+            else if (DeactivateReversal != null) xml += DeactivateReversal.Serialize();
+            else if (UnloadReversal != null) xml += UnloadReversal.Serialize();
             xml += "\r\n</litleOnlineRequest>";
 
             return xml;
         }
     }
 
-
-    public partial class authentication
+    public class Authentication
     {
-        public string user;
-        public string password;
+        public string User;
+        public string Password;
+
         public String Serialize()
         {
-            return "\r\n<authentication>\r\n<user>" + SecurityElement.Escape(user) + "</user>\r\n<password>" + SecurityElement.Escape(password) + "</password>\r\n</authentication>";
+            return "\r\n<authentication>\r\n<user>" + SecurityElement.Escape(User) + "</user>\r\n<password>" +
+                   SecurityElement.Escape(Password) + "</password>\r\n</authentication>";
         }
     }
 
-    public partial class customerInfo
+    public class CustomerInfo
     {
+        public string Ssn;
 
-        public string ssn;
+        public DateTime Dob;
 
-        public DateTime dob;
+        public DateTime CustomerRegistrationDate;
 
-        public DateTime customerRegistrationDate;
+        private CustomerInfoCustomerType _customerTypeField;
+        private bool _customerTypeSet;
 
-        private customerInfoCustomerType customerTypeField;
-        private bool customerTypeSet;
-        public customerInfoCustomerType customerType
+        public CustomerInfoCustomerType CustomerType
         {
-            get { return this.customerTypeField; }
-            set { this.customerTypeField = value; customerTypeSet = true; }
-        }
-
-        private long incomeAmountField;
-        private bool incomeAmountSet;
-        public long incomeAmount
-        {
-            get { return this.incomeAmountField; }
-            set { this.incomeAmountField = value; incomeAmountSet = true; }
-        }
-
-        private currencyCodeEnum incomeCurrencyField;
-        private bool incomeCurrencySet;
-        public currencyCodeEnum incomeCurrency
-        {
-            get { return this.incomeCurrencyField; }
-            set { this.incomeCurrencyField = value; incomeCurrencySet = true; }
-        }
-
-        private bool customerCheckingAccountField;
-        private bool customerCheckingAccountSet;
-        public bool customerCheckingAccount
-        {
-            get { return this.customerCheckingAccountField; }
-            set { this.customerCheckingAccountField = value; customerCheckingAccountSet = true; }
-        }
-
-        private bool customerSavingAccountField;
-        private bool customerSavingAccountSet;
-        public bool customerSavingAccount
-        {
-            get { return this.customerSavingAccountField; }
-            set { this.customerSavingAccountField = value; customerSavingAccountSet = true; }
-        }
-
-        public string employerName;
-
-        public string customerWorkTelephone;
-
-        private customerInfoResidenceStatus residenceStatusField;
-        private bool residenceStatusSet;
-        public customerInfoResidenceStatus residenceStatus
-        {
-            get { return this.residenceStatusField; }
-            set { this.residenceStatusField = value; residenceStatusSet = true; }
-        }
-
-        private int yearsAtResidenceField;
-        private bool yearsAtResidenceSet;
-        public int yearsAtResidence
-        {
-            get { return this.yearsAtResidenceField; }
-            set { this.yearsAtResidenceField = value; yearsAtResidenceSet = true; }
-        }
-
-        private int yearsAtEmployerField;
-        private bool yearsAtEmployerSet;
-        public int yearsAtEmployer
-        {
-            get
-            {
-                return this.yearsAtEmployerField;
-            }
+            get { return _customerTypeField; }
             set
             {
-                this.yearsAtEmployerField = value;
-                this.yearsAtEmployerSet = true;
+                _customerTypeField = value;
+                _customerTypeSet = true;
             }
         }
 
+        private long _incomeAmountField;
+        private bool _incomeAmountSet;
 
-        public customerInfo()
+        public long IncomeAmount
         {
-            this.incomeCurrency = currencyCodeEnum.USD;
+            get { return _incomeAmountField; }
+            set
+            {
+                _incomeAmountField = value;
+                _incomeAmountSet = true;
+            }
+        }
+
+        private CurrencyCodeEnum _incomeCurrencyField;
+        private bool _incomeCurrencySet;
+
+        public CurrencyCodeEnum IncomeCurrency
+        {
+            get { return _incomeCurrencyField; }
+            set
+            {
+                _incomeCurrencyField = value;
+                _incomeCurrencySet = true;
+            }
+        }
+
+        private bool _customerCheckingAccountField;
+        private bool _customerCheckingAccountSet;
+
+        public bool CustomerCheckingAccount
+        {
+            get { return _customerCheckingAccountField; }
+            set
+            {
+                _customerCheckingAccountField = value;
+                _customerCheckingAccountSet = true;
+            }
+        }
+
+        private bool _customerSavingAccountField;
+        private bool _customerSavingAccountSet;
+
+        public bool CustomerSavingAccount
+        {
+            get { return _customerSavingAccountField; }
+            set
+            {
+                _customerSavingAccountField = value;
+                _customerSavingAccountSet = true;
+            }
+        }
+
+        public string EmployerName;
+
+        public string CustomerWorkTelephone;
+
+        private CustomerInfoResidenceStatus _residenceStatusField;
+        private bool _residenceStatusSet;
+
+        public CustomerInfoResidenceStatus ResidenceStatus
+        {
+            get { return _residenceStatusField; }
+            set
+            {
+                _residenceStatusField = value;
+                _residenceStatusSet = true;
+            }
+        }
+
+        private int _yearsAtResidenceField;
+        private bool _yearsAtResidenceSet;
+
+        public int YearsAtResidence
+        {
+            get { return _yearsAtResidenceField; }
+            set
+            {
+                _yearsAtResidenceField = value;
+                _yearsAtResidenceSet = true;
+            }
+        }
+
+        private int _yearsAtEmployerField;
+        private bool _yearsAtEmployerSet;
+
+        public int YearsAtEmployer
+        {
+            get { return _yearsAtEmployerField; }
+            set
+            {
+                _yearsAtEmployerField = value;
+                _yearsAtEmployerSet = true;
+            }
+        }
+
+        public CustomerInfo()
+        {
+            IncomeCurrency = CurrencyCodeEnum.USD;
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (ssn != null)
+            var xml = "";
+            if (Ssn != null)
             {
-                xml += "\r\n<ssn>" + SecurityElement.Escape(ssn) + "</ssn>";
+                xml += "\r\n<ssn>" + SecurityElement.Escape(Ssn) + "</ssn>";
             }
-            if (dob != null)
+            xml += "\r\n<dob>" + XmlUtil.ToXsdDate(Dob) + "</dob>";
+            xml += "\r\n<customerRegistrationDate>" + XmlUtil.ToXsdDate(CustomerRegistrationDate) +
+                   "</customerRegistrationDate>";
+            if (_customerTypeSet)
             {
-                xml += "\r\n<dob>" + XmlUtil.toXsdDate(dob) + "</dob>";
+                xml += "\r\n<customerType>" + _customerTypeField + "</customerType>";
             }
-            if (customerRegistrationDate != null)
+            if (_incomeAmountSet)
             {
-                xml += "\r\n<customerRegistrationDate>" + XmlUtil.toXsdDate(customerRegistrationDate) + "</customerRegistrationDate>";
+                xml += "\r\n<incomeAmount>" + _incomeAmountField + "</incomeAmount>";
             }
-            if (customerTypeSet)
+            if (_incomeCurrencySet)
             {
-                xml += "\r\n<customerType>" + customerTypeField + "</customerType>";
+                xml += "\r\n<incomeCurrency>" + _incomeCurrencyField + "</incomeCurrency>";
             }
-            if (incomeAmountSet)
+            if (_customerCheckingAccountSet)
             {
-                xml += "\r\n<incomeAmount>" + incomeAmountField + "</incomeAmount>";
+                xml += "\r\n<customerCheckingAccount>" + _customerCheckingAccountField.ToString().ToLower() +
+                       "</customerCheckingAccount>";
             }
-            if (incomeCurrencySet)
+            if (_customerSavingAccountSet)
             {
-                xml += "\r\n<incomeCurrency>" + incomeCurrencyField + "</incomeCurrency>";
+                xml += "\r\n<customerSavingAccount>" + _customerSavingAccountField.ToString().ToLower() +
+                       "</customerSavingAccount>";
             }
-            if (customerCheckingAccountSet)
+            if (EmployerName != null)
             {
-                xml += "\r\n<customerCheckingAccount>" + customerCheckingAccountField.ToString().ToLower() + "</customerCheckingAccount>";
+                xml += "\r\n<employerName>" + SecurityElement.Escape(EmployerName) + "</employerName>";
             }
-            if (customerSavingAccountSet)
+            if (CustomerWorkTelephone != null)
             {
-                xml += "\r\n<customerSavingAccount>" + customerSavingAccountField.ToString().ToLower() + "</customerSavingAccount>";
+                xml += "\r\n<customerWorkTelephone>" + SecurityElement.Escape(CustomerWorkTelephone) +
+                       "</customerWorkTelephone>";
             }
-            if (employerName != null)
+            if (_residenceStatusSet)
             {
-                xml += "\r\n<employerName>" + SecurityElement.Escape(employerName) + "</employerName>";
+                xml += "\r\n<residenceStatus>" + _residenceStatusField + "</residenceStatus>";
             }
-            if (customerWorkTelephone != null)
+            if (_yearsAtResidenceSet)
             {
-                xml += "\r\n<customerWorkTelephone>" + SecurityElement.Escape(customerWorkTelephone) + "</customerWorkTelephone>";
+                xml += "\r\n<yearsAtResidence>" + _yearsAtResidenceField + "</yearsAtResidence>";
             }
-            if (residenceStatusSet)
+            if (_yearsAtEmployerSet)
             {
-                xml += "\r\n<residenceStatus>" + residenceStatusField + "</residenceStatus>";
-            }
-            if (yearsAtResidenceSet)
-            {
-                xml += "\r\n<yearsAtResidence>" + yearsAtResidenceField + "</yearsAtResidence>";
-            }
-            if (yearsAtEmployerSet)
-            {
-                xml += "\r\n<yearsAtEmployer>" + yearsAtEmployerField + "</yearsAtEmployer>";
+                xml += "\r\n<yearsAtEmployer>" + _yearsAtEmployerField + "</yearsAtEmployer>";
             }
             return xml;
         }
-
-
     }
 
-    public enum customerInfoCustomerType
+    public enum CustomerInfoCustomerType
     {
-
-        /// <remarks/>
         New,
         Existing,
     }
 
-    public enum currencyCodeEnum
+    public enum CurrencyCodeEnum
     {
-
-        /// <remarks/>
         AUD,
         CAD,
         CHF,
@@ -273,106 +298,159 @@ namespace Litle.Sdk
         USD,
     }
 
-    public enum customerInfoResidenceStatus
+    public enum CustomerInfoResidenceStatus
     {
-
-        /// <remarks/>
         Own,
         Rent,
         Other,
     }
 
-    public partial class enhancedData
+    public class EnhancedData
     {
-        public string customerReference;
-        private long salesTaxField;
-        private bool salesTaxSet;
-        public long salesTax
-        {
-            get { return this.salesTaxField; }
-            set { this.salesTaxField = value; this.salesTaxSet = true; }
-        }
-        private enhancedDataDeliveryType deliveryTypeField;
-        private bool deliveryTypeSet;
-        public enhancedDataDeliveryType deliveryType
-        {
-            get { return this.deliveryTypeField; }
-            set { this.deliveryTypeField = value; this.deliveryTypeSet = true; }
-        }
-        public bool taxExemptField;
-        public bool taxExemptSet;
-        public bool taxExempt
-        {
-            get { return this.taxExemptField; }
-            set { this.taxExemptField = value; this.taxExemptSet = true; }
-        }
-        private long discountAmountField;
-        private bool discountAmountSet;
-        public long discountAmount
-        {
-            get { return this.discountAmountField; }
-            set { this.discountAmountField = value; this.discountAmountSet = true; }
-        }
-        private long shippingAmountField;
-        private bool shippingAmountSet;
-        public long shippingAmount
-        {
-            get { return this.shippingAmountField; }
-            set { this.shippingAmountField = value; this.shippingAmountSet = true; }
-        }
-        private long dutyAmountField;
-        private bool dutyAmountSet;
-        public long dutyAmount
-        {
-            get { return this.dutyAmountField; }
-            set { this.dutyAmountField = value; this.dutyAmountSet = true; }
-        }
-        public string shipFromPostalCode;
-        public string destinationPostalCode;
-        private countryTypeEnum destinationCountryCodeField;
-        private bool destinationCountryCodeSet;
-        public countryTypeEnum destinationCountry
-        {
-            get { return this.destinationCountryCodeField; }
-            set { this.destinationCountryCodeField = value; this.destinationCountryCodeSet = true; }
-        }
-        public string invoiceReferenceNumber;
-        private DateTime orderDateField;
-        private bool orderDateSet;
-        public DateTime orderDate
-        {
-            get { return this.orderDateField; }
-            set { this.orderDateField = value; this.orderDateSet = true; }
-        }
-        public List<detailTax> detailTaxes;
-        public List<lineItemData> lineItems;
+        public string CustomerReference;
+        private long _salesTaxField;
+        private bool _salesTaxSet;
 
-        public enhancedData()
+        public long SalesTax
         {
-            lineItems = new List<lineItemData>();
-            detailTaxes = new List<detailTax>();
+            get { return _salesTaxField; }
+            set
+            {
+                _salesTaxField = value;
+                _salesTaxSet = true;
+            }
+        }
+
+        private enhancedDataDeliveryType _deliveryTypeField;
+        private bool _deliveryTypeSet;
+
+        public enhancedDataDeliveryType DeliveryType
+        {
+            get { return _deliveryTypeField; }
+            set
+            {
+                _deliveryTypeField = value;
+                _deliveryTypeSet = true;
+            }
+        }
+
+        public bool TaxExemptField;
+        public bool TaxExemptSet;
+
+        public bool TaxExempt
+        {
+            get { return TaxExemptField; }
+            set
+            {
+                TaxExemptField = value;
+                TaxExemptSet = true;
+            }
+        }
+
+        private long _discountAmountField;
+        private bool _discountAmountSet;
+
+        public long DiscountAmount
+        {
+            get { return _discountAmountField; }
+            set
+            {
+                _discountAmountField = value;
+                _discountAmountSet = true;
+            }
+        }
+
+        private long _shippingAmountField;
+        private bool _shippingAmountSet;
+
+        public long ShippingAmount
+        {
+            get { return _shippingAmountField; }
+            set
+            {
+                _shippingAmountField = value;
+                _shippingAmountSet = true;
+            }
+        }
+
+        private long _dutyAmountField;
+        private bool _dutyAmountSet;
+
+        public long DutyAmount
+        {
+            get { return _dutyAmountField; }
+            set
+            {
+                _dutyAmountField = value;
+                _dutyAmountSet = true;
+            }
+        }
+
+        public string ShipFromPostalCode;
+        public string DestinationPostalCode;
+        private CountryTypeEnum _destinationCountryCodeField;
+        private bool _destinationCountryCodeSet;
+
+        public CountryTypeEnum DestinationCountry
+        {
+            get { return _destinationCountryCodeField; }
+            set
+            {
+                _destinationCountryCodeField = value;
+                _destinationCountryCodeSet = true;
+            }
+        }
+
+        public string InvoiceReferenceNumber;
+        private DateTime _orderDateField;
+        private bool _orderDateSet;
+
+        public DateTime OrderDate
+        {
+            get { return _orderDateField; }
+            set
+            {
+                _orderDateField = value;
+                _orderDateSet = true;
+            }
+        }
+
+        public List<DetailTax> DetailTaxes;
+        public List<LineItemData> LineItems;
+
+        public EnhancedData()
+        {
+            LineItems = new List<LineItemData>();
+            DetailTaxes = new List<DetailTax>();
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (customerReference != null) xml += "\r\n<customerReference>" + SecurityElement.Escape(customerReference) + "</customerReference>";
-            if (salesTaxSet) xml += "\r\n<salesTax>" + salesTaxField + "</salesTax>";
-            if (deliveryTypeSet) xml += "\r\n<deliveryType>" + deliveryTypeField + "</deliveryType>";
-            if (taxExemptSet) xml += "\r\n<taxExempt>" + taxExemptField.ToString().ToLower() + "</taxExempt>";
-            if (discountAmountSet) xml += "\r\n<discountAmount>" + discountAmountField + "</discountAmount>";
-            if (shippingAmountSet) xml += "\r\n<shippingAmount>" + shippingAmountField + "</shippingAmount>";
-            if (dutyAmountSet) xml += "\r\n<dutyAmount>" + dutyAmountField + "</dutyAmount>";
-            if (shipFromPostalCode != null) xml += "\r\n<shipFromPostalCode>" + SecurityElement.Escape(shipFromPostalCode) + "</shipFromPostalCode>";
-            if (destinationPostalCode != null) xml += "\r\n<destinationPostalCode>" + SecurityElement.Escape(destinationPostalCode) + "</destinationPostalCode>";
-            if (destinationCountryCodeSet) xml += "\r\n<destinationCountryCode>" + destinationCountryCodeField + "</destinationCountryCode>";
-            if (invoiceReferenceNumber != null) xml += "\r\n<invoiceReferenceNumber>" + SecurityElement.Escape(invoiceReferenceNumber) + "</invoiceReferenceNumber>";
-            if (orderDateSet) xml += "\r\n<orderDate>" + XmlUtil.toXsdDate(orderDateField) + "</orderDate>";
-            foreach (detailTax detailTax in detailTaxes)
+            var xml = "";
+            if (CustomerReference != null)
+                xml += "\r\n<customerReference>" + SecurityElement.Escape(CustomerReference) + "</customerReference>";
+            if (_salesTaxSet) xml += "\r\n<salesTax>" + _salesTaxField + "</salesTax>";
+            if (_deliveryTypeSet) xml += "\r\n<deliveryType>" + _deliveryTypeField + "</deliveryType>";
+            if (TaxExemptSet) xml += "\r\n<taxExempt>" + TaxExemptField.ToString().ToLower() + "</taxExempt>";
+            if (_discountAmountSet) xml += "\r\n<discountAmount>" + _discountAmountField + "</discountAmount>";
+            if (_shippingAmountSet) xml += "\r\n<shippingAmount>" + _shippingAmountField + "</shippingAmount>";
+            if (_dutyAmountSet) xml += "\r\n<dutyAmount>" + _dutyAmountField + "</dutyAmount>";
+            if (ShipFromPostalCode != null)
+                xml += "\r\n<shipFromPostalCode>" + SecurityElement.Escape(ShipFromPostalCode) + "</shipFromPostalCode>";
+            if (DestinationPostalCode != null)
+                xml += "\r\n<destinationPostalCode>" + SecurityElement.Escape(DestinationPostalCode) +
+                       "</destinationPostalCode>";
+            if (_destinationCountryCodeSet)
+                xml += "\r\n<destinationCountryCode>" + _destinationCountryCodeField + "</destinationCountryCode>";
+            if (InvoiceReferenceNumber != null)
+                xml += "\r\n<invoiceReferenceNumber>" + SecurityElement.Escape(InvoiceReferenceNumber) +
+                       "</invoiceReferenceNumber>";
+            if (_orderDateSet) xml += "\r\n<orderDate>" + XmlUtil.ToXsdDate(_orderDateField) + "</orderDate>";
+            foreach (var detailTax in DetailTaxes)
             {
                 xml += "\r\n<detailTax>" + detailTax.Serialize() + "\r\n</detailTax>";
             }
-            foreach (lineItemData lineItem in lineItems)
+            foreach (var lineItem in LineItems)
             {
                 xml += "\r\n<lineItemData>" + lineItem.Serialize() + "\r\n</lineItemData>";
             }
@@ -380,14 +458,14 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class voidTxn : transactionTypeWithReportGroup
+    public class VoidTxn : transactionTypeWithReportGroup
     {
-        public long litleTxnId;
-        public processingInstructions processingInstructions;
+        public long LitleTxnId;
+        public ProcessingInstructions ProcessingInstructions;
 
         public override string Serialize()
         {
-            string xml = "\r\n<void";
+            var xml = "\r\n<void";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
@@ -395,237 +473,341 @@ namespace Litle.Sdk
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
             xml += ">";
-            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
-            if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
+            xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
+            if (ProcessingInstructions != null)
+                xml += "\r\n<processingInstructions>" + ProcessingInstructions.Serialize() +
+                       "\r\n</processingInstructions>";
             xml += "\r\n</void>";
 
             return xml;
         }
-
     }
 
-    public partial class lineItemData
+    public class LineItemData
     {
-        private int itemSeqenceNumberField;
-        private bool itemSequenceNumberSet;
-        public int itemSequenceNumber
-        {
-            get { return this.itemSeqenceNumberField; }
-            set { this.itemSeqenceNumberField = value; this.itemSequenceNumberSet = true; }
-        }
-        public string itemDescription;
-        public string productCode;
-        public string quantity;
-        public string unitOfMeasure;
-        private long taxAmountField;
-        private bool taxAmountSet;
-        public long taxAmount
-        {
-            get { return this.taxAmountField; }
-            set { this.taxAmountField = value; this.taxAmountSet = true; }
-        }
-        private long lineItemTotalField;
-        private bool lineItemTotalSet;
-        public long lineItemTotal
-        {
-            get { return this.lineItemTotalField; }
-            set { this.lineItemTotalField = value; this.lineItemTotalSet = true; }
-        }
-        private long lineItemTotalWithTaxField;
-        private bool lineItemTotalWithTaxSet;
-        public long lineItemTotalWithTax
-        {
-            get { return this.lineItemTotalWithTaxField; }
-            set { this.lineItemTotalWithTaxField = value; this.lineItemTotalWithTaxSet = true; }
-        }
-        private long itemDiscountAmountField;
-        private bool itemDiscountAmountSet;
-        public long itemDiscountAmount
-        {
-            get { return this.itemDiscountAmountField; }
-            set { this.itemDiscountAmountField = value; this.itemDiscountAmountSet = true; }
-        }
-        public string commodityCode;
-        public string unitCost;
-        public List<detailTax> detailTaxes;
+        private int _itemSeqenceNumberField;
+        private bool _itemSequenceNumberSet;
 
-        public lineItemData()
+        public int ItemSequenceNumber
         {
-            detailTaxes = new List<detailTax>();
+            get { return _itemSeqenceNumberField; }
+            set
+            {
+                _itemSeqenceNumberField = value;
+                _itemSequenceNumberSet = true;
+            }
+        }
+
+        public string ItemDescription;
+        public string ProductCode;
+        public string Quantity;
+        public string UnitOfMeasure;
+        private long _taxAmountField;
+        private bool _taxAmountSet;
+
+        public long TaxAmount
+        {
+            get { return _taxAmountField; }
+            set
+            {
+                _taxAmountField = value;
+                _taxAmountSet = true;
+            }
+        }
+
+        private long _lineItemTotalField;
+        private bool _lineItemTotalSet;
+
+        public long LineItemTotal
+        {
+            get { return _lineItemTotalField; }
+            set
+            {
+                _lineItemTotalField = value;
+                _lineItemTotalSet = true;
+            }
+        }
+
+        private long _lineItemTotalWithTaxField;
+        private bool _lineItemTotalWithTaxSet;
+
+        public long LineItemTotalWithTax
+        {
+            get { return _lineItemTotalWithTaxField; }
+            set
+            {
+                _lineItemTotalWithTaxField = value;
+                _lineItemTotalWithTaxSet = true;
+            }
+        }
+
+        private long _itemDiscountAmountField;
+        private bool _itemDiscountAmountSet;
+
+        public long ItemDiscountAmount
+        {
+            get { return _itemDiscountAmountField; }
+            set
+            {
+                _itemDiscountAmountField = value;
+                _itemDiscountAmountSet = true;
+            }
+        }
+
+        public string CommodityCode;
+        public string UnitCost;
+        public List<DetailTax> DetailTaxes;
+
+        public LineItemData()
+        {
+            DetailTaxes = new List<DetailTax>();
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (itemSequenceNumberSet) xml += "\r\n<itemSequenceNumber>" + itemSeqenceNumberField + "</itemSequenceNumber>";
-            if (itemDescription != null) xml += "\r\n<itemDescription>" + SecurityElement.Escape(itemDescription) + "</itemDescription>";
-            if (productCode != null) xml += "\r\n<productCode>" + SecurityElement.Escape(productCode) + "</productCode>";
-            if (quantity != null) xml += "\r\n<quantity>" + SecurityElement.Escape(quantity) + "</quantity>";
-            if (unitOfMeasure != null) xml += "\r\n<unitOfMeasure>" + SecurityElement.Escape(unitOfMeasure) + "</unitOfMeasure>";
-            if (taxAmountSet) xml += "\r\n<taxAmount>" + taxAmountField + "</taxAmount>";
-            if (lineItemTotalSet) xml += "\r\n<lineItemTotal>" + lineItemTotalField + "</lineItemTotal>";
-            if (lineItemTotalWithTaxSet) xml += "\r\n<lineItemTotalWithTax>" + lineItemTotalWithTaxField + "</lineItemTotalWithTax>";
-            if (itemDiscountAmountSet) xml += "\r\n<itemDiscountAmount>" + itemDiscountAmountField + "</itemDiscountAmount>";
-            if (commodityCode != null) xml += "\r\n<commodityCode>" + SecurityElement.Escape(commodityCode) + "</commodityCode>";
-            if (unitCost != null) xml += "\r\n<unitCost>" + SecurityElement.Escape(unitCost) + "</unitCost>";
-            foreach (detailTax detailTax in detailTaxes)
+            var xml = "";
+            if (_itemSequenceNumberSet)
+                xml += "\r\n<itemSequenceNumber>" + _itemSeqenceNumberField + "</itemSequenceNumber>";
+            if (ItemDescription != null)
+                xml += "\r\n<itemDescription>" + SecurityElement.Escape(ItemDescription) + "</itemDescription>";
+            if (ProductCode != null)
+                xml += "\r\n<productCode>" + SecurityElement.Escape(ProductCode) + "</productCode>";
+            if (Quantity != null) xml += "\r\n<quantity>" + SecurityElement.Escape(Quantity) + "</quantity>";
+            if (UnitOfMeasure != null)
+                xml += "\r\n<unitOfMeasure>" + SecurityElement.Escape(UnitOfMeasure) + "</unitOfMeasure>";
+            if (_taxAmountSet) xml += "\r\n<taxAmount>" + _taxAmountField + "</taxAmount>";
+            if (_lineItemTotalSet) xml += "\r\n<lineItemTotal>" + _lineItemTotalField + "</lineItemTotal>";
+            if (_lineItemTotalWithTaxSet)
+                xml += "\r\n<lineItemTotalWithTax>" + _lineItemTotalWithTaxField + "</lineItemTotalWithTax>";
+            if (_itemDiscountAmountSet)
+                xml += "\r\n<itemDiscountAmount>" + _itemDiscountAmountField + "</itemDiscountAmount>";
+            if (CommodityCode != null)
+                xml += "\r\n<commodityCode>" + SecurityElement.Escape(CommodityCode) + "</commodityCode>";
+            if (UnitCost != null) xml += "\r\n<unitCost>" + SecurityElement.Escape(UnitCost) + "</unitCost>";
+            foreach (var detailTax in DetailTaxes)
             {
                 if (detailTax != null) xml += "\r\n<detailTax>" + detailTax.Serialize() + "</detailTax>";
             }
             return xml;
         }
-
     }
 
-
-    public partial class detailTax
+    public class DetailTax
     {
-        private bool taxIncludedInTotalField;
-        private bool taxIncludedInTotalSet;
-        public bool taxIncludedInTotal
+        private bool _taxIncludedInTotalField;
+        private bool _taxIncludedInTotalSet;
+
+        public bool TaxIncludedInTotal
         {
-            get { return this.taxIncludedInTotalField; }
-            set { this.taxIncludedInTotalField = value; this.taxIncludedInTotalSet = true; }
+            get { return _taxIncludedInTotalField; }
+            set
+            {
+                _taxIncludedInTotalField = value;
+                _taxIncludedInTotalSet = true;
+            }
         }
-        private long taxAmountField;
-        private bool taxAmountSet;
-        public long taxAmount
+
+        private long _taxAmountField;
+        private bool _taxAmountSet;
+
+        public long TaxAmount
         {
-            get { return this.taxAmountField; }
-            set { this.taxAmountField = value; this.taxAmountSet = true; }
+            get { return _taxAmountField; }
+            set
+            {
+                _taxAmountField = value;
+                _taxAmountSet = true;
+            }
         }
-        public string taxRate;
-        private taxTypeIdentifierEnum taxTypeIdentifierField;
-        private bool taxTypeIdentifierSet;
-        public taxTypeIdentifierEnum taxTypeIdentifier
+
+        public string TaxRate;
+        private taxTypeIdentifierEnum _taxTypeIdentifierField;
+        private bool _taxTypeIdentifierSet;
+
+        public taxTypeIdentifierEnum TaxTypeIdentifier
         {
-            get { return this.taxTypeIdentifierField; }
-            set { this.taxTypeIdentifierField = value; this.taxTypeIdentifierSet = true; }
+            get { return _taxTypeIdentifierField; }
+            set
+            {
+                _taxTypeIdentifierField = value;
+                _taxTypeIdentifierSet = true;
+            }
         }
-        public string cardAcceptorTaxId;
+
+        public string CardAcceptorTaxId;
 
         public string Serialize()
         {
-            string xml = "";
-            if (taxIncludedInTotalSet) xml += "\r\n<taxIncludedInTotal>" + taxIncludedInTotalField.ToString().ToLower() + "</taxIncludedInTotal>";
-            if (taxAmountSet) xml += "\r\n<taxAmount>" + taxAmountField + "</taxAmount>";
-            if (taxRate != null) xml += "\r\n<taxRate>" + SecurityElement.Escape(taxRate) + "</taxRate>";
-            if (taxTypeIdentifierSet) xml += "\r\n<taxTypeIdentifier>" + taxTypeIdentifierField + "</taxTypeIdentifier>";
-            if (cardAcceptorTaxId != null) xml += "\r\n<cardAcceptorTaxId>" + SecurityElement.Escape(cardAcceptorTaxId) + "</cardAcceptorTaxId>";
+            var xml = "";
+            if (_taxIncludedInTotalSet)
+                xml += "\r\n<taxIncludedInTotal>" + _taxIncludedInTotalField.ToString().ToLower() +
+                       "</taxIncludedInTotal>";
+            if (_taxAmountSet) xml += "\r\n<taxAmount>" + _taxAmountField + "</taxAmount>";
+            if (TaxRate != null) xml += "\r\n<taxRate>" + SecurityElement.Escape(TaxRate) + "</taxRate>";
+            if (_taxTypeIdentifierSet)
+                xml += "\r\n<taxTypeIdentifier>" + _taxTypeIdentifierField + "</taxTypeIdentifier>";
+            if (CardAcceptorTaxId != null)
+                xml += "\r\n<cardAcceptorTaxId>" + SecurityElement.Escape(CardAcceptorTaxId) + "</cardAcceptorTaxId>";
             return xml;
         }
     }
 
-    public partial class transactionTypeWithReportGroupAndPartial : transactionType
+    public class TransactionTypeWithReportGroupAndPartial : transactionType
     {
-        public string reportGroup;
-        private bool partialField;
-        protected bool partialSet;
-        public bool partial
+        public string ReportGroup;
+        private bool _partialField;
+        protected bool PartialSet;
+
+        public bool Partial
         {
-            get { return this.partialField; }
-            set { this.partialField = value; partialSet = true; }
+            get { return _partialField; }
+            set
+            {
+                _partialField = value;
+                PartialSet = true;
+            }
         }
     }
 
-    public partial class capture : transactionTypeWithReportGroupAndPartial
+    public class Capture : TransactionTypeWithReportGroupAndPartial
     {
-        public long litleTxnId;
-        private long amountField;
-        private bool amountSet;
-        public long amount
+        public long LitleTxnId;
+        private long _amountField;
+        private bool _amountSet;
+
+        public long Amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return _amountField; }
+            set
+            {
+                _amountField = value;
+                _amountSet = true;
+            }
         }
-        private bool surchargeAmountSet;
-        private long surchargeAmountField;
-        public long surchargeAmount
+
+        private bool _surchargeAmountSet;
+        private long _surchargeAmountField;
+
+        public long SurchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return _surchargeAmountField; }
+            set
+            {
+                _surchargeAmountField = value;
+                _surchargeAmountSet = true;
+            }
         }
-        public enhancedData enhancedData;
-        public processingInstructions processingInstructions;
-        private bool payPalOrderCompleteField;
-        private bool payPalOrderCompleteSet;
-        public bool payPalOrderComplete
+
+        public EnhancedData EnhancedData;
+        public ProcessingInstructions ProcessingInstructions;
+        private bool _payPalOrderCompleteField;
+        private bool _payPalOrderCompleteSet;
+
+        public bool PayPalOrderComplete
         {
-            get { return this.payPalOrderCompleteField; }
-            set { this.payPalOrderCompleteField = value; payPalOrderCompleteSet = true; }
+            get { return _payPalOrderCompleteField; }
+            set
+            {
+                _payPalOrderCompleteField = value;
+                _payPalOrderCompleteSet = true;
+            }
         }
-        public string payPalNotes;
+
+        public string PayPalNotes;
 
         public override string Serialize()
         {
-            string xml = "\r\n<capture";
+            var xml = "\r\n<capture";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
-            xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
-            if (partialSet)
+            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\"";
+            if (PartialSet)
             {
-                xml += " partial=\"" + partial.ToString().ToLower() + "\"";
+                xml += " partial=\"" + Partial.ToString().ToLower() + "\"";
             }
             xml += ">";
-            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
-            if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
-            if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
-            if (enhancedData != null) xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
-            if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
-            if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderComplete>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderComplete>";
-            if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
+            xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
+            if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
+            if (_surchargeAmountSet) xml += "\r\n<surchargeAmount>" + _surchargeAmountField + "</surchargeAmount>";
+            if (EnhancedData != null) xml += "\r\n<enhancedData>" + EnhancedData.Serialize() + "\r\n</enhancedData>";
+            if (ProcessingInstructions != null)
+                xml += "\r\n<processingInstructions>" + ProcessingInstructions.Serialize() +
+                       "\r\n</processingInstructions>";
+            if (_payPalOrderCompleteSet)
+                xml += "\r\n<payPalOrderComplete>" + _payPalOrderCompleteField.ToString().ToLower() +
+                       "</payPalOrderComplete>";
+            if (PayPalNotes != null)
+                xml += "\r\n<payPalNotes>" + SecurityElement.Escape(PayPalNotes) + "</payPalNotes>";
             xml += "\r\n</capture>";
 
             return xml;
         }
     }
 
-    public partial class echeckCredit : transactionTypeWithReportGroup
+    public class EcheckCredit : transactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
-        private bool litleTxnIdSet;
-        public long litleTxnId
-        {
-            get { return this.litleTxnIdField; }
-            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
-        }
-        private long amountField;
-        private bool amountSet;
-        public long amount
-        {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
-        }
-        private bool secondaryAmountSet;
-        private long secondaryAmountField;
-        public long secondaryAmount
-        {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
-        }
-        public customBilling customBilling;
-        public string orderId;
-        public orderSourceType orderSource;
-        public contact billToAddress;
-        public echeckType echeck;
+        private long _litleTxnIdField;
+        private bool _litleTxnIdSet;
 
-        [Obsolete()]
-        public echeckTokenType token
+        public long LitleTxnId
         {
-            get { return echeckToken; }
-            set { echeckToken = value; }
+            get { return _litleTxnIdField; }
+            set
+            {
+                _litleTxnIdField = value;
+                _litleTxnIdSet = true;
+            }
         }
 
-        public echeckTokenType echeckToken;
+        private long _amountField;
+        private bool _amountSet;
 
-        public merchantDataType merchantData;
+        public long Amount
+        {
+            get { return _amountField; }
+            set
+            {
+                _amountField = value;
+                _amountSet = true;
+            }
+        }
+
+        private bool _secondaryAmountSet;
+        private long _secondaryAmountField;
+
+        public long SecondaryAmount
+        {
+            get { return _secondaryAmountField; }
+            set
+            {
+                _secondaryAmountField = value;
+                _secondaryAmountSet = true;
+            }
+        }
+
+        public CustomBilling CustomBilling;
+        public string OrderId;
+        public OrderSourceType OrderSource;
+        public Contact BillToAddress;
+        public EcheckType Echeck;
+
+        [Obsolete]
+        public EcheckTokenType Token
+        {
+            get { return EcheckToken; }
+            set { EcheckToken = value; }
+        }
+
+        public EcheckTokenType EcheckToken;
+
+        public MerchantDataType MerchantData;
 
         public override string Serialize()
         {
-            string xml = "\r\n<echeckCredit";
+            var xml = "\r\n<echeckCredit";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
@@ -634,72 +816,99 @@ namespace Litle.Sdk
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
             xml += ">";
 
-            if (litleTxnIdSet)
+            if (_litleTxnIdSet)
             {
-                xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
-                if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
-                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
+                xml += "\r\n<litleTxnId>" + _litleTxnIdField + "</litleTxnId>";
+                if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
+                if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+                if (CustomBilling != null)
+                    xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "</customBilling>";
             }
             else
             {
-                xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-                xml += "\r\n<amount>" + amountField + "</amount>";
-                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-                if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-                if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
-                if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
-                else if (echeckToken != null) xml += "\r\n<echeckToken>" + echeckToken.Serialize() + "</echeckToken>";
-                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
-                if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
+                xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+                xml += "\r\n<amount>" + _amountField + "</amount>";
+                if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+                if (OrderSource != null) xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+                if (BillToAddress != null)
+                    xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "</billToAddress>";
+                if (Echeck != null) xml += "\r\n<echeck>" + Echeck.Serialize() + "</echeck>";
+                else if (EcheckToken != null) xml += "\r\n<echeckToken>" + EcheckToken.Serialize() + "</echeckToken>";
+                if (CustomBilling != null)
+                    xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "</customBilling>";
+                if (MerchantData != null) xml += "\r\n<merchantData>" + MerchantData.Serialize() + "</merchantData>";
             }
             xml += "\r\n</echeckCredit>";
             return xml;
         }
     }
 
-    public partial class echeckSale : transactionTypeWithReportGroup
+    public class EcheckSale : transactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
-        private bool litleTxnIdSet;
-        public long litleTxnId
+        private long _litleTxnIdField;
+        private bool _litleTxnIdSet;
+
+        public long LitleTxnId
         {
-            get { return this.litleTxnIdField; }
-            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+            get { return _litleTxnIdField; }
+            set
+            {
+                _litleTxnIdField = value;
+                _litleTxnIdSet = true;
+            }
         }
-        private long amountField;
-        private bool amountSet;
-        public long amount
+
+        private long _amountField;
+        private bool _amountSet;
+
+        public long Amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return _amountField; }
+            set
+            {
+                _amountField = value;
+                _amountSet = true;
+            }
         }
-        private bool secondaryAmountSet;
-        private long secondaryAmountField;
-        public long secondaryAmount
+
+        private bool _secondaryAmountSet;
+        private long _secondaryAmountField;
+
+        public long SecondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+            get { return _secondaryAmountField; }
+            set
+            {
+                _secondaryAmountField = value;
+                _secondaryAmountSet = true;
+            }
         }
-        public customBilling customBilling;
-        public string orderId;
-        private bool verifyField;
-        private bool verifySet;
-        public bool verify
+
+        public CustomBilling CustomBilling;
+        public string OrderId;
+        private bool _verifyField;
+        private bool _verifySet;
+
+        public bool Verify
         {
-            get { return this.verifyField; }
-            set { this.verifyField = value; verifySet = true; }
+            get { return _verifyField; }
+            set
+            {
+                _verifyField = value;
+                _verifySet = true;
+            }
         }
-        public orderSourceType orderSource;
-        public contact billToAddress;
-        public contact shipToAddress;
-        public echeckType echeck;
-        public echeckTokenType token;
-        public merchantDataType merchantData;
+
+        public OrderSourceType OrderSource;
+        public Contact BillToAddress;
+        public Contact ShipToAddress;
+        public EcheckType Echeck;
+        public EcheckTokenType Token;
+        public MerchantDataType MerchantData;
 
         public override string Serialize()
         {
-            string xml = "\r\n<echeckSale";
+            var xml = "\r\n<echeckSale";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
@@ -708,60 +917,75 @@ namespace Litle.Sdk
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
             xml += ">";
 
-            if (litleTxnIdSet)
+            if (_litleTxnIdSet)
             {
-                xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
-                if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
+                xml += "\r\n<litleTxnId>" + _litleTxnIdField + "</litleTxnId>";
+                if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
                 // let sandbox do the validation for secondaryAmount
-                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
+                if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+                if (CustomBilling != null)
+                    xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "</customBilling>";
             }
             else
             {
-                xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-                if (verifySet) xml += "\r\n<verify>" + (verifyField ? "true" : "false") + "</verify>";
-                xml += "\r\n<amount>" + amountField + "</amount>";
-                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-                if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-                if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
-                if (shipToAddress != null) xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "</shipToAddress>";
-                if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
-                else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
-                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
-                if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
+                xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+                if (_verifySet) xml += "\r\n<verify>" + (_verifyField ? "true" : "false") + "</verify>";
+                xml += "\r\n<amount>" + _amountField + "</amount>";
+                if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+                if (OrderSource != null) xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+                if (BillToAddress != null)
+                    xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "</billToAddress>";
+                if (ShipToAddress != null)
+                    xml += "\r\n<shipToAddress>" + ShipToAddress.Serialize() + "</shipToAddress>";
+                if (Echeck != null) xml += "\r\n<echeck>" + Echeck.Serialize() + "</echeck>";
+                else if (Token != null) xml += "\r\n<echeckToken>" + Token.Serialize() + "</echeckToken>";
+                if (CustomBilling != null)
+                    xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "</customBilling>";
+                if (MerchantData != null) xml += "\r\n<merchantData>" + MerchantData.Serialize() + "</merchantData>";
             }
             xml += "\r\n</echeckSale>";
             return xml;
         }
     }
 
-
-    public partial class echeckVerification : transactionTypeWithReportGroup
+    public class EcheckVerification : transactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
-        private bool litleTxnIdSet;
-        public long litleTxnId
+        private long _litleTxnIdField;
+        private bool _litleTxnIdSet;
+
+        public long LitleTxnId
         {
-            get { return this.litleTxnIdField; }
-            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+            get { return _litleTxnIdField; }
+            set
+            {
+                _litleTxnIdField = value;
+                _litleTxnIdSet = true;
+            }
         }
-        public string orderId;
-        private long amountField;
-        private bool amountSet;
-        public long amount
+
+        public string OrderId;
+        private long _amountField;
+        private bool _amountSet;
+
+        public long Amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return _amountField; }
+            set
+            {
+                _amountField = value;
+                _amountSet = true;
+            }
         }
-        public orderSourceType orderSource;
-        public contact billToAddress;
-        public echeckType echeck;
-        public echeckTokenType token;
-        public merchantDataType merchantData;
+
+        public OrderSourceType OrderSource;
+        public Contact BillToAddress;
+        public EcheckType Echeck;
+        public EcheckTokenType Token;
+        public MerchantDataType MerchantData;
 
         public override string Serialize()
         {
-            string xml = "\r\n<echeckVerification";
+            var xml = "\r\n<echeckVerification";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
@@ -770,31 +994,31 @@ namespace Litle.Sdk
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
             xml += ">";
 
-            if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
-            xml += "\r\n<orderId>" + orderId + "</orderId>";
-            if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
-            if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
-            if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
-            else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
-            if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
+            if (_litleTxnIdSet) xml += "\r\n<litleTxnId>" + _litleTxnIdField + "</litleTxnId>";
+            xml += "\r\n<orderId>" + OrderId + "</orderId>";
+            if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
+            if (OrderSource != null) xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+            if (BillToAddress != null) xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "</billToAddress>";
+            if (Echeck != null) xml += "\r\n<echeck>" + Echeck.Serialize() + "</echeck>";
+            else if (Token != null) xml += "\r\n<echeckToken>" + Token.Serialize() + "</echeckToken>";
+            if (MerchantData != null) xml += "\r\n<merchantData>" + MerchantData.Serialize() + "</merchantData>";
             xml += "\r\n</echeckVerification>";
             return xml;
         }
     }
 
-    public partial class registerTokenRequestType : transactionTypeWithReportGroup
+    public class RegisterTokenRequestType : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public string accountNumber;
-        public echeckForTokenType echeckForToken;
-        public string paypageRegistrationId;
-        public string cardValidationNum;
-        public applepayType applepay;
+        public string OrderId;
+        public string AccountNumber;
+        public EcheckForTokenType EcheckForToken;
+        public string PaypageRegistrationId;
+        public string CardValidationNum;
+        public ApplepayType Applepay;
 
         public override string Serialize()
         {
-            string xml = "\r\n<registerTokenRequest";
+            var xml = "\r\n<registerTokenRequest";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
@@ -803,26 +1027,29 @@ namespace Litle.Sdk
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
             xml += ">";
 
-            xml += "\r\n<orderId>" + orderId + "</orderId>";
-            if (accountNumber != null) xml += "\r\n<accountNumber>" + accountNumber + "</accountNumber>";
-            else if (echeckForToken != null) xml += "\r\n<echeckForToken>" + echeckForToken.Serialize() + "</echeckForToken>";
-            else if (paypageRegistrationId != null) xml += "\r\n<paypageRegistrationId>" + paypageRegistrationId + "</paypageRegistrationId>";
-            else if (applepay != null) xml += "\r\n<applepay>" + applepay.Serialize() + "\r\n</applepay>";
-            if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + cardValidationNum + "</cardValidationNum>";
+            xml += "\r\n<orderId>" + OrderId + "</orderId>";
+            if (AccountNumber != null) xml += "\r\n<accountNumber>" + AccountNumber + "</accountNumber>";
+            else if (EcheckForToken != null)
+                xml += "\r\n<echeckForToken>" + EcheckForToken.Serialize() + "</echeckForToken>";
+            else if (PaypageRegistrationId != null)
+                xml += "\r\n<paypageRegistrationId>" + PaypageRegistrationId + "</paypageRegistrationId>";
+            else if (Applepay != null) xml += "\r\n<applepay>" + Applepay.Serialize() + "\r\n</applepay>";
+            if (CardValidationNum != null)
+                xml += "\r\n<cardValidationNum>" + CardValidationNum + "</cardValidationNum>";
             xml += "\r\n</registerTokenRequest>";
             return xml;
         }
     }
 
-    public partial class updateCardValidationNumOnToken : transactionTypeWithReportGroup
+    public class UpdateCardValidationNumOnToken : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public string litleToken;
-        public string cardValidationNum;
+        public string OrderId;
+        public string LitleToken;
+        public string CardValidationNum;
 
         public override string Serialize()
         {
-            string xml = "\r\n<updateCardValidationNumOnToken";
+            var xml = "\r\n<updateCardValidationNumOnToken";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
@@ -831,87 +1058,117 @@ namespace Litle.Sdk
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
             xml += ">";
 
-            if (orderId != null) xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-            if (litleToken != null) xml += "\r\n<litleToken>" + SecurityElement.Escape(litleToken) + "</litleToken>";
-            if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
+            if (OrderId != null) xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+            if (LitleToken != null) xml += "\r\n<litleToken>" + SecurityElement.Escape(LitleToken) + "</litleToken>";
+            if (CardValidationNum != null)
+                xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(CardValidationNum) + "</cardValidationNum>";
             xml += "\r\n</updateCardValidationNumOnToken>";
             return xml;
         }
     }
 
-    public partial class echeckForTokenType
+    public class EcheckForTokenType
     {
-        public string accNum;
-        public string routingNum;
+        public string AccNum;
+        public string RoutingNum;
 
         public string Serialize()
         {
-            string xml = "";
-            if (accNum != null) xml += "\r\n<accNum>" + SecurityElement.Escape(accNum) + "</accNum>";
-            if (routingNum != null) xml += "\r\n<routingNum>" + SecurityElement.Escape(routingNum) + "</routingNum>";
+            var xml = "";
+            if (AccNum != null) xml += "\r\n<accNum>" + SecurityElement.Escape(AccNum) + "</accNum>";
+            if (RoutingNum != null) xml += "\r\n<routingNum>" + SecurityElement.Escape(RoutingNum) + "</routingNum>";
             return xml;
         }
     }
 
-
-    public partial class credit : transactionTypeWithReportGroup
+    public class Credit : transactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
-        private bool litleTxnIdSet;
-        public long litleTxnId
+        private long _litleTxnIdField;
+        private bool _litleTxnIdSet;
+
+        public long LitleTxnId
         {
-            get { return this.litleTxnIdField; }
-            set { this.litleTxnIdField = value; litleTxnIdSet = true; }
+            get { return _litleTxnIdField; }
+            set
+            {
+                _litleTxnIdField = value;
+                _litleTxnIdSet = true;
+            }
         }
-        private long amountField;
-        private bool amountSet;
-        public long amount
+
+        private long _amountField;
+        private bool _amountSet;
+
+        public long Amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return _amountField; }
+            set
+            {
+                _amountField = value;
+                _amountSet = true;
+            }
         }
-        private bool secondaryAmountSet;
-        private long secondaryAmountField;
-        public long secondaryAmount
+
+        private bool _secondaryAmountSet;
+        private long _secondaryAmountField;
+
+        public long SecondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
+            get { return _secondaryAmountField; }
+            set
+            {
+                _secondaryAmountField = value;
+                _secondaryAmountSet = true;
+            }
         }
-        private bool surchargeAmountSet;
-        private long surchargeAmountField;
-        public long surchargeAmount
+
+        private bool _surchargeAmountSet;
+        private long _surchargeAmountField;
+
+        public long SurchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return _surchargeAmountField; }
+            set
+            {
+                _surchargeAmountField = value;
+                _surchargeAmountSet = true;
+            }
         }
-        public customBilling customBilling;
-        public enhancedData enhancedData;
-        public processingInstructions processingInstructions;
-        public string orderId;
-        public orderSourceType orderSource;
-        public contact billToAddress;
-        public cardType card;
-        public mposType mpos;
-        public cardTokenType token;
-        public cardPaypageType paypage;
-        public payPal paypal;
-        private taxTypeIdentifierEnum taxTypeField;
-        private bool taxTypeSet;
-        public taxTypeIdentifierEnum taxType
+
+        public CustomBilling CustomBilling;
+        public EnhancedData EnhancedData;
+        public ProcessingInstructions ProcessingInstructions;
+        public string OrderId;
+        public OrderSourceType OrderSource;
+        public Contact BillToAddress;
+        public CardType Card;
+        public MposType Mpos;
+        public CardTokenType Token;
+        public CardPaypageType Paypage;
+        public PayPal Paypal;
+        private taxTypeIdentifierEnum _taxTypeField;
+        private bool _taxTypeSet;
+
+        public taxTypeIdentifierEnum TaxType
         {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; taxTypeSet = true; }
+            get { return _taxTypeField; }
+            set
+            {
+                _taxTypeField = value;
+                _taxTypeSet = true;
+            }
         }
-        public billMeLaterRequest billMeLaterRequest;
-        public pos pos;
-        public amexAggregatorData amexAggregatorData;
-        public merchantDataType merchantData;
-        public String payPalNotes;
-        public String actionReason;
+
+        public BillMeLaterRequest BillMeLaterRequest;
+        public Pos Pos;
+        public AmexAggregatorData AmexAggregatorData;
+        public MerchantDataType MerchantData;
+        public String PayPalNotes;
+        public String ActionReason;
 
         public override string Serialize()
         {
-            string xml = "\r\n<credit";
+            var xml = "\r\n<credit";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
@@ -920,353 +1177,459 @@ namespace Litle.Sdk
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
             xml += ">";
 
-            if (litleTxnIdSet)
+            if (_litleTxnIdSet)
             {
-                xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
-                if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
-                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-                if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
-                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
-                if (enhancedData != null) xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "</enhancedData>";
-                if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "</processingInstructions>";
-                if (pos != null) xml += "\r\n<pos>" + pos.Serialize() + "</pos>";
+                xml += "\r\n<litleTxnId>" + _litleTxnIdField + "</litleTxnId>";
+                if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
+                if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+                if (_surchargeAmountSet) xml += "\r\n<surchargeAmount>" + _surchargeAmountField + "</surchargeAmount>";
+                if (CustomBilling != null)
+                    xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "</customBilling>";
+                if (EnhancedData != null) xml += "\r\n<enhancedData>" + EnhancedData.Serialize() + "</enhancedData>";
+                if (ProcessingInstructions != null)
+                    xml += "\r\n<processingInstructions>" + ProcessingInstructions.Serialize() +
+                           "</processingInstructions>";
+                if (Pos != null) xml += "\r\n<pos>" + Pos.Serialize() + "</pos>";
             }
             else
             {
-                xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-                xml += "\r\n<amount>" + amountField + "</amount>";
-                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-                if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
-                if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-                if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "</billToAddress>";
-                if (card != null) xml += "\r\n<card>" + card.Serialize() + "</card>";
-                else if (token != null) xml += "\r\n<token>" + token.Serialize() + "</token>";
-                else if (mpos != null) xml += "\r\n<mpos>" + mpos.Serialize() + "</mpos>";
-                else if (paypage != null) xml += "\r\n<paypage>" + paypage.Serialize() + "</paypage>";
-                else if (paypal != null)
+                xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+                xml += "\r\n<amount>" + _amountField + "</amount>";
+                if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+                if (_surchargeAmountSet) xml += "\r\n<surchargeAmount>" + _surchargeAmountField + "</surchargeAmount>";
+                if (OrderSource != null) xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+                if (BillToAddress != null)
+                    xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "</billToAddress>";
+                if (Card != null) xml += "\r\n<card>" + Card.Serialize() + "</card>";
+                else if (Token != null) xml += "\r\n<token>" + Token.Serialize() + "</token>";
+                else if (Mpos != null) xml += "\r\n<mpos>" + Mpos.Serialize() + "</mpos>";
+                else if (Paypage != null) xml += "\r\n<paypage>" + Paypage.Serialize() + "</paypage>";
+                else if (Paypal != null)
                 {
                     xml += "\r\n<paypal>";
-                    if (paypal.payerId != null) xml += "\r\n<payerId>" + SecurityElement.Escape(paypal.payerId) + "</payerId>";
-                    else if (paypal.payerEmail != null) xml += "\r\n<payerEmail>" + SecurityElement.Escape(paypal.payerEmail) + "</payerEmail>";
+                    if (Paypal.PayerId != null)
+                        xml += "\r\n<payerId>" + SecurityElement.Escape(Paypal.PayerId) + "</payerId>";
+                    else if (Paypal.PayerEmail != null)
+                        xml += "\r\n<payerEmail>" + SecurityElement.Escape(Paypal.PayerEmail) + "</payerEmail>";
                     xml += "\r\n</paypal>";
                 }
-                if (customBilling != null) xml += "\r\n<customBilling>" + customBilling.Serialize() + "</customBilling>";
-                if (taxTypeSet) xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
-                if (billMeLaterRequest != null) xml += "\r\n<billMeLaterRequest>" + billMeLaterRequest.Serialize() + "</billMeLaterRequest>";
-                if (enhancedData != null) xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "</enhancedData>";
-                if (processingInstructions != null) xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "</processingInstructions>";
-                if (pos != null) xml += "\r\n<pos>" + pos.Serialize() + "</pos>";
-                if (amexAggregatorData != null) xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "</amexAggregatorData>";
-                if (merchantData != null) xml += "\r\n<merchantData>" + merchantData.Serialize() + "</merchantData>";
+                if (CustomBilling != null)
+                    xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "</customBilling>";
+                if (_taxTypeSet) xml += "\r\n<taxType>" + _taxTypeField + "</taxType>";
+                if (BillMeLaterRequest != null)
+                    xml += "\r\n<billMeLaterRequest>" + BillMeLaterRequest.Serialize() + "</billMeLaterRequest>";
+                if (EnhancedData != null) xml += "\r\n<enhancedData>" + EnhancedData.Serialize() + "</enhancedData>";
+                if (ProcessingInstructions != null)
+                    xml += "\r\n<processingInstructions>" + ProcessingInstructions.Serialize() +
+                           "</processingInstructions>";
+                if (Pos != null) xml += "\r\n<pos>" + Pos.Serialize() + "</pos>";
+                if (AmexAggregatorData != null)
+                    xml += "\r\n<amexAggregatorData>" + AmexAggregatorData.Serialize() + "</amexAggregatorData>";
+                if (MerchantData != null) xml += "\r\n<merchantData>" + MerchantData.Serialize() + "</merchantData>";
             }
-            if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
-            if (actionReason != null) xml += "\r\n<actionReason>" + SecurityElement.Escape(actionReason) + "</actionReason>";
+            if (PayPalNotes != null)
+                xml += "\r\n<payPalNotes>" + SecurityElement.Escape(PayPalNotes) + "</payPalNotes>";
+            if (ActionReason != null)
+                xml += "\r\n<actionReason>" + SecurityElement.Escape(ActionReason) + "</actionReason>";
             xml += "\r\n</credit>";
             return xml;
         }
     }
 
-    public partial class echeckType
+    public class EcheckType
     {
-        private echeckAccountTypeEnum accTypeField;
-        private bool accTypeSet;
-        public echeckAccountTypeEnum accType
+        private echeckAccountTypeEnum _accTypeField;
+        private bool _accTypeSet;
+
+        public echeckAccountTypeEnum AccType
         {
-            get { return this.accTypeField; }
-            set { this.accTypeField = value; accTypeSet = true; }
+            get { return _accTypeField; }
+            set
+            {
+                _accTypeField = value;
+                _accTypeSet = true;
+            }
         }
 
-        public string accNum;
-        public string routingNum;
-        public string checkNum;
-        public string ccdPaymentInformation;
+        public string AccNum;
+        public string RoutingNum;
+        public string CheckNum;
+        public string CcdPaymentInformation;
 
         public string Serialize()
         {
-            string xml = "";
-            string accTypeName = accTypeField.ToString();
-            XmlEnumAttribute[] attributes = 
-                (XmlEnumAttribute[])typeof(echeckAccountTypeEnum).GetMember(accTypeField.ToString())[0].GetCustomAttributes(typeof(XmlEnumAttribute), false);
+            var xml = "";
+            var accTypeName = _accTypeField.ToString();
+            var attributes =
+                (XmlEnumAttribute[])
+                    typeof (echeckAccountTypeEnum).GetMember(_accTypeField.ToString())[0].GetCustomAttributes(
+                        typeof (XmlEnumAttribute), false);
             if (attributes.Length > 0) accTypeName = attributes[0].Name;
-            if (accTypeSet) xml += "\r\n<accType>" + accTypeName + "</accType>";
-            if (accNum != null) xml += "\r\n<accNum>" + SecurityElement.Escape(accNum) + "</accNum>";
-            if (routingNum != null) xml += "\r\n<routingNum>" + SecurityElement.Escape(routingNum) + "</routingNum>";
-            if (checkNum != null) xml += "\r\n<checkNum>" + SecurityElement.Escape(checkNum) + "</checkNum>";
-            if (ccdPaymentInformation != null) xml += "\r\n<ccdPaymentInformation>" + SecurityElement.Escape(ccdPaymentInformation) + "</ccdPaymentInformation>";
+            if (_accTypeSet) xml += "\r\n<accType>" + accTypeName + "</accType>";
+            if (AccNum != null) xml += "\r\n<accNum>" + SecurityElement.Escape(AccNum) + "</accNum>";
+            if (RoutingNum != null) xml += "\r\n<routingNum>" + SecurityElement.Escape(RoutingNum) + "</routingNum>";
+            if (CheckNum != null) xml += "\r\n<checkNum>" + SecurityElement.Escape(CheckNum) + "</checkNum>";
+            if (CcdPaymentInformation != null)
+                xml += "\r\n<ccdPaymentInformation>" + SecurityElement.Escape(CcdPaymentInformation) +
+                       "</ccdPaymentInformation>";
             return xml;
         }
     }
 
-    public partial class echeckTokenType
+    public class EcheckTokenType
     {
-        public string litleToken;
-        public string routingNum;
-        private echeckAccountTypeEnum accTypeField;
-        private bool accTypeSet;
-        public echeckAccountTypeEnum accType
+        public string LitleToken;
+        public string RoutingNum;
+        private echeckAccountTypeEnum _accTypeField;
+        private bool _accTypeSet;
+
+        public echeckAccountTypeEnum AccType
         {
-            get { return this.accTypeField; }
-            set { this.accTypeField = value; accTypeSet = true; }
+            get { return _accTypeField; }
+            set
+            {
+                _accTypeField = value;
+                _accTypeSet = true;
+            }
         }
-        public string checkNum;
+
+        public string CheckNum;
 
         public string Serialize()
         {
-            string xml = "";
-            if (litleToken != null) xml += "\r\n<litleToken>" + SecurityElement.Escape(litleToken) + "</litleToken>";
-            if (routingNum != null) xml += "\r\n<routingNum>" + SecurityElement.Escape(routingNum) + "</routingNum>";
-            if (accTypeSet) xml += "\r\n<accType>" + accTypeField + "</accType>";
-            if (checkNum != null) xml += "\r\n<checkNum>" + SecurityElement.Escape(checkNum) + "</checkNum>";
-            return xml;
-        }
-
-    }
-
-
-    public partial class pos
-    {
-        private posCapabilityTypeEnum capabilityField;
-        private bool capabilitySet;
-        public posCapabilityTypeEnum capability
-        {
-            get { return this.capabilityField; }
-            set { this.capabilityField = value; capabilitySet = true; }
-        }
-
-        private posEntryModeTypeEnum entryModeField;
-        private bool entryModeSet;
-        public posEntryModeTypeEnum entryMode
-        {
-            get { return this.entryModeField; }
-            set { this.entryModeField = value; entryModeSet = true; }
-        }
-
-        private posCardholderIdTypeEnum cardholderIdField;
-        private bool cardholderIdSet;
-        public posCardholderIdTypeEnum cardholderId
-        {
-            get { return this.cardholderIdField; }
-            set { this.cardholderIdField = value; cardholderIdSet = true; }
-        }
-        public string terminalId;
-
-        private posCatLevelEnum catLevelField;
-        private bool catLevelSet;
-        public posCatLevelEnum catLevel
-        {
-            get { return this.catLevelField; }
-            set { this.catLevelField = value; catLevelSet = true; }
-        }
-
-        public string Serialize()
-        {
-            string xml = "";
-            if (capabilitySet) xml += "\r\n<capability>" + capabilityField + "</capability>";
-            if (entryModeSet) xml += "\r\n<entryMode>" + entryModeField + "</entryMode>";
-            if (cardholderIdSet) xml += "\r\n<cardholderId>" + cardholderIdField + "</cardholderId>";
-            if (terminalId != null) xml += "\r\n<terminalId>" + SecurityElement.Escape(terminalId) + "</terminalId>";
-            if (catLevelSet) xml += "\r\n<catLevel>" + catLevelField.Serialize() +"</catLevel>";
-            return xml;
-        }
-
-    }
-
-    public partial class payPal
-    {
-        public string payerId;
-        public string payerEmail;
-        public string token;
-        public string transactionId;
-
-        public string Serialize()
-        {
-            string xml = "";
-            if (payerId != null) xml += "\r\n<payerId>" + SecurityElement.Escape(payerId) + "</payerId>";
-            if (payerEmail != null) xml += "\r\n<payerEmail>" + SecurityElement.Escape(payerEmail) + "</payerEmail>";
-            if (token != null) xml += "\r\n<token>" + SecurityElement.Escape(token) + "</token>";
-            if (transactionId != null) xml += "\r\n<transactionId>" + SecurityElement.Escape(transactionId) + "</transactionId>";
+            var xml = "";
+            if (LitleToken != null) xml += "\r\n<litleToken>" + SecurityElement.Escape(LitleToken) + "</litleToken>";
+            if (RoutingNum != null) xml += "\r\n<routingNum>" + SecurityElement.Escape(RoutingNum) + "</routingNum>";
+            if (_accTypeSet) xml += "\r\n<accType>" + _accTypeField + "</accType>";
+            if (CheckNum != null) xml += "\r\n<checkNum>" + SecurityElement.Escape(CheckNum) + "</checkNum>";
             return xml;
         }
     }
 
-    public partial class merchantDataType
+    public class Pos
     {
-        public string campaign;
-        public string affiliate;
-        public string merchantGroupingId;
+        private posCapabilityTypeEnum _capabilityField;
+        private bool _capabilitySet;
 
-        public string Serialize()
+        public posCapabilityTypeEnum Capability
         {
-            string xml = "";
-            if (campaign != null) xml += "\r\n<campaign>" + SecurityElement.Escape(campaign) + "</campaign>";
-            if (affiliate != null) xml += "\r\n<affiliate>" + SecurityElement.Escape(affiliate) + "</affiliate>";
-            if (merchantGroupingId != null) xml += "\r\n<merchantGroupingId>" + SecurityElement.Escape(merchantGroupingId) + "</merchantGroupingId>";
-            return xml;
+            get { return _capabilityField; }
+            set
+            {
+                _capabilityField = value;
+                _capabilitySet = true;
+            }
         }
-    }
 
-    public partial class cardTokenType
-    {
-        public string litleToken;
-        public string expDate;
-        public string cardValidationNum;
-        private MethodOfPaymentTypeEnum typeField;
-        private bool typeSet;
-        public MethodOfPaymentTypeEnum type
+        private posEntryModeTypeEnum _entryModeField;
+        private bool _entryModeSet;
+
+        public posEntryModeTypeEnum EntryMode
         {
-            get { return this.typeField; }
-            set { this.typeField = value; typeSet = true; }
+            get { return _entryModeField; }
+            set
+            {
+                _entryModeField = value;
+                _entryModeSet = true;
+            }
+        }
+
+        private posCardholderIdTypeEnum _cardholderIdField;
+        private bool _cardholderIdSet;
+
+        public posCardholderIdTypeEnum CardholderId
+        {
+            get { return _cardholderIdField; }
+            set
+            {
+                _cardholderIdField = value;
+                _cardholderIdSet = true;
+            }
+        }
+
+        public string TerminalId;
+
+        private posCatLevelEnum _catLevelField;
+        private bool _catLevelSet;
+
+        public posCatLevelEnum CatLevel
+        {
+            get { return _catLevelField; }
+            set
+            {
+                _catLevelField = value;
+                _catLevelSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "\r\n<litleToken>" + SecurityElement.Escape(litleToken) + "</litleToken>";
-            if (expDate != null) xml += "\r\n<expDate>" + SecurityElement.Escape(expDate) + "</expDate>";
-            if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
-            if (typeSet) xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(typeField) + "</type>";
+            var xml = "";
+            if (_capabilitySet) xml += "\r\n<capability>" + _capabilityField + "</capability>";
+            if (_entryModeSet) xml += "\r\n<entryMode>" + _entryModeField + "</entryMode>";
+            if (_cardholderIdSet) xml += "\r\n<cardholderId>" + _cardholderIdField + "</cardholderId>";
+            if (TerminalId != null) xml += "\r\n<terminalId>" + SecurityElement.Escape(TerminalId) + "</terminalId>";
+            if (_catLevelSet) xml += "\r\n<catLevel>" + _catLevelField.Serialize() + "</catLevel>";
             return xml;
         }
     }
 
-    public partial class cardPaypageType
+    public class PayPal
     {
-        public string paypageRegistrationId;
-        public string expDate;
-        public string cardValidationNum;
-        private MethodOfPaymentTypeEnum typeField;
-        private bool typeSet;
-        public MethodOfPaymentTypeEnum type
+        public string PayerId;
+        public string PayerEmail;
+        public string Token;
+        public string TransactionId;
+
+        public string Serialize()
         {
-            get { return this.typeField; }
-            set { this.typeField = value; typeSet = true; }
+            var xml = "";
+            if (PayerId != null) xml += "\r\n<payerId>" + SecurityElement.Escape(PayerId) + "</payerId>";
+            if (PayerEmail != null) xml += "\r\n<payerEmail>" + SecurityElement.Escape(PayerEmail) + "</payerEmail>";
+            if (Token != null) xml += "\r\n<token>" + SecurityElement.Escape(Token) + "</token>";
+            if (TransactionId != null)
+                xml += "\r\n<transactionId>" + SecurityElement.Escape(TransactionId) + "</transactionId>";
+            return xml;
+        }
+    }
+
+    public class MerchantDataType
+    {
+        public string Campaign;
+        public string Affiliate;
+        public string MerchantGroupingId;
+
+        public string Serialize()
+        {
+            var xml = "";
+            if (Campaign != null) xml += "\r\n<campaign>" + SecurityElement.Escape(Campaign) + "</campaign>";
+            if (Affiliate != null) xml += "\r\n<affiliate>" + SecurityElement.Escape(Affiliate) + "</affiliate>";
+            if (MerchantGroupingId != null)
+                xml += "\r\n<merchantGroupingId>" + SecurityElement.Escape(MerchantGroupingId) + "</merchantGroupingId>";
+            return xml;
+        }
+    }
+
+    public class CardTokenType
+    {
+        public string LitleToken;
+        public string ExpDate;
+        public string CardValidationNum;
+        private MethodOfPaymentTypeEnum _typeField;
+        private bool _typeSet;
+
+        public MethodOfPaymentTypeEnum Type
+        {
+            get { return _typeField; }
+            set
+            {
+                _typeField = value;
+                _typeSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "\r\n<paypageRegistrationId>" + SecurityElement.Escape(paypageRegistrationId) + "</paypageRegistrationId>";
-            if (expDate != null) xml += "\r\n<expDate>" + SecurityElement.Escape(expDate) + "</expDate>";
-            if (cardValidationNum != null) xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
-            if (typeSet) xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(typeField) + "</type>";
+            var xml = "\r\n<litleToken>" + SecurityElement.Escape(LitleToken) + "</litleToken>";
+            if (ExpDate != null) xml += "\r\n<expDate>" + SecurityElement.Escape(ExpDate) + "</expDate>";
+            if (CardValidationNum != null)
+                xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(CardValidationNum) + "</cardValidationNum>";
+            if (_typeSet) xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(_typeField) + "</type>";
             return xml;
         }
     }
 
-    public partial class billMeLaterRequest
+    public class CardPaypageType
     {
-        private long bmlMerchantIdField;
-        private bool bmlMerchantIdSet;
-        public long bmlMerchantId
+        public string PaypageRegistrationId;
+        public string ExpDate;
+        public string CardValidationNum;
+        private MethodOfPaymentTypeEnum _typeField;
+        private bool _typeSet;
+
+        public MethodOfPaymentTypeEnum Type
         {
-            get { return this.bmlMerchantIdField; }
-            set { this.bmlMerchantIdField = value; bmlMerchantIdSet = true; }
-        }
-        private long bmlProductTypeField;
-        private bool bmlProductTypeSet;
-        public long bmlProductType
-        {
-            get { return this.bmlProductTypeField; }
-            set { this.bmlProductTypeField = value; bmlProductTypeSet = true; }
-        }
-        private int termsAndConditionsField;
-        private bool termsAndConditionsSet;
-        public int termsAndConditions
-        {
-            get { return this.termsAndConditionsField; }
-            set { this.termsAndConditionsField = value; termsAndConditionsSet = true; }
-        }
-        public string preapprovalNumber;
-        private int merchantPromotionalCodeField;
-        private bool merchantPromotionalCodeSet;
-        public int merchantPromotionalCode
-        {
-            get { return this.merchantPromotionalCodeField; }
-            set { this.merchantPromotionalCodeField = value; merchantPromotionalCodeSet = true; }
-        }
-        public string virtualAuthenticationKeyPresenceIndicator;
-        public string virtualAuthenticationKeyData;
-        private int itemCategoryCodeField;
-        private bool itemCategoryCodeSet;
-        public int itemCategoryCode
-        {
-            get { return this.itemCategoryCodeField; }
-            set { this.itemCategoryCodeField = value; itemCategoryCodeSet = true; }
+            get { return _typeField; }
+            set
+            {
+                _typeField = value;
+                _typeSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (bmlMerchantIdSet) xml += "\r\n<bmlMerchantId>" + bmlMerchantIdField + "</bmlMerchantId>";
-            if (bmlProductTypeSet) xml += "\r\n<bmlProductType>" + bmlProductTypeField + "</bmlProductType>";
-            if (termsAndConditionsSet) xml += "\r\n<termsAndConditions>" + termsAndConditionsField + "</termsAndConditions>";
-            if (preapprovalNumber != null) xml += "\r\n<preapprovalNumber>" + SecurityElement.Escape(preapprovalNumber) + "</preapprovalNumber>";
-            if (merchantPromotionalCodeSet) xml += "\r\n<merchantPromotionalCode>" + merchantPromotionalCodeField + "</merchantPromotionalCode>";
-            if (virtualAuthenticationKeyPresenceIndicator != null) xml += "\r\n<virtualAuthenticationKeyPresenceIndicator>" + SecurityElement.Escape(virtualAuthenticationKeyPresenceIndicator) + "</virtualAuthenticationKeyPresenceIndicator>";
-            if (virtualAuthenticationKeyData != null) xml += "\r\n<virtualAuthenticationKeyData>" + SecurityElement.Escape(virtualAuthenticationKeyData) + "</virtualAuthenticationKeyData>";
-            if (itemCategoryCodeSet) xml += "\r\n<itemCategoryCode>" + itemCategoryCodeField + "</itemCategoryCode>";
+            var xml = "\r\n<paypageRegistrationId>" + SecurityElement.Escape(PaypageRegistrationId) +
+                         "</paypageRegistrationId>";
+            if (ExpDate != null) xml += "\r\n<expDate>" + SecurityElement.Escape(ExpDate) + "</expDate>";
+            if (CardValidationNum != null)
+                xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(CardValidationNum) + "</cardValidationNum>";
+            if (_typeSet) xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(_typeField) + "</type>";
             return xml;
         }
-
     }
 
-    public partial class customBilling
+    public class BillMeLaterRequest
     {
-        public string phone;
-        public string city;
-        public string url;
-        public string descriptor;
+        private long _bmlMerchantIdField;
+        private bool _bmlMerchantIdSet;
+
+        public long BmlMerchantId
+        {
+            get { return _bmlMerchantIdField; }
+            set
+            {
+                _bmlMerchantIdField = value;
+                _bmlMerchantIdSet = true;
+            }
+        }
+
+        private long _bmlProductTypeField;
+        private bool _bmlProductTypeSet;
+
+        public long BmlProductType
+        {
+            get { return _bmlProductTypeField; }
+            set
+            {
+                _bmlProductTypeField = value;
+                _bmlProductTypeSet = true;
+            }
+        }
+
+        private int _termsAndConditionsField;
+        private bool _termsAndConditionsSet;
+
+        public int TermsAndConditions
+        {
+            get { return _termsAndConditionsField; }
+            set
+            {
+                _termsAndConditionsField = value;
+                _termsAndConditionsSet = true;
+            }
+        }
+
+        public string PreapprovalNumber;
+        private int _merchantPromotionalCodeField;
+        private bool _merchantPromotionalCodeSet;
+
+        public int MerchantPromotionalCode
+        {
+            get { return _merchantPromotionalCodeField; }
+            set
+            {
+                _merchantPromotionalCodeField = value;
+                _merchantPromotionalCodeSet = true;
+            }
+        }
+
+        public string VirtualAuthenticationKeyPresenceIndicator;
+        public string VirtualAuthenticationKeyData;
+        private int _itemCategoryCodeField;
+        private bool _itemCategoryCodeSet;
+
+        public int ItemCategoryCode
+        {
+            get { return _itemCategoryCodeField; }
+            set
+            {
+                _itemCategoryCodeField = value;
+                _itemCategoryCodeSet = true;
+            }
+        }
+
         public string Serialize()
         {
-            string xml = "";
-            if (phone != null) xml += "\r\n<phone>" + SecurityElement.Escape(phone) + "</phone>";
-            else if (city != null) xml += "\r\n<city>" + SecurityElement.Escape(city) + "</city>";
-            else if (url != null) xml += "\r\n<url>" + SecurityElement.Escape(url) + "</url>";
-            if (descriptor != null) xml += "\r\n<descriptor>" + SecurityElement.Escape(descriptor) + "</descriptor>";
+            var xml = "";
+            if (_bmlMerchantIdSet) xml += "\r\n<bmlMerchantId>" + _bmlMerchantIdField + "</bmlMerchantId>";
+            if (_bmlProductTypeSet) xml += "\r\n<bmlProductType>" + _bmlProductTypeField + "</bmlProductType>";
+            if (_termsAndConditionsSet)
+                xml += "\r\n<termsAndConditions>" + _termsAndConditionsField + "</termsAndConditions>";
+            if (PreapprovalNumber != null)
+                xml += "\r\n<preapprovalNumber>" + SecurityElement.Escape(PreapprovalNumber) + "</preapprovalNumber>";
+            if (_merchantPromotionalCodeSet)
+                xml += "\r\n<merchantPromotionalCode>" + _merchantPromotionalCodeField + "</merchantPromotionalCode>";
+            if (VirtualAuthenticationKeyPresenceIndicator != null)
+                xml += "\r\n<virtualAuthenticationKeyPresenceIndicator>" +
+                       SecurityElement.Escape(VirtualAuthenticationKeyPresenceIndicator) +
+                       "</virtualAuthenticationKeyPresenceIndicator>";
+            if (VirtualAuthenticationKeyData != null)
+                xml += "\r\n<virtualAuthenticationKeyData>" + SecurityElement.Escape(VirtualAuthenticationKeyData) +
+                       "</virtualAuthenticationKeyData>";
+            if (_itemCategoryCodeSet) xml += "\r\n<itemCategoryCode>" + _itemCategoryCodeField + "</itemCategoryCode>";
             return xml;
         }
     }
 
-    public partial class amexAggregatorData
+    public class CustomBilling
     {
-        public string sellerId;
-        public string sellerMerchantCategoryCode;
-        public string Serialize()
-        {
-            string xml = "";
-            xml += "\r\n<sellerId>" + SecurityElement.Escape(sellerId) + "</sellerId>";
-            xml += "\r\n<sellerMerchantCategoryCode>" + SecurityElement.Escape(sellerMerchantCategoryCode) + "</sellerMerchantCategoryCode>";
-            return xml;
-        }
-
-    }
-
-    public partial class processingInstructions
-    {
-        private bool bypassVelocityCheckField;
-        private bool bypassVelocityCheckSet;
-        public bool bypassVelocityCheck
-        {
-            get { return this.bypassVelocityCheckField; }
-            set { this.bypassVelocityCheckField = value; this.bypassVelocityCheckSet = true; }
-        }
+        public string Phone;
+        public string City;
+        public string Url;
+        public string Descriptor;
 
         public string Serialize()
         {
-            string xml = "";
-            if (bypassVelocityCheckSet) xml += "\r\n<bypassVelocityCheck>" + bypassVelocityCheckField.ToString().ToLower() + "</bypassVelocityCheck>";
+            var xml = "";
+            if (Phone != null) xml += "\r\n<phone>" + SecurityElement.Escape(Phone) + "</phone>";
+            else if (City != null) xml += "\r\n<city>" + SecurityElement.Escape(City) + "</city>";
+            else if (Url != null) xml += "\r\n<url>" + SecurityElement.Escape(Url) + "</url>";
+            if (Descriptor != null) xml += "\r\n<descriptor>" + SecurityElement.Escape(Descriptor) + "</descriptor>";
             return xml;
         }
     }
 
-    public partial class echeckRedeposit : baseRequestTransactionEcheckRedeposit
+    public class AmexAggregatorData
+    {
+        public string SellerId;
+        public string SellerMerchantCategoryCode;
+
+        public string Serialize()
+        {
+            var xml = "";
+            xml += "\r\n<sellerId>" + SecurityElement.Escape(SellerId) + "</sellerId>";
+            xml += "\r\n<sellerMerchantCategoryCode>" + SecurityElement.Escape(SellerMerchantCategoryCode) +
+                   "</sellerMerchantCategoryCode>";
+            return xml;
+        }
+    }
+
+    public class ProcessingInstructions
+    {
+        private bool _bypassVelocityCheckField;
+        private bool _bypassVelocityCheckSet;
+
+        public bool BypassVelocityCheck
+        {
+            get { return _bypassVelocityCheckField; }
+            set
+            {
+                _bypassVelocityCheckField = value;
+                _bypassVelocityCheckSet = true;
+            }
+        }
+
+        public string Serialize()
+        {
+            var xml = "";
+            if (_bypassVelocityCheckSet)
+                xml += "\r\n<bypassVelocityCheck>" + _bypassVelocityCheckField.ToString().ToLower() +
+                       "</bypassVelocityCheck>";
+            return xml;
+        }
+    }
+
+    public class EcheckRedeposit : baseRequestTransactionEcheckRedeposit
     {
         //litleTxnIdField and set are in super
-        public echeckType echeck;
-        public echeckTokenType token;
-        public merchantDataType merchantData;
+        public EcheckType Echeck;
+        public EcheckTokenType Token;
+        public MerchantDataType MerchantData;
 
         public override string Serialize()
         {
-            string xml = "\r\n<echeckRedeposit";
+            var xml = "\r\n<echeckRedeposit";
             xml += " id=\"" + id + "\"";
             if (customerId != null)
             {
@@ -1274,960 +1637,1076 @@ namespace Litle.Sdk
             }
             xml += " reportGroup=\"" + reportGroup + "\">";
             if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
-            if (echeck != null) xml += "\r\n<echeck>" + echeck.Serialize() + "</echeck>";
-            else if (token != null) xml += "\r\n<echeckToken>" + token.Serialize() + "</echeckToken>";
-            if (merchantData != null) { xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>"; }
+            if (Echeck != null) xml += "\r\n<echeck>" + Echeck.Serialize() + "</echeck>";
+            else if (Token != null) xml += "\r\n<echeckToken>" + Token.Serialize() + "</echeckToken>";
+            if (MerchantData != null)
+            {
+                xml += "\r\n<merchantData>" + MerchantData.Serialize() + "\r\n</merchantData>";
+            }
             xml += "\r\n</echeckRedeposit>";
             return xml;
         }
     }
 
-    public partial class authorization : transactionTypeWithReportGroup
+    public class Authorization : transactionTypeWithReportGroup
     {
+        private long _litleTxnIdField;
+        private bool _litleTxnIdSet;
 
-        private long litleTxnIdField;
-        private bool litleTxnIdSet;
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get
-            {
-                return this.litleTxnIdField;
-            }
+            get { return _litleTxnIdField; }
             set
             {
-                this.litleTxnIdField = value;
-                this.litleTxnIdSet = true;
+                _litleTxnIdField = value;
+                _litleTxnIdSet = true;
             }
         }
-        public string orderId;
-        public long amount;
-        private bool secondaryAmountSet;
-        private long secondaryAmountField;
-        public long secondaryAmount
+
+        public string OrderId;
+        public long Amount;
+        private bool _secondaryAmountSet;
+        private long _secondaryAmountField;
+
+        public long SecondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
-        }
-        private bool surchargeAmountSet;
-        private long surchargeAmountField;
-        public long surchargeAmount
-        {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
-        }
-        public orderSourceType orderSource;
-        public customerInfo customerInfo;
-        public contact billToAddress;
-        public contact shipToAddress;
-        public cardType card;
-        public mposType mpos;
-        public payPal paypal;
-        public cardTokenType token;
-        public cardPaypageType paypage;
-        public applepayType applepay;
-        public billMeLaterRequest billMeLaterRequest;
-        public fraudCheckType cardholderAuthentication;
-        public processingInstructions processingInstructions;
-        public pos pos;
-        public customBilling customBilling;
-        private govtTaxTypeEnum taxTypeField;
-        private bool taxTypeSet;
-        public govtTaxTypeEnum taxType
-        {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; this.taxTypeSet = true; }
-        }
-        public enhancedData enhancedData;
-        public amexAggregatorData amexAggregatorData;
-        private bool allowPartialAuthField;
-        private bool allowPartialAuthSet;
-        public bool allowPartialAuth
-        {
-            get
-            {
-                return this.allowPartialAuthField;
-            }
+            get { return _secondaryAmountField; }
             set
             {
-                this.allowPartialAuthField = value;
-                this.allowPartialAuthSet = true;
+                _secondaryAmountField = value;
+                _secondaryAmountSet = true;
             }
         }
-        public healthcareIIAS healthcareIIAS;
-        public filteringType filtering;
-        public merchantDataType merchantData;
-        public recyclingRequestType recyclingRequest;
-        private bool fraudFilterOverrideField;
-        private bool fraudFilterOverrideSet;
-        public bool fraudFilterOverride
+
+        private bool _surchargeAmountSet;
+        private long _surchargeAmountField;
+
+        public long SurchargeAmount
         {
-            get
-            {
-                return this.fraudFilterOverrideField;
-            }
+            get { return _surchargeAmountField; }
             set
             {
-                this.fraudFilterOverrideField = value;
-                this.fraudFilterOverrideSet = true;
+                _surchargeAmountField = value;
+                _surchargeAmountSet = true;
             }
         }
-        public recurringRequest recurringRequest;
-        private bool debtRepaymentField;
-        private bool debtRepaymentSet;
-        public bool debtRepayment
+
+        public OrderSourceType OrderSource;
+        public CustomerInfo CustomerInfo;
+        public Contact BillToAddress;
+        public Contact ShipToAddress;
+        public CardType Card;
+        public MposType Mpos;
+        public PayPal Paypal;
+        public CardTokenType Token;
+        public CardPaypageType Paypage;
+        public ApplepayType Applepay;
+        public BillMeLaterRequest BillMeLaterRequest;
+        public FraudCheckType CardholderAuthentication;
+        public ProcessingInstructions ProcessingInstructions;
+        public Pos Pos;
+        public CustomBilling CustomBilling;
+        private govtTaxTypeEnum _taxTypeField;
+        private bool _taxTypeSet;
+
+        public govtTaxTypeEnum TaxType
         {
-            get
-            {
-                return this.debtRepaymentField;
-            }
+            get { return _taxTypeField; }
             set
             {
-                this.debtRepaymentField = value;
-                this.debtRepaymentSet = true;
+                _taxTypeField = value;
+                _taxTypeSet = true;
             }
         }
-        public advancedFraudChecksType advancedFraudChecks;
-        public wallet wallet;
+
+        public EnhancedData EnhancedData;
+        public AmexAggregatorData AmexAggregatorData;
+        private bool _allowPartialAuthField;
+        private bool _allowPartialAuthSet;
+
+        public bool AllowPartialAuth
+        {
+            get { return _allowPartialAuthField; }
+            set
+            {
+                _allowPartialAuthField = value;
+                _allowPartialAuthSet = true;
+            }
+        }
+
+        public HealthcareIIAS HealthcareIIAS;
+        public FilteringType Filtering;
+        public MerchantDataType MerchantData;
+        public RecyclingRequestType RecyclingRequest;
+        private bool _fraudFilterOverrideField;
+        private bool _fraudFilterOverrideSet;
+
+        public bool FraudFilterOverride
+        {
+            get { return _fraudFilterOverrideField; }
+            set
+            {
+                _fraudFilterOverrideField = value;
+                _fraudFilterOverrideSet = true;
+            }
+        }
+
+        public RecurringRequest RecurringRequest;
+        private bool _debtRepaymentField;
+        private bool _debtRepaymentSet;
+
+        public bool DebtRepayment
+        {
+            get { return _debtRepaymentField; }
+            set
+            {
+                _debtRepaymentField = value;
+                _debtRepaymentSet = true;
+            }
+        }
+
+        public AdvancedFraudChecksType AdvancedFraudChecks;
+        public Wallet Wallet;
 
         public override String Serialize()
         {
-            string xml = "\r\n<authorization";
+            var xml = "\r\n<authorization";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (litleTxnIdSet)
+            if (_litleTxnIdSet)
             {
-                xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
+                xml += "\r\n<litleTxnId>" + _litleTxnIdField + "</litleTxnId>";
             }
             else
             {
-                xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-                xml += "\r\n<amount>" + amount + "</amount>";
-                if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-                if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
-                if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
+                xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+                xml += "\r\n<amount>" + Amount + "</amount>";
+                if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+                if (_surchargeAmountSet) xml += "\r\n<surchargeAmount>" + _surchargeAmountField + "</surchargeAmount>";
+                if (OrderSource != null) xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
 
-                if (customerInfo != null)
+                if (CustomerInfo != null)
                 {
-                    xml += "\r\n<customerInfo>" + customerInfo.Serialize() + "\r\n</customerInfo>";
+                    xml += "\r\n<customerInfo>" + CustomerInfo.Serialize() + "\r\n</customerInfo>";
                 }
-                if (billToAddress != null)
+                if (BillToAddress != null)
                 {
-                    xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
+                    xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "\r\n</billToAddress>";
                 }
-                if (shipToAddress != null)
+                if (ShipToAddress != null)
                 {
-                    xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "\r\n</shipToAddress>";
+                    xml += "\r\n<shipToAddress>" + ShipToAddress.Serialize() + "\r\n</shipToAddress>";
                 }
-                if (card != null)
+                if (Card != null)
                 {
-                    xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+                    xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
                 }
-                else if (paypal != null)
+                else if (Paypal != null)
                 {
-                    xml += "\r\n<paypal>" + paypal.Serialize() + "\r\n</paypal>";
+                    xml += "\r\n<paypal>" + Paypal.Serialize() + "\r\n</paypal>";
                 }
-                else if (mpos != null)
+                else if (Mpos != null)
                 {
-                    xml += "\r\n<mpos>" + mpos.Serialize() + "\r\n</mpos>";
+                    xml += "\r\n<mpos>" + Mpos.Serialize() + "\r\n</mpos>";
                 }
-                else if (token != null)
+                else if (Token != null)
                 {
-                    xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+                    xml += "\r\n<token>" + Token.Serialize() + "\r\n</token>";
                 }
-                else if (paypage != null)
+                else if (Paypage != null)
                 {
-                    xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+                    xml += "\r\n<paypage>" + Paypage.Serialize() + "\r\n</paypage>";
                 }
-                else if (applepay != null)
+                else if (Applepay != null)
                 {
-                    xml += "\r\n<applepay>" + applepay.Serialize() + "\r\n</applepay>";
+                    xml += "\r\n<applepay>" + Applepay.Serialize() + "\r\n</applepay>";
                 }
-                if (billMeLaterRequest != null)
+                if (BillMeLaterRequest != null)
                 {
-                    xml += "\r\n<billMeLaterRequest>" + billMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
+                    xml += "\r\n<billMeLaterRequest>" + BillMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
                 }
-                if (cardholderAuthentication != null)
+                if (CardholderAuthentication != null)
                 {
-                    xml += "\r\n<cardholderAuthentication>" + cardholderAuthentication.Serialize() + "\r\n</cardholderAuthentication>";
+                    xml += "\r\n<cardholderAuthentication>" + CardholderAuthentication.Serialize() +
+                           "\r\n</cardholderAuthentication>";
                 }
-                if (processingInstructions != null)
+                if (ProcessingInstructions != null)
                 {
-                    xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
+                    xml += "\r\n<processingInstructions>" + ProcessingInstructions.Serialize() +
+                           "\r\n</processingInstructions>";
                 }
-                if (pos != null)
+                if (Pos != null)
                 {
-                    xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
+                    xml += "\r\n<pos>" + Pos.Serialize() + "\r\n</pos>";
                 }
-                if (customBilling != null)
+                if (CustomBilling != null)
                 {
-                    xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
+                    xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "\r\n</customBilling>";
                 }
-                if (taxTypeSet)
+                if (_taxTypeSet)
                 {
-                    xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
+                    xml += "\r\n<taxType>" + _taxTypeField + "</taxType>";
                 }
-                if (enhancedData != null)
+                if (EnhancedData != null)
                 {
-                    xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
+                    xml += "\r\n<enhancedData>" + EnhancedData.Serialize() + "\r\n</enhancedData>";
                 }
-                if (amexAggregatorData != null)
+                if (AmexAggregatorData != null)
                 {
-                    xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
+                    xml += "\r\n<amexAggregatorData>" + AmexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
                 }
-                if (allowPartialAuthSet)
+                if (_allowPartialAuthSet)
                 {
-                    xml += "\r\n<allowPartialAuth>" + allowPartialAuthField.ToString().ToLower() + "</allowPartialAuth>";
+                    xml += "\r\n<allowPartialAuth>" + _allowPartialAuthField.ToString().ToLower() + "</allowPartialAuth>";
                 }
-                if (healthcareIIAS != null)
+                if (HealthcareIIAS != null)
                 {
-                    xml += "\r\n<healthcareIIAS>" + healthcareIIAS.Serialize() + "\r\n</healthcareIIAS>";
+                    xml += "\r\n<healthcareIIAS>" + HealthcareIIAS.Serialize() + "\r\n</healthcareIIAS>";
                 }
-                if (filtering != null)
+                if (Filtering != null)
                 {
-                    xml += "\r\n<filtering>" + filtering.Serialize() + "\r\n</filtering>";
+                    xml += "\r\n<filtering>" + Filtering.Serialize() + "\r\n</filtering>";
                 }
-                if (merchantData != null)
+                if (MerchantData != null)
                 {
-                    xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
+                    xml += "\r\n<merchantData>" + MerchantData.Serialize() + "\r\n</merchantData>";
                 }
-                if (recyclingRequest != null)
+                if (RecyclingRequest != null)
                 {
-                    xml += "\r\n<recyclingRequest>" + recyclingRequest.Serialize() + "\r\n</recyclingRequest>";
+                    xml += "\r\n<recyclingRequest>" + RecyclingRequest.Serialize() + "\r\n</recyclingRequest>";
                 }
-                if (fraudFilterOverrideSet) xml += "\r\n<fraudFilterOverride>" + fraudFilterOverrideField.ToString().ToLower() + "</fraudFilterOverride>";
-                if (recurringRequest != null)
+                if (_fraudFilterOverrideSet)
+                    xml += "\r\n<fraudFilterOverride>" + _fraudFilterOverrideField.ToString().ToLower() +
+                           "</fraudFilterOverride>";
+                if (RecurringRequest != null)
                 {
-                    xml += "\r\n<recurringRequest>" + recurringRequest.Serialize() + "\r\n</recurringRequest>";
+                    xml += "\r\n<recurringRequest>" + RecurringRequest.Serialize() + "\r\n</recurringRequest>";
                 }
-                if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
-                if (advancedFraudChecks != null)
+                if (_debtRepaymentSet)
+                    xml += "\r\n<debtRepayment>" + DebtRepayment.ToString().ToLower() + "</debtRepayment>";
+                if (AdvancedFraudChecks != null)
                 {
-                    xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
+                    xml += "\r\n<advancedFraudChecks>" + AdvancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
                 }
-                if (wallet != null)
+                if (Wallet != null)
                 {
-                    xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
+                    xml += "\r\n<wallet>" + Wallet.Serialize() + "\r\n</wallet>";
                 }
             }
-            
+
             xml += "\r\n</authorization>";
             return xml;
         }
     }
 
-    public partial class sale : transactionTypeWithReportGroup
+    public class Sale : transactionTypeWithReportGroup
     {
+        private long _litleTxnIdField;
+        private bool _litleTxnIdSet;
 
-        private long litleTxnIdField;
-        private bool litleTxnIdSet;
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get
-            {
-                return this.litleTxnIdField;
-            }
+            get { return _litleTxnIdField; }
             set
             {
-                this.litleTxnIdField = value;
-                this.litleTxnIdSet = true;
+                _litleTxnIdField = value;
+                _litleTxnIdSet = true;
             }
         }
-        public string orderId;
-        public long amount;
-        private bool secondaryAmountSet;
-        private long secondaryAmountField;
-        public long secondaryAmount
+
+        public string OrderId;
+        public long Amount;
+        private bool _secondaryAmountSet;
+        private long _secondaryAmountField;
+
+        public long SecondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
-        }
-        private bool surchargeAmountSet;
-        private long surchargeAmountField;
-        public long surchargeAmount
-        {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
-        }
-        public orderSourceType orderSource;
-        public customerInfo customerInfo;
-        public contact billToAddress;
-        public contact shipToAddress;
-        public cardType card;
-        public mposType mpos;
-        public payPal paypal;
-        public cardTokenType token;
-        public cardPaypageType paypage;
-        public applepayType applepay;
-        public billMeLaterRequest billMeLaterRequest;
-        public fraudCheckType cardholderAuthentication;
-        public customBilling customBilling;
-        private govtTaxTypeEnum taxTypeField;
-        private bool taxTypeSet;
-        public govtTaxTypeEnum taxType
-        {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; this.taxTypeSet = true; }
-        }
-        public enhancedData enhancedData;
-        public processingInstructions processingInstructions;
-        public pos pos;
-        private bool payPalOrderCompleteField;
-        private bool payPalOrderCompleteSet;
-        public bool payPalOrderComplete
-        {
-            get { return this.payPalOrderCompleteField; }
-            set { this.payPalOrderCompleteField = value; this.payPalOrderCompleteSet = true; }
-        }
-        public string payPalNotes;
-        public amexAggregatorData amexAggregatorData;
-        private bool allowPartialAuthField;
-        private bool allowPartialAuthSet;
-        public bool allowPartialAuth
-        {
-            get
-            {
-                return this.allowPartialAuthField;
-            }
+            get { return _secondaryAmountField; }
             set
             {
-                this.allowPartialAuthField = value;
-                this.allowPartialAuthSet = true;
+                _secondaryAmountField = value;
+                _secondaryAmountSet = true;
             }
         }
-        public healthcareIIAS healthcareIIAS;
-        public filteringType filtering;
-        public merchantDataType merchantData;
-        public recyclingRequestType recyclingRequest;
-        private bool fraudFilterOverrideField;
-        private bool fraudFilterOverrideSet;
-        public bool fraudFilterOverride
+
+        private bool _surchargeAmountSet;
+        private long _surchargeAmountField;
+
+        public long SurchargeAmount
         {
-            get
-            {
-                return this.fraudFilterOverrideField;
-            }
+            get { return _surchargeAmountField; }
             set
             {
-                this.fraudFilterOverrideField = value;
-                this.fraudFilterOverrideSet = true;
+                _surchargeAmountField = value;
+                _surchargeAmountSet = true;
             }
         }
-        public recurringRequest recurringRequest;
-        public litleInternalRecurringRequest litleInternalRecurringRequest;
-        private bool debtRepaymentField;
-        private bool debtRepaymentSet;
-        public bool debtRepayment
+
+        public OrderSourceType OrderSource;
+        public CustomerInfo CustomerInfo;
+        public Contact BillToAddress;
+        public Contact ShipToAddress;
+        public CardType Card;
+        public MposType Mpos;
+        public PayPal Paypal;
+        public CardTokenType Token;
+        public CardPaypageType Paypage;
+        public ApplepayType Applepay;
+        public BillMeLaterRequest BillMeLaterRequest;
+        public FraudCheckType CardholderAuthentication;
+        public CustomBilling CustomBilling;
+        private govtTaxTypeEnum _taxTypeField;
+        private bool _taxTypeSet;
+
+        public govtTaxTypeEnum TaxType
         {
-            get
-            {
-                return this.debtRepaymentField;
-            }
+            get { return _taxTypeField; }
             set
             {
-                this.debtRepaymentField = value;
-                this.debtRepaymentSet = true;
+                _taxTypeField = value;
+                _taxTypeSet = true;
             }
         }
-        public advancedFraudChecksType advancedFraudChecks;
-        public wallet wallet;
+
+        public EnhancedData EnhancedData;
+        public ProcessingInstructions ProcessingInstructions;
+        public Pos Pos;
+        private bool _payPalOrderCompleteField;
+        private bool _payPalOrderCompleteSet;
+
+        public bool PayPalOrderComplete
+        {
+            get { return _payPalOrderCompleteField; }
+            set
+            {
+                _payPalOrderCompleteField = value;
+                _payPalOrderCompleteSet = true;
+            }
+        }
+
+        public string PayPalNotes;
+        public AmexAggregatorData AmexAggregatorData;
+        private bool _allowPartialAuthField;
+        private bool _allowPartialAuthSet;
+
+        public bool AllowPartialAuth
+        {
+            get { return _allowPartialAuthField; }
+            set
+            {
+                _allowPartialAuthField = value;
+                _allowPartialAuthSet = true;
+            }
+        }
+
+        public HealthcareIIAS HealthcareIIAS;
+        public FilteringType Filtering;
+        public MerchantDataType MerchantData;
+        public RecyclingRequestType RecyclingRequest;
+        private bool _fraudFilterOverrideField;
+        private bool _fraudFilterOverrideSet;
+
+        public bool FraudFilterOverride
+        {
+            get { return _fraudFilterOverrideField; }
+            set
+            {
+                _fraudFilterOverrideField = value;
+                _fraudFilterOverrideSet = true;
+            }
+        }
+
+        public RecurringRequest RecurringRequest;
+        public LitleInternalRecurringRequest LitleInternalRecurringRequest;
+        private bool _debtRepaymentField;
+        private bool _debtRepaymentSet;
+
+        public bool DebtRepayment
+        {
+            get { return _debtRepaymentField; }
+            set
+            {
+                _debtRepaymentField = value;
+                _debtRepaymentSet = true;
+            }
+        }
+
+        public AdvancedFraudChecksType AdvancedFraudChecks;
+        public Wallet Wallet;
 
         public override String Serialize()
         {
-            string xml = "\r\n<sale";
+            var xml = "\r\n<sale";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
-            xml += "\r\n<orderId>" + orderId + "</orderId>";
-            xml += "\r\n<amount>" + amount + "</amount>";
-            if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-            if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
-            if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            if (customerInfo != null)
+            if (_litleTxnIdSet) xml += "\r\n<litleTxnId>" + _litleTxnIdField + "</litleTxnId>";
+            xml += "\r\n<orderId>" + OrderId + "</orderId>";
+            xml += "\r\n<amount>" + Amount + "</amount>";
+            if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+            if (_surchargeAmountSet) xml += "\r\n<surchargeAmount>" + _surchargeAmountField + "</surchargeAmount>";
+            if (OrderSource != null) xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+            if (CustomerInfo != null)
             {
-                xml += "\r\n<customerInfo>" + customerInfo.Serialize() + "\r\n</customerInfo>";
+                xml += "\r\n<customerInfo>" + CustomerInfo.Serialize() + "\r\n</customerInfo>";
             }
-            if (billToAddress != null)
+            if (BillToAddress != null)
             {
-                xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
+                xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "\r\n</billToAddress>";
             }
-            if (shipToAddress != null)
+            if (ShipToAddress != null)
             {
-                xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "\r\n</shipToAddress>";
+                xml += "\r\n<shipToAddress>" + ShipToAddress.Serialize() + "\r\n</shipToAddress>";
             }
-            if (card != null)
+            if (Card != null)
             {
-                xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+                xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
             }
-            else if (paypal != null)
+            else if (Paypal != null)
             {
-                xml += "\r\n<paypal>" + paypal.Serialize() + "\r\n</paypal>";
+                xml += "\r\n<paypal>" + Paypal.Serialize() + "\r\n</paypal>";
             }
-            else if (token != null)
+            else if (Token != null)
             {
-                xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+                xml += "\r\n<token>" + Token.Serialize() + "\r\n</token>";
             }
-            else if (mpos != null)
+            else if (Mpos != null)
             {
-                xml += "\r\n<mpos>" + mpos.Serialize() + "</mpos>";
+                xml += "\r\n<mpos>" + Mpos.Serialize() + "</mpos>";
             }
-            else if (paypage != null)
+            else if (Paypage != null)
             {
-                xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+                xml += "\r\n<paypage>" + Paypage.Serialize() + "\r\n</paypage>";
             }
-            else if (applepay != null)
+            else if (Applepay != null)
             {
-                xml += "\r\n<applepay>" + applepay.Serialize() + "\r\n</applepay>";
+                xml += "\r\n<applepay>" + Applepay.Serialize() + "\r\n</applepay>";
             }
-            if (billMeLaterRequest != null)
+            if (BillMeLaterRequest != null)
             {
-                xml += "\r\n<billMeLaterRequest>" + billMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
+                xml += "\r\n<billMeLaterRequest>" + BillMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
             }
-            if (cardholderAuthentication != null)
+            if (CardholderAuthentication != null)
             {
-                xml += "\r\n<cardholderAuthentication>" + cardholderAuthentication.Serialize() + "\r\n</cardholderAuthentication>";
+                xml += "\r\n<cardholderAuthentication>" + CardholderAuthentication.Serialize() +
+                       "\r\n</cardholderAuthentication>";
             }
-            if (customBilling != null)
+            if (CustomBilling != null)
             {
-                xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
+                xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "\r\n</customBilling>";
             }
-            if (taxTypeSet)
+            if (_taxTypeSet)
             {
-                xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
+                xml += "\r\n<taxType>" + _taxTypeField + "</taxType>";
             }
-            if (enhancedData != null)
+            if (EnhancedData != null)
             {
-                xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
+                xml += "\r\n<enhancedData>" + EnhancedData.Serialize() + "\r\n</enhancedData>";
             }
-            if (processingInstructions != null)
+            if (ProcessingInstructions != null)
             {
-                xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
+                xml += "\r\n<processingInstructions>" + ProcessingInstructions.Serialize() +
+                       "\r\n</processingInstructions>";
             }
-            if (pos != null)
+            if (Pos != null)
             {
-                xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
+                xml += "\r\n<pos>" + Pos.Serialize() + "\r\n</pos>";
             }
-            if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderCompleteSet>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderCompleteSet>";
-            if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
-            if (amexAggregatorData != null)
+            if (_payPalOrderCompleteSet)
+                xml += "\r\n<payPalOrderCompleteSet>" + _payPalOrderCompleteField.ToString().ToLower() +
+                       "</payPalOrderCompleteSet>";
+            if (PayPalNotes != null)
+                xml += "\r\n<payPalNotes>" + SecurityElement.Escape(PayPalNotes) + "</payPalNotes>";
+            if (AmexAggregatorData != null)
             {
-                xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
+                xml += "\r\n<amexAggregatorData>" + AmexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
             }
-            if (allowPartialAuthSet)
+            if (_allowPartialAuthSet)
             {
-                xml += "\r\n<allowPartialAuth>" + allowPartialAuthField.ToString().ToLower() + "</allowPartialAuth>";
+                xml += "\r\n<allowPartialAuth>" + _allowPartialAuthField.ToString().ToLower() + "</allowPartialAuth>";
             }
-            if (healthcareIIAS != null)
+            if (HealthcareIIAS != null)
             {
-                xml += "\r\n<healthcareIIAS>" + healthcareIIAS.Serialize() + "\r\n</healthcareIIAS>";
+                xml += "\r\n<healthcareIIAS>" + HealthcareIIAS.Serialize() + "\r\n</healthcareIIAS>";
             }
-            if (filtering != null)
+            if (Filtering != null)
             {
-                xml += "\r\n<filtering>" + filtering.Serialize() + "\r\n</filtering>";
+                xml += "\r\n<filtering>" + Filtering.Serialize() + "\r\n</filtering>";
             }
-            if (merchantData != null)
+            if (MerchantData != null)
             {
-                xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
+                xml += "\r\n<merchantData>" + MerchantData.Serialize() + "\r\n</merchantData>";
             }
-            if (recyclingRequest != null)
+            if (RecyclingRequest != null)
             {
-                xml += "\r\n<recyclingRequest>" + recyclingRequest.Serialize() + "\r\n</recyclingRequest>";
+                xml += "\r\n<recyclingRequest>" + RecyclingRequest.Serialize() + "\r\n</recyclingRequest>";
             }
-            if (fraudFilterOverrideSet) xml += "\r\n<fraudFilterOverride>" + fraudFilterOverrideField.ToString().ToLower() + "</fraudFilterOverride>";
-            if (recurringRequest != null)
+            if (_fraudFilterOverrideSet)
+                xml += "\r\n<fraudFilterOverride>" + _fraudFilterOverrideField.ToString().ToLower() +
+                       "</fraudFilterOverride>";
+            if (RecurringRequest != null)
             {
-                xml += "\r\n<recurringRequest>" + recurringRequest.Serialize() + "\r\n</recurringRequest>";
+                xml += "\r\n<recurringRequest>" + RecurringRequest.Serialize() + "\r\n</recurringRequest>";
             }
-            if (litleInternalRecurringRequest != null)
+            if (LitleInternalRecurringRequest != null)
             {
-                xml += "\r\n<litleInternalRecurringRequest>" + litleInternalRecurringRequest.Serialize() + "\r\n</litleInternalRecurringRequest>";
+                xml += "\r\n<litleInternalRecurringRequest>" + LitleInternalRecurringRequest.Serialize() +
+                       "\r\n</litleInternalRecurringRequest>";
             }
-            if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
-            if (advancedFraudChecks != null) xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
-            if (wallet != null)
+            if (_debtRepaymentSet)
+                xml += "\r\n<debtRepayment>" + DebtRepayment.ToString().ToLower() + "</debtRepayment>";
+            if (AdvancedFraudChecks != null)
+                xml += "\r\n<advancedFraudChecks>" + AdvancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
+            if (Wallet != null)
             {
-                xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
+                xml += "\r\n<wallet>" + Wallet.Serialize() + "\r\n</wallet>";
             }
             xml += "\r\n</sale>";
             return xml;
         }
     }
 
-    public partial class forceCapture : transactionTypeWithReportGroup
+    public class ForceCapture : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public long amount;
-        private bool secondaryAmountSet;
-        private long secondaryAmountField;
-        public long secondaryAmount
+        public string OrderId;
+        public long Amount;
+        private bool _secondaryAmountSet;
+        private long _secondaryAmountField;
+
+        public long SecondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
-        }
-        private bool surchargeAmountSet;
-        private long surchargeAmountField;
-        public long surchargeAmount
-        {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
-        }
-        public orderSourceType orderSource;
-        public contact billToAddress;
-        public cardType card;
-        public mposType mpos;
-        public cardTokenType token;
-        public cardPaypageType paypage;
-        public customBilling customBilling;
-        private govtTaxTypeEnum taxTypeField;
-        private bool taxTypeSet;
-        public govtTaxTypeEnum taxType
-        {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; this.taxTypeSet = true; }
-        }
-        public enhancedData enhancedData;
-        public processingInstructions processingInstructions;
-        public pos pos;
-        public amexAggregatorData amexAggregatorData;
-        public merchantDataType merchantData;
-        private bool debtRepaymentField;
-        private bool debtRepaymentSet;
-        public bool debtRepayment
-        {
-            get
-            {
-                return this.debtRepaymentField;
-            }
+            get { return _secondaryAmountField; }
             set
             {
-                this.debtRepaymentField = value;
-                this.debtRepaymentSet = true;
+                _secondaryAmountField = value;
+                _secondaryAmountSet = true;
+            }
+        }
+
+        private bool _surchargeAmountSet;
+        private long _surchargeAmountField;
+
+        public long SurchargeAmount
+        {
+            get { return _surchargeAmountField; }
+            set
+            {
+                _surchargeAmountField = value;
+                _surchargeAmountSet = true;
+            }
+        }
+
+        public OrderSourceType OrderSource;
+        public Contact BillToAddress;
+        public CardType Card;
+        public MposType Mpos;
+        public CardTokenType Token;
+        public CardPaypageType Paypage;
+        public CustomBilling CustomBilling;
+        private govtTaxTypeEnum _taxTypeField;
+        private bool _taxTypeSet;
+
+        public govtTaxTypeEnum TaxType
+        {
+            get { return _taxTypeField; }
+            set
+            {
+                _taxTypeField = value;
+                _taxTypeSet = true;
+            }
+        }
+
+        public EnhancedData EnhancedData;
+        public ProcessingInstructions ProcessingInstructions;
+        public Pos Pos;
+        public AmexAggregatorData AmexAggregatorData;
+        public MerchantDataType MerchantData;
+        private bool _debtRepaymentField;
+        private bool _debtRepaymentSet;
+
+        public bool DebtRepayment
+        {
+            get { return _debtRepaymentField; }
+            set
+            {
+                _debtRepaymentField = value;
+                _debtRepaymentSet = true;
             }
         }
 
         public override String Serialize()
         {
-            string xml = "\r\n<forceCapture";
+            var xml = "\r\n<forceCapture";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-            xml += "\r\n<amount>" + amount + "</amount>";
-            if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-            if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
-            if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            if (billToAddress != null)
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+            xml += "\r\n<amount>" + Amount + "</amount>";
+            if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+            if (_surchargeAmountSet) xml += "\r\n<surchargeAmount>" + _surchargeAmountField + "</surchargeAmount>";
+            if (OrderSource != null) xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+            if (BillToAddress != null)
             {
-                xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
+                xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "\r\n</billToAddress>";
             }
-            if (card != null)
+            if (Card != null)
             {
-                xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+                xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
             }
-            else if (token != null)
+            else if (Token != null)
             {
-                xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+                xml += "\r\n<token>" + Token.Serialize() + "\r\n</token>";
             }
-            else if (mpos != null)
+            else if (Mpos != null)
             {
-                xml += "\r\n<mpos>" + mpos.Serialize() + "</mpos>";
+                xml += "\r\n<mpos>" + Mpos.Serialize() + "</mpos>";
             }
-            else if (paypage != null)
+            else if (Paypage != null)
             {
-                xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+                xml += "\r\n<paypage>" + Paypage.Serialize() + "\r\n</paypage>";
             }
-            if (customBilling != null)
+            if (CustomBilling != null)
             {
-                xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
+                xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "\r\n</customBilling>";
             }
-            if (taxTypeSet)
+            if (_taxTypeSet)
             {
-                xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
+                xml += "\r\n<taxType>" + _taxTypeField + "</taxType>";
             }
-            if (enhancedData != null)
+            if (EnhancedData != null)
             {
-                xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
+                xml += "\r\n<enhancedData>" + EnhancedData.Serialize() + "\r\n</enhancedData>";
             }
-            if (processingInstructions != null)
+            if (ProcessingInstructions != null)
             {
-                xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
+                xml += "\r\n<processingInstructions>" + ProcessingInstructions.Serialize() +
+                       "\r\n</processingInstructions>";
             }
-            if (pos != null)
+            if (Pos != null)
             {
-                xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
+                xml += "\r\n<pos>" + Pos.Serialize() + "\r\n</pos>";
             }
-            if (amexAggregatorData != null)
+            if (AmexAggregatorData != null)
             {
-                xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
+                xml += "\r\n<amexAggregatorData>" + AmexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
             }
-            if (merchantData != null)
+            if (MerchantData != null)
             {
-                xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
+                xml += "\r\n<merchantData>" + MerchantData.Serialize() + "\r\n</merchantData>";
             }
-            if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+            if (_debtRepaymentSet)
+                xml += "\r\n<debtRepayment>" + DebtRepayment.ToString().ToLower() + "</debtRepayment>";
             xml += "\r\n</forceCapture>";
             return xml;
         }
     }
 
-    public partial class captureGivenAuth : transactionTypeWithReportGroup
+    public class CaptureGivenAuth : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public authInformation authInformation;
-        public long amount;
-        private bool secondaryAmountSet;
-        private long secondaryAmountField;
-        public long secondaryAmount
+        public string OrderId;
+        public AuthInformation AuthInformation;
+        public long Amount;
+        private bool _secondaryAmountSet;
+        private long _secondaryAmountField;
+
+        public long SecondaryAmount
         {
-            get { return this.secondaryAmountField; }
-            set { this.secondaryAmountField = value; this.secondaryAmountSet = true; }
-        }
-        private bool surchargeAmountSet;
-        private long surchargeAmountField;
-        public long surchargeAmount
-        {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
-        }
-        public orderSourceType orderSource;
-        public contact billToAddress;
-        public contact shipToAddress;
-        public cardType card;
-        public mposType mpos;
-        public cardTokenType token;
-        public cardPaypageType paypage;
-        public customBilling customBilling;
-        private govtTaxTypeEnum taxTypeField;
-        private bool taxTypeSet;
-        public govtTaxTypeEnum taxType
-        {
-            get { return this.taxTypeField; }
-            set { this.taxTypeField = value; this.taxTypeSet = true; }
-        }
-        public billMeLaterRequest billMeLaterRequest;
-        public enhancedData enhancedData;
-        public processingInstructions processingInstructions;
-        public pos pos;
-        public amexAggregatorData amexAggregatorData;
-        public merchantDataType merchantData;
-        private bool debtRepaymentField;
-        private bool debtRepaymentSet;
-        public bool debtRepayment
-        {
-            get
-            {
-                return this.debtRepaymentField;
-            }
+            get { return _secondaryAmountField; }
             set
             {
-                this.debtRepaymentField = value;
-                this.debtRepaymentSet = true;
+                _secondaryAmountField = value;
+                _secondaryAmountSet = true;
+            }
+        }
+
+        private bool _surchargeAmountSet;
+        private long _surchargeAmountField;
+
+        public long SurchargeAmount
+        {
+            get { return _surchargeAmountField; }
+            set
+            {
+                _surchargeAmountField = value;
+                _surchargeAmountSet = true;
+            }
+        }
+
+        public OrderSourceType OrderSource;
+        public Contact BillToAddress;
+        public Contact ShipToAddress;
+        public CardType Card;
+        public MposType Mpos;
+        public CardTokenType Token;
+        public CardPaypageType Paypage;
+        public CustomBilling CustomBilling;
+        private govtTaxTypeEnum _taxTypeField;
+        private bool _taxTypeSet;
+
+        public govtTaxTypeEnum TaxType
+        {
+            get { return _taxTypeField; }
+            set
+            {
+                _taxTypeField = value;
+                _taxTypeSet = true;
+            }
+        }
+
+        public BillMeLaterRequest BillMeLaterRequest;
+        public EnhancedData EnhancedData;
+        public ProcessingInstructions ProcessingInstructions;
+        public Pos Pos;
+        public AmexAggregatorData AmexAggregatorData;
+        public MerchantDataType MerchantData;
+        private bool _debtRepaymentField;
+        private bool _debtRepaymentSet;
+
+        public bool DebtRepayment
+        {
+            get { return _debtRepaymentField; }
+            set
+            {
+                _debtRepaymentField = value;
+                _debtRepaymentSet = true;
             }
         }
 
         public override String Serialize()
         {
-            string xml = "\r\n<captureGivenAuth";
+            var xml = "\r\n<captureGivenAuth";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-            if (authInformation != null) xml += "\r\n<authInformation>" + authInformation.Serialize() + "\r\n</authInformation>";
-            xml += "\r\n<amount>" + amount + "</amount>";
-            if (secondaryAmountSet) xml += "\r\n<secondaryAmount>" + secondaryAmountField + "</secondaryAmount>";
-            if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
-            if (orderSource != null) xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            if (billToAddress != null)
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+            if (AuthInformation != null)
+                xml += "\r\n<authInformation>" + AuthInformation.Serialize() + "\r\n</authInformation>";
+            xml += "\r\n<amount>" + Amount + "</amount>";
+            if (_secondaryAmountSet) xml += "\r\n<secondaryAmount>" + _secondaryAmountField + "</secondaryAmount>";
+            if (_surchargeAmountSet) xml += "\r\n<surchargeAmount>" + _surchargeAmountField + "</surchargeAmount>";
+            if (OrderSource != null) xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+            if (BillToAddress != null)
             {
-                xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
+                xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "\r\n</billToAddress>";
             }
-            if (shipToAddress != null)
+            if (ShipToAddress != null)
             {
-                xml += "\r\n<shipToAddress>" + shipToAddress.Serialize() + "\r\n</shipToAddress>";
+                xml += "\r\n<shipToAddress>" + ShipToAddress.Serialize() + "\r\n</shipToAddress>";
             }
-            if (card != null)
+            if (Card != null)
             {
-                xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+                xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
             }
-            else if (token != null)
+            else if (Token != null)
             {
-                xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
+                xml += "\r\n<token>" + Token.Serialize() + "\r\n</token>";
             }
-            else if (mpos != null)
+            else if (Mpos != null)
             {
-                xml += "\r\n<mpos>" + mpos.Serialize() + "</mpos>";
+                xml += "\r\n<mpos>" + Mpos.Serialize() + "</mpos>";
             }
-            else if (paypage != null)
+            else if (Paypage != null)
             {
-                xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
+                xml += "\r\n<paypage>" + Paypage.Serialize() + "\r\n</paypage>";
             }
-            if (customBilling != null)
+            if (CustomBilling != null)
             {
-                xml += "\r\n<customBilling>" + customBilling.Serialize() + "\r\n</customBilling>";
+                xml += "\r\n<customBilling>" + CustomBilling.Serialize() + "\r\n</customBilling>";
             }
-            if (taxTypeSet)
+            if (_taxTypeSet)
             {
-                xml += "\r\n<taxType>" + taxTypeField + "</taxType>";
+                xml += "\r\n<taxType>" + _taxTypeField + "</taxType>";
             }
-            if (billMeLaterRequest != null)
+            if (BillMeLaterRequest != null)
             {
-                xml += "\r\n<billMeLaterRequest>" + billMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
+                xml += "\r\n<billMeLaterRequest>" + BillMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
             }
-            if (enhancedData != null)
+            if (EnhancedData != null)
             {
-                xml += "\r\n<enhancedData>" + enhancedData.Serialize() + "\r\n</enhancedData>";
+                xml += "\r\n<enhancedData>" + EnhancedData.Serialize() + "\r\n</enhancedData>";
             }
-            if (processingInstructions != null)
+            if (ProcessingInstructions != null)
             {
-                xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
+                xml += "\r\n<processingInstructions>" + ProcessingInstructions.Serialize() +
+                       "\r\n</processingInstructions>";
             }
-            if (pos != null)
+            if (Pos != null)
             {
-                xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
+                xml += "\r\n<pos>" + Pos.Serialize() + "\r\n</pos>";
             }
-            if (amexAggregatorData != null)
+            if (AmexAggregatorData != null)
             {
-                xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
+                xml += "\r\n<amexAggregatorData>" + AmexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
             }
-            if (merchantData != null)
+            if (MerchantData != null)
             {
-                xml += "\r\n<merchantData>" + merchantData.Serialize() + "\r\n</merchantData>";
+                xml += "\r\n<merchantData>" + MerchantData.Serialize() + "\r\n</merchantData>";
             }
-            if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+            if (_debtRepaymentSet)
+                xml += "\r\n<debtRepayment>" + DebtRepayment.ToString().ToLower() + "</debtRepayment>";
             xml += "\r\n</captureGivenAuth>";
             return xml;
         }
     }
 
-    public partial class cancelSubscription : recurringTransactionType
+    public class CancelSubscription : recurringTransactionType
     {
-        private long subscriptionIdField;
-        private bool subscriptionIdSet;
-        public long subscriptionId
+        private long _subscriptionIdField;
+        private bool _subscriptionIdSet;
+
+        public long SubscriptionId
         {
-            get
-            {
-                return this.subscriptionIdField;
-            }
+            get { return _subscriptionIdField; }
             set
             {
-                this.subscriptionIdField = value;
-                this.subscriptionIdSet = true;
+                _subscriptionIdField = value;
+                _subscriptionIdSet = true;
             }
         }
 
         public override String Serialize()
         {
-            string xml = "\r\n<cancelSubscription>";
-            if (subscriptionIdSet) xml += "\r\n<subscriptionId>" + subscriptionIdField + "</subscriptionId>";
+            var xml = "\r\n<cancelSubscription>";
+            if (_subscriptionIdSet) xml += "\r\n<subscriptionId>" + _subscriptionIdField + "</subscriptionId>";
             xml += "\r\n</cancelSubscription>";
             return xml;
         }
     }
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    public enum intervalType
+    [Serializable]
+    [XmlType(Namespace = "http://www.litle.com/schema")]
+    public enum IntervalType
     {
-        ANNUAL,
-        SEMIANNUAL,
-        QUARTERLY,
-        MONTHLY,
-        WEEKLY
+        Annual,
+        Semiannual,
+        Quarterly,
+        Monthly,
+        Weekly
     }
 
-    [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    public enum trialIntervalType
+    [Serializable]
+    [XmlType(Namespace = "http://www.litle.com/schema")]
+    public enum TrialIntervalType
     {
-        MONTH,
-        DAY
+        Month,
+        Day
     }
 
-    public partial class createPlan : recurringTransactionType
+    public class CreatePlan : recurringTransactionType
     {
-        public string planCode;
-        public string name;
+        public string PlanCode;
+        public string Name;
 
-        private string descriptionField;
-        private bool descriptionSet;
-        public string description
+        private string _descriptionField;
+        private bool _descriptionSet;
+
+        public string Description
         {
-            get { return this.descriptionField; }
-            set { this.descriptionField = value; this.descriptionSet = true; }
+            get { return _descriptionField; }
+            set
+            {
+                _descriptionField = value;
+                _descriptionSet = true;
+            }
         }
 
-        public intervalType intervalType;
-        public long amount;
+        public IntervalType IntervalType;
+        public long Amount;
 
-        public int numberOfPaymentsField;
-        public bool numberOfPaymentsSet;
-        public int numberOfPayments
+        public int NumberOfPaymentsField;
+        public bool NumberOfPaymentsSet;
+
+        public int NumberOfPayments
         {
-            get { return this.numberOfPaymentsField; }
-            set { this.numberOfPaymentsField = value; this.numberOfPaymentsSet = true; }
+            get { return NumberOfPaymentsField; }
+            set
+            {
+                NumberOfPaymentsField = value;
+                NumberOfPaymentsSet = true;
+            }
         }
 
-        public int trialNumberOfIntervalsField;
-        public bool trialNumberOfIntervalsSet;
-        public int trialNumberOfIntervals
+        public int TrialNumberOfIntervalsField;
+        public bool TrialNumberOfIntervalsSet;
+
+        public int TrialNumberOfIntervals
         {
-            get { return this.trialNumberOfIntervalsField; }
-            set { this.trialNumberOfIntervalsField = value; this.trialNumberOfIntervalsSet = true; }
+            get { return TrialNumberOfIntervalsField; }
+            set
+            {
+                TrialNumberOfIntervalsField = value;
+                TrialNumberOfIntervalsSet = true;
+            }
         }
 
-        private trialIntervalType trialIntervalTypeField;
-        private bool trialIntervalTypeSet;
-        public trialIntervalType trialIntervalType 
+        private TrialIntervalType _trialIntervalTypeField;
+        private bool _trialIntervalTypeSet;
+
+        public TrialIntervalType TrialIntervalType
         {
-            get { return this.trialIntervalTypeField; }
-            set { this.trialIntervalTypeField = value; this.trialIntervalTypeSet = true; }
+            get { return _trialIntervalTypeField; }
+            set
+            {
+                _trialIntervalTypeField = value;
+                _trialIntervalTypeSet = true;
+            }
         }
 
-        private bool activeField;
-        private bool activeSet;
-        public bool active
+        private bool _activeField;
+        private bool _activeSet;
+
+        public bool Active
         {
-            get { return this.activeField; }
-            set { this.activeField = value; this.activeSet = true; }
+            get { return _activeField; }
+            set
+            {
+                _activeField = value;
+                _activeSet = true;
+            }
         }
 
         public override String Serialize()
         {
-            string xml = "\r\n<createPlan>";
-            xml += "\r\n<planCode>" + SecurityElement.Escape(planCode) + "</planCode>";
-            xml += "\r\n<name>" + SecurityElement.Escape(name) + "</name>";
-            if (descriptionSet) xml += "\r\n<description>" + SecurityElement.Escape(descriptionField) + "</description>";
-            xml += "\r\n<intervalType>" + intervalType + "</intervalType>";
-            xml += "\r\n<amount>" + amount + "</amount>";
-            if (numberOfPaymentsSet) xml += "\r\n<numberOfPayments>" + numberOfPaymentsField + "</numberOfPayments>";
-            if (trialNumberOfIntervalsSet) xml += "\r\n<trialNumberOfIntervals>" + trialNumberOfIntervalsField + "</trialNumberOfIntervals>";
-            if (trialIntervalTypeSet) xml += "\r\n<trialIntervalType>" + trialIntervalTypeField + "</trialIntervalType>";
-            if (activeSet) xml += "\r\n<active>" + activeField.ToString().ToLower() + "</active>";
+            var xml = "\r\n<createPlan>";
+            xml += "\r\n<planCode>" + SecurityElement.Escape(PlanCode) + "</planCode>";
+            xml += "\r\n<name>" + SecurityElement.Escape(Name) + "</name>";
+            if (_descriptionSet)
+                xml += "\r\n<description>" + SecurityElement.Escape(_descriptionField) + "</description>";
+            xml += "\r\n<intervalType>" + IntervalType + "</intervalType>";
+            xml += "\r\n<amount>" + Amount + "</amount>";
+            if (NumberOfPaymentsSet) xml += "\r\n<numberOfPayments>" + NumberOfPaymentsField + "</numberOfPayments>";
+            if (TrialNumberOfIntervalsSet)
+                xml += "\r\n<trialNumberOfIntervals>" + TrialNumberOfIntervalsField + "</trialNumberOfIntervals>";
+            if (_trialIntervalTypeSet)
+                xml += "\r\n<trialIntervalType>" + _trialIntervalTypeField + "</trialIntervalType>";
+            if (_activeSet) xml += "\r\n<active>" + _activeField.ToString().ToLower() + "</active>";
             xml += "\r\n</createPlan>";
             return xml;
         }
     }
 
-    public partial class updatePlan : recurringTransactionType
+    public class UpdatePlan : recurringTransactionType
     {
-        public string planCode;
+        public string PlanCode;
 
-        private bool activeField;
-        private bool activeSet;
-        public bool active
+        private bool _activeField;
+        private bool _activeSet;
+
+        public bool Active
         {
-            get { return this.activeField; }
-            set { this.activeField = value; this.activeSet = true; }
+            get { return _activeField; }
+            set
+            {
+                _activeField = value;
+                _activeSet = true;
+            }
         }
 
         public override String Serialize()
         {
-            string xml = "\r\n<updatePlan>";
-            xml += "\r\n<planCode>" + SecurityElement.Escape(planCode) + "</planCode>";
-            if (activeSet) xml += "\r\n<active>" + activeField.ToString().ToLower() + "</active>";
+            var xml = "\r\n<updatePlan>";
+            xml += "\r\n<planCode>" + SecurityElement.Escape(PlanCode) + "</planCode>";
+            if (_activeSet) xml += "\r\n<active>" + _activeField.ToString().ToLower() + "</active>";
             xml += "\r\n</updatePlan>";
             return xml;
         }
     }
-    public partial class updateSubscription : recurringTransactionType
+
+    public class UpdateSubscription : recurringTransactionType
     {
-        private long subscriptionIdField;
-        private bool subscriptionIdSet;
-        public long subscriptionId
+        private long _subscriptionIdField;
+        private bool _subscriptionIdSet;
+
+        public long SubscriptionId
         {
-            get
-            {
-                return this.subscriptionIdField;
-            }
+            get { return _subscriptionIdField; }
             set
             {
-                this.subscriptionIdField = value;
-                this.subscriptionIdSet = true;
+                _subscriptionIdField = value;
+                _subscriptionIdSet = true;
             }
         }
 
-        public string planCode;
-        public contact billToAddress;
-        public cardType card;
-        public cardTokenType token;
-        public cardPaypageType paypage;
-        private DateTime billingDateField;
-        private bool billingDateSet;
-        public DateTime billingDate
+        public string PlanCode;
+        public Contact BillToAddress;
+        public CardType Card;
+        public CardTokenType Token;
+        public CardPaypageType Paypage;
+        private DateTime _billingDateField;
+        private bool _billingDateSet;
+
+        public DateTime BillingDate
         {
-            get
-            {
-                return this.billingDateField;
-            }
+            get { return _billingDateField; }
             set
             {
-                this.billingDateField = value;
-                this.billingDateSet = true;
+                _billingDateField = value;
+                _billingDateSet = true;
             }
         }
 
-        public List<createDiscount> createDiscounts;
-        public List<updateDiscount> updateDiscounts;
-        public List<deleteDiscount> deleteDiscounts;
-        public List<createAddOn> createAddOns;
-        public List<updateAddOn> updateAddOns;
-        public List<deleteAddOn> deleteAddOns;
+        public List<CreateDiscount> CreateDiscounts;
+        public List<UpdateDiscount> UpdateDiscounts;
+        public List<DeleteDiscount> DeleteDiscounts;
+        public List<CreateAddOn> CreateAddOns;
+        public List<UpdateAddOn> UpdateAddOns;
+        public List<DeleteAddOn> DeleteAddOns;
 
-        public updateSubscription()
+        public UpdateSubscription()
         {
-            createDiscounts = new List<createDiscount>();
-            updateDiscounts = new List<updateDiscount>();
-            deleteDiscounts = new List<deleteDiscount>();
-            createAddOns = new List<createAddOn>();
-            updateAddOns = new List<updateAddOn>();
-            deleteAddOns = new List<deleteAddOn>();
+            CreateDiscounts = new List<CreateDiscount>();
+            UpdateDiscounts = new List<UpdateDiscount>();
+            DeleteDiscounts = new List<DeleteDiscount>();
+            CreateAddOns = new List<CreateAddOn>();
+            UpdateAddOns = new List<UpdateAddOn>();
+            DeleteAddOns = new List<DeleteAddOn>();
         }
 
         public override String Serialize()
         {
-            string xml = "\r\n<updateSubscription>";
-            if (subscriptionIdSet) xml += "\r\n<subscriptionId>" + subscriptionIdField + "</subscriptionId>";
-            if (planCode != null) xml += "\r\n<planCode>" + SecurityElement.Escape(planCode) + "</planCode>";
-            if (billToAddress != null) xml += "\r\n<billToAddress>" + billToAddress.Serialize() + "\r\n</billToAddress>";
-            if (card != null) xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
-            else if (token != null) xml += "\r\n<token>" + token.Serialize() + "\r\n</token>";
-            else if (paypage != null) xml += "\r\n<paypage>" + paypage.Serialize() + "\r\n</paypage>";
-            if (billingDateSet) xml += "\r\n<billingDate>" + XmlUtil.toXsdDate(billingDateField) + "</billingDate>";
-            foreach (createDiscount createDiscount in createDiscounts) 
+            var xml = "\r\n<updateSubscription>";
+            if (_subscriptionIdSet) xml += "\r\n<subscriptionId>" + _subscriptionIdField + "</subscriptionId>";
+            if (PlanCode != null) xml += "\r\n<planCode>" + SecurityElement.Escape(PlanCode) + "</planCode>";
+            if (BillToAddress != null)
+                xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "\r\n</billToAddress>";
+            if (Card != null) xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
+            else if (Token != null) xml += "\r\n<token>" + Token.Serialize() + "\r\n</token>";
+            else if (Paypage != null) xml += "\r\n<paypage>" + Paypage.Serialize() + "\r\n</paypage>";
+            if (_billingDateSet) xml += "\r\n<billingDate>" + XmlUtil.ToXsdDate(_billingDateField) + "</billingDate>";
+            foreach (var createDiscount in CreateDiscounts)
             {
                 xml += "\r\n<createDiscount>" + createDiscount.Serialize() + "\r\n</createDiscount>";
             }
-            foreach (updateDiscount updateDiscount in updateDiscounts)
+            foreach (var updateDiscount in UpdateDiscounts)
             {
                 xml += "\r\n<updateDiscount>" + updateDiscount.Serialize() + "\r\n</updateDiscount>";
             }
-            foreach (deleteDiscount deleteDiscount in deleteDiscounts)
+            foreach (var deleteDiscount in DeleteDiscounts)
             {
                 xml += "\r\n<deleteDiscount>" + deleteDiscount.Serialize() + "\r\n</deleteDiscount>";
             }
-            foreach (createAddOn createAddOn in createAddOns)
+            foreach (var createAddOn in CreateAddOns)
             {
                 xml += "\r\n<createAddOn>" + createAddOn.Serialize() + "\r\n</createAddOn>";
             }
-            foreach (updateAddOn updateAddOn in updateAddOns)
+            foreach (var updateAddOn in UpdateAddOns)
             {
                 xml += "\r\n<updateAddOn>" + updateAddOn.Serialize() + "\r\n</updateAddOn>";
             }
-            foreach (deleteAddOn deleteAddOn in deleteAddOns)
+            foreach (DeleteAddOn deleteAddOn in DeleteAddOns)
             {
                 xml += "\r\n<deleteAddOn>" + deleteAddOn.Serialize() + "\r\n</deleteAddOn>";
             }
@@ -2236,54 +2715,64 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class fraudResult
+    public partial class FraudResult
     {
         public string Serialize()
         {
-            string xml = "";
+            var xml = "";
             if (avsResult != null) xml += "\r\n<avsResult>" + SecurityElement.Escape(avsResult) + "</avsResult>";
-            if (cardValidationResult != null) xml += "\r\n<cardValidationResult>" + SecurityElement.Escape(cardValidationResult) + "</cardValidationResult>";
-            if (authenticationResult != null) xml += "\r\n<authenticationResult>" + SecurityElement.Escape(authenticationResult) + "</authenticationResult>";
-            if (advancedAVSResult != null) xml += "\r\n<advancedAVSResult>" + SecurityElement.Escape(advancedAVSResult) + "</advancedAVSResult>";
+            if (cardValidationResult != null)
+                xml += "\r\n<cardValidationResult>" + SecurityElement.Escape(cardValidationResult) +
+                       "</cardValidationResult>";
+            if (authenticationResult != null)
+                xml += "\r\n<authenticationResult>" + SecurityElement.Escape(authenticationResult) +
+                       "</authenticationResult>";
+            if (advancedAVSResult != null)
+                xml += "\r\n<advancedAVSResult>" + SecurityElement.Escape(advancedAVSResult) + "</advancedAVSResult>";
             return xml;
         }
     }
 
-    public partial class authInformation
+    public class AuthInformation
     {
-        public DateTime authDate;
-        public string authCode;
-        public fraudResult fraudResult;
-        private long authAmountField;
-        private bool authAmountSet;
-        public long authAmount
+        public DateTime AuthDate;
+        public string AuthCode;
+        public FraudResult FraudResult;
+        private long _authAmountField;
+        private bool _authAmountSet;
+
+        public long AuthAmount
         {
-            get { return this.authAmountField; }
-            set { this.authAmountField = value; this.authAmountSet = true; }
+            get { return _authAmountField; }
+            set
+            {
+                _authAmountField = value;
+                _authAmountSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (authDate != null) xml += "\r\n<authDate>" + XmlUtil.toXsdDate(authDate) + "</authDate>";
-            if (authCode != null) xml += "\r\n<authCode>" + SecurityElement.Escape(authCode) + "</authCode>";
-            if (fraudResult != null) xml += "\r\n<fraudResult>" + fraudResult.Serialize() + "</fraudResult>";
-            if (authAmountSet) xml += "\r\n<authAmount>" + authAmountField + "</authAmount>";
+            var xml = "";
+            xml += "\r\n<authDate>" + XmlUtil.ToXsdDate(AuthDate) + "</authDate>";
+            if (AuthCode != null) xml += "\r\n<authCode>" + SecurityElement.Escape(AuthCode) + "</authCode>";
+            if (FraudResult != null) xml += "\r\n<fraudResult>" + FraudResult.Serialize() + "</fraudResult>";
+            if (_authAmountSet) xml += "\r\n<authAmount>" + _authAmountField + "</authAmount>";
             return xml;
         }
     }
 
     public class XmlUtil
     {
-        public static string toXsdDate(DateTime dateTime)
+        public static string ToXsdDate(DateTime dateTime)
         {
-            string year = dateTime.Year.ToString();
-            string month = dateTime.Month.ToString();
+            var year = dateTime.Year.ToString(CultureInfo.InvariantCulture);
+            var month = dateTime.Month.ToString(CultureInfo.InvariantCulture);
             if (dateTime.Month < 10)
             {
                 month = "0" + month;
             }
-            string day = dateTime.Day.ToString();
+            var day = dateTime.Day.ToString(CultureInfo.InvariantCulture);
             if (dateTime.Day < 10)
             {
                 day = "0" + day;
@@ -2292,257 +2781,327 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class recyclingRequestType
+    public class RecyclingRequestType
     {
-        private recycleByTypeEnum recycleByField;
-        private bool recycleBySet;
-        public recycleByTypeEnum recycleBy
+        private recycleByTypeEnum _recycleByField;
+        private bool _recycleBySet;
+
+        public recycleByTypeEnum RecycleBy
         {
-            get { return this.recycleByField; }
-            set { this.recycleByField = value; this.recycleBySet = true; }
+            get { return _recycleByField; }
+            set
+            {
+                _recycleByField = value;
+                _recycleBySet = true;
+            }
         }
-        public string recycleId;
+
+        public string RecycleId;
 
         public string Serialize()
         {
-            string xml = "";
-            if (recycleBySet) xml += "\r\n<recycleBy>" + recycleByField + "</recycleBy>";
-            if (recycleId != null) xml += "\r\n<recycleId>" + SecurityElement.Escape(recycleId) + "</recycleId>";
+            var xml = "";
+            if (_recycleBySet) xml += "\r\n<recycleBy>" + _recycleByField + "</recycleBy>";
+            if (RecycleId != null) xml += "\r\n<recycleId>" + SecurityElement.Escape(RecycleId) + "</recycleId>";
             return xml;
         }
     }
 
-    public partial class litleInternalRecurringRequest
+    public class LitleInternalRecurringRequest
     {
-        public string subscriptionId;
-        public string recurringTxnId;
+        public string SubscriptionId;
+        public string RecurringTxnId;
 
-        private bool finalPaymentField;
-        private bool finalPaymentSet;
-        public bool finalPayment
+        private bool _finalPaymentField;
+        private bool _finalPaymentSet;
+
+        public bool FinalPayment
         {
-            get { return this.finalPaymentField; }
-            set { this.finalPaymentField = value; this.finalPaymentSet = true; }
+            get { return _finalPaymentField; }
+            set
+            {
+                _finalPaymentField = value;
+                _finalPaymentSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (subscriptionId != null) xml += "\r\n<subscriptionId>" + SecurityElement.Escape(subscriptionId) + "</subscriptionId>";
-            if (recurringTxnId != null) xml += "\r\n<recurringTxnId>" + SecurityElement.Escape(recurringTxnId) + "</recurringTxnId>";
-            if(finalPaymentSet) xml += "\r\n<finalPayment>" + finalPaymentField.ToString().ToLower() + "</finalPayment>";
+            var xml = "";
+            if (SubscriptionId != null)
+                xml += "\r\n<subscriptionId>" + SecurityElement.Escape(SubscriptionId) + "</subscriptionId>";
+            if (RecurringTxnId != null)
+                xml += "\r\n<recurringTxnId>" + SecurityElement.Escape(RecurringTxnId) + "</recurringTxnId>";
+            if (_finalPaymentSet)
+                xml += "\r\n<finalPayment>" + _finalPaymentField.ToString().ToLower() + "</finalPayment>";
             return xml;
         }
     }
 
-    public partial class createDiscount
+    public class CreateDiscount
     {
-        public string discountCode;
-        public string name;
-        public long amount;
-        public DateTime startDate;
-        public DateTime endDate;
+        public string DiscountCode;
+        public string Name;
+        public long Amount;
+        public DateTime StartDate;
+        public DateTime EndDate;
 
         public string Serialize()
         {
-            string xml = "";
-            xml += "\r\n<discountCode>" + SecurityElement.Escape(discountCode) + "</discountCode>";
-            xml += "\r\n<name>" + SecurityElement.Escape(name) + "</name>";
-            xml += "\r\n<amount>" + amount + "</amount>";
-            xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDate) + "</startDate>";
-            xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDate) + "</endDate>";
+            var xml = "";
+            xml += "\r\n<discountCode>" + SecurityElement.Escape(DiscountCode) + "</discountCode>";
+            xml += "\r\n<name>" + SecurityElement.Escape(Name) + "</name>";
+            xml += "\r\n<amount>" + Amount + "</amount>";
+            xml += "\r\n<startDate>" + XmlUtil.ToXsdDate(StartDate) + "</startDate>";
+            xml += "\r\n<endDate>" + XmlUtil.ToXsdDate(EndDate) + "</endDate>";
             return xml;
         }
     }
 
-    public partial class updateDiscount
+    public class UpdateDiscount
     {
-        public string discountCode;
+        public string DiscountCode;
 
-        private string nameField;
-        private bool nameSet;
-        public string name
+        private string _nameField;
+        private bool _nameSet;
+
+        public string Name
         {
-            get { return this.nameField; }
-            set { this.nameField = value; this.nameSet = true; }
+            get { return _nameField; }
+            set
+            {
+                _nameField = value;
+                _nameSet = true;
+            }
         }
 
-        private long amountField;
-        private bool amountSet;
-        public long amount
+        private long _amountField;
+        private bool _amountSet;
+
+        public long Amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; this.amountSet = true; }
+            get { return _amountField; }
+            set
+            {
+                _amountField = value;
+                _amountSet = true;
+            }
         }
 
-        private DateTime startDateField;
-        private bool startDateSet;
-        public DateTime startDate
+        private DateTime _startDateField;
+        private bool _startDateSet;
+
+        public DateTime StartDate
         {
-            get { return this.startDateField; }
-            set { this.startDateField = value; this.startDateSet = true; }
+            get { return _startDateField; }
+            set
+            {
+                _startDateField = value;
+                _startDateSet = true;
+            }
         }
 
-        private DateTime endDateField;
-        private bool endDateSet;
-        public DateTime endDate
+        private DateTime _endDateField;
+        private bool _endDateSet;
+
+        public DateTime EndDate
         {
-            get { return this.endDateField; }
-            set { this.endDateField = value; this.endDateSet = true; }
+            get { return _endDateField; }
+            set
+            {
+                _endDateField = value;
+                _endDateSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            xml += "\r\n<discountCode>" + SecurityElement.Escape(discountCode) + "</discountCode>";
-            if (nameSet) xml += "\r\n<name>" + SecurityElement.Escape(nameField) + "</name>";
-            if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
-            if (startDateSet) xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDateField) + "</startDate>";
-            if (endDateSet) xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDateField) + "</endDate>";
+            var xml = "";
+            xml += "\r\n<discountCode>" + SecurityElement.Escape(DiscountCode) + "</discountCode>";
+            if (_nameSet) xml += "\r\n<name>" + SecurityElement.Escape(_nameField) + "</name>";
+            if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
+            if (_startDateSet) xml += "\r\n<startDate>" + XmlUtil.ToXsdDate(_startDateField) + "</startDate>";
+            if (_endDateSet) xml += "\r\n<endDate>" + XmlUtil.ToXsdDate(_endDateField) + "</endDate>";
             return xml;
         }
     }
 
-    public partial class deleteDiscount
+    public class DeleteDiscount
     {
-        public string discountCode;
+        public string DiscountCode;
 
         public string Serialize()
         {
-            string xml = "";
-            xml += "\r\n<discountCode>" + SecurityElement.Escape(discountCode) + "</discountCode>";
+            var xml = "";
+            xml += "\r\n<discountCode>" + SecurityElement.Escape(DiscountCode) + "</discountCode>";
             return xml;
         }
     }
 
-    public partial class createAddOn
+    public class CreateAddOn
     {
-        public string addOnCode;
-        public string name;
-        public long amount;
-        public DateTime startDate;
-        public DateTime endDate;
+        public string AddOnCode;
+        public string Name;
+        public long Amount;
+        public DateTime StartDate;
+        public DateTime EndDate;
 
         public string Serialize()
         {
-            string xml = "";
-            xml += "\r\n<addOnCode>" + SecurityElement.Escape(addOnCode) + "</addOnCode>";
-            xml += "\r\n<name>" + SecurityElement.Escape(name) + "</name>";
-            xml += "\r\n<amount>" + amount + "</amount>";
-            xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDate) + "</startDate>";
-            xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDate) + "</endDate>";
+            var xml = "";
+            xml += "\r\n<addOnCode>" + SecurityElement.Escape(AddOnCode) + "</addOnCode>";
+            xml += "\r\n<name>" + SecurityElement.Escape(Name) + "</name>";
+            xml += "\r\n<amount>" + Amount + "</amount>";
+            xml += "\r\n<startDate>" + XmlUtil.ToXsdDate(StartDate) + "</startDate>";
+            xml += "\r\n<endDate>" + XmlUtil.ToXsdDate(EndDate) + "</endDate>";
             return xml;
         }
     }
 
-    public partial class updateAddOn
+    public class UpdateAddOn
     {
-        public string addOnCode;
+        public string AddOnCode;
 
-        private string nameField;
-        private bool nameSet;
-        public string name
+        private string _nameField;
+        private bool _nameSet;
+
+        public string Name
         {
-            get { return this.nameField; }
-            set { this.nameField = value; this.nameSet = true; }
+            get { return _nameField; }
+            set
+            {
+                _nameField = value;
+                _nameSet = true;
+            }
         }
 
-        private long amountField;
-        private bool amountSet;
-        public long amount
+        private long _amountField;
+        private bool _amountSet;
+
+        public long Amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; this.amountSet = true; }
+            get { return _amountField; }
+            set
+            {
+                _amountField = value;
+                _amountSet = true;
+            }
         }
 
-        private DateTime startDateField;
-        private bool startDateSet;
-        public DateTime startDate
+        private DateTime _startDateField;
+        private bool _startDateSet;
+
+        public DateTime StartDate
         {
-            get { return this.startDateField; }
-            set { this.startDateField = value; this.startDateSet = true; }
+            get { return _startDateField; }
+            set
+            {
+                _startDateField = value;
+                _startDateSet = true;
+            }
         }
 
-        private DateTime endDateField;
-        private bool endDateSet;
-        public DateTime endDate
+        private DateTime _endDateField;
+        private bool _endDateSet;
+
+        public DateTime EndDate
         {
-            get { return this.endDateField; }
-            set { this.endDateField = value; this.endDateSet = true; }
+            get { return _endDateField; }
+            set
+            {
+                _endDateField = value;
+                _endDateSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            xml += "\r\n<addOnCode>" + SecurityElement.Escape(addOnCode) + "</addOnCode>";
-            if (nameSet) xml += "\r\n<name>" + SecurityElement.Escape(nameField) + "</name>";
-            if (amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
-            if (startDateSet) xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDateField) + "</startDate>";
-            if (endDateSet) xml += "\r\n<endDate>" + XmlUtil.toXsdDate(endDateField) + "</endDate>";
+            var xml = "";
+            xml += "\r\n<addOnCode>" + SecurityElement.Escape(AddOnCode) + "</addOnCode>";
+            if (_nameSet) xml += "\r\n<name>" + SecurityElement.Escape(_nameField) + "</name>";
+            if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
+            if (_startDateSet) xml += "\r\n<startDate>" + XmlUtil.ToXsdDate(_startDateField) + "</startDate>";
+            if (_endDateSet) xml += "\r\n<endDate>" + XmlUtil.ToXsdDate(_endDateField) + "</endDate>";
             return xml;
         }
     }
 
-    public partial class deleteAddOn
+    public class DeleteAddOn
     {
-        public string addOnCode;
+        public string AddOnCode;
 
         public string Serialize()
         {
-            string xml = "";
-            xml += "\r\n<addOnCode>" + SecurityElement.Escape(addOnCode) + "</addOnCode>";
+            var xml = "";
+            xml += "\r\n<addOnCode>" + SecurityElement.Escape(AddOnCode) + "</addOnCode>";
             return xml;
         }
     }
 
-
-    public partial class subscription
+    public class Subscription
     {
-        public string planCode;
-        private bool numberOfPaymentsSet;
-        private int numberOfPaymentsField;
-        public int numberOfPayments
+        public string PlanCode;
+        private bool _numberOfPaymentsSet;
+        private int _numberOfPaymentsField;
+
+        public int NumberOfPayments
         {
-            get { return this.numberOfPaymentsField; }
-            set { this.numberOfPaymentsField = value; this.numberOfPaymentsSet = true; }
-        }
-        private bool startDateSet;
-        private DateTime startDateField;
-        public DateTime startDate
-        {
-            get { return this.startDateField; }
-            set { this.startDateField = value; this.startDateSet = true; }
-        }
-        private bool amountSet;
-        private long amountField;
-        public long amount
-        {
-            get { return this.amountField; }
-            set { this.amountField = value; this.amountSet = true; }
+            get { return _numberOfPaymentsField; }
+            set
+            {
+                _numberOfPaymentsField = value;
+                _numberOfPaymentsSet = true;
+            }
         }
 
-        public List<createDiscount> createDiscounts;
-        public List<createAddOn> createAddOns;
+        private bool _startDateSet;
+        private DateTime _startDateField;
 
-        public subscription()
+        public DateTime StartDate
         {
-            createDiscounts = new List<createDiscount>();
-            createAddOns = new List<createAddOn>();
+            get { return _startDateField; }
+            set
+            {
+                _startDateField = value;
+                _startDateSet = true;
+            }
+        }
+
+        private bool _amountSet;
+        private long _amountField;
+
+        public long Amount
+        {
+            get { return _amountField; }
+            set
+            {
+                _amountField = value;
+                _amountSet = true;
+            }
+        }
+
+        public List<CreateDiscount> CreateDiscounts;
+        public List<CreateAddOn> CreateAddOns;
+
+        public Subscription()
+        {
+            CreateDiscounts = new List<CreateDiscount>();
+            CreateAddOns = new List<CreateAddOn>();
         }
 
 
         public string Serialize()
         {
-            string xml = "";
-            xml += "\r\n<planCode>" + planCode + "</planCode>";
-            if(numberOfPaymentsSet) xml += "\r\n<numberOfPayments>" + numberOfPayments + "</numberOfPayments>";
-            if (startDateSet) xml += "\r\n<startDate>" + XmlUtil.toXsdDate(startDateField) + "</startDate>";
-            if(amountSet) xml += "\r\n<amount>" + amountField + "</amount>";
-            foreach(createDiscount createDiscount in createDiscounts) 
+            var xml = "";
+            xml += "\r\n<planCode>" + PlanCode + "</planCode>";
+            if (_numberOfPaymentsSet) xml += "\r\n<numberOfPayments>" + NumberOfPayments + "</numberOfPayments>";
+            if (_startDateSet) xml += "\r\n<startDate>" + XmlUtil.ToXsdDate(_startDateField) + "</startDate>";
+            if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
+            foreach (var createDiscount in CreateDiscounts)
             {
                 xml += "\r\n<createDiscount>" + createDiscount.Serialize() + "\r\n</createDiscount>";
             }
-            foreach (createAddOn createAddOn in createAddOns)
+            foreach (var createAddOn in CreateAddOns)
             {
                 xml += "\r\n<createAddOn>" + createAddOn.Serialize() + "\r\n</createAddOn>";
             }
@@ -2551,202 +3110,261 @@ namespace Litle.Sdk
         }
     }
 
-
-
-
-
-    public partial class filteringType
+    public class FilteringType
     {
-        private bool prepaidField;
-        private bool prepaidSet;
-        public bool prepaid
+        private bool _prepaidField;
+        private bool _prepaidSet;
+
+        public bool Prepaid
         {
-            get { return this.prepaidField; }
-            set { this.prepaidField = value; this.prepaidSet = true; }
+            get { return _prepaidField; }
+            set
+            {
+                _prepaidField = value;
+                _prepaidSet = true;
+            }
         }
 
-        private bool internationalField;
-        private bool internationalSet;
-        public bool international
+        private bool _internationalField;
+        private bool _internationalSet;
+
+        public bool International
         {
-            get { return this.internationalField; }
-            set { this.internationalField = value; this.internationalSet = true; }
+            get { return _internationalField; }
+            set
+            {
+                _internationalField = value;
+                _internationalSet = true;
+            }
         }
 
-        private bool chargebackField;
-        private bool chargebackSet;
-        public bool chargeback
+        private bool _chargebackField;
+        private bool _chargebackSet;
+
+        public bool Chargeback
         {
-            get { return this.chargebackField; }
-            set { this.chargebackField = value; this.chargebackSet = true; }
+            get { return _chargebackField; }
+            set
+            {
+                _chargebackField = value;
+                _chargebackSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (prepaidSet) xml += "\r\n<prepaid>" + prepaidField.ToString().ToLower() + "</prepaid>";
-            if (internationalSet) xml += "\r\n<international>" + internationalField.ToString().ToLower() + "</international>";
-            if (chargebackSet) xml += "\r\n<chargeback>" + chargebackField.ToString().ToLower() + "</chargeback>";
+            var xml = "";
+            if (_prepaidSet) xml += "\r\n<prepaid>" + _prepaidField.ToString().ToLower() + "</prepaid>";
+            if (_internationalSet)
+                xml += "\r\n<international>" + _internationalField.ToString().ToLower() + "</international>";
+            if (_chargebackSet) xml += "\r\n<chargeback>" + _chargebackField.ToString().ToLower() + "</chargeback>";
             return xml;
         }
-
     }
 
-    public partial class healthcareIIAS
+    public class HealthcareIIAS
     {
-        public healthcareAmounts healthcareAmounts;
-        private IIASFlagType IIASFlagField;
-        private bool IIASFlagSet;
+        public HealthcareAmounts HealthcareAmounts;
+        private IIASFlagType _iiasFlagField;
+        private bool _iiasFlagSet;
+
         public IIASFlagType IIASFlag
         {
-            get { return this.IIASFlagField; }
-            set { this.IIASFlagField = value; this.IIASFlagSet = true; }
+            get { return _iiasFlagField; }
+            set
+            {
+                _iiasFlagField = value;
+                _iiasFlagSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (healthcareAmounts != null) xml += "\r\n<healthcareAmounts>" + healthcareAmounts.Serialize() + "</healthcareAmounts>";
-            if (IIASFlagSet) xml += "\r\n<IIASFlag>" + IIASFlagField + "</IIASFlag>";
+            var xml = "";
+            if (HealthcareAmounts != null)
+                xml += "\r\n<healthcareAmounts>" + HealthcareAmounts.Serialize() + "</healthcareAmounts>";
+            if (_iiasFlagSet) xml += "\r\n<IIASFlag>" + _iiasFlagField + "</IIASFlag>";
             return xml;
         }
     }
 
-    public partial class recurringRequest
+    public class RecurringRequest
     {
-        public subscription subscription;
+        public Subscription Subscription;
 
         public string Serialize()
         {
-            string xml = "";
-            if (subscription != null) xml += "\r\n<subscription>" + subscription.Serialize() + "\r\n</subscription>";
+            var xml = "";
+            if (Subscription != null) xml += "\r\n<subscription>" + Subscription.Serialize() + "\r\n</subscription>";
             return xml;
         }
     }
-
-
-    public partial class healthcareAmounts
+    
+    public class HealthcareAmounts
     {
-        private int totalHealthcareAmountField;
-        private bool totalHealthcareAmountSet;
-        public int totalHealthcareAmount
+        private int _totalHealthcareAmountField;
+        private bool _totalHealthcareAmountSet;
+
+        public int TotalHealthcareAmount
         {
-            get { return this.totalHealthcareAmountField; }
-            set { this.totalHealthcareAmountField = value; this.totalHealthcareAmountSet = true; }
+            get { return _totalHealthcareAmountField; }
+            set
+            {
+                _totalHealthcareAmountField = value;
+                _totalHealthcareAmountSet = true;
+            }
         }
 
-        private int RxAmountField;
-        private bool RxAmountSet;
+        private int _rxAmountField;
+        private bool _rxAmountSet;
+
         public int RxAmount
         {
-            get { return this.RxAmountField; }
-            set { this.RxAmountField = value; this.RxAmountSet = true; }
+            get { return _rxAmountField; }
+            set
+            {
+                _rxAmountField = value;
+                _rxAmountSet = true;
+            }
         }
 
-        private int visionAmountField;
-        private bool visionAmountSet;
-        public int visionAmount
+        private int _visionAmountField;
+        private bool _visionAmountSet;
+
+        public int VisionAmount
         {
-            get { return this.visionAmountField; }
-            set { this.visionAmountField = value; this.visionAmountSet = true; }
+            get { return _visionAmountField; }
+            set
+            {
+                _visionAmountField = value;
+                _visionAmountSet = true;
+            }
         }
 
-        private int clinicOtherAmountField;
-        private bool clinicOtherAmountSet;
-        public int clinicOtherAmount
+        private int _clinicOtherAmountField;
+        private bool _clinicOtherAmountSet;
+
+        public int ClinicOtherAmount
         {
-            get { return this.clinicOtherAmountField; }
-            set { this.clinicOtherAmountField = value; this.clinicOtherAmountSet = true; }
+            get { return _clinicOtherAmountField; }
+            set
+            {
+                _clinicOtherAmountField = value;
+                _clinicOtherAmountSet = true;
+            }
         }
 
-        private int dentalAmountField;
-        private bool dentalAmountSet;
-        public int dentalAmount
+        private int _dentalAmountField;
+        private bool _dentalAmountSet;
+
+        public int DentalAmount
         {
-            get { return this.dentalAmountField; }
-            set { this.dentalAmountField = value; this.dentalAmountSet = true; }
+            get { return _dentalAmountField; }
+            set
+            {
+                _dentalAmountField = value;
+                _dentalAmountSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (totalHealthcareAmountSet) xml += "\r\n<totalHealthcareAmount>" + totalHealthcareAmountField + "</totalHealthcareAmount>";
-            if (RxAmountSet) xml += "\r\n<RxAmount>" + RxAmountField + "</RxAmount>";
-            if (visionAmountSet) xml += "\r\n<visionAmount>" + visionAmountField + "</visionAmount>";
-            if (clinicOtherAmountSet) xml += "\r\n<clinicOtherAmount>" + clinicOtherAmountField + "</clinicOtherAmount>";
-            if (dentalAmountSet) xml += "\r\n<dentalAmount>" + dentalAmountField + "</dentalAmount>";
+            var xml = "";
+            if (_totalHealthcareAmountSet)
+                xml += "\r\n<totalHealthcareAmount>" + _totalHealthcareAmountField + "</totalHealthcareAmount>";
+            if (_rxAmountSet) xml += "\r\n<RxAmount>" + _rxAmountField + "</RxAmount>";
+            if (_visionAmountSet) xml += "\r\n<visionAmount>" + _visionAmountField + "</visionAmount>";
+            if (_clinicOtherAmountSet)
+                xml += "\r\n<clinicOtherAmount>" + _clinicOtherAmountField + "</clinicOtherAmount>";
+            if (_dentalAmountSet) xml += "\r\n<dentalAmount>" + _dentalAmountField + "</dentalAmount>";
             return xml;
         }
     }
 
-    public sealed class orderSourceType
+    public sealed class OrderSourceType
     {
-        public static readonly orderSourceType ecommerce = new orderSourceType("ecommerce");
-        public static readonly orderSourceType installment = new orderSourceType("installment");
-        public static readonly orderSourceType mailorder = new orderSourceType("mailorder");
-        public static readonly orderSourceType recurring = new orderSourceType("recurring");
-        public static readonly orderSourceType retail = new orderSourceType("retail");
-        public static readonly orderSourceType telephone = new orderSourceType("telephone");
-        public static readonly orderSourceType item3dsAuthenticated = new orderSourceType("3dsAuthenticated");
-        public static readonly orderSourceType item3dsAttempted = new orderSourceType("3dsAttempted");
-        public static readonly orderSourceType recurringtel = new orderSourceType("recurringtel");
-        public static readonly orderSourceType echeckppd = new orderSourceType("echeckppd");
-        public static readonly orderSourceType applepay = new orderSourceType("applepay");
+        public static readonly OrderSourceType Ecommerce = new OrderSourceType("ecommerce");
+        public static readonly OrderSourceType Installment = new OrderSourceType("installment");
+        public static readonly OrderSourceType Mailorder = new OrderSourceType("mailorder");
+        public static readonly OrderSourceType Recurring = new OrderSourceType("recurring");
+        public static readonly OrderSourceType Retail = new OrderSourceType("retail");
+        public static readonly OrderSourceType Telephone = new OrderSourceType("telephone");
+        public static readonly OrderSourceType Item3DsAuthenticated = new OrderSourceType("3dsAuthenticated");
+        public static readonly OrderSourceType Item3DsAttempted = new OrderSourceType("3dsAttempted");
+        public static readonly OrderSourceType Recurringtel = new OrderSourceType("recurringtel");
+        public static readonly OrderSourceType Echeckppd = new OrderSourceType("echeckppd");
+        public static readonly OrderSourceType Applepay = new OrderSourceType("applepay");
 
-        private orderSourceType(String value) { this.value = value; }
-        public string Serialize() { return value; }
-        private string value;
-    }
-
-    public partial class contact
-    {
-
-        public string name;
-        public string firstName;
-        public string middleInitial;
-        public string lastName;
-        public string companyName;
-        public string addressLine1;
-        public string addressLine2;
-        public string addressLine3;
-        public string city;
-        public string state;
-        public string zip;
-        private countryTypeEnum countryField;
-        private bool countrySpecified;
-        public countryTypeEnum country
+        private OrderSourceType(String value)
         {
-            get { return this.countryField; }
-            set { this.countryField = value; countrySpecified = true; }
+            _value = value;
         }
-        public string email;
-        public string phone;
 
         public string Serialize()
         {
-            string xml = "";
-            if (name != null) xml += "\r\n<name>" + SecurityElement.Escape(name) + "</name>";
-            if (firstName != null) xml += "\r\n<firstName>" + SecurityElement.Escape(firstName) + "</firstName>";
-            if (middleInitial != null) xml += "\r\n<middleInitial>" + SecurityElement.Escape(middleInitial) + "</middleInitial>";
-            if (lastName != null) xml += "\r\n<lastName>" + SecurityElement.Escape(lastName) + "</lastName>";
-            if (companyName != null) xml += "\r\n<companyName>" + SecurityElement.Escape(companyName) + "</companyName>";
-            if (addressLine1 != null) xml += "\r\n<addressLine1>" + SecurityElement.Escape(addressLine1) + "</addressLine1>";
-            if (addressLine2 != null) xml += "\r\n<addressLine2>" + SecurityElement.Escape(addressLine2) + "</addressLine2>";
-            if (addressLine3 != null) xml += "\r\n<addressLine3>" + SecurityElement.Escape(addressLine3) + "</addressLine3>";
-            if (city != null) xml += "\r\n<city>" + SecurityElement.Escape(city) + "</city>";
-            if (state != null) xml += "\r\n<state>" + SecurityElement.Escape(state) + "</state>";
-            if (zip != null) xml += "\r\n<zip>" + SecurityElement.Escape(zip) + "</zip>";
-            if (countrySpecified) xml += "\r\n<country>" + countryField + "</country>";
-            if (email != null) xml += "\r\n<email>" + SecurityElement.Escape(email) + "</email>";
-            if (phone != null) xml += "\r\n<phone>" + SecurityElement.Escape(phone) + "</phone>";
+            return _value;
+        }
+
+        private readonly string _value;
+    }
+
+    public class Contact
+    {
+        public string Name;
+        public string FirstName;
+        public string MiddleInitial;
+        public string LastName;
+        public string CompanyName;
+        public string AddressLine1;
+        public string AddressLine2;
+        public string AddressLine3;
+        public string City;
+        public string State;
+        public string Zip;
+        private CountryTypeEnum _countryField;
+        private bool _countrySpecified;
+
+        public CountryTypeEnum Country
+        {
+            get { return _countryField; }
+            set
+            {
+                _countryField = value;
+                _countrySpecified = true;
+            }
+        }
+
+        public string Email;
+        public string Phone;
+
+        public string Serialize()
+        {
+            var xml = "";
+            if (Name != null) xml += "\r\n<name>" + SecurityElement.Escape(Name) + "</name>";
+            if (FirstName != null) xml += "\r\n<firstName>" + SecurityElement.Escape(FirstName) + "</firstName>";
+            if (MiddleInitial != null)
+                xml += "\r\n<middleInitial>" + SecurityElement.Escape(MiddleInitial) + "</middleInitial>";
+            if (LastName != null) xml += "\r\n<lastName>" + SecurityElement.Escape(LastName) + "</lastName>";
+            if (CompanyName != null)
+                xml += "\r\n<companyName>" + SecurityElement.Escape(CompanyName) + "</companyName>";
+            if (AddressLine1 != null)
+                xml += "\r\n<addressLine1>" + SecurityElement.Escape(AddressLine1) + "</addressLine1>";
+            if (AddressLine2 != null)
+                xml += "\r\n<addressLine2>" + SecurityElement.Escape(AddressLine2) + "</addressLine2>";
+            if (AddressLine3 != null)
+                xml += "\r\n<addressLine3>" + SecurityElement.Escape(AddressLine3) + "</addressLine3>";
+            if (City != null) xml += "\r\n<city>" + SecurityElement.Escape(City) + "</city>";
+            if (State != null) xml += "\r\n<state>" + SecurityElement.Escape(State) + "</state>";
+            if (Zip != null) xml += "\r\n<zip>" + SecurityElement.Escape(Zip) + "</zip>";
+            if (_countrySpecified) xml += "\r\n<country>" + _countryField + "</country>";
+            if (Email != null) xml += "\r\n<email>" + SecurityElement.Escape(Email) + "</email>";
+            if (Phone != null) xml += "\r\n<phone>" + SecurityElement.Escape(Phone) + "</phone>";
             return xml;
         }
     }
 
-    public enum countryTypeEnum
+    public enum CountryTypeEnum
     {
-
-        /// <remarks/>
         USA,
         AF,
         AX,
@@ -2999,251 +3617,316 @@ namespace Litle.Sdk
         ME,
     }
 
-    public partial class fraudCheckType
+    public class FraudCheckType
     {
-        public String authenticationValue;
-        public String authenticationTransactionId;
-        public String customerIpAddress;
-        private bool authenticatedByMerchantField;
-        private bool authenticatedByMerchantSet;
-        public bool authenticatedByMerchant
+        public String AuthenticationValue;
+        public String AuthenticationTransactionId;
+        public String CustomerIpAddress;
+        private bool _authenticatedByMerchantField;
+        private bool _authenticatedByMerchantSet;
+
+        public bool AuthenticatedByMerchant
         {
-            get { return this.authenticatedByMerchantField; }
-            set { this.authenticatedByMerchantField = value; authenticatedByMerchantSet = true; }
+            get { return _authenticatedByMerchantField; }
+            set
+            {
+                _authenticatedByMerchantField = value;
+                _authenticatedByMerchantSet = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (authenticationValue != null) xml += "\r\n<authenticationValue>" + SecurityElement.Escape(authenticationValue) + "</authenticationValue>";
-            if (authenticationTransactionId != null) xml += "\r\n<authenticationTransactionId>" + SecurityElement.Escape(authenticationTransactionId) + "</authenticationTransactionId>";
-            if (customerIpAddress != null) xml += "\r\n<customerIpAddress>" + SecurityElement.Escape(customerIpAddress) + "</customerIpAddress>";
-            if (authenticatedByMerchantSet) xml += "\r\n<authenticatedByMerchant>" + authenticatedByMerchantField + "</authenticatedByMerchant>";
+            var xml = "";
+            if (AuthenticationValue != null)
+                xml += "\r\n<authenticationValue>" + SecurityElement.Escape(AuthenticationValue) +
+                       "</authenticationValue>";
+            if (AuthenticationTransactionId != null)
+                xml += "\r\n<authenticationTransactionId>" + SecurityElement.Escape(AuthenticationTransactionId) +
+                       "</authenticationTransactionId>";
+            if (CustomerIpAddress != null)
+                xml += "\r\n<customerIpAddress>" + SecurityElement.Escape(CustomerIpAddress) + "</customerIpAddress>";
+            if (_authenticatedByMerchantSet)
+                xml += "\r\n<authenticatedByMerchant>" + _authenticatedByMerchantField + "</authenticatedByMerchant>";
             return xml;
         }
     }
 
-    public partial class advancedFraudChecksType
+    public class AdvancedFraudChecksType
     {
-        public string threatMetrixSessionId;
-        private string customAttribute1Field;
-        private bool customAttribute1Set;
-        public string customAttribute1 { 
-            get { return this.customAttribute1Field; } 
-            set { this.customAttribute1Field = value; customAttribute1Set = true; } 
-        }
-        private string customAttribute2Field;
-        private bool customAttribute2Set;
-        public string customAttribute2
+        public string ThreatMetrixSessionId;
+        private string _customAttribute1Field;
+        private bool _customAttribute1Set;
+
+        public string CustomAttribute1
         {
-            get { return this.customAttribute2Field; }
-            set { this.customAttribute2Field = value; customAttribute2Set = true; }
+            get { return _customAttribute1Field; }
+            set
+            {
+                _customAttribute1Field = value;
+                _customAttribute1Set = true;
+            }
         }
-        private string customAttribute3Field;
-        private bool customAttribute3Set;
-        public string customAttribute3
+
+        private string _customAttribute2Field;
+        private bool _customAttribute2Set;
+
+        public string CustomAttribute2
         {
-            get { return this.customAttribute3Field; }
-            set { this.customAttribute3Field = value; customAttribute3Set = true; }
+            get { return _customAttribute2Field; }
+            set
+            {
+                _customAttribute2Field = value;
+                _customAttribute2Set = true;
+            }
         }
-        private string customAttribute4Field;
-        private bool customAttribute4Set;
-        public string customAttribute4
+
+        private string _customAttribute3Field;
+        private bool _customAttribute3Set;
+
+        public string CustomAttribute3
         {
-            get { return this.customAttribute4Field; }
-            set { this.customAttribute4Field = value; customAttribute4Set = true; }
+            get { return _customAttribute3Field; }
+            set
+            {
+                _customAttribute3Field = value;
+                _customAttribute3Set = true;
+            }
         }
-        private string customAttribute5Field;
-        private bool customAttribute5Set;
-        public string customAttribute5
+
+        private string _customAttribute4Field;
+        private bool _customAttribute4Set;
+
+        public string CustomAttribute4
         {
-            get { return this.customAttribute5Field; }
-            set { this.customAttribute5Field = value; customAttribute5Set = true; }
+            get { return _customAttribute4Field; }
+            set
+            {
+                _customAttribute4Field = value;
+                _customAttribute4Set = true;
+            }
+        }
+
+        private string _customAttribute5Field;
+        private bool _customAttribute5Set;
+
+        public string CustomAttribute5
+        {
+            get { return _customAttribute5Field; }
+            set
+            {
+                _customAttribute5Field = value;
+                _customAttribute5Set = true;
+            }
         }
 
         public string Serialize()
         {
-            string xml = "";
-            if (threatMetrixSessionId != null) xml += "\r\n<threatMetrixSessionId>" + SecurityElement.Escape(threatMetrixSessionId) + "</threatMetrixSessionId>";
-            if (customAttribute1Set) xml += "\r\n<customAttribute1>" + SecurityElement.Escape(customAttribute1Field) + "</customAttribute1>";
-            if (customAttribute2Set) xml += "\r\n<customAttribute2>" + SecurityElement.Escape(customAttribute2Field) + "</customAttribute2>";
-            if (customAttribute3Set) xml += "\r\n<customAttribute3>" + SecurityElement.Escape(customAttribute3Field) + "</customAttribute3>";
-            if (customAttribute4Set) xml += "\r\n<customAttribute4>" + SecurityElement.Escape(customAttribute4Field) + "</customAttribute4>";
-            if (customAttribute5Set) xml += "\r\n<customAttribute5>" + SecurityElement.Escape(customAttribute5Field) + "</customAttribute5>";
+            var xml = "";
+            if (ThreatMetrixSessionId != null)
+                xml += "\r\n<threatMetrixSessionId>" + SecurityElement.Escape(ThreatMetrixSessionId) +
+                       "</threatMetrixSessionId>";
+            if (_customAttribute1Set)
+                xml += "\r\n<customAttribute1>" + SecurityElement.Escape(_customAttribute1Field) + "</customAttribute1>";
+            if (_customAttribute2Set)
+                xml += "\r\n<customAttribute2>" + SecurityElement.Escape(_customAttribute2Field) + "</customAttribute2>";
+            if (_customAttribute3Set)
+                xml += "\r\n<customAttribute3>" + SecurityElement.Escape(_customAttribute3Field) + "</customAttribute3>";
+            if (_customAttribute4Set)
+                xml += "\r\n<customAttribute4>" + SecurityElement.Escape(_customAttribute4Field) + "</customAttribute4>";
+            if (_customAttribute5Set)
+                xml += "\r\n<customAttribute5>" + SecurityElement.Escape(_customAttribute5Field) + "</customAttribute5>";
             return xml;
         }
     }
 
-    public partial class mposType {
-        public string ksn;
-        public string formatId;
-        public string encryptedTrack;
-        public int track1Status;
-        public int track2Status;
+    public class MposType
+    {
+        public string Ksn;
+        public string FormatId;
+        public string EncryptedTrack;
+        public int Track1Status;
+        public int Track2Status;
 
         public string Serialize()
         {
-            string xml = "";
-            if (ksn != null)
+            var xml = "";
+            if (Ksn != null)
             {
-                xml += "\r\n<ksn>" + ksn + "</ksn>";
+                xml += "\r\n<ksn>" + Ksn + "</ksn>";
             }
-            if (formatId != null)
+            if (FormatId != null)
             {
-                xml += "\r\n<formatId>" + formatId + "</formatId>";
+                xml += "\r\n<formatId>" + FormatId + "</formatId>";
             }
-            if (encryptedTrack != null)
+            if (EncryptedTrack != null)
             {
-                xml += "\r\n<encryptedTrack>" + SecurityElement.Escape(encryptedTrack) + "</encryptedTrack>";
+                xml += "\r\n<encryptedTrack>" + SecurityElement.Escape(EncryptedTrack) + "</encryptedTrack>";
             }
-            if (track1Status == 0 || track1Status == 1 )
+            if (Track1Status == 0 || Track1Status == 1)
             {
-                xml += "\r\n<track1Status>" + track1Status + "</track1Status>";
+                xml += "\r\n<track1Status>" + Track1Status + "</track1Status>";
             }
-            if (track2Status == 0 || track2Status == 1)
+            if (Track2Status == 0 || Track2Status == 1)
             {
-                xml += "\r\n<track2Status>" + track2Status + "</track2Status>";
+                xml += "\r\n<track2Status>" + Track2Status + "</track2Status>";
             }
 
             return xml;
         }
     }
 
-    public partial class cardType
+    public class CardType
     {
-        public MethodOfPaymentTypeEnum type;
-        public string number;
-        public string expDate;
-        public string track;
-        public string cardValidationNum;
+        public MethodOfPaymentTypeEnum Type;
+        public string Number;
+        public string ExpDate;
+        public string Track;
+        public string CardValidationNum;
 
         public string Serialize()
         {
-            string xml = "";
-            if (track == null)
+            var xml = "";
+            if (Track == null)
             {
-                xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(type) + "</type>";
-                if (number != null)
+                xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(Type) + "</type>";
+                if (Number != null)
                 {
-                    xml += "\r\n<number>" + SecurityElement.Escape(number) + "</number>";
+                    xml += "\r\n<number>" + SecurityElement.Escape(Number) + "</number>";
                 }
-                if (expDate != null)
+                if (ExpDate != null)
                 {
-                    xml += "\r\n<expDate>" + SecurityElement.Escape(expDate) + "</expDate>";
+                    xml += "\r\n<expDate>" + SecurityElement.Escape(ExpDate) + "</expDate>";
                 }
             }
             else
             {
-                xml += "\r\n<track>" + SecurityElement.Escape(track) + "</track>";
+                xml += "\r\n<track>" + SecurityElement.Escape(Track) + "</track>";
             }
-            if (cardValidationNum != null)
+            if (CardValidationNum != null)
             {
-                xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(cardValidationNum) + "</cardValidationNum>";
+                xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(CardValidationNum) + "</cardValidationNum>";
             }
             return xml;
         }
     }
 
-    public partial class virtualGiftCardType
+    public class VirtualGiftCardType
     {
-        public int accountNumberLength
+        public int AccountNumberLength
         {
-            get { return this.accountNumberLengthField; }
-            set { this.accountNumberLengthField = value; accountNumberLengthSet = true; }
+            get { return _accountNumberLengthField; }
+            set
+            {
+                _accountNumberLengthField = value;
+                _accountNumberLengthSet = true;
+            }
         }
-        private int accountNumberLengthField;
-        private bool accountNumberLengthSet;
 
-        public string giftCardBin;
+        private int _accountNumberLengthField;
+        private bool _accountNumberLengthSet;
+
+        public string GiftCardBin;
 
         public String Serialize()
         {
-            String xml = "";
-            if (accountNumberLengthSet) xml += "\r\n<accountNumberLength>" + accountNumberLengthField + "</accountNumberLength>";
-            if (giftCardBin != null) xml += "\r\n<giftCardBin>" + SecurityElement.Escape(giftCardBin) + "</giftCardBin>";
+            var xml = "";
+            if (_accountNumberLengthSet)
+                xml += "\r\n<accountNumberLength>" + _accountNumberLengthField + "</accountNumberLength>";
+            if (GiftCardBin != null)
+                xml += "\r\n<giftCardBin>" + SecurityElement.Escape(GiftCardBin) + "</giftCardBin>";
             return xml;
         }
-
     }
 
-    public partial class authReversal : transactionTypeWithReportGroup
+    public class AuthReversal : transactionTypeWithReportGroup
     {
-        public long litleTxnId;
-        private long amountField;
-        private bool amountSet;
-        public long amount
+        public long LitleTxnId;
+        private long _amountField;
+        private bool _amountSet;
+
+        public long Amount
         {
-            get { return this.amountField; }
-            set { this.amountField = value; amountSet = true; }
+            get { return _amountField; }
+            set
+            {
+                _amountField = value;
+                _amountSet = true;
+            }
         }
-        private bool surchargeAmountSet;
-        private long surchargeAmountField;
-        public long surchargeAmount
+
+        private bool _surchargeAmountSet;
+        private long _surchargeAmountField;
+
+        public long SurchargeAmount
         {
-            get { return this.surchargeAmountField; }
-            set { this.surchargeAmountField = value; this.surchargeAmountSet = true; }
+            get { return _surchargeAmountField; }
+            set
+            {
+                _surchargeAmountField = value;
+                _surchargeAmountSet = true;
+            }
         }
-        public string payPalNotes;
-        public string actionReason;
+
+        public string PayPalNotes;
+        public string ActionReason;
 
         public override string Serialize()
         {
-            string xml = "\r\n<authReversal";
+            var xml = "\r\n<authReversal";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
-            if (amountSet)
+            xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
+            if (_amountSet)
             {
-                xml += "\r\n<amount>" + amountField + "</amount>";
+                xml += "\r\n<amount>" + _amountField + "</amount>";
             }
-            if (surchargeAmountSet) xml += "\r\n<surchargeAmount>" + surchargeAmountField + "</surchargeAmount>";
-            if (payPalNotes != null)
+            if (_surchargeAmountSet) xml += "\r\n<surchargeAmount>" + _surchargeAmountField + "</surchargeAmount>";
+            if (PayPalNotes != null)
             {
-                xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
+                xml += "\r\n<payPalNotes>" + SecurityElement.Escape(PayPalNotes) + "</payPalNotes>";
             }
-            if (actionReason != null)
+            if (ActionReason != null)
             {
-                xml += "\r\n<actionReason>" + SecurityElement.Escape(actionReason) + "</actionReason>";
+                xml += "\r\n<actionReason>" + SecurityElement.Escape(ActionReason) + "</actionReason>";
             }
             xml += "\r\n</authReversal>";
             return xml;
         }
-
     }
 
-    public partial class echeckVoid : transactionTypeWithReportGroup
+    public class EcheckVoid : transactionTypeWithReportGroup
     {
-        public long litleTxnId;
+        public long LitleTxnId;
 
         public override string Serialize()
         {
-            string xml = "\r\n<echeckVoid";
+            var xml = "\r\n<echeckVoid";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + litleTxnId + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
             xml += "\r\n</echeckVoid>";
             return xml;
         }
-
     }
 
-    public class accountUpdate : transactionTypeWithReportGroup
+    public class AccountUpdate : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public cardType card;
-        public cardTokenType token;
+        public string OrderId;
+        public CardType Card;
+        public CardTokenType Token;
 
         public override string Serialize()
         {
-            string xml = "\r\n<accountUpdate ";
+            var xml = "\r\n<accountUpdate ";
 
             if (id != null)
             {
@@ -3255,18 +3938,18 @@ namespace Litle.Sdk
             }
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
 
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
 
-            if (card != null)
+            if (Card != null)
             {
                 xml += "\r\n<card>";
-                xml += card.Serialize();
+                xml += Card.Serialize();
                 xml += "\r\n</card>";
             }
-            else if (token != null)
+            else if (Token != null)
             {
                 xml += "\r\n<token>";
-                xml += token.Serialize();
+                xml += Token.Serialize();
                 xml += "\r\n</token>";
             }
 
@@ -3276,378 +3959,381 @@ namespace Litle.Sdk
         }
     }
 
-    public class accountUpdateFileRequestData
+    public class AccountUpdateFileRequestData
     {
-        public string merchantId;
-        public accountUpdateFileRequestData()
+        public string MerchantId;
+
+        public AccountUpdateFileRequestData()
         {
-            merchantId = Properties.Settings.Default.merchantId;
+            MerchantId = Settings.Default.merchantId;
         }
-        public accountUpdateFileRequestData(Dictionary<String,String> config) 
+
+        public AccountUpdateFileRequestData(IDictionary<string, string> config)
         {
-            this.merchantId = config["merchantId"];
+            MerchantId = config["merchantId"];
         }
-        public DateTime postDay; //yyyy-MM-dd
+
+        public DateTime PostDay; //yyyy-MM-dd
 
         public string Serialize()
         {
-            string xml = "\r\n<merchantId>" + SecurityElement.Escape(merchantId) + "</merchantId>";
+            var xml = "\r\n<merchantId>" + SecurityElement.Escape(MerchantId) + "</merchantId>";
 
-            if (postDay != null)
-            {
-                xml += "\r\n<postDay>" + postDay.ToString("yyyy-MM-dd") + "</postDay>";
-            }
+            xml += "\r\n<postDay>" + PostDay.ToString("yyyy-MM-dd") + "</postDay>";
 
             return xml;
         }
     }
 
-    public partial class activate : transactionTypeWithReportGroup
+    public class Activate : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public long amount;
-        public orderSourceType orderSource;
-        public cardType card;
-        public virtualGiftCardType virtualGiftCard;
+        public string OrderId;
+        public long Amount;
+        public OrderSourceType OrderSource;
+        public CardType Card;
+        public VirtualGiftCardType VirtualGiftCard;
 
         public override string Serialize()
         {
-            string xml = "\r\n<activate";
+            var xml = "\r\n<activate";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-            xml += "\r\n<amount>" + amount + "</amount>";
-            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            if (card != null) xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
-            else if (virtualGiftCard != null) xml += "\r\n<virtualGiftCard>" + virtualGiftCard.Serialize() + "\r\n</virtualGiftCard>";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+            xml += "\r\n<amount>" + Amount + "</amount>";
+            xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+            if (Card != null) xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
+            else if (VirtualGiftCard != null)
+                xml += "\r\n<virtualGiftCard>" + VirtualGiftCard.Serialize() + "\r\n</virtualGiftCard>";
             xml += "\r\n</activate>";
             return xml;
         }
     }
 
-    public partial class deactivate : transactionTypeWithReportGroup
+    public class Deactivate : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public orderSourceType orderSource;
-        public cardType card;
+        public string OrderId;
+        public OrderSourceType OrderSource;
+        public CardType Card;
 
         public override string Serialize()
         {
-            string xml = "\r\n<deactivate";
+            var xml = "\r\n<deactivate";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+            xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+            xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
             xml += "\r\n</deactivate>";
             return xml;
         }
     }
 
-    public partial class load : transactionTypeWithReportGroup
+    public class Load : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public long amount;
-        public orderSourceType orderSource;
-        public cardType card;
+        public string OrderId;
+        public long Amount;
+        public OrderSourceType OrderSource;
+        public CardType Card;
 
         public override string Serialize()
         {
-            string xml = "\r\n<load";
+            var xml = "\r\n<load";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-            xml += "\r\n<amount>" + amount + "</amount>";
-            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+            xml += "\r\n<amount>" + Amount + "</amount>";
+            xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+            xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
             xml += "\r\n</load>";
             return xml;
         }
     }
 
-    public partial class unload : transactionTypeWithReportGroup
+    public class Unload : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public long amount;
-        public orderSourceType orderSource;
-        public cardType card;
+        public string OrderId;
+        public long Amount;
+        public OrderSourceType OrderSource;
+        public CardType Card;
 
         public override string Serialize()
         {
-            string xml = "\r\n<unload";
+            var xml = "\r\n<unload";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-            xml += "\r\n<amount>" + amount + "</amount>";
-            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+            xml += "\r\n<amount>" + Amount + "</amount>";
+            xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+            xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
             xml += "\r\n</unload>";
             return xml;
         }
     }
 
-    public partial class balanceInquiry : transactionTypeWithReportGroup
+    public class BalanceInquiry : transactionTypeWithReportGroup
     {
-        public string orderId;
-        public orderSourceType orderSource;
-        public cardType card;
+        public string OrderId;
+        public OrderSourceType OrderSource;
+        public CardType Card;
 
         public override string Serialize()
         {
-            string xml = "\r\n<balanceInquiry";
+            var xml = "\r\n<balanceInquiry";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
-            xml += "\r\n<orderSource>" + orderSource.Serialize() + "</orderSource>";
-            xml += "\r\n<card>" + card.Serialize() + "\r\n</card>";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
+            xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
+            xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
             xml += "\r\n</balanceInquiry>";
             return xml;
         }
     }
 
-    public partial class loadReversal : transactionTypeWithReportGroup
+    public class LoadReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public String LitleTxnId;
 
         public override string Serialize()
         {
-            string xml = "\r\n<loadReversal";
+            var xml = "\r\n<loadReversal";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(LitleTxnId) + "</litleTxnId>";
             xml += "\r\n</loadReversal>";
             return xml;
         }
     }
 
-    public partial class unloadReversal : transactionTypeWithReportGroup
+    public class UnloadReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public String LitleTxnId;
 
         public override string Serialize()
         {
-            string xml = "\r\n<unloadReversal";
+            var xml = "\r\n<unloadReversal";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(LitleTxnId) + "</litleTxnId>";
             xml += "\r\n</unloadReversal>";
             return xml;
         }
     }
 
-    public partial class deactivateReversal : transactionTypeWithReportGroup
+    public class DeactivateReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public String LitleTxnId;
 
         public override string Serialize()
         {
-            string xml = "\r\n<deactivateReversal";
+            var xml = "\r\n<deactivateReversal";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(LitleTxnId) + "</litleTxnId>";
             xml += "\r\n</deactivateReversal>";
             return xml;
         }
     }
 
-    public partial class activateReversal : transactionTypeWithReportGroup
+    public class ActivateReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public String LitleTxnId;
 
         public override string Serialize()
         {
-            string xml = "\r\n<activateReversal";
+            var xml = "\r\n<activateReversal";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(LitleTxnId) + "</litleTxnId>";
             xml += "\r\n</activateReversal>";
             return xml;
         }
     }
 
-    public partial class refundReversal : transactionTypeWithReportGroup
+    public class RefundReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public String LitleTxnId;
 
         public override string Serialize()
         {
-            string xml = "\r\n<refundReversal";
+            var xml = "\r\n<refundReversal";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(LitleTxnId) + "</litleTxnId>";
             xml += "\r\n</refundReversal>";
             return xml;
         }
     }
 
-    public partial class depositReversal : transactionTypeWithReportGroup
+    public class DepositReversal : transactionTypeWithReportGroup
     {
-        public String litleTxnId;
+        public String LitleTxnId;
 
         public override string Serialize()
         {
-            string xml = "\r\n<depositReversal";
+            var xml = "\r\n<depositReversal";
             xml += " id=\"" + SecurityElement.Escape(id) + "\"";
             if (customerId != null)
             {
                 xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(litleTxnId) + "</litleTxnId>";
+            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(LitleTxnId) + "</litleTxnId>";
             xml += "\r\n</depositReversal>";
             return xml;
         }
     }
 
-    public partial class applepayType
+    public class ApplepayType
     {
-        public string data;
-        public applepayHeaderType header;
-        public string signature;
-        public string version;
+        public string Data;
+        public ApplepayHeaderType Header;
+        public string Signature;
+        public string Version;
 
         public string Serialize()
         {
-            string xml = "";
-            if (data != null) xml += "\r\n<data>" + SecurityElement.Escape(data) + "</data>";
-            if (header != null) xml += "\r\n<header>" + header.Serialize() + "</header>";
-            if (signature != null) xml += "\r\n<signature>" + SecurityElement.Escape(signature) + "</signature>";
-            if (version != null) xml += "\r\n<version>" + SecurityElement.Escape(version) + "</version>";
+            var xml = "";
+            if (Data != null) xml += "\r\n<data>" + SecurityElement.Escape(Data) + "</data>";
+            if (Header != null) xml += "\r\n<header>" + Header.Serialize() + "</header>";
+            if (Signature != null) xml += "\r\n<signature>" + SecurityElement.Escape(Signature) + "</signature>";
+            if (Version != null) xml += "\r\n<version>" + SecurityElement.Escape(Version) + "</version>";
             return xml;
         }
     }
 
-    public partial class applepayHeaderType
+    public class ApplepayHeaderType
     {
-        public string applicationData;
-        public string ephemeralPublicKey;
-        public string publicKeyHash;
-        public string transactionId;
+        public string ApplicationData;
+        public string EphemeralPublicKey;
+        public string PublicKeyHash;
+        public string TransactionId;
 
         public string Serialize()
         {
-            string xml = "";
-            if (applicationData != null) xml += "\r\n<applicationData>" + SecurityElement.Escape(applicationData) + "</applicationData>";
-            if (ephemeralPublicKey != null) xml += "\r\n<ephemeralPublicKey>" + SecurityElement.Escape(ephemeralPublicKey) + "</ephemeralPublicKey>";
-            if (publicKeyHash != null) xml += "\r\n<publicKeyHash>" + SecurityElement.Escape(publicKeyHash) + "</publicKeyHash>";
-            if (transactionId != null) xml += "\r\n<transactionId>" + SecurityElement.Escape(transactionId) + "</transactionId>";
+            var xml = "";
+            if (ApplicationData != null)
+                xml += "\r\n<applicationData>" + SecurityElement.Escape(ApplicationData) + "</applicationData>";
+            if (EphemeralPublicKey != null)
+                xml += "\r\n<ephemeralPublicKey>" + SecurityElement.Escape(EphemeralPublicKey) + "</ephemeralPublicKey>";
+            if (PublicKeyHash != null)
+                xml += "\r\n<publicKeyHash>" + SecurityElement.Escape(PublicKeyHash) + "</publicKeyHash>";
+            if (TransactionId != null)
+                xml += "\r\n<transactionId>" + SecurityElement.Escape(TransactionId) + "</transactionId>";
             return xml;
         }
     }
 
-    public partial class wallet
+    public class Wallet
     {
-        public walletWalletSourceType walletSourceType;
-        public string walletSourceTypeId;
+        public WalletWalletSourceType WalletSourceType;
+        public string WalletSourceTypeId;
 
         public string Serialize()
         {
-            string xml = "";
-            if (walletSourceType != null) xml += "\r\n<walletSourceType>" + walletSourceType + "</walletSourceType>";
-            if (walletSourceTypeId != null) xml += "\r\n<walletSourceTypeId>" + SecurityElement.Escape(walletSourceTypeId) + "</walletSourceTypeId>";
+            var xml = "";
+            xml += "\r\n<walletSourceType>" + WalletSourceType + "</walletSourceType>";
+            if (WalletSourceTypeId != null)
+                xml += "\r\n<walletSourceTypeId>" + SecurityElement.Escape(WalletSourceTypeId) + "</walletSourceTypeId>";
             return xml;
-        } 
+        }
     }
 
-    public enum walletWalletSourceType
+    public enum WalletWalletSourceType
     {
         MasterPass
     }
 
-    public partial class fraudCheck : transactionTypeWithReportGroup
+    public class FraudCheck : transactionTypeWithReportGroup
     {
+        public AdvancedFraudChecksType AdvancedFraudChecks;
 
-        public advancedFraudChecksType advancedFraudChecks;
+        private Contact _billToAddressField;
+        private bool _billToAddressSet;
 
-        private contact billToAddressField;
-        private bool billToAddressSet;
-        public contact billToAddress
+        public Contact BillToAddress
         {
-            get
-            {
-                return this.billToAddressField;
-            }
+            get { return _billToAddressField; }
             set
             {
-                this.billToAddressField = value; this.billToAddressSet = true;
+                _billToAddressField = value;
+                _billToAddressSet = true;
             }
         }
 
-        private contact shipToAddressField;
-        private bool shipToAddressSet;
-        public contact shipToAddress
+        private Contact _shipToAddressField;
+        private bool _shipToAddressSet;
+
+        public Contact ShipToAddress
         {
-            get
-            {
-                return this.shipToAddressField;
-            }
+            get { return _shipToAddressField; }
             set
             {
-                this.shipToAddressField = value; this.shipToAddressSet = true;
+                _shipToAddressField = value;
+                _shipToAddressSet = true;
             }
         }
 
-        private int amountField;
-        private bool amountSet;
-        public int amount
+        private int _amountField;
+        private bool _amountSet;
+
+        public int Amount
         {
-            get
-            {
-                return this.amountField;
-            }
+            get { return _amountField; }
             set
             {
-                this.amountField = value; this.amountSet = true;
+                _amountField = value;
+                _amountSet = true;
             }
         }
 
         public override string Serialize()
         {
-            string xml = "";
-            if (advancedFraudChecks != null) xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "</advancedFraudChecks>";
-            if (billToAddressSet) xml += "\r\n<billToAddress>" + billToAddressField.Serialize() + "</billToAddress>";
-            if (shipToAddressSet) xml += "\r\n<shipToAddress>" + shipToAddressField.Serialize() + "</shipToAddress>";
-            if (amountSet) xml += "\r\n<amount>" + amountField.ToString() + "</amount>";
+            var xml = "";
+            if (AdvancedFraudChecks != null)
+                xml += "\r\n<advancedFraudChecks>" + AdvancedFraudChecks.Serialize() + "</advancedFraudChecks>";
+            if (_billToAddressSet) xml += "\r\n<billToAddress>" + _billToAddressField.Serialize() + "</billToAddress>";
+            if (_shipToAddressSet) xml += "\r\n<shipToAddress>" + _shipToAddressField.Serialize() + "</shipToAddress>";
+            if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
             return xml;
         }
     }

@@ -9,9 +9,9 @@ namespace Litle.Sdk
 {
     public class litleXmlSerializer
     {
-        virtual public String SerializeObject(litleOnlineRequest req)
+        virtual public String SerializeObject(LitleOnlineRequest req)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(litleOnlineRequest));
+            XmlSerializer serializer = new XmlSerializer(typeof(LitleOnlineRequest));
             MemoryStream ms = new MemoryStream();
             try
             {

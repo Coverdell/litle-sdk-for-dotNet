@@ -33,9 +33,9 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test50()
         {
-            registerTokenRequestType request = new registerTokenRequestType();
-            request.orderId = "50";
-            request.accountNumber = "4457119922390123";
+            RegisterTokenRequestType request = new RegisterTokenRequestType();
+            request.OrderId = "50";
+            request.AccountNumber = "4457119922390123";
 
             registerTokenResponse response = litle.RegisterToken(request);
             Assert.AreEqual("445711", response.bin);
@@ -48,9 +48,9 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test51()
         {
-            registerTokenRequestType request = new registerTokenRequestType();
-            request.orderId = "51";
-            request.accountNumber = "4457119999999999";
+            RegisterTokenRequestType request = new RegisterTokenRequestType();
+            request.OrderId = "51";
+            request.AccountNumber = "4457119999999999";
 
             registerTokenResponse response = litle.RegisterToken(request);
             Assert.AreEqual("820", response.response);
@@ -60,9 +60,9 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test52()
         {
-            registerTokenRequestType request = new registerTokenRequestType();
-            request.orderId = "52";
-            request.accountNumber = "4457119922390123";
+            RegisterTokenRequestType request = new RegisterTokenRequestType();
+            request.OrderId = "52";
+            request.AccountNumber = "4457119922390123";
 
             registerTokenResponse response = litle.RegisterToken(request);
             Assert.AreEqual("445711", response.bin);
@@ -75,12 +75,12 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test53()
         {
-            registerTokenRequestType request = new registerTokenRequestType();
-            request.orderId = "53";
-            echeckForTokenType echeck = new echeckForTokenType();
-            echeck.accNum = "1099999998";
-            echeck.routingNum = "114567895";
-            request.echeckForToken = echeck; ;
+            RegisterTokenRequestType request = new RegisterTokenRequestType();
+            request.OrderId = "53";
+            EcheckForTokenType echeck = new EcheckForTokenType();
+            echeck.AccNum = "1099999998";
+            echeck.RoutingNum = "114567895";
+            request.EcheckForToken = echeck; ;
 
             registerTokenResponse response = litle.RegisterToken(request);
             Assert.AreEqual(MethodOfPaymentTypeEnum.EC, response.type);
@@ -93,12 +93,12 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test54()
         {
-            registerTokenRequestType request = new registerTokenRequestType();
-            request.orderId = "54";
-            echeckForTokenType echeck = new echeckForTokenType();
-            echeck.accNum = "1022222102";
-            echeck.routingNum = "1145_7895";
-            request.echeckForToken = echeck; ;
+            RegisterTokenRequestType request = new RegisterTokenRequestType();
+            request.OrderId = "54";
+            EcheckForTokenType echeck = new EcheckForTokenType();
+            echeck.AccNum = "1022222102";
+            echeck.RoutingNum = "1145_7895";
+            request.EcheckForToken = echeck; ;
 
             registerTokenResponse response = litle.RegisterToken(request);
             Assert.AreEqual("900", response.response);
@@ -108,16 +108,16 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test55()
         {
-            authorization auth = new authorization();
-            auth.orderId = "55";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.number = "5435101234510196";
-            card.expDate = "1112";
-            card.cardValidationNum = "987";
-            card.type = MethodOfPaymentTypeEnum.MC;
-            auth.card = card;
+            Authorization auth = new Authorization();
+            auth.OrderId = "55";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Number = "5435101234510196";
+            card.ExpDate = "1112";
+            card.CardValidationNum = "987";
+            card.Type = MethodOfPaymentTypeEnum.MC;
+            auth.Card = card;
 
             authorizationResponse response = litle.Authorize(auth);
             Assert.AreEqual("000", response.response);
@@ -131,16 +131,16 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test56()
         {
-            authorization auth = new authorization();
-            auth.orderId = "56";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.number = "5435109999999999";
-            card.expDate = "1112";
-            card.cardValidationNum = "987";
-            card.type = MethodOfPaymentTypeEnum.MC;
-            auth.card = card;
+            Authorization auth = new Authorization();
+            auth.OrderId = "56";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Number = "5435109999999999";
+            card.ExpDate = "1112";
+            card.CardValidationNum = "987";
+            card.Type = MethodOfPaymentTypeEnum.MC;
+            auth.Card = card;
 
             authorizationResponse response = litle.Authorize(auth);
             Assert.AreEqual("301", response.response);
@@ -150,16 +150,16 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test57()
         {
-            authorization auth = new authorization();
-            auth.orderId = "57";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.number = "5435101234510196";
-            card.expDate = "1112";
-            card.cardValidationNum = "987";
-            card.type = MethodOfPaymentTypeEnum.MC;
-            auth.card = card;
+            Authorization auth = new Authorization();
+            auth.OrderId = "57";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Number = "5435101234510196";
+            card.ExpDate = "1112";
+            card.CardValidationNum = "987";
+            card.Type = MethodOfPaymentTypeEnum.MC;
+            auth.Card = card;
 
             authorizationResponse response = litle.Authorize(auth);
             Assert.AreEqual("000", response.response);
@@ -173,14 +173,14 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test59()
         {
-            authorization auth = new authorization();
-            auth.orderId = "59";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            cardTokenType token = new cardTokenType();
-            token.litleToken = "1712990000040196";
-            token.expDate = "1112";
-            auth.token = token;
+            Authorization auth = new Authorization();
+            auth.OrderId = "59";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            CardTokenType token = new CardTokenType();
+            token.LitleToken = "1712990000040196";
+            token.ExpDate = "1112";
+            auth.Token = token;
 
             authorizationResponse response = litle.Authorize(auth);
             Assert.AreEqual("822", response.response);
@@ -190,14 +190,14 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test60()
         {
-            authorization auth = new authorization();
-            auth.orderId = "60";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            cardTokenType token = new cardTokenType();
-            token.litleToken = "1712999999999999";
-            token.expDate = "1112";
-            auth.token = token;
+            Authorization auth = new Authorization();
+            auth.OrderId = "60";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            CardTokenType token = new CardTokenType();
+            token.LitleToken = "1712999999999999";
+            token.ExpDate = "1112";
+            auth.Token = token;
 
             authorizationResponse response = litle.Authorize(auth);
             Assert.AreEqual("823", response.response);
@@ -207,19 +207,19 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test61()
         {
-            echeckSale sale = new echeckSale();
-            sale.orderId = "61";
-            sale.amount = 15000;
-            sale.orderSource = orderSourceType.ecommerce;
-            contact billToAddress = new contact();
-            billToAddress.firstName = "Tom";
-            billToAddress.lastName = "Black";
-            sale.billToAddress = billToAddress;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking; ;
-            echeck.accNum = "1099999003";
-            echeck.routingNum = "114567895";
-            sale.echeck = echeck;
+            EcheckSale sale = new EcheckSale();
+            sale.OrderId = "61";
+            sale.Amount = 15000;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            Contact billToAddress = new Contact();
+            billToAddress.FirstName = "Tom";
+            billToAddress.LastName = "Black";
+            sale.BillToAddress = billToAddress;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking; ;
+            echeck.AccNum = "1099999003";
+            echeck.RoutingNum = "114567895";
+            sale.Echeck = echeck;
 
             echeckSalesResponse response = litle.EcheckSale(sale);
             Assert.AreEqual("801", response.tokenResponse.tokenResponseCode);
@@ -231,19 +231,19 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test62()
         {
-            echeckSale sale = new echeckSale();
-            sale.orderId = "62";
-            sale.amount = 15000;
-            sale.orderSource = orderSourceType.ecommerce;
-            contact billToAddress = new contact();
-            billToAddress.firstName = "Tom";
-            billToAddress.lastName = "Black";
-            sale.billToAddress = billToAddress;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking; ;
-            echeck.accNum = "1099999999";
-            echeck.routingNum = "114567895";
-            sale.echeck = echeck;
+            EcheckSale sale = new EcheckSale();
+            sale.OrderId = "62";
+            sale.Amount = 15000;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            Contact billToAddress = new Contact();
+            billToAddress.FirstName = "Tom";
+            billToAddress.LastName = "Black";
+            sale.BillToAddress = billToAddress;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking; ;
+            echeck.AccNum = "1099999999";
+            echeck.RoutingNum = "114567895";
+            sale.Echeck = echeck;
 
             echeckSalesResponse response = litle.EcheckSale(sale);
             Assert.AreEqual("801", response.tokenResponse.tokenResponseCode);
@@ -256,19 +256,19 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test63()
         {
-            echeckSale sale = new echeckSale();
-            sale.orderId = "63";
-            sale.amount = 15000;
-            sale.orderSource = orderSourceType.ecommerce;
-            contact billToAddress = new contact();
-            billToAddress.firstName = "Tom";
-            billToAddress.lastName = "Black";
-            sale.billToAddress = billToAddress;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking; ;
-            echeck.accNum = "1099999999";
-            echeck.routingNum = "214567892";
-            sale.echeck = echeck;
+            EcheckSale sale = new EcheckSale();
+            sale.OrderId = "63";
+            sale.Amount = 15000;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            Contact billToAddress = new Contact();
+            billToAddress.FirstName = "Tom";
+            billToAddress.LastName = "Black";
+            sale.BillToAddress = billToAddress;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking; ;
+            echeck.AccNum = "1099999999";
+            echeck.RoutingNum = "214567892";
+            sale.Echeck = echeck;
 
             echeckSalesResponse response = litle.EcheckSale(sale);
             Assert.AreEqual("801", response.tokenResponse.tokenResponseCode);

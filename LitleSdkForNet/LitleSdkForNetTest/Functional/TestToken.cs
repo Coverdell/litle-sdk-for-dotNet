@@ -33,9 +33,9 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleToken()
         {
-            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
-            registerTokenRequest.accountNumber = "1233456789103801";
+            RegisterTokenRequestType registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
+            registerTokenRequest.AccountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
             StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
@@ -45,9 +45,9 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleTokenWithPayPage()
         {
-            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
-            registerTokenRequest.paypageRegistrationId = "1233456789101112";
+            RegisterTokenRequestType registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
+            registerTokenRequest.PaypageRegistrationId = "1233456789101112";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
             StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
@@ -56,12 +56,12 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleTokenWithEcheck()
         {
-            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
-            echeckForTokenType echeckObj = new echeckForTokenType();
-            echeckObj.accNum = "12344565";
-            echeckObj.routingNum = "123476545";
-            registerTokenRequest.echeckForToken = echeckObj;
+            RegisterTokenRequestType registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
+            EcheckForTokenType echeckObj = new EcheckForTokenType();
+            echeckObj.AccNum = "12344565";
+            echeckObj.RoutingNum = "123476545";
+            registerTokenRequest.EcheckForToken = echeckObj;
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
             StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
@@ -70,20 +70,20 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleTokenWithApplepay()
         {
-            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
+            RegisterTokenRequestType registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
             registerTokenRequest.reportGroup = "Planets";
-            applepayType applepay = new applepayType();
-            applepayHeaderType applepayHeaderType = new applepayHeaderType();
-            applepayHeaderType.applicationData = "454657413164";
-            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.transactionId = "1234";
-            applepay.header = applepayHeaderType;
-            applepay.data = "user";
-            applepay.signature = "sign";
-            applepay.version = "1";
-            registerTokenRequest.applepay = applepay;
+            ApplepayType applepay = new ApplepayType();
+            ApplepayHeaderType applepayHeaderType = new ApplepayHeaderType();
+            applepayHeaderType.ApplicationData = "454657413164";
+            applepayHeaderType.EphemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.PublicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.TransactionId = "1234";
+            applepay.Header = applepayHeaderType;
+            applepay.Data = "user";
+            applepay.Signature = "sign";
+            applepay.Version = "1";
+            registerTokenRequest.Applepay = applepay;
             registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
             StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);
             Assert.AreEqual("0", rtokenResponse.applepayResponse.transactionAmount);
@@ -92,11 +92,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void TokenEcheckMissingRequiredField()
         {
-            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
-            echeckForTokenType echeckObj = new echeckForTokenType();
-            echeckObj.routingNum = "123476545";
-            registerTokenRequest.echeckForToken = echeckObj;
+            RegisterTokenRequestType registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
+            EcheckForTokenType echeckObj = new EcheckForTokenType();
+            echeckObj.RoutingNum = "123476545";
+            registerTokenRequest.EcheckForToken = echeckObj;
             registerTokenRequest.reportGroup = "Planets";
             try
             {
@@ -112,9 +112,9 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void TestSimpleTokenWithNullableTypeField()
         {
-            registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
-            registerTokenRequest.accountNumber = "1233456789103801";
+            RegisterTokenRequestType registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
+            registerTokenRequest.AccountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
             registerTokenResponse rtokenResponse = litle.RegisterToken(registerTokenRequest);
             StringAssert.AreEqualIgnoringCase("Account number was successfully registered", rtokenResponse.message);

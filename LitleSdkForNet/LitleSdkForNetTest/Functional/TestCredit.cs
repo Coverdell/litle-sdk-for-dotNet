@@ -33,16 +33,16 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleCreditWithCard()
         {
-            credit creditObj = new credit();
-            creditObj.amount = 106;
-            creditObj.orderId = "2111";
-            creditObj.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
+            Credit creditObj = new Credit();
+            creditObj.Amount = 106;
+            creditObj.OrderId = "2111";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
             
-            creditObj.card = card;
+            creditObj.Card = card;
             
             creditResponse response = litle.Credit(creditObj);
             Assert.AreEqual("Approved", response.message);
@@ -51,17 +51,17 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleCreditWithMpos()
         {
-            credit creditObj = new credit();
-            creditObj.amount = 106;
-            creditObj.orderId = "2111";
-            creditObj.orderSource = orderSourceType.ecommerce;
-            mposType mpos = new mposType();
-            mpos.ksn = "77853211300008E00016";
-            mpos.encryptedTrack = "CASE1E185EADD6AFE78C9A214B21313DCD836FDD555FBE3A6C48D141FE80AB9172B963265AFF72111895FE415DEDA162CE8CB7AC4D91EDB611A2AB756AA9CB1A000000000000000000000000000000005A7AAF5E8885A9DB88ECD2430C497003F2646619A2382FFF205767492306AC804E8E64E8EA6981DD";
-            mpos.formatId = "30";
-            mpos.track1Status = 0;
-            mpos.track2Status = 0;
-            creditObj.mpos = mpos;
+            Credit creditObj = new Credit();
+            creditObj.Amount = 106;
+            creditObj.OrderId = "2111";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
+            MposType mpos = new MposType();
+            mpos.Ksn = "77853211300008E00016";
+            mpos.EncryptedTrack = "CASE1E185EADD6AFE78C9A214B21313DCD836FDD555FBE3A6C48D141FE80AB9172B963265AFF72111895FE415DEDA162CE8CB7AC4D91EDB611A2AB756AA9CB1A000000000000000000000000000000005A7AAF5E8885A9DB88ECD2430C497003F2646619A2382FFF205767492306AC804E8E64E8EA6981DD";
+            mpos.FormatId = "30";
+            mpos.Track1Status = 0;
+            mpos.Track2Status = 0;
+            creditObj.Mpos = mpos;
 
             creditResponse response = litle.Credit(creditObj);
             Assert.AreEqual("Approved", response.message);
@@ -70,14 +70,14 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleCreditWithPaypal()
         {
-            credit creditObj = new credit();
-            creditObj.amount = 106;
-            creditObj.orderId = "123456";
-            creditObj.orderSource = orderSourceType.ecommerce;
-            payPal payPalObj = new payPal();
-            payPalObj.payerId = "1234";
+            Credit creditObj = new Credit();
+            creditObj.Amount = 106;
+            creditObj.OrderId = "123456";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
+            PayPal payPalObj = new PayPal();
+            payPalObj.PayerId = "1234";
 
-            creditObj.paypal = payPalObj;
+            creditObj.Paypal = payPalObj;
 
             creditResponse response = litle.Credit(creditObj);
             Assert.AreEqual("Approved", response.message);
@@ -86,18 +86,18 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void PaypalNotes()
         {
-            credit creditObj = new credit();
-            creditObj.amount = 106;
-            creditObj.orderId = "123456";
-            creditObj.payPalNotes = "Hello";
-            creditObj.orderSource = orderSourceType.ecommerce;
+            Credit creditObj = new Credit();
+            creditObj.Amount = 106;
+            creditObj.OrderId = "123456";
+            creditObj.PayPalNotes = "Hello";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
 
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
 
-            creditObj.card = card;
+            creditObj.Card = card;
             
             creditResponse response = litle.Credit(creditObj);
             Assert.AreEqual("Approved", response.message);
@@ -106,22 +106,22 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void ProcessingInstructionAndAmexData()
         {
-            credit creditObj = new credit();
-            creditObj.amount = 2000;
-            creditObj.orderId = "12344";
-            creditObj.orderSource = orderSourceType.ecommerce;
+            Credit creditObj = new Credit();
+            creditObj.Amount = 2000;
+            creditObj.OrderId = "12344";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
 
-            processingInstructions processingInstructionsObj = new processingInstructions();
-            processingInstructionsObj.bypassVelocityCheck = true;
+            ProcessingInstructions processingInstructionsObj = new ProcessingInstructions();
+            processingInstructionsObj.BypassVelocityCheck = true;
 
-            creditObj.processingInstructions = processingInstructionsObj;
+            creditObj.ProcessingInstructions = processingInstructionsObj;
             
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
 
-            creditObj.card = card;
+            creditObj.Card = card;
 
             creditResponse response = litle.Credit(creditObj);
             Assert.AreEqual("Approved", response.message);
@@ -130,16 +130,16 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleCreditWithCardAndSpecialCharacters()
         {
-            credit creditObj = new credit();
-            creditObj.amount = 106;
-            creditObj.orderId = "<&'>";
-            creditObj.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000<>0000001";
-            card.expDate = "1210";
+            Credit creditObj = new Credit();
+            creditObj.Amount = 106;
+            creditObj.OrderId = "<&'>";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000<>0000001";
+            card.ExpDate = "1210";
 
-            creditObj.card = card;
+            creditObj.Card = card;
 
             creditResponse response = litle.Credit(creditObj);
             Assert.AreEqual("Approved", response.message);

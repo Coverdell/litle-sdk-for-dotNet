@@ -24,8 +24,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecyclingDataOnVoidResponse()
         {
-            voidTxn voidTxn = new voidTxn();
-            voidTxn.litleTxnId = 123;
+            VoidTxn voidTxn = new VoidTxn();
+            voidTxn.LitleTxnId = 123;
            
             var mock = new Mock<Communications>();
 
@@ -42,8 +42,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecyclingDataOnVoidResponseIsOptional()
         {
-            voidTxn voidTxn = new voidTxn();
-            voidTxn.litleTxnId = 123;
+            VoidTxn voidTxn = new VoidTxn();
+            voidTxn.LitleTxnId = 123;
 
             var mock = new Mock<Communications>();
 

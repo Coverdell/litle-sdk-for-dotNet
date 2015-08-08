@@ -33,25 +33,25 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleEcheckVerification()
         {
-            echeckVerification echeckVerificationObject = new echeckVerification();
-            echeckVerificationObject.amount = 123456;
-            echeckVerificationObject.orderId = "12345";
-            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
+            EcheckVerification echeckVerificationObject = new EcheckVerification();
+            echeckVerificationObject.Amount = 123456;
+            echeckVerificationObject.OrderId = "12345";
+            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
             
-            echeckType echeckTypeObj = new echeckType();
-            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
-            echeckTypeObj.accNum = "12345657890";
-            echeckTypeObj.routingNum = "123456789";
-            echeckTypeObj.checkNum = "123455";
+            EcheckType echeckTypeObj = new EcheckType();
+            echeckTypeObj.AccType = echeckAccountTypeEnum.Checking;
+            echeckTypeObj.AccNum = "12345657890";
+            echeckTypeObj.RoutingNum = "123456789";
+            echeckTypeObj.CheckNum = "123455";
             
-            contact contactObj = new contact();
-            contactObj.name = "Bob";
-            contactObj.city = "lowell";
-            contactObj.state = "MA";
-            contactObj.email = "litle.com";
+            Contact contactObj = new Contact();
+            contactObj.Name = "Bob";
+            contactObj.City = "lowell";
+            contactObj.State = "MA";
+            contactObj.Email = "litle.com";
 
-            echeckVerificationObject.echeck = echeckTypeObj;
-            echeckVerificationObject.billToAddress = contactObj;
+            echeckVerificationObject.Echeck = echeckTypeObj;
+            echeckVerificationObject.BillToAddress = contactObj;
 
             echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
@@ -60,25 +60,25 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void EcheckVerificationWithEcheckToken()
         {
-            echeckVerification echeckVerificationObject = new echeckVerification();
-            echeckVerificationObject.amount = 123456;
-            echeckVerificationObject.orderId = "12345";
-            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
+            EcheckVerification echeckVerificationObject = new EcheckVerification();
+            echeckVerificationObject.Amount = 123456;
+            echeckVerificationObject.OrderId = "12345";
+            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
 
-            echeckTokenType echeckTokenObj = new echeckTokenType();
-            echeckTokenObj.accType = echeckAccountTypeEnum.Checking;
-            echeckTokenObj.litleToken = "1234565789012";
-            echeckTokenObj.routingNum = "123456789";
-            echeckTokenObj.checkNum = "123455";
+            EcheckTokenType echeckTokenObj = new EcheckTokenType();
+            echeckTokenObj.AccType = echeckAccountTypeEnum.Checking;
+            echeckTokenObj.LitleToken = "1234565789012";
+            echeckTokenObj.RoutingNum = "123456789";
+            echeckTokenObj.CheckNum = "123455";
 
-            contact contactObj = new contact();
-            contactObj.name = "Bob";
-            contactObj.city = "lowell";
-            contactObj.state = "MA";
-            contactObj.email = "litle.com";
+            Contact contactObj = new Contact();
+            contactObj.Name = "Bob";
+            contactObj.City = "lowell";
+            contactObj.State = "MA";
+            contactObj.Email = "litle.com";
 
-            echeckVerificationObject.token = echeckTokenObj;
-            echeckVerificationObject.billToAddress = contactObj;
+            echeckVerificationObject.Token = echeckTokenObj;
+            echeckVerificationObject.BillToAddress = contactObj;
 
             echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
@@ -87,18 +87,18 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void TestMissingBillingField()
         {
-            echeckVerification echeckVerificationObject = new echeckVerification();
+            EcheckVerification echeckVerificationObject = new EcheckVerification();
             echeckVerificationObject.reportGroup = "Planets";
-            echeckVerificationObject.amount = 123;
-            echeckVerificationObject.orderId = "12345";
-            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
+            echeckVerificationObject.Amount = 123;
+            echeckVerificationObject.OrderId = "12345";
+            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
 
-            echeckType echeckTypeObj = new echeckType();
-            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
-            echeckTypeObj.accNum = "12345657890";
-            echeckTypeObj.routingNum = "123456789";
-            echeckTypeObj.checkNum = "123455";
-            echeckVerificationObject.echeck = echeckTypeObj;
+            EcheckType echeckTypeObj = new EcheckType();
+            echeckTypeObj.AccType = echeckAccountTypeEnum.Checking;
+            echeckTypeObj.AccNum = "12345657890";
+            echeckTypeObj.RoutingNum = "123456789";
+            echeckTypeObj.CheckNum = "123455";
+            echeckVerificationObject.Echeck = echeckTypeObj;
             try
             {
                 //expected exception;

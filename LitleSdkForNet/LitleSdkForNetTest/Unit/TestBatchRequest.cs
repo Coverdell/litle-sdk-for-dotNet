@@ -96,21 +96,21 @@ merchantId=""01234"">
         [Test]
         public void testAddAuthorization()
         {
-            authorization authorization = new authorization();
+            Authorization authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             batchRequest.AddAuthorization(authorization);
 
             Assert.AreEqual(1, batchRequest.GetNumAuthorization());
-            Assert.AreEqual(authorization.amount, batchRequest.GetSumOfAuthorization());
+            Assert.AreEqual(authorization.Amount, batchRequest.GetSumOfAuthorization());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, authorization.Serialize()));
@@ -119,14 +119,14 @@ merchantId=""01234"">
         [Test]
         public void testAddAccountUpdate()
         {
-            accountUpdate accountUpdate = new accountUpdate();
+            AccountUpdate accountUpdate = new AccountUpdate();
             accountUpdate.reportGroup = "Planets";
-            accountUpdate.orderId = "12344";
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            accountUpdate.card = card;
+            accountUpdate.OrderId = "12344";
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            accountUpdate.Card = card;
 
             batchRequest.AddAccountUpdate(accountUpdate);
 
@@ -139,15 +139,15 @@ merchantId=""01234"">
         [Test]
         public void testAuthReversal()
         {
-            authReversal authreversal = new authReversal();
-            authreversal.litleTxnId = 12345678000;
-            authreversal.amount = 106;
-            authreversal.payPalNotes = "Notes";
+            AuthReversal authreversal = new AuthReversal();
+            authreversal.LitleTxnId = 12345678000;
+            authreversal.Amount = 106;
+            authreversal.PayPalNotes = "Notes";
 
             batchRequest.AddAuthReversal(authreversal);
 
             Assert.AreEqual(1, batchRequest.GetNumAuthReversal());
-            Assert.AreEqual(authreversal.amount, batchRequest.GetSumOfAuthReversal());
+            Assert.AreEqual(authreversal.Amount, batchRequest.GetSumOfAuthReversal());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, authreversal.Serialize()));
@@ -156,14 +156,14 @@ merchantId=""01234"">
         [Test]
         public void testCapture()
         {
-            capture capture = new capture();
-            capture.litleTxnId = 12345678000;
-            capture.amount = 106;
+            Capture capture = new Capture();
+            capture.LitleTxnId = 12345678000;
+            capture.Amount = 106;
 
             batchRequest.AddCapture(capture);
 
             Assert.AreEqual(1, batchRequest.GetNumCapture());
-            Assert.AreEqual(capture.amount, batchRequest.GetSumOfCapture());
+            Assert.AreEqual(capture.Amount, batchRequest.GetSumOfCapture());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, capture.Serialize()));
@@ -172,25 +172,25 @@ merchantId=""01234"">
         [Test]
         public void testCaptureGivenAuth()
         {
-            captureGivenAuth capturegivenauth = new captureGivenAuth();
-            capturegivenauth.orderId = "12344";
-            capturegivenauth.amount = 106;
-            authInformation authinfo = new authInformation();
-            authinfo.authDate = new DateTime(2002, 10, 9);
-            authinfo.authCode = "543216";
-            authinfo.authAmount = 12345;
-            capturegivenauth.authInformation = authinfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            capturegivenauth.card = card;
+            CaptureGivenAuth capturegivenauth = new CaptureGivenAuth();
+            capturegivenauth.OrderId = "12344";
+            capturegivenauth.Amount = 106;
+            AuthInformation authinfo = new AuthInformation();
+            authinfo.AuthDate = new DateTime(2002, 10, 9);
+            authinfo.AuthCode = "543216";
+            authinfo.AuthAmount = 12345;
+            capturegivenauth.AuthInformation = authinfo;
+            capturegivenauth.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            capturegivenauth.Card = card;
 
             batchRequest.AddCaptureGivenAuth(capturegivenauth);
 
             Assert.AreEqual(1, batchRequest.GetNumCaptureGivenAuth());
-            Assert.AreEqual(capturegivenauth.amount, batchRequest.GetSumOfCaptureGivenAuth());
+            Assert.AreEqual(capturegivenauth.Amount, batchRequest.GetSumOfCaptureGivenAuth());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, capturegivenauth.Serialize()));
@@ -199,20 +199,20 @@ merchantId=""01234"">
         [Test]
         public void testCredit()
         {
-            credit credit = new credit();
-            credit.orderId = "12344";
-            credit.amount = 106;
-            credit.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            credit.card = card;
+            Credit credit = new Credit();
+            credit.OrderId = "12344";
+            credit.Amount = 106;
+            credit.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            credit.Card = card;
 
             batchRequest.AddCredit(credit);
 
             Assert.AreEqual(1, batchRequest.GetNumCredit());
-            Assert.AreEqual(credit.amount, batchRequest.GetSumOfCredit());
+            Assert.AreEqual(credit.Amount, batchRequest.GetSumOfCredit());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, credit.Serialize()));
@@ -221,14 +221,14 @@ merchantId=""01234"">
         [Test]
         public void testEcheckCredit()
         {
-            echeckCredit echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12;
-            echeckcredit.litleTxnId = 123456789101112;
+            EcheckCredit echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12;
+            echeckcredit.LitleTxnId = 123456789101112;
 
             batchRequest.AddEcheckCredit(echeckcredit);
 
             Assert.AreEqual(1, batchRequest.GetNumEcheckCredit());
-            Assert.AreEqual(echeckcredit.amount, batchRequest.GetSumOfEcheckCredit());
+            Assert.AreEqual(echeckcredit.Amount, batchRequest.GetSumOfEcheckCredit());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckcredit.Serialize()));
@@ -237,7 +237,7 @@ merchantId=""01234"">
         [Test]
         public void testEcheckRedeposit()
         {
-            echeckRedeposit echeckredeposit = new echeckRedeposit();
+            EcheckRedeposit echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
 
             batchRequest.AddEcheckRedeposit(echeckredeposit);
@@ -251,27 +251,27 @@ merchantId=""01234"">
         [Test]
         public void testEcheckSale()
         {
-            echeckSale echecksale = new echeckSale();
-            echecksale.orderId = "12345";
-            echecksale.amount = 123456;
-            echecksale.orderSource = orderSourceType.ecommerce;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echecksale.echeck = echeck;
-            contact contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echecksale.billToAddress = contact;
+            EcheckSale echecksale = new EcheckSale();
+            echecksale.OrderId = "12345";
+            echecksale.Amount = 123456;
+            echecksale.OrderSource = OrderSourceType.Ecommerce;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echecksale.Echeck = echeck;
+            Contact contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
+            echecksale.BillToAddress = contact;
 
             batchRequest.AddEcheckSale(echecksale);
 
             Assert.AreEqual(1, batchRequest.GetNumEcheckSale());
-            Assert.AreEqual(echecksale.amount, batchRequest.GetSumOfEcheckSale());
+            Assert.AreEqual(echecksale.Amount, batchRequest.GetSumOfEcheckSale());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echecksale.Serialize()));
@@ -280,27 +280,27 @@ merchantId=""01234"">
         [Test]
         public void testEcheckVerification()
         {
-            echeckVerification echeckverification = new echeckVerification();
-            echeckverification.orderId = "12345";
-            echeckverification.amount = 123456;
-            echeckverification.orderSource = orderSourceType.ecommerce;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echeckverification.echeck = echeck;
-            contact contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echeckverification.billToAddress = contact;
+            EcheckVerification echeckverification = new EcheckVerification();
+            echeckverification.OrderId = "12345";
+            echeckverification.Amount = 123456;
+            echeckverification.OrderSource = OrderSourceType.Ecommerce;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echeckverification.Echeck = echeck;
+            Contact contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
+            echeckverification.BillToAddress = contact;
 
             batchRequest.AddEcheckVerification(echeckverification);
 
             Assert.AreEqual(1, batchRequest.GetNumEcheckVerification());
-            Assert.AreEqual(echeckverification.amount, batchRequest.GetSumOfEcheckVerification());
+            Assert.AreEqual(echeckverification.Amount, batchRequest.GetSumOfEcheckVerification());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, echeckverification.Serialize()));
@@ -309,20 +309,20 @@ merchantId=""01234"">
         [Test]
         public void testForceCapture()
         {
-            forceCapture forcecapture = new forceCapture();
-            forcecapture.orderId = "12344";
-            forcecapture.amount = 106;
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            forcecapture.card = card;
+            ForceCapture forcecapture = new ForceCapture();
+            forcecapture.OrderId = "12344";
+            forcecapture.Amount = 106;
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            forcecapture.Card = card;
 
             batchRequest.AddForceCapture(forcecapture);
 
             Assert.AreEqual(1, batchRequest.GetNumForceCapture());
-            Assert.AreEqual(forcecapture.amount, batchRequest.GetSumOfForceCapture());
+            Assert.AreEqual(forcecapture.Amount, batchRequest.GetSumOfForceCapture());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, forcecapture.Serialize()));
@@ -331,20 +331,20 @@ merchantId=""01234"">
         [Test]
         public void testSale()
         {
-            sale sale = new sale();
-            sale.orderId = "12344";
-            sale.amount = 106;
-            sale.orderSource = orderSourceType.ecommerce;
-            cardType card = new cardType();
-            card.type = MethodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            sale.card = card;
+            Sale sale = new Sale();
+            sale.OrderId = "12344";
+            sale.Amount = 106;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            CardType card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            sale.Card = card;
 
             batchRequest.AddSale(sale);
 
             Assert.AreEqual(1, batchRequest.GetNumSale());
-            Assert.AreEqual(sale.amount, batchRequest.GetSumOfSale());
+            Assert.AreEqual(sale.Amount, batchRequest.GetSumOfSale());
 
             mockLitleFile.Verify(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, sale.Serialize()));
@@ -353,9 +353,9 @@ merchantId=""01234"">
         [Test]
         public void testToken()
         {
-            registerTokenRequestType token = new registerTokenRequestType();
-            token.orderId = "12344";
-            token.accountNumber = "1233456789103801";
+            RegisterTokenRequestType token = new RegisterTokenRequestType();
+            token.OrderId = "12344";
+            token.AccountNumber = "1233456789103801";
 
             batchRequest.AddRegisterTokenRequest(token);
 
@@ -368,9 +368,9 @@ merchantId=""01234"">
         [Test]
         public void testUpdateCardValidationNumOnToken()
         {
-            updateCardValidationNumOnToken updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
-            updateCardValidationNumOnToken.orderId = "12344";
-            updateCardValidationNumOnToken.litleToken = "123";
+            UpdateCardValidationNumOnToken updateCardValidationNumOnToken = new UpdateCardValidationNumOnToken();
+            updateCardValidationNumOnToken.OrderId = "12344";
+            updateCardValidationNumOnToken.LitleToken = "123";
 
             batchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
 
@@ -383,21 +383,21 @@ merchantId=""01234"">
         [Test]
         public void testUpdateSubscription()
         {
-            updateSubscription update = new updateSubscription();
-            update.billingDate = new DateTime(2002, 10, 9);
-            contact billToAddress = new contact();
-            billToAddress.name = "Greg Dake";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "sdksupport@litle.com";
-            update.billToAddress = billToAddress;
-            cardType card = new cardType();
-            card.number = "4100000000000001";
-            card.expDate = "1215";
-            card.type = MethodOfPaymentTypeEnum.VI;
-            update.card = card;
-            update.planCode = "abcdefg";
-            update.subscriptionId = 12345;
+            UpdateSubscription update = new UpdateSubscription();
+            update.BillingDate = new DateTime(2002, 10, 9);
+            Contact billToAddress = new Contact();
+            billToAddress.Name = "Greg Dake";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "sdksupport@litle.com";
+            update.BillToAddress = billToAddress;
+            CardType card = new CardType();
+            card.Number = "4100000000000001";
+            card.ExpDate = "1215";
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            update.Card = card;
+            update.PlanCode = "abcdefg";
+            update.SubscriptionId = 12345;
 
             batchRequest.AddUpdateSubscription(update);
 
@@ -410,7 +410,7 @@ merchantId=""01234"">
         [Test]
         public void testCreatePlan()
         {
-            createPlan createPlan = new createPlan();
+            CreatePlan createPlan = new CreatePlan();
 
             batchRequest.AddCreatePlan(createPlan);
 
@@ -423,7 +423,7 @@ merchantId=""01234"">
         [Test]
         public void testUpdatePlan()
         {
-            updatePlan updatePlan = new updatePlan();
+            UpdatePlan updatePlan = new UpdatePlan();
 
             batchRequest.AddUpdatePlan(updatePlan);
 
@@ -436,10 +436,10 @@ merchantId=""01234"">
         [Test]
         public void testActivate()
         {
-            activate activate = new activate();
-            activate.amount = 500;
-            activate.orderSource = orderSourceType.ecommerce;
-            activate.card = new cardType();
+            Activate activate = new Activate();
+            activate.Amount = 500;
+            activate.OrderSource = OrderSourceType.Ecommerce;
+            activate.Card = new CardType();
 
             batchRequest.AddActivate(activate);
 
@@ -453,9 +453,9 @@ merchantId=""01234"">
         [Test]
         public void testDeactivate()
         {
-            deactivate deactivate = new deactivate();
-            deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            Deactivate deactivate = new Deactivate();
+            deactivate.OrderSource = OrderSourceType.Ecommerce;
+            deactivate.Card = new CardType();
 
             batchRequest.AddDeactivate(deactivate);
 
@@ -468,10 +468,10 @@ merchantId=""01234"">
         [Test]
         public void testLoad()
         {
-            load load = new load();
-            load.amount = 600;
-            load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            Load load = new Load();
+            load.Amount = 600;
+            load.OrderSource = OrderSourceType.Ecommerce;
+            load.Card = new CardType();
 
             batchRequest.AddLoad(load);
 
@@ -485,10 +485,10 @@ merchantId=""01234"">
         [Test]
         public void testUnload()
         {
-            unload unload = new unload();
-            unload.amount = 700;
-            unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            Unload unload = new Unload();
+            unload.Amount = 700;
+            unload.OrderSource = OrderSourceType.Ecommerce;
+            unload.Card = new CardType();
 
             batchRequest.AddUnload(unload);
 
@@ -502,9 +502,9 @@ merchantId=""01234"">
         [Test]
         public void testBalanceInquiry()
         {
-            balanceInquiry balanceInquiry = new balanceInquiry();
-            balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            BalanceInquiry balanceInquiry = new BalanceInquiry();
+            balanceInquiry.OrderSource = OrderSourceType.Ecommerce;
+            balanceInquiry.Card = new CardType();
 
             batchRequest.AddBalanceInquiry(balanceInquiry);
 
@@ -517,8 +517,8 @@ merchantId=""01234"">
         [Test]
         public void testCancelSubscription()
         {
-            cancelSubscription cancel = new cancelSubscription();
-            cancel.subscriptionId = 12345;
+            CancelSubscription cancel = new CancelSubscription();
+            cancel.SubscriptionId = 12345;
 
             batchRequest.AddCancelSubscription(cancel);
 
@@ -533,18 +533,18 @@ merchantId=""01234"">
         {
             EcheckPreNoteSale echeckPreNoteSale = new EcheckPreNoteSale();
             echeckPreNoteSale.OrderId = "12345";
-            echeckPreNoteSale.OrderSource = orderSourceType.ecommerce;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
+            echeckPreNoteSale.OrderSource = OrderSourceType.Ecommerce;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
             echeckPreNoteSale.Echeck = echeck;
-            contact contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
+            Contact contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
             echeckPreNoteSale.BillToAddress = contact;
 
             batchRequest.AddEcheckPreNoteSale(echeckPreNoteSale);
@@ -560,18 +560,18 @@ merchantId=""01234"">
         {
             EcheckPreNoteCredit echeckPreNoteCredit = new EcheckPreNoteCredit();
             echeckPreNoteCredit.OrderId = "12345";
-            echeckPreNoteCredit.OrderSource = orderSourceType.ecommerce;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
+            echeckPreNoteCredit.OrderSource = OrderSourceType.Ecommerce;
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
             echeckPreNoteCredit.Echeck = echeck;
-            contact contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
+            Contact contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
             echeckPreNoteCredit.BillToAddress = contact;
 
             batchRequest.AddEcheckPreNoteCredit(echeckPreNoteCredit);
@@ -590,11 +590,11 @@ merchantId=""01234"">
             submerchantCredit.SubmerchantName = "merchant";
             submerchantCredit.FundsTransferId = "123467";
             submerchantCredit.Amount = 106L;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
             submerchantCredit.AccountInfo = echeck;
 
             batchRequest.AddSubmerchantCredit(submerchantCredit);
@@ -648,11 +648,11 @@ merchantId=""01234"">
             vendorCredit.VendorName = "merchant";
             vendorCredit.FundsTransferId = "123467";
             vendorCredit.Amount = 106L;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
             vendorCredit.AccountInfo = echeck;
 
             batchRequest.AddVendorCredit(vendorCredit);
@@ -689,11 +689,11 @@ merchantId=""01234"">
             submerchantDebit.SubmerchantName = "merchant";
             submerchantDebit.FundsTransferId = "123467";
             submerchantDebit.Amount = 106L;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
             submerchantDebit.AccountInfo = echeck;
 
             batchRequest.AddSubmerchantDebit(submerchantDebit);
@@ -747,11 +747,11 @@ merchantId=""01234"">
             vendorDebit.VendorName = "merchant";
             vendorDebit.FundsTransferId = "123467";
             vendorDebit.Amount = 106L;
-            echeckType echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
+            EcheckType echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
             vendorDebit.AccountInfo = echeck;
 
             batchRequest.AddVendorDebit(vendorDebit);

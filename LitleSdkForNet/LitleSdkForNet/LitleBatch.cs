@@ -9,7 +9,7 @@ namespace Litle.Sdk
 {
     public class LitleRequest
     {
-        private authentication _authentication;
+        private Authentication _authentication;
         private readonly Dictionary<String, String> _config;
         private Communications _communication;
         private litleXmlSerializer _litleXmlSerializer;
@@ -85,7 +85,7 @@ namespace Litle.Sdk
         {
             _communication = new Communications();
 
-            _authentication = new authentication {user = _config["username"], password = _config["password"]};
+            _authentication = new Authentication {User = _config["username"], Password = _config["password"]};
 
             _requestDirectory = _config["requestDirectory"] + "\\Requests\\";
             _responseDirectory = _config["responseDirectory"] + "\\Responses\\";
@@ -95,7 +95,7 @@ namespace Litle.Sdk
             _litleFile = new LitleFile();
         }
 
-        public authentication GetAuthenication()
+        public Authentication GetAuthenication()
         {
             return _authentication;
         }

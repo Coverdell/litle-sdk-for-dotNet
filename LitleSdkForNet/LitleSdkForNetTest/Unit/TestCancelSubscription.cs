@@ -23,8 +23,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimple()
         {
-            cancelSubscription update = new cancelSubscription();
-            update.subscriptionId = 12345;
+            CancelSubscription update = new CancelSubscription();
+            update.SubscriptionId = 12345;
            
             var mock = new Mock<Communications>();
 

@@ -489,12 +489,12 @@ namespace Litle.Sdk
             return _physicalCheckDebitAmount;
         }
 
-        public void AddAuthorization(authorization authorization)
+        public void AddAuthorization(Authorization authorization)
         {
             if (_numAccountUpdates == 0)
             {
                 _numAuthorization++;
-                _sumOfAuthorization += authorization.amount;
+                _sumOfAuthorization += authorization.Amount;
                 FillInReportGroup(authorization);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, authorization);
             }
@@ -504,12 +504,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddCapture(capture capture)
+        public void AddCapture(Capture capture)
         {
             if (_numAccountUpdates == 0)
             {
                 _numCapture++;
-                _sumOfCapture += capture.amount;
+                _sumOfCapture += capture.Amount;
                 FillInReportGroup(capture);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, capture);
             }
@@ -519,12 +519,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddCredit(credit credit)
+        public void AddCredit(Credit credit)
         {
             if (_numAccountUpdates == 0)
             {
                 _numCredit++;
-                _sumOfCredit += credit.amount;
+                _sumOfCredit += credit.Amount;
                 FillInReportGroup(credit);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, credit);
             }
@@ -534,12 +534,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddSale(sale sale)
+        public void AddSale(Sale sale)
         {
             if (_numAccountUpdates == 0)
             {
                 _numSale++;
-                _sumOfSale += sale.amount;
+                _sumOfSale += sale.Amount;
                 FillInReportGroup(sale);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, sale);
             }
@@ -549,12 +549,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddAuthReversal(authReversal authReversal)
+        public void AddAuthReversal(AuthReversal authReversal)
         {
             if (_numAccountUpdates == 0)
             {
                 _numAuthReversal++;
-                _sumOfAuthReversal += authReversal.amount;
+                _sumOfAuthReversal += authReversal.Amount;
                 FillInReportGroup(authReversal);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, authReversal);
             }
@@ -564,12 +564,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddEcheckCredit(echeckCredit echeckCredit)
+        public void AddEcheckCredit(EcheckCredit echeckCredit)
         {
             if (_numAccountUpdates == 0)
             {
                 _numEcheckCredit++;
-                _sumOfEcheckCredit += echeckCredit.amount;
+                _sumOfEcheckCredit += echeckCredit.Amount;
                 FillInReportGroup(echeckCredit);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckCredit);
             }
@@ -579,12 +579,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddEcheckVerification(echeckVerification echeckVerification)
+        public void AddEcheckVerification(EcheckVerification echeckVerification)
         {
             if (_numAccountUpdates == 0)
             {
                 _numEcheckVerification++;
-                _sumOfEcheckVerification += echeckVerification.amount;
+                _sumOfEcheckVerification += echeckVerification.Amount;
                 FillInReportGroup(echeckVerification);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckVerification);
             }
@@ -594,12 +594,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddEcheckSale(echeckSale echeckSale)
+        public void AddEcheckSale(EcheckSale echeckSale)
         {
             if (_numAccountUpdates == 0)
             {
                 _numEcheckSale++;
-                _sumOfEcheckSale += echeckSale.amount;
+                _sumOfEcheckSale += echeckSale.Amount;
                 FillInReportGroup(echeckSale);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckSale);
             }
@@ -609,7 +609,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddRegisterTokenRequest(registerTokenRequestType registerTokenRequestType)
+        public void AddRegisterTokenRequest(RegisterTokenRequestType registerTokenRequestType)
         {
             if (_numAccountUpdates == 0)
             {
@@ -623,12 +623,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddForceCapture(forceCapture forceCapture)
+        public void AddForceCapture(ForceCapture forceCapture)
         {
             if (_numAccountUpdates == 0)
             {
                 _numForceCapture++;
-                _sumOfForceCapture += forceCapture.amount;
+                _sumOfForceCapture += forceCapture.Amount;
                 FillInReportGroup(forceCapture);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, forceCapture);
             }
@@ -638,12 +638,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddCaptureGivenAuth(captureGivenAuth captureGivenAuth)
+        public void AddCaptureGivenAuth(CaptureGivenAuth captureGivenAuth)
         {
             if (_numAccountUpdates == 0)
             {
                 _numCaptureGivenAuth++;
-                _sumOfCaptureGivenAuth += captureGivenAuth.amount;
+                _sumOfCaptureGivenAuth += captureGivenAuth.Amount;
                 FillInReportGroup(captureGivenAuth);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, captureGivenAuth);
             }
@@ -653,7 +653,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddEcheckRedeposit(echeckRedeposit echeckRedeposit)
+        public void AddEcheckRedeposit(EcheckRedeposit echeckRedeposit)
         {
             if (_numAccountUpdates == 0)
             {
@@ -695,7 +695,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
+        public void AddUpdateCardValidationNumOnToken(UpdateCardValidationNumOnToken updateCardValidationNumOnToken)
         {
             if (_numAccountUpdates == 0)
             {
@@ -710,7 +710,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddUpdateSubscription(updateSubscription updateSubscription)
+        public void AddUpdateSubscription(UpdateSubscription updateSubscription)
         {
             if (_numAccountUpdates == 0)
             {
@@ -723,7 +723,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddCancelSubscription(cancelSubscription cancelSubscription)
+        public void AddCancelSubscription(CancelSubscription cancelSubscription)
         {
             if (_numAccountUpdates == 0)
             {
@@ -736,7 +736,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddCreatePlan(createPlan createPlan)
+        public void AddCreatePlan(CreatePlan createPlan)
         {
             if (_numAccountUpdates == 0)
             {
@@ -749,7 +749,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddUpdatePlan(updatePlan updatePlan)
+        public void AddUpdatePlan(UpdatePlan updatePlan)
         {
             if (_numAccountUpdates == 0)
             {
@@ -762,12 +762,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddActivate(activate activate)
+        public void AddActivate(Activate activate)
         {
             if (_numAccountUpdates == 0)
             {
                 _numActivates++;
-                _activateAmount += activate.amount;
+                _activateAmount += activate.Amount;
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, activate);
             }
             else
@@ -776,7 +776,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddDeactivate(deactivate deactivate)
+        public void AddDeactivate(Deactivate deactivate)
         {
             if (_numAccountUpdates == 0)
             {
@@ -789,12 +789,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddLoad(load load)
+        public void AddLoad(Load load)
         {
             if (_numAccountUpdates == 0)
             {
                 _numLoads++;
-                _loadAmount += load.amount;
+                _loadAmount += load.Amount;
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, load);
             }
             else
@@ -803,12 +803,12 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddUnload(unload unload)
+        public void AddUnload(Unload unload)
         {
             if (_numAccountUpdates == 0)
             {
                 _numUnloads++;
-                _unloadAmount += unload.amount;
+                _unloadAmount += unload.Amount;
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, unload);
             }
             else
@@ -817,7 +817,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddBalanceInquiry(balanceInquiry balanceInquiry)
+        public void AddBalanceInquiry(BalanceInquiry balanceInquiry)
         {
             if (_numAccountUpdates == 0)
             {
@@ -830,7 +830,7 @@ namespace Litle.Sdk
             }
         }
 
-        public void AddAccountUpdate(accountUpdate accountUpdate)
+        public void AddAccountUpdate(AccountUpdate accountUpdate)
         {
             if (IsOnlyAccountUpdates())
             {
@@ -1236,11 +1236,11 @@ namespace Litle.Sdk
             }
         }
 
-        private void FillInReportGroup(transactionTypeWithReportGroupAndPartial txn)
+        private void FillInReportGroup(TransactionTypeWithReportGroupAndPartial txn)
         {
-            if (txn.reportGroup == null)
+            if (txn.ReportGroup == null)
             {
-                txn.reportGroup = Config["reportGroup"];
+                txn.ReportGroup = Config["reportGroup"];
             }
         }
 
@@ -1286,7 +1286,7 @@ namespace Litle.Sdk
     public class RfrRequest
     {
         public long LitleSessionId;
-        public accountUpdateFileRequestData AccountUpdateFileRequestData;
+        public AccountUpdateFileRequestData AccountUpdateFileRequestData;
 
         private LitleTime _litleTime;
         private LitleFile _litleFile;
@@ -1404,16 +1404,16 @@ namespace Litle.Sdk
         public string OrderId { get; set; }
 
         /// <remarks />
-        public orderSourceType OrderSource { get; set; }
+        public OrderSourceType OrderSource { get; set; }
 
         /// <remarks />
-        public contact BillToAddress { get; set; }
+        public Contact BillToAddress { get; set; }
 
         /// <remarks />
-        public echeckType Echeck { get; set; }
+        public EcheckType Echeck { get; set; }
 
         /// <remarks />
-        public merchantDataType MerchantData { get; set; }
+        public MerchantDataType MerchantData { get; set; }
 
         public override string Serialize()
         {
@@ -1470,16 +1470,16 @@ namespace Litle.Sdk
         public string OrderId { get; set; }
 
         /// <remarks />
-        public orderSourceType OrderSource { get; set; }
+        public OrderSourceType OrderSource { get; set; }
 
         /// <remarks />
-        public contact BillToAddress { get; set; }
+        public Contact BillToAddress { get; set; }
 
         /// <remarks />
-        public echeckType Echeck { get; set; }
+        public EcheckType Echeck { get; set; }
 
         /// <remarks />
-        public merchantDataType MerchantData { get; set; }
+        public MerchantDataType MerchantData { get; set; }
 
         public override string Serialize()
         {
@@ -1540,7 +1540,7 @@ namespace Litle.Sdk
 
         public long? Amount { get; set; }
 
-        public echeckType AccountInfo { get; set; }
+        public EcheckType AccountInfo { get; set; }
 
         public override string Serialize()
         {
@@ -1646,7 +1646,7 @@ namespace Litle.Sdk
 
         public long? Amount { get; set; }
 
-        public echeckType AccountInfo { get; set; }
+        public EcheckType AccountInfo { get; set; }
 
         public override string Serialize()
         {
@@ -1721,7 +1721,7 @@ namespace Litle.Sdk
 
         public long? Amount { get; set; }
 
-        public echeckType AccountInfo { get; set; }
+        public EcheckType AccountInfo { get; set; }
 
         public override string Serialize()
         {
@@ -1827,7 +1827,7 @@ namespace Litle.Sdk
 
         public long? Amount { get; set; }
 
-        public echeckType AccountInfo { get; set; }
+        public EcheckType AccountInfo { get; set; }
 
         public override string Serialize()
         {
