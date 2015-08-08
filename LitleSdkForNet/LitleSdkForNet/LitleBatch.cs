@@ -12,7 +12,7 @@ namespace Litle.Sdk
         private Authentication _authentication;
         private readonly Dictionary<String, String> _config;
         private Communications _communication;
-        private litleXmlSerializer _litleXmlSerializer;
+        private LitleXmlSerializer _litleXmlSerializer;
         private int _numOfLitleBatchRequest;
         private int _numOfRfrRequest;
         public string FinalFilePath = null;
@@ -90,7 +90,7 @@ namespace Litle.Sdk
             _requestDirectory = _config["requestDirectory"] + "\\Requests\\";
             _responseDirectory = _config["responseDirectory"] + "\\Responses\\";
 
-            _litleXmlSerializer = new litleXmlSerializer();
+            _litleXmlSerializer = new LitleXmlSerializer();
             _litleTime = new LitleTime();
             _litleFile = new LitleFile();
         }
@@ -120,12 +120,12 @@ namespace Litle.Sdk
             return _communication;
         }
 
-        public void SetLitleXmlSerializer(litleXmlSerializer litleXmlSerializer)
+        public void SetLitleXmlSerializer(LitleXmlSerializer litleXmlSerializer)
         {
             _litleXmlSerializer = litleXmlSerializer;
         }
 
-        public litleXmlSerializer GetLitleXmlSerializer()
+        public LitleXmlSerializer GetLitleXmlSerializer()
         {
             return _litleXmlSerializer;
         }

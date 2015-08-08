@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using System.Xml.Serialization;
+using System.Text;
 using System.Xml;
+using System.Xml.Serialization;
 
 namespace Litle.Sdk
 {
-    public class litleXmlSerializer
+    public class LitleXmlSerializer
     {
-        virtual public String SerializeObject(LitleOnlineRequest req)
+        public virtual String SerializeObject(LitleOnlineRequest req)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(LitleOnlineRequest));
-            MemoryStream ms = new MemoryStream();
+            var serializer = new XmlSerializer(typeof (LitleOnlineRequest));
+            var ms = new MemoryStream();
             try
             {
                 serializer.Serialize(ms, req);
@@ -21,10 +20,10 @@ namespace Litle.Sdk
             {
                 throw new LitleOnlineException("Error in sending request to Litle!", e);
             }
-            return Encoding.UTF8.GetString(ms.GetBuffer());//return string is UTF8 encoded.
-        }// serialize the xml
+            return Encoding.UTF8.GetString(ms.GetBuffer()); //return string is UTF8 encoded.
+        } // serialize the xml
 
-        virtual public litleResponse DeserializeObjectFromFile(string filePath)
+        public virtual litleResponse DeserializeObjectFromFile(string filePath)
         {
             litleResponse i;
             try
@@ -36,6 +35,6 @@ namespace Litle.Sdk
                 throw new LitleOnlineException("Error in recieving response from Litle!", e);
             }
             return i;
-        }// deserialize the object
+        } // deserialize the object
     }
 }

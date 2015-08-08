@@ -98,7 +98,7 @@ namespace Litle.Sdk.Test.Unit
             accountUpdate.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<accountUpdateResponse reportGroup=\"Merch01ReportGrp\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId><orderId>MERCH01-0002</orderId><response>000</response><responseTime>2010-04-11T15:44:26</responseTime><message>Approved</message></accountUpdateResponse>")
@@ -115,7 +115,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -163,7 +163,7 @@ namespace Litle.Sdk.Test.Unit
             authorization.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<authorizationResponse id=\"\" reportGroup=\"Planets\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId><orderId>123</orderId><response>000</response><responseTime>2013-06-19T19:54:42</responseTime><message>Approved</message><authCode>123457</authCode><fraudResult><avsResult>00</avsResult></fraudResult><tokenResponse><litleToken>1711000103054242</litleToken><tokenResponseCode>802</tokenResponseCode><tokenMessage>Account number was previously registered</tokenMessage><type>VI</type><bin>424242</bin></tokenResponse></authorizationResponse>")
@@ -180,7 +180,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -217,7 +217,7 @@ namespace Litle.Sdk.Test.Unit
             authreversal.PayPalNotes = "Notes";
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<authReversalResponse id=\"123\" customerId=\"Customer Id\" reportGroup=\"Auth Reversals\" xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId><orderId>abc123</orderId><response>000</response><responseTime>2011-08-30T13:15:43</responseTime><message>Approved</message></authReversalResponse>")
@@ -234,7 +234,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
             litle.SetCommunication(mockedCommunications);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -273,7 +273,7 @@ namespace Litle.Sdk.Test.Unit
             capture.Amount = 106;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
               .Returns("<captureResponse id=\"123\" reportGroup=\"RG27\" xmlns=\"http://www.litle.com/schema\"> <litleTxnId>123</litleTxnId> <orderId>12z58743y1</orderId> <response>000</response> <responseTime>2011-09-01T10:24:31</responseTime> <message>message</message> </captureResponse>")
@@ -288,7 +288,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -339,7 +339,7 @@ namespace Litle.Sdk.Test.Unit
             capturegivenauth.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<captureGivenAuthResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></captureGivenAuthResponse>")
@@ -354,7 +354,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -400,7 +400,7 @@ namespace Litle.Sdk.Test.Unit
             credit.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<creditResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></creditResponse>")
@@ -415,7 +415,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -455,7 +455,7 @@ namespace Litle.Sdk.Test.Unit
             echeckcredit.LitleTxnId = 123456789101112;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<echeckCreditResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckCreditResponse>")
@@ -470,7 +470,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -509,7 +509,7 @@ namespace Litle.Sdk.Test.Unit
             echeckredeposit.litleTxnId = 123456;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<echeckRedepositResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckRedepositResponse>")
@@ -524,7 +524,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -577,7 +577,7 @@ namespace Litle.Sdk.Test.Unit
             echecksale.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<echeckSalesResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckSalesResponse>")
@@ -592,7 +592,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -645,7 +645,7 @@ namespace Litle.Sdk.Test.Unit
             echeckverification.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<echeckVerificationResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckVerificationResponse>")
@@ -660,7 +660,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -706,7 +706,7 @@ namespace Litle.Sdk.Test.Unit
             forcecapture.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<forceCaptureResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></forceCaptureResponse>")
@@ -721,7 +721,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -767,7 +767,7 @@ namespace Litle.Sdk.Test.Unit
             sale.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<saleResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></saleResponse>")
@@ -782,7 +782,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -822,7 +822,7 @@ namespace Litle.Sdk.Test.Unit
             token.AccountNumber = "1233456789103801";
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<registerTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></registerTokenResponse>")
@@ -837,7 +837,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -877,7 +877,7 @@ namespace Litle.Sdk.Test.Unit
             updateCardValidationNumOnToken.LitleToken = "123";
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<updateCardValidationNumOnTokenResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></updateCardValidationNumOnTokenResponse>")
@@ -892,7 +892,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -940,7 +940,7 @@ namespace Litle.Sdk.Test.Unit
 
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleBatchResponse = new Mock<batchResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             authorizationResponse mockAuthorizationResponse1 = new authorizationResponse();
             mockAuthorizationResponse1.litleTxnId = 123;
@@ -959,7 +959,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -1002,12 +1002,12 @@ namespace Litle.Sdk.Test.Unit
 
             litleResponse mockLitleResponse = null;
 
-            var mockXml = new Mock<litleXmlSerializer>();
+            var mockXml = new Mock<LitleXmlSerializer>();
 
             Communications mockedCommunications = mockCommunications.Object;
 
             mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -1048,7 +1048,7 @@ namespace Litle.Sdk.Test.Unit
             authorization.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<authorizationResponse reportGroup=\"Default Report Group\" xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></authorizationResponse>")
@@ -1063,7 +1063,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -1144,9 +1144,9 @@ namespace Litle.Sdk.Test.Unit
             mockedLitleResponse.setRfrResponseReader(mockXmlReader.Object);
             mockedLitleResponse.setBatchResponseReader(mockBatchXmlReader.Object);
 
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
             LitleTime mockedLitleTime = mockLitleTime.Object;
@@ -1186,7 +1186,7 @@ namespace Litle.Sdk.Test.Unit
             cancel.SubscriptionId = 12345;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<cancelSubscriptionResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>54321</litleTxnId><response>000</response><message>Approved</message><responseTime>2013-09-04T21:55:14</responseTime><subscriptionId>12345</subscriptionId></cancelSubscriptionResponse>")
@@ -1203,7 +1203,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -1250,7 +1250,7 @@ namespace Litle.Sdk.Test.Unit
             update.SubscriptionId = 12345;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<updateSubscriptionResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>54321</litleTxnId><response>000</response><message>Approved</message><responseTime>2013-09-04T21:55:14</responseTime><subscriptionId>12345</subscriptionId></updateSubscriptionResponse>")
@@ -1267,7 +1267,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -1304,7 +1304,7 @@ namespace Litle.Sdk.Test.Unit
             createPlan.Amount = 100;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<createPlanResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId></createPlanResponse>")
@@ -1321,7 +1321,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -1357,7 +1357,7 @@ namespace Litle.Sdk.Test.Unit
             updatePlan.Active = true;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<updatePlanResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId></updatePlanResponse>")
@@ -1374,7 +1374,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -1411,7 +1411,7 @@ namespace Litle.Sdk.Test.Unit
             activate.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<activateResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId></activateResponse>")
@@ -1428,7 +1428,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -1465,7 +1465,7 @@ namespace Litle.Sdk.Test.Unit
             deactivate.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<deactivateResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId></deactivateResponse>")
@@ -1482,7 +1482,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -1519,7 +1519,7 @@ namespace Litle.Sdk.Test.Unit
             load.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<loadResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId></loadResponse>")
@@ -1536,7 +1536,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -1573,7 +1573,7 @@ namespace Litle.Sdk.Test.Unit
             unload.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<unloadResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId></unloadResponse>")
@@ -1590,7 +1590,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -1627,7 +1627,7 @@ namespace Litle.Sdk.Test.Unit
             balanceInquiry.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<balanceInquiryResponse xmlns=\"http://www.litle.com/schema\"><litleTxnId>123</litleTxnId></balanceInquiryResponse>")
@@ -1644,7 +1644,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mockCommunications.Object;
             litle.SetCommunication(mockedCommunication);
 
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
@@ -1692,7 +1692,7 @@ namespace Litle.Sdk.Test.Unit
             echeckPreNoteSale.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<echeckPreNoteSaleResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckPreNoteSaleResponse>")
@@ -1707,7 +1707,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
@@ -1759,7 +1759,7 @@ namespace Litle.Sdk.Test.Unit
             echeckPreNoteCredit.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<echeckPreNoteCreditResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></echeckPreNoteCreditResponse>")
@@ -1774,7 +1774,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunications = mockCommunications.Object;
 
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
-            litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
+            LitleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
             LitleFile mockedLitleFile = mockLitleFile.Object;
 
