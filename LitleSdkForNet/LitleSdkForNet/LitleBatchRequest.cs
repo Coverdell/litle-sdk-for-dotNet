@@ -1,1503 +1,1419 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using System.Security;
+using Litle.Sdk.Properties;
 
 namespace Litle.Sdk
 {
-    public partial class batchRequest
+    public class BatchRequest
     {
-        public string id;
-        public string merchantId;
-        public string reportGroup;
-
-        public Dictionary<String, String> config;
-
-        public string batchFilePath;
-        private string tempBatchFilePath;
-        private LitleFile litleFile;
-        private LitleTime litleTime;
-        private string requestDirectory;
-        private string responseDirectory;
-
-        private int numAuthorization;
-        private int numAccountUpdates;
-        private int numCapture;
-        private int numCredit;
-        private int numSale;
-        private int numAuthReversal;
-        private int numEcheckCredit;
-        private int numEcheckVerification;
-        private int numEcheckSale;
-        private int numRegisterTokenRequest;
-        private int numForceCapture;
-        private int numCaptureGivenAuth;
-        private int numEcheckRedeposit;
-        private int numEcheckPreNoteSale;
-        private int numEcheckPreNoteCredit;
-        private int numUpdateCardValidationNumOnToken;
-        private int numUpdateSubscriptions;
-        private int numCancelSubscriptions;
-        private int numCreatePlans;
-        private int numUpdatePlans;
-        private int numActivates;
-        private int numDeactivates;
-        private int numLoads;
-        private int numUnloads;
-        private int numBalanceInquiries;
-        private int numPayFacCredit;
-        private int numSubmerchantCredit;
-        private int numReserveCredit;
-        private int numVendorCredit;
-        private int numPhysicalCheckCredit;
-        private int numPayFacDebit;
-        private int numSubmerchantDebit;
-        private int numReserveDebit;
-        private int numVendorDebit;
-        private int numPhysicalCheckDebit;
-
-        private long sumOfAuthorization;
-        private long sumOfAuthReversal;
-        private long sumOfCapture;
-        private long sumOfCredit;
-        private long sumOfSale;
-        private long sumOfForceCapture;
-        private long sumOfEcheckSale;
-        private long sumOfEcheckCredit;
-        private long sumOfEcheckVerification;
-        private long sumOfCaptureGivenAuth;
-        private long activateAmount;
-        private long loadAmount;
-        private long unloadAmount;
-        private long payFacCreditAmount;
-        private long submerchantCreditAmount;
-        private long reserveCreditAmount;
-        private long vendorCreditAmount;
-        private long physicalCheckCreditAmount;
-        private long payFacDebitAmount;
-        private long submerchantDebitAmount;
-        private long reserveDebitAmount;
-        private long vendorDebitAmount;
-        private long physicalCheckDebitAmount;
-
-        private const string accountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
-
-        public batchRequest()
-        {
-            config = new Dictionary<String, String>();
-
-            config["url"] = Properties.Settings.Default.url;
-            config["reportGroup"] = Properties.Settings.Default.reportGroup;
-            config["username"] = Properties.Settings.Default.username;
-            config["printxml"] = Properties.Settings.Default.printxml;
-            config["timeout"] = Properties.Settings.Default.timeout;
-            config["proxyHost"] = Properties.Settings.Default.proxyHost;
-            config["merchantId"] = Properties.Settings.Default.merchantId;
-            config["password"] = Properties.Settings.Default.password;
-            config["proxyPort"] = Properties.Settings.Default.proxyPort;
-            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
-            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
-            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-            config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
-            config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
-
-            initializeRequest();
-        }
-
-        public batchRequest(Dictionary<String, String> config)
-        {
-            this.config = config;
-
-            initializeRequest();
+        public string ID;
+        public string MerchantId;
+        public string ReportGroup;
+
+        public Dictionary<String, String> Config;
+
+        public string BatchFilePath;
+        private string _tempBatchFilePath;
+        private LitleFile _litleFile;
+        private LitleTime _litleTime;
+        private string _requestDirectory;
+        private string _responseDirectory;
+
+        private int _numAuthorization;
+        private int _numAccountUpdates;
+        private int _numCapture;
+        private int _numCredit;
+        private int _numSale;
+        private int _numAuthReversal;
+        private int _numEcheckCredit;
+        private int _numEcheckVerification;
+        private int _numEcheckSale;
+        private int _numRegisterTokenRequest;
+        private int _numForceCapture;
+        private int _numCaptureGivenAuth;
+        private int _numEcheckRedeposit;
+        private int _numEcheckPreNoteSale;
+        private int _numEcheckPreNoteCredit;
+        private int _numUpdateCardValidationNumOnToken;
+        private int _numUpdateSubscriptions;
+        private int _numCancelSubscriptions;
+        private int _numCreatePlans;
+        private int _numUpdatePlans;
+        private int _numActivates;
+        private int _numDeactivates;
+        private int _numLoads;
+        private int _numUnloads;
+        private int _numBalanceInquiries;
+        private int _numPayFacCredit;
+        private int _numSubmerchantCredit;
+        private int _numReserveCredit;
+        private int _numVendorCredit;
+        private int _numPhysicalCheckCredit;
+        private int _numPayFacDebit;
+        private int _numSubmerchantDebit;
+        private int _numReserveDebit;
+        private int _numVendorDebit;
+        private int _numPhysicalCheckDebit;
+
+        private long _sumOfAuthorization;
+        private long _sumOfAuthReversal;
+        private long _sumOfCapture;
+        private long _sumOfCredit;
+        private long _sumOfSale;
+        private long _sumOfForceCapture;
+        private long _sumOfEcheckSale;
+        private long _sumOfEcheckCredit;
+        private long _sumOfEcheckVerification;
+        private long _sumOfCaptureGivenAuth;
+        private long _activateAmount;
+        private long _loadAmount;
+        private long _unloadAmount;
+        private long _payFacCreditAmount;
+        private long _submerchantCreditAmount;
+        private long _reserveCreditAmount;
+        private long _vendorCreditAmount;
+        private long _physicalCheckCreditAmount;
+        private long _payFacDebitAmount;
+        private long _submerchantDebitAmount;
+        private long _reserveDebitAmount;
+        private long _vendorDebitAmount;
+        private long _physicalCheckDebitAmount;
+
+        private const string AccountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
+
+        public BatchRequest()
+        {
+            Config = new Dictionary<String, String>();
+            Config["url"] = Settings.Default.url;
+            Config["reportGroup"] = Settings.Default.reportGroup;
+            Config["username"] = Settings.Default.username;
+            Config["printxml"] = Settings.Default.printxml;
+            Config["timeout"] = Settings.Default.timeout;
+            Config["proxyHost"] = Settings.Default.proxyHost;
+            Config["merchantId"] = Settings.Default.merchantId;
+            Config["password"] = Settings.Default.password;
+            Config["proxyPort"] = Settings.Default.proxyPort;
+            Config["sftpUrl"] = Settings.Default.sftpUrl;
+            Config["sftpUsername"] = Settings.Default.sftpUsername;
+            Config["sftpPassword"] = Settings.Default.sftpPassword;
+            Config["knownHostsFile"] = Settings.Default.knownHostsFile;
+            Config["requestDirectory"] = Settings.Default.requestDirectory;
+            Config["responseDirectory"] = Settings.Default.responseDirectory;
+
+            InitializeRequest();
+        }
+
+        public BatchRequest(Dictionary<String, String> config)
+        {
+            Config = config;
+            InitializeRequest();
         }
 
-        private void initializeRequest()
+        private void InitializeRequest()
         {
-            requestDirectory = config["requestDirectory"] + "\\Requests\\";
-            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+            _requestDirectory = Config["requestDirectory"] + "\\Requests\\";
+            _responseDirectory = Config["responseDirectory"] + "\\Responses\\";
 
-            litleFile = new LitleFile();
-            litleTime = new LitleTime();
+            _litleFile = new LitleFile();
+            _litleTime = new LitleTime();
 
-            numAuthorization = 0;
-            numAuthReversal = 0;
-            numCapture = 0;
-            numCaptureGivenAuth = 0;
-            numCredit = 0;
-            numEcheckCredit = 0;
-            numEcheckRedeposit = 0;
-            numEcheckPreNoteSale = 0;
-            numEcheckPreNoteCredit = 0;
-            numEcheckSale = 0;
-            numEcheckVerification = 0;
-            numForceCapture = 0;
-            numRegisterTokenRequest = 0;
-            numSale = 0;
-            numUpdateCardValidationNumOnToken = 0;
-            numUpdateSubscriptions = 0;
-            numCancelSubscriptions = 0;
-            numPayFacCredit = 0;
-            numSubmerchantCredit = 0;
-            numReserveCredit = 0;
-            numVendorCredit = 0;
-            numPhysicalCheckCredit = 0;
-            numPayFacDebit = 0;
-            numSubmerchantDebit = 0;
-            numReserveDebit = 0;
-            numVendorDebit = 0;
-            numPhysicalCheckDebit = 0;
+            _numAuthorization = 0;
+            _numAuthReversal = 0;
+            _numCapture = 0;
+            _numCaptureGivenAuth = 0;
+            _numCredit = 0;
+            _numEcheckCredit = 0;
+            _numEcheckRedeposit = 0;
+            _numEcheckPreNoteSale = 0;
+            _numEcheckPreNoteCredit = 0;
+            _numEcheckSale = 0;
+            _numEcheckVerification = 0;
+            _numForceCapture = 0;
+            _numRegisterTokenRequest = 0;
+            _numSale = 0;
+            _numUpdateCardValidationNumOnToken = 0;
+            _numUpdateSubscriptions = 0;
+            _numCancelSubscriptions = 0;
+            _numPayFacCredit = 0;
+            _numSubmerchantCredit = 0;
+            _numReserveCredit = 0;
+            _numVendorCredit = 0;
+            _numPhysicalCheckCredit = 0;
+            _numPayFacDebit = 0;
+            _numSubmerchantDebit = 0;
+            _numReserveDebit = 0;
+            _numVendorDebit = 0;
+            _numPhysicalCheckDebit = 0;
 
-            sumOfAuthorization = 0;
-            sumOfAuthReversal = 0;
-            sumOfCapture = 0;
-            sumOfCredit = 0;
-            sumOfSale = 0;
-            sumOfForceCapture = 0;
-            sumOfEcheckSale = 0;
-            sumOfEcheckCredit = 0;
-            sumOfEcheckVerification = 0;
-            sumOfCaptureGivenAuth = 0;
-            payFacCreditAmount = 0;
-            submerchantCreditAmount = 0;
-            reserveCreditAmount = 0;
-            vendorCreditAmount = 0;
-            physicalCheckCreditAmount = 0;
-            payFacDebitAmount = 0;
-            submerchantDebitAmount = 0;
-            reserveDebitAmount = 0;
-            vendorDebitAmount = 0;
-            physicalCheckDebitAmount = 0;
+            _sumOfAuthorization = 0;
+            _sumOfAuthReversal = 0;
+            _sumOfCapture = 0;
+            _sumOfCredit = 0;
+            _sumOfSale = 0;
+            _sumOfForceCapture = 0;
+            _sumOfEcheckSale = 0;
+            _sumOfEcheckCredit = 0;
+            _sumOfEcheckVerification = 0;
+            _sumOfCaptureGivenAuth = 0;
+            _payFacCreditAmount = 0;
+            _submerchantCreditAmount = 0;
+            _reserveCreditAmount = 0;
+            _vendorCreditAmount = 0;
+            _physicalCheckCreditAmount = 0;
+            _payFacDebitAmount = 0;
+            _submerchantDebitAmount = 0;
+            _reserveDebitAmount = 0;
+            _vendorDebitAmount = 0;
+            _physicalCheckDebitAmount = 0;
         }
 
-        public string getResponseDirectory()
+        public string GetResponseDirectory()
         {
-            return this.responseDirectory;
+            return _responseDirectory;
         }
 
-        public string getRequestDirectory()
+        public string GetRequestDirectory()
         {
-            return this.requestDirectory;
+            return _requestDirectory;
         }
 
-        public void setLitleFile(LitleFile litleFile)
+        public void SetLitleFile(LitleFile litleFile)
         {
-            this.litleFile = litleFile;
+            _litleFile = litleFile;
         }
 
-        public LitleFile getLitleFile()
+        public LitleFile GetLitleFile()
         {
-            return this.litleFile;
+            return _litleFile;
         }
 
-        public void setLitleTime(LitleTime litleTime)
+        public void SetLitleTime(LitleTime litleTime)
         {
-            this.litleTime = litleTime;
+            _litleTime = litleTime;
         }
 
-        public LitleTime getLitleTime()
+        public LitleTime GetLitleTime()
         {
-            return this.litleTime;
+            return _litleTime;
         }
 
-        public int getNumAuthorization()
+        public int GetNumAuthorization()
         {
-            return numAuthorization;
+            return _numAuthorization;
         }
 
-        public int getNumAccountUpdates()
+        public int GetNumAccountUpdates()
         {
-            return numAccountUpdates;
+            return _numAccountUpdates;
         }
 
-        public int getNumCapture()
+        public int GetNumCapture()
         {
-            return numCapture;
+            return _numCapture;
         }
 
-        public int getNumCredit()
+        public int GetNumCredit()
         {
-            return numCredit;
+            return _numCredit;
         }
 
-        public int getNumSale()
+        public int GetNumSale()
         {
-            return numSale;
+            return _numSale;
         }
 
-        public int getNumAuthReversal()
+        public int GetNumAuthReversal()
         {
-            return numAuthReversal;
+            return _numAuthReversal;
         }
 
-        public int getNumEcheckCredit()
+        public int GetNumEcheckCredit()
         {
-            return numEcheckCredit;
+            return _numEcheckCredit;
         }
 
-        public int getNumEcheckVerification()
+        public int GetNumEcheckVerification()
         {
-            return numEcheckVerification;
+            return _numEcheckVerification;
         }
 
-        public int getNumEcheckSale()
+        public int GetNumEcheckSale()
         {
-            return numEcheckSale;
+            return _numEcheckSale;
         }
 
-        public int getNumRegisterTokenRequest()
+        public int GetNumRegisterTokenRequest()
         {
-            return numRegisterTokenRequest;
+            return _numRegisterTokenRequest;
         }
 
-        public int getNumForceCapture()
+        public int GetNumForceCapture()
         {
-            return numForceCapture;
+            return _numForceCapture;
         }
 
-        public int getNumCaptureGivenAuth()
+        public int GetNumCaptureGivenAuth()
         {
-            return numCaptureGivenAuth;
+            return _numCaptureGivenAuth;
         }
 
-        public int getNumEcheckRedeposit()
+        public int GetNumEcheckRedeposit()
         {
-            return numEcheckRedeposit;
+            return _numEcheckRedeposit;
         }
 
-        public int getNumEcheckPreNoteSale()
+        public int GetNumEcheckPreNoteSale()
         {
-            return numEcheckPreNoteSale;
+            return _numEcheckPreNoteSale;
         }
 
-        public int getNumEcheckPreNoteCredit()
+        public int GetNumEcheckPreNoteCredit()
         {
-            return numEcheckPreNoteCredit;
+            return _numEcheckPreNoteCredit;
         }
 
-        public int getNumUpdateCardValidationNumOnToken()
+        public int GetNumUpdateCardValidationNumOnToken()
         {
-            return numUpdateCardValidationNumOnToken;
+            return _numUpdateCardValidationNumOnToken;
         }
 
-        public int getNumUpdateSubscriptions()
+        public int GetNumUpdateSubscriptions()
         {
-            return numUpdateSubscriptions;
+            return _numUpdateSubscriptions;
         }
 
-        public int getNumCancelSubscriptions()
+        public int GetNumCancelSubscriptions()
         {
-            return numCancelSubscriptions;
+            return _numCancelSubscriptions;
         }
 
-        public int getNumCreatePlans()
+        public int GetNumCreatePlans()
         {
-            return numCreatePlans;
+            return _numCreatePlans;
         }
 
-        public int getNumUpdatePlans()
+        public int GetNumUpdatePlans()
         {
-            return numUpdatePlans;
+            return _numUpdatePlans;
         }
 
-        public int getNumActivates()
+        public int GetNumActivates()
         {
-            return numActivates;
+            return _numActivates;
         }
 
-        public int getNumDeactivates()
+        public int GetNumDeactivates()
         {
-            return numDeactivates;
+            return _numDeactivates;
         }
 
-        public int getNumLoads()
+        public int GetNumLoads()
         {
-            return numLoads;
+            return _numLoads;
         }
 
-        public int getNumUnloads()
+        public int GetNumUnloads()
         {
-            return numUnloads;
+            return _numUnloads;
         }
 
-        public int getNumBalanceInquiries()
+        public int GetNumBalanceInquiries()
         {
-            return numBalanceInquiries;
+            return _numBalanceInquiries;
         }
 
-        public int getNumPayFacCredit()
+        public int GetNumPayFacCredit()
         {
-            return numPayFacCredit;
+            return _numPayFacCredit;
         }
 
-        public int getNumSubmerchantCredit()
+        public int GetNumSubmerchantCredit()
         {
-            return numSubmerchantCredit;
+            return _numSubmerchantCredit;
         }
 
-        public int getNumReserveCredit()
+        public int GetNumReserveCredit()
         {
-            return numReserveCredit;
+            return _numReserveCredit;
         }
 
-        public int getNumVendorCredit()
+        public int GetNumVendorCredit()
         {
-            return numVendorCredit;
+            return _numVendorCredit;
         }
 
-        public int getNumPhysicalCheckCredit()
+        public int GetNumPhysicalCheckCredit()
         {
-            return numPhysicalCheckCredit;
+            return _numPhysicalCheckCredit;
         }
 
-        public int getNumPayFacDebit()
+        public int GetNumPayFacDebit()
         {
-            return numPayFacDebit;
+            return _numPayFacDebit;
         }
 
-        public int getNumSubmerchantDebit()
+        public int GetNumSubmerchantDebit()
         {
-            return numSubmerchantDebit;
+            return _numSubmerchantDebit;
         }
 
-        public int getNumReserveDebit()
+        public int GetNumReserveDebit()
         {
-            return numReserveDebit;
+            return _numReserveDebit;
         }
 
-        public int getNumVendorDebit()
+        public int GetNumVendorDebit()
         {
-            return numVendorDebit;
+            return _numVendorDebit;
         }
 
-        public int getNumPhysicalCheckDebit()
+        public int GetNumPhysicalCheckDebit()
         {
-            return numPhysicalCheckDebit;
+            return _numPhysicalCheckDebit;
         }
 
-        public long getLoadAmount()
+        public long GetLoadAmount()
         {
-            return loadAmount;
+            return _loadAmount;
         }
 
-        public long getUnloadAmount()
+        public long GetUnloadAmount()
         {
-            return unloadAmount;
+            return _unloadAmount;
         }
 
-        public long getActivateAmount()
+        public long GetActivateAmount()
         {
-            return activateAmount;
+            return _activateAmount;
         }
 
-        public long getSumOfAuthorization()
+        public long GetSumOfAuthorization()
         {
-            return sumOfAuthorization;
+            return _sumOfAuthorization;
         }
 
-        public long getSumOfAuthReversal()
+        public long GetSumOfAuthReversal()
         {
-            return sumOfAuthReversal;
+            return _sumOfAuthReversal;
         }
 
-        public long getSumOfCapture()
+        public long GetSumOfCapture()
         {
-            return sumOfCapture;
+            return _sumOfCapture;
         }
 
-        public long getSumOfCredit()
+        public long GetSumOfCredit()
         {
-            return sumOfCredit;
+            return _sumOfCredit;
         }
 
-        public long getSumOfSale()
+        public long GetSumOfSale()
         {
-            return sumOfSale;
+            return _sumOfSale;
         }
 
-        public long getSumOfForceCapture()
+        public long GetSumOfForceCapture()
         {
-            return sumOfForceCapture;
+            return _sumOfForceCapture;
         }
 
-        public long getSumOfEcheckSale()
+        public long GetSumOfEcheckSale()
         {
-            return sumOfEcheckSale;
+            return _sumOfEcheckSale;
         }
 
-        public long getSumOfEcheckCredit()
+        public long GetSumOfEcheckCredit()
         {
-            return sumOfEcheckCredit;
+            return _sumOfEcheckCredit;
         }
 
-        public long getSumOfEcheckVerification()
+        public long GetSumOfEcheckVerification()
         {
-            return sumOfEcheckVerification;
+            return _sumOfEcheckVerification;
         }
 
-        public long getSumOfCaptureGivenAuth()
+        public long GetSumOfCaptureGivenAuth()
         {
-            return sumOfCaptureGivenAuth;
+            return _sumOfCaptureGivenAuth;
         }
 
-        public long getPayFacCreditAmount()
+        public long GetPayFacCreditAmount()
         {
-            return payFacCreditAmount;
+            return _payFacCreditAmount;
         }
 
-        public long getSubmerchantCreditAmount()
+        public long GetSubmerchantCreditAmount()
         {
-            return submerchantCreditAmount;
+            return _submerchantCreditAmount;
         }
 
-        public long getReserveCreditAmount()
+        public long GetReserveCreditAmount()
         {
-            return reserveCreditAmount;
+            return _reserveCreditAmount;
         }
 
-        public long getVendorCreditAmount()
+        public long GetVendorCreditAmount()
         {
-            return vendorCreditAmount;
+            return _vendorCreditAmount;
         }
 
-        public long getPhysicalCheckCreditAmount()
+        public long GetPhysicalCheckCreditAmount()
         {
-            return physicalCheckCreditAmount;
+            return _physicalCheckCreditAmount;
         }
 
-        public long getPayFacDebitAmount()
+        public long GetPayFacDebitAmount()
         {
-            return payFacDebitAmount;
+            return _payFacDebitAmount;
         }
 
-        public long getSubmerchantDebitAmount()
+        public long GetSubmerchantDebitAmount()
         {
-            return submerchantDebitAmount;
+            return _submerchantDebitAmount;
         }
 
-        public long getReserveDebitAmount()
+        public long GetReserveDebitAmount()
         {
-            return reserveDebitAmount;
+            return _reserveDebitAmount;
         }
 
-        public long getVendorDebitAmount()
+        public long GetVendorDebitAmount()
         {
-            return vendorDebitAmount;
+            return _vendorDebitAmount;
         }
 
-        public long getPhysicalCheckDebitAmount()
+        public long GetPhysicalCheckDebitAmount()
         {
-            return physicalCheckDebitAmount;
+            return _physicalCheckDebitAmount;
         }
 
-        public void addAuthorization(authorization authorization)
+        public void AddAuthorization(authorization authorization)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numAuthorization++;
-                sumOfAuthorization += authorization.amount;
-                fillInReportGroup(authorization);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, authorization);
+                _numAuthorization++;
+                _sumOfAuthorization += authorization.amount;
+                FillInReportGroup(authorization);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, authorization);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addCapture(capture capture)
+        public void AddCapture(capture capture)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numCapture++;
-                sumOfCapture += capture.amount;
-                fillInReportGroup(capture);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, capture);
+                _numCapture++;
+                _sumOfCapture += capture.amount;
+                FillInReportGroup(capture);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, capture);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addCredit(credit credit)
+        public void AddCredit(credit credit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numCredit++;
-                sumOfCredit += credit.amount;
-                fillInReportGroup(credit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, credit);
+                _numCredit++;
+                _sumOfCredit += credit.amount;
+                FillInReportGroup(credit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, credit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addSale(sale sale)
+        public void AddSale(sale sale)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numSale++;
-                sumOfSale += sale.amount;
-                fillInReportGroup(sale);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, sale);
+                _numSale++;
+                _sumOfSale += sale.amount;
+                FillInReportGroup(sale);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, sale);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addAuthReversal(authReversal authReversal)
+        public void AddAuthReversal(authReversal authReversal)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numAuthReversal++;
-                sumOfAuthReversal += authReversal.amount;
-                fillInReportGroup(authReversal);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, authReversal);
+                _numAuthReversal++;
+                _sumOfAuthReversal += authReversal.amount;
+                FillInReportGroup(authReversal);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, authReversal);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addEcheckCredit(echeckCredit echeckCredit)
+        public void AddEcheckCredit(echeckCredit echeckCredit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numEcheckCredit++;
-                sumOfEcheckCredit += echeckCredit.amount;
-                fillInReportGroup(echeckCredit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckCredit);
+                _numEcheckCredit++;
+                _sumOfEcheckCredit += echeckCredit.amount;
+                FillInReportGroup(echeckCredit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckCredit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addEcheckVerification(echeckVerification echeckVerification)
+        public void AddEcheckVerification(echeckVerification echeckVerification)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numEcheckVerification++;
-                sumOfEcheckVerification += echeckVerification.amount;
-                fillInReportGroup(echeckVerification);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckVerification);
+                _numEcheckVerification++;
+                _sumOfEcheckVerification += echeckVerification.amount;
+                FillInReportGroup(echeckVerification);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckVerification);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addEcheckSale(echeckSale echeckSale)
+        public void AddEcheckSale(echeckSale echeckSale)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numEcheckSale++;
-                sumOfEcheckSale += echeckSale.amount;
-                fillInReportGroup(echeckSale);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckSale);
+                _numEcheckSale++;
+                _sumOfEcheckSale += echeckSale.amount;
+                FillInReportGroup(echeckSale);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckSale);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addRegisterTokenRequest(registerTokenRequestType registerTokenRequestType)
+        public void AddRegisterTokenRequest(registerTokenRequestType registerTokenRequestType)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numRegisterTokenRequest++;
-                fillInReportGroup(registerTokenRequestType);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, registerTokenRequestType);
+                _numRegisterTokenRequest++;
+                FillInReportGroup(registerTokenRequestType);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, registerTokenRequestType);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addForceCapture(forceCapture forceCapture)
+        public void AddForceCapture(forceCapture forceCapture)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numForceCapture++;
-                sumOfForceCapture += forceCapture.amount;
-                fillInReportGroup(forceCapture);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, forceCapture);
+                _numForceCapture++;
+                _sumOfForceCapture += forceCapture.amount;
+                FillInReportGroup(forceCapture);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, forceCapture);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addCaptureGivenAuth(captureGivenAuth captureGivenAuth)
+        public void AddCaptureGivenAuth(captureGivenAuth captureGivenAuth)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numCaptureGivenAuth++;
-                sumOfCaptureGivenAuth += captureGivenAuth.amount;
-                fillInReportGroup(captureGivenAuth);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, captureGivenAuth);
+                _numCaptureGivenAuth++;
+                _sumOfCaptureGivenAuth += captureGivenAuth.amount;
+                FillInReportGroup(captureGivenAuth);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, captureGivenAuth);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addEcheckRedeposit(echeckRedeposit echeckRedeposit)
+        public void AddEcheckRedeposit(echeckRedeposit echeckRedeposit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numEcheckRedeposit++;
-                fillInReportGroup(echeckRedeposit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckRedeposit);
+                _numEcheckRedeposit++;
+                FillInReportGroup(echeckRedeposit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckRedeposit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addEcheckPreNoteSale(echeckPreNoteSale echeckPreNoteSale)
+        public void AddEcheckPreNoteSale(EcheckPreNoteSale echeckPreNoteSale)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numEcheckPreNoteSale++;
-                fillInReportGroup(echeckPreNoteSale);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckPreNoteSale);
+                _numEcheckPreNoteSale++;
+                FillInReportGroup(echeckPreNoteSale);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckPreNoteSale);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addEcheckPreNoteCredit(echeckPreNoteCredit echeckPreNoteCredit)
+        public void AddEcheckPreNoteCredit(EcheckPreNoteCredit echeckPreNoteCredit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numEcheckPreNoteCredit++;
-                fillInReportGroup(echeckPreNoteCredit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, echeckPreNoteCredit);
+                _numEcheckPreNoteCredit++;
+                FillInReportGroup(echeckPreNoteCredit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckPreNoteCredit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
+        public void AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken updateCardValidationNumOnToken)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numUpdateCardValidationNumOnToken++;
-                fillInReportGroup(updateCardValidationNumOnToken);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, updateCardValidationNumOnToken);
+                _numUpdateCardValidationNumOnToken++;
+                FillInReportGroup(updateCardValidationNumOnToken);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath,
+                    updateCardValidationNumOnToken);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addUpdateSubscription(updateSubscription updateSubscription)
+        public void AddUpdateSubscription(updateSubscription updateSubscription)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numUpdateSubscriptions++;
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, updateSubscription);
+                _numUpdateSubscriptions++;
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, updateSubscription);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addCancelSubscription(cancelSubscription cancelSubscription)
+        public void AddCancelSubscription(cancelSubscription cancelSubscription)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numCancelSubscriptions++;
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, cancelSubscription);
+                _numCancelSubscriptions++;
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, cancelSubscription);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addCreatePlan(createPlan createPlan)
+        public void AddCreatePlan(createPlan createPlan)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numCreatePlans++;
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, createPlan);
+                _numCreatePlans++;
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, createPlan);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addUpdatePlan(updatePlan updatePlan)
+        public void AddUpdatePlan(updatePlan updatePlan)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numUpdatePlans++;
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, updatePlan);
+                _numUpdatePlans++;
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, updatePlan);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addActivate(activate activate)
+        public void AddActivate(activate activate)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numActivates++;
-                activateAmount += activate.amount;
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, activate);
+                _numActivates++;
+                _activateAmount += activate.amount;
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, activate);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addDeactivate(deactivate deactivate)
+        public void AddDeactivate(deactivate deactivate)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numDeactivates++;
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, deactivate);
+                _numDeactivates++;
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, deactivate);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addLoad(load load)
+        public void AddLoad(load load)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numLoads++;
-                loadAmount += load.amount;
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, load);
+                _numLoads++;
+                _loadAmount += load.amount;
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, load);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addUnload(unload unload)
+        public void AddUnload(unload unload)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numUnloads++;
-                unloadAmount += unload.amount;
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, unload);
+                _numUnloads++;
+                _unloadAmount += unload.amount;
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, unload);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addBalanceInquiry(balanceInquiry balanceInquiry)
+        public void AddBalanceInquiry(balanceInquiry balanceInquiry)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numBalanceInquiries++;
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, balanceInquiry);
+                _numBalanceInquiries++;
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, balanceInquiry);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addAccountUpdate(accountUpdate accountUpdate)
+        public void AddAccountUpdate(accountUpdate accountUpdate)
         {
-            if (isOnlyAccountUpdates())
+            if (IsOnlyAccountUpdates())
             {
-                numAccountUpdates++;
-                fillInReportGroup(accountUpdate);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, accountUpdate);
+                _numAccountUpdates++;
+                FillInReportGroup(accountUpdate);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, accountUpdate);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addSubmerchantCredit(submerchantCredit submerchantCredit)
+        public void AddSubmerchantCredit(SubmerchantCredit submerchantCredit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numSubmerchantCredit++;
-                submerchantCreditAmount += (long)submerchantCredit.amount;
-                fillInReportGroup(submerchantCredit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, submerchantCredit);
+                _numSubmerchantCredit++;
+                if (submerchantCredit.Amount != null) _submerchantCreditAmount += (long) submerchantCredit.Amount;
+                FillInReportGroup(submerchantCredit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, submerchantCredit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addPayFacCredit(payFacCredit payFacCredit)
+        public void AddPayFacCredit(PayFacCredit payFacCredit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numPayFacCredit++;
-                payFacCreditAmount += (long)payFacCredit.amount;
-                fillInReportGroup(payFacCredit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, payFacCredit);
+                _numPayFacCredit++;
+                if (payFacCredit.Amount != null) _payFacCreditAmount += (long) payFacCredit.Amount;
+                FillInReportGroup(payFacCredit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, payFacCredit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addReserveCredit(reserveCredit reserveCredit)
+        public void AddReserveCredit(ReserveCredit reserveCredit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numReserveCredit++;
-                reserveCreditAmount += (long)reserveCredit.amount;
-                fillInReportGroup(reserveCredit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, reserveCredit);
+                _numReserveCredit++;
+                if (reserveCredit.Amount != null) _reserveCreditAmount += (long) reserveCredit.Amount;
+                FillInReportGroup(reserveCredit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, reserveCredit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addVendorCredit(vendorCredit vendorCredit)
+        public void AddVendorCredit(VendorCredit vendorCredit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numVendorCredit++;
-                vendorCreditAmount += (long)vendorCredit.amount;
-                fillInReportGroup(vendorCredit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, vendorCredit);
+                _numVendorCredit++;
+                if (vendorCredit.Amount != null) _vendorCreditAmount += (long) vendorCredit.Amount;
+                FillInReportGroup(vendorCredit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, vendorCredit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addPhysicalCheckCredit(physicalCheckCredit physicalCheckCredit)
+        public void AddPhysicalCheckCredit(PhysicalCheckCredit physicalCheckCredit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numPhysicalCheckCredit++;
-                physicalCheckCreditAmount += (long)physicalCheckCredit.amount;
-                fillInReportGroup(physicalCheckCredit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, physicalCheckCredit);
+                _numPhysicalCheckCredit++;
+                if (physicalCheckCredit.Amount != null) _physicalCheckCreditAmount += (long) physicalCheckCredit.Amount;
+                FillInReportGroup(physicalCheckCredit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, physicalCheckCredit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addSubmerchantDebit(submerchantDebit submerchantDebit)
+        public void AddSubmerchantDebit(SubmerchantDebit submerchantDebit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numSubmerchantDebit++;
-                submerchantDebitAmount += (long)submerchantDebit.amount;
-                fillInReportGroup(submerchantDebit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, submerchantDebit);
+                _numSubmerchantDebit++;
+                if (submerchantDebit.Amount != null) _submerchantDebitAmount += (long) submerchantDebit.Amount;
+                FillInReportGroup(submerchantDebit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, submerchantDebit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addPayFacDebit(payFacDebit payFacDebit)
+        public void AddPayFacDebit(PayFacDebit payFacDebit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numPayFacDebit++;
-                payFacDebitAmount += (long)payFacDebit.amount;
-                fillInReportGroup(payFacDebit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, payFacDebit);
+                _numPayFacDebit++;
+                if (payFacDebit.Amount != null) _payFacDebitAmount += (long) payFacDebit.Amount;
+                FillInReportGroup(payFacDebit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, payFacDebit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addReserveDebit(reserveDebit reserveDebit)
+        public void AddReserveDebit(ReserveDebit reserveDebit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numReserveDebit++;
-                reserveDebitAmount += (long)reserveDebit.amount;
-                fillInReportGroup(reserveDebit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, reserveDebit);
+                _numReserveDebit++;
+                if (reserveDebit.Amount != null) _reserveDebitAmount += (long) reserveDebit.Amount;
+                FillInReportGroup(reserveDebit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, reserveDebit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addVendorDebit(vendorDebit vendorDebit)
+        public void AddVendorDebit(VendorDebit vendorDebit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numVendorDebit++;
-                vendorDebitAmount += (long)vendorDebit.amount;
-                fillInReportGroup(vendorDebit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, vendorDebit);
+                _numVendorDebit++;
+                if (vendorDebit.Amount != null) _vendorDebitAmount += (long) vendorDebit.Amount;
+                FillInReportGroup(vendorDebit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, vendorDebit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
-        public void addPhysicalCheckDebit(physicalCheckDebit physicalCheckDebit)
+        public void AddPhysicalCheckDebit(PhysicalCheckDebit physicalCheckDebit)
         {
-            if (numAccountUpdates == 0)
+            if (_numAccountUpdates == 0)
             {
-                numPhysicalCheckDebit++;
-                physicalCheckDebitAmount += (long)physicalCheckDebit.amount;
-                fillInReportGroup(physicalCheckDebit);
-                tempBatchFilePath = saveElement(litleFile, litleTime, tempBatchFilePath, physicalCheckDebit);
+                _numPhysicalCheckDebit++;
+                if (physicalCheckDebit.Amount != null) _physicalCheckDebitAmount += (long) physicalCheckDebit.Amount;
+                FillInReportGroup(physicalCheckDebit);
+                _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, physicalCheckDebit);
             }
             else
             {
-                throw new LitleOnlineException(accountUpdateErrorMessage);
+                throw new LitleOnlineException(AccountUpdateErrorMessage);
             }
         }
 
         public String Serialize()
         {
-            string xmlHeader = generateXmlHeader();
+            string xmlHeader = GenerateXmlHeader();
+            const string xmlFooter = "</batchRequest>\r\n";
 
-            string xmlFooter = "</batchRequest>\r\n";
+            BatchFilePath = _litleFile.CreateRandomFile(_requestDirectory, null, "_batchRequest.xml", _litleTime);
 
-            batchFilePath = litleFile.CreateRandomFile(requestDirectory, null, "_batchRequest.xml", litleTime);
+            _litleFile.AppendLineToFile(BatchFilePath, xmlHeader);
+            _litleFile.AppendFileToFile(BatchFilePath, _tempBatchFilePath);
+            _litleFile.AppendLineToFile(BatchFilePath, xmlFooter);
 
-            litleFile.AppendLineToFile(batchFilePath, xmlHeader);
-            litleFile.AppendFileToFile(batchFilePath, tempBatchFilePath);
-            litleFile.AppendLineToFile(batchFilePath, xmlFooter);
+            _tempBatchFilePath = null;
 
-            tempBatchFilePath = null;
-
-            return batchFilePath;
+            return BatchFilePath;
         }
 
-        public string generateXmlHeader()
+        public string GenerateXmlHeader()
         {
-            string xmlHeader = "\r\n<batchRequest id=\"" + id + "\"\r\n";
+            string xmlHeader = "\r\n<batchRequest id=\"" + ID + "\"\r\n";
 
-            if (numAuthorization != 0)
+            if (_numAuthorization != 0)
             {
-                xmlHeader += "numAuths=\"" + numAuthorization + "\"\r\n";
-                xmlHeader += "authAmount=\"" + sumOfAuthorization + "\"\r\n";
+                xmlHeader += "numAuths=\"" + _numAuthorization + "\"\r\n";
+                xmlHeader += "authAmount=\"" + _sumOfAuthorization + "\"\r\n";
             }
 
-            if (numAuthReversal != 0)
+            if (_numAuthReversal != 0)
             {
-                xmlHeader += "numAuthReversals=\"" + numAuthReversal + "\"\r\n";
-                xmlHeader += "authReversalAmount=\"" + sumOfAuthReversal + "\"\r\n";
+                xmlHeader += "numAuthReversals=\"" + _numAuthReversal + "\"\r\n";
+                xmlHeader += "authReversalAmount=\"" + _sumOfAuthReversal + "\"\r\n";
             }
 
-            if (numCapture != 0)
+            if (_numCapture != 0)
             {
-                xmlHeader += "numCaptures=\"" + numCapture + "\"\r\n";
-                xmlHeader += "captureAmount=\"" + sumOfCapture + "\"\r\n";
+                xmlHeader += "numCaptures=\"" + _numCapture + "\"\r\n";
+                xmlHeader += "captureAmount=\"" + _sumOfCapture + "\"\r\n";
             }
 
-            if (numCredit != 0)
+            if (_numCredit != 0)
             {
-
-                xmlHeader += "numCredits=\"" + numCredit + "\"\r\n";
-                xmlHeader += "creditAmount=\"" + sumOfCredit + "\"\r\n";
+                xmlHeader += "numCredits=\"" + _numCredit + "\"\r\n";
+                xmlHeader += "creditAmount=\"" + _sumOfCredit + "\"\r\n";
             }
 
-            if (numForceCapture != 0)
+            if (_numForceCapture != 0)
             {
-
-                xmlHeader += "numForceCaptures=\"" + numForceCapture + "\"\r\n";
-                xmlHeader += "forceCaptureAmount=\"" + sumOfForceCapture + "\"\r\n";
+                xmlHeader += "numForceCaptures=\"" + _numForceCapture + "\"\r\n";
+                xmlHeader += "forceCaptureAmount=\"" + _sumOfForceCapture + "\"\r\n";
             }
 
-            if (numSale != 0)
+            if (_numSale != 0)
             {
-
-                xmlHeader += "numSales=\"" + numSale + "\"\r\n";
-                xmlHeader += "saleAmount=\"" + sumOfSale + "\"\r\n";
+                xmlHeader += "numSales=\"" + _numSale + "\"\r\n";
+                xmlHeader += "saleAmount=\"" + _sumOfSale + "\"\r\n";
             }
 
-            if (numCaptureGivenAuth != 0)
+            if (_numCaptureGivenAuth != 0)
             {
-
-                xmlHeader += "numCaptureGivenAuths=\"" + numCaptureGivenAuth + "\"\r\n";
-                xmlHeader += "captureGivenAuthAmount=\"" + sumOfCaptureGivenAuth + "\"\r\n";
+                xmlHeader += "numCaptureGivenAuths=\"" + _numCaptureGivenAuth + "\"\r\n";
+                xmlHeader += "captureGivenAuthAmount=\"" + _sumOfCaptureGivenAuth + "\"\r\n";
             }
 
-            if (numEcheckSale != 0)
+            if (_numEcheckSale != 0)
             {
-
-                xmlHeader += "numEcheckSales=\"" + numEcheckSale + "\"\r\n";
-                xmlHeader += "echeckSalesAmount=\"" + sumOfEcheckSale + "\"\r\n";
+                xmlHeader += "numEcheckSales=\"" + _numEcheckSale + "\"\r\n";
+                xmlHeader += "echeckSalesAmount=\"" + _sumOfEcheckSale + "\"\r\n";
             }
 
-            if (numEcheckCredit != 0)
+            if (_numEcheckCredit != 0)
             {
-
-                xmlHeader += "numEcheckCredit=\"" + numEcheckCredit + "\"\r\n";
-                xmlHeader += "echeckCreditAmount=\"" + sumOfEcheckCredit + "\"\r\n";
+                xmlHeader += "numEcheckCredit=\"" + _numEcheckCredit + "\"\r\n";
+                xmlHeader += "echeckCreditAmount=\"" + _sumOfEcheckCredit + "\"\r\n";
             }
 
-            if (numEcheckVerification != 0)
+            if (_numEcheckVerification != 0)
             {
-
-                xmlHeader += "numEcheckVerification=\"" + numEcheckVerification + "\"\r\n";
-                xmlHeader += "echeckVerificationAmount=\"" + sumOfEcheckVerification + "\"\r\n";
+                xmlHeader += "numEcheckVerification=\"" + _numEcheckVerification + "\"\r\n";
+                xmlHeader += "echeckVerificationAmount=\"" + _sumOfEcheckVerification + "\"\r\n";
             }
 
-            if (numEcheckRedeposit != 0)
+            if (_numEcheckRedeposit != 0)
             {
-                xmlHeader += "numEcheckRedeposit=\"" + numEcheckRedeposit + "\"\r\n";
+                xmlHeader += "numEcheckRedeposit=\"" + _numEcheckRedeposit + "\"\r\n";
             }
 
-            if (numEcheckPreNoteSale != 0)
+            if (_numEcheckPreNoteSale != 0)
             {
-                xmlHeader += "numEcheckPreNoteSale=\"" + numEcheckPreNoteSale + "\"\r\n";
+                xmlHeader += "numEcheckPreNoteSale=\"" + _numEcheckPreNoteSale + "\"\r\n";
             }
 
-            if (numEcheckPreNoteCredit != 0)
+            if (_numEcheckPreNoteCredit != 0)
             {
-                xmlHeader += "numEcheckPreNoteCredit=\"" + numEcheckPreNoteCredit + "\"\r\n";
+                xmlHeader += "numEcheckPreNoteCredit=\"" + _numEcheckPreNoteCredit + "\"\r\n";
             }
 
-            if (numAccountUpdates != 0)
+            if (_numAccountUpdates != 0)
             {
-                xmlHeader += "numAccountUpdates=\"" + numAccountUpdates + "\"\r\n";
+                xmlHeader += "numAccountUpdates=\"" + _numAccountUpdates + "\"\r\n";
             }
 
-            if (numRegisterTokenRequest != 0)
+            if (_numRegisterTokenRequest != 0)
             {
-                xmlHeader += "numTokenRegistrations=\"" + numRegisterTokenRequest + "\"\r\n";
+                xmlHeader += "numTokenRegistrations=\"" + _numRegisterTokenRequest + "\"\r\n";
             }
 
-            if (numUpdateCardValidationNumOnToken != 0)
+            if (_numUpdateCardValidationNumOnToken != 0)
             {
-                xmlHeader += "numUpdateCardValidationNumOnTokens=\"" + numUpdateCardValidationNumOnToken + "\"\r\n";
+                xmlHeader += "numUpdateCardValidationNumOnTokens=\"" + _numUpdateCardValidationNumOnToken + "\"\r\n";
             }
 
-            if (numUpdateSubscriptions != 0)
+            if (_numUpdateSubscriptions != 0)
             {
-                xmlHeader += "numUpdateSubscriptions=\"" + numUpdateSubscriptions + "\"\r\n";
+                xmlHeader += "numUpdateSubscriptions=\"" + _numUpdateSubscriptions + "\"\r\n";
             }
 
-            if (numCancelSubscriptions != 0)
+            if (_numCancelSubscriptions != 0)
             {
-                xmlHeader += "numCancelSubscriptions=\"" + numCancelSubscriptions + "\"\r\n";
+                xmlHeader += "numCancelSubscriptions=\"" + _numCancelSubscriptions + "\"\r\n";
             }
 
-            if (numCreatePlans != 0)
+            if (_numCreatePlans != 0)
             {
-                xmlHeader += "numCreatePlans=\"" + numCreatePlans + "\"\r\n";
+                xmlHeader += "numCreatePlans=\"" + _numCreatePlans + "\"\r\n";
             }
 
-            if (numUpdatePlans != 0)
+            if (_numUpdatePlans != 0)
             {
-                xmlHeader += "numUpdatePlans=\"" + numUpdatePlans + "\"\r\n";
+                xmlHeader += "numUpdatePlans=\"" + _numUpdatePlans + "\"\r\n";
             }
 
-            if (numActivates != 0)
+            if (_numActivates != 0)
             {
-                xmlHeader += "numUpdateActivates=\"" + numActivates + "\"\r\n";
-                xmlHeader += "activateAmount=\"" + activateAmount + "\"\r\n";
+                xmlHeader += "numUpdateActivates=\"" + _numActivates + "\"\r\n";
+                xmlHeader += "activateAmount=\"" + _activateAmount + "\"\r\n";
             }
 
-            if (numDeactivates != 0)
+            if (_numDeactivates != 0)
             {
-                xmlHeader += "numDeactivates=\"" + numDeactivates + "\"\r\n";
+                xmlHeader += "numDeactivates=\"" + _numDeactivates + "\"\r\n";
             }
 
-            if (numLoads != 0)
+            if (_numLoads != 0)
             {
-                xmlHeader += "numLoads=\"" + numLoads + "\"\r\n";
-                xmlHeader += "loadAmount=\"" + loadAmount + "\"\r\n";
+                xmlHeader += "numLoads=\"" + _numLoads + "\"\r\n";
+                xmlHeader += "loadAmount=\"" + _loadAmount + "\"\r\n";
             }
 
-            if (numUnloads != 0)
+            if (_numUnloads != 0)
             {
-                xmlHeader += "numUnloads=\"" + numUnloads + "\"\r\n";
-                xmlHeader += "unloadAmount=\"" + unloadAmount + "\"\r\n";
+                xmlHeader += "numUnloads=\"" + _numUnloads + "\"\r\n";
+                xmlHeader += "unloadAmount=\"" + _unloadAmount + "\"\r\n";
             }
 
-            if (numBalanceInquiries != 0)
+            if (_numBalanceInquiries != 0)
             {
-                xmlHeader += "numBalanceInquirys=\"" + numBalanceInquiries + "\"\r\n";
+                xmlHeader += "numBalanceInquirys=\"" + _numBalanceInquiries + "\"\r\n";
             }
 
-            if (numPayFacCredit != 0)
+            if (_numPayFacCredit != 0)
             {
-
-                xmlHeader += "numPayFacCredit=\"" + numPayFacCredit + "\"\r\n";
-                xmlHeader += "payFacCreditAmount=\"" + payFacCreditAmount + "\"\r\n";
+                xmlHeader += "numPayFacCredit=\"" + _numPayFacCredit + "\"\r\n";
+                xmlHeader += "payFacCreditAmount=\"" + _payFacCreditAmount + "\"\r\n";
             }
 
-            if (numSubmerchantCredit != 0)
+            if (_numSubmerchantCredit != 0)
             {
-
-                xmlHeader += "numSubmerchantCredit=\"" + numSubmerchantCredit + "\"\r\n";
-                xmlHeader += "submerchantCreditAmount=\"" + submerchantCreditAmount + "\"\r\n";
+                xmlHeader += "numSubmerchantCredit=\"" + _numSubmerchantCredit + "\"\r\n";
+                xmlHeader += "submerchantCreditAmount=\"" + _submerchantCreditAmount + "\"\r\n";
             }
 
-            if (numReserveCredit != 0)
+            if (_numReserveCredit != 0)
             {
-
-                xmlHeader += "numReserveCredit=\"" + numReserveCredit + "\"\r\n";
-                xmlHeader += "reserveCreditAmount=\"" + reserveCreditAmount + "\"\r\n";
+                xmlHeader += "numReserveCredit=\"" + _numReserveCredit + "\"\r\n";
+                xmlHeader += "reserveCreditAmount=\"" + _reserveCreditAmount + "\"\r\n";
             }
 
-            if (numVendorCredit != 0)
+            if (_numVendorCredit != 0)
             {
-
-                xmlHeader += "numVendorCredit=\"" + numVendorCredit + "\"\r\n";
-                xmlHeader += "vendorCreditAmount=\"" + vendorCreditAmount + "\"\r\n";
+                xmlHeader += "numVendorCredit=\"" + _numVendorCredit + "\"\r\n";
+                xmlHeader += "vendorCreditAmount=\"" + _vendorCreditAmount + "\"\r\n";
             }
 
-            if (numPhysicalCheckCredit != 0)
+            if (_numPhysicalCheckCredit != 0)
             {
-
-                xmlHeader += "numPhysicalCheckCredit=\"" + numPhysicalCheckCredit + "\"\r\n";
-                xmlHeader += "physicalCheckCreditAmount=\"" + physicalCheckCreditAmount + "\"\r\n";
+                xmlHeader += "numPhysicalCheckCredit=\"" + _numPhysicalCheckCredit + "\"\r\n";
+                xmlHeader += "physicalCheckCreditAmount=\"" + _physicalCheckCreditAmount + "\"\r\n";
             }
 
-            if (numPayFacDebit != 0)
+            if (_numPayFacDebit != 0)
             {
-
-                xmlHeader += "numPayFacDebit=\"" + numPayFacDebit + "\"\r\n";
-                xmlHeader += "payFacDebitAmount=\"" + payFacDebitAmount + "\"\r\n";
+                xmlHeader += "numPayFacDebit=\"" + _numPayFacDebit + "\"\r\n";
+                xmlHeader += "payFacDebitAmount=\"" + _payFacDebitAmount + "\"\r\n";
             }
 
-            if (numSubmerchantDebit != 0)
+            if (_numSubmerchantDebit != 0)
             {
-
-                xmlHeader += "numSubmerchantDebit=\"" + numSubmerchantDebit + "\"\r\n";
-                xmlHeader += "submerchantDebitAmount=\"" + submerchantDebitAmount + "\"\r\n";
+                xmlHeader += "numSubmerchantDebit=\"" + _numSubmerchantDebit + "\"\r\n";
+                xmlHeader += "submerchantDebitAmount=\"" + _submerchantDebitAmount + "\"\r\n";
             }
 
-            if (numReserveDebit != 0)
+            if (_numReserveDebit != 0)
             {
-
-                xmlHeader += "numReserveDebit=\"" + numReserveDebit + "\"\r\n";
-                xmlHeader += "reserveDebitAmount=\"" + reserveDebitAmount + "\"\r\n";
+                xmlHeader += "numReserveDebit=\"" + _numReserveDebit + "\"\r\n";
+                xmlHeader += "reserveDebitAmount=\"" + _reserveDebitAmount + "\"\r\n";
             }
 
-            if (numVendorDebit != 0)
+            if (_numVendorDebit != 0)
             {
-
-                xmlHeader += "numVendorDebit=\"" + numVendorDebit + "\"\r\n";
-                xmlHeader += "vendorDebitAmount=\"" + vendorDebitAmount + "\"\r\n";
+                xmlHeader += "numVendorDebit=\"" + _numVendorDebit + "\"\r\n";
+                xmlHeader += "vendorDebitAmount=\"" + _vendorDebitAmount + "\"\r\n";
             }
 
-            if (numPhysicalCheckDebit != 0)
+            if (_numPhysicalCheckDebit != 0)
             {
-
-                xmlHeader += "numPhysicalCheckDebit=\"" + numPhysicalCheckDebit + "\"\r\n";
-                xmlHeader += "physicalCheckDebitAmount=\"" + physicalCheckDebitAmount + "\"\r\n";
+                xmlHeader += "numPhysicalCheckDebit=\"" + _numPhysicalCheckDebit + "\"\r\n";
+                xmlHeader += "physicalCheckDebitAmount=\"" + _physicalCheckDebitAmount + "\"\r\n";
             }
 
             xmlHeader += "merchantSdk=\"DotNet;9.3.2\"\r\n";
-
-            xmlHeader += "merchantId=\"" + config["merchantId"] + "\">\r\n";
+            xmlHeader += "merchantId=\"" + Config["merchantId"] + "\">\r\n";
             return xmlHeader;
         }
 
-        private string saveElement(LitleFile litleFile, LitleTime litleTime, string filePath, transactionRequest element)
+        private string SaveElement(LitleFile litleFile, LitleTime litleTime, string filePath, transactionRequest element)
         {
-            string fPath;
-            fPath = litleFile.CreateRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_batchRequest.xml", litleTime);
+            string fPath = litleFile.CreateRandomFile(_requestDirectory, Path.GetFileName(filePath),
+                "_temp_batchRequest.xml",
+                litleTime);
 
             litleFile.AppendLineToFile(fPath, element.Serialize());
 
             return fPath;
         }
 
-        private void fillInReportGroup(transactionTypeWithReportGroup txn)
+        private void FillInReportGroup(transactionTypeWithReportGroup txn)
         {
             if (txn.reportGroup == null)
             {
-                txn.reportGroup = config["reportGroup"];
+                txn.reportGroup = Config["reportGroup"];
             }
         }
 
-        private void fillInReportGroup(transactionTypeWithReportGroupAndPartial txn)
+        private void FillInReportGroup(transactionTypeWithReportGroupAndPartial txn)
         {
             if (txn.reportGroup == null)
             {
-                txn.reportGroup = config["reportGroup"];
+                txn.reportGroup = Config["reportGroup"];
             }
         }
 
-        private bool isOnlyAccountUpdates()
+        private bool IsOnlyAccountUpdates()
         {
-            bool result = numAuthorization == 0
-                && numCapture == 0
-                && numCredit == 0
-                && numSale == 0
-                && numAuthReversal == 0
-                && numEcheckCredit == 0
-                && numEcheckVerification == 0
-                && numEcheckSale == 0
-                && numRegisterTokenRequest == 0
-                && numForceCapture == 0
-                && numCaptureGivenAuth == 0
-                && numEcheckRedeposit == 0
-                && numEcheckPreNoteSale == 0
-                && numEcheckPreNoteCredit == 0
-                && numUpdateCardValidationNumOnToken == 0
-                && numUpdateSubscriptions == 0
-                && numCancelSubscriptions == 0
-                && numCreatePlans == 0
-                && numUpdatePlans == 0
-                && numActivates == 0
-                && numDeactivates == 0
-                && numLoads == 0
-                && numUnloads == 0
-                && numBalanceInquiries == 0
-                && numPayFacCredit == 0
-                && numSubmerchantCredit == 0
-                && numReserveCredit == 0
-                && numVendorCredit == 0
-                && numPhysicalCheckCredit == 0
-                && numPayFacDebit == 0
-                && numSubmerchantDebit == 0
-                && numReserveDebit == 0
-                && numVendorDebit == 0
-                && numPhysicalCheckDebit == 0;
-
-            return result;
+            return _numAuthorization == 0
+                   && _numCapture == 0
+                   && _numCredit == 0
+                   && _numSale == 0
+                   && _numAuthReversal == 0
+                   && _numEcheckCredit == 0
+                   && _numEcheckVerification == 0
+                   && _numEcheckSale == 0
+                   && _numRegisterTokenRequest == 0
+                   && _numForceCapture == 0
+                   && _numCaptureGivenAuth == 0
+                   && _numEcheckRedeposit == 0
+                   && _numEcheckPreNoteSale == 0
+                   && _numEcheckPreNoteCredit == 0
+                   && _numUpdateCardValidationNumOnToken == 0
+                   && _numUpdateSubscriptions == 0
+                   && _numCancelSubscriptions == 0
+                   && _numCreatePlans == 0
+                   && _numUpdatePlans == 0
+                   && _numActivates == 0
+                   && _numDeactivates == 0
+                   && _numLoads == 0
+                   && _numUnloads == 0
+                   && _numBalanceInquiries == 0
+                   && _numPayFacCredit == 0
+                   && _numSubmerchantCredit == 0
+                   && _numReserveCredit == 0
+                   && _numVendorCredit == 0
+                   && _numPhysicalCheckCredit == 0
+                   && _numPayFacDebit == 0
+                   && _numSubmerchantDebit == 0
+                   && _numReserveDebit == 0
+                   && _numVendorDebit == 0
+                   && _numPhysicalCheckDebit == 0;
         }
     }
 
-    public class RFRRequest
+    public class RfrRequest
     {
-        public long litleSessionId;
-        public accountUpdateFileRequestData accountUpdateFileRequestData;
+        public long LitleSessionId;
+        public accountUpdateFileRequestData AccountUpdateFileRequestData;
 
-        private LitleTime litleTime;
-        private LitleFile litleFile;
-        private string requestDirectory;
-        private string responseDirectory;
+        private LitleTime _litleTime;
+        private LitleFile _litleFile;
+        private string _requestDirectory;
+        private string _responseDirectory;
 
-        private Dictionary<String, String> config;
+        private Dictionary<String, String> _config;
 
-        public RFRRequest()
+        public RfrRequest()
         {
-            config = new Dictionary<String, String>();
+            _config = new Dictionary<String, String>();
+            _config["url"] = Settings.Default.url;
+            _config["reportGroup"] = Settings.Default.reportGroup;
+            _config["username"] = Settings.Default.username;
+            _config["printxml"] = Settings.Default.printxml;
+            _config["timeout"] = Settings.Default.timeout;
+            _config["proxyHost"] = Settings.Default.proxyHost;
+            _config["merchantId"] = Settings.Default.merchantId;
+            _config["password"] = Settings.Default.password;
+            _config["proxyPort"] = Settings.Default.proxyPort;
+            _config["sftpUrl"] = Settings.Default.sftpUrl;
+            _config["sftpUsername"] = Settings.Default.sftpUsername;
+            _config["sftpPassword"] = Settings.Default.sftpPassword;
+            _config["knownHostsFile"] = Settings.Default.knownHostsFile;
+            _config["requestDirectory"] = Settings.Default.requestDirectory;
+            _config["responseDirectory"] = Settings.Default.responseDirectory;
 
-            config["url"] = Properties.Settings.Default.url;
-            config["reportGroup"] = Properties.Settings.Default.reportGroup;
-            config["username"] = Properties.Settings.Default.username;
-            config["printxml"] = Properties.Settings.Default.printxml;
-            config["timeout"] = Properties.Settings.Default.timeout;
-            config["proxyHost"] = Properties.Settings.Default.proxyHost;
-            config["merchantId"] = Properties.Settings.Default.merchantId;
-            config["password"] = Properties.Settings.Default.password;
-            config["proxyPort"] = Properties.Settings.Default.proxyPort;
-            config["sftpUrl"] = Properties.Settings.Default.sftpUrl;
-            config["sftpUsername"] = Properties.Settings.Default.sftpUsername;
-            config["sftpPassword"] = Properties.Settings.Default.sftpPassword;
-            config["knownHostsFile"] = Properties.Settings.Default.knownHostsFile;
-            config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
-            config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
+            _litleTime = new LitleTime();
+            _litleFile = new LitleFile();
 
-            litleTime = new LitleTime();
-            litleFile = new LitleFile();
-
-            requestDirectory = config["requestDirectory"] + "\\Requests\\";
-            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+            _requestDirectory = _config["requestDirectory"] + "\\Requests\\";
+            _responseDirectory = _config["responseDirectory"] + "\\Responses\\";
         }
 
-        public RFRRequest(Dictionary<String, String> config)
+        public RfrRequest(Dictionary<String, String> config)
         {
-            this.config = config;
-
-            initializeRequest();
+            _config = config;
+            InitializeRequest();
         }
 
-        private void initializeRequest()
+        private void InitializeRequest()
         {
-            requestDirectory = config["requestDirectory"] + "\\Requests\\";
-            responseDirectory = config["responseDirectory"] + "\\Responses\\";
+            _requestDirectory = _config["requestDirectory"] + "\\Requests\\";
+            _responseDirectory = _config["responseDirectory"] + "\\Responses\\";
 
-            litleFile = new LitleFile();
-            litleTime = new LitleTime();
+            _litleFile = new LitleFile();
+            _litleTime = new LitleTime();
         }
 
-        public string getRequestDirectory()
+        public string GetRequestDirectory()
         {
-            return this.requestDirectory;
+            return _requestDirectory;
         }
 
-        public string getResponseDirectory()
+        public string GetResponseDirectory()
         {
-            return this.responseDirectory;
+            return _responseDirectory;
         }
 
-        public void setConfig(Dictionary<String, String> config)
+        public void SetConfig(Dictionary<String, String> config)
         {
-            this.config = config;
+            _config = config;
         }
 
-        public void setLitleFile(LitleFile litleFile)
+        public void SetLitleFile(LitleFile litleFile)
         {
-            this.litleFile = litleFile;
+            _litleFile = litleFile;
         }
 
-        public LitleFile getLitleFile()
+        public LitleFile GetLitleFile()
         {
-            return this.litleFile;
+            return _litleFile;
         }
 
-        public void setLitleTime(LitleTime litleTime)
+        public void SetLitleTime(LitleTime litleTime)
         {
-            this.litleTime = litleTime;
+            _litleTime = litleTime;
         }
 
-        public LitleTime getLitleTime()
+        public LitleTime GetLitleTime()
         {
-            return this.litleTime;
+            return _litleTime;
         }
 
         public string Serialize()
         {
-            string xmlHeader = "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">";
-            string xmlFooter = "\r\n</RFRRequest>";
+            const string xmlHeader = "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">";
+            const string xmlFooter = "\r\n</RFRRequest>";
 
-            string filePath = litleFile.CreateRandomFile(requestDirectory, null, "_RFRRequest.xml", litleTime);
+            string filePath = _litleFile.CreateRandomFile(_requestDirectory, null, "_RFRRequest.xml", _litleTime);
 
             string xmlBody = "";
 
-            if (accountUpdateFileRequestData != null)
+            if (AccountUpdateFileRequestData != null)
             {
                 xmlBody += "\r\n<accountUpdateFileRequestData>";
-                xmlBody += accountUpdateFileRequestData.Serialize();
+                xmlBody += AccountUpdateFileRequestData.Serialize();
                 xmlBody += "\r\n</accountUpdateFileRequestData>";
             }
             else
             {
-                xmlBody += "\r\n<litleSessionId>" + litleSessionId + "</litleSessionId>";
+                xmlBody += "\r\n<litleSessionId>" + LitleSessionId + "</litleSessionId>";
             }
-            litleFile.AppendLineToFile(filePath, xmlHeader);
-            litleFile.AppendLineToFile(filePath, xmlBody);
-            litleFile.AppendLineToFile(filePath, xmlFooter);
+            _litleFile.AppendLineToFile(filePath, xmlHeader);
+            _litleFile.AppendLineToFile(filePath, xmlBody);
+            _litleFile.AppendLineToFile(filePath, xmlFooter);
 
             return filePath;
         }
     }
 
-    public partial class echeckPreNoteCredit : transactionTypeWithReportGroup
+    public class EcheckPreNoteCredit : transactionTypeWithReportGroup
     {
+        /// <remarks />
+        public string OrderId { get; set; }
 
-        private string orderIdField;
+        /// <remarks />
+        public orderSourceType OrderSource { get; set; }
 
-        private orderSourceType orderSourceField;
+        /// <remarks />
+        public contact BillToAddress { get; set; }
 
-        private contact billToAddressField;
+        /// <remarks />
+        public echeckType Echeck { get; set; }
 
-        private echeckType echeckField;
-
-        private merchantDataType merchantDataField;
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public orderSourceType orderSource
-        {
-            get
-            {
-                return this.orderSourceField;
-            }
-            set
-            {
-                this.orderSourceField = value;
-            }
-        }
-
-        /// <remarks/>
-        public contact billToAddress
-        {
-            get
-            {
-                return this.billToAddressField;
-            }
-            set
-            {
-                this.billToAddressField = value;
-            }
-        }
-
-        /// <remarks/>
-        public echeckType echeck
-        {
-            get
-            {
-                return this.echeckField;
-            }
-            set
-            {
-                this.echeckField = value;
-            }
-        }
-
-        /// <remarks/>
-        public merchantDataType merchantData
-        {
-            get
-            {
-                return this.merchantDataField;
-            }
-            set
-            {
-                this.merchantDataField = value;
-            }
-        }
+        /// <remarks />
+        public merchantDataType MerchantData { get; set; }
 
         public override string Serialize()
         {
@@ -1512,33 +1428,33 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             }
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
 
-            if (orderSource != null)
+            if (OrderSource != null)
             {
                 xml += "\r\n<orderSource>";
-                xml += orderSource.Serialize();
+                xml += OrderSource.Serialize();
                 xml += "</orderSource>";
             }
 
-            if (billToAddress != null)
+            if (BillToAddress != null)
             {
                 xml += "\r\n<billToAddress>";
-                xml += billToAddress.Serialize();
+                xml += BillToAddress.Serialize();
                 xml += "\r\n</billToAddress>";
             }
 
-            if (echeck != null)
+            if (Echeck != null)
             {
                 xml += "\r\n<echeck>";
-                xml += echeck.Serialize();
+                xml += Echeck.Serialize();
                 xml += "\r\n</echeck>";
             }
 
-            if (merchantData != null)
+            if (MerchantData != null)
             {
                 xml += "\r\n<merchantData>";
-                xml += merchantData.Serialize();
+                xml += MerchantData.Serialize();
                 xml += "\r\n</merchantData>";
             }
 
@@ -1548,83 +1464,22 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class echeckPreNoteSale : transactionTypeWithReportGroup
+    public class EcheckPreNoteSale : transactionTypeWithReportGroup
     {
+        /// <remarks />
+        public string OrderId { get; set; }
 
-        private string orderIdField;
+        /// <remarks />
+        public orderSourceType OrderSource { get; set; }
 
-        private orderSourceType orderSourceField;
+        /// <remarks />
+        public contact BillToAddress { get; set; }
 
-        private contact billToAddressField;
+        /// <remarks />
+        public echeckType Echeck { get; set; }
 
-        private echeckType echeckField;
-
-        private merchantDataType merchantDataField;
-
-        /// <remarks/>
-        public string orderId
-        {
-            get
-            {
-                return this.orderIdField;
-            }
-            set
-            {
-                this.orderIdField = value;
-            }
-        }
-
-        /// <remarks/>
-        public orderSourceType orderSource
-        {
-            get
-            {
-                return this.orderSourceField;
-            }
-            set
-            {
-                this.orderSourceField = value;
-            }
-        }
-
-        /// <remarks/>
-        public contact billToAddress
-        {
-            get
-            {
-                return this.billToAddressField;
-            }
-            set
-            {
-                this.billToAddressField = value;
-            }
-        }
-
-        /// <remarks/>
-        public echeckType echeck
-        {
-            get
-            {
-                return this.echeckField;
-            }
-            set
-            {
-                this.echeckField = value;
-            }
-        }
-
-        /// <remarks/>
-        public merchantDataType merchantData
-        {
-            get
-            {
-                return this.merchantDataField;
-            }
-            set
-            {
-                this.merchantDataField = value;
-            }
-        }
+        /// <remarks />
+        public merchantDataType MerchantData { get; set; }
 
         public override string Serialize()
         {
@@ -1639,33 +1494,33 @@ namespace Litle.Sdk
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             }
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(orderId) + "</orderId>";
+            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
 
-            if (orderSource != null)
+            if (OrderSource != null)
             {
                 xml += "\r\n<orderSource>";
-                xml += orderSource.Serialize();
+                xml += OrderSource.Serialize();
                 xml += "</orderSource>";
             }
 
-            if (billToAddress != null)
+            if (BillToAddress != null)
             {
                 xml += "\r\n<billToAddress>";
-                xml += billToAddress.Serialize();
+                xml += BillToAddress.Serialize();
                 xml += "\r\n</billToAddress>";
             }
 
-            if (echeck != null)
+            if (Echeck != null)
             {
                 xml += "\r\n<echeck>";
-                xml += echeck.Serialize();
+                xml += Echeck.Serialize();
                 xml += "\r\n</echeck>";
             }
 
-            if (merchantData != null)
+            if (MerchantData != null)
             {
                 xml += "\r\n<merchantData>";
-                xml += merchantData.Serialize();
+                xml += MerchantData.Serialize();
                 xml += "\r\n</merchantData>";
             }
 
@@ -1675,18 +1530,17 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class submerchantCredit : transactionTypeWithReportGroup
+    public class SubmerchantCredit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string SubmerchantName { get; set; }
 
-        public string submerchantName { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
+        public long? Amount { get; set; }
 
-        public long? amount { get; set; }
-
-        public echeckType accountInfo { get; set; }
+        public echeckType AccountInfo { get; set; }
 
         public override string Serialize()
         {
@@ -1697,19 +1551,20 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (submerchantName != null)
-                xml += "\r\n<submerchantName>" + SecurityElement.Escape(submerchantName) + "</submerchantName>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (SubmerchantName != null)
+                xml += "\r\n<submerchantName>" + SecurityElement.Escape(SubmerchantName) + "</submerchantName>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
-            if (accountInfo != null)
+            if (AccountInfo != null)
             {
                 xml += "\r\n<accountInfo>";
-                xml += accountInfo.Serialize();
+                xml += AccountInfo.Serialize();
                 xml += "</accountInfo>";
             }
 
@@ -1719,14 +1574,13 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class payFacCredit : transactionTypeWithReportGroup
+    public class PayFacCredit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
+        public long? Amount { get; set; }
 
         public override string Serialize()
         {
@@ -1737,12 +1591,13 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
             xml += "\r\n</payFacCredit>";
 
@@ -1750,14 +1605,13 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class reserveCredit : transactionTypeWithReportGroup
+    public class ReserveCredit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
+        public long? Amount { get; set; }
 
         public override string Serialize()
         {
@@ -1768,12 +1622,13 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
             xml += "\r\n</reserveCredit>";
 
@@ -1781,18 +1636,17 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class vendorCredit : transactionTypeWithReportGroup
+    public class VendorCredit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string VendorName { get; set; }
 
-        public string vendorName { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
+        public long? Amount { get; set; }
 
-        public long? amount { get; set; }
-
-        public echeckType accountInfo { get; set; }
+        public echeckType AccountInfo { get; set; }
 
         public override string Serialize()
         {
@@ -1803,19 +1657,20 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (vendorName != null)
-                xml += "\r\n<vendorName>" + SecurityElement.Escape(vendorName) + "</vendorName>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (VendorName != null)
+                xml += "\r\n<vendorName>" + SecurityElement.Escape(VendorName) + "</vendorName>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
-            if (accountInfo != null)
+            if (AccountInfo != null)
             {
                 xml += "\r\n<accountInfo>";
-                xml += accountInfo.Serialize();
+                xml += AccountInfo.Serialize();
                 xml += "</accountInfo>";
             }
 
@@ -1825,14 +1680,13 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class physicalCheckCredit : transactionTypeWithReportGroup
+    public class PhysicalCheckCredit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
+        public long? Amount { get; set; }
 
         public override string Serialize()
         {
@@ -1843,12 +1697,13 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
             xml += "\r\n</physicalCheckCredit>";
 
@@ -1856,18 +1711,17 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class submerchantDebit : transactionTypeWithReportGroup
+    public class SubmerchantDebit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string SubmerchantName { get; set; }
 
-        public string submerchantName { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
+        public long? Amount { get; set; }
 
-        public long? amount { get; set; }
-
-        public echeckType accountInfo { get; set; }
+        public echeckType AccountInfo { get; set; }
 
         public override string Serialize()
         {
@@ -1878,19 +1732,20 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (submerchantName != null)
-                xml += "\r\n<submerchantName>" + SecurityElement.Escape(submerchantName) + "</submerchantName>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (SubmerchantName != null)
+                xml += "\r\n<submerchantName>" + SecurityElement.Escape(SubmerchantName) + "</submerchantName>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
-            if (accountInfo != null)
+            if (AccountInfo != null)
             {
                 xml += "\r\n<accountInfo>";
-                xml += accountInfo.Serialize();
+                xml += AccountInfo.Serialize();
                 xml += "</accountInfo>";
             }
 
@@ -1900,14 +1755,13 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class payFacDebit : transactionTypeWithReportGroup
+    public class PayFacDebit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
+        public long? Amount { get; set; }
 
         public override string Serialize()
         {
@@ -1918,12 +1772,13 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
             xml += "\r\n</payFacDebit>";
 
@@ -1931,14 +1786,13 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class reserveDebit : transactionTypeWithReportGroup
+    public class ReserveDebit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
+        public long? Amount { get; set; }
 
         public override string Serialize()
         {
@@ -1949,12 +1803,13 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
             xml += "\r\n</reserveDebit>";
 
@@ -1962,18 +1817,17 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class vendorDebit : transactionTypeWithReportGroup
+    public class VendorDebit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string VendorName { get; set; }
 
-        public string vendorName { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
+        public long? Amount { get; set; }
 
-        public long? amount { get; set; }
-
-        public echeckType accountInfo { get; set; }
+        public echeckType AccountInfo { get; set; }
 
         public override string Serialize()
         {
@@ -1984,19 +1838,20 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (vendorName != null)
-                xml += "\r\n<vendorName>" + SecurityElement.Escape(vendorName) + "</vendorName>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (VendorName != null)
+                xml += "\r\n<vendorName>" + SecurityElement.Escape(VendorName) + "</vendorName>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
-            if (accountInfo != null)
+            if (AccountInfo != null)
             {
                 xml += "\r\n<accountInfo>";
-                xml += accountInfo.Serialize();
+                xml += AccountInfo.Serialize();
                 xml += "</accountInfo>";
             }
 
@@ -2006,14 +1861,13 @@ namespace Litle.Sdk
         }
     }
 
-    public partial class physicalCheckDebit : transactionTypeWithReportGroup
+    public class PhysicalCheckDebit : transactionTypeWithReportGroup
     {
+        public string FundingSubmerchantId { get; set; }
 
-        public string fundingSubmerchantId { get; set; }
+        public string FundsTransferId { get; set; }
 
-        public string fundsTransferId { get; set; }
-
-        public long? amount { get; set; }
+        public long? Amount { get; set; }
 
         public override string Serialize()
         {
@@ -2024,12 +1878,13 @@ namespace Litle.Sdk
             if (customerId != null)
                 xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
             xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
-            if (fundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(fundingSubmerchantId) + "</fundingSubmerchantId>";
-            if (fundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(fundsTransferId) + "</fundsTransferId>";
-            if (amount != null)
-                xml += "\r\n<amount>" + amount + "</amount>";
+            if (FundingSubmerchantId != null)
+                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
+                       "</fundingSubmerchantId>";
+            if (FundsTransferId != null)
+                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
+            if (Amount != null)
+                xml += "\r\n<amount>" + Amount + "</amount>";
 
             xml += "\r\n</physicalCheckDebit>";
 

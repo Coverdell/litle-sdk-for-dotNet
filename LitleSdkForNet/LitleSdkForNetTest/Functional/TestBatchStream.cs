@@ -59,7 +59,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            BatchRequest litleBatchRequest = new BatchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -72,7 +72,7 @@ namespace Litle.Sdk.Test.Functional
             card.expDate = "1210";
             authorization.card = card;       
 
-            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
 
             authorization authorization2 = new authorization();
             authorization2.reportGroup = "Planets";
@@ -85,35 +85,35 @@ namespace Litle.Sdk.Test.Functional
             card2.expDate = "1210";
             authorization2.card = card2; 
 
-            litleBatchRequest.addAuthorization(authorization2);
+            litleBatchRequest.AddAuthorization(authorization2);
 
             authReversal reversal = new authReversal();
             reversal.litleTxnId = 12345678000L;
             reversal.amount = 106;
             reversal.payPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal);
+            litleBatchRequest.AddAuthReversal(reversal);
 
             authReversal reversal2 = new authReversal();
             reversal2.litleTxnId = 12345678900L;
             reversal2.amount = 106;
             reversal2.payPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal2);
+            litleBatchRequest.AddAuthReversal(reversal2);
 
             capture capture = new capture();
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture);
+            litleBatchRequest.AddCapture(capture);
 
             capture capture2 = new capture();
             capture2.litleTxnId = 123456700;
             capture2.amount = 106;
             capture2.payPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture2);
+            litleBatchRequest.AddCapture(capture2);
 
             captureGivenAuth capturegivenauth = new captureGivenAuth();
             capturegivenauth.amount = 106;
@@ -127,7 +127,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             capturegivenauth.card = card;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
 
             captureGivenAuth capturegivenauth2 = new captureGivenAuth();
             capturegivenauth2.amount = 106;
@@ -141,7 +141,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth2.orderSource = orderSourceType.ecommerce;
             capturegivenauth2.card = card2;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth2);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth2);
 
             credit creditObj = new credit();
             creditObj.amount = 106;
@@ -149,7 +149,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.orderSource = orderSourceType.ecommerce;
             creditObj.card = card;
 
-            litleBatchRequest.addCredit(creditObj);
+            litleBatchRequest.AddCredit(creditObj);
 
             credit creditObj2 = new credit();
             creditObj2.amount = 106;
@@ -157,7 +157,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj2.orderSource = orderSourceType.ecommerce;
             creditObj2.card = card2;
 
-            litleBatchRequest.addCredit(creditObj2);
+            litleBatchRequest.AddCredit(creditObj2);
 
             echeckCredit echeckcredit = new echeckCredit();
             echeckcredit.amount = 12L;
@@ -176,7 +176,7 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
 
             echeckCredit echeckcredit2 = new echeckCredit();
             echeckcredit2.amount = 12L;
@@ -195,19 +195,19 @@ namespace Litle.Sdk.Test.Functional
             billToAddress2.email = "litle.com";
             echeckcredit2.billToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit2);
+            litleBatchRequest.AddEcheckCredit(echeckcredit2);
 
             echeckRedeposit echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
             echeckredeposit.echeck = echeck;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
 
             echeckRedeposit echeckredeposit2 = new echeckRedeposit();
             echeckredeposit2.litleTxnId = 123457;
             echeckredeposit2.echeck = echeck2;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit2);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit2);
 
             echeckSale echeckSaleObj = new echeckSale();
             echeckSaleObj.amount = 123456;
@@ -216,7 +216,7 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.echeck = echeck;
             echeckSaleObj.billToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj);
 
             echeckSale echeckSaleObj2 = new echeckSale();
             echeckSaleObj2.amount = 123456;
@@ -225,39 +225,39 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj2.echeck = echeck2;
             echeckSaleObj2.billToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj2);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj2);
 
-            echeckPreNoteSale echeckPreNoteSaleObj1 = new echeckPreNoteSale();
-            echeckPreNoteSaleObj1.orderId = "12345";
-            echeckPreNoteSaleObj1.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteSaleObj1.echeck = echeck;
-            echeckPreNoteSaleObj1.billToAddress = billToAddress;
+            EcheckPreNoteSale echeckPreNoteSaleObj1 = new EcheckPreNoteSale();
+            echeckPreNoteSaleObj1.OrderId = "12345";
+            echeckPreNoteSaleObj1.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteSaleObj1.Echeck = echeck;
+            echeckPreNoteSaleObj1.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleObj1);
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSaleObj1);
 
-            echeckPreNoteSale echeckPreNoteSaleObj2 = new echeckPreNoteSale();
-            echeckPreNoteSaleObj2.orderId = "12345";
-            echeckPreNoteSaleObj2.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteSaleObj2.echeck = echeck2;
-            echeckPreNoteSaleObj2.billToAddress = billToAddress2;
+            EcheckPreNoteSale echeckPreNoteSaleObj2 = new EcheckPreNoteSale();
+            echeckPreNoteSaleObj2.OrderId = "12345";
+            echeckPreNoteSaleObj2.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteSaleObj2.Echeck = echeck2;
+            echeckPreNoteSaleObj2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleObj2);
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSaleObj2);
 
-            echeckPreNoteCredit echeckPreNoteCreditObj1 = new echeckPreNoteCredit();
-            echeckPreNoteCreditObj1.orderId = "12345";
-            echeckPreNoteCreditObj1.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteCreditObj1.echeck = echeck;
-            echeckPreNoteCreditObj1.billToAddress = billToAddress;
+            EcheckPreNoteCredit echeckPreNoteCreditObj1 = new EcheckPreNoteCredit();
+            echeckPreNoteCreditObj1.OrderId = "12345";
+            echeckPreNoteCreditObj1.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteCreditObj1.Echeck = echeck;
+            echeckPreNoteCreditObj1.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditObj1);
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCreditObj1);
 
-            echeckPreNoteCredit echeckPreNoteCreditObj2 = new echeckPreNoteCredit();
-            echeckPreNoteCreditObj2.orderId = "12345";
-            echeckPreNoteCreditObj2.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteCreditObj2.echeck = echeck2;
-            echeckPreNoteCreditObj2.billToAddress = billToAddress2;
+            EcheckPreNoteCredit echeckPreNoteCreditObj2 = new EcheckPreNoteCredit();
+            echeckPreNoteCreditObj2.OrderId = "12345";
+            echeckPreNoteCreditObj2.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteCreditObj2.Echeck = echeck2;
+            echeckPreNoteCreditObj2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditObj2);
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCreditObj2);
 
             echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.amount = 123456;
@@ -266,7 +266,7 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject.echeck = echeck;
             echeckVerificationObject.billToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject);
 
             echeckVerification echeckVerificationObject2 = new echeckVerification();
             echeckVerificationObject2.amount = 123456;
@@ -275,7 +275,7 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject2.echeck = echeck2;
             echeckVerificationObject2.billToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject2);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject2);
 
             forceCapture forcecapture = new forceCapture();
             forcecapture.amount = 106;
@@ -283,7 +283,7 @@ namespace Litle.Sdk.Test.Functional
             forcecapture.orderSource = orderSourceType.ecommerce;
             forcecapture.card = card;
 
-            litleBatchRequest.addForceCapture(forcecapture);
+            litleBatchRequest.AddForceCapture(forcecapture);
 
             forceCapture forcecapture2 = new forceCapture();
             forcecapture2.amount = 106;
@@ -291,7 +291,7 @@ namespace Litle.Sdk.Test.Functional
             forcecapture2.orderSource = orderSourceType.ecommerce;
             forcecapture2.card = card2;
 
-            litleBatchRequest.addForceCapture(forcecapture2);
+            litleBatchRequest.AddForceCapture(forcecapture2);
 
             sale saleObj = new sale();
             saleObj.amount = 106;
@@ -300,7 +300,7 @@ namespace Litle.Sdk.Test.Functional
             saleObj.orderSource = orderSourceType.ecommerce;
             saleObj.card = card;
 
-            litleBatchRequest.addSale(saleObj);
+            litleBatchRequest.AddSale(saleObj);
 
             sale saleObj2 = new sale();
             saleObj2.amount = 106;
@@ -309,35 +309,35 @@ namespace Litle.Sdk.Test.Functional
             saleObj2.orderSource = orderSourceType.ecommerce;
             saleObj2.card = card2;
 
-            litleBatchRequest.addSale(saleObj2);
+            litleBatchRequest.AddSale(saleObj2);
 
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
             registerTokenRequest.orderId = "12344";
             registerTokenRequest.accountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
 
             registerTokenRequestType registerTokenRequest2 = new registerTokenRequestType();
             registerTokenRequest2.orderId = "12345";
             registerTokenRequest2.accountNumber = "1233456789103801";
             registerTokenRequest2.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest2);
 
             updateCardValidationNumOnToken updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
             updateCardValidationNumOnToken.orderId = "12344";
             updateCardValidationNumOnToken.cardValidationNum = "123";
             updateCardValidationNumOnToken.litleToken = "4100000000000001";
 
-            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
+            litleBatchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
 
             updateCardValidationNumOnToken updateCardValidationNumOnToken2 = new updateCardValidationNumOnToken();
             updateCardValidationNumOnToken2.orderId = "12345";
             updateCardValidationNumOnToken2.cardValidationNum = "123";
             updateCardValidationNumOnToken2.litleToken = "4242424242424242";
 
-            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
+            litleBatchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
             litle.AddBatch(litleBatchRequest);
 
             litleResponse litleResponse = litle.SendToLitleWithStream();
@@ -476,7 +476,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void accountUpdateBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            BatchRequest litleBatchRequest = new BatchRequest();
 
             accountUpdate accountUpdate1 = new accountUpdate();
             accountUpdate1.orderId = "1111";
@@ -486,13 +486,13 @@ namespace Litle.Sdk.Test.Functional
             card.expDate = "1210";
             accountUpdate1.card = card;
 
-            litleBatchRequest.addAccountUpdate(accountUpdate1);
+            litleBatchRequest.AddAccountUpdate(accountUpdate1);
 
             accountUpdate accountUpdate2 = new accountUpdate();
             accountUpdate2.orderId = "1112";
             accountUpdate2.card = card;
 
-            litleBatchRequest.addAccountUpdate(accountUpdate2);
+            litleBatchRequest.AddAccountUpdate(accountUpdate2);
 
             litle.AddBatch(litleBatchRequest);
             litleResponse litleResponse = litle.SendToLitleWithStream();
@@ -519,8 +519,8 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void RFRBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.id = "1234567A";
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.ID = "1234567A";
 
             accountUpdate accountUpdate1 = new accountUpdate();
             accountUpdate1.orderId = "1111";
@@ -530,13 +530,13 @@ namespace Litle.Sdk.Test.Functional
             card.expDate = "1210";
             accountUpdate1.card = card;
 
-            litleBatchRequest.addAccountUpdate(accountUpdate1);
+            litleBatchRequest.AddAccountUpdate(accountUpdate1);
 
             accountUpdate accountUpdate2 = new accountUpdate();
             accountUpdate2.orderId = "1112";
             accountUpdate2.card = card;
 
-            litleBatchRequest.addAccountUpdate(accountUpdate2);
+            litleBatchRequest.AddAccountUpdate(accountUpdate2);
 
             litle.AddBatch(litleBatchRequest);
             litleResponse litleResponse = litle.SendToLitleWithStream();
@@ -559,11 +559,11 @@ namespace Litle.Sdk.Test.Functional
             }
 
             LitleRequest litleRfr = new LitleRequest();
-            RFRRequest rfrRequest = new RFRRequest();
+            RfrRequest rfrRequest = new RfrRequest();
             accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
             accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;
             accountUpdateFileRequestData.postDay = DateTime.Now;
-            rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
+            rfrRequest.AccountUpdateFileRequestData = accountUpdateFileRequestData;
 
             litleRfr.AddRfrRequest(rfrRequest);            
 
@@ -589,7 +589,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void nullBatchData()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            BatchRequest litleBatchRequest = new BatchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -602,10 +602,10 @@ namespace Litle.Sdk.Test.Functional
             card.expDate = "1210";
             authorization.card = card; //This needs to compile      
 
-            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
             try
             {
-                litleBatchRequest.addAuthorization(null);
+                litleBatchRequest.AddAuthorization(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -617,10 +617,10 @@ namespace Litle.Sdk.Test.Functional
             reversal.amount = 106;
             reversal.payPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal);
+            litleBatchRequest.AddAuthReversal(reversal);
             try
             {
-                litleBatchRequest.addAuthReversal(null);
+                litleBatchRequest.AddAuthReversal(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -632,10 +632,10 @@ namespace Litle.Sdk.Test.Functional
             capture.amount = 106;
             capture.payPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture);
+            litleBatchRequest.AddCapture(capture);
             try
             {
-                litleBatchRequest.addCapture(null);
+                litleBatchRequest.AddCapture(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -654,10 +654,10 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             capturegivenauth.card = card;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
             try
             {
-                litleBatchRequest.addCaptureGivenAuth(null);
+                litleBatchRequest.AddCaptureGivenAuth(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -670,10 +670,10 @@ namespace Litle.Sdk.Test.Functional
             creditObj.orderSource = orderSourceType.ecommerce;
             creditObj.card = card;
 
-            litleBatchRequest.addCredit(creditObj);
+            litleBatchRequest.AddCredit(creditObj);
             try
             {
-                litleBatchRequest.addCredit(null);
+                litleBatchRequest.AddCredit(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -697,10 +697,10 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
             try
             {
-                litleBatchRequest.addEcheckCredit(null);
+                litleBatchRequest.AddEcheckCredit(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -711,10 +711,10 @@ namespace Litle.Sdk.Test.Functional
             echeckredeposit.litleTxnId = 123456;
             echeckredeposit.echeck = echeck;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
             try
             {
-                litleBatchRequest.addEcheckRedeposit(null);
+                litleBatchRequest.AddEcheckRedeposit(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -728,10 +728,10 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.echeck = echeck;
             echeckSaleObj.billToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj);
             try
             {
-                litleBatchRequest.addEcheckSale(null);
+                litleBatchRequest.AddEcheckSale(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -745,10 +745,10 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject.echeck = echeck;
             echeckVerificationObject.billToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject);
             try
             {
-                litleBatchRequest.addEcheckVerification(null);
+                litleBatchRequest.AddEcheckVerification(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -761,10 +761,10 @@ namespace Litle.Sdk.Test.Functional
             forcecapture.orderSource = orderSourceType.ecommerce;
             forcecapture.card = card;
 
-            litleBatchRequest.addForceCapture(forcecapture);
+            litleBatchRequest.AddForceCapture(forcecapture);
             try
             {
-                litleBatchRequest.addForceCapture(null);
+                litleBatchRequest.AddForceCapture(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -778,10 +778,10 @@ namespace Litle.Sdk.Test.Functional
             saleObj.orderSource = orderSourceType.ecommerce;
             saleObj.card = card;
 
-            litleBatchRequest.addSale(saleObj);
+            litleBatchRequest.AddSale(saleObj);
             try
             {
-                litleBatchRequest.addSale(null);
+                litleBatchRequest.AddSale(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -793,10 +793,10 @@ namespace Litle.Sdk.Test.Functional
             registerTokenRequest.accountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
             try
             {
-                litleBatchRequest.addRegisterTokenRequest(null);
+                litleBatchRequest.AddRegisterTokenRequest(null);
             }
             catch (System.NullReferenceException e)
             {
@@ -816,7 +816,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            BatchRequest litleBatchRequest = new BatchRequest();
 
             authorization authorization = new authorization();
             authorization.reportGroup = "Planets";
@@ -829,7 +829,7 @@ namespace Litle.Sdk.Test.Functional
             card.expDate = "1210";
             authorization.card = card;     
 
-            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
 
             authorization authorization2 = new authorization();
             authorization2.reportGroup = "Planets";
@@ -842,35 +842,35 @@ namespace Litle.Sdk.Test.Functional
             card2.expDate = "1210";
             authorization2.card = card2; 
 
-            litleBatchRequest.addAuthorization(authorization2);
+            litleBatchRequest.AddAuthorization(authorization2);
 
             authReversal reversal = new authReversal();
             reversal.litleTxnId = 12345678000L;
             reversal.amount = 106;
             reversal.payPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal);
+            litleBatchRequest.AddAuthReversal(reversal);
 
             authReversal reversal2 = new authReversal();
             reversal2.litleTxnId = 12345678900L;
             reversal2.amount = 106;
             reversal2.payPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal2);
+            litleBatchRequest.AddAuthReversal(reversal2);
 
             capture capture = new capture();
             capture.litleTxnId = 123456000;
             capture.amount = 106;
             capture.payPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture);
+            litleBatchRequest.AddCapture(capture);
 
             capture capture2 = new capture();
             capture2.litleTxnId = 123456700;
             capture2.amount = 106;
             capture2.payPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture2);
+            litleBatchRequest.AddCapture(capture2);
 
             captureGivenAuth capturegivenauth = new captureGivenAuth();
             capturegivenauth.amount = 106;
@@ -884,7 +884,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth.orderSource = orderSourceType.ecommerce;
             capturegivenauth.card = card;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
 
             captureGivenAuth capturegivenauth2 = new captureGivenAuth();
             capturegivenauth2.amount = 106;
@@ -898,7 +898,7 @@ namespace Litle.Sdk.Test.Functional
             capturegivenauth2.orderSource = orderSourceType.ecommerce;
             capturegivenauth2.card = card2;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth2);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth2);
 
             credit creditObj = new credit();
             creditObj.amount = 106;
@@ -906,7 +906,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj.orderSource = orderSourceType.ecommerce;
             creditObj.card = card;
 
-            litleBatchRequest.addCredit(creditObj);
+            litleBatchRequest.AddCredit(creditObj);
 
             credit creditObj2 = new credit();
             creditObj2.amount = 106;
@@ -914,7 +914,7 @@ namespace Litle.Sdk.Test.Functional
             creditObj2.orderSource = orderSourceType.ecommerce;
             creditObj2.card = card2;
 
-            litleBatchRequest.addCredit(creditObj2);
+            litleBatchRequest.AddCredit(creditObj2);
 
             echeckCredit echeckcredit = new echeckCredit();
             echeckcredit.amount = 12L;
@@ -933,7 +933,7 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.email = "litle.com";
             echeckcredit.billToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
 
             echeckCredit echeckcredit2 = new echeckCredit();
             echeckcredit2.amount = 12L;
@@ -952,19 +952,19 @@ namespace Litle.Sdk.Test.Functional
             billToAddress2.email = "litle.com";
             echeckcredit2.billToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit2);
+            litleBatchRequest.AddEcheckCredit(echeckcredit2);
 
             echeckRedeposit echeckredeposit = new echeckRedeposit();
             echeckredeposit.litleTxnId = 123456;
             echeckredeposit.echeck = echeck;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
 
             echeckRedeposit echeckredeposit2 = new echeckRedeposit();
             echeckredeposit2.litleTxnId = 123457;
             echeckredeposit2.echeck = echeck2;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit2);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit2);
 
             echeckSale echeckSaleObj = new echeckSale();
             echeckSaleObj.amount = 123456;
@@ -973,7 +973,7 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj.echeck = echeck;
             echeckSaleObj.billToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj);
 
             echeckSale echeckSaleObj2 = new echeckSale();
             echeckSaleObj2.amount = 123456;
@@ -982,7 +982,7 @@ namespace Litle.Sdk.Test.Functional
             echeckSaleObj2.echeck = echeck2;
             echeckSaleObj2.billToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj2);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj2);
 
             echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.amount = 123456;
@@ -991,7 +991,7 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject.echeck = echeck;
             echeckVerificationObject.billToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject);
 
             echeckVerification echeckVerificationObject2 = new echeckVerification();
             echeckVerificationObject2.amount = 123456;
@@ -1000,7 +1000,7 @@ namespace Litle.Sdk.Test.Functional
             echeckVerificationObject2.echeck = echeck2;
             echeckVerificationObject2.billToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject2);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject2);
 
             forceCapture forcecapture = new forceCapture();
             forcecapture.amount = 106;
@@ -1008,7 +1008,7 @@ namespace Litle.Sdk.Test.Functional
             forcecapture.orderSource = orderSourceType.ecommerce;
             forcecapture.card = card;
 
-            litleBatchRequest.addForceCapture(forcecapture);
+            litleBatchRequest.AddForceCapture(forcecapture);
 
             forceCapture forcecapture2 = new forceCapture();
             forcecapture2.amount = 106;
@@ -1016,7 +1016,7 @@ namespace Litle.Sdk.Test.Functional
             forcecapture2.orderSource = orderSourceType.ecommerce;
             forcecapture2.card = card2;
 
-            litleBatchRequest.addForceCapture(forcecapture2);
+            litleBatchRequest.AddForceCapture(forcecapture2);
 
             sale saleObj = new sale();
             saleObj.amount = 106;
@@ -1025,7 +1025,7 @@ namespace Litle.Sdk.Test.Functional
             saleObj.orderSource = orderSourceType.ecommerce;
             saleObj.card = card;
 
-            litleBatchRequest.addSale(saleObj);
+            litleBatchRequest.AddSale(saleObj);
 
             sale saleObj2 = new sale();
             saleObj2.amount = 106;
@@ -1034,21 +1034,21 @@ namespace Litle.Sdk.Test.Functional
             saleObj2.orderSource = orderSourceType.ecommerce;
             saleObj2.card = card2;
 
-            litleBatchRequest.addSale(saleObj2);
+            litleBatchRequest.AddSale(saleObj2);
 
             registerTokenRequestType registerTokenRequest = new registerTokenRequestType();
             registerTokenRequest.orderId = "12344";
             registerTokenRequest.accountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
 
             registerTokenRequestType registerTokenRequest2 = new registerTokenRequestType();
             registerTokenRequest2.orderId = "12345";
             registerTokenRequest2.accountNumber = "1233456789103801";
             registerTokenRequest2.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest2);
 
             litle.AddBatch(litleBatchRequest);
 
@@ -1065,7 +1065,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void EcheckPreNoteTestAll()
         {
-            batchRequest litleBatchRequest = new batchRequest();
+            BatchRequest litleBatchRequest = new BatchRequest();
 
             contact billToAddress = new contact();
             billToAddress.name = "Mike";
@@ -1091,47 +1091,47 @@ namespace Litle.Sdk.Test.Functional
             echeckAccErr.routingNum = "011100012";
             echeckAccErr.checkNum = "123458";
 
-            echeckPreNoteSale echeckPreNoteSaleSuccess = new echeckPreNoteSale();
-            echeckPreNoteSaleSuccess.orderId = "000";
-            echeckPreNoteSaleSuccess.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteSaleSuccess.echeck = echeckSuccess;
-            echeckPreNoteSaleSuccess.billToAddress = billToAddress;
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleSuccess);
+            EcheckPreNoteSale echeckPreNoteSaleSuccess = new EcheckPreNoteSale();
+            echeckPreNoteSaleSuccess.OrderId = "000";
+            echeckPreNoteSaleSuccess.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteSaleSuccess.Echeck = echeckSuccess;
+            echeckPreNoteSaleSuccess.BillToAddress = billToAddress;
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSaleSuccess);
 
-            echeckPreNoteSale echeckPreNoteSaleRoutErr = new echeckPreNoteSale();
-            echeckPreNoteSaleRoutErr.orderId = "900";
-            echeckPreNoteSaleRoutErr.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteSaleRoutErr.echeck = echeckRoutErr;
-            echeckPreNoteSaleRoutErr.billToAddress = billToAddress;
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleRoutErr);
+            EcheckPreNoteSale echeckPreNoteSaleRoutErr = new EcheckPreNoteSale();
+            echeckPreNoteSaleRoutErr.OrderId = "900";
+            echeckPreNoteSaleRoutErr.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteSaleRoutErr.Echeck = echeckRoutErr;
+            echeckPreNoteSaleRoutErr.BillToAddress = billToAddress;
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSaleRoutErr);
 
-            echeckPreNoteSale echeckPreNoteSaleAccErr = new echeckPreNoteSale();
-            echeckPreNoteSaleAccErr.orderId = "301";
-            echeckPreNoteSaleAccErr.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteSaleAccErr.echeck = echeckAccErr;
-            echeckPreNoteSaleAccErr.billToAddress = billToAddress;
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleAccErr);
+            EcheckPreNoteSale echeckPreNoteSaleAccErr = new EcheckPreNoteSale();
+            echeckPreNoteSaleAccErr.OrderId = "301";
+            echeckPreNoteSaleAccErr.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteSaleAccErr.Echeck = echeckAccErr;
+            echeckPreNoteSaleAccErr.BillToAddress = billToAddress;
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSaleAccErr);
 
-            echeckPreNoteCredit echeckPreNoteCreditSuccess = new echeckPreNoteCredit();
-            echeckPreNoteCreditSuccess.orderId = "000";
-            echeckPreNoteCreditSuccess.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteCreditSuccess.echeck = echeckSuccess;
-            echeckPreNoteCreditSuccess.billToAddress = billToAddress;
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditSuccess);
+            EcheckPreNoteCredit echeckPreNoteCreditSuccess = new EcheckPreNoteCredit();
+            echeckPreNoteCreditSuccess.OrderId = "000";
+            echeckPreNoteCreditSuccess.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteCreditSuccess.Echeck = echeckSuccess;
+            echeckPreNoteCreditSuccess.BillToAddress = billToAddress;
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCreditSuccess);
 
-            echeckPreNoteCredit echeckPreNoteCreditRoutErr = new echeckPreNoteCredit();
-            echeckPreNoteCreditRoutErr.orderId = "900";
-            echeckPreNoteCreditRoutErr.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteCreditRoutErr.echeck = echeckRoutErr;
-            echeckPreNoteCreditRoutErr.billToAddress = billToAddress;
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditRoutErr);
+            EcheckPreNoteCredit echeckPreNoteCreditRoutErr = new EcheckPreNoteCredit();
+            echeckPreNoteCreditRoutErr.OrderId = "900";
+            echeckPreNoteCreditRoutErr.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteCreditRoutErr.Echeck = echeckRoutErr;
+            echeckPreNoteCreditRoutErr.BillToAddress = billToAddress;
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCreditRoutErr);
 
-            echeckPreNoteCredit echeckPreNoteCreditAccErr = new echeckPreNoteCredit();
-            echeckPreNoteCreditAccErr.orderId = "301";
-            echeckPreNoteCreditAccErr.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteCreditAccErr.echeck = echeckAccErr;
-            echeckPreNoteCreditAccErr.billToAddress = billToAddress;
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditAccErr);
+            EcheckPreNoteCredit echeckPreNoteCreditAccErr = new EcheckPreNoteCredit();
+            echeckPreNoteCreditAccErr.OrderId = "301";
+            echeckPreNoteCreditAccErr.OrderSource = orderSourceType.ecommerce;
+            echeckPreNoteCreditAccErr.Echeck = echeckAccErr;
+            echeckPreNoteCreditAccErr.BillToAddress = billToAddress;
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCreditAccErr);
 
             litle.AddBatch(litleBatchRequest);
 
@@ -1189,7 +1189,7 @@ namespace Litle.Sdk.Test.Functional
 
             LitleRequest litleOverride = new LitleRequest(configOverride);
 
-            batchRequest litleBatchRequest = new batchRequest(configOverride);
+            BatchRequest litleBatchRequest = new BatchRequest(configOverride);
 
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Corporate;
@@ -1197,73 +1197,73 @@ namespace Litle.Sdk.Test.Functional
             echeck.routingNum = "011075150";
             echeck.checkNum = "123455";
 
-            submerchantCredit submerchantCredit = new submerchantCredit();
-            submerchantCredit.fundingSubmerchantId = "123456";
-            submerchantCredit.submerchantName = "merchant";
-            submerchantCredit.fundsTransferId = "123467";
-            submerchantCredit.amount = 106L;
-            submerchantCredit.accountInfo = echeck;
-            litleBatchRequest.addSubmerchantCredit(submerchantCredit);
+            SubmerchantCredit submerchantCredit = new SubmerchantCredit();
+            submerchantCredit.FundingSubmerchantId = "123456";
+            submerchantCredit.SubmerchantName = "merchant";
+            submerchantCredit.FundsTransferId = "123467";
+            submerchantCredit.Amount = 106L;
+            submerchantCredit.AccountInfo = echeck;
+            litleBatchRequest.AddSubmerchantCredit(submerchantCredit);
 
-            payFacCredit payFacCredit = new payFacCredit();
-            payFacCredit.fundingSubmerchantId = "123456";
-            payFacCredit.fundsTransferId = "123467";
-            payFacCredit.amount = 107L;
-            litleBatchRequest.addPayFacCredit(payFacCredit);
+            PayFacCredit payFacCredit = new PayFacCredit();
+            payFacCredit.FundingSubmerchantId = "123456";
+            payFacCredit.FundsTransferId = "123467";
+            payFacCredit.Amount = 107L;
+            litleBatchRequest.AddPayFacCredit(payFacCredit);
 
-            reserveCredit reserveCredit = new reserveCredit();
-            reserveCredit.fundingSubmerchantId = "123456";
-            reserveCredit.fundsTransferId = "123467";
-            reserveCredit.amount = 107L;
-            litleBatchRequest.addReserveCredit(reserveCredit);
+            ReserveCredit reserveCredit = new ReserveCredit();
+            reserveCredit.FundingSubmerchantId = "123456";
+            reserveCredit.FundsTransferId = "123467";
+            reserveCredit.Amount = 107L;
+            litleBatchRequest.AddReserveCredit(reserveCredit);
 
-            vendorCredit vendorCredit = new vendorCredit();
-            vendorCredit.fundingSubmerchantId = "123456";
-            vendorCredit.vendorName = "merchant";
-            vendorCredit.fundsTransferId = "123467";
-            vendorCredit.amount = 106L;
-            vendorCredit.accountInfo = echeck;
-            litleBatchRequest.addVendorCredit(vendorCredit);
+            VendorCredit vendorCredit = new VendorCredit();
+            vendorCredit.FundingSubmerchantId = "123456";
+            vendorCredit.VendorName = "merchant";
+            vendorCredit.FundsTransferId = "123467";
+            vendorCredit.Amount = 106L;
+            vendorCredit.AccountInfo = echeck;
+            litleBatchRequest.AddVendorCredit(vendorCredit);
 
-            physicalCheckCredit physicalCheckCredit = new physicalCheckCredit();
-            physicalCheckCredit.fundingSubmerchantId = "123456";
-            physicalCheckCredit.fundsTransferId = "123467";
-            physicalCheckCredit.amount = 107L;
-            litleBatchRequest.addPhysicalCheckCredit(physicalCheckCredit);
+            PhysicalCheckCredit physicalCheckCredit = new PhysicalCheckCredit();
+            physicalCheckCredit.FundingSubmerchantId = "123456";
+            physicalCheckCredit.FundsTransferId = "123467";
+            physicalCheckCredit.Amount = 107L;
+            litleBatchRequest.AddPhysicalCheckCredit(physicalCheckCredit);
 
-            submerchantDebit submerchantDebit = new submerchantDebit();
-            submerchantDebit.fundingSubmerchantId = "123456";
-            submerchantDebit.submerchantName = "merchant";
-            submerchantDebit.fundsTransferId = "123467";
-            submerchantDebit.amount = 106L;
-            submerchantDebit.accountInfo = echeck;
-            litleBatchRequest.addSubmerchantDebit(submerchantDebit);
+            SubmerchantDebit submerchantDebit = new SubmerchantDebit();
+            submerchantDebit.FundingSubmerchantId = "123456";
+            submerchantDebit.SubmerchantName = "merchant";
+            submerchantDebit.FundsTransferId = "123467";
+            submerchantDebit.Amount = 106L;
+            submerchantDebit.AccountInfo = echeck;
+            litleBatchRequest.AddSubmerchantDebit(submerchantDebit);
 
-            payFacDebit payFacDebit = new payFacDebit();
-            payFacDebit.fundingSubmerchantId = "123456";
-            payFacDebit.fundsTransferId = "123467";
-            payFacDebit.amount = 107L;
-            litleBatchRequest.addPayFacDebit(payFacDebit);
+            PayFacDebit payFacDebit = new PayFacDebit();
+            payFacDebit.FundingSubmerchantId = "123456";
+            payFacDebit.FundsTransferId = "123467";
+            payFacDebit.Amount = 107L;
+            litleBatchRequest.AddPayFacDebit(payFacDebit);
 
-            reserveDebit reserveDebit = new reserveDebit();
-            reserveDebit.fundingSubmerchantId = "123456";
-            reserveDebit.fundsTransferId = "123467";
-            reserveDebit.amount = 107L;
-            litleBatchRequest.addReserveDebit(reserveDebit);
+            ReserveDebit reserveDebit = new ReserveDebit();
+            reserveDebit.FundingSubmerchantId = "123456";
+            reserveDebit.FundsTransferId = "123467";
+            reserveDebit.Amount = 107L;
+            litleBatchRequest.AddReserveDebit(reserveDebit);
 
-            vendorDebit vendorDebit = new vendorDebit();
-            vendorDebit.fundingSubmerchantId = "123456";
-            vendorDebit.vendorName = "merchant";
-            vendorDebit.fundsTransferId = "123467";
-            vendorDebit.amount = 106L;
-            vendorDebit.accountInfo = echeck;
-            litleBatchRequest.addVendorDebit(vendorDebit);
+            VendorDebit vendorDebit = new VendorDebit();
+            vendorDebit.FundingSubmerchantId = "123456";
+            vendorDebit.VendorName = "merchant";
+            vendorDebit.FundsTransferId = "123467";
+            vendorDebit.Amount = 106L;
+            vendorDebit.AccountInfo = echeck;
+            litleBatchRequest.AddVendorDebit(vendorDebit);
 
-            physicalCheckDebit physicalCheckDebit = new physicalCheckDebit();
-            physicalCheckDebit.fundingSubmerchantId = "123456";
-            physicalCheckDebit.fundsTransferId = "123467";
-            physicalCheckDebit.amount = 107L;
-            litleBatchRequest.addPhysicalCheckDebit(physicalCheckDebit);
+            PhysicalCheckDebit physicalCheckDebit = new PhysicalCheckDebit();
+            physicalCheckDebit.FundingSubmerchantId = "123456";
+            physicalCheckDebit.FundsTransferId = "123467";
+            physicalCheckDebit.Amount = 107L;
+            litleBatchRequest.AddPhysicalCheckDebit(physicalCheckDebit);
 
             litleOverride.AddBatch(litleBatchRequest);
 

@@ -11,7 +11,7 @@ namespace Litle.Sdk.Test.Unit
     [TestFixture]
     class TestRFRRequest
     {
-        private RFRRequest rfrRequest;
+        private RfrRequest rfrRequest;
 
         private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";
         private const string timeRegex = "[0-1][0-9]-[0-3][0-9]-[0-9]{4}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{4}_";
@@ -35,7 +35,7 @@ namespace Litle.Sdk.Test.Unit
         [SetUp]
         public void setUpBeforeTest()
         {
-            rfrRequest = new RFRRequest();
+            rfrRequest = new RfrRequest();
         }
 
         [Test]
@@ -61,13 +61,13 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            rfrRequest = new RFRRequest(mockConfig);
+            rfrRequest = new RfrRequest(mockConfig);
 
-            Assert.AreEqual("C:\\MockRequests\\Requests\\", rfrRequest.getRequestDirectory());
-            Assert.AreEqual("C:\\MockResponses\\Responses\\", rfrRequest.getResponseDirectory());
+            Assert.AreEqual("C:\\MockRequests\\Requests\\", rfrRequest.GetRequestDirectory());
+            Assert.AreEqual("C:\\MockResponses\\Responses\\", rfrRequest.GetResponseDirectory());
 
-            Assert.NotNull(rfrRequest.getLitleTime());
-            Assert.NotNull(rfrRequest.getLitleFile());
+            Assert.NotNull(rfrRequest.GetLitleTime());
+            Assert.NotNull(rfrRequest.GetLitleFile());
         }
 
         [Test]
@@ -76,9 +76,9 @@ namespace Litle.Sdk.Test.Unit
             LitleFile mockedLitleFile = mockLitleFile.Object;
             LitleTime mockedLitleTime = mockLitleTime.Object;
 
-            rfrRequest.litleSessionId = 123456789;
-            rfrRequest.setLitleFile(mockedLitleFile);
-            rfrRequest.setLitleTime(mockedLitleTime);
+            rfrRequest.LitleSessionId = 123456789;
+            rfrRequest.SetLitleFile(mockedLitleFile);
+            rfrRequest.SetLitleTime(mockedLitleTime);
 
             Assert.AreEqual(mockFilePath, rfrRequest.Serialize());
 

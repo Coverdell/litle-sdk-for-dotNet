@@ -123,11 +123,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addAccountUpdate(accountUpdate);
-            litleBatchRequest.addAccountUpdate(accountUpdate);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddAccountUpdate(accountUpdate);
+            litleBatchRequest.AddAccountUpdate(accountUpdate);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -188,11 +188,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addAuthorization(authorization);
-            litleBatchRequest.addAuthorization(authorization);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -242,11 +242,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addAuthReversal(authreversal);
-            litleBatchRequest.addAuthReversal(authreversal);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddAuthReversal(authreversal);
+            litleBatchRequest.AddAuthReversal(authreversal);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -297,11 +297,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCapture(capture);
-            litleBatchRequest.addCapture(capture);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCapture(capture);
+            litleBatchRequest.AddCapture(capture);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -363,11 +363,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -424,11 +424,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCredit(credit);
-            litleBatchRequest.addCredit(credit);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCredit(credit);
+            litleBatchRequest.AddCredit(credit);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -479,11 +479,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckCredit(echeckcredit);
-            litleBatchRequest.addEcheckCredit(echeckcredit);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -533,11 +533,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -601,11 +601,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckSale(echecksale);
-            litleBatchRequest.addEcheckSale(echecksale);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckSale(echecksale);
+            litleBatchRequest.AddEcheckSale(echecksale);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -669,11 +669,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckVerification(echeckverification);
-            litleBatchRequest.addEcheckVerification(echeckverification);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckVerification(echeckverification);
+            litleBatchRequest.AddEcheckVerification(echeckverification);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -730,11 +730,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addForceCapture(forcecapture);
-            litleBatchRequest.addForceCapture(forcecapture);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddForceCapture(forcecapture);
+            litleBatchRequest.AddForceCapture(forcecapture);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -791,11 +791,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addSale(sale);
-            litleBatchRequest.addSale(sale);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddSale(sale);
+            litleBatchRequest.AddSale(sale);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -846,11 +846,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addRegisterTokenRequest(token);
-            litleBatchRequest.addRegisterTokenRequest(token);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddRegisterTokenRequest(token);
+            litleBatchRequest.AddRegisterTokenRequest(token);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -901,11 +901,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
-            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
+            litleBatchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -969,12 +969,12 @@ namespace Litle.Sdk.Test.Unit
                 litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
                 litle.SetLitleFile(mockedLitleFile);
                 litle.SetLitleTime(mockLitleTime.Object);
-                batchRequest litleBatchRequest = new batchRequest();
-                litleBatchRequest.setLitleFile(mockedLitleFile);
-                litleBatchRequest.setLitleTime(mockLitleTime.Object);
+                BatchRequest litleBatchRequest = new BatchRequest();
+                litleBatchRequest.SetLitleFile(mockedLitleFile);
+                litleBatchRequest.SetLitleTime(mockLitleTime.Object);
 
-                litleBatchRequest.addAuthorization(authorization);
-                litleBatchRequest.addAuthorization(authorization);
+                litleBatchRequest.AddAuthorization(authorization);
+                litleBatchRequest.AddAuthorization(authorization);
                 litle.AddBatch(litleBatchRequest);
 
                 string batchFileName = litle.SendToLitle();
@@ -1017,12 +1017,12 @@ namespace Litle.Sdk.Test.Unit
                 litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
                 litle.SetLitleFile(mockedLitleFile);
                 litle.SetLitleTime(mockLitleTime.Object);
-                batchRequest litleBatchRequest = new batchRequest();
-                litleBatchRequest.setLitleFile(mockedLitleFile);
-                litleBatchRequest.setLitleTime(mockLitleTime.Object);
+                BatchRequest litleBatchRequest = new BatchRequest();
+                litleBatchRequest.SetLitleFile(mockedLitleFile);
+                litleBatchRequest.SetLitleTime(mockLitleTime.Object);
 
-                litleBatchRequest.addAuthorization(authorization);
-                litleBatchRequest.addAuthorization(authorization);
+                litleBatchRequest.AddAuthorization(authorization);
+                litleBatchRequest.AddAuthorization(authorization);
                 litle.AddBatch(litleBatchRequest);
 
                 string batchFileName = litle.SendToLitle();
@@ -1071,11 +1071,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addAuthorization(authorization);
-            litleBatchRequest.addAuthorization(authorization);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1116,9 +1116,9 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleTime(mockedLitleTime);
             litle.SetLitleFile(mockedLitleFile);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.addAuthorization(authorization);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.AddAuthorization(authorization);
             litle.AddBatch(litleBatchRequest);
 
             string resultFile = litle.Serialize();
@@ -1131,8 +1131,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testRFRRequest()
         {
-            RFRRequest rfrRequest = new RFRRequest();
-            rfrRequest.litleSessionId = 123456789;
+            RfrRequest rfrRequest = new RfrRequest();
+            rfrRequest.LitleSessionId = 123456789;
 
             var mockBatchXmlReader = new Mock<XmlReader>();
             mockBatchXmlReader.Setup(XmlReader => XmlReader.ReadState).Returns(ReadState.Closed);
@@ -1157,8 +1157,8 @@ namespace Litle.Sdk.Test.Unit
             litle.SetCommunication(mockedCommunications);
             litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            rfrRequest.setLitleFile(mockedLitleFile);
-            rfrRequest.setLitleTime(mockedLitleTime);
+            rfrRequest.SetLitleFile(mockedLitleFile);
+            rfrRequest.SetLitleTime(mockedLitleTime);
 
             litle.AddRfrRequest(rfrRequest);
 
@@ -1211,10 +1211,10 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCancelSubscription(cancel);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCancelSubscription(cancel);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1275,10 +1275,10 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addUpdateSubscription(update);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddUpdateSubscription(update);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1329,11 +1329,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCreatePlan(createPlan);
-            litleBatchRequest.addCreatePlan(createPlan);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCreatePlan(createPlan);
+            litleBatchRequest.AddCreatePlan(createPlan);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1382,11 +1382,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addUpdatePlan(updatePlan);
-            litleBatchRequest.addUpdatePlan(updatePlan);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddUpdatePlan(updatePlan);
+            litleBatchRequest.AddUpdatePlan(updatePlan);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1436,11 +1436,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addActivate(activate);
-            litleBatchRequest.addActivate(activate);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddActivate(activate);
+            litleBatchRequest.AddActivate(activate);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1490,11 +1490,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addDeactivate(deactivate);
-            litleBatchRequest.addDeactivate(deactivate);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddDeactivate(deactivate);
+            litleBatchRequest.AddDeactivate(deactivate);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1544,11 +1544,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addLoad(load);
-            litleBatchRequest.addLoad(load);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddLoad(load);
+            litleBatchRequest.AddLoad(load);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1598,11 +1598,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addUnload(unload);
-            litleBatchRequest.addUnload(unload);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddUnload(unload);
+            litleBatchRequest.AddUnload(unload);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1652,11 +1652,11 @@ namespace Litle.Sdk.Test.Unit
 
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addBalanceInquiry(balanceInquiry);
-            litleBatchRequest.addBalanceInquiry(balanceInquiry);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddBalanceInquiry(balanceInquiry);
+            litleBatchRequest.AddBalanceInquiry(balanceInquiry);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1675,21 +1675,21 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckPreNoteSale()
         {
-            echeckPreNoteSale echeckPreNoteSale = new echeckPreNoteSale();
-            echeckPreNoteSale.orderId = "12345";
-            echeckPreNoteSale.orderSource = orderSourceType.ecommerce;
+            EcheckPreNoteSale echeckPreNoteSale = new EcheckPreNoteSale();
+            echeckPreNoteSale.OrderId = "12345";
+            echeckPreNoteSale.OrderSource = orderSourceType.ecommerce;
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.Checking;
             echeck.accNum = "12345657890";
             echeck.routingNum = "123456789";
             echeck.checkNum = "123455";
-            echeckPreNoteSale.echeck = echeck;
+            echeckPreNoteSale.Echeck = echeck;
             contact contact = new contact();
             contact.name = "Bob";
             contact.city = "lowell";
             contact.state = "MA";
             contact.email = "litle.com";
-            echeckPreNoteSale.billToAddress = contact;
+            echeckPreNoteSale.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
@@ -1716,11 +1716,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSale);
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSale);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSale);
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSale);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();
@@ -1742,21 +1742,21 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckPreNoteCredit()
         {
-            echeckPreNoteCredit echeckPreNoteCredit = new echeckPreNoteCredit();
-            echeckPreNoteCredit.orderId = "12345";
-            echeckPreNoteCredit.orderSource = orderSourceType.ecommerce;
+            EcheckPreNoteCredit echeckPreNoteCredit = new EcheckPreNoteCredit();
+            echeckPreNoteCredit.OrderId = "12345";
+            echeckPreNoteCredit.OrderSource = orderSourceType.ecommerce;
             echeckType echeck = new echeckType();
             echeck.accType = echeckAccountTypeEnum.CorpSavings;
             echeck.accNum = "12345657890";
             echeck.routingNum = "123456789";
             echeck.checkNum = "123455";
-            echeckPreNoteCredit.echeck = echeck;
+            echeckPreNoteCredit.Echeck = echeck;
             contact contact = new contact();
             contact.name = "Bob";
             contact.city = "lowell";
             contact.state = "MA";
             contact.email = "litle.com";
-            echeckPreNoteCredit.billToAddress = contact;
+            echeckPreNoteCredit.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
@@ -1783,11 +1783,11 @@ namespace Litle.Sdk.Test.Unit
             litle.SetLitleFile(mockedLitleFile);
             litle.SetLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest();
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCredit);
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCredit);
+            BatchRequest litleBatchRequest = new BatchRequest();
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCredit);
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCredit);
             litle.AddBatch(litleBatchRequest);
 
             string batchFileName = litle.SendToLitle();

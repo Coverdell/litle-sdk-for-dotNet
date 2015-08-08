@@ -150,7 +150,7 @@ namespace Litle.Sdk
             return _litleFile;
         }
 
-        public void AddBatch(batchRequest litleBatchRequest)
+        public void AddBatch(BatchRequest litleBatchRequest)
         {
             if (_numOfRfrRequest != 0)
             {
@@ -163,7 +163,7 @@ namespace Litle.Sdk
             _numOfLitleBatchRequest++;
         }
 
-        public void AddRfrRequest(RFRRequest rfrRequest)
+        public void AddRfrRequest(RfrRequest rfrRequest)
         {
             if (_numOfLitleBatchRequest != 0)
             {
@@ -204,7 +204,7 @@ namespace Litle.Sdk
             return _litleXmlSerializer.DeserializeObjectFromFile(_responseDirectory + batchFileName);
         }
 
-        public string SerializeBatchRequestToFile(batchRequest litleBatchRequest, string filePath)
+        public string SerializeBatchRequestToFile(BatchRequest litleBatchRequest, string filePath)
         {
             filePath = _litleFile.CreateRandomFile(_requestDirectory, Path.GetFileName(filePath), "_temp_litleRequest.xml",
                 _litleTime);
@@ -214,7 +214,7 @@ namespace Litle.Sdk
             return filePath;
         }
 
-        public string SerializeRfrRequestToFile(RFRRequest rfrRequest, string filePath)
+        public string SerializeRfrRequestToFile(RfrRequest rfrRequest, string filePath)
         {
             filePath = _litleFile.CreateRandomFile(_requestDirectory, Path.GetFileName(filePath), "_temp_litleRequest.xml",
                 _litleTime);
@@ -253,11 +253,11 @@ namespace Litle.Sdk
             return filePath;
         }
 
-        private void FillInReportGroup(batchRequest litleBatchRequest)
+        private void FillInReportGroup(BatchRequest litleBatchRequest)
         {
-            if (litleBatchRequest.reportGroup == null)
+            if (litleBatchRequest.ReportGroup == null)
             {
-                litleBatchRequest.reportGroup = _config["reportGroup"];
+                litleBatchRequest.ReportGroup = _config["reportGroup"];
             }
         }
     }
