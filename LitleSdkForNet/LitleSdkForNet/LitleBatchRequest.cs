@@ -16,8 +16,8 @@ namespace Litle.Sdk
 
         public string batchFilePath;
         private string tempBatchFilePath;
-        private litleFile litleFile;
-        private litleTime litleTime;
+        private LitleFile litleFile;
+        private LitleTime litleTime;
         private string requestDirectory;
         private string responseDirectory;
 
@@ -118,8 +118,8 @@ namespace Litle.Sdk
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
 
-            litleFile = new litleFile();
-            litleTime = new litleTime();
+            litleFile = new LitleFile();
+            litleTime = new LitleTime();
 
             numAuthorization = 0;
             numAuthReversal = 0;
@@ -181,22 +181,22 @@ namespace Litle.Sdk
             return this.requestDirectory;
         }
 
-        public void setLitleFile(litleFile litleFile)
+        public void setLitleFile(LitleFile litleFile)
         {
             this.litleFile = litleFile;
         }
 
-        public litleFile getLitleFile()
+        public LitleFile getLitleFile()
         {
             return this.litleFile;
         }
 
-        public void setLitleTime(litleTime litleTime)
+        public void setLitleTime(LitleTime litleTime)
         {
             this.litleTime = litleTime;
         }
 
-        public litleTime getLitleTime()
+        public LitleTime getLitleTime()
         {
             return this.litleTime;
         }
@@ -1001,7 +1001,7 @@ namespace Litle.Sdk
 
             string xmlFooter = "</batchRequest>\r\n";
 
-            batchFilePath = litleFile.createRandomFile(requestDirectory, null, "_batchRequest.xml", litleTime);
+            batchFilePath = litleFile.CreateRandomFile(requestDirectory, null, "_batchRequest.xml", litleTime);
 
             litleFile.AppendLineToFile(batchFilePath, xmlHeader);
             litleFile.AppendFileToFile(batchFilePath, tempBatchFilePath);
@@ -1237,10 +1237,10 @@ namespace Litle.Sdk
             return xmlHeader;
         }
 
-        private string saveElement(litleFile litleFile, litleTime litleTime, string filePath, transactionRequest element)
+        private string saveElement(LitleFile litleFile, LitleTime litleTime, string filePath, transactionRequest element)
         {
             string fPath;
-            fPath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_batchRequest.xml", litleTime);
+            fPath = litleFile.CreateRandomFile(requestDirectory, Path.GetFileName(filePath), "_temp_batchRequest.xml", litleTime);
 
             litleFile.AppendLineToFile(fPath, element.Serialize());
 
@@ -1309,8 +1309,8 @@ namespace Litle.Sdk
         public long litleSessionId;
         public accountUpdateFileRequestData accountUpdateFileRequestData;
 
-        private litleTime litleTime;
-        private litleFile litleFile;
+        private LitleTime litleTime;
+        private LitleFile litleFile;
         private string requestDirectory;
         private string responseDirectory;
 
@@ -1336,8 +1336,8 @@ namespace Litle.Sdk
             config["requestDirectory"] = Properties.Settings.Default.requestDirectory;
             config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
-            litleTime = new litleTime();
-            litleFile = new litleFile();
+            litleTime = new LitleTime();
+            litleFile = new LitleFile();
 
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
@@ -1355,8 +1355,8 @@ namespace Litle.Sdk
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
 
-            litleFile = new litleFile();
-            litleTime = new litleTime();
+            litleFile = new LitleFile();
+            litleTime = new LitleTime();
         }
 
         public string getRequestDirectory()
@@ -1374,22 +1374,22 @@ namespace Litle.Sdk
             this.config = config;
         }
 
-        public void setLitleFile(litleFile litleFile)
+        public void setLitleFile(LitleFile litleFile)
         {
             this.litleFile = litleFile;
         }
 
-        public litleFile getLitleFile()
+        public LitleFile getLitleFile()
         {
             return this.litleFile;
         }
 
-        public void setLitleTime(litleTime litleTime)
+        public void setLitleTime(LitleTime litleTime)
         {
             this.litleTime = litleTime;
         }
 
-        public litleTime getLitleTime()
+        public LitleTime getLitleTime()
         {
             return this.litleTime;
         }
@@ -1399,7 +1399,7 @@ namespace Litle.Sdk
             string xmlHeader = "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">";
             string xmlFooter = "\r\n</RFRRequest>";
 
-            string filePath = litleFile.createRandomFile(requestDirectory, null, "_RFRRequest.xml", litleTime);
+            string filePath = litleFile.CreateRandomFile(requestDirectory, null, "_RFRRequest.xml", litleTime);
 
             string xmlBody = "";
 

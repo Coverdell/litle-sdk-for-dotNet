@@ -10,7 +10,7 @@ namespace Litle.Sdk.Test.Functional
     [TestFixture]
     class TestBatchStream
     {
-        private litleRequest litle;
+        private LitleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
 
@@ -53,7 +53,7 @@ namespace Litle.Sdk.Test.Functional
         [SetUp]
         public void setUpBeforeTest()
         {
-            litle = new litleRequest();
+            litle = new LitleRequest();
         }
 
         [Test]
@@ -338,9 +338,9 @@ namespace Litle.Sdk.Test.Functional
             updateCardValidationNumOnToken2.litleToken = "4242424242424242";
 
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitleWithStream();
+            litleResponse litleResponse = litle.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -494,8 +494,8 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addAccountUpdate(accountUpdate2);
 
-            litle.addBatch(litleBatchRequest);
-            litleResponse litleResponse = litle.sendToLitleWithStream();
+            litle.AddBatch(litleBatchRequest);
+            litleResponse litleResponse = litle.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -538,8 +538,8 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addAccountUpdate(accountUpdate2);
 
-            litle.addBatch(litleBatchRequest);
-            litleResponse litleResponse = litle.sendToLitleWithStream();
+            litle.AddBatch(litleBatchRequest);
+            litleResponse litleResponse = litle.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
 
@@ -558,18 +558,18 @@ namespace Litle.Sdk.Test.Functional
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
 
-            litleRequest litleRfr = new litleRequest();
+            LitleRequest litleRfr = new LitleRequest();
             RFRRequest rfrRequest = new RFRRequest();
             accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
             accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;
             accountUpdateFileRequestData.postDay = DateTime.Now;
             rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
 
-            litleRfr.addRFRRequest(rfrRequest);            
+            litleRfr.AddRfrRequest(rfrRequest);            
 
             try
             {
-                litleResponse litleRfrResponse = litleRfr.sendToLitleWithStream();
+                litleResponse litleRfrResponse = litleRfr.SendToLitleWithStream();
                 Assert.NotNull(litleRfrResponse);
 
                 RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
@@ -805,7 +805,7 @@ namespace Litle.Sdk.Test.Functional
 
             try
             {
-                litle.addBatch(litleBatchRequest);
+                litle.AddBatch(litleBatchRequest);
             }
             catch (System.NullReferenceException e)
             {
@@ -1050,11 +1050,11 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
 
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
             try
             {
-                litleResponse litleResponse = litle.sendToLitleWithStream();
+                litleResponse litleResponse = litle.SendToLitleWithStream();
             }
             catch (LitleOnlineException e)
             {
@@ -1133,9 +1133,9 @@ namespace Litle.Sdk.Test.Functional
             echeckPreNoteCreditAccErr.billToAddress = billToAddress;
             litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditAccErr);
 
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.sendToLitleWithStream();
+            litleResponse litleResponse = litle.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -1187,7 +1187,7 @@ namespace Litle.Sdk.Test.Functional
             configOverride["requestDirectory"] = Properties.Settings.Default.requestDirectory;
             configOverride["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
-            litleRequest litleOverride = new litleRequest(configOverride);
+            LitleRequest litleOverride = new LitleRequest(configOverride);
 
             batchRequest litleBatchRequest = new batchRequest(configOverride);
 
@@ -1265,9 +1265,9 @@ namespace Litle.Sdk.Test.Functional
             physicalCheckDebit.amount = 107L;
             litleBatchRequest.addPhysicalCheckDebit(physicalCheckDebit);
 
-            litleOverride.addBatch(litleBatchRequest);
+            litleOverride.AddBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litleOverride.sendToLitleWithStream();
+            litleResponse litleResponse = litleOverride.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);

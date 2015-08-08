@@ -14,27 +14,27 @@ namespace Litle.Sdk.Test.Unit
     [TestFixture]
     class TestBatch
     {
-        private litleRequest litle;
+        private LitleRequest litle;
         private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";
         private const string timeRegex = "[0-1][0-9]-[0-3][0-9]-[0-9]{4}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{4}_";
         private const string batchNameRegex = timeRegex + "[A-Z]{8}";
         private const string mockFileName = "TheRainbow.xml";
         private const string mockFilePath = "C:\\Somewhere\\Over\\" + mockFileName;
 
-        private Mock<litleTime> mockLitleTime;
-        private Mock<litleFile> mockLitleFile;
+        private Mock<LitleTime> mockLitleTime;
+        private Mock<LitleFile> mockLitleFile;
         private Mock<Communications> mockCommunications;
         private Mock<XmlReader> mockXmlReader;
 
         [TestFixtureSetUp]
         public void setUp()
         {
-            mockLitleTime = new Mock<litleTime>();
-            mockLitleTime.Setup(litleTime => litleTime.getCurrentTime(It.Is<String>(resultFormat => resultFormat == timeFormat))).Returns("01-01-1960_01-22-30-1234_");
+            mockLitleTime = new Mock<LitleTime>();
+            mockLitleTime.Setup(litleTime => litleTime.GetCurrentTime(It.Is<String>(resultFormat => resultFormat == timeFormat))).Returns("01-01-1960_01-22-30-1234_");
 
-            mockLitleFile = new Mock<litleFile>();
-            mockLitleFile.Setup(litleFile => litleFile.createDirectory(It.IsAny<String>()));
-            mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
+            mockLitleFile = new Mock<LitleFile>();
+            mockLitleFile.Setup(litleFile => litleFile.CreateDirectory(It.IsAny<String>()));
+            mockLitleFile.Setup(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
             mockLitleFile.Setup(litleFile => litleFile.AppendFileToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
             mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
 
@@ -44,7 +44,7 @@ namespace Litle.Sdk.Test.Unit
         [SetUp]
         public void setUpBeforeEachTest()
         {
-            litle = new litleRequest();
+            litle = new LitleRequest();
 
             mockXmlReader = new Mock<XmlReader>();
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadToFollowing(It.IsAny<String>())).Returns(true).Returns(true).Returns(false);
@@ -74,15 +74,15 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            litle = new litleRequest(mockConfig);
+            litle = new LitleRequest(mockConfig);
 
-            Assert.AreEqual("C:\\MockRequests\\Requests\\", litle.getRequestDirectory());
-            Assert.AreEqual("C:\\MockResponses\\Responses\\", litle.getResponseDirectory());
+            Assert.AreEqual("C:\\MockRequests\\Requests\\", litle.GetRequestDirectory());
+            Assert.AreEqual("C:\\MockResponses\\Responses\\", litle.GetResponseDirectory());
 
-            Assert.NotNull(litle.getCommunication());
-            Assert.NotNull(litle.getLitleTime());
-            Assert.NotNull(litle.getLitleFile());
-            Assert.NotNull(litle.getLitleXmlSerializer());
+            Assert.NotNull(litle.GetCommunication());
+            Assert.NotNull(litle.GetLitleTime());
+            Assert.NotNull(litle.GetLitleFile());
+            Assert.NotNull(litle.GetLitleXmlSerializer());
         }
 
         [Test]
@@ -113,25 +113,25 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addAccountUpdate(accountUpdate);
             litleBatchRequest.addAccountUpdate(accountUpdate);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             accountUpdateResponse actualAccountUpdateResponse1 = actualLitleBatchResponse.nextAccountUpdateResponse();
             accountUpdateResponse actualAccountUpdateResponse2 = actualLitleBatchResponse.nextAccountUpdateResponse();
@@ -178,25 +178,25 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addAuthorization(authorization);
             litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -232,26 +232,26 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunications = mockCommunications.Object;
-            litle.setCommunication(mockedCommunications);
+            litle.SetCommunication(mockedCommunications);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addAuthReversal(authreversal);
             litleBatchRequest.addAuthReversal(authreversal);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             authReversalResponse actualAuthReversalResponse1 = actualLitleBatchResponse.nextAuthReversalResponse();
             authReversalResponse actualAuthReversalResponse2 = actualLitleBatchResponse.nextAuthReversalResponse();
@@ -290,23 +290,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCapture(capture);
             litleBatchRequest.addCapture(capture);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             captureResponse actualCaptureResponse1 = actualLitleBatchResponse.nextCaptureResponse();
             captureResponse actualCaptureResponse2 = actualLitleBatchResponse.nextCaptureResponse();
@@ -356,23 +356,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
             litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             captureGivenAuthResponse actualCaptureGivenAuthReponse1 = actualLitleBatchResponse.nextCaptureGivenAuthResponse();
             captureGivenAuthResponse actualCaptureGivenAuthReponse2 = actualLitleBatchResponse.nextCaptureGivenAuthResponse();
@@ -417,23 +417,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCredit(credit);
             litleBatchRequest.addCredit(credit);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             creditResponse actualCreditReponse1 = actualLitleBatchResponse.nextCreditResponse();
             creditResponse actualCreditReponse2 = actualLitleBatchResponse.nextCreditResponse();
@@ -472,23 +472,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckCredit(echeckcredit);
             litleBatchRequest.addEcheckCredit(echeckcredit);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             echeckCreditResponse actualEcheckCreditResponse1 = actualLitleBatchResponse.nextEcheckCreditResponse();
             echeckCreditResponse actualEcheckCreditResponse2 = actualLitleBatchResponse.nextEcheckCreditResponse();
@@ -526,23 +526,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckRedeposit(echeckredeposit);
             litleBatchRequest.addEcheckRedeposit(echeckredeposit);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             echeckRedepositResponse actualEcheckRedepositResponse1 = actualLitleBatchResponse.nextEcheckRedepositResponse();
             echeckRedepositResponse actualEcheckRedepositResponse2 = actualLitleBatchResponse.nextEcheckRedepositResponse();
@@ -594,23 +594,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckSale(echecksale);
             litleBatchRequest.addEcheckSale(echecksale);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             echeckSalesResponse actualEcheckSalesResponse1 = actualLitleBatchResponse.nextEcheckSalesResponse();
             echeckSalesResponse actualEcheckSalesResponse2 = actualLitleBatchResponse.nextEcheckSalesResponse();
@@ -662,23 +662,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckVerification(echeckverification);
             litleBatchRequest.addEcheckVerification(echeckverification);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             echeckVerificationResponse actualEcheckVerificationResponse1 = actualLitleBatchResponse.nextEcheckVerificationResponse();
             echeckVerificationResponse actualEcheckVerificationResponse2 = actualLitleBatchResponse.nextEcheckVerificationResponse();
@@ -723,23 +723,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addForceCapture(forcecapture);
             litleBatchRequest.addForceCapture(forcecapture);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             forceCaptureResponse actualForceCaptureResponse1 = actualLitleBatchResponse.nextForceCaptureResponse();
             forceCaptureResponse actualForceCaptureResponse2 = actualLitleBatchResponse.nextForceCaptureResponse();
@@ -784,23 +784,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addSale(sale);
             litleBatchRequest.addSale(sale);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             saleResponse actualSaleResponse1 = actualLitleBatchResponse.nextSaleResponse();
             saleResponse actualSaleResponse2 = actualLitleBatchResponse.nextSaleResponse();
@@ -839,23 +839,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addRegisterTokenRequest(token);
             litleBatchRequest.addRegisterTokenRequest(token);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             registerTokenResponse actualRegisterTokenResponse1 = actualLitleBatchResponse.nextRegisterTokenResponse();
             registerTokenResponse actualRegisterTokenResponse2 = actualLitleBatchResponse.nextRegisterTokenResponse();
@@ -894,23 +894,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             updateCardValidationNumOnTokenResponse actualUpdateCardValidationNumOnTokenResponse1 = actualLitleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
             updateCardValidationNumOnTokenResponse actualUpdateCardValidationNumOnTokenResponse2 = actualLitleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
@@ -961,24 +961,24 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
             try
             {
-                litle.setCommunication(mockedCommunications);
-                litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-                litle.setLitleFile(mockedLitleFile);
-                litle.setLitleTime(mockLitleTime.Object);
+                litle.SetCommunication(mockedCommunications);
+                litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+                litle.SetLitleFile(mockedLitleFile);
+                litle.SetLitleTime(mockLitleTime.Object);
                 batchRequest litleBatchRequest = new batchRequest();
                 litleBatchRequest.setLitleFile(mockedLitleFile);
                 litleBatchRequest.setLitleTime(mockLitleTime.Object);
 
                 litleBatchRequest.addAuthorization(authorization);
                 litleBatchRequest.addAuthorization(authorization);
-                litle.addBatch(litleBatchRequest);
+                litle.AddBatch(litleBatchRequest);
 
-                string batchFileName = litle.sendToLitle();
-                litleResponse litleResponse = litle.receiveFromLitle(batchFileName);
+                string batchFileName = litle.SendToLitle();
+                litleResponse litleResponse = litle.ReceiveFromLitle(batchFileName);
             }
             catch (LitleOnlineException e)
             {
@@ -1009,24 +1009,24 @@ namespace Litle.Sdk.Test.Unit
             mockXml.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockXml.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
             try
             {
-                litle.setCommunication(mockedCommunications);
-                litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-                litle.setLitleFile(mockedLitleFile);
-                litle.setLitleTime(mockLitleTime.Object);
+                litle.SetCommunication(mockedCommunications);
+                litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+                litle.SetLitleFile(mockedLitleFile);
+                litle.SetLitleTime(mockLitleTime.Object);
                 batchRequest litleBatchRequest = new batchRequest();
                 litleBatchRequest.setLitleFile(mockedLitleFile);
                 litleBatchRequest.setLitleTime(mockLitleTime.Object);
 
                 litleBatchRequest.addAuthorization(authorization);
                 litleBatchRequest.addAuthorization(authorization);
-                litle.addBatch(litleBatchRequest);
+                litle.AddBatch(litleBatchRequest);
 
-                string batchFileName = litle.sendToLitle();
-                litleResponse litleResponse = litle.receiveFromLitle(batchFileName);
+                string batchFileName = litle.SendToLitle();
+                litleResponse litleResponse = litle.ReceiveFromLitle(batchFileName);
             }
             catch (LitleOnlineException e)
             {
@@ -1065,22 +1065,22 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addAuthorization(authorization);
             litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             authorizationResponse actualAuthorizationResponse1 = actualLitleBatchResponse.nextAuthorizationResponse();
             authorizationResponse actualAuthorizationResponse2 = actualLitleBatchResponse.nextAuthorizationResponse();
@@ -1110,16 +1110,16 @@ namespace Litle.Sdk.Test.Unit
             card.expDate = "1210";
             authorization.card = card;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litleTime mockedLitleTime = mockLitleTime.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            LitleTime mockedLitleTime = mockLitleTime.Object;
 
-            litle.setLitleTime(mockedLitleTime);
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockedLitleTime);
+            litle.SetLitleFile(mockedLitleFile);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
             string resultFile = litle.Serialize();
 
@@ -1148,23 +1148,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litleTime mockedLitleTime = mockLitleTime.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            LitleTime mockedLitleTime = mockLitleTime.Object;
             Communications mockedCommunications = mockCommunications.Object;
 
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockedLitleTime);
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockedLitleTime);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             rfrRequest.setLitleFile(mockedLitleFile);
             rfrRequest.setLitleTime(mockedLitleTime);
 
-            litle.addRFRRequest(rfrRequest);
+            litle.AddRfrRequest(rfrRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse nullLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             RFRResponse actualRFRResponse = actualLitleResponse.nextRFRResponse();
             RFRResponse nullRFRResponse = actualLitleResponse.nextRFRResponse();
@@ -1201,24 +1201,24 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCancelSubscription(cancel);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1265,24 +1265,24 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addUpdateSubscription(update);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1319,25 +1319,25 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCreatePlan(createPlan);
             litleBatchRequest.addCreatePlan(createPlan);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1372,25 +1372,25 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addUpdatePlan(updatePlan);
             litleBatchRequest.addUpdatePlan(updatePlan);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1426,25 +1426,25 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addActivate(activate);
             litleBatchRequest.addActivate(activate);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1480,25 +1480,25 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addDeactivate(deactivate);
             litleBatchRequest.addDeactivate(deactivate);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1534,25 +1534,25 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addLoad(load);
             litleBatchRequest.addLoad(load);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1588,25 +1588,25 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addUnload(unload);
             litleBatchRequest.addUnload(unload);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1642,25 +1642,25 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
 
             Communications mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addBalanceInquiry(balanceInquiry);
             litleBatchRequest.addBalanceInquiry(balanceInquiry);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            string batchFileName = litle.SendToLitle();
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1709,23 +1709,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSale);
             litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSale);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             echeckPreNoteSaleResponse actualEcheckPreNoteSaleResponse1 = actualLitleBatchResponse.nextEcheckPreNoteSaleResponse();
             echeckPreNoteSaleResponse actualEcheckPreNoteSaleResponse2 = actualLitleBatchResponse.nextEcheckPreNoteSaleResponse();
@@ -1776,23 +1776,23 @@ namespace Litle.Sdk.Test.Unit
             mockLitleXmlSerializer.Setup(litleXmlSerializer => litleXmlSerializer.DeserializeObjectFromFile(It.IsAny<String>())).Returns(mockedLitleResponse);
             litleXmlSerializer mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
 
-            litleFile mockedLitleFile = mockLitleFile.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
             batchRequest litleBatchRequest = new batchRequest();
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCredit);
             litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCredit);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchFileName = litle.sendToLitle();
+            string batchFileName = litle.SendToLitle();
 
-            litleResponse actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            litleResponse actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             batchResponse actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             echeckPreNoteCreditResponse actualEcheckPreNoteCreditResponse1 = actualLitleBatchResponse.nextEcheckPreNoteCreditResponse();
             echeckPreNoteCreditResponse actualEcheckPreNoteCreditResponse2 = actualLitleBatchResponse.nextEcheckPreNoteCreditResponse();

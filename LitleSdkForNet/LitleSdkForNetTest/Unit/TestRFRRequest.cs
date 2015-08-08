@@ -19,16 +19,16 @@ namespace Litle.Sdk.Test.Unit
         private const string mockFileName = "TheRainbow.xml";
         private const string mockFilePath = "C:\\Somewhere\\\\Over\\\\" + mockFileName;
 
-        private Mock<litleFile> mockLitleFile;
-        private Mock<litleTime> mockLitleTime;
+        private Mock<LitleFile> mockLitleFile;
+        private Mock<LitleTime> mockLitleTime;
 
         [TestFixtureSetUp]
         public void setUp()
         {
-            mockLitleFile = new Mock<litleFile>();
-            mockLitleTime = new Mock<litleTime>();
+            mockLitleFile = new Mock<LitleFile>();
+            mockLitleTime = new Mock<LitleTime>();
 
-            mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
+            mockLitleFile.Setup(litleFile => litleFile.CreateRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
             mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
         }
 
@@ -73,8 +73,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testSerialize()
         {
-            litleFile mockedLitleFile = mockLitleFile.Object;
-            litleTime mockedLitleTime = mockLitleTime.Object;
+            LitleFile mockedLitleFile = mockLitleFile.Object;
+            LitleTime mockedLitleTime = mockLitleTime.Object;
 
             rfrRequest.litleSessionId = 123456789;
             rfrRequest.setLitleFile(mockedLitleFile);

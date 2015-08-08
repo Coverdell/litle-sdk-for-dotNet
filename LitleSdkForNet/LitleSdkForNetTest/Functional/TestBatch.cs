@@ -10,7 +10,7 @@ namespace Litle.Sdk.Test.Functional
     [TestFixture]
     class TestBatch
     {
-        private litleRequest litle;
+        private LitleRequest litle;
         private Dictionary<String, String> invalidConfig;
         private Dictionary<String, String> invalidSftpConfig;
 
@@ -57,7 +57,7 @@ namespace Litle.Sdk.Test.Functional
         [SetUp]
         public void setUpBeforeTest()
         {
-            litle = new litleRequest();
+            litle = new LitleRequest();
         }
 
         [Test]
@@ -340,13 +340,13 @@ namespace Litle.Sdk.Test.Functional
             updateCardValidationNumOnToken2.litleToken = "4242424242424242";
 
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchName = litle.sendToLitle();
+            string batchName = litle.SendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2 * 2, 10 * 2));
+            litle.BlockAndWaitForResponse(batchName, estimatedResponseTime(2 * 2, 10 * 2));
 
-            litleResponse litleResponse = litle.receiveFromLitle(batchName);
+            litleResponse litleResponse = litle.ReceiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -500,12 +500,12 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addAccountUpdate(accountUpdate2);
 
-            litle.addBatch(litleBatchRequest);
-            string batchName = litle.sendToLitle();
+            litle.AddBatch(litleBatchRequest);
+            string batchName = litle.SendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(0, 1 * 2));
+            litle.BlockAndWaitForResponse(batchName, estimatedResponseTime(0, 1 * 2));
 
-            litleResponse litleResponse = litle.receiveFromLitle(batchName);
+            litleResponse litleResponse = litle.ReceiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -546,11 +546,11 @@ namespace Litle.Sdk.Test.Functional
             accountUpdate2.card = card;
 
             litleBatchRequest.addAccountUpdate(accountUpdate2);
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchName = litle.sendToLitle();
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(0, 1 * 2));
-            litleResponse litleResponse = litle.receiveFromLitle(batchName);
+            string batchName = litle.SendToLitle();
+            litle.BlockAndWaitForResponse(batchName, estimatedResponseTime(0, 1 * 2));
+            litleResponse litleResponse = litle.ReceiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
 
@@ -569,21 +569,21 @@ namespace Litle.Sdk.Test.Functional
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
 
-            litleRequest litleRfr = new litleRequest();
+            LitleRequest litleRfr = new LitleRequest();
             RFRRequest rfrRequest = new RFRRequest();
             accountUpdateFileRequestData accountUpdateFileRequestData = new accountUpdateFileRequestData();
             accountUpdateFileRequestData.merchantId = Properties.Settings.Default.merchantId;
             accountUpdateFileRequestData.postDay = DateTime.Now;
             rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
 
-            litleRfr.addRFRRequest(rfrRequest);
+            litleRfr.AddRfrRequest(rfrRequest);
 
-            string rfrBatchName = litleRfr.sendToLitle();
+            string rfrBatchName = litleRfr.SendToLitle();
             
             try
             {
-                litle.blockAndWaitForResponse(rfrBatchName, 120000);
-                litleResponse litleRfrResponse = litle.receiveFromLitle(rfrBatchName);
+                litle.BlockAndWaitForResponse(rfrBatchName, 120000);
+                litleResponse litleRfrResponse = litle.ReceiveFromLitle(rfrBatchName);
                 Assert.NotNull(litleRfrResponse);
                 RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
                 Assert.NotNull(rfrResponse);
@@ -818,7 +818,7 @@ namespace Litle.Sdk.Test.Functional
 
             try
             {
-                litle.addBatch(litleBatchRequest);
+                litle.AddBatch(litleBatchRequest);
             }
             catch (System.NullReferenceException e)
             {
@@ -829,7 +829,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
-            litleRequest litleIC = new litleRequest(invalidConfig);
+            LitleRequest litleIC = new LitleRequest(invalidConfig);
 
             batchRequest litleBatchRequest = new batchRequest();
 
@@ -1065,15 +1065,15 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
 
-            litleIC.addBatch(litleBatchRequest);
+            litleIC.AddBatch(litleBatchRequest);
 
-            string batchName = litleIC.sendToLitle();
+            string batchName = litleIC.SendToLitle();
 
-            litleIC.blockAndWaitForResponse(batchName, 60*1000*5);
+            litleIC.BlockAndWaitForResponse(batchName, 60*1000*5);
 
             try
             {
-                litleResponse litleResponse = litleIC.receiveFromLitle(batchName);
+                litleResponse litleResponse = litleIC.ReceiveFromLitle(batchName);
                 Assert.Fail("Fail to throw a connection exception");
             }
             catch (LitleOnlineException e)
@@ -1085,7 +1085,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidSftpCredientialsBatch()
         {
-            litleRequest litleISC = new litleRequest(invalidSftpConfig);
+            LitleRequest litleISC = new LitleRequest(invalidSftpConfig);
 
             batchRequest litleBatchRequest = new batchRequest();
 
@@ -1321,11 +1321,11 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
 
-            litleISC.addBatch(litleBatchRequest);
+            litleISC.AddBatch(litleBatchRequest);
 
             try
             {
-                string batchName = litleISC.sendToLitle();
+                string batchName = litleISC.SendToLitle();
                 Assert.Fail("Fail to throw a connection exception");
             }
             catch (LitleOnlineException e)
@@ -1352,13 +1352,13 @@ namespace Litle.Sdk.Test.Functional
 
             litleBatchRequest.addAuthorization(authorization);
 
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            string batchName = litle.sendToLitle();
+            string batchName = litle.SendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2 * 2, 10 * 2));
+            litle.BlockAndWaitForResponse(batchName, estimatedResponseTime(2 * 2, 10 * 2));
 
-            litleResponse litleResponse = litle.receiveFromLitle(batchName);
+            litleResponse litleResponse = litle.ReceiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
