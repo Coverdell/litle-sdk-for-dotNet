@@ -37,7 +37,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -63,7 +63,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -89,7 +89,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -115,7 +115,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -138,7 +138,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -161,7 +161,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -183,7 +183,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -210,7 +210,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -247,7 +247,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -277,7 +277,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -304,7 +304,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -375,7 +375,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Authorize(auth);
 
             authorizationResponse authorizationResponse = litle.Authorize(auth);
@@ -422,7 +422,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Authorize(auth);
 
             authorizationResponse authorizationResponse = litle.Authorize(auth);
@@ -467,7 +467,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><orderId>123</orderId><fraudResult><advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
@@ -529,7 +529,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);

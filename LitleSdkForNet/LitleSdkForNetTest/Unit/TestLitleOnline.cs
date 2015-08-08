@@ -41,7 +41,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
      
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorize = litle.Authorize(authorization);
             Assert.AreEqual(123, authorize.litleTxnId);
         }
@@ -61,7 +61,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authReversalResponse><litleTxnId>123</litleTxnId></authReversalResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authReversalResponse authreversalresponse = litle.AuthReversal(authreversal);
             Assert.AreEqual(123, authreversalresponse.litleTxnId);
         }
@@ -81,7 +81,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureResponse><litleTxnId>123</litleTxnId></captureResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             captureResponse captureresponse = litle.Capture(caputure);
             Assert.AreEqual(123, captureresponse.litleTxnId);
         }
@@ -110,7 +110,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             captureGivenAuthResponse caputregivenauthresponse = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual(123, caputregivenauthresponse.litleTxnId);
         }
@@ -134,7 +134,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             creditResponse creditresponse = litle.Credit(credit);
             Assert.AreEqual(123, creditresponse.litleTxnId);
         }
@@ -152,7 +152,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckCreditResponse><litleTxnId>123</litleTxnId></echeckCreditResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             echeckCreditResponse echeckcreditresponse = litle.EcheckCredit(echeckcredit);
             Assert.AreEqual(123, echeckcreditresponse.litleTxnId);
         }
@@ -169,7 +169,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckRedepositResponse><litleTxnId>123</litleTxnId></echeckRedepositResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             echeckRedepositResponse echeckredepositresponse = litle.EcheckRedeposit(echeckredeposit);
             Assert.AreEqual(123, echeckredepositresponse.litleTxnId);
         }
@@ -201,7 +201,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckSalesResponse><litleTxnId>123</litleTxnId></echeckSalesResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             echeckSalesResponse echecksaleresponse = litle.EcheckSale(echecksale);
             Assert.AreEqual(123, echecksaleresponse.litleTxnId);
         }
@@ -233,7 +233,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             echeckVerificationResponse echeckverificaitonresponse = litle.EcheckVerification(echeckverification);
             Assert.AreEqual(123, echeckverificaitonresponse.litleTxnId);
         }
@@ -257,7 +257,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             forceCaptureResponse forcecaptureresponse = litle.ForceCapture(forcecapture);
             Assert.AreEqual(123, forcecaptureresponse.litleTxnId);
         }
@@ -281,7 +281,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             saleResponse saleresponse = litle.Sale(sale);
             Assert.AreEqual(123, saleresponse.litleTxnId);
         }
@@ -300,7 +300,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><registerTokenResponse><litleTxnId>123</litleTxnId></registerTokenResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             registerTokenResponse registertokenresponse = litle.RegisterToken(token);
             Assert.AreEqual(123, registertokenresponse.litleTxnId);
             Assert.IsNull(registertokenresponse.type);
@@ -320,7 +320,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><activateResponse><litleTxnId>123</litleTxnId></activateResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             activateResponse activateResponse = litle.Activate(activate);
             Assert.AreEqual("123", activateResponse.litleTxnId);
         }
@@ -339,7 +339,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><deactivateResponse><litleTxnId>123</litleTxnId></deactivateResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             deactivateResponse deactivateResponse = litle.Deactivate(deactivate);
             Assert.AreEqual("123", deactivateResponse.litleTxnId);
         }
@@ -358,7 +358,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><loadResponse><litleTxnId>123</litleTxnId></loadResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             loadResponse loadResponse = litle.Load(load);
             Assert.AreEqual("123", loadResponse.litleTxnId);
         }
@@ -377,7 +377,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><unloadResponse><litleTxnId>123</litleTxnId></unloadResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             unloadResponse unloadResponse = litle.Unload(unload);
             Assert.AreEqual("123", unloadResponse.litleTxnId);
         }
@@ -396,7 +396,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><balanceInquiryResponse><litleTxnId>123</litleTxnId></balanceInquiryResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             balanceInquiryResponse balanceInquiryResponse = litle.BalanceInquiry(balanceInquiry);
             Assert.AreEqual("123", balanceInquiryResponse.litleTxnId);
         }
@@ -413,7 +413,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><createPlanResponse><planCode>theCode</planCode></createPlanResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             createPlanResponse createPlanResponse = litle.CreatePlan(createPlan);
             Assert.AreEqual("theCode", createPlanResponse.planCode);
         }
@@ -430,7 +430,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><updatePlanResponse><planCode>theCode</planCode></updatePlanResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             updatePlanResponse updatePlanResponse = litle.UpdatePlan(updatePlan);
             Assert.AreEqual("theCode", updatePlanResponse.planCode);
         }
@@ -455,7 +455,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='1' message='Error validating xml data against the schema' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             try
             {
                 litle.Authorize(authorization);
@@ -486,7 +486,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("no xml");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             try
             {
                 litle.Authorize(authorization);
@@ -516,7 +516,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse reportGroup='Default Report Group'></authorizationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             authorizationResponse authorize = litle.Authorize(authorization);
             Assert.AreEqual("Default Report Group", authorize.reportGroup);
         }

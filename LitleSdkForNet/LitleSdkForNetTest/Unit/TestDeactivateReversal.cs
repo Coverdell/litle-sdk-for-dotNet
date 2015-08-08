@@ -34,7 +34,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.22' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><deactivateReversalResponse><litleTxnId>123</litleTxnId></deactivateReversalResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             deactivateReversalResponse response = litle.DeactivateReversal(deactivateReversal);
             Assert.AreEqual("123", response.litleTxnId);
         }

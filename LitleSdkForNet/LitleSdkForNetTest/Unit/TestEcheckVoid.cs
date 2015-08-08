@@ -33,7 +33,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVoidResponse><litleTxnId>123</litleTxnId></echeckVoidResponse></litleOnlineResponse>");
      
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.EcheckVoid(echeckVoid);
         }
 

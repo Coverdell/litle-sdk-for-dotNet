@@ -37,7 +37,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
      
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -56,7 +56,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -74,7 +74,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -101,7 +101,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -151,7 +151,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -177,7 +177,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -199,7 +199,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -216,7 +216,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -233,7 +233,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -249,7 +249,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -268,7 +268,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
 
@@ -299,7 +299,7 @@ namespace Litle.Sdk.Test.Unit
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
             litle.Sale(sale);
         }
     }
