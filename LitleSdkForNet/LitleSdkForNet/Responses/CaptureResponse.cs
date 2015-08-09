@@ -8,7 +8,9 @@ namespace Litle.Sdk.Responses
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class CaptureResponse : TransactionTypeWithReportGroup
     {
+        [XmlElement("giftCardResponse")]
         public GiftCardResponse GiftCardResponse;
+        [XmlElement("fraudResult")]
         public FraudResult FraudResult;
 
         private long _litleTxnIdField;
@@ -87,7 +89,7 @@ namespace Litle.Sdk.Responses
             set { _accountUpdaterField = value; }
         }
 
-        [XmlAttribute]
+        [XmlAttribute("duplicate")]
         public bool Duplicate
         {
             get { return _duplicateField; }
