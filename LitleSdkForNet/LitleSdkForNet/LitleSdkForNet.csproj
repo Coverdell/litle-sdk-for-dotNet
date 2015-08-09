@@ -41,6 +41,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ILitleOnline.cs" />
+    <Compile Include="MethodOfPaymentTypeEnum.cs" />
     <Compile Include="Requests\BatchRequest.cs" />
     <Compile Include="Requests\EcheckPreNoteCredit.cs" />
     <Compile Include="FraudResult.cs" />
@@ -246,7 +248,7 @@
     <Compile Include="LitleOnlineException.cs" />
     <Compile Include="LitleOnline.cs" />
     <Compile Include="Responses\PhysicalCheckDebitResponse.cs" />
-    <Compile Include="XmlFields.cs" />
+    <Compile Include="MethodOfPaymentSerializer.cs" />
     <Compile Include="Requests\FraudCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
