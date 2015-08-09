@@ -360,8 +360,8 @@ namespace Litle.Sdk
 
         private LitleOnlineResponse SendToLitle(LitleOnlineRequest request)
         {
-            string xmlRequest = request.Serialize();
-            string xmlResponse = _communication.HttpPost(xmlRequest, _config);
+            var xmlRequest = request.Serialize();
+            var xmlResponse = _communication.HttpPost(xmlRequest, _config);
             try
             {
                 LitleOnlineResponse litleOnlineResponse = DeserializeObject(xmlResponse);
@@ -387,7 +387,7 @@ namespace Litle.Sdk
 
         public static LitleOnlineResponse DeserializeObject(string response)
         {
-            var serializer = new XmlSerializer(typeof (LitleOnlineResponse));
+            var serializer = new XmlSerializer(typeof (LitleOnlineResponse), "litleOnlineResponse");
             var reader = new StringReader(response);
             return (LitleOnlineResponse) serializer.Deserialize(reader);
         } // deserialize the object
