@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -45,8 +46,8 @@ namespace Litle.Sdk.Test.Functional
             
             creditObj.Card = card;
             
-            creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            CreditResponse response = litle.Credit(creditObj);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -64,8 +65,8 @@ namespace Litle.Sdk.Test.Functional
             mpos.Track2Status = 0;
             creditObj.Mpos = mpos;
 
-            creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            CreditResponse response = litle.Credit(creditObj);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -80,8 +81,8 @@ namespace Litle.Sdk.Test.Functional
 
             creditObj.Paypal = payPalObj;
 
-            creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            CreditResponse response = litle.Credit(creditObj);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -100,8 +101,8 @@ namespace Litle.Sdk.Test.Functional
 
             creditObj.Card = card;
             
-            creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            CreditResponse response = litle.Credit(creditObj);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -124,8 +125,8 @@ namespace Litle.Sdk.Test.Functional
 
             creditObj.Card = card;
 
-            creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            CreditResponse response = litle.Credit(creditObj);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -142,8 +143,8 @@ namespace Litle.Sdk.Test.Functional
 
             creditObj.Card = card;
 
-            creditResponse response = litle.Credit(creditObj);
-            Assert.AreEqual("Approved", response.message);
+            CreditResponse response = litle.Credit(creditObj);
+            Assert.AreEqual("Approved", response.Message);
         }
     }
 }

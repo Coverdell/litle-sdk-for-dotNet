@@ -1,9 +1,10 @@
 using System;
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
-    public class CaptureGivenAuth : transactionTypeWithReportGroup
+    public class CaptureGivenAuth : TransactionTypeWithReportGroup
     {
         public string OrderId;
         public AuthInformation AuthInformation;
@@ -42,10 +43,10 @@ namespace Litle.Sdk.Requests
         public CardTokenType Token;
         public CardPaypageType Paypage;
         public CustomBilling CustomBilling;
-        private govtTaxTypeEnum _taxTypeField;
+        private GovtTaxTypeEnum _taxTypeField;
         private bool _taxTypeSet;
 
-        public govtTaxTypeEnum TaxType
+        public GovtTaxTypeEnum TaxType
         {
             get { return _taxTypeField; }
             set
@@ -77,12 +78,12 @@ namespace Litle.Sdk.Requests
         public override String Serialize()
         {
             var xml = "\r\n<captureGivenAuth";
-            xml += " id=\"" + SecurityElement.Escape(id) + "\"";
-            if (customerId != null)
+            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
+            if (CustomerId != null)
             {
-                xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
+                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
             }
-            xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
             if (AuthInformation != null)
                 xml += "\r\n<authInformation>" + AuthInformation.Serialize() + "\r\n</authInformation>";

@@ -26,7 +26,7 @@ namespace Litle.Sdk.Test.Unit
         public void TestMerchantData()
         {
             EcheckRedeposit echeckRedeposit = new EcheckRedeposit();
-            echeckRedeposit.litleTxnId = 1;
+            echeckRedeposit.LitleTxnId = 1;
             echeckRedeposit.MerchantData = new MerchantDataType();
             echeckRedeposit.MerchantData.Campaign = "camp";
             echeckRedeposit.MerchantData.Affiliate = "affil";

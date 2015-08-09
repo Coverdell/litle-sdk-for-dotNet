@@ -1,6 +1,8 @@
-﻿namespace Litle.Sdk.Requests
+﻿using Litle.Sdk.Responses;
+
+namespace Litle.Sdk.Requests
 {
-    public class FraudCheck : transactionTypeWithReportGroup
+    public class FraudCheck : TransactionTypeWithReportGroup
     {
         public AdvancedFraudChecksType AdvancedFraudChecks;
 

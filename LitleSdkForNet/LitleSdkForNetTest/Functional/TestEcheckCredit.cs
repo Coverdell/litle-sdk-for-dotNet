@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -24,9 +25,9 @@ namespace Litle.Sdk.Test.Functional
             EcheckCredit echeckcredit = new EcheckCredit();
             echeckcredit.Amount = 12L;
             echeckcredit.LitleTxnId = 123456789101112L;
-            echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
+            EcheckCreditResponse response = litle.EcheckCredit(echeckcredit);
 
-            Assert.AreEqual("Approved", response.message);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -52,7 +53,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.OrderId = "12345";
             echeckcredit.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -63,8 +64,8 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.State = "MA";
             billToAddress.Email = "litle.com";
             echeckcredit.BillToAddress = billToAddress;
-            echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Approved", response.message);
+            EcheckCreditResponse response = litle.EcheckCredit(echeckcredit);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -75,7 +76,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.OrderId = "12345";
             echeckcredit.OrderSource = OrderSourceType.Ecommerce;
             EcheckTokenType echeckToken = new EcheckTokenType();
-            echeckToken.AccType = echeckAccountTypeEnum.Checking;
+            echeckToken.AccType = EcheckAccountTypeEnum.Checking;
             echeckToken.LitleToken = "1234565789012";
             echeckToken.RoutingNum = "123456789";
             echeckToken.CheckNum = "123455";
@@ -86,8 +87,8 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.State = "MA";
             billToAddress.Email = "litle.com";
             echeckcredit.BillToAddress = billToAddress;
-            echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Approved", response.message);
+            EcheckCreditResponse response = litle.EcheckCredit(echeckcredit);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -98,7 +99,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.OrderId = "12345";
             echeckcredit.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -123,7 +124,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.OrderId = "12345";
             echeckcredit.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -135,8 +136,8 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.State = "MA";
             billToAddress.Email = "litle.com";
             echeckcredit.BillToAddress = billToAddress;
-            echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Approved", response.message);
+            EcheckCreditResponse response = litle.EcheckCredit(echeckcredit);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -146,8 +147,8 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.Amount = 12L;
             echeckcredit.SecondaryAmount = 50;
             echeckcredit.LitleTxnId = 12345L;
-            echeckCreditResponse response = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual("Approved", response.message);
+            EcheckCreditResponse response = litle.EcheckCredit(echeckcredit);
+            Assert.AreEqual("Approved", response.Message);
         }
     }
 }

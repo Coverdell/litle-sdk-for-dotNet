@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -49,8 +50,8 @@ namespace Litle.Sdk.Test.Functional
             card.Number = "4100000000000000";
             card.ExpDate = "1210";
             capturegivenauth.Card = card;
-            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
-            Assert.AreEqual("Approved", response.message);
+            CaptureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -73,8 +74,8 @@ namespace Litle.Sdk.Test.Functional
             mpos.Track1Status = 0;
             mpos.Track2Status = 0;
             capturegivenauth.Mpos = mpos;
-            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
-            Assert.AreEqual("Approved", response.message);
+            CaptureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -95,8 +96,8 @@ namespace Litle.Sdk.Test.Functional
             cardtoken.CardValidationNum = "555";
             cardtoken.Type = MethodOfPaymentTypeEnum.VI;
             capturegivenauth.Token = cardtoken;
-            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
-            Assert.AreEqual("Approved", response.message);
+            CaptureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -125,8 +126,8 @@ namespace Litle.Sdk.Test.Functional
             card.Number = "4100000000000000";
             card.ExpDate = "1210";
             capturegivenauth.Card = card;
-            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
-            Assert.AreEqual("Approved", response.message);
+            CaptureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -152,8 +153,8 @@ namespace Litle.Sdk.Test.Functional
             card.Number = "4100000000000000";
             card.ExpDate = "1210";
             capturegivenauth.Card=card;
-            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
-            Assert.AreEqual("Approved", response.message);
+            CaptureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -175,8 +176,8 @@ namespace Litle.Sdk.Test.Functional
             cardtoken.CardValidationNum = "555";
             cardtoken.Type = MethodOfPaymentTypeEnum.VI;
             capturegivenauth.Token = cardtoken;
-            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
-            Assert.AreEqual("Approved", response.message);
+            CaptureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -198,8 +199,8 @@ namespace Litle.Sdk.Test.Functional
             card.Number = "4100000000000000";
             card.ExpDate = "1210";
             capturegivenauth.Card = card;
-            captureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
-            Assert.AreEqual("Approved", response.message);
+            CaptureGivenAuthResponse response = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual("Approved", response.Message);
         }
     }
 }

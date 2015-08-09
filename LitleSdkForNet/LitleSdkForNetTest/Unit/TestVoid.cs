@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -35,9 +36,9 @@ namespace Litle.Sdk.Test.Unit
      
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            litleOnlineResponseTransactionResponseVoidResponse response = litle.DoVoid(voidTxn);
-            Assert.AreEqual(123, response.litleTxnId);
-            Assert.AreEqual(456, response.recycling.creditLitleTxnId);
+            LitleOnlineResponseTransactionResponseVoidResponse response = litle.DoVoid(voidTxn);
+            Assert.AreEqual(123, response.LitleTxnId);
+            Assert.AreEqual(456, response.Recycling.CreditLitleTxnId);
         }
 
         [Test]
@@ -53,9 +54,9 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            litleOnlineResponseTransactionResponseVoidResponse response = litle.DoVoid(voidTxn);
-            Assert.AreEqual(123, response.litleTxnId);
-            Assert.IsNull(response.recycling);
+            LitleOnlineResponseTransactionResponseVoidResponse response = litle.DoVoid(voidTxn);
+            Assert.AreEqual(123, response.LitleTxnId);
+            Assert.IsNull(response.Recycling);
         }
 
     }

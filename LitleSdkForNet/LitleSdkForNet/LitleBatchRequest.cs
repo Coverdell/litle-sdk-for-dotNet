@@ -4,6 +4,7 @@ using System.IO;
 using System.Security;
 using Litle.Sdk.Properties;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk
 {
@@ -1218,7 +1219,7 @@ namespace Litle.Sdk
             return xmlHeader;
         }
 
-        private string SaveElement(LitleFile litleFile, LitleTime litleTime, string filePath, transactionRequest element)
+        private string SaveElement(LitleFile litleFile, LitleTime litleTime, string filePath, TransactionRequest element)
         {
             string fPath = litleFile.CreateRandomFile(_requestDirectory, Path.GetFileName(filePath),
                 "_temp_batchRequest.xml",
@@ -1229,11 +1230,11 @@ namespace Litle.Sdk
             return fPath;
         }
 
-        private void FillInReportGroup(transactionTypeWithReportGroup txn)
+        private void FillInReportGroup(TransactionTypeWithReportGroup txn)
         {
-            if (txn.reportGroup == null)
+            if (txn.ReportGroup == null)
             {
-                txn.reportGroup = Config["reportGroup"];
+                txn.ReportGroup = Config["reportGroup"];
             }
         }
 
@@ -1399,7 +1400,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class EcheckPreNoteCredit : transactionTypeWithReportGroup
+    public class EcheckPreNoteCredit : TransactionTypeWithReportGroup
     {
         /// <remarks />
         public string OrderId { get; set; }
@@ -1420,15 +1421,15 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<echeckPreNoteCredit ";
 
-            if (id != null)
+            if (ID != null)
             {
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
             }
-            if (customerId != null)
+            if (CustomerId != null)
             {
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
             }
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
 
             if (OrderSource != null)
@@ -1465,7 +1466,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class EcheckPreNoteSale : transactionTypeWithReportGroup
+    public class EcheckPreNoteSale : TransactionTypeWithReportGroup
     {
         /// <remarks />
         public string OrderId { get; set; }
@@ -1486,15 +1487,15 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<echeckPreNoteSale ";
 
-            if (id != null)
+            if (ID != null)
             {
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
             }
-            if (customerId != null)
+            if (CustomerId != null)
             {
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
             }
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
 
             if (OrderSource != null)
@@ -1531,7 +1532,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class SubmerchantCredit : transactionTypeWithReportGroup
+    public class SubmerchantCredit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1547,11 +1548,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<submerchantCredit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";
@@ -1575,7 +1576,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class PayFacCredit : transactionTypeWithReportGroup
+    public class PayFacCredit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1587,11 +1588,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<payFacCredit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";
@@ -1606,7 +1607,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class ReserveCredit : transactionTypeWithReportGroup
+    public class ReserveCredit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1618,11 +1619,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<reserveCredit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";
@@ -1637,7 +1638,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class VendorCredit : transactionTypeWithReportGroup
+    public class VendorCredit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1653,11 +1654,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<vendorCredit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";
@@ -1681,7 +1682,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class PhysicalCheckCredit : transactionTypeWithReportGroup
+    public class PhysicalCheckCredit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1693,11 +1694,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<physicalCheckCredit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";
@@ -1712,7 +1713,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class SubmerchantDebit : transactionTypeWithReportGroup
+    public class SubmerchantDebit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1728,11 +1729,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<submerchantDebit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";
@@ -1756,7 +1757,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class PayFacDebit : transactionTypeWithReportGroup
+    public class PayFacDebit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1768,11 +1769,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<payFacDebit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";
@@ -1787,7 +1788,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class ReserveDebit : transactionTypeWithReportGroup
+    public class ReserveDebit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1799,11 +1800,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<reserveDebit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";
@@ -1818,7 +1819,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class VendorDebit : transactionTypeWithReportGroup
+    public class VendorDebit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1834,11 +1835,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<vendorDebit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";
@@ -1862,7 +1863,7 @@ namespace Litle.Sdk
         }
     }
 
-    public class PhysicalCheckDebit : transactionTypeWithReportGroup
+    public class PhysicalCheckDebit : TransactionTypeWithReportGroup
     {
         public string FundingSubmerchantId { get; set; }
 
@@ -1874,11 +1875,11 @@ namespace Litle.Sdk
         {
             string xml = "\r\n<physicalCheckDebit ";
 
-            if (id != null)
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
-            if (customerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            if (ID != null)
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
+            if (CustomerId != null)
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             if (FundingSubmerchantId != null)
                 xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
                        "</fundingSubmerchantId>";

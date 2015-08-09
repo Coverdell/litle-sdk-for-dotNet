@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -45,13 +46,13 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0812";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
-            Assert.AreEqual("2000", response.enhancedAuthResponse.fundingSource.availableBalance);
-            Assert.AreEqual("NO", response.enhancedAuthResponse.fundingSource.reloadable);
-            Assert.AreEqual("GIFT", response.enhancedAuthResponse.fundingSource.prepaidCardType);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(FundingSourceTypeEnum.Prepaid, response.EnhancedAuthResponse.FundingSource.Type);
+            Assert.AreEqual("2000", response.EnhancedAuthResponse.FundingSource.AvailableBalance);
+            Assert.AreEqual("NO", response.EnhancedAuthResponse.FundingSource.Reloadable);
+            Assert.AreEqual("GIFT", response.EnhancedAuthResponse.FundingSource.PrepaidCardType);
         }
 
         [Test]
@@ -67,13 +68,13 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0312";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
-            Assert.AreEqual("2000", response.enhancedAuthResponse.fundingSource.availableBalance);
-            Assert.AreEqual("YES", response.enhancedAuthResponse.fundingSource.reloadable);
-            Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(FundingSourceTypeEnum.Prepaid, response.EnhancedAuthResponse.FundingSource.Type);
+            Assert.AreEqual("2000", response.EnhancedAuthResponse.FundingSource.AvailableBalance);
+            Assert.AreEqual("YES", response.EnhancedAuthResponse.FundingSource.Reloadable);
+            Assert.AreEqual("PAYROLL", response.EnhancedAuthResponse.FundingSource.PrepaidCardType);
         }
 
         [Test]
@@ -89,13 +90,13 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0312";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
-            Assert.AreEqual("0", response.enhancedAuthResponse.fundingSource.availableBalance);
-            Assert.AreEqual("YES", response.enhancedAuthResponse.fundingSource.reloadable);
-            Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(FundingSourceTypeEnum.Prepaid, response.EnhancedAuthResponse.FundingSource.Type);
+            Assert.AreEqual("0", response.EnhancedAuthResponse.FundingSource.AvailableBalance);
+            Assert.AreEqual("YES", response.EnhancedAuthResponse.FundingSource.Reloadable);
+            Assert.AreEqual("PAYROLL", response.EnhancedAuthResponse.FundingSource.PrepaidCardType);
         }
 
         [Test]
@@ -111,13 +112,13 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0312";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
-            Assert.AreEqual("6500", response.enhancedAuthResponse.fundingSource.availableBalance);
-            Assert.AreEqual("YES", response.enhancedAuthResponse.fundingSource.reloadable);
-            Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(FundingSourceTypeEnum.Prepaid, response.EnhancedAuthResponse.FundingSource.Type);
+            Assert.AreEqual("6500", response.EnhancedAuthResponse.FundingSource.AvailableBalance);
+            Assert.AreEqual("YES", response.EnhancedAuthResponse.FundingSource.Reloadable);
+            Assert.AreEqual("PAYROLL", response.EnhancedAuthResponse.FundingSource.PrepaidCardType);
         }
 
         [Test]
@@ -133,13 +134,13 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0312";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
-            Assert.AreEqual("12200", response.enhancedAuthResponse.fundingSource.availableBalance);
-            Assert.AreEqual("YES", response.enhancedAuthResponse.fundingSource.reloadable);
-            Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(FundingSourceTypeEnum.Prepaid, response.EnhancedAuthResponse.FundingSource.Type);
+            Assert.AreEqual("12200", response.EnhancedAuthResponse.FundingSource.AvailableBalance);
+            Assert.AreEqual("YES", response.EnhancedAuthResponse.FundingSource.Reloadable);
+            Assert.AreEqual("PAYROLL", response.EnhancedAuthResponse.FundingSource.PrepaidCardType);
         }
 
         [Test]
@@ -155,13 +156,13 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0312";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
-            Assert.AreEqual("20000", response.enhancedAuthResponse.fundingSource.availableBalance);
-            Assert.AreEqual("YES", response.enhancedAuthResponse.fundingSource.reloadable);
-            Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(FundingSourceTypeEnum.Prepaid, response.EnhancedAuthResponse.FundingSource.Type);
+            Assert.AreEqual("20000", response.EnhancedAuthResponse.FundingSource.AvailableBalance);
+            Assert.AreEqual("YES", response.EnhancedAuthResponse.FundingSource.Reloadable);
+            Assert.AreEqual("PAYROLL", response.EnhancedAuthResponse.FundingSource.PrepaidCardType);
         }
 
         [Test]
@@ -177,13 +178,13 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0312";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
-            Assert.AreEqual("10050", response.enhancedAuthResponse.fundingSource.availableBalance);
-            Assert.AreEqual("YES", response.enhancedAuthResponse.fundingSource.reloadable);
-            Assert.AreEqual("PAYROLL", response.enhancedAuthResponse.fundingSource.prepaidCardType);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(FundingSourceTypeEnum.Prepaid, response.EnhancedAuthResponse.FundingSource.Type);
+            Assert.AreEqual("10050", response.EnhancedAuthResponse.FundingSource.AvailableBalance);
+            Assert.AreEqual("YES", response.EnhancedAuthResponse.FundingSource.Reloadable);
+            Assert.AreEqual("PAYROLL", response.EnhancedAuthResponse.FundingSource.PrepaidCardType);
         }
 
         [Test]
@@ -199,10 +200,10 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0912";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(affluenceTypeEnum.AFFLUENT, response.enhancedAuthResponse.affluence);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(AffluenceTypeEnum.Affluent, response.EnhancedAuthResponse.Affluence);
         }
 
         [Test]
@@ -218,10 +219,10 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "1111";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(affluenceTypeEnum.MASSAFFLUENT, response.enhancedAuthResponse.affluence);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(AffluenceTypeEnum.Massaffluent, response.EnhancedAuthResponse.Affluence);
         }
 
         [Test]
@@ -237,10 +238,10 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0412";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(affluenceTypeEnum.AFFLUENT, response.enhancedAuthResponse.affluence);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(AffluenceTypeEnum.Affluent, response.EnhancedAuthResponse.Affluence);
 
         }
 
@@ -257,10 +258,10 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "0812";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual(affluenceTypeEnum.MASSAFFLUENT, response.enhancedAuthResponse.affluence);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual(AffluenceTypeEnum.Massaffluent, response.EnhancedAuthResponse.Affluence);
 
         }
 
@@ -277,10 +278,10 @@ namespace Litle.Sdk.Test.Certification
             card.ExpDate = "1112";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
-            Assert.AreEqual("BRA", response.enhancedAuthResponse.issuerCountry);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
+            Assert.AreEqual("BRA", response.EnhancedAuthResponse.IssuerCountry);
 
         }
 
@@ -304,9 +305,9 @@ namespace Litle.Sdk.Test.Certification
             healthcareiias.IIASFlag = IIASFlagType.Y;
             authorization.HealthcareIIAS = healthcareiias;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("341", response.response);
-            Assert.AreEqual("Invalid healthcare amounts", response.message);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("341", response.Response);
+            Assert.AreEqual("Invalid healthcare amounts", response.Message);
         }
 
         [Test]
@@ -330,9 +331,9 @@ namespace Litle.Sdk.Test.Certification
             healthcareiias.IIASFlag = IIASFlagType.Y;
             authorization.HealthcareIIAS = healthcareiias;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("341", response.response);
-            Assert.AreEqual("Invalid healthcare amounts", response.message);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("341", response.Response);
+            Assert.AreEqual("Invalid healthcare amounts", response.Message);
         }
 
         [Test]
@@ -356,9 +357,9 @@ namespace Litle.Sdk.Test.Certification
             healthcareiias.IIASFlag = IIASFlagType.Y;
             authorization.HealthcareIIAS = healthcareiias;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -385,9 +386,9 @@ namespace Litle.Sdk.Test.Certification
             healthcareiias.IIASFlag = IIASFlagType.Y;
             authorization.HealthcareIIAS = healthcareiias;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("341", response.response);
-            Assert.AreEqual("Invalid healthcare amounts", response.message);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("341", response.Response);
+            Assert.AreEqual("Invalid healthcare amounts", response.Message);
         }
 
         [Test]
@@ -414,9 +415,9 @@ namespace Litle.Sdk.Test.Certification
             healthcareiias.IIASFlag = IIASFlagType.Y;
             authorization.HealthcareIIAS = healthcareiias;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("341", response.response);
-            Assert.AreEqual("Invalid healthcare amounts", response.message);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("341", response.Response);
+            Assert.AreEqual("Invalid healthcare amounts", response.Message);
         }
 
         [Test]
@@ -441,10 +442,10 @@ namespace Litle.Sdk.Test.Certification
             healthcareiias.IIASFlag = IIASFlagType.Y;
             authorization.HealthcareIIAS = healthcareiias;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("010", response.response);
-            Assert.AreEqual("Partially Approved", response.message);
-            Assert.AreEqual("18699", response.approvedAmount);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("010", response.Response);
+            Assert.AreEqual("Partially Approved", response.Message);
+            Assert.AreEqual("18699", response.ApprovedAmount);
         }
             
     }

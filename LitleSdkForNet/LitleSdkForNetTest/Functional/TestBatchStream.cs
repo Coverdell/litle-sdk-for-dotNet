@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using System.IO;
@@ -63,7 +64,7 @@ namespace Litle.Sdk.Test.Functional
             BatchRequest litleBatchRequest = new BatchRequest();
 
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -76,7 +77,7 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.AddAuthorization(authorization);
 
             Authorization authorization2 = new Authorization();
-            authorization2.reportGroup = "Planets";
+            authorization2.ReportGroup = "Planets";
             authorization2.OrderId = "12345";
             authorization2.Amount = 106;
             authorization2.OrderSource = OrderSourceType.Ecommerce;
@@ -165,7 +166,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.OrderId = "12345";
             echeckcredit.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "1099999903";
             echeck.RoutingNum = "011201995";
             echeck.CheckNum = "123455";
@@ -184,7 +185,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit2.OrderId = "12346";
             echeckcredit2.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck2 = new EcheckType();
-            echeck2.AccType = echeckAccountTypeEnum.Checking;
+            echeck2.AccType = EcheckAccountTypeEnum.Checking;
             echeck2.AccNum = "1099999903";
             echeck2.RoutingNum = "011201995";
             echeck2.CheckNum = "123456";
@@ -199,13 +200,13 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.AddEcheckCredit(echeckcredit2);
 
             EcheckRedeposit echeckredeposit = new EcheckRedeposit();
-            echeckredeposit.litleTxnId = 123456;
+            echeckredeposit.LitleTxnId = 123456;
             echeckredeposit.Echeck = echeck;
 
             litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
 
             EcheckRedeposit echeckredeposit2 = new EcheckRedeposit();
-            echeckredeposit2.litleTxnId = 123457;
+            echeckredeposit2.LitleTxnId = 123457;
             echeckredeposit2.Echeck = echeck2;
 
             litleBatchRequest.AddEcheckRedeposit(echeckredeposit2);
@@ -315,14 +316,14 @@ namespace Litle.Sdk.Test.Functional
             RegisterTokenRequestType registerTokenRequest = new RegisterTokenRequestType();
             registerTokenRequest.OrderId = "12344";
             registerTokenRequest.AccountNumber = "1233456789103801";
-            registerTokenRequest.reportGroup = "Planets";
+            registerTokenRequest.ReportGroup = "Planets";
 
             litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
 
             RegisterTokenRequestType registerTokenRequest2 = new RegisterTokenRequestType();
             registerTokenRequest2.OrderId = "12345";
             registerTokenRequest2.AccountNumber = "1233456789103801";
-            registerTokenRequest2.reportGroup = "Planets";
+            registerTokenRequest2.ReportGroup = "Planets";
 
             litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest2);
 
@@ -341,136 +342,136 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
             litle.AddBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.SendToLitleWithStream();
+            LitleResponse litleResponse = litle.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
-            Assert.AreEqual("0", litleResponse.response);
-            Assert.AreEqual("Valid Format", litleResponse.message);
+            Assert.AreEqual("0", litleResponse.Response);
+            Assert.AreEqual("Valid Format", litleResponse.Message);
 
-            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
+            BatchResponse litleBatchResponse = litleResponse.NextBatchResponse();
             while (litleBatchResponse != null)
             {
-                authorizationResponse authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
+                AuthorizationResponse authorizationResponse = litleBatchResponse.NextAuthorizationResponse();
                 while (authorizationResponse != null)
                 {
-                    Assert.AreEqual("000", authorizationResponse.response);
+                    Assert.AreEqual("000", authorizationResponse.Response);
 
-                    authorizationResponse = litleBatchResponse.nextAuthorizationResponse();
+                    authorizationResponse = litleBatchResponse.NextAuthorizationResponse();
                 }
 
-                authReversalResponse authReversalResponse = litleBatchResponse.nextAuthReversalResponse();
+                AuthReversalResponse authReversalResponse = litleBatchResponse.NextAuthReversalResponse();
                 while (authReversalResponse != null)
                 {
-                    Assert.AreEqual("360", authReversalResponse.response);
+                    Assert.AreEqual("360", authReversalResponse.Response);
 
-                    authReversalResponse = litleBatchResponse.nextAuthReversalResponse();
+                    authReversalResponse = litleBatchResponse.NextAuthReversalResponse();
                 }
 
-                captureResponse captureResponse = litleBatchResponse.nextCaptureResponse();
+                CaptureResponse captureResponse = litleBatchResponse.NextCaptureResponse();
                 while (captureResponse != null)
                 {
-                    Assert.AreEqual("360", captureResponse.response);
+                    Assert.AreEqual("360", captureResponse.Response);
 
-                    captureResponse = litleBatchResponse.nextCaptureResponse();
+                    captureResponse = litleBatchResponse.NextCaptureResponse();
                 }
 
-                captureGivenAuthResponse captureGivenAuthResponse = litleBatchResponse.nextCaptureGivenAuthResponse();
+                CaptureGivenAuthResponse captureGivenAuthResponse = litleBatchResponse.NextCaptureGivenAuthResponse();
                 while (captureGivenAuthResponse != null)
                 {
-                    Assert.AreEqual("000", captureGivenAuthResponse.response);
+                    Assert.AreEqual("000", captureGivenAuthResponse.Response);
 
-                    captureGivenAuthResponse = litleBatchResponse.nextCaptureGivenAuthResponse();
+                    captureGivenAuthResponse = litleBatchResponse.NextCaptureGivenAuthResponse();
                 }
 
-                creditResponse creditResponse = litleBatchResponse.nextCreditResponse();
+                CreditResponse creditResponse = litleBatchResponse.NextCreditResponse();
                 while (creditResponse != null)
                 {
-                    Assert.AreEqual("000", creditResponse.response);
+                    Assert.AreEqual("000", creditResponse.Response);
 
-                    creditResponse = litleBatchResponse.nextCreditResponse();
+                    creditResponse = litleBatchResponse.NextCreditResponse();
                 }
 
-                echeckCreditResponse echeckCreditResponse = litleBatchResponse.nextEcheckCreditResponse();
+                EcheckCreditResponse echeckCreditResponse = litleBatchResponse.NextEcheckCreditResponse();
                 while (echeckCreditResponse != null)
                 {
-                    Assert.AreEqual("000", echeckCreditResponse.response);
+                    Assert.AreEqual("000", echeckCreditResponse.Response);
 
-                    echeckCreditResponse = litleBatchResponse.nextEcheckCreditResponse();
+                    echeckCreditResponse = litleBatchResponse.NextEcheckCreditResponse();
                 }
 
-                echeckRedepositResponse echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
+                EcheckRedepositResponse echeckRedepositResponse = litleBatchResponse.NextEcheckRedepositResponse();
                 while (echeckRedepositResponse != null)
                 {
-                    Assert.AreEqual("360", echeckRedepositResponse.response);
+                    Assert.AreEqual("360", echeckRedepositResponse.Response);
 
-                    echeckRedepositResponse = litleBatchResponse.nextEcheckRedepositResponse();
+                    echeckRedepositResponse = litleBatchResponse.NextEcheckRedepositResponse();
                 }
 
-                echeckSalesResponse echeckSalesResponse = litleBatchResponse.nextEcheckSalesResponse();
+                EcheckSalesResponse echeckSalesResponse = litleBatchResponse.NextEcheckSalesResponse();
                 while (echeckSalesResponse != null)
                 {
-                    Assert.AreEqual("000", echeckSalesResponse.response);
+                    Assert.AreEqual("000", echeckSalesResponse.Response);
 
-                    echeckSalesResponse = litleBatchResponse.nextEcheckSalesResponse();
+                    echeckSalesResponse = litleBatchResponse.NextEcheckSalesResponse();
                 }
 
-                echeckPreNoteSaleResponse echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
+                EcheckPreNoteSaleResponse echeckPreNoteSaleResponse = litleBatchResponse.NextEcheckPreNoteSaleResponse();
                 while (echeckPreNoteSaleResponse != null)
                 {
-                    Assert.AreEqual("000", echeckPreNoteSaleResponse.response);
+                    Assert.AreEqual("000", echeckPreNoteSaleResponse.Response);
 
-                    echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
+                    echeckPreNoteSaleResponse = litleBatchResponse.NextEcheckPreNoteSaleResponse();
                 }
 
-                echeckPreNoteCreditResponse echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
+                EcheckPreNoteCreditResponse echeckPreNoteCreditResponse = litleBatchResponse.NextEcheckPreNoteCreditResponse();
                 while (echeckPreNoteCreditResponse != null)
                 {
-                    Assert.AreEqual("000", echeckPreNoteCreditResponse.response);
+                    Assert.AreEqual("000", echeckPreNoteCreditResponse.Response);
 
-                    echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
+                    echeckPreNoteCreditResponse = litleBatchResponse.NextEcheckPreNoteCreditResponse();
                 }
 
-                echeckVerificationResponse echeckVerificationResponse = litleBatchResponse.nextEcheckVerificationResponse();
+                EcheckVerificationResponse echeckVerificationResponse = litleBatchResponse.NextEcheckVerificationResponse();
                 while (echeckVerificationResponse != null)
                 {
-                    Assert.AreEqual("957", echeckVerificationResponse.response);
+                    Assert.AreEqual("957", echeckVerificationResponse.Response);
 
-                    echeckVerificationResponse = litleBatchResponse.nextEcheckVerificationResponse();
+                    echeckVerificationResponse = litleBatchResponse.NextEcheckVerificationResponse();
                 }
 
-                forceCaptureResponse forceCaptureResponse = litleBatchResponse.nextForceCaptureResponse();
+                ForceCaptureResponse forceCaptureResponse = litleBatchResponse.NextForceCaptureResponse();
                 while (forceCaptureResponse != null)
                 {
-                    Assert.AreEqual("000", forceCaptureResponse.response);
+                    Assert.AreEqual("000", forceCaptureResponse.Response);
 
-                    forceCaptureResponse = litleBatchResponse.nextForceCaptureResponse();
+                    forceCaptureResponse = litleBatchResponse.NextForceCaptureResponse();
                 }
 
-                registerTokenResponse registerTokenResponse = litleBatchResponse.nextRegisterTokenResponse();
+                RegisterTokenResponse registerTokenResponse = litleBatchResponse.NextRegisterTokenResponse();
                 while (registerTokenResponse != null)
                 {
-                    Assert.AreEqual("820", registerTokenResponse.response);
+                    Assert.AreEqual("820", registerTokenResponse.Response);
 
-                    registerTokenResponse = litleBatchResponse.nextRegisterTokenResponse();
+                    registerTokenResponse = litleBatchResponse.NextRegisterTokenResponse();
                 }
 
-                saleResponse saleResponse = litleBatchResponse.nextSaleResponse();
+                SaleResponse saleResponse = litleBatchResponse.NextSaleResponse();
                 while (saleResponse != null)
                 {
-                    Assert.AreEqual("000", saleResponse.response);
+                    Assert.AreEqual("000", saleResponse.Response);
 
-                    saleResponse = litleBatchResponse.nextSaleResponse();
+                    saleResponse = litleBatchResponse.NextSaleResponse();
                 }
 
-                updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
+                UpdateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse = litleBatchResponse.NextUpdateCardValidationNumOnTokenResponse();
                 while (updateCardValidationNumOnTokenResponse != null)
                 {
-                    Assert.AreEqual("823", updateCardValidationNumOnTokenResponse.response);
+                    Assert.AreEqual("823", updateCardValidationNumOnTokenResponse.Response);
 
-                    updateCardValidationNumOnTokenResponse = litleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
+                    updateCardValidationNumOnTokenResponse = litleBatchResponse.NextUpdateCardValidationNumOnTokenResponse();
                 }
 
-                litleBatchResponse = litleResponse.nextBatchResponse();
+                litleBatchResponse = litleResponse.NextBatchResponse();
             }
         }
 
@@ -496,24 +497,24 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.AddAccountUpdate(accountUpdate2);
 
             litle.AddBatch(litleBatchRequest);
-            litleResponse litleResponse = litle.SendToLitleWithStream();
+            LitleResponse litleResponse = litle.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
-            Assert.AreEqual("0", litleResponse.response);
-            Assert.AreEqual("Valid Format", litleResponse.message);
+            Assert.AreEqual("0", litleResponse.Response);
+            Assert.AreEqual("Valid Format", litleResponse.Message);
 
-            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
+            BatchResponse litleBatchResponse = litleResponse.NextBatchResponse();
             while (litleBatchResponse != null)
             {
-                accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                AccountUpdateResponse accountUpdateResponse = litleBatchResponse.NextAccountUpdateResponse();
                 Assert.NotNull(accountUpdateResponse);
                 while (accountUpdateResponse != null)
                 {
-                    Assert.AreEqual("301", accountUpdateResponse.response);
+                    Assert.AreEqual("301", accountUpdateResponse.Response);
 
-                    accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                    accountUpdateResponse = litleBatchResponse.NextAccountUpdateResponse();
                 }
-                litleBatchResponse = litleResponse.nextBatchResponse();
+                litleBatchResponse = litleResponse.NextBatchResponse();
             }
         }
 
@@ -540,23 +541,23 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.AddAccountUpdate(accountUpdate2);
 
             litle.AddBatch(litleBatchRequest);
-            litleResponse litleResponse = litle.SendToLitleWithStream();
+            LitleResponse litleResponse = litle.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
 
-            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
+            BatchResponse litleBatchResponse = litleResponse.NextBatchResponse();
             Assert.NotNull(litleBatchResponse);
             while (litleBatchResponse != null)
             {
-                accountUpdateResponse accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                AccountUpdateResponse accountUpdateResponse = litleBatchResponse.NextAccountUpdateResponse();
                 Assert.NotNull(accountUpdateResponse);
                 while (accountUpdateResponse != null)
                 {
-                    Assert.AreEqual("000", accountUpdateResponse.response);
+                    Assert.AreEqual("000", accountUpdateResponse.Response);
 
-                    accountUpdateResponse = litleBatchResponse.nextAccountUpdateResponse();
+                    accountUpdateResponse = litleBatchResponse.NextAccountUpdateResponse();
                 }
-                litleBatchResponse = litleResponse.nextBatchResponse();
+                litleBatchResponse = litleResponse.NextBatchResponse();
             }
 
             LitleRequest litleRfr = new LitleRequest();
@@ -570,16 +571,16 @@ namespace Litle.Sdk.Test.Functional
 
             try
             {
-                litleResponse litleRfrResponse = litleRfr.SendToLitleWithStream();
+                LitleResponse litleRfrResponse = litleRfr.SendToLitleWithStream();
                 Assert.NotNull(litleRfrResponse);
 
-                RFRResponse rfrResponse = litleRfrResponse.nextRFRResponse();
+                RFRResponse rfrResponse = litleRfrResponse.NextRFRResponse();
                 Assert.NotNull(rfrResponse);
                 while (rfrResponse != null)
                 {
-                    Assert.AreEqual("1", rfrResponse.response);
-                    Assert.AreEqual("The account update file is not ready yet.  Please try again later.", rfrResponse.message);
-                    rfrResponse = litleResponse.nextRFRResponse();
+                    Assert.AreEqual("1", rfrResponse.Response);
+                    Assert.AreEqual("The account update file is not ready yet.  Please try again later.", rfrResponse.Message);
+                    rfrResponse = litleResponse.NextRFRResponse();
                 }
             }
             catch (Exception)
@@ -593,7 +594,7 @@ namespace Litle.Sdk.Test.Functional
             BatchRequest litleBatchRequest = new BatchRequest();
 
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -686,7 +687,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.OrderId = "12345";
             echeckcredit.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "011201995";
             echeck.CheckNum = "123455";
@@ -709,7 +710,7 @@ namespace Litle.Sdk.Test.Functional
             }
 
             EcheckRedeposit echeckredeposit = new EcheckRedeposit();
-            echeckredeposit.litleTxnId = 123456;
+            echeckredeposit.LitleTxnId = 123456;
             echeckredeposit.Echeck = echeck;
 
             litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
@@ -792,7 +793,7 @@ namespace Litle.Sdk.Test.Functional
             RegisterTokenRequestType registerTokenRequest = new RegisterTokenRequestType();
             registerTokenRequest.OrderId = "12344";
             registerTokenRequest.AccountNumber = "1233456789103801";
-            registerTokenRequest.reportGroup = "Planets";
+            registerTokenRequest.ReportGroup = "Planets";
 
             litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
             try
@@ -820,7 +821,7 @@ namespace Litle.Sdk.Test.Functional
             BatchRequest litleBatchRequest = new BatchRequest();
 
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -833,7 +834,7 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.AddAuthorization(authorization);
 
             Authorization authorization2 = new Authorization();
-            authorization2.reportGroup = "Planets";
+            authorization2.ReportGroup = "Planets";
             authorization2.OrderId = "12345";
             authorization2.Amount = 106;
             authorization2.OrderSource = OrderSourceType.Ecommerce;
@@ -922,7 +923,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit.OrderId = "12345";
             echeckcredit.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "1099999903";
             echeck.RoutingNum = "011201995";
             echeck.CheckNum = "123455";
@@ -941,7 +942,7 @@ namespace Litle.Sdk.Test.Functional
             echeckcredit2.OrderId = "12346";
             echeckcredit2.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck2 = new EcheckType();
-            echeck2.AccType = echeckAccountTypeEnum.Checking;
+            echeck2.AccType = EcheckAccountTypeEnum.Checking;
             echeck2.AccNum = "1099999903";
             echeck2.RoutingNum = "011201995";
             echeck2.CheckNum = "123456";
@@ -956,13 +957,13 @@ namespace Litle.Sdk.Test.Functional
             litleBatchRequest.AddEcheckCredit(echeckcredit2);
 
             EcheckRedeposit echeckredeposit = new EcheckRedeposit();
-            echeckredeposit.litleTxnId = 123456;
+            echeckredeposit.LitleTxnId = 123456;
             echeckredeposit.Echeck = echeck;
 
             litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
 
             EcheckRedeposit echeckredeposit2 = new EcheckRedeposit();
-            echeckredeposit2.litleTxnId = 123457;
+            echeckredeposit2.LitleTxnId = 123457;
             echeckredeposit2.Echeck = echeck2;
 
             litleBatchRequest.AddEcheckRedeposit(echeckredeposit2);
@@ -1040,14 +1041,14 @@ namespace Litle.Sdk.Test.Functional
             RegisterTokenRequestType registerTokenRequest = new RegisterTokenRequestType();
             registerTokenRequest.OrderId = "12344";
             registerTokenRequest.AccountNumber = "1233456789103801";
-            registerTokenRequest.reportGroup = "Planets";
+            registerTokenRequest.ReportGroup = "Planets";
 
             litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
 
             RegisterTokenRequestType registerTokenRequest2 = new RegisterTokenRequestType();
             registerTokenRequest2.OrderId = "12345";
             registerTokenRequest2.AccountNumber = "1233456789103801";
-            registerTokenRequest2.reportGroup = "Planets";
+            registerTokenRequest2.ReportGroup = "Planets";
 
             litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest2);
 
@@ -1055,7 +1056,7 @@ namespace Litle.Sdk.Test.Functional
 
             try
             {
-                litleResponse litleResponse = litle.SendToLitleWithStream();
+                LitleResponse litleResponse = litle.SendToLitleWithStream();
             }
             catch (LitleOnlineException e)
             {
@@ -1075,19 +1076,19 @@ namespace Litle.Sdk.Test.Functional
             billToAddress.Email = "litle.com";
 
             EcheckType echeckSuccess = new EcheckType();
-            echeckSuccess.AccType = echeckAccountTypeEnum.Corporate;
+            echeckSuccess.AccType = EcheckAccountTypeEnum.Corporate;
             echeckSuccess.AccNum = "1092969901";
             echeckSuccess.RoutingNum = "011075150";
             echeckSuccess.CheckNum = "123456";
 
             EcheckType echeckRoutErr = new EcheckType();
-            echeckRoutErr.AccType = echeckAccountTypeEnum.Checking;
+            echeckRoutErr.AccType = EcheckAccountTypeEnum.Checking;
             echeckRoutErr.AccNum = "6099999992";
             echeckRoutErr.RoutingNum = "053133052";
             echeckRoutErr.CheckNum = "123457";
 
             EcheckType echeckAccErr = new EcheckType();
-            echeckAccErr.AccType = echeckAccountTypeEnum.Corporate;
+            echeckAccErr.AccType = EcheckAccountTypeEnum.Corporate;
             echeckAccErr.AccNum = "10@2969901";
             echeckAccErr.RoutingNum = "011100012";
             echeckAccErr.CheckNum = "123458";
@@ -1136,32 +1137,32 @@ namespace Litle.Sdk.Test.Functional
 
             litle.AddBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litle.SendToLitleWithStream();
+            LitleResponse litleResponse = litle.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
-            Assert.AreEqual("0", litleResponse.response);
-            Assert.AreEqual("Valid Format", litleResponse.message);
+            Assert.AreEqual("0", litleResponse.Response);
+            Assert.AreEqual("Valid Format", litleResponse.Message);
 
-            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
+            BatchResponse litleBatchResponse = litleResponse.NextBatchResponse();
             while (litleBatchResponse != null)
             {
-                echeckPreNoteSaleResponse echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
+                EcheckPreNoteSaleResponse echeckPreNoteSaleResponse = litleBatchResponse.NextEcheckPreNoteSaleResponse();
                 while (echeckPreNoteSaleResponse != null)
                 {
-                    Assert.AreEqual(echeckPreNoteSaleResponse.orderId, echeckPreNoteSaleResponse.response);
+                    Assert.AreEqual(echeckPreNoteSaleResponse.OrderId, echeckPreNoteSaleResponse.Response);
 
-                    echeckPreNoteSaleResponse = litleBatchResponse.nextEcheckPreNoteSaleResponse();
+                    echeckPreNoteSaleResponse = litleBatchResponse.NextEcheckPreNoteSaleResponse();
                 }
 
-                echeckPreNoteCreditResponse echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
+                EcheckPreNoteCreditResponse echeckPreNoteCreditResponse = litleBatchResponse.NextEcheckPreNoteCreditResponse();
                 while (echeckPreNoteCreditResponse != null)
                 {
-                    Assert.AreEqual(echeckPreNoteCreditResponse.orderId, echeckPreNoteCreditResponse.response);
+                    Assert.AreEqual(echeckPreNoteCreditResponse.OrderId, echeckPreNoteCreditResponse.Response);
 
-                    echeckPreNoteCreditResponse = litleBatchResponse.nextEcheckPreNoteCreditResponse();
+                    echeckPreNoteCreditResponse = litleBatchResponse.NextEcheckPreNoteCreditResponse();
                 }
 
-                litleBatchResponse = litleResponse.nextBatchResponse();
+                litleBatchResponse = litleResponse.NextBatchResponse();
             }
         }
 
@@ -1193,7 +1194,7 @@ namespace Litle.Sdk.Test.Functional
             BatchRequest litleBatchRequest = new BatchRequest(configOverride);
 
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.AccType = EcheckAccountTypeEnum.Corporate;
             echeck.AccNum = "1092969901";
             echeck.RoutingNum = "011075150";
             echeck.CheckNum = "123455";
@@ -1268,86 +1269,86 @@ namespace Litle.Sdk.Test.Functional
 
             litleOverride.AddBatch(litleBatchRequest);
 
-            litleResponse litleResponse = litleOverride.SendToLitleWithStream();
+            LitleResponse litleResponse = litleOverride.SendToLitleWithStream();
 
             Assert.NotNull(litleResponse);
-            Assert.AreEqual("0", litleResponse.response);
-            Assert.AreEqual("Valid Format", litleResponse.message);
+            Assert.AreEqual("0", litleResponse.Response);
+            Assert.AreEqual("Valid Format", litleResponse.Message);
 
-            batchResponse litleBatchResponse = litleResponse.nextBatchResponse();
+            BatchResponse litleBatchResponse = litleResponse.NextBatchResponse();
             while (litleBatchResponse != null)
             {
-                submerchantCreditResponse submerchantCreditResponse = litleBatchResponse.nextSubmerchantCreditResponse();
+                SubmerchantCreditResponse submerchantCreditResponse = litleBatchResponse.NextSubmerchantCreditResponse();
                 while (submerchantCreditResponse != null)
                 {
-                    Assert.AreEqual("000", submerchantCreditResponse.response);
-                    submerchantCreditResponse = litleBatchResponse.nextSubmerchantCreditResponse();
+                    Assert.AreEqual("000", submerchantCreditResponse.Response);
+                    submerchantCreditResponse = litleBatchResponse.NextSubmerchantCreditResponse();
                 }
 
-                payFacCreditResponse payFacCreditResponse = litleBatchResponse.nextPayFacCreditResponse();
+                PayFacCreditResponse payFacCreditResponse = litleBatchResponse.NextPayFacCreditResponse();
                 while (payFacCreditResponse != null)
                 {
-                    Assert.AreEqual("000", payFacCreditResponse.response);
-                    payFacCreditResponse = litleBatchResponse.nextPayFacCreditResponse();
+                    Assert.AreEqual("000", payFacCreditResponse.Response);
+                    payFacCreditResponse = litleBatchResponse.NextPayFacCreditResponse();
                 }
 
-                vendorCreditResponse vendorCreditResponse = litleBatchResponse.nextVendorCreditResponse();
+                VendorCreditResponse vendorCreditResponse = litleBatchResponse.NextVendorCreditResponse();
                 while (vendorCreditResponse != null)
                 {
-                    Assert.AreEqual("000", vendorCreditResponse.response);
-                    vendorCreditResponse = litleBatchResponse.nextVendorCreditResponse();
+                    Assert.AreEqual("000", vendorCreditResponse.Response);
+                    vendorCreditResponse = litleBatchResponse.NextVendorCreditResponse();
                 }
 
-                reserveCreditResponse reserveCreditResponse = litleBatchResponse.nextReserveCreditResponse();
+                ReserveCreditResponse reserveCreditResponse = litleBatchResponse.NextReserveCreditResponse();
                 while (reserveCreditResponse != null)
                 {
-                    Assert.AreEqual("000", reserveCreditResponse.response);
-                    reserveCreditResponse = litleBatchResponse.nextReserveCreditResponse();
+                    Assert.AreEqual("000", reserveCreditResponse.Response);
+                    reserveCreditResponse = litleBatchResponse.NextReserveCreditResponse();
                 }
 
-                physicalCheckCreditResponse physicalCheckCreditResponse = litleBatchResponse.nextPhysicalCheckCreditResponse();
+                PhysicalCheckCreditResponse physicalCheckCreditResponse = litleBatchResponse.NextPhysicalCheckCreditResponse();
                 while (physicalCheckCreditResponse != null)
                 {
-                    Assert.AreEqual("000", physicalCheckCreditResponse.response);
-                    physicalCheckCreditResponse = litleBatchResponse.nextPhysicalCheckCreditResponse();
+                    Assert.AreEqual("000", physicalCheckCreditResponse.Response);
+                    physicalCheckCreditResponse = litleBatchResponse.NextPhysicalCheckCreditResponse();
                 }
 
-                submerchantDebitResponse submerchantDebitResponse = litleBatchResponse.nextSubmerchantDebitResponse();
+                SubmerchantDebitResponse submerchantDebitResponse = litleBatchResponse.NextSubmerchantDebitResponse();
                 while (submerchantDebitResponse != null)
                 {
-                    Assert.AreEqual("000", submerchantDebitResponse.response);
-                    submerchantDebitResponse = litleBatchResponse.nextSubmerchantDebitResponse();
+                    Assert.AreEqual("000", submerchantDebitResponse.Response);
+                    submerchantDebitResponse = litleBatchResponse.NextSubmerchantDebitResponse();
                 }
 
-                payFacDebitResponse payFacDebitResponse = litleBatchResponse.nextPayFacDebitResponse();
+                PayFacDebitResponse payFacDebitResponse = litleBatchResponse.NextPayFacDebitResponse();
                 while (payFacDebitResponse != null)
                 {
-                    Assert.AreEqual("000", payFacDebitResponse.response);
-                    payFacDebitResponse = litleBatchResponse.nextPayFacDebitResponse();
+                    Assert.AreEqual("000", payFacDebitResponse.Response);
+                    payFacDebitResponse = litleBatchResponse.NextPayFacDebitResponse();
                 }
 
-                vendorDebitResponse vendorDebitResponse = litleBatchResponse.nextVendorDebitResponse();
+                VendorDebitResponse vendorDebitResponse = litleBatchResponse.NextVendorDebitResponse();
                 while (vendorDebitResponse != null)
                 {
-                    Assert.AreEqual("000", vendorDebitResponse.response);
-                    vendorDebitResponse = litleBatchResponse.nextVendorDebitResponse();
+                    Assert.AreEqual("000", vendorDebitResponse.Response);
+                    vendorDebitResponse = litleBatchResponse.NextVendorDebitResponse();
                 }
 
-                reserveDebitResponse reserveDebitResponse = litleBatchResponse.nextReserveDebitResponse();
+                ReserveDebitResponse reserveDebitResponse = litleBatchResponse.NextReserveDebitResponse();
                 while (reserveDebitResponse != null)
                 {
-                    Assert.AreEqual("000", reserveDebitResponse.response);
-                    reserveDebitResponse = litleBatchResponse.nextReserveDebitResponse();
+                    Assert.AreEqual("000", reserveDebitResponse.Response);
+                    reserveDebitResponse = litleBatchResponse.NextReserveDebitResponse();
                 }
 
-                physicalCheckDebitResponse physicalCheckDebitResponse = litleBatchResponse.nextPhysicalCheckDebitResponse();
+                PhysicalCheckDebitResponse physicalCheckDebitResponse = litleBatchResponse.NextPhysicalCheckDebitResponse();
                 while (physicalCheckDebitResponse != null)
                 {
-                    Assert.AreEqual("000", physicalCheckDebitResponse.response);
-                    physicalCheckDebitResponse = litleBatchResponse.nextPhysicalCheckDebitResponse();
+                    Assert.AreEqual("000", physicalCheckDebitResponse.Response);
+                    physicalCheckDebitResponse = litleBatchResponse.NextPhysicalCheckDebitResponse();
                 }
 
-                litleBatchResponse = litleResponse.nextBatchResponse();
+                litleBatchResponse = litleResponse.NextBatchResponse();
             }
         }
     }

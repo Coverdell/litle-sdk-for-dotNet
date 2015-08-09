@@ -51,10 +51,10 @@ namespace Litle.Sdk.Requests
         public override string Serialize()
         {
             var xml = "\r\n<capture";
-            xml += " id=\"" + SecurityElement.Escape(id) + "\"";
-            if (customerId != null)
+            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
+            if (CustomerId != null)
             {
-                xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
+                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
             }
             xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\"";
             if (PartialSet)

@@ -1,13 +1,14 @@
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
     public class RecyclingRequestType
     {
-        private recycleByTypeEnum _recycleByField;
+        private RecycleByTypeEnum _recycleByField;
         private bool _recycleBySet;
 
-        public recycleByTypeEnum RecycleBy
+        public RecycleByTypeEnum RecycleBy
         {
             get { return _recycleByField; }
             set

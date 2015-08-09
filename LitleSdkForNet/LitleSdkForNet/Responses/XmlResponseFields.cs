@@ -1,45 +1,27 @@
 using System;
-using System.CodeDom.Compiler;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using Litle.Sdk.Requests;
 
-namespace Litle.Sdk
+namespace Litle.Sdk.Responses
 {
-    /// <remarks />
     [XmlInclude(typeof (RegisterTokenRequestType))]
-    //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
-    //[System.SerializableAttribute()]
-    //[System.Diagnostics.DebuggerStepThroughAttribute()]
-    //[System.ComponentModel.DesignerCategoryAttribute("code")]
-    //[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://www.litle.com/schema")]
-    public class transactionTypeWithReportGroup : transactionType
+    public class TransactionTypeWithReportGroup : TransactionType
     {
-        /// <remarks />
         [XmlAttribute]
-        public string reportGroup { get; set; }
+        public string ReportGroup { get; set; }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class transactionResponse
+    public class TransactionResponse
     {
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class transactionRequest
+    public class TransactionRequest
     {
         public virtual string Serialize()
         {
@@ -47,3131 +29,2301 @@ namespace Litle.Sdk
         }
     }
 
-    /// <remarks />
-    [XmlInclude(typeof (transactionTypeOptionReportGroup))]
+    [XmlInclude(typeof (TransactionTypeOptionReportGroup))]
     [XmlInclude(typeof (TransactionTypeWithReportGroupAndPartial))]
-    [XmlInclude(typeof (transactionTypeWithReportGroup))]
+    [XmlInclude(typeof (TransactionTypeWithReportGroup))]
     [XmlInclude(typeof (RegisterTokenRequestType))]
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class transactionType : transactionRequest
+    public class TransactionType : TransactionRequest
     {
-        private string idField;
+        private string _idField;
+        private string _customerIdField;
 
-        private string customerIdField;
-
-        /// <remarks />
         [XmlAttribute]
-        public string id
+        public string ID
         {
-            get { return idField; }
-            set { idField = value; }
+            get { return _idField; }
+            set { _idField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public string customerId
+        public string CustomerId
         {
-            get { return customerIdField; }
-            set { customerIdField = value; }
+            get { return _customerIdField; }
+            set { _customerIdField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class transactionTypeOptionReportGroup : transactionType
+    public class TransactionTypeOptionReportGroup : TransactionType
     {
-        private string reportGroupField;
+        private string _reportGroupField;
 
-        /// <remarks />
         [XmlAttribute]
-        public string reportGroup
+        public string ReportGroup
         {
-            get { return reportGroupField; }
-            set { reportGroupField = value; }
+            get { return _reportGroupField; }
+            set { _reportGroupField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class recurringTransactionResponseType : transactionResponse
+    public class RecurringTransactionResponseType : TransactionResponse
     {
-        private string litleTxnIdField;
+        private string _litleTxnIdField;
 
-        /// <remarks />
-        public string litleTxnId
+        public string LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        private string responseField;
+        private string _responseField;
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        private string messageField;
+        private string _messageField;
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        private DateTime responseTimeField;
+        private DateTime _responseTimeField;
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class recurringTransactionType : transactionRequest
+    public class RecurringTransactionType : TransactionRequest
     {
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
     public enum ItemsChoiceType
     {
-        /// <remarks />
-        expDate,
-
-        /// <remarks />
-        number,
-
-        /// <remarks />
-        track,
-
-        /// <remarks />
-        type,
+        ExpDate,
+        Number,
+        Track,
+        Type,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum posCapabilityTypeEnum
+    public enum PosCapabilityTypeEnum
     {
-        /// <remarks />
-        notused,
-
-        /// <remarks />
-        magstripe,
-
-        /// <remarks />
-        keyedonly,
+        Notused,
+        Magstripe,
+        Keyedonly,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum posEntryModeTypeEnum
+    public enum PosEntryModeTypeEnum
     {
-        /// <remarks />
-        notused,
-
-        /// <remarks />
-        keyed,
-
-        /// <remarks />
-        track1,
-
-        /// <remarks />
-        track2,
-
-        /// <remarks />
-        completeread,
+        Notused,
+        Keyed,
+        Track1,
+        Track2,
+        Completeread,
     }
 
-    public sealed class posCatLevelEnum
+    public sealed class PosCatLevelEnum
     {
-        public static readonly posCatLevelEnum selfservice = new posCatLevelEnum("self service");
+        public static readonly PosCatLevelEnum Selfservice = new PosCatLevelEnum("self service");
 
-        private posCatLevelEnum(String value)
+        private PosCatLevelEnum(String value)
         {
-            this.value = value;
+            _value = value;
         }
 
         public string Serialize()
         {
-            return value;
+            return _value;
         }
 
-        private readonly string value;
+        private readonly string _value;
     }
 
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum posCardholderIdTypeEnum
+    public enum PosCardholderIdTypeEnum
     {
-        /// <remarks />
-        signature,
-
-        /// <remarks />
-        pin,
-
-        /// <remarks />
-        nopin,
-
-        /// <remarks />
-        directmarket,
+        Signature,
+        Pin,
+        Nopin,
+        Directmarket,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
     public enum ItemChoiceType1
     {
-        /// <remarks />
-        city,
-
-        /// <remarks />
-        phone,
-
-        /// <remarks />
-        url,
+        City,
+        Phone,
+        Url,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum govtTaxTypeEnum
+    public enum GovtTaxTypeEnum
     {
-        /// <remarks />
-        payment,
-
-        /// <remarks />
-        fee,
+        Payment,
+        Fee,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    public enum enhancedDataDeliveryType
+    public enum EnhancedDataDeliveryType
     {
-        /// <remarks />
         CNC,
-
-        /// <remarks />
         DIG,
-
-        /// <remarks />
         PHY,
-
-        /// <remarks />
         SVC,
-
-        /// <remarks />
         TBD,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum taxTypeIdentifierEnum
+    public enum TaxTypeIdentifierEnum
     {
-        /// <remarks />
         [XmlEnum("00")] Item00,
-
-        /// <remarks />
         [XmlEnum("01")] Item01,
-
-        /// <remarks />
         [XmlEnum("02")] Item02,
-
-        /// <remarks />
         [XmlEnum("03")] Item03,
-
-        /// <remarks />
         [XmlEnum("04")] Item04,
-
-        /// <remarks />
         [XmlEnum("05")] Item05,
-
-        /// <remarks />
         [XmlEnum("06")] Item06,
-
-        /// <remarks />
         [XmlEnum("10")] Item10,
-
-        /// <remarks />
         [XmlEnum("11")] Item11,
-
-        /// <remarks />
         [XmlEnum("12")] Item12,
-
-        /// <remarks />
         [XmlEnum("13")] Item13,
-
-        /// <remarks />
         [XmlEnum("14")] Item14,
-
-        /// <remarks />
         [XmlEnum("20")] Item20,
-
-        /// <remarks />
         [XmlEnum("21")] Item21,
-
-        /// <remarks />
         [XmlEnum("22")] Item22,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
     public enum IIASFlagType
     {
-        /// <remarks />
         Y,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum recycleByTypeEnum
+    public enum RecycleByTypeEnum
     {
-        /// <remarks />
         Merchant,
-
-        /// <remarks />
         Litle,
-
-        /// <remarks />
         None,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class FraudResult
+    public class AdvancedFraudResultsType
     {
-        private string avsResultField;
-
-        private string cardValidationResultField;
-
-        private string authenticationResultField;
-
-        private string advancedAVSResultField;
-
-        public advancedFraudResultsType advancedFraudResults;
-
-        /// <remarks />
-        public string avsResult
-        {
-            get { return avsResultField; }
-            set { avsResultField = value; }
-        }
-
-        /// <remarks />
-        public string cardValidationResult
-        {
-            get { return cardValidationResultField; }
-            set { cardValidationResultField = value; }
-        }
-
-        /// <remarks />
-        public string authenticationResult
-        {
-            get { return authenticationResultField; }
-            set { authenticationResultField = value; }
-        }
-
-        /// <remarks />
-        public string advancedAVSResult
-        {
-            get { return advancedAVSResultField; }
-            set { advancedAVSResultField = value; }
-        }
+        public string DeviceReviewStatus;
+        public int DeviceReputationScore;
+        public string TriggeredRule;
     }
 
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class advancedFraudResultsType
+    public class CreditPaypal
     {
-        public string deviceReviewStatus;
-        public int deviceReputationScore;
-        public string triggeredRule;
-    }
+        private string _itemField;
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
-    [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    public class creditPaypal
-    {
-        private string itemField;
+        private ItemChoiceType2 _itemElementNameField;
 
-        private ItemChoiceType2 itemElementNameField;
-
-        /// <remarks />
         [XmlElement("payerEmail", typeof (string))]
         [XmlElement("payerId", typeof (string))]
         [XmlChoiceIdentifier("ItemElementName")]
         public string Item
         {
-            get { return itemField; }
-            set { itemField = value; }
+            get { return _itemField; }
+            set { _itemField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
         public ItemChoiceType2 ItemElementName
         {
-            get { return itemElementNameField; }
-            set { itemElementNameField = value; }
+            get { return _itemElementNameField; }
+            set { _itemElementNameField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
     public enum ItemChoiceType2
     {
-        /// <remarks />
-        payerEmail,
-
-        /// <remarks />
-        payerId,
+        PayerEmail,
+        PayerId,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
     public enum ItemsChoiceType1
     {
-        /// <remarks />
-        amexAggregatorData,
-
-        /// <remarks />
-        amount,
-
-        /// <remarks />
-        billMeLaterRequest,
-
-        /// <remarks />
-        billToAddress,
-
-        /// <remarks />
-        card,
-
-        /// <remarks />
-        customBilling,
-
-        /// <remarks />
-        enhancedData,
-
-        /// <remarks />
-        litleTxnId,
-
-        /// <remarks />
-        merchantData,
-
-        /// <remarks />
-        orderId,
-
-        /// <remarks />
-        orderSource,
-
-        /// <remarks />
-        paypage,
-
-        /// <remarks />
-        paypal,
-
-        /// <remarks />
-        pos,
-
-        /// <remarks />
-        processingInstructions,
-
-        /// <remarks />
-        taxType,
-
-        /// <remarks />
-        token,
+        AmexAggregatorData,
+        Amount,
+        BillMeLaterRequest,
+        BillToAddress,
+        Card,
+        CustomBilling,
+        EnhancedData,
+        LitleTxnId,
+        MerchantData,
+        OrderId,
+        OrderSource,
+        Paypage,
+        Paypal,
+        Pos,
+        ProcessingInstructions,
+        TaxType,
+        Token,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum echeckAccountTypeEnum
+    public enum EcheckAccountTypeEnum
     {
-        /// <remarks />
         Checking,
-
-        /// <remarks />
         Savings,
-
-        /// <remarks />
         Corporate,
-
-        /// <remarks />
         [XmlEnum("Corp Savings")] CorpSavings,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
     public enum ItemsChoiceType3
     {
-        /// <remarks />
-        amount,
-
-        /// <remarks />
-        billToAddress,
-
-        /// <remarks />
-        customBilling,
-
-        /// <remarks />
-        echeck,
-
-        /// <remarks />
-        echeckOrEcheckToken,
-
-        /// <remarks />
-        echeckToken,
-
-        /// <remarks />
-        litleTxnId,
-
-        /// <remarks />
-        merchantData,
-
-        /// <remarks />
-        orderId,
-
-        /// <remarks />
-        orderSource,
+        Amount,
+        BillToAddress,
+        CustomBilling,
+        Echeck,
+        EcheckOrEcheckToken,
+        EcheckToken,
+        LitleTxnId,
+        MerchantData,
+        OrderId,
+        OrderSource,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot("echeckRedeposit", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class baseRequestTransactionEcheckRedeposit : transactionTypeWithReportGroup
+    public class BaseRequestTransactionEcheckRedeposit : TransactionTypeWithReportGroup
     {
-        protected long litleTxnIdField;
-        protected bool litleTxnIdSet;
+        protected long LitleTxnIdField;
+        protected bool LitleTxnIdSet;
 
-        private object itemField;
+        private object _itemField;
 
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
+            get { return LitleTxnIdField; }
             set
             {
-                litleTxnIdField = value;
-                litleTxnIdSet = true;
+                LitleTxnIdField = value;
+                LitleTxnIdSet = true;
             }
         }
 
-        /// <remarks />
         [XmlElement("echeck", typeof (EcheckType))]
         [XmlElement("echeckToken", typeof (EcheckTokenType))]
         public object Item
         {
-            get { return itemField; }
-            set { itemField = value; }
+            get { return _itemField; }
+            set { _itemField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
     public enum ItemsChoiceType4
     {
-        /// <remarks />
-        amount,
-
-        /// <remarks />
-        billToAddress,
-
-        /// <remarks />
-        customBilling,
-
-        /// <remarks />
-        echeck,
-
-        /// <remarks />
-        echeckOrEcheckToken,
-
-        /// <remarks />
-        echeckToken,
-
-        /// <remarks />
-        litleTxnId,
-
-        /// <remarks />
-        merchantData,
-
-        /// <remarks />
-        orderId,
-
-        /// <remarks />
-        orderSource,
-
-        /// <remarks />
-        shipToAddress,
-
-        /// <remarks />
-        verify,
+        Amount,
+        BillToAddress,
+        CustomBilling,
+        Echeck,
+        EcheckOrEcheckToken,
+        EcheckToken,
+        LitleTxnId,
+        MerchantData,
+        OrderId,
+        OrderSource,
+        ShipToAddress,
+        Verify,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
     public enum Item1ChoiceType
     {
-        /// <remarks />
-        cardholderAuthentication,
-
-        /// <remarks />
-        fraudCheck,
+        CardholderAuthentication,
+        FraudCheck,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class driversLicenseInfo
+    public class DriversLicenseInfo
     {
-        private string licenseNumberField;
+        private string _licenseNumberField;
+        private string _stateField;
+        private string _dateOfBirthField;
 
-        private string stateField;
-
-        private string dateOfBirthField;
-
-        /// <remarks />
-        public string licenseNumber
+        public string LicenseNumber
         {
-            get { return licenseNumberField; }
-            set { licenseNumberField = value; }
+            get { return _licenseNumberField; }
+            set { _licenseNumberField = value; }
         }
 
-        /// <remarks />
-        public string state
+        public string State
         {
-            get { return stateField; }
-            set { stateField = value; }
+            get { return _stateField; }
+            set { _stateField = value; }
         }
 
-        /// <remarks />
-        public string dateOfBirth
+        public string DateOfBirth
         {
-            get { return dateOfBirthField; }
-            set { dateOfBirthField = value; }
+            get { return _dateOfBirthField; }
+            set { _dateOfBirthField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class recycleAdviceType
+    public class RecycleAdviceType
     {
-        private object itemField;
+        private object _itemField;
 
-        /// <remarks />
         [XmlElement("nextRecycleTime", typeof (DateTime))]
         [XmlElement("recycleAdviceEnd", typeof (string))]
         public object Item
         {
-            get { return itemField; }
-            set { itemField = value; }
+            get { return _itemField; }
+            set { _itemField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class recyclingType
+    public class RecyclingType
     {
-        private recycleAdviceType recycleAdviceField;
+        private RecycleAdviceType _recycleAdviceField;
+        private bool _recycleEngineActiveField;
 
-        private bool recycleEngineActiveField;
-
-        /// <remarks />
-        public recycleAdviceType recycleAdvice
+        public RecycleAdviceType RecycleAdvice
         {
-            get { return recycleAdviceField; }
-            set { recycleAdviceField = value; }
+            get { return _recycleAdviceField; }
+            set { _recycleAdviceField = value; }
         }
 
-        /// <remarks />
-        public bool recycleEngineActive
+        public bool RecycleEngineActive
         {
-            get { return recycleEngineActiveField; }
-            set { recycleEngineActiveField = value; }
+            get { return _recycleEngineActiveField; }
+            set { _recycleEngineActiveField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class recurringResponse
+    public class RecurringResponse
     {
-        private long subscriptionIdField;
-        private string responseCodeField;
-        private string responseMessageField;
-        private long recurringTxnIdField;
+        private long _subscriptionIdField;
+        private string _responseCodeField;
+        private string _responseMessageField;
+        private long _recurringTxnIdField;
 
-        /// <remarks />
-        public long subscriptionId
+        public long SubscriptionId
         {
-            get { return subscriptionIdField; }
-            set { subscriptionIdField = value; }
+            get { return _subscriptionIdField; }
+            set { _subscriptionIdField = value; }
         }
 
-        /// <remarks />
-        public string responseCode
+        public string ResponseCode
         {
-            get { return responseCodeField; }
-            set { responseCodeField = value; }
+            get { return _responseCodeField; }
+            set { _responseCodeField = value; }
         }
 
-        /// <remarks />
-        public string responseMessage
+        public string ResponseMessage
         {
-            get { return responseMessageField; }
-            set { responseMessageField = value; }
+            get { return _responseMessageField; }
+            set { _responseMessageField = value; }
         }
 
-        /// <remarks />
-        public long recurringTxnId
+        public long RecurringTxnId
         {
-            get { return recurringTxnIdField; }
-            set { recurringTxnIdField = value; }
+            get { return _recurringTxnIdField; }
+            set { _recurringTxnIdField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class voidRecyclingResponseType
+    public class VoidRecyclingResponseType
     {
-        private long creditLitleTxnIdField;
+        private long _creditLitleTxnIdField;
 
-        public long creditLitleTxnId
+        public long CreditLitleTxnId
         {
-            get { return creditLitleTxnIdField; }
-            set { creditLitleTxnIdField = value; }
+            get { return _creditLitleTxnIdField; }
+            set { _creditLitleTxnIdField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class tokenResponseType
+    public class TokenResponseType
     {
-        private string litleTokenField;
+        private string _litleTokenField;
+        private string _tokenResponseCodeField;
+        private string _tokenMessageField;
+        private MethodOfPaymentTypeEnum _typeField;
+        private bool _typeFieldSpecified;
+        private string _binField;
+        private string _eCheckAccountSuffixField;
 
-        private string tokenResponseCodeField;
-
-        private string tokenMessageField;
-
-        private MethodOfPaymentTypeEnum typeField;
-
-        private bool typeFieldSpecified;
-
-        private string binField;
-
-        private string eCheckAccountSuffixField;
-
-        /// <remarks />
-        public string litleToken
+        public string LitleToken
         {
-            get { return litleTokenField; }
-            set { litleTokenField = value; }
+            get { return _litleTokenField; }
+            set { _litleTokenField = value; }
         }
 
-        /// <remarks />
-        public string tokenResponseCode
+        public string TokenResponseCode
         {
-            get { return tokenResponseCodeField; }
-            set { tokenResponseCodeField = value; }
+            get { return _tokenResponseCodeField; }
+            set { _tokenResponseCodeField = value; }
         }
 
-        /// <remarks />
-        public string tokenMessage
+        public string TokenMessage
         {
-            get { return tokenMessageField; }
-            set { tokenMessageField = value; }
+            get { return _tokenMessageField; }
+            set { _tokenMessageField = value; }
         }
 
-        /// <remarks />
-        public MethodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum Type
         {
-            get { return typeField; }
-            set { typeField = value; }
+            get { return _typeField; }
+            set { _typeField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool typeSpecified
+        public bool TypeSpecified
         {
-            get { return typeFieldSpecified; }
-            set { typeFieldSpecified = value; }
+            get { return _typeFieldSpecified; }
+            set { _typeFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string bin
+        public string Bin
         {
-            get { return binField; }
-            set { binField = value; }
+            get { return _binField; }
+            set { _binField = value; }
         }
 
-        /// <remarks />
-        public string eCheckAccountSuffix
+        public string ECheckAccountSuffix
         {
-            get { return eCheckAccountSuffixField; }
-            set { eCheckAccountSuffixField = value; }
+            get { return _eCheckAccountSuffixField; }
+            set { _eCheckAccountSuffixField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class cardTokenInfoType
+    public class CardTokenInfoType
     {
-        private string litleTokenField;
+        private string _litleTokenField;
+        private MethodOfPaymentTypeEnum _typeField;
+        private string _expDateField;
+        private string _binField;
 
-        private MethodOfPaymentTypeEnum typeField;
-
-        private string expDateField;
-
-        private string binField;
-
-        /// <remarks />
-        public string litleToken
+        public string LitleToken
         {
-            get { return litleTokenField; }
-            set { litleTokenField = value; }
+            get { return _litleTokenField; }
+            set { _litleTokenField = value; }
         }
 
-        /// <remarks />
-        public MethodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum Type
         {
-            get { return typeField; }
-            set { typeField = value; }
+            get { return _typeField; }
+            set { _typeField = value; }
         }
 
-        /// <remarks />
-        public string expDate
+        public string ExpDate
         {
-            get { return expDateField; }
-            set { expDateField = value; }
+            get { return _expDateField; }
+            set { _expDateField = value; }
         }
 
-        /// <remarks />
-        public string bin
+        public string Bin
         {
-            get { return binField; }
-            set { binField = value; }
+            get { return _binField; }
+            set { _binField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class extendedCardResponseType
+    public class ExtendedCardResponseType
     {
-        private string messageField;
+        private string _messageField;
+        private string _codeField;
 
-        private string codeField;
-
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public string code
+        public string Code
         {
-            get { return codeField; }
-            set { codeField = value; }
+            get { return _codeField; }
+            set { _codeField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class cardAccountInfoType
+    public class CardAccountInfoType
     {
-        private MethodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum _typeField;
+        private string _numberField;
+        private string _expDateField;
 
-        private string numberField;
-
-        private string expDateField;
-
-        /// <remarks />
-        public MethodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum Type
         {
-            get { return typeField; }
-            set { typeField = value; }
+            get { return _typeField; }
+            set { _typeField = value; }
         }
 
-        /// <remarks />
-        public string number
+        public string Number
         {
-            get { return numberField; }
-            set { numberField = value; }
+            get { return _numberField; }
+            set { _numberField = value; }
         }
 
-        /// <remarks />
-        public string expDate
+        public string ExpDate
         {
-            get { return expDateField; }
-            set { expDateField = value; }
+            get { return _expDateField; }
+            set { _expDateField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class echeckTokenInfoType
+    public class EcheckTokenInfoType
     {
-        private echeckAccountTypeEnum accTypeField;
+        private EcheckAccountTypeEnum _accTypeField;
+        private string _litleTokenField;
+        private string _routingNumField;
 
-        private string litleTokenField;
-
-        private string routingNumField;
-
-        /// <remarks />
-        public echeckAccountTypeEnum accType
+        public EcheckAccountTypeEnum AccType
         {
-            get { return accTypeField; }
-            set { accTypeField = value; }
+            get { return _accTypeField; }
+            set { _accTypeField = value; }
         }
 
-        /// <remarks />
-        public string litleToken
+        public string LitleToken
         {
-            get { return litleTokenField; }
-            set { litleTokenField = value; }
+            get { return _litleTokenField; }
+            set { _litleTokenField = value; }
         }
 
-        /// <remarks />
-        public string routingNum
+        public string RoutingNum
         {
-            get { return routingNumField; }
-            set { routingNumField = value; }
+            get { return _routingNumField; }
+            set { _routingNumField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class echeckAccountInfoType
+    public class EcheckAccountInfoType
     {
-        private echeckAccountTypeEnum accTypeField;
+        private EcheckAccountTypeEnum _accTypeField;
+        private string _accNumField;
+        private string _routingNumField;
 
-        private string accNumField;
-
-        private string routingNumField;
-
-        /// <remarks />
-        public echeckAccountTypeEnum accType
+        public EcheckAccountTypeEnum AccType
         {
-            get { return accTypeField; }
-            set { accTypeField = value; }
+            get { return _accTypeField; }
+            set { _accTypeField = value; }
         }
 
-        /// <remarks />
-        public string accNum
+        public string AccNum
         {
-            get { return accNumField; }
-            set { accNumField = value; }
+            get { return _accNumField; }
+            set { _accNumField = value; }
         }
 
-        /// <remarks />
-        public string routingNum
+        public string RoutingNum
         {
-            get { return routingNumField; }
-            set { routingNumField = value; }
+            get { return _routingNumField; }
+            set { _routingNumField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public class accountInfoType
+    public class AccountInfoType
     {
-        private MethodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum _typeField;
+        private string _numberField;
 
-        private string numberField;
-
-        /// <remarks />
-        public MethodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum Type
         {
-            get { return typeField; }
-            set { typeField = value; }
+            get { return _typeField; }
+            set { _typeField = value; }
         }
 
-        /// <remarks />
-        public string number
+        public string Number
         {
-            get { return numberField; }
-            set { numberField = value; }
+            get { return _numberField; }
+            set { _numberField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class billMeLaterResponseData
+    public class BillMeLaterResponseData
     {
-        private long bmlMerchantIdField;
+        private long _bmlMerchantIdField;
+        private string _promotionalOfferCodeField;
+        private int _approvedTermsCodeField;
+        private bool _approvedTermsCodeFieldSpecified;
+        private string _creditLineField;
+        private string _addressIndicatorField;
+        private string _loanToValueEstimatorField;
+        private string _riskEstimatorField;
+        private string _riskQueueAssignmentField;
 
-        private string promotionalOfferCodeField;
-
-        private int approvedTermsCodeField;
-
-        private bool approvedTermsCodeFieldSpecified;
-
-        private string creditLineField;
-
-        private string addressIndicatorField;
-
-        private string loanToValueEstimatorField;
-
-        private string riskEstimatorField;
-
-        private string riskQueueAssignmentField;
-
-        /// <remarks />
-        public long bmlMerchantId
+        public long BmlMerchantId
         {
-            get { return bmlMerchantIdField; }
-            set { bmlMerchantIdField = value; }
+            get { return _bmlMerchantIdField; }
+            set { _bmlMerchantIdField = value; }
         }
 
-        /// <remarks />
-        public string promotionalOfferCode
+        public string PromotionalOfferCode
         {
-            get { return promotionalOfferCodeField; }
-            set { promotionalOfferCodeField = value; }
+            get { return _promotionalOfferCodeField; }
+            set { _promotionalOfferCodeField = value; }
         }
 
-        /// <remarks />
-        public int approvedTermsCode
+        public int ApprovedTermsCode
         {
-            get { return approvedTermsCodeField; }
-            set { approvedTermsCodeField = value; }
+            get { return _approvedTermsCodeField; }
+            set { _approvedTermsCodeField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool approvedTermsCodeSpecified
+        public bool ApprovedTermsCodeSpecified
         {
-            get { return approvedTermsCodeFieldSpecified; }
-            set { approvedTermsCodeFieldSpecified = value; }
+            get { return _approvedTermsCodeFieldSpecified; }
+            set { _approvedTermsCodeFieldSpecified = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "integer")]
-        public string creditLine
+        public string CreditLine
         {
-            get { return creditLineField; }
-            set { creditLineField = value; }
+            get { return _creditLineField; }
+            set { _creditLineField = value; }
         }
 
-        /// <remarks />
-        public string addressIndicator
+        public string AddressIndicator
         {
-            get { return addressIndicatorField; }
-            set { addressIndicatorField = value; }
+            get { return _addressIndicatorField; }
+            set { _addressIndicatorField = value; }
         }
 
-        /// <remarks />
-        public string loanToValueEstimator
+        public string LoanToValueEstimator
         {
-            get { return loanToValueEstimatorField; }
-            set { loanToValueEstimatorField = value; }
+            get { return _loanToValueEstimatorField; }
+            set { _loanToValueEstimatorField = value; }
         }
 
-        /// <remarks />
-        public string riskEstimator
+        public string RiskEstimator
         {
-            get { return riskEstimatorField; }
-            set { riskEstimatorField = value; }
+            get { return _riskEstimatorField; }
+            set { _riskEstimatorField = value; }
         }
 
-        /// <remarks />
-        public string riskQueueAssignment
+        public string RiskQueueAssignment
         {
-            get { return riskQueueAssignmentField; }
-            set { riskQueueAssignmentField = value; }
+            get { return _riskQueueAssignmentField; }
+            set { _riskQueueAssignmentField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class registerTokenResponse : transactionTypeWithReportGroup
+    public class RegisterTokenResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _litleTokenField;
+        private string _binField;
+        private MethodOfPaymentTypeEnum? _typeField;
+        private bool _typeFieldSpecified;
+        private string _eCheckAccountSuffixField;
+        private string _responseField;
+        private string _messageField;
+        private DateTime _responseTimeField;
+        private ApplepayResponse _applepayResponseField;
 
-        private string orderIdField;
-
-        private string litleTokenField;
-
-        private string binField;
-
-        private MethodOfPaymentTypeEnum? typeField;
-
-        private bool typeFieldSpecified;
-
-        private string eCheckAccountSuffixField;
-
-        private string responseField;
-
-        private string messageField;
-
-        private DateTime responseTimeField;
-
-        private applepayResponse applepayResponseField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string litleToken
+        public string LitleToken
         {
-            get { return litleTokenField; }
-            set { litleTokenField = value; }
+            get { return _litleTokenField; }
+            set { _litleTokenField = value; }
         }
 
-        /// <remarks />
-        public string bin
+        public string Bin
         {
-            get { return binField; }
-            set { binField = value; }
+            get { return _binField; }
+            set { _binField = value; }
         }
 
-        /// <remarks />
-        public MethodOfPaymentTypeEnum? type
+        public MethodOfPaymentTypeEnum? Type
         {
-            get { return typeFieldSpecified ? typeField : null; }
-            set { typeField = value; }
+            get { return _typeFieldSpecified ? _typeField : null; }
+            set { _typeField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool typeSpecified
+        public bool TypeSpecified
         {
-            get { return typeFieldSpecified; }
-            set { typeFieldSpecified = value; }
+            get { return _typeFieldSpecified; }
+            set { _typeFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string eCheckAccountSuffix
+        public string ECheckAccountSuffix
         {
-            get { return eCheckAccountSuffixField; }
-            set { eCheckAccountSuffixField = value; }
+            get { return _eCheckAccountSuffixField; }
+            set { _eCheckAccountSuffixField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public applepayResponse applepayResponse
+        public ApplepayResponse ApplepayResponse
         {
-            get { return applepayResponseField; }
-            set { applepayResponseField = value; }
+            get { return _applepayResponseField; }
+            set { _applepayResponseField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class updateCardValidationNumOnTokenResponse : transactionTypeWithReportGroup
+    public class UpdateCardValidationNumOnTokenResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private string _messageField;
+        private DateTime _responseTimeField;
 
-        private string orderIdField;
-
-        private string responseField;
-
-        private string messageField;
-
-        private DateTime responseTimeField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class authorizationResponse : transactionTypeWithReportGroup
+    public class AuthorizationResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _cardProductIdField;
+        private DateTime _postDateField;
+        private bool _postDateFieldSpecified;
+        private string _messageField;
+        private string _authCodeField;
+        private string _authorizationResponseSubCodeField;
+        private string _approvedAmountField;
+        private AccountInfoType _accountInformationField;
+        private AccountUpdater _accountUpdaterField;
+        private FraudResult _fraudResultField;
+        private BillMeLaterResponseData _billMeLaterResponseDataField;
+        private TokenResponseType _tokenResponseField;
+        private EnhancedAuthResponse _enhancedAuthResponseField;
+        private RecyclingType _recyclingField;
+        private RecurringResponse _recurringResponseField;
+        private GiftCardResponse _giftCardResponseField;
+        private ApplepayResponse _applepayResponseField;
 
-        private string orderIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string cardProductIdField;
-
-        private DateTime postDateField;
-
-        private bool postDateFieldSpecified;
-
-        private string messageField;
-
-        private string authCodeField;
-
-        private string authorizationResponseSubCodeField;
-
-        private string approvedAmountField;
-
-        private accountInfoType accountInformationField;
-
-        private accountUpdater accountUpdaterField;
-
-        private FraudResult fraudResultField;
-
-        private billMeLaterResponseData billMeLaterResponseDataField;
-
-        private tokenResponseType tokenResponseField;
-
-        private enhancedAuthResponse enhancedAuthResponseField;
-
-        private recyclingType recyclingField;
-
-        private recurringResponse recurringResponseField;
-
-        private giftCardResponse giftCardResponseField;
-
-        private applepayResponse applepayResponseField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string cardProductId
+        public string CardProductId
         {
-            get { return cardProductIdField; }
-            set { cardProductIdField = value; }
+            get { return _cardProductIdField; }
+            set { _cardProductIdField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public string authCode
+        public string AuthCode
         {
-            get { return authCodeField; }
-            set { authCodeField = value; }
+            get { return _authCodeField; }
+            set { _authCodeField = value; }
         }
 
-        /// <remarks />
-        public string authorizationResponseSubCode
+        public string AuthorizationResponseSubCode
         {
-            get { return authorizationResponseSubCodeField; }
-            set { authorizationResponseSubCodeField = value; }
+            get { return _authorizationResponseSubCodeField; }
+            set { _authorizationResponseSubCodeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "integer")]
-        public string approvedAmount
+        public string ApprovedAmount
         {
-            get { return approvedAmountField; }
-            set { approvedAmountField = value; }
+            get { return _approvedAmountField; }
+            set { _approvedAmountField = value; }
         }
 
-        /// <remarks />
-        public accountInfoType accountInformation
+        public AccountInfoType AccountInformation
         {
-            get { return accountInformationField; }
-            set { accountInformationField = value; }
+            get { return _accountInformationField; }
+            set { _accountInformationField = value; }
         }
 
-        /// <remarks />
-        public accountUpdater accountUpdater
+        public AccountUpdater AccountUpdater
         {
-            get { return accountUpdaterField; }
-            set { accountUpdaterField = value; }
+            get { return _accountUpdaterField; }
+            set { _accountUpdaterField = value; }
         }
 
-        /// <remarks />
-        public FraudResult fraudResult
+        public FraudResult FraudResult
         {
-            get { return fraudResultField; }
-            set { fraudResultField = value; }
+            get { return _fraudResultField; }
+            set { _fraudResultField = value; }
         }
 
-        /// <remarks />
-        public billMeLaterResponseData billMeLaterResponseData
+        public BillMeLaterResponseData BillMeLaterResponseData
         {
-            get { return billMeLaterResponseDataField; }
-            set { billMeLaterResponseDataField = value; }
+            get { return _billMeLaterResponseDataField; }
+            set { _billMeLaterResponseDataField = value; }
         }
 
-        /// <remarks />
-        public tokenResponseType tokenResponse
+        public TokenResponseType TokenResponse
         {
-            get { return tokenResponseField; }
-            set { tokenResponseField = value; }
+            get { return _tokenResponseField; }
+            set { _tokenResponseField = value; }
         }
 
-        /// <remarks />
-        public enhancedAuthResponse enhancedAuthResponse
+        public EnhancedAuthResponse EnhancedAuthResponse
         {
-            get { return enhancedAuthResponseField; }
-            set { enhancedAuthResponseField = value; }
+            get { return _enhancedAuthResponseField; }
+            set { _enhancedAuthResponseField = value; }
         }
 
-        /// <remarks />
-        public recyclingType recycling
+        public RecyclingType Recycling
         {
-            get { return recyclingField; }
-            set { recyclingField = value; }
+            get { return _recyclingField; }
+            set { _recyclingField = value; }
         }
 
-        /// <remarks />
-        public recurringResponse recurringResponse
+        public RecurringResponse RecurringResponse
         {
-            get { return recurringResponseField; }
-            set { recurringResponseField = value; }
+            get { return _recurringResponseField; }
+            set { _recurringResponseField = value; }
         }
 
-        /// <remarks />
-        public giftCardResponse giftCardResponse
+        public GiftCardResponse GiftCardResponse
         {
-            get { return giftCardResponseField; }
-            set { giftCardResponseField = value; }
+            get { return _giftCardResponseField; }
+            set { _giftCardResponseField = value; }
         }
 
-        /// <remarks />
-        public applepayResponse applepayResponse
+        public ApplepayResponse ApplepayResponse
         {
-            get { return applepayResponseField; }
-            set { applepayResponseField = value; }
+            get { return _applepayResponseField; }
+            set { _applepayResponseField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class cancelSubscriptionResponse
+    public class CancelSubscriptionResponse
     {
-        private string subscriptionIdField;
+        private string _subscriptionIdField;
 
-        /// <remarks />
-        public string subscriptionId
+        public string SubscriptionId
         {
-            get { return subscriptionIdField; }
-            set { subscriptionIdField = value; }
+            get { return _subscriptionIdField; }
+            set { _subscriptionIdField = value; }
         }
 
-        private string litleTxnIdField;
+        private string _litleTxnIdField;
 
-        /// <remarks />
-        public string litleTxnId
+        public string LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        private string responseField;
+        private string _responseField;
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        private string messageField;
+        private string _messageField;
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        private DateTime responseTimeField;
+        private DateTime _responseTimeField;
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class updateSubscriptionResponse
+    public class UpdateSubscriptionResponse
     {
-        private string subscriptionIdField;
+        private string _subscriptionIdField;
 
-        /// <remarks />
-        public string subscriptionId
+        public string SubscriptionId
         {
-            get { return subscriptionIdField; }
-            set { subscriptionIdField = value; }
+            get { return _subscriptionIdField; }
+            set { _subscriptionIdField = value; }
         }
 
-        private string litleTxnIdField;
+        private string _litleTxnIdField;
 
-        /// <remarks />
-        public string litleTxnId
+        public string LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        private string responseField;
+        private string _responseField;
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        private string messageField;
+        private string _messageField;
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        private DateTime responseTimeField;
+        private DateTime _responseTimeField;
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        public tokenResponseType tokenResponse;
+        public TokenResponseType TokenResponse;
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class accountUpdater
+    public class AccountUpdater
     {
-        public extendedCardResponseType extendedCardResponse;
-        public echeckAccountInfoType newAccountInfo;
-        public cardAccountInfoType newCardInfo;
-        public cardTokenInfoType newCardTokenInfo;
-        public echeckTokenInfoType newTokenInfo;
-        public echeckAccountInfoType originalAccountInfo;
-        public cardAccountInfoType originalCardInfo;
-        public cardTokenInfoType originalCardTokenInfo;
-        public echeckTokenInfoType originalTokenInfo;
+        public ExtendedCardResponseType ExtendedCardResponse;
+        public EcheckAccountInfoType NewAccountInfo;
+        public CardAccountInfoType NewCardInfo;
+        public CardTokenInfoType NewCardTokenInfo;
+        public EcheckTokenInfoType NewTokenInfo;
+        public EcheckAccountInfoType OriginalAccountInfo;
+        public CardAccountInfoType OriginalCardInfo;
+        public CardTokenInfoType OriginalCardTokenInfo;
+        public EcheckTokenInfoType OriginalTokenInfo;
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
     public enum ItemsChoiceType2
     {
-        /// <remarks />
-        extendedCardResponse,
-
-        /// <remarks />
-        newAccountInfo,
-
-        /// <remarks />
-        newCardInfo,
-
-        /// <remarks />
-        newCardTokenInfo,
-
-        /// <remarks />
-        newTokenInfo,
-
-        /// <remarks />
-        originalAccountInfo,
-
-        /// <remarks />
-        originalCardInfo,
-
-        /// <remarks />
-        originalCardTokenInfo,
-
-        /// <remarks />
-        originalTokenInfo,
+        ExtendedCardResponse,
+        NewAccountInfo,
+        NewCardInfo,
+        NewCardTokenInfo,
+        NewTokenInfo,
+        OriginalAccountInfo,
+        OriginalCardInfo,
+        OriginalCardTokenInfo,
+        OriginalTokenInfo,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class enhancedAuthResponse
+    public class EnhancedAuthResponse
     {
-        //public string litleTxnId;
-        //public string response;
-        //public string message;
-        //public System.DateTime responseTime;
-        //public tokenResponseType tokenResponse;
-        //public string virtualAccountNumber;
-        //public enhancedAuthResponseFundingSource fundingSource;
-        //public affluenceTypeEnum affluence;
-        //public string issuerCountry;
+        private EnhancedAuthResponseFundingSource _fundingSourceField;
+        private AffluenceTypeEnum? _affluenceField;
+        private bool _affluenceFieldSpecified;
+        private string _issuerCountryField;
+        private CardProductTypeEnum? _cardProductTypeField;
+        private bool _cardProductTypeFieldSpecified;
+        private bool _virtualAccountNumberField;
+        private bool _virtualAccountNumberFieldSpecified;
 
-        private enhancedAuthResponseFundingSource fundingSourceField;
-
-        private affluenceTypeEnum? affluenceField;
-
-        private bool affluenceFieldSpecified;
-
-        private string issuerCountryField;
-
-        private cardProductTypeEnum? cardProductTypeField;
-
-        private bool cardProductTypeFieldSpecified;
-
-        private bool virtualAccountNumberField;
-
-        private bool virtualAccountNumberFieldSpecified;
-
-        /// <remarks />
-        public enhancedAuthResponseFundingSource fundingSource
+        public EnhancedAuthResponseFundingSource FundingSource
         {
-            get { return fundingSourceField; }
-            set { fundingSourceField = value; }
+            get { return _fundingSourceField; }
+            set { _fundingSourceField = value; }
         }
 
-        /// <remarks />
-        public affluenceTypeEnum? affluence
+        public AffluenceTypeEnum? Affluence
         {
-            get
-            {
-                return affluenceFieldSpecified ? affluenceField : null;
-                //(!null)?return ((affluenceTypeEnum?)this).affluenceField:return null;
-            }
-            set { affluenceField = value; }
+            get { return _affluenceFieldSpecified ? _affluenceField : null; }
+            set { _affluenceField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool affluenceSpecified
+        public bool AffluenceSpecified
         {
-            get { return affluenceFieldSpecified; }
-            set { affluenceFieldSpecified = value; }
+            get { return _affluenceFieldSpecified; }
+            set { _affluenceFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string issuerCountry
+        public string IssuerCountry
         {
-            get { return issuerCountryField; }
-            set { issuerCountryField = value; }
+            get { return _issuerCountryField; }
+            set { _issuerCountryField = value; }
         }
 
-        /// <remarks />
-        public cardProductTypeEnum? cardProductType
+        public CardProductTypeEnum? CardProductType
         {
-            get { return cardProductTypeFieldSpecified ? cardProductTypeField : null; }
-            set { cardProductTypeField = value; }
+            get { return _cardProductTypeFieldSpecified ? _cardProductTypeField : null; }
+            set { _cardProductTypeField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool cardProductTypeSpecified
+        public bool CardProductTypeSpecified
         {
-            get { return cardProductTypeFieldSpecified; }
-            set { cardProductTypeFieldSpecified = value; }
+            get { return _cardProductTypeFieldSpecified; }
+            set { _cardProductTypeFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public bool virtualAccountNumber
+        public bool VirtualAccountNumber
         {
-            get { return virtualAccountNumberField; }
-            set { virtualAccountNumberField = value; }
+            get { return _virtualAccountNumberField; }
+            set { _virtualAccountNumberField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool virtualAccountNumberSpecified
+        public bool VirtualAccountNumberSpecified
         {
-            get { return virtualAccountNumberFieldSpecified; }
-            set { virtualAccountNumberFieldSpecified = value; }
+            get { return _virtualAccountNumberFieldSpecified; }
+            set { _virtualAccountNumberFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    public class enhancedAuthResponseFundingSource
+    public class EnhancedAuthResponseFundingSource
     {
-        private fundingSourceTypeEnum typeField;
+        private FundingSourceTypeEnum _typeField;
+        private string _availableBalanceField;
+        private string _reloadableField;
+        private string _prepaidCardTypeField;
 
-        private string availableBalanceField;
-
-        private string reloadableField;
-
-        private string prepaidCardTypeField;
-
-        /// <remarks />
-        public fundingSourceTypeEnum type
+        public FundingSourceTypeEnum Type
         {
-            get { return typeField; }
-            set { typeField = value; }
+            get { return _typeField; }
+            set { _typeField = value; }
         }
 
-        /// <remarks />
-        public string availableBalance
+        public string AvailableBalance
         {
-            get { return availableBalanceField; }
-            set { availableBalanceField = value; }
+            get { return _availableBalanceField; }
+            set { _availableBalanceField = value; }
         }
 
-        /// <remarks />
-        public string reloadable
+        public string Reloadable
         {
-            get { return reloadableField; }
-            set { reloadableField = value; }
+            get { return _reloadableField; }
+            set { _reloadableField = value; }
         }
 
-        /// <remarks />
-        public string prepaidCardType
+        public string PrepaidCardType
         {
-            get { return prepaidCardTypeField; }
-            set { prepaidCardTypeField = value; }
+            get { return _prepaidCardTypeField; }
+            set { _prepaidCardTypeField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum fundingSourceTypeEnum
+    public enum FundingSourceTypeEnum
     {
-        /// <remarks />
-        UNKNOWN,
-
-        /// <remarks />
-        PREPAID,
-
-        /// <remarks />
-        FSA,
-
-        /// <remarks />
-        CREDIT,
-
-        /// <remarks />
-        DEBIT,
+        Unknown,
+        Prepaid,
+        Fsa,
+        Credit,
+        Debit,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum affluenceTypeEnum
+    public enum AffluenceTypeEnum
     {
-        /// <remarks />
-        AFFLUENT,
-
-        /// <remarks />
-        [XmlEnum("MASS AFFLUENT")] MASSAFFLUENT,
+        Affluent,
+        [XmlEnum("MASS AFFLUENT")] Massaffluent,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum cardProductTypeEnum
+    public enum CardProductTypeEnum
     {
-        /// <remarks />
-        UNKNOWN,
-
-        /// <remarks />
-        COMMERCIAL,
-
-        /// <remarks />
-        CONSUMER,
+        Unknown,
+        Commercial,
+        Consumer,
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class authReversalResponse : transactionTypeWithReportGroup
+    public class AuthReversalResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private DateTime _postDateField;
+        private bool _postDateFieldSpecified;
+        private string _messageField;
 
-        private string orderIdField;
+        public GiftCardResponse GiftCardResponse;
 
-        private string responseField;
+        private bool _duplicateField;
+        private bool _duplicateFieldSpecified;
 
-        private DateTime responseTimeField;
-
-        private DateTime postDateField;
-
-        private bool postDateFieldSpecified;
-
-        private string messageField;
-
-        public giftCardResponse giftCardResponse;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class captureResponse : transactionTypeWithReportGroup
+    public class CaptureResponse : TransactionTypeWithReportGroup
     {
-        public giftCardResponse giftCardResponse;
-        public FraudResult fraudResult;
+        public GiftCardResponse GiftCardResponse;
+        public FraudResult FraudResult;
 
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
 
-        private string orderIdField;
+        private string _orderIdField;
 
-        private string responseField;
+        private string _responseField;
 
-        private DateTime responseTimeField;
+        private DateTime _responseTimeField;
 
-        private DateTime postDateField;
+        private DateTime _postDateField;
 
-        private bool postDateFieldSpecified;
+        private bool _postDateFieldSpecified;
 
-        private string messageField;
+        private string _messageField;
 
-        private accountUpdater accountUpdaterField;
+        private AccountUpdater _accountUpdaterField;
 
-        private bool duplicateField;
+        private bool _duplicateField;
 
-        private bool duplicateFieldSpecified;
+        private bool _duplicateFieldSpecified;
 
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public accountUpdater accountUpdater
+        public AccountUpdater AccountUpdater
         {
-            get { return accountUpdaterField; }
-            set { accountUpdaterField = value; }
+            get { return _accountUpdaterField; }
+            set { _accountUpdaterField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class forceCaptureResponse : transactionTypeWithReportGroup
+    public class ForceCaptureResponse : TransactionTypeWithReportGroup
     {
-        public giftCardResponse giftCardResponse;
-        public FraudResult fraudResult;
-        private long litleTxnIdField;
+        public GiftCardResponse GiftCardResponse;
+        public FraudResult FraudResult;
+        private long _litleTxnIdField;
 
-        private string orderIdField;
+        private string _orderIdField;
 
-        private string responseField;
+        private string _responseField;
 
-        private DateTime responseTimeField;
+        private DateTime _responseTimeField;
 
-        private DateTime postDateField;
+        private DateTime _postDateField;
 
-        private bool postDateFieldSpecified;
+        private bool _postDateFieldSpecified;
 
-        private string messageField;
+        private string _messageField;
 
-        private tokenResponseType tokenResponseField;
+        private TokenResponseType _tokenResponseField;
 
-        private accountUpdater accountUpdaterField;
+        private AccountUpdater _accountUpdaterField;
 
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public tokenResponseType tokenResponse
+        public TokenResponseType TokenResponse
         {
-            get { return tokenResponseField; }
-            set { tokenResponseField = value; }
+            get { return _tokenResponseField; }
+            set { _tokenResponseField = value; }
         }
 
-        /// <remarks />
-        public accountUpdater accountUpdater
+        public AccountUpdater AccountUpdater
         {
-            get { return accountUpdaterField; }
-            set { accountUpdaterField = value; }
+            get { return _accountUpdaterField; }
+            set { _accountUpdaterField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
+
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class captureGivenAuthResponse : transactionTypeWithReportGroup
+    public class CaptureGivenAuthResponse : TransactionTypeWithReportGroup
     {
-        public giftCardResponse giftCardResponse;
-        public FraudResult fraudResult;
-        private long litleTxnIdField;
+        public GiftCardResponse GiftCardResponse;
+        public FraudResult FraudResult;
+        private long _litleTxnIdField;
 
-        private string orderIdField;
+        private string _orderIdField;
 
-        private string responseField;
+        private string _responseField;
 
-        private DateTime responseTimeField;
+        private DateTime _responseTimeField;
 
-        private DateTime postDateField;
+        private DateTime _postDateField;
 
-        private bool postDateFieldSpecified;
+        private bool _postDateFieldSpecified;
 
-        private string messageField;
+        private string _messageField;
 
-        private tokenResponseType tokenResponseField;
+        private TokenResponseType _tokenResponseField;
 
-        /// <remarks />
-        public long litleTxnId
+
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public tokenResponseType tokenResponse
+        public TokenResponseType TokenResponse
         {
-            get { return tokenResponseField; }
-            set { tokenResponseField = value; }
+            get { return _tokenResponseField; }
+            set { _tokenResponseField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class saleResponse : transactionTypeWithReportGroup
+    public class SaleResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _cardProductIdField;
+        private DateTime _postDateField;
+        private bool _postDateFieldSpecified;
+        private string _messageField;
+        private string _authCodeField;
+        private string _authorizationResponseSubCodeField;
+        private string _approvedAmountField;
+        private AccountInfoType _accountInformationField;
+        private FraudResult _fraudResultField;
+        private BillMeLaterResponseData _billMeLaterResponseDataField;
+        private TokenResponseType _tokenResponseField;
+        private EnhancedAuthResponse _enhancedAuthResponseField;
+        private AccountUpdater _accountUpdaterField;
+        private RecyclingType _recyclingField;
+        private RecurringResponse _recurringResponseField;
+        private GiftCardResponse _giftCardResponseField;
+        private ApplepayResponse _applepayResponseField;
+        private bool _duplicateField;
+        private bool _duplicateFieldSpecified;
 
-        private string orderIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string cardProductIdField;
-
-        private DateTime postDateField;
-
-        private bool postDateFieldSpecified;
-
-        private string messageField;
-
-        private string authCodeField;
-
-        private string authorizationResponseSubCodeField;
-
-        private string approvedAmountField;
-
-        private accountInfoType accountInformationField;
-
-        private FraudResult fraudResultField;
-
-        private billMeLaterResponseData billMeLaterResponseDataField;
-
-        private tokenResponseType tokenResponseField;
-
-        private enhancedAuthResponse enhancedAuthResponseField;
-
-        private accountUpdater accountUpdaterField;
-
-        private recyclingType recyclingField;
-
-        private recurringResponse recurringResponseField;
-
-        private giftCardResponse giftCardResponseField;
-
-        private applepayResponse applepayResponseField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string cardProductId
+        public string CardProductId
         {
-            get { return cardProductIdField; }
-            set { cardProductIdField = value; }
+            get { return _cardProductIdField; }
+            set { _cardProductIdField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public string authCode
+        public string AuthCode
         {
-            get { return authCodeField; }
-            set { authCodeField = value; }
+            get { return _authCodeField; }
+            set { _authCodeField = value; }
         }
 
-        /// <remarks />
-        public string authorizationResponseSubCode
+        public string AuthorizationResponseSubCode
         {
-            get { return authorizationResponseSubCodeField; }
-            set { authorizationResponseSubCodeField = value; }
+            get { return _authorizationResponseSubCodeField; }
+            set { _authorizationResponseSubCodeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "integer")]
-        public string approvedAmount
+        public string ApprovedAmount
         {
-            get { return approvedAmountField; }
-            set { approvedAmountField = value; }
+            get { return _approvedAmountField; }
+            set { _approvedAmountField = value; }
         }
 
-        /// <remarks />
-        public accountInfoType accountInformation
+        public AccountInfoType AccountInformation
         {
-            get { return accountInformationField; }
-            set { accountInformationField = value; }
+            get { return _accountInformationField; }
+            set { _accountInformationField = value; }
         }
 
-        /// <remarks />
-        public FraudResult fraudResult
+        public FraudResult FraudResult
         {
-            get { return fraudResultField; }
-            set { fraudResultField = value; }
+            get { return _fraudResultField; }
+            set { _fraudResultField = value; }
         }
 
-        /// <remarks />
-        public billMeLaterResponseData billMeLaterResponseData
+        public BillMeLaterResponseData BillMeLaterResponseData
         {
-            get { return billMeLaterResponseDataField; }
-            set { billMeLaterResponseDataField = value; }
+            get { return _billMeLaterResponseDataField; }
+            set { _billMeLaterResponseDataField = value; }
         }
 
-        /// <remarks />
-        public tokenResponseType tokenResponse
+        public TokenResponseType TokenResponse
         {
-            get { return tokenResponseField; }
-            set { tokenResponseField = value; }
+            get { return _tokenResponseField; }
+            set { _tokenResponseField = value; }
         }
 
-        /// <remarks />
-        public enhancedAuthResponse enhancedAuthResponse
+        public EnhancedAuthResponse EnhancedAuthResponse
         {
-            get { return enhancedAuthResponseField; }
-            set { enhancedAuthResponseField = value; }
+            get { return _enhancedAuthResponseField; }
+            set { _enhancedAuthResponseField = value; }
         }
 
-        /// <remarks />
-        public accountUpdater accountUpdater
+        public AccountUpdater AccountUpdater
         {
-            get { return accountUpdaterField; }
-            set { accountUpdaterField = value; }
+            get { return _accountUpdaterField; }
+            set { _accountUpdaterField = value; }
         }
 
-        /// <remarks />
-        public recyclingType recycling
+        public RecyclingType Recycling
         {
-            get { return recyclingField; }
-            set { recyclingField = value; }
+            get { return _recyclingField; }
+            set { _recyclingField = value; }
         }
 
-        /// <remarks />
-        public recurringResponse recurringResponse
+        public RecurringResponse RecurringResponse
         {
-            get { return recurringResponseField; }
-            set { recurringResponseField = value; }
+            get { return _recurringResponseField; }
+            set { _recurringResponseField = value; }
         }
 
-        /// <remarks />
-        public giftCardResponse giftCardResponse
+        public GiftCardResponse GiftCardResponse
         {
-            get { return giftCardResponseField; }
-            set { giftCardResponseField = value; }
+            get { return _giftCardResponseField; }
+            set { _giftCardResponseField = value; }
         }
 
-        /// <remarks />
-        public applepayResponse applepayResponse
+        public ApplepayResponse ApplepayResponse
         {
-            get { return applepayResponseField; }
-            set { applepayResponseField = value; }
+            get { return _applepayResponseField; }
+            set { _applepayResponseField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class creditResponse : transactionTypeWithReportGroup
+    public class CreditResponse : TransactionTypeWithReportGroup
     {
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
-        private long litleTxnIdField;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private DateTime _postDateField;
+        private bool _postDateFieldSpecified;
+        private string _messageField;
+        private TokenResponseType _tokenResponseField;
+        private bool _duplicateField;
+        private bool _duplicateFieldSpecified;
 
-        private string orderIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private DateTime postDateField;
-
-        private bool postDateFieldSpecified;
-
-        private string messageField;
-
-        private tokenResponseType tokenResponseField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public tokenResponseType tokenResponse
+        public TokenResponseType TokenResponse
         {
-            get { return tokenResponseField; }
-            set { tokenResponseField = value; }
+            get { return _tokenResponseField; }
+            set { _tokenResponseField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class echeckSalesResponse : transactionTypeWithReportGroup
+    public class EcheckSalesResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
+        private string _verificationCodeField;
+        private DateTime _postDateField;
+        private bool _postDateFieldSpecified;
+        private AccountUpdater _accountUpdaterField;
+        private TokenResponseType _tokenResponseField;
+        private bool _duplicateField;
+        private bool _duplicateFieldSpecified;
 
-        private string orderIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        private string verificationCodeField;
-
-        private DateTime postDateField;
-
-        private bool postDateFieldSpecified;
-
-        private accountUpdater accountUpdaterField;
-
-        private tokenResponseType tokenResponseField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public string verificationCode
+        public string VerificationCode
         {
-            get { return verificationCodeField; }
-            set { verificationCodeField = value; }
+            get { return _verificationCodeField; }
+            set { _verificationCodeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public accountUpdater accountUpdater
+        public AccountUpdater AccountUpdater
         {
-            get { return accountUpdaterField; }
-            set { accountUpdaterField = value; }
+            get { return _accountUpdaterField; }
+            set { _accountUpdaterField = value; }
         }
 
-        /// <remarks />
-        public tokenResponseType tokenResponse
+        public TokenResponseType TokenResponse
         {
-            get { return tokenResponseField; }
-            set { tokenResponseField = value; }
+            get { return _tokenResponseField; }
+            set { _tokenResponseField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class echeckCreditResponse : transactionTypeWithReportGroup
+    public class EcheckCreditResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
+        private DateTime _postDateField;
+        private bool _postDateFieldSpecified;
+        private AccountUpdater _accountUpdaterField;
+        private TokenResponseType _tokenResponseField;
+        private bool _duplicateField;
+        private bool _duplicateFieldSpecified;
 
-        private string orderIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        private DateTime postDateField;
-
-        private bool postDateFieldSpecified;
-
-        private accountUpdater accountUpdaterField;
-
-        private tokenResponseType tokenResponseField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public accountUpdater accountUpdater
+        public AccountUpdater AccountUpdater
         {
-            get { return accountUpdaterField; }
-            set { accountUpdaterField = value; }
+            get { return _accountUpdaterField; }
+            set { _accountUpdaterField = value; }
         }
 
-        /// <remarks />
-        public tokenResponseType tokenResponse
+        public TokenResponseType TokenResponse
         {
-            get { return tokenResponseField; }
-            set { tokenResponseField = value; }
+            get { return _tokenResponseField; }
+            set { _tokenResponseField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class echeckVerificationResponse : transactionTypeWithReportGroup
+    public class EcheckVerificationResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
+        private DateTime _postDateField;
+        private bool _postDateFieldSpecified;
+        private TokenResponseType _tokenResponseField;
 
-        private string orderIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        private DateTime postDateField;
-
-        private bool postDateFieldSpecified;
-
-        private tokenResponseType tokenResponseField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public tokenResponseType tokenResponse
+        public TokenResponseType TokenResponse
         {
-            get { return tokenResponseField; }
-            set { tokenResponseField = value; }
+            get { return _tokenResponseField; }
+            set { _tokenResponseField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class echeckRedepositResponse : transactionTypeWithReportGroup
+    public class EcheckRedepositResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
+        private DateTime _postDateField;
+        private bool _postDateFieldSpecified;
+        private AccountUpdater _accountUpdaterField;
+        private TokenResponseType _tokenResponseField;
 
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        private DateTime postDateField;
-
-        private bool postDateFieldSpecified;
-
-        private accountUpdater accountUpdaterField;
-
-        private tokenResponseType tokenResponseField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool postDateSpecified
+        public bool PostDateSpecified
         {
-            get { return postDateFieldSpecified; }
-            set { postDateFieldSpecified = value; }
+            get { return _postDateFieldSpecified; }
+            set { _postDateFieldSpecified = value; }
         }
 
-        /// <remarks />
-        public accountUpdater accountUpdater
+        public AccountUpdater AccountUpdater
         {
-            get { return accountUpdaterField; }
-            set { accountUpdaterField = value; }
+            get { return _accountUpdaterField; }
+            set { _accountUpdaterField = value; }
         }
 
-        /// <remarks />
-        public tokenResponseType tokenResponse
+        public TokenResponseType TokenResponse
         {
-            get { return tokenResponseField; }
-            set { tokenResponseField = value; }
+            get { return _tokenResponseField; }
+            set { _tokenResponseField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class litleOnlineResponse
+    public class LitleOnlineResponse
     {
-        private string responseField;
+        private string _responseField;
+        private string _messageField;
+        private string _versionField;
 
-        private string messageField;
+        public AuthReversalResponse AuthReversalResponse;
+        public AuthorizationResponse AuthorizationResponse;
+        public CaptureGivenAuthResponse CaptureGivenAuthResponse;
+        public CaptureResponse CaptureResponse;
+        public CreditResponse CreditResponse;
+        public EcheckCreditResponse EcheckCreditResponse;
+        public EcheckRedepositResponse EcheckRedepositResponse;
+        public EcheckSalesResponse EcheckSalesResponse;
+        public EcheckVerificationResponse EcheckVerificationResponse;
+        public LitleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoidResponse;
+        public ForceCaptureResponse ForceCaptureResponse;
+        public RegisterTokenResponse RegisterTokenResponse;
+        public SaleResponse SaleResponse;
+        public LitleOnlineResponseTransactionResponseVoidResponse VoidResponse;
+        public UpdateCardValidationNumOnTokenResponse UpdateCardValidationNumOnTokenResponse;
+        public CancelSubscriptionResponse CancelSubscriptionResponse;
+        public UpdateSubscriptionResponse UpdateSubscriptionResponse;
+        public ActivateResponse ActivateResponse;
+        public DeactivateResponse DeactivateResponse;
+        public LoadResponse LoadResponse;
+        public UnloadResponse UnloadResponse;
+        public BalanceInquiryResponse BalanceInquiryResponse;
+        public CreatePlanResponse CreatePlanResponse;
+        public UpdatePlanResponse UpdatePlanResponse;
+        public RefundReversalResponse RefundReversalResponse;
+        public DepositReversalResponse DepositReversalResponse;
+        public ActivateReversalResponse ActivateReversalResponse;
+        public DeactivateReversalResponse DeactivateReversalResponse;
+        public LoadReversalResponse LoadReversalResponse;
+        public UnloadReversalResponse UnloadReversalResponse;
 
-        private string versionField;
-
-        public authReversalResponse authReversalResponse;
-        public authorizationResponse authorizationResponse;
-        public captureGivenAuthResponse captureGivenAuthResponse;
-        public captureResponse captureResponse;
-        public creditResponse creditResponse;
-        public echeckCreditResponse echeckCreditResponse;
-        public echeckRedepositResponse echeckRedepositResponse;
-        public echeckSalesResponse echeckSalesResponse;
-        public echeckVerificationResponse echeckVerificationResponse;
-        public litleOnlineResponseTransactionResponseEcheckVoidResponse echeckVoidResponse;
-        public forceCaptureResponse forceCaptureResponse;
-        public registerTokenResponse registerTokenResponse;
-        public saleResponse saleResponse;
-        public litleOnlineResponseTransactionResponseVoidResponse voidResponse;
-        public updateCardValidationNumOnTokenResponse updateCardValidationNumOnTokenResponse;
-        public cancelSubscriptionResponse cancelSubscriptionResponse;
-        public updateSubscriptionResponse updateSubscriptionResponse;
-        public activateResponse activateResponse;
-        public deactivateResponse deactivateResponse;
-        public loadResponse loadResponse;
-        public unloadResponse unloadResponse;
-        public balanceInquiryResponse balanceInquiryResponse;
-        public createPlanResponse createPlanResponse;
-        public updatePlanResponse updatePlanResponse;
-        public refundReversalResponse refundReversalResponse;
-        public depositReversalResponse depositReversalResponse;
-        public activateReversalResponse activateReversalResponse;
-        public deactivateReversalResponse deactivateReversalResponse;
-        public loadReversalResponse loadReversalResponse;
-        public unloadReversalResponse unloadReversalResponse;
-
-        /// <remarks />
         [XmlAttribute]
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public string version
+        public string Version
         {
-            get { return versionField; }
-            set { versionField = value; }
+            get { return _versionField; }
+            set { _versionField = value; }
         }
     }
 
     [Serializable]
-    [DesignerCategory("code")]
     [XmlRoot("litleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class litleResponse
+    public class LitleResponse
     {
-        public string id;
-        public long litleBatchId;
-        public long litleSessionId;
-        public string merchantId;
-        public string response;
-        public string message;
-        public string version;
+        public string ID;
+        public long LitleBatchId;
+        public long LitleSessionId;
+        public string MerchantId;
+        public string Response;
+        public string Message;
+        public string Version;
 
-        private XmlReader originalXmlReader;
-        private XmlReader batchResponseReader;
-        private XmlReader rfrResponseReader;
-        private string filePath;
+        private XmlReader _originalXmlReader;
+        private XmlReader _batchResponseReader;
+        private XmlReader _rfrResponseReader;
+        private string _filePath;
 
-        public litleResponse()
+        public LitleResponse()
         {
         }
 
-        public litleResponse(string filePath)
+        public LitleResponse(string filePath)
         {
-            XmlTextReader reader = new XmlTextReader(filePath);
-            readXml(reader, filePath);
+            var reader = new XmlTextReader(filePath);
+            ReadXml(reader, filePath);
         }
 
-        public litleResponse(XmlReader reader, string filePath)
+        public LitleResponse(XmlReader reader, string filePath)
         {
-            readXml(reader, filePath);
+            ReadXml(reader, filePath);
         }
 
-        public void setBatchResponseReader(XmlReader xmlReader)
+        public void SetBatchResponseReader(XmlReader xmlReader)
         {
-            batchResponseReader = xmlReader;
+            _batchResponseReader = xmlReader;
         }
 
-        public void setRfrResponseReader(XmlReader xmlReader)
+        public void SetRfrResponseReader(XmlReader xmlReader)
         {
-            rfrResponseReader = xmlReader;
+            _rfrResponseReader = xmlReader;
         }
 
-        public void readXml(XmlReader reader, string filePath)
+        public void ReadXml(XmlReader reader, string filePath)
         {
             if (reader.ReadToFollowing("litleResponse"))
             {
-                version = reader.GetAttribute("version");
-                message = reader.GetAttribute("message");
-                response = reader.GetAttribute("response");
+                Version = reader.GetAttribute("version");
+                Message = reader.GetAttribute("message");
+                Response = reader.GetAttribute("response");
 
                 string rawLitleSessionId = reader.GetAttribute("litleSessionId");
                 if (rawLitleSessionId != null)
                 {
-                    litleSessionId = Int64.Parse(rawLitleSessionId);
+                    LitleSessionId = Int64.Parse(rawLitleSessionId);
                 }
             }
             else
@@ -3179,2474 +2331,2042 @@ namespace Litle.Sdk
                 reader.Close();
             }
 
-            originalXmlReader = reader;
-            this.filePath = filePath;
+            _originalXmlReader = reader;
+            _filePath = filePath;
 
-            batchResponseReader = new XmlTextReader(filePath);
-            if (!batchResponseReader.ReadToFollowing("batchResponse"))
+            _batchResponseReader = new XmlTextReader(filePath);
+            if (!_batchResponseReader.ReadToFollowing("batchResponse"))
             {
-                batchResponseReader.Close();
+                _batchResponseReader.Close();
             }
 
-            rfrResponseReader = new XmlTextReader(filePath);
-            if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
+            _rfrResponseReader = new XmlTextReader(filePath);
+            if (!_rfrResponseReader.ReadToFollowing("RFRResponse"))
             {
-                rfrResponseReader.Close();
+                _rfrResponseReader.Close();
             }
         }
 
-        public virtual batchResponse nextBatchResponse()
+        public virtual BatchResponse NextBatchResponse()
         {
-            if (batchResponseReader.ReadState != ReadState.Closed)
+            if (_batchResponseReader.ReadState == ReadState.Closed) return null;
+            var litleBatchResponse = new BatchResponse(_batchResponseReader, _filePath);
+            if (!_batchResponseReader.ReadToFollowing("batchResponse"))
             {
-                batchResponse litleBatchResponse = new batchResponse(batchResponseReader, filePath);
-                if (!batchResponseReader.ReadToFollowing("batchResponse"))
-                {
-                    batchResponseReader.Close();
-                }
-
-                return litleBatchResponse;
+                _batchResponseReader.Close();
             }
 
-            return null;
+            return litleBatchResponse;
         }
 
-        public virtual RFRResponse nextRFRResponse()
+        public virtual RFRResponse NextRFRResponse()
         {
-            if (rfrResponseReader.ReadState != ReadState.Closed)
+            if (_rfrResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _rfrResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (RFRResponse));
+            var reader = new StringReader(response);
+            var rfrResponse = (RFRResponse) serializer.Deserialize(reader);
+
+            if (!_rfrResponseReader.ReadToFollowing("RFRResponse"))
             {
-                string response = rfrResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (RFRResponse));
-                StringReader reader = new StringReader(response);
-                RFRResponse rfrResponse = (RFRResponse) serializer.Deserialize(reader);
-
-                if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
-                {
-                    rfrResponseReader.Close();
-                }
-
-                return rfrResponse;
+                _rfrResponseReader.Close();
             }
 
-            return null;
+            return rfrResponse;
         }
     }
 
     [Serializable]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class batchResponse
+    public class BatchResponse
     {
-        public string id;
-        public long litleBatchId;
-        public string merchantId;
+        public string ID;
+        public long LitleBatchId;
+        public string MerchantId;
 
-        private XmlReader originalXmlReader;
-        private XmlReader accountUpdateResponseReader;
-        private XmlReader authorizationResponseReader;
-        private XmlReader authReversalResponseReader;
-        private XmlReader captureResponseReader;
-        private XmlReader captureGivenAuthResponseReader;
-        private XmlReader creditResponseReader;
-        private XmlReader forceCaptureResponseReader;
-        private XmlReader echeckCreditResponseReader;
-        private XmlReader echeckRedepositResponseReader;
-        private XmlReader echeckSalesResponseReader;
-        private XmlReader echeckVerificationResponseReader;
-        private XmlReader saleResponseReader;
-        private XmlReader registerTokenResponseReader;
-        private XmlReader updateCardValidationNumOnTokenResponseReader;
-        private XmlReader cancelSubscriptionResponseReader;
-        private XmlReader updateSubscriptionResponseReader;
-        private XmlReader createPlanResponseReader;
-        private XmlReader updatePlanResponseReader;
-        private XmlReader activateResponseReader;
-        private XmlReader deactivateResponseReader;
-        private XmlReader loadResponseReader;
-        private XmlReader echeckPreNoteSaleResponseReader;
-        private XmlReader echeckPreNoteCreditResponseReader;
-        private XmlReader unloadResponseReader;
-        private XmlReader balanceInquiryResponseReader;
-        private XmlReader submerchantCreditResponseReader;
-        private XmlReader payFacCreditResponseReader;
-        private XmlReader vendorCreditResponseReader;
-        private XmlReader reserveCreditResponseReader;
-        private XmlReader physicalCheckCreditResponseReader;
-        private XmlReader submerchantDebitResponseReader;
-        private XmlReader payFacDebitResponseReader;
-        private XmlReader vendorDebitResponseReader;
-        private XmlReader reserveDebitResponseReader;
-        private XmlReader physicalCheckDebitResponseReader;
+        private XmlReader _originalXmlReader;
+        private XmlReader _accountUpdateResponseReader;
+        private XmlReader _authorizationResponseReader;
+        private XmlReader _authReversalResponseReader;
+        private XmlReader _captureResponseReader;
+        private XmlReader _captureGivenAuthResponseReader;
+        private XmlReader _creditResponseReader;
+        private XmlReader _forceCaptureResponseReader;
+        private XmlReader _echeckCreditResponseReader;
+        private XmlReader _echeckRedepositResponseReader;
+        private XmlReader _echeckSalesResponseReader;
+        private XmlReader _echeckVerificationResponseReader;
+        private XmlReader _saleResponseReader;
+        private XmlReader _registerTokenResponseReader;
+        private XmlReader _updateCardValidationNumOnTokenResponseReader;
+        private XmlReader _cancelSubscriptionResponseReader;
+        private XmlReader _updateSubscriptionResponseReader;
+        private XmlReader _createPlanResponseReader;
+        private XmlReader _updatePlanResponseReader;
+        private XmlReader _activateResponseReader;
+        private XmlReader _deactivateResponseReader;
+        private XmlReader _loadResponseReader;
+        private XmlReader _echeckPreNoteSaleResponseReader;
+        private XmlReader _echeckPreNoteCreditResponseReader;
+        private XmlReader _unloadResponseReader;
+        private XmlReader _balanceInquiryResponseReader;
+        private XmlReader _submerchantCreditResponseReader;
+        private XmlReader _payFacCreditResponseReader;
+        private XmlReader _vendorCreditResponseReader;
+        private XmlReader _reserveCreditResponseReader;
+        private XmlReader _physicalCheckCreditResponseReader;
+        private XmlReader _submerchantDebitResponseReader;
+        private XmlReader _payFacDebitResponseReader;
+        private XmlReader _vendorDebitResponseReader;
+        private XmlReader _reserveDebitResponseReader;
+        private XmlReader _physicalCheckDebitResponseReader;
 
-        public batchResponse()
+        public BatchResponse()
         {
         }
 
-        public batchResponse(XmlReader xmlReader, string filePath)
+        public BatchResponse(XmlReader xmlReader, string filePath)
         {
-            readXml(xmlReader, filePath);
+            ReadXml(xmlReader, filePath);
         }
 
-        public void setAccountUpdateResponseReader(XmlReader xmlReader)
+        public void SetAccountUpdateResponseReader(XmlReader xmlReader)
         {
-            accountUpdateResponseReader = xmlReader;
+            _accountUpdateResponseReader = xmlReader;
         }
 
-        public void setAuthorizationResponseReader(XmlReader xmlReader)
+        public void SetAuthorizationResponseReader(XmlReader xmlReader)
         {
-            authorizationResponseReader = xmlReader;
+            _authorizationResponseReader = xmlReader;
         }
 
-        public void setAuthReversalResponseReader(XmlReader xmlReader)
+        public void SetAuthReversalResponseReader(XmlReader xmlReader)
         {
-            authReversalResponseReader = xmlReader;
+            _authReversalResponseReader = xmlReader;
         }
 
-        public void setCaptureResponseReader(XmlReader xmlReader)
+        public void SetCaptureResponseReader(XmlReader xmlReader)
         {
-            captureResponseReader = xmlReader;
+            _captureResponseReader = xmlReader;
         }
 
-        public void setCaptureGivenAuthResponseReader(XmlReader xmlReader)
+        public void SetCaptureGivenAuthResponseReader(XmlReader xmlReader)
         {
-            captureGivenAuthResponseReader = xmlReader;
+            _captureGivenAuthResponseReader = xmlReader;
         }
 
-        public void setCreditResponseReader(XmlReader xmlReader)
+        public void SetCreditResponseReader(XmlReader xmlReader)
         {
-            creditResponseReader = xmlReader;
+            _creditResponseReader = xmlReader;
         }
 
-        public void setForceCaptureResponseReader(XmlReader xmlReader)
+        public void SetForceCaptureResponseReader(XmlReader xmlReader)
         {
-            forceCaptureResponseReader = xmlReader;
+            _forceCaptureResponseReader = xmlReader;
         }
 
-        public void setEcheckCreditResponseReader(XmlReader xmlReader)
+        public void SetEcheckCreditResponseReader(XmlReader xmlReader)
         {
-            echeckCreditResponseReader = xmlReader;
+            _echeckCreditResponseReader = xmlReader;
         }
 
-        public void setEcheckRedepositResponseReader(XmlReader xmlReader)
+        public void SetEcheckRedepositResponseReader(XmlReader xmlReader)
         {
-            echeckRedepositResponseReader = xmlReader;
+            _echeckRedepositResponseReader = xmlReader;
         }
 
-        public void setEcheckSalesResponseReader(XmlReader xmlReader)
+        public void SetEcheckSalesResponseReader(XmlReader xmlReader)
         {
-            echeckSalesResponseReader = xmlReader;
+            _echeckSalesResponseReader = xmlReader;
         }
 
-        public void setEcheckVerificationResponseReader(XmlReader xmlReader)
+        public void SetEcheckVerificationResponseReader(XmlReader xmlReader)
         {
-            echeckVerificationResponseReader = xmlReader;
+            _echeckVerificationResponseReader = xmlReader;
         }
 
-        public void setSaleResponseReader(XmlReader xmlReader)
+        public void SetSaleResponseReader(XmlReader xmlReader)
         {
-            saleResponseReader = xmlReader;
+            _saleResponseReader = xmlReader;
         }
 
-        public void setRegisterTokenResponseReader(XmlReader xmlReader)
+        public void SetRegisterTokenResponseReader(XmlReader xmlReader)
         {
-            registerTokenResponseReader = xmlReader;
+            _registerTokenResponseReader = xmlReader;
         }
 
-        public void setUpdateCardValidationNumOnTokenResponseReader(XmlReader xmlReader)
+        public void SetUpdateCardValidationNumOnTokenResponseReader(XmlReader xmlReader)
         {
-            updateCardValidationNumOnTokenResponseReader = xmlReader;
+            _updateCardValidationNumOnTokenResponseReader = xmlReader;
         }
 
-        public void setCancelSubscriptionResponseReader(XmlReader xmlReader)
+        public void SetCancelSubscriptionResponseReader(XmlReader xmlReader)
         {
-            cancelSubscriptionResponseReader = xmlReader;
+            _cancelSubscriptionResponseReader = xmlReader;
         }
 
-        public void setUpdateSubscriptionResponseReader(XmlReader xmlReader)
+        public void SetUpdateSubscriptionResponseReader(XmlReader xmlReader)
         {
-            updateSubscriptionResponseReader = xmlReader;
+            _updateSubscriptionResponseReader = xmlReader;
         }
 
-        public void setCreatePlanResponseReader(XmlReader xmlReader)
+        public void SetCreatePlanResponseReader(XmlReader xmlReader)
         {
-            createPlanResponseReader = xmlReader;
+            _createPlanResponseReader = xmlReader;
         }
 
-        public void setUpdatePlanResponseReader(XmlReader xmlReader)
+        public void SetUpdatePlanResponseReader(XmlReader xmlReader)
         {
-            updatePlanResponseReader = xmlReader;
+            _updatePlanResponseReader = xmlReader;
         }
 
-        public void setActivateResponseReader(XmlReader xmlReader)
+        public void SetActivateResponseReader(XmlReader xmlReader)
         {
-            activateResponseReader = xmlReader;
+            _activateResponseReader = xmlReader;
         }
 
-        public void setDeactivateResponseReader(XmlReader xmlReader)
+        public void SetDeactivateResponseReader(XmlReader xmlReader)
         {
-            deactivateResponseReader = xmlReader;
+            _deactivateResponseReader = xmlReader;
         }
 
-        public void setLoadResponseReader(XmlReader xmlReader)
+        public void SetLoadResponseReader(XmlReader xmlReader)
         {
-            loadResponseReader = xmlReader;
+            _loadResponseReader = xmlReader;
         }
 
-        public void setEcheckPreNoteSaleResponseReader(XmlReader xmlReader)
+        public void SetEcheckPreNoteSaleResponseReader(XmlReader xmlReader)
         {
-            echeckPreNoteSaleResponseReader = xmlReader;
+            _echeckPreNoteSaleResponseReader = xmlReader;
         }
 
-        public void setEcheckPreNoteCreditResponseReader(XmlReader xmlReader)
+        public void SetEcheckPreNoteCreditResponseReader(XmlReader xmlReader)
         {
-            echeckPreNoteCreditResponseReader = xmlReader;
+            _echeckPreNoteCreditResponseReader = xmlReader;
         }
 
-        public void setUnloadResponseReader(XmlReader xmlReader)
+        public void SetUnloadResponseReader(XmlReader xmlReader)
         {
-            unloadResponseReader = xmlReader;
+            _unloadResponseReader = xmlReader;
         }
 
-        public void setBalanceInquiryResponseReader(XmlReader xmlReader)
+        public void SetBalanceInquiryResponseReader(XmlReader xmlReader)
         {
-            balanceInquiryResponseReader = xmlReader;
+            _balanceInquiryResponseReader = xmlReader;
         }
 
-        public void setSubmerchantCreditResponseReader(XmlReader xmlReader)
+        public void SetSubmerchantCreditResponseReader(XmlReader xmlReader)
         {
-            submerchantCreditResponseReader = xmlReader;
+            _submerchantCreditResponseReader = xmlReader;
         }
 
-        public void setPayFacCreditResponseReader(XmlReader xmlReader)
+        public void SetPayFacCreditResponseReader(XmlReader xmlReader)
         {
-            payFacCreditResponseReader = xmlReader;
+            _payFacCreditResponseReader = xmlReader;
         }
 
-        public void setReserveCreditResponseReader(XmlReader xmlReader)
+        public void SetReserveCreditResponseReader(XmlReader xmlReader)
         {
-            reserveCreditResponseReader = xmlReader;
+            _reserveCreditResponseReader = xmlReader;
         }
 
-        public void setVendorCreditResponseReader(XmlReader xmlReader)
+        public void SetVendorCreditResponseReader(XmlReader xmlReader)
         {
-            vendorCreditResponseReader = xmlReader;
+            _vendorCreditResponseReader = xmlReader;
         }
 
-        public void setPhysicalCheckCreditResponseReader(XmlReader xmlReader)
+        public void SetPhysicalCheckCreditResponseReader(XmlReader xmlReader)
         {
-            physicalCheckCreditResponseReader = xmlReader;
+            _physicalCheckCreditResponseReader = xmlReader;
         }
 
-        public void setSubmerchantDebitResponseReader(XmlReader xmlReader)
+        public void SetSubmerchantDebitResponseReader(XmlReader xmlReader)
         {
-            submerchantDebitResponseReader = xmlReader;
+            _submerchantDebitResponseReader = xmlReader;
         }
 
-        public void setPayFacDebitResponseReader(XmlReader xmlReader)
+        public void SetPayFacDebitResponseReader(XmlReader xmlReader)
         {
-            payFacDebitResponseReader = xmlReader;
+            _payFacDebitResponseReader = xmlReader;
         }
 
-        public void setReserveDebitResponseReader(XmlReader xmlReader)
+        public void SetReserveDebitResponseReader(XmlReader xmlReader)
         {
-            reserveDebitResponseReader = xmlReader;
+            _reserveDebitResponseReader = xmlReader;
         }
 
-        public void setVendorDebitResponseReader(XmlReader xmlReader)
+        public void SetVendorDebitResponseReader(XmlReader xmlReader)
         {
-            vendorDebitResponseReader = xmlReader;
+            _vendorDebitResponseReader = xmlReader;
         }
 
-        public void setPhysicalCheckDebitResponseReader(XmlReader xmlReader)
+        public void SetPhysicalCheckDebitResponseReader(XmlReader xmlReader)
         {
-            physicalCheckDebitResponseReader = xmlReader;
+            _physicalCheckDebitResponseReader = xmlReader;
         }
 
-
-        public void readXml(XmlReader reader, string filePath)
+        public void ReadXml(XmlReader reader, string filePath)
         {
-            id = reader.GetAttribute("id");
-            litleBatchId = Int64.Parse(reader.GetAttribute("litleBatchId"));
-            merchantId = reader.GetAttribute("merchantId");
+            ID = reader.GetAttribute("id");
+            LitleBatchId = Int64.Parse(reader.GetAttribute("litleBatchId"));
+            MerchantId = reader.GetAttribute("merchantId");
 
-            originalXmlReader = reader;
-            accountUpdateResponseReader = new XmlTextReader(filePath);
-            authorizationResponseReader = new XmlTextReader(filePath);
-            authReversalResponseReader = new XmlTextReader(filePath);
-            captureResponseReader = new XmlTextReader(filePath);
-            captureGivenAuthResponseReader = new XmlTextReader(filePath);
-            creditResponseReader = new XmlTextReader(filePath);
-            forceCaptureResponseReader = new XmlTextReader(filePath);
-            echeckCreditResponseReader = new XmlTextReader(filePath);
-            echeckRedepositResponseReader = new XmlTextReader(filePath);
-            echeckSalesResponseReader = new XmlTextReader(filePath);
-            echeckVerificationResponseReader = new XmlTextReader(filePath);
-            saleResponseReader = new XmlTextReader(filePath);
-            registerTokenResponseReader = new XmlTextReader(filePath);
-            updateCardValidationNumOnTokenResponseReader = new XmlTextReader(filePath);
-            cancelSubscriptionResponseReader = new XmlTextReader(filePath);
-            updateSubscriptionResponseReader = new XmlTextReader(filePath);
-            createPlanResponseReader = new XmlTextReader(filePath);
-            updatePlanResponseReader = new XmlTextReader(filePath);
-            activateResponseReader = new XmlTextReader(filePath);
-            deactivateResponseReader = new XmlTextReader(filePath);
-            loadResponseReader = new XmlTextReader(filePath);
-            echeckPreNoteSaleResponseReader = new XmlTextReader(filePath);
-            echeckPreNoteCreditResponseReader = new XmlTextReader(filePath);
-            unloadResponseReader = new XmlTextReader(filePath);
-            balanceInquiryResponseReader = new XmlTextReader(filePath);
-            submerchantCreditResponseReader = new XmlTextReader(filePath);
-            payFacCreditResponseReader = new XmlTextReader(filePath);
-            reserveCreditResponseReader = new XmlTextReader(filePath);
-            vendorCreditResponseReader = new XmlTextReader(filePath);
-            physicalCheckCreditResponseReader = new XmlTextReader(filePath);
-            submerchantDebitResponseReader = new XmlTextReader(filePath);
-            payFacDebitResponseReader = new XmlTextReader(filePath);
-            reserveDebitResponseReader = new XmlTextReader(filePath);
-            vendorDebitResponseReader = new XmlTextReader(filePath);
-            physicalCheckDebitResponseReader = new XmlTextReader(filePath);
+            _originalXmlReader = reader;
+            _accountUpdateResponseReader = new XmlTextReader(filePath);
+            _authorizationResponseReader = new XmlTextReader(filePath);
+            _authReversalResponseReader = new XmlTextReader(filePath);
+            _captureResponseReader = new XmlTextReader(filePath);
+            _captureGivenAuthResponseReader = new XmlTextReader(filePath);
+            _creditResponseReader = new XmlTextReader(filePath);
+            _forceCaptureResponseReader = new XmlTextReader(filePath);
+            _echeckCreditResponseReader = new XmlTextReader(filePath);
+            _echeckRedepositResponseReader = new XmlTextReader(filePath);
+            _echeckSalesResponseReader = new XmlTextReader(filePath);
+            _echeckVerificationResponseReader = new XmlTextReader(filePath);
+            _saleResponseReader = new XmlTextReader(filePath);
+            _registerTokenResponseReader = new XmlTextReader(filePath);
+            _updateCardValidationNumOnTokenResponseReader = new XmlTextReader(filePath);
+            _cancelSubscriptionResponseReader = new XmlTextReader(filePath);
+            _updateSubscriptionResponseReader = new XmlTextReader(filePath);
+            _createPlanResponseReader = new XmlTextReader(filePath);
+            _updatePlanResponseReader = new XmlTextReader(filePath);
+            _activateResponseReader = new XmlTextReader(filePath);
+            _deactivateResponseReader = new XmlTextReader(filePath);
+            _loadResponseReader = new XmlTextReader(filePath);
+            _echeckPreNoteSaleResponseReader = new XmlTextReader(filePath);
+            _echeckPreNoteCreditResponseReader = new XmlTextReader(filePath);
+            _unloadResponseReader = new XmlTextReader(filePath);
+            _balanceInquiryResponseReader = new XmlTextReader(filePath);
+            _submerchantCreditResponseReader = new XmlTextReader(filePath);
+            _payFacCreditResponseReader = new XmlTextReader(filePath);
+            _reserveCreditResponseReader = new XmlTextReader(filePath);
+            _vendorCreditResponseReader = new XmlTextReader(filePath);
+            _physicalCheckCreditResponseReader = new XmlTextReader(filePath);
+            _submerchantDebitResponseReader = new XmlTextReader(filePath);
+            _payFacDebitResponseReader = new XmlTextReader(filePath);
+            _reserveDebitResponseReader = new XmlTextReader(filePath);
+            _vendorDebitResponseReader = new XmlTextReader(filePath);
+            _physicalCheckDebitResponseReader = new XmlTextReader(filePath);
 
-            if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
+            if (!_accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
             {
-                accountUpdateResponseReader.Close();
+                _accountUpdateResponseReader.Close();
             }
-            if (!authorizationResponseReader.ReadToFollowing("authorizationResponse"))
+            if (!_authorizationResponseReader.ReadToFollowing("authorizationResponse"))
             {
-                authorizationResponseReader.Close();
+                _authorizationResponseReader.Close();
             }
-            if (!authReversalResponseReader.ReadToFollowing("authReversalResponse"))
+            if (!_authReversalResponseReader.ReadToFollowing("authReversalResponse"))
             {
-                authReversalResponseReader.Close();
+                _authReversalResponseReader.Close();
             }
-            if (!captureResponseReader.ReadToFollowing("captureResponse"))
+            if (!_captureResponseReader.ReadToFollowing("captureResponse"))
             {
-                captureResponseReader.Close();
+                _captureResponseReader.Close();
             }
-            if (!captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
+            if (!_captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
             {
-                captureGivenAuthResponseReader.Close();
+                _captureGivenAuthResponseReader.Close();
             }
-            if (!creditResponseReader.ReadToFollowing("creditResponse"))
+            if (!_creditResponseReader.ReadToFollowing("creditResponse"))
             {
-                creditResponseReader.Close();
+                _creditResponseReader.Close();
             }
-            if (!forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
+            if (!_forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
             {
-                forceCaptureResponseReader.Close();
+                _forceCaptureResponseReader.Close();
             }
-            if (!echeckCreditResponseReader.ReadToFollowing("echeckCreditResponse"))
+            if (!_echeckCreditResponseReader.ReadToFollowing("echeckCreditResponse"))
             {
-                echeckCreditResponseReader.Close();
+                _echeckCreditResponseReader.Close();
             }
-            if (!echeckRedepositResponseReader.ReadToFollowing("echeckRedepositResponse"))
+            if (!_echeckRedepositResponseReader.ReadToFollowing("echeckRedepositResponse"))
             {
-                echeckRedepositResponseReader.Close();
+                _echeckRedepositResponseReader.Close();
             }
-            if (!echeckSalesResponseReader.ReadToFollowing("echeckSalesResponse"))
+            if (!_echeckSalesResponseReader.ReadToFollowing("echeckSalesResponse"))
             {
-                echeckSalesResponseReader.Close();
+                _echeckSalesResponseReader.Close();
             }
-            if (!echeckVerificationResponseReader.ReadToFollowing("echeckVerificationResponse"))
+            if (!_echeckVerificationResponseReader.ReadToFollowing("echeckVerificationResponse"))
             {
-                echeckVerificationResponseReader.Close();
+                _echeckVerificationResponseReader.Close();
             }
-            if (!saleResponseReader.ReadToFollowing("saleResponse"))
+            if (!_saleResponseReader.ReadToFollowing("saleResponse"))
             {
-                saleResponseReader.Close();
+                _saleResponseReader.Close();
             }
-            if (!registerTokenResponseReader.ReadToFollowing("registerTokenResponse"))
+            if (!_registerTokenResponseReader.ReadToFollowing("registerTokenResponse"))
             {
-                registerTokenResponseReader.Close();
+                _registerTokenResponseReader.Close();
             }
-            if (!updateCardValidationNumOnTokenResponseReader.ReadToFollowing("updateCardValidationNumOnTokenResponse"))
+            if (!_updateCardValidationNumOnTokenResponseReader.ReadToFollowing("updateCardValidationNumOnTokenResponse"))
             {
-                updateCardValidationNumOnTokenResponseReader.Close();
+                _updateCardValidationNumOnTokenResponseReader.Close();
             }
-            if (!cancelSubscriptionResponseReader.ReadToFollowing("cancelSubscriptionResponse"))
+            if (!_cancelSubscriptionResponseReader.ReadToFollowing("cancelSubscriptionResponse"))
             {
-                cancelSubscriptionResponseReader.Close();
+                _cancelSubscriptionResponseReader.Close();
             }
-            if (!updateSubscriptionResponseReader.ReadToFollowing("updateSubscriptionResponse"))
+            if (!_updateSubscriptionResponseReader.ReadToFollowing("updateSubscriptionResponse"))
             {
-                updateSubscriptionResponseReader.Close();
+                _updateSubscriptionResponseReader.Close();
             }
-            if (!createPlanResponseReader.ReadToFollowing("createPlanResponse"))
+            if (!_createPlanResponseReader.ReadToFollowing("createPlanResponse"))
             {
-                createPlanResponseReader.Close();
+                _createPlanResponseReader.Close();
             }
-            if (!updatePlanResponseReader.ReadToFollowing("updatePlanResponse"))
+            if (!_updatePlanResponseReader.ReadToFollowing("updatePlanResponse"))
             {
-                updatePlanResponseReader.Close();
+                _updatePlanResponseReader.Close();
             }
-            if (!activateResponseReader.ReadToFollowing("activateResponse"))
+            if (!_activateResponseReader.ReadToFollowing("activateResponse"))
             {
-                activateResponseReader.Close();
+                _activateResponseReader.Close();
             }
-            if (!loadResponseReader.ReadToFollowing("loadResponse"))
+            if (!_loadResponseReader.ReadToFollowing("loadResponse"))
             {
-                loadResponseReader.Close();
+                _loadResponseReader.Close();
             }
-            if (!deactivateResponseReader.ReadToFollowing("deactivateResponse"))
+            if (!_deactivateResponseReader.ReadToFollowing("deactivateResponse"))
             {
-                deactivateResponseReader.Close();
+                _deactivateResponseReader.Close();
             }
-            if (!echeckPreNoteSaleResponseReader.ReadToFollowing("echeckPreNoteSaleResponse"))
+            if (!_echeckPreNoteSaleResponseReader.ReadToFollowing("echeckPreNoteSaleResponse"))
             {
-                echeckPreNoteSaleResponseReader.Close();
+                _echeckPreNoteSaleResponseReader.Close();
             }
-            if (!echeckPreNoteCreditResponseReader.ReadToFollowing("echeckPreNoteCreditResponse"))
+            if (!_echeckPreNoteCreditResponseReader.ReadToFollowing("echeckPreNoteCreditResponse"))
             {
-                echeckPreNoteCreditResponseReader.Close();
+                _echeckPreNoteCreditResponseReader.Close();
             }
-            if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
+            if (!_unloadResponseReader.ReadToFollowing("unloadResponse"))
             {
-                unloadResponseReader.Close();
+                _unloadResponseReader.Close();
             }
-            if (!balanceInquiryResponseReader.ReadToFollowing("balanceInquiryResponse"))
+            if (!_balanceInquiryResponseReader.ReadToFollowing("balanceInquiryResponse"))
             {
-                balanceInquiryResponseReader.Close();
+                _balanceInquiryResponseReader.Close();
             }
-            if (!submerchantCreditResponseReader.ReadToFollowing("submerchantCreditResponse"))
+            if (!_submerchantCreditResponseReader.ReadToFollowing("submerchantCreditResponse"))
             {
-                submerchantCreditResponseReader.Close();
+                _submerchantCreditResponseReader.Close();
             }
-            if (!payFacCreditResponseReader.ReadToFollowing("payFacCreditResponse"))
+            if (!_payFacCreditResponseReader.ReadToFollowing("payFacCreditResponse"))
             {
-                payFacCreditResponseReader.Close();
+                _payFacCreditResponseReader.Close();
             }
-            if (!vendorCreditResponseReader.ReadToFollowing("vendorCreditResponse"))
+            if (!_vendorCreditResponseReader.ReadToFollowing("vendorCreditResponse"))
             {
-                vendorCreditResponseReader.Close();
+                _vendorCreditResponseReader.Close();
             }
-            if (!reserveCreditResponseReader.ReadToFollowing("reserveCreditResponse"))
+            if (!_reserveCreditResponseReader.ReadToFollowing("reserveCreditResponse"))
             {
-                reserveCreditResponseReader.Close();
+                _reserveCreditResponseReader.Close();
             }
-            if (!physicalCheckCreditResponseReader.ReadToFollowing("physicalCheckCreditResponse"))
+            if (!_physicalCheckCreditResponseReader.ReadToFollowing("physicalCheckCreditResponse"))
             {
-                physicalCheckCreditResponseReader.Close();
+                _physicalCheckCreditResponseReader.Close();
             }
-            if (!submerchantDebitResponseReader.ReadToFollowing("submerchantDebitResponse"))
+            if (!_submerchantDebitResponseReader.ReadToFollowing("submerchantDebitResponse"))
             {
-                submerchantDebitResponseReader.Close();
+                _submerchantDebitResponseReader.Close();
             }
-            if (!payFacDebitResponseReader.ReadToFollowing("payFacDebitResponse"))
+            if (!_payFacDebitResponseReader.ReadToFollowing("payFacDebitResponse"))
             {
-                payFacDebitResponseReader.Close();
+                _payFacDebitResponseReader.Close();
             }
-            if (!vendorDebitResponseReader.ReadToFollowing("vendorDebitResponse"))
+            if (!_vendorDebitResponseReader.ReadToFollowing("vendorDebitResponse"))
             {
-                vendorDebitResponseReader.Close();
+                _vendorDebitResponseReader.Close();
             }
-            if (!reserveDebitResponseReader.ReadToFollowing("reserveDebitResponse"))
+            if (!_reserveDebitResponseReader.ReadToFollowing("reserveDebitResponse"))
             {
-                reserveDebitResponseReader.Close();
+                _reserveDebitResponseReader.Close();
             }
-            if (!physicalCheckDebitResponseReader.ReadToFollowing("physicalCheckDebitResponse"))
+            if (!_physicalCheckDebitResponseReader.ReadToFollowing("physicalCheckDebitResponse"))
             {
-                physicalCheckDebitResponseReader.Close();
+                _physicalCheckDebitResponseReader.Close();
             }
         }
 
-        public virtual accountUpdateResponse nextAccountUpdateResponse()
+        public virtual AccountUpdateResponse NextAccountUpdateResponse()
         {
-            if (accountUpdateResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = accountUpdateResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (accountUpdateResponse));
-                StringReader reader = new StringReader(response);
-                accountUpdateResponse i = (accountUpdateResponse) serializer.Deserialize(reader);
-
-                if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
-                {
-                    accountUpdateResponseReader.Close();
-                }
+            if (_accountUpdateResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _accountUpdateResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (AccountUpdateResponse));
+            var reader = new StringReader(response);
+            var i = (AccountUpdateResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
+            {
+                _accountUpdateResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual authorizationResponse nextAuthorizationResponse()
+        public virtual AuthorizationResponse NextAuthorizationResponse()
         {
-            if (authorizationResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = authorizationResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (authorizationResponse));
-                StringReader reader = new StringReader(response);
-                authorizationResponse i = (authorizationResponse) serializer.Deserialize(reader);
-
-                if (!authorizationResponseReader.ReadToFollowing("authorizationResponse"))
-                {
-                    authorizationResponseReader.Close();
-                }
+            if (_authorizationResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _authorizationResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (AuthorizationResponse));
+            var reader = new StringReader(response);
+            var i = (AuthorizationResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_authorizationResponseReader.ReadToFollowing("authorizationResponse"))
+            {
+                _authorizationResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual authReversalResponse nextAuthReversalResponse()
+        public virtual AuthReversalResponse NextAuthReversalResponse()
         {
-            if (authReversalResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = authReversalResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (authReversalResponse));
-                StringReader reader = new StringReader(response);
-                authReversalResponse i = (authReversalResponse) serializer.Deserialize(reader);
-
-                if (!authReversalResponseReader.ReadToFollowing("authReversalResponse"))
-                {
-                    authReversalResponseReader.Close();
-                }
+            if (_authReversalResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _authReversalResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (AuthReversalResponse));
+            var reader = new StringReader(response);
+            var i = (AuthReversalResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_authReversalResponseReader.ReadToFollowing("authReversalResponse"))
+            {
+                _authReversalResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual captureResponse nextCaptureResponse()
+        public virtual CaptureResponse NextCaptureResponse()
         {
-            if (captureResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = captureResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (captureResponse));
-                StringReader reader = new StringReader(response);
-                captureResponse i = (captureResponse) serializer.Deserialize(reader);
+            if (_captureResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _captureResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (CaptureResponse));
+            var reader = new StringReader(response);
+            var i = (CaptureResponse) serializer.Deserialize(reader);
 
-                if (!captureResponseReader.ReadToFollowing("captureResponse"))
-                {
-                    captureResponseReader.Close();
-                }
-
-                return i;
+            if (!_captureResponseReader.ReadToFollowing("captureResponse"))
+            {
+                _captureResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual captureGivenAuthResponse nextCaptureGivenAuthResponse()
+        public virtual CaptureGivenAuthResponse NextCaptureGivenAuthResponse()
         {
-            if (captureGivenAuthResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = captureGivenAuthResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (captureGivenAuthResponse));
-                StringReader reader = new StringReader(response);
-                captureGivenAuthResponse i = (captureGivenAuthResponse) serializer.Deserialize(reader);
+            if (_captureGivenAuthResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _captureGivenAuthResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (CaptureGivenAuthResponse));
+            var reader = new StringReader(response);
+            var i = (CaptureGivenAuthResponse) serializer.Deserialize(reader);
 
-                if (!captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
-                {
-                    captureGivenAuthResponseReader.Close();
-                }
-
-                return i;
+            if (!_captureGivenAuthResponseReader.ReadToFollowing("captureGivenAuthResponse"))
+            {
+                _captureGivenAuthResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual creditResponse nextCreditResponse()
+        public virtual CreditResponse NextCreditResponse()
         {
-            if (creditResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = creditResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (creditResponse));
-                StringReader reader = new StringReader(response);
-                creditResponse i = (creditResponse) serializer.Deserialize(reader);
+            if (_creditResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _creditResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (CreditResponse));
+            var reader = new StringReader(response);
+            var i = (CreditResponse) serializer.Deserialize(reader);
 
-                if (!creditResponseReader.ReadToFollowing("creditResponse"))
-                {
-                    creditResponseReader.Close();
-                }
-
-                return i;
+            if (!_creditResponseReader.ReadToFollowing("creditResponse"))
+            {
+                _creditResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual echeckCreditResponse nextEcheckCreditResponse()
+        public virtual EcheckCreditResponse NextEcheckCreditResponse()
         {
-            if (echeckCreditResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = echeckCreditResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (echeckCreditResponse));
-                StringReader reader = new StringReader(response);
-                echeckCreditResponse i = (echeckCreditResponse) serializer.Deserialize(reader);
+            if (_echeckCreditResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _echeckCreditResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (EcheckCreditResponse));
+            var reader = new StringReader(response);
+            var i = (EcheckCreditResponse) serializer.Deserialize(reader);
 
-                if (!echeckCreditResponseReader.ReadToFollowing("echeckCreditResponse"))
-                {
-                    echeckCreditResponseReader.Close();
-                }
-
-                return i;
+            if (!_echeckCreditResponseReader.ReadToFollowing("echeckCreditResponse"))
+            {
+                _echeckCreditResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual echeckRedepositResponse nextEcheckRedepositResponse()
+        public virtual EcheckRedepositResponse NextEcheckRedepositResponse()
         {
-            if (echeckRedepositResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = echeckRedepositResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (echeckRedepositResponse));
-                StringReader reader = new StringReader(response);
-                echeckRedepositResponse i = (echeckRedepositResponse) serializer.Deserialize(reader);
-
-                if (!echeckRedepositResponseReader.ReadToFollowing("echeckRedepositResponse"))
-                {
-                    echeckRedepositResponseReader.Close();
-                }
+            if (_echeckRedepositResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _echeckRedepositResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (EcheckRedepositResponse));
+            var reader = new StringReader(response);
+            var i = (EcheckRedepositResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_echeckRedepositResponseReader.ReadToFollowing("echeckRedepositResponse"))
+            {
+                _echeckRedepositResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual echeckSalesResponse nextEcheckSalesResponse()
+        public virtual EcheckSalesResponse NextEcheckSalesResponse()
         {
-            if (echeckSalesResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = echeckSalesResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (echeckSalesResponse));
-                StringReader reader = new StringReader(response);
-                echeckSalesResponse i = (echeckSalesResponse) serializer.Deserialize(reader);
+            if (_echeckSalesResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _echeckSalesResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (EcheckSalesResponse));
+            var reader = new StringReader(response);
+            var i = (EcheckSalesResponse) serializer.Deserialize(reader);
 
-                if (!echeckSalesResponseReader.ReadToFollowing("echeckSalesResponse"))
-                {
-                    echeckSalesResponseReader.Close();
-                }
-
-                return i;
+            if (!_echeckSalesResponseReader.ReadToFollowing("echeckSalesResponse"))
+            {
+                _echeckSalesResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual echeckVerificationResponse nextEcheckVerificationResponse()
+        public virtual EcheckVerificationResponse NextEcheckVerificationResponse()
         {
-            if (echeckVerificationResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = echeckVerificationResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (echeckVerificationResponse));
-                StringReader reader = new StringReader(response);
-                echeckVerificationResponse i = (echeckVerificationResponse) serializer.Deserialize(reader);
+            if (_echeckVerificationResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _echeckVerificationResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (EcheckVerificationResponse));
+            var reader = new StringReader(response);
+            var i = (EcheckVerificationResponse) serializer.Deserialize(reader);
 
-                if (!echeckVerificationResponseReader.ReadToFollowing("echeckVerificationResponse"))
-                {
-                    echeckVerificationResponseReader.Close();
-                }
-
-                return i;
+            if (!_echeckVerificationResponseReader.ReadToFollowing("echeckVerificationResponse"))
+            {
+                _echeckVerificationResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual forceCaptureResponse nextForceCaptureResponse()
+        public virtual ForceCaptureResponse NextForceCaptureResponse()
         {
-            if (forceCaptureResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = forceCaptureResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (forceCaptureResponse));
-                StringReader reader = new StringReader(response);
-                forceCaptureResponse i = (forceCaptureResponse) serializer.Deserialize(reader);
+            if (_forceCaptureResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _forceCaptureResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (ForceCaptureResponse));
+            var reader = new StringReader(response);
+            var i = (ForceCaptureResponse) serializer.Deserialize(reader);
 
-                if (!forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
-                {
-                    forceCaptureResponseReader.Close();
-                }
-
-                return i;
+            if (!_forceCaptureResponseReader.ReadToFollowing("forceCaptureResponse"))
+            {
+                _forceCaptureResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual registerTokenResponse nextRegisterTokenResponse()
+        public virtual RegisterTokenResponse NextRegisterTokenResponse()
         {
-            if (registerTokenResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = registerTokenResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (registerTokenResponse));
-                StringReader reader = new StringReader(response);
-                registerTokenResponse i = (registerTokenResponse) serializer.Deserialize(reader);
+            if (_registerTokenResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _registerTokenResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (RegisterTokenResponse));
+            var reader = new StringReader(response);
+            var i = (RegisterTokenResponse) serializer.Deserialize(reader);
 
-                if (!registerTokenResponseReader.ReadToFollowing("registerTokenResponse"))
-                {
-                    registerTokenResponseReader.Close();
-                }
-
-                return i;
+            if (!_registerTokenResponseReader.ReadToFollowing("registerTokenResponse"))
+            {
+                _registerTokenResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual saleResponse nextSaleResponse()
+        public virtual SaleResponse NextSaleResponse()
         {
-            if (saleResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = saleResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (saleResponse));
-                StringReader reader = new StringReader(response);
-                saleResponse i = (saleResponse) serializer.Deserialize(reader);
-
-                if (!saleResponseReader.ReadToFollowing("saleResponse"))
-                {
-                    saleResponseReader.Close();
-                }
+            if (_saleResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _saleResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (SaleResponse));
+            var reader = new StringReader(response);
+            var i = (SaleResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_saleResponseReader.ReadToFollowing("saleResponse"))
+            {
+                _saleResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual updateCardValidationNumOnTokenResponse nextUpdateCardValidationNumOnTokenResponse()
+        public virtual UpdateCardValidationNumOnTokenResponse NextUpdateCardValidationNumOnTokenResponse()
         {
-            if (updateCardValidationNumOnTokenResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = updateCardValidationNumOnTokenResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (updateCardValidationNumOnTokenResponse));
-                StringReader reader = new StringReader(response);
-                updateCardValidationNumOnTokenResponse i =
-                    (updateCardValidationNumOnTokenResponse) serializer.Deserialize(reader);
-
-                if (
-                    !updateCardValidationNumOnTokenResponseReader.ReadToFollowing(
-                        "updateCardValidationNumOnTokenResponse"))
-                {
-                    updateCardValidationNumOnTokenResponseReader.Close();
-                }
+            if (_updateCardValidationNumOnTokenResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _updateCardValidationNumOnTokenResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (UpdateCardValidationNumOnTokenResponse));
+            var reader = new StringReader(response);
+            var i =
+                (UpdateCardValidationNumOnTokenResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (
+                !_updateCardValidationNumOnTokenResponseReader.ReadToFollowing(
+                    "updateCardValidationNumOnTokenResponse"))
+            {
+                _updateCardValidationNumOnTokenResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual updateSubscriptionResponse nextUpdateSubscriptionResponse()
+        public virtual UpdateSubscriptionResponse NextUpdateSubscriptionResponse()
         {
-            if (updateSubscriptionResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = updateSubscriptionResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (updateSubscriptionResponse));
-                StringReader reader = new StringReader(response);
-                updateSubscriptionResponse i = (updateSubscriptionResponse) serializer.Deserialize(reader);
+            if (_updateSubscriptionResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _updateSubscriptionResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (UpdateSubscriptionResponse));
+            var reader = new StringReader(response);
+            var i = (UpdateSubscriptionResponse) serializer.Deserialize(reader);
 
-                if (!updateSubscriptionResponseReader.ReadToFollowing("updateSubscriptionResponse"))
-                {
-                    updateSubscriptionResponseReader.Close();
-                }
-
-                return i;
+            if (!_updateSubscriptionResponseReader.ReadToFollowing("updateSubscriptionResponse"))
+            {
+                _updateSubscriptionResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual cancelSubscriptionResponse nextCancelSubscriptionResponse()
+        public virtual CancelSubscriptionResponse NextCancelSubscriptionResponse()
         {
-            if (cancelSubscriptionResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = cancelSubscriptionResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (cancelSubscriptionResponse));
-                StringReader reader = new StringReader(response);
-                cancelSubscriptionResponse i = (cancelSubscriptionResponse) serializer.Deserialize(reader);
+            if (_cancelSubscriptionResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _cancelSubscriptionResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (CancelSubscriptionResponse));
+            var reader = new StringReader(response);
+            var i = (CancelSubscriptionResponse) serializer.Deserialize(reader);
 
-                if (!cancelSubscriptionResponseReader.ReadToFollowing("cancelSubscriptionResponse"))
-                {
-                    cancelSubscriptionResponseReader.Close();
-                }
-
-                return i;
+            if (!_cancelSubscriptionResponseReader.ReadToFollowing("cancelSubscriptionResponse"))
+            {
+                _cancelSubscriptionResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual createPlanResponse nextCreatePlanResponse()
+        public virtual CreatePlanResponse NextCreatePlanResponse()
         {
-            if (createPlanResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = createPlanResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (createPlanResponse));
-                StringReader reader = new StringReader(response);
-                createPlanResponse i = (createPlanResponse) serializer.Deserialize(reader);
-
-                if (!createPlanResponseReader.ReadToFollowing("createPlanResponse"))
-                {
-                    createPlanResponseReader.Close();
-                }
+            if (_createPlanResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _createPlanResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (CreatePlanResponse));
+            var reader = new StringReader(response);
+            var i = (CreatePlanResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_createPlanResponseReader.ReadToFollowing("createPlanResponse"))
+            {
+                _createPlanResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual updatePlanResponse nextUpdatePlanResponse()
+        public virtual UpdatePlanResponse NextUpdatePlanResponse()
         {
-            if (updatePlanResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = updatePlanResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (updatePlanResponse));
-                StringReader reader = new StringReader(response);
-                updatePlanResponse i = (updatePlanResponse) serializer.Deserialize(reader);
+            if (_updatePlanResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _updatePlanResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (UpdatePlanResponse));
+            var reader = new StringReader(response);
+            var i = (UpdatePlanResponse) serializer.Deserialize(reader);
 
-                if (!updatePlanResponseReader.ReadToFollowing("updatePlanResponse"))
-                {
-                    updatePlanResponseReader.Close();
-                }
-
-                return i;
+            if (!_updatePlanResponseReader.ReadToFollowing("updatePlanResponse"))
+            {
+                _updatePlanResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual activateResponse nextActivateResponse()
+        public virtual ActivateResponse NextActivateResponse()
         {
-            if (activateResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = activateResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (activateResponse));
-                StringReader reader = new StringReader(response);
-                activateResponse i = (activateResponse) serializer.Deserialize(reader);
+            if (_activateResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _activateResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (ActivateResponse));
+            var reader = new StringReader(response);
+            var i = (ActivateResponse) serializer.Deserialize(reader);
 
-                if (!activateResponseReader.ReadToFollowing("activateResponse"))
-                {
-                    activateResponseReader.Close();
-                }
-
-                return i;
+            if (!_activateResponseReader.ReadToFollowing("activateResponse"))
+            {
+                _activateResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual deactivateResponse nextDeactivateResponse()
+        public virtual DeactivateResponse NextDeactivateResponse()
         {
-            if (deactivateResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = deactivateResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (deactivateResponse));
-                StringReader reader = new StringReader(response);
-                deactivateResponse i = (deactivateResponse) serializer.Deserialize(reader);
+            if (_deactivateResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _deactivateResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (DeactivateResponse));
+            var reader = new StringReader(response);
+            var i = (DeactivateResponse) serializer.Deserialize(reader);
 
-                if (!deactivateResponseReader.ReadToFollowing("deactivateResponse"))
-                {
-                    deactivateResponseReader.Close();
-                }
-
-                return i;
+            if (!_deactivateResponseReader.ReadToFollowing("deactivateResponse"))
+            {
+                _deactivateResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual echeckPreNoteSaleResponse nextEcheckPreNoteSaleResponse()
+        public virtual EcheckPreNoteSaleResponse NextEcheckPreNoteSaleResponse()
         {
-            if (echeckPreNoteSaleResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = echeckPreNoteSaleResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (echeckPreNoteSaleResponse));
-                StringReader reader = new StringReader(response);
-                echeckPreNoteSaleResponse i = (echeckPreNoteSaleResponse) serializer.Deserialize(reader);
+            if (_echeckPreNoteSaleResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _echeckPreNoteSaleResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (EcheckPreNoteSaleResponse));
+            var reader = new StringReader(response);
+            var i = (EcheckPreNoteSaleResponse) serializer.Deserialize(reader);
 
-                if (!echeckPreNoteSaleResponseReader.ReadToFollowing("echeckPreNoteSaleResponse"))
-                {
-                    echeckPreNoteSaleResponseReader.Close();
-                }
-
-                return i;
+            if (!_echeckPreNoteSaleResponseReader.ReadToFollowing("echeckPreNoteSaleResponse"))
+            {
+                _echeckPreNoteSaleResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual echeckPreNoteCreditResponse nextEcheckPreNoteCreditResponse()
+        public virtual EcheckPreNoteCreditResponse NextEcheckPreNoteCreditResponse()
         {
-            if (echeckPreNoteCreditResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = echeckPreNoteCreditResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (echeckPreNoteCreditResponse));
-                StringReader reader = new StringReader(response);
-                echeckPreNoteCreditResponse i = (echeckPreNoteCreditResponse) serializer.Deserialize(reader);
-
-                if (!echeckPreNoteCreditResponseReader.ReadToFollowing("echeckPreNoteCreditResponse"))
-                {
-                    echeckPreNoteCreditResponseReader.Close();
-                }
+            if (_echeckPreNoteCreditResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _echeckPreNoteCreditResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (EcheckPreNoteCreditResponse));
+            var reader = new StringReader(response);
+            var i = (EcheckPreNoteCreditResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_echeckPreNoteCreditResponseReader.ReadToFollowing("echeckPreNoteCreditResponse"))
+            {
+                _echeckPreNoteCreditResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual loadResponse nextLoadResponse()
+        public virtual LoadResponse NextLoadResponse()
         {
-            if (loadResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = loadResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (loadResponse));
-                StringReader reader = new StringReader(response);
-                loadResponse i = (loadResponse) serializer.Deserialize(reader);
-
-                if (!loadResponseReader.ReadToFollowing("loadResponse"))
-                {
-                    loadResponseReader.Close();
-                }
+            if (_loadResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _loadResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (LoadResponse));
+            var reader = new StringReader(response);
+            var i = (LoadResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_loadResponseReader.ReadToFollowing("loadResponse"))
+            {
+                _loadResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual unloadResponse nextUnloadResponse()
+        public virtual UnloadResponse NextUnloadResponse()
         {
-            if (unloadResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = unloadResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (unloadResponse));
-                StringReader reader = new StringReader(response);
-                unloadResponse i = (unloadResponse) serializer.Deserialize(reader);
-
-                if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
-                {
-                    unloadResponseReader.Close();
-                }
+            if (_unloadResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _unloadResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (UnloadResponse));
+            var reader = new StringReader(response);
+            var i = (UnloadResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_unloadResponseReader.ReadToFollowing("unloadResponse"))
+            {
+                _unloadResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual balanceInquiryResponse nextBalanceInquiryResponse()
+        public virtual BalanceInquiryResponse NextBalanceInquiryResponse()
         {
-            if (balanceInquiryResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = balanceInquiryResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (balanceInquiryResponse));
-                StringReader reader = new StringReader(response);
-                balanceInquiryResponse i = (balanceInquiryResponse) serializer.Deserialize(reader);
-
-                if (!balanceInquiryResponseReader.ReadToFollowing("balanceInquiryResponse"))
-                {
-                    balanceInquiryResponseReader.Close();
-                }
+            if (_balanceInquiryResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _balanceInquiryResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (BalanceInquiryResponse));
+            var reader = new StringReader(response);
+            var i = (BalanceInquiryResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_balanceInquiryResponseReader.ReadToFollowing("balanceInquiryResponse"))
+            {
+                _balanceInquiryResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual submerchantCreditResponse nextSubmerchantCreditResponse()
+        public virtual SubmerchantCreditResponse NextSubmerchantCreditResponse()
         {
-            if (submerchantCreditResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = submerchantCreditResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (submerchantCreditResponse));
-                StringReader reader = new StringReader(response);
-                submerchantCreditResponse i = (submerchantCreditResponse) serializer.Deserialize(reader);
+            if (_submerchantCreditResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _submerchantCreditResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (SubmerchantCreditResponse));
+            var reader = new StringReader(response);
+            var i = (SubmerchantCreditResponse) serializer.Deserialize(reader);
 
-                if (!submerchantCreditResponseReader.ReadToFollowing("submerchantCreditResponse"))
-                {
-                    submerchantCreditResponseReader.Close();
-                }
-
-                return i;
+            if (!_submerchantCreditResponseReader.ReadToFollowing("submerchantCreditResponse"))
+            {
+                _submerchantCreditResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual payFacCreditResponse nextPayFacCreditResponse()
+        public virtual PayFacCreditResponse NextPayFacCreditResponse()
         {
-            if (payFacCreditResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = payFacCreditResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (payFacCreditResponse));
-                StringReader reader = new StringReader(response);
-                payFacCreditResponse i = (payFacCreditResponse) serializer.Deserialize(reader);
+            if (_payFacCreditResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _payFacCreditResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (PayFacCreditResponse));
+            var reader = new StringReader(response);
+            var i = (PayFacCreditResponse) serializer.Deserialize(reader);
 
-                if (!payFacCreditResponseReader.ReadToFollowing("payFacCreditResponse"))
-                {
-                    payFacCreditResponseReader.Close();
-                }
-
-                return i;
+            if (!_payFacCreditResponseReader.ReadToFollowing("payFacCreditResponse"))
+            {
+                _payFacCreditResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual vendorCreditResponse nextVendorCreditResponse()
+        public virtual VendorCreditResponse NextVendorCreditResponse()
         {
-            if (vendorCreditResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = vendorCreditResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (vendorCreditResponse));
-                StringReader reader = new StringReader(response);
-                vendorCreditResponse i = (vendorCreditResponse) serializer.Deserialize(reader);
+            if (_vendorCreditResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _vendorCreditResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (VendorCreditResponse));
+            var reader = new StringReader(response);
+            var i = (VendorCreditResponse) serializer.Deserialize(reader);
 
-                if (!vendorCreditResponseReader.ReadToFollowing("vendorCreditResponse"))
-                {
-                    vendorCreditResponseReader.Close();
-                }
-
-                return i;
+            if (!_vendorCreditResponseReader.ReadToFollowing("vendorCreditResponse"))
+            {
+                _vendorCreditResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual reserveCreditResponse nextReserveCreditResponse()
+        public virtual ReserveCreditResponse NextReserveCreditResponse()
         {
-            if (reserveCreditResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = reserveCreditResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (reserveCreditResponse));
-                StringReader reader = new StringReader(response);
-                reserveCreditResponse i = (reserveCreditResponse) serializer.Deserialize(reader);
+            if (_reserveCreditResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _reserveCreditResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (ReserveCreditResponse));
+            var reader = new StringReader(response);
+            var i = (ReserveCreditResponse) serializer.Deserialize(reader);
 
-                if (!reserveCreditResponseReader.ReadToFollowing("reserveCreditResponse"))
-                {
-                    reserveCreditResponseReader.Close();
-                }
-
-                return i;
+            if (!_reserveCreditResponseReader.ReadToFollowing("reserveCreditResponse"))
+            {
+                _reserveCreditResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual physicalCheckCreditResponse nextPhysicalCheckCreditResponse()
+        public virtual PhysicalCheckCreditResponse NextPhysicalCheckCreditResponse()
         {
-            if (physicalCheckCreditResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = physicalCheckCreditResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (physicalCheckCreditResponse));
-                StringReader reader = new StringReader(response);
-                physicalCheckCreditResponse i = (physicalCheckCreditResponse) serializer.Deserialize(reader);
-
-                if (!physicalCheckCreditResponseReader.ReadToFollowing("physicalCheckCreditResponse"))
-                {
-                    physicalCheckCreditResponseReader.Close();
-                }
+            if (_physicalCheckCreditResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _physicalCheckCreditResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (PhysicalCheckCreditResponse));
+            var reader = new StringReader(response);
+            var i = (PhysicalCheckCreditResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_physicalCheckCreditResponseReader.ReadToFollowing("physicalCheckCreditResponse"))
+            {
+                _physicalCheckCreditResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual submerchantDebitResponse nextSubmerchantDebitResponse()
+        public virtual SubmerchantDebitResponse NextSubmerchantDebitResponse()
         {
-            if (submerchantDebitResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = submerchantDebitResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (submerchantDebitResponse));
-                StringReader reader = new StringReader(response);
-                submerchantDebitResponse i = (submerchantDebitResponse) serializer.Deserialize(reader);
+            if (_submerchantDebitResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _submerchantDebitResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (SubmerchantDebitResponse));
+            var reader = new StringReader(response);
+            var i = (SubmerchantDebitResponse) serializer.Deserialize(reader);
 
-                if (!submerchantDebitResponseReader.ReadToFollowing("submerchantDebitResponse"))
-                {
-                    submerchantDebitResponseReader.Close();
-                }
-
-                return i;
+            if (!_submerchantDebitResponseReader.ReadToFollowing("submerchantDebitResponse"))
+            {
+                _submerchantDebitResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual payFacDebitResponse nextPayFacDebitResponse()
+        public virtual PayFacDebitResponse NextPayFacDebitResponse()
         {
-            if (payFacDebitResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = payFacDebitResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (payFacDebitResponse));
-                StringReader reader = new StringReader(response);
-                payFacDebitResponse i = (payFacDebitResponse) serializer.Deserialize(reader);
+            if (_payFacDebitResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _payFacDebitResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (PayFacDebitResponse));
+            var reader = new StringReader(response);
+            var i = (PayFacDebitResponse) serializer.Deserialize(reader);
 
-                if (!payFacDebitResponseReader.ReadToFollowing("payFacDebitResponse"))
-                {
-                    payFacDebitResponseReader.Close();
-                }
-
-                return i;
+            if (!_payFacDebitResponseReader.ReadToFollowing("payFacDebitResponse"))
+            {
+                _payFacDebitResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual vendorDebitResponse nextVendorDebitResponse()
+        public virtual VendorDebitResponse NextVendorDebitResponse()
         {
-            if (vendorDebitResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = vendorDebitResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (vendorDebitResponse));
-                StringReader reader = new StringReader(response);
-                vendorDebitResponse i = (vendorDebitResponse) serializer.Deserialize(reader);
-
-                if (!vendorDebitResponseReader.ReadToFollowing("vendorDebitResponse"))
-                {
-                    vendorDebitResponseReader.Close();
-                }
+            if (_vendorDebitResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _vendorDebitResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (VendorDebitResponse));
+            var reader = new StringReader(response);
+            var i = (VendorDebitResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_vendorDebitResponseReader.ReadToFollowing("vendorDebitResponse"))
+            {
+                _vendorDebitResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual reserveDebitResponse nextReserveDebitResponse()
+        public virtual ReserveDebitResponse NextReserveDebitResponse()
         {
-            if (reserveDebitResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = reserveDebitResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (reserveDebitResponse));
-                StringReader reader = new StringReader(response);
-                reserveDebitResponse i = (reserveDebitResponse) serializer.Deserialize(reader);
-
-                if (!reserveDebitResponseReader.ReadToFollowing("reserveDebitResponse"))
-                {
-                    reserveDebitResponseReader.Close();
-                }
+            if (_reserveDebitResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _reserveDebitResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (ReserveDebitResponse));
+            var reader = new StringReader(response);
+            var i = (ReserveDebitResponse) serializer.Deserialize(reader);
 
-                return i;
+            if (!_reserveDebitResponseReader.ReadToFollowing("reserveDebitResponse"))
+            {
+                _reserveDebitResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
 
-        public virtual physicalCheckDebitResponse nextPhysicalCheckDebitResponse()
+        public virtual PhysicalCheckDebitResponse NextPhysicalCheckDebitResponse()
         {
-            if (physicalCheckDebitResponseReader.ReadState != ReadState.Closed)
-            {
-                string response = physicalCheckDebitResponseReader.ReadOuterXml();
-                XmlSerializer serializer = new XmlSerializer(typeof (physicalCheckDebitResponse));
-                StringReader reader = new StringReader(response);
-                physicalCheckDebitResponse i = (physicalCheckDebitResponse) serializer.Deserialize(reader);
+            if (_physicalCheckDebitResponseReader.ReadState == ReadState.Closed) return null;
+            string response = _physicalCheckDebitResponseReader.ReadOuterXml();
+            var serializer = new XmlSerializer(typeof (PhysicalCheckDebitResponse));
+            var reader = new StringReader(response);
+            var i = (PhysicalCheckDebitResponse) serializer.Deserialize(reader);
 
-                if (!physicalCheckDebitResponseReader.ReadToFollowing("physicalCheckDebitResponse"))
-                {
-                    physicalCheckDebitResponseReader.Close();
-                }
-
-                return i;
+            if (!_physicalCheckDebitResponseReader.ReadToFollowing("physicalCheckDebitResponse"))
+            {
+                _physicalCheckDebitResponseReader.Close();
             }
 
-            return null;
+            return i;
         }
     }
 
 
     [Serializable]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class RFRResponse
     {
-        [XmlAttribute] public string response;
-        [XmlAttribute] public string message;
+        [XmlAttribute] public string Response;
+        [XmlAttribute] public string Message;
     }
 
     [Serializable]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class accountUpdateResponseCardTokenType : CardTokenType
+    public class AccountUpdateResponseCardTokenType : CardTokenType
     {
-        public string bin;
+        public string Bin;
     }
 
     [Serializable]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class accountUpdateResponse : transactionTypeWithReportGroup
+    public class AccountUpdateResponse : TransactionTypeWithReportGroup
     {
-        public long litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public string message;
+        public long LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public string Message;
 
         //Optional child elements
-        public CardType updatedCard;
-        public CardType originalCard;
-        public accountUpdateResponseCardTokenType originalToken;
-        public accountUpdateResponseCardTokenType updatedToken;
+        public CardType UpdatedCard;
+        public CardType OriginalCard;
+        public AccountUpdateResponseCardTokenType OriginalToken;
+        public AccountUpdateResponseCardTokenType UpdatedToken;
     }
 
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot("echeckVoidResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class litleOnlineResponseTransactionResponseEcheckVoidResponse : transactionTypeWithReportGroup
+    public class LitleOnlineResponseTransactionResponseEcheckVoidResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private DateTime _postDateField;
+        private string _messageField;
+        private bool _duplicateField;
+        private bool _duplicateFieldSpecified;
 
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private DateTime postDateField;
-
-        private string messageField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot("voidResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class litleOnlineResponseTransactionResponseVoidResponse : transactionTypeWithReportGroup
+    public class LitleOnlineResponseTransactionResponseVoidResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private DateTime _postDateField;
+        private string _messageField;
+        private bool _duplicateField;
+        private bool _duplicateFieldSpecified;
+        private VoidRecyclingResponseType _recyclingField;
 
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private DateTime postDateField;
-
-        private string messageField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
-        private voidRecyclingResponseType recyclingField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "date")]
-        public DateTime postDate
+        public DateTime PostDate
         {
-            get { return postDateField; }
-            set { postDateField = value; }
+            get { return _postDateField; }
+            set { _postDateField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
 
-        //private voidRecyclingResponseType recycling;
-        public voidRecyclingResponseType recycling
+        public VoidRecyclingResponseType Recycling
         {
-            get { return recyclingField; }
-            set { recyclingField = value; }
+            get { return _recyclingField; }
+            set { _recyclingField = value; }
         }
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    public class giftCardResponse
+    public class GiftCardResponse
     {
-        public String availableBalance;
-        public String beginningBalance;
-        public String endingBalance;
-        public String cashBackAmount;
+        public String AvailableBalance;
+        public String BeginningBalance;
+        public String EndingBalance;
+        public String CashBackAmount;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    public class virtualGiftCardResponseType
+    public class VirtualGiftCardResponseType
     {
-        public String accountNumber;
-        public String cardValidationNum;
+        public String AccountNumber;
+        public String CardValidationNum;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class activateResponse : transactionTypeWithReportGroup
+    public class ActivateResponse : TransactionTypeWithReportGroup
     {
-        [XmlAttribute] public bool duplicate;
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
-        public virtualGiftCardResponseType virtualGiftCardResponse;
+        [XmlAttribute] public bool Duplicate;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
+        public VirtualGiftCardResponseType VirtualGiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class loadResponse : transactionTypeWithReportGroup
+    public class LoadResponse : TransactionTypeWithReportGroup
     {
-        [XmlAttribute] public bool duplicate;
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        [XmlAttribute] public bool Duplicate;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class unloadResponse : transactionTypeWithReportGroup
+    public class UnloadResponse : TransactionTypeWithReportGroup
     {
-        [XmlAttribute] public bool duplicate;
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        [XmlAttribute] public bool Duplicate;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class balanceInquiryResponse : transactionTypeWithReportGroup
+    public class BalanceInquiryResponse : TransactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class deactivateResponse : transactionTypeWithReportGroup
+    public class DeactivateResponse : TransactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class createPlanResponse : recurringTransactionResponseType
+    public class CreatePlanResponse : RecurringTransactionResponseType
     {
-        public string planCode;
+        public string PlanCode;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class updatePlanResponse : recurringTransactionResponseType
+    public class UpdatePlanResponse : RecurringTransactionResponseType
     {
-        public string planCode;
+        public string PlanCode;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class loadReversalResponse : transactionTypeWithReportGroup
+    public class LoadReversalResponse : TransactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class unloadReversalResponse : transactionTypeWithReportGroup
+    public class UnloadReversalResponse : TransactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class deactivateReversalResponse : transactionTypeWithReportGroup
+    public class DeactivateReversalResponse : TransactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class activateReversalResponse : transactionTypeWithReportGroup
+    public class ActivateReversalResponse : TransactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class refundReversalResponse : transactionTypeWithReportGroup
+    public class RefundReversalResponse : TransactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class depositReversalResponse : transactionTypeWithReportGroup
+    public class DepositReversalResponse : TransactionTypeWithReportGroup
     {
-        public string litleTxnId;
-        public string orderId;
-        public string response;
-        public DateTime responseTime;
-        public DateTime postDate;
-        public string message;
-        public FraudResult fraudResult;
-        public giftCardResponse giftCardResponse;
+        public string LitleTxnId;
+        public string OrderId;
+        public string Response;
+        public DateTime ResponseTime;
+        public DateTime PostDate;
+        public string Message;
+        public FraudResult FraudResult;
+        public GiftCardResponse GiftCardResponse;
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class applepayResponse
+    public class ApplepayResponse
     {
-        private string applicationPrimaryAccountNumberField;
+        private string _applicationPrimaryAccountNumberField;
+        private string _applicationExpirationDateField;
+        private string _currencyCodeField;
+        private string _transactionAmountField;
+        private string _cardholderNameField;
+        private string _deviceManufacturerIdentifierField;
+        private string _paymentDataTypeField;
+        private byte[] _onlinePaymentCryptogramField;
+        private string _eciIndicatorField;
 
-        private string applicationExpirationDateField;
-
-        private string currencyCodeField;
-
-        private string transactionAmountField;
-
-        private string cardholderNameField;
-
-        private string deviceManufacturerIdentifierField;
-
-        private string paymentDataTypeField;
-
-        private byte[] onlinePaymentCryptogramField;
-
-        private string eciIndicatorField;
-
-        /// <remarks />
-        public string applicationPrimaryAccountNumber
+        public string ApplicationPrimaryAccountNumber
         {
-            get { return applicationPrimaryAccountNumberField; }
-            set { applicationPrimaryAccountNumberField = value; }
+            get { return _applicationPrimaryAccountNumberField; }
+            set { _applicationPrimaryAccountNumberField = value; }
         }
 
-        /// <remarks />
-        public string applicationExpirationDate
+        public string ApplicationExpirationDate
         {
-            get { return applicationExpirationDateField; }
-            set { applicationExpirationDateField = value; }
+            get { return _applicationExpirationDateField; }
+            set { _applicationExpirationDateField = value; }
         }
 
-        /// <remarks />
-        public string currencyCode
+        public string CurrencyCode
         {
-            get { return currencyCodeField; }
-            set { currencyCodeField = value; }
+            get { return _currencyCodeField; }
+            set { _currencyCodeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "integer")]
-        public string transactionAmount
+        public string TransactionAmount
         {
-            get { return transactionAmountField; }
-            set { transactionAmountField = value; }
+            get { return _transactionAmountField; }
+            set { _transactionAmountField = value; }
         }
 
-        /// <remarks />
-        public string cardholderName
+        public string CardholderName
         {
-            get { return cardholderNameField; }
-            set { cardholderNameField = value; }
+            get { return _cardholderNameField; }
+            set { _cardholderNameField = value; }
         }
 
-        /// <remarks />
-        public string deviceManufacturerIdentifier
+        public string DeviceManufacturerIdentifier
         {
-            get { return deviceManufacturerIdentifierField; }
-            set { deviceManufacturerIdentifierField = value; }
+            get { return _deviceManufacturerIdentifierField; }
+            set { _deviceManufacturerIdentifierField = value; }
         }
 
-        /// <remarks />
-        public string paymentDataType
+        public string PaymentDataType
         {
-            get { return paymentDataTypeField; }
-            set { paymentDataTypeField = value; }
+            get { return _paymentDataTypeField; }
+            set { _paymentDataTypeField = value; }
         }
 
-        /// <remarks />
         [XmlElement(DataType = "base64Binary")]
-        public byte[] onlinePaymentCryptogram
+        public byte[] OnlinePaymentCryptogram
         {
-            get { return onlinePaymentCryptogramField; }
-            set { onlinePaymentCryptogramField = value; }
+            get { return _onlinePaymentCryptogramField; }
+            set { _onlinePaymentCryptogramField = value; }
         }
 
-        /// <remarks />
-        public string eciIndicator
+        public string EciIndicator
         {
-            get { return eciIndicatorField; }
-            set { eciIndicatorField = value; }
+            get { return _eciIndicatorField; }
+            set { _eciIndicatorField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot("echeckPreNoteSaleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class echeckPreNoteSaleResponse : transactionTypeWithReportGroup
+    public class EcheckPreNoteSaleResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
+        private bool _duplicateField;
+        private bool _duplicateFieldSpecified;
 
-        private string orderIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot("echeckPreNoteCreditResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class echeckPreNoteCreditResponse : transactionTypeWithReportGroup
+    public class EcheckPreNoteCreditResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _orderIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
+        private bool _duplicateField;
+        private bool _duplicateFieldSpecified;
 
-        private string orderIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        private bool duplicateField;
-
-        private bool duplicateFieldSpecified;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string orderId
+        public string OrderId
         {
-            get { return orderIdField; }
-            set { orderIdField = value; }
+            get { return _orderIdField; }
+            set { _orderIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
         [XmlAttribute]
-        public bool duplicate
+        public bool Duplicate
         {
-            get { return duplicateField; }
-            set { duplicateField = value; }
+            get { return _duplicateField; }
+            set { _duplicateField = value; }
         }
 
-        /// <remarks />
         [XmlIgnore]
-        public bool duplicateSpecified
+        public bool DuplicateSpecified
         {
-            get { return duplicateFieldSpecified; }
-            set { duplicateFieldSpecified = value; }
+            get { return _duplicateFieldSpecified; }
+            set { _duplicateFieldSpecified = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class fraudCheckResponse : transactionTypeWithReportGroup
+    public class FraudCheckResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _responseField;
+        private string _messageField;
+        private DateTime _responseTimeField;
+        private AdvancedFraudResultsType _advancedFraudResultsField;
 
-        private string responseField;
-
-        private string messageField;
-
-        private DateTime responseTimeField;
-
-        private advancedFraudResultsType advancedFraudResultsField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public advancedFraudResultsType advancedFraudResults
+        public AdvancedFraudResultsType AdvancedFraudResults
         {
-            get { return advancedFraudResultsField; }
-            set { advancedFraudResultsField = value; }
+            get { return _advancedFraudResultsField; }
+            set { _advancedFraudResultsField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class submerchantCreditResponse : transactionTypeWithReportGroup
+    public class SubmerchantCreditResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class payFacCreditResponse : transactionTypeWithReportGroup
+    public class PayFacCreditResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class vendorCreditResponse : transactionTypeWithReportGroup
+    public class VendorCreditResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class reserveCreditResponse : transactionTypeWithReportGroup
+    public class ReserveCreditResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class physicalCheckCreditResponse : transactionTypeWithReportGroup
+    public class PhysicalCheckCreditResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class submerchantDebitResponse : transactionTypeWithReportGroup
+    public class SubmerchantDebitResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class payFacDebitResponse : transactionTypeWithReportGroup
+    public class PayFacDebitResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class vendorDebitResponse : transactionTypeWithReportGroup
+    public class VendorDebitResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class reserveDebitResponse : transactionTypeWithReportGroup
+    public class ReserveDebitResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 
-    /// <remarks />
-    [GeneratedCode("xsd", "2.0.50727.3038")]
     [Serializable]
-    [DebuggerStepThrough]
-    [DesignerCategory("code")]
     [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class physicalCheckDebitResponse : transactionTypeWithReportGroup
+    public class PhysicalCheckDebitResponse : TransactionTypeWithReportGroup
     {
-        private long litleTxnIdField;
+        private long _litleTxnIdField;
+        private string _fundsTransferIdField;
+        private string _responseField;
+        private DateTime _responseTimeField;
+        private string _messageField;
 
-        private string fundsTransferIdField;
-
-        private string responseField;
-
-        private DateTime responseTimeField;
-
-        private string messageField;
-
-        /// <remarks />
-        public long litleTxnId
+        public long LitleTxnId
         {
-            get { return litleTxnIdField; }
-            set { litleTxnIdField = value; }
+            get { return _litleTxnIdField; }
+            set { _litleTxnIdField = value; }
         }
 
-        /// <remarks />
-        public string fundsTransferId
+        public string FundsTransferId
         {
-            get { return fundsTransferIdField; }
-            set { fundsTransferIdField = value; }
+            get { return _fundsTransferIdField; }
+            set { _fundsTransferIdField = value; }
         }
 
-        /// <remarks />
-        public string response
+        public string Response
         {
-            get { return responseField; }
-            set { responseField = value; }
+            get { return _responseField; }
+            set { _responseField = value; }
         }
 
-        /// <remarks />
-        public DateTime responseTime
+        public DateTime ResponseTime
         {
-            get { return responseTimeField; }
-            set { responseTimeField = value; }
+            get { return _responseTimeField; }
+            set { _responseTimeField = value; }
         }
 
-        /// <remarks />
-        public string message
+        public string Message
         {
-            get { return messageField; }
-            set { messageField = value; }
+            get { return _messageField; }
+            set { _messageField = value; }
         }
     }
 }

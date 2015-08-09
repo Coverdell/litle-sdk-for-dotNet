@@ -29,7 +29,7 @@ namespace Litle.Sdk.Test.Unit
             capture.Amount = 2;
             capture.SecondaryAmount = 1;
             capture.OrderSource = OrderSourceType.Ecommerce;
-            capture.reportGroup = "Planets";
+            capture.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -48,7 +48,7 @@ namespace Litle.Sdk.Test.Unit
             capture.Amount = 2;
             capture.SurchargeAmount = 1;
             capture.OrderSource = OrderSourceType.Ecommerce;
-            capture.reportGroup = "Planets";
+            capture.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -66,7 +66,7 @@ namespace Litle.Sdk.Test.Unit
             CaptureGivenAuth capture = new CaptureGivenAuth();
             capture.Amount = 2;
             capture.OrderSource = OrderSourceType.Ecommerce;
-            capture.reportGroup = "Planets";
+            capture.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 

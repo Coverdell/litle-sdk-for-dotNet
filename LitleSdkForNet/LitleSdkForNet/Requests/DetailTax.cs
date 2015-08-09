@@ -1,4 +1,5 @@
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
@@ -31,10 +32,10 @@ namespace Litle.Sdk.Requests
         }
 
         public string TaxRate;
-        private taxTypeIdentifierEnum _taxTypeIdentifierField;
+        private TaxTypeIdentifierEnum _taxTypeIdentifierField;
         private bool _taxTypeIdentifierSet;
 
-        public taxTypeIdentifierEnum TaxTypeIdentifier
+        public TaxTypeIdentifierEnum TaxTypeIdentifier
         {
             get { return _taxTypeIdentifierField; }
             set

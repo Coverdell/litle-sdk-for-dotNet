@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -39,8 +40,8 @@ namespace Litle.Sdk.Test.Functional
             capture.Amount = 106;
             capture.PayPalNotes = "Notes";
 
-            captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Approved", response.message);
+            CaptureResponse response = litle.Capture(capture);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -52,8 +53,8 @@ namespace Litle.Sdk.Test.Functional
             capture.Partial = true;
             capture.PayPalNotes = "Notes";
 
-            captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Approved", response.message);
+            CaptureResponse response = litle.Capture(capture);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -66,11 +67,11 @@ namespace Litle.Sdk.Test.Functional
             EnhancedData enhanceddata = new EnhancedData();
             enhanceddata.CustomerReference = "Litle";
             enhanceddata.SalesTax = 50;
-            enhanceddata.DeliveryType = enhancedDataDeliveryType.TBD;
+            enhanceddata.DeliveryType = EnhancedDataDeliveryType.TBD;
             capture.EnhancedData = enhanceddata;
             capture.PayPalOrderComplete = true;
-            captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Approved", response.message);
+            CaptureResponse response = litle.Capture(capture);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -81,8 +82,8 @@ namespace Litle.Sdk.Test.Functional
             capture.Amount = 106;
             capture.PayPalNotes = "<'&\">";
 
-            captureResponse response = litle.Capture(capture);
-            Assert.AreEqual("Approved", response.message);
+            CaptureResponse response = litle.Capture(capture);
+            Assert.AreEqual("Approved", response.Message);
         }
     }
 }

@@ -1,8 +1,9 @@
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
-    public class AccountUpdate : transactionTypeWithReportGroup
+    public class AccountUpdate : TransactionTypeWithReportGroup
     {
         public string OrderId;
         public CardType Card;
@@ -12,15 +13,15 @@ namespace Litle.Sdk.Requests
         {
             var xml = "\r\n<accountUpdate ";
 
-            if (id != null)
+            if (ID != null)
             {
-                xml += "id=\"" + SecurityElement.Escape(id) + "\" ";
+                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
             }
-            if (customerId != null)
+            if (CustomerId != null)
             {
-                xml += "customerId=\"" + SecurityElement.Escape(customerId) + "\" ";
+                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
             }
-            xml += "reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
 
             xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
 

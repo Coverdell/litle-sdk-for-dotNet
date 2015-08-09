@@ -1,8 +1,9 @@
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
-    public class VoidTxn : transactionTypeWithReportGroup
+    public class VoidTxn : TransactionTypeWithReportGroup
     {
         public long LitleTxnId;
         public ProcessingInstructions ProcessingInstructions;
@@ -10,12 +11,12 @@ namespace Litle.Sdk.Requests
         public override string Serialize()
         {
             var xml = "\r\n<void";
-            xml += " id=\"" + SecurityElement.Escape(id) + "\"";
-            if (customerId != null)
+            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
+            if (CustomerId != null)
             {
-                xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
+                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
             }
-            xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
+            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\"";
             xml += ">";
             xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
             if (ProcessingInstructions != null)

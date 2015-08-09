@@ -30,7 +30,7 @@ namespace Litle.Sdk.Test.Unit
             reversal.Amount = 2;
             reversal.SurchargeAmount = 1;
             reversal.PayPalNotes = "note";
-            reversal.reportGroup = "Planets";
+            reversal.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -49,7 +49,7 @@ namespace Litle.Sdk.Test.Unit
             reversal.LitleTxnId = 3;
             reversal.Amount = 2;
             reversal.PayPalNotes = "note";
-            reversal.reportGroup = "Planets";
+            reversal.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 

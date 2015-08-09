@@ -1,14 +1,15 @@
 using System.Security;
 using System.Xml.Serialization;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
     public class EcheckType
     {
-        private echeckAccountTypeEnum _accTypeField;
+        private EcheckAccountTypeEnum _accTypeField;
         private bool _accTypeSet;
 
-        public echeckAccountTypeEnum AccType
+        public EcheckAccountTypeEnum AccType
         {
             get { return _accTypeField; }
             set
@@ -29,7 +30,7 @@ namespace Litle.Sdk.Requests
             var accTypeName = _accTypeField.ToString();
             var attributes =
                 (XmlEnumAttribute[])
-                    typeof (echeckAccountTypeEnum).GetMember(_accTypeField.ToString())[0].GetCustomAttributes(
+                    typeof (EcheckAccountTypeEnum).GetMember(_accTypeField.ToString())[0].GetCustomAttributes(
                         typeof (XmlEnumAttribute), false);
             if (attributes.Length > 0) accTypeName = attributes[0].Name;
             if (_accTypeSet) xml += "\r\n<accType>" + accTypeName + "</accType>";

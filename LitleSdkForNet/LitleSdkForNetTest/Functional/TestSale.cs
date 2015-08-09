@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -45,8 +46,8 @@ namespace Litle.Sdk.Test.Functional
             cardObj.ExpDate = "1210";
             saleObj.Card = cardObj;
 
-            saleResponse responseObj = litle.Sale(saleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            SaleResponse responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.Message);
         }
 
         [Test]
@@ -65,8 +66,8 @@ namespace Litle.Sdk.Test.Functional
             mpos.Track2Status = 0; ;
             saleObj.Mpos = mpos;
 
-            saleResponse responseObj = litle.Sale(saleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            SaleResponse responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.Message);
         }
 
         [Test]
@@ -82,8 +83,8 @@ namespace Litle.Sdk.Test.Functional
             payPalObj.Token = "1234";
             payPalObj.TransactionId = "123456";
             saleObj.Paypal = payPalObj;
-            saleResponse responseObj = litle.Sale(saleObj);
-            StringAssert.AreEqualIgnoringCase("Approved", responseObj.message);
+            SaleResponse responseObj = litle.Sale(saleObj);
+            StringAssert.AreEqualIgnoringCase("Approved", responseObj.Message);
         }
 
         [Test]
@@ -111,9 +112,9 @@ namespace Litle.Sdk.Test.Functional
             wallet.WalletSourceType = WalletWalletSourceType.MasterPass;
             saleObj.Wallet = wallet;
 
-            saleResponse responseObj = litle.Sale(saleObj);
-            Assert.AreEqual("Insufficient Funds", responseObj.message);
-            Assert.AreEqual("110", responseObj.applepayResponse.transactionAmount);
+            SaleResponse responseObj = litle.Sale(saleObj);
+            Assert.AreEqual("Insufficient Funds", responseObj.Message);
+            Assert.AreEqual("110", responseObj.ApplepayResponse.TransactionAmount);
         }
 
         [Test]
@@ -135,7 +136,7 @@ namespace Litle.Sdk.Test.Functional
 
             try
             {
-                saleResponse responseObj = litle.Sale(saleObj);
+                SaleResponse responseObj = litle.Sale(saleObj);
             }
             catch (LitleOnlineException e)
             {

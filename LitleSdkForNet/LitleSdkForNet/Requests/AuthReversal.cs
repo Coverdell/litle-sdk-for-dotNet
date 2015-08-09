@@ -1,8 +1,9 @@
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
-    public class AuthReversal : transactionTypeWithReportGroup
+    public class AuthReversal : TransactionTypeWithReportGroup
     {
         public long LitleTxnId;
         private long _amountField;
@@ -37,12 +38,12 @@ namespace Litle.Sdk.Requests
         public override string Serialize()
         {
             var xml = "\r\n<authReversal";
-            xml += " id=\"" + SecurityElement.Escape(id) + "\"";
-            if (customerId != null)
+            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
+            if (CustomerId != null)
             {
-                xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
+                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
             }
-            xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\">";
+            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
             xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
             if (_amountSet)
             {

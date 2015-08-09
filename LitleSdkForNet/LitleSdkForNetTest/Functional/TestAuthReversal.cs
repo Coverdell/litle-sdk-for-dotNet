@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -39,8 +40,8 @@ namespace Litle.Sdk.Test.Functional
             reversal.Amount = 106;
             reversal.PayPalNotes = "Notes";
 
-            authReversalResponse response = litle.AuthReversal(reversal);
-            Assert.AreEqual("Approved", response.message);
+            AuthReversalResponse response = litle.AuthReversal(reversal);
+            Assert.AreEqual("Approved", response.Message);
         }
             
         [Test]
@@ -51,8 +52,8 @@ namespace Litle.Sdk.Test.Functional
             reversal.Amount = 106;
             reversal.PayPalNotes = "<'&\">";
 
-            authReversalResponse response = litle.AuthReversal(reversal);
-            Assert.AreEqual("Approved", response.message);
+            AuthReversalResponse response = litle.AuthReversal(reversal);
+            Assert.AreEqual("Approved", response.Message);
     }
     }
 }

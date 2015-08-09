@@ -29,7 +29,7 @@ namespace Litle.Sdk.Test.Unit
             credit.OrderId = "12344";
             credit.Amount = 2;
             credit.OrderSource = OrderSourceType.Ecommerce;
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
             credit.ActionReason = "SUSPECT_FRAUD";
            
             var mock = new Mock<Communications>();
@@ -49,7 +49,7 @@ namespace Litle.Sdk.Test.Unit
             credit.OrderId = "12344";
             credit.Amount = 2;
             credit.OrderSource = OrderSourceType.Ecommerce;
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -69,7 +69,7 @@ namespace Litle.Sdk.Test.Unit
             credit.SecondaryAmount = 1;
             credit.OrderId = "3";
             credit.OrderSource = OrderSourceType.Ecommerce;
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -89,7 +89,7 @@ namespace Litle.Sdk.Test.Unit
             credit.SecondaryAmount = 1;
             credit.LitleTxnId = 3;
             credit.ProcessingInstructions = new ProcessingInstructions();
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -109,7 +109,7 @@ namespace Litle.Sdk.Test.Unit
             credit.SurchargeAmount = 1;
             credit.LitleTxnId = 3;
             credit.ProcessingInstructions = new ProcessingInstructions();
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -127,7 +127,7 @@ namespace Litle.Sdk.Test.Unit
             Credit credit = new Credit();
             credit.Amount = 2;
             credit.LitleTxnId = 3;
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
             credit.ProcessingInstructions = new ProcessingInstructions();
 
             var mock = new Mock<Communications>();
@@ -148,7 +148,7 @@ namespace Litle.Sdk.Test.Unit
             credit.SurchargeAmount = 1;
             credit.OrderId = "3";
             credit.OrderSource = OrderSourceType.Ecommerce;
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -167,7 +167,7 @@ namespace Litle.Sdk.Test.Unit
             credit.Amount = 2;
             credit.OrderId = "3";
             credit.OrderSource = OrderSourceType.Ecommerce;
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -187,7 +187,7 @@ namespace Litle.Sdk.Test.Unit
             credit.Pos = new Pos();
             credit.Pos.TerminalId = "abc123";
             credit.LitleTxnId = 3;
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
             credit.PayPalNotes = "notes";
 
             var mock = new Mock<Communications>();
@@ -206,7 +206,7 @@ namespace Litle.Sdk.Test.Unit
             Credit credit = new Credit();
             credit.Amount = 2;
             credit.LitleTxnId = 3;
-            credit.reportGroup = "Planets";
+            credit.ReportGroup = "Planets";
             credit.PayPalNotes = "notes";
 
             var mock = new Mock<Communications>();

@@ -1,6 +1,8 @@
+using Litle.Sdk.Responses;
+
 namespace Litle.Sdk.Requests
 {
-    public class TransactionTypeWithReportGroupAndPartial : transactionType
+    public class TransactionTypeWithReportGroupAndPartial : TransactionType
     {
         public string ReportGroup;
         private bool _partialField;

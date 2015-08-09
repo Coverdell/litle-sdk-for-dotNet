@@ -1,13 +1,14 @@
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
     public class Pos
     {
-        private posCapabilityTypeEnum _capabilityField;
+        private PosCapabilityTypeEnum _capabilityField;
         private bool _capabilitySet;
 
-        public posCapabilityTypeEnum Capability
+        public PosCapabilityTypeEnum Capability
         {
             get { return _capabilityField; }
             set
@@ -17,10 +18,10 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        private posEntryModeTypeEnum _entryModeField;
+        private PosEntryModeTypeEnum _entryModeField;
         private bool _entryModeSet;
 
-        public posEntryModeTypeEnum EntryMode
+        public PosEntryModeTypeEnum EntryMode
         {
             get { return _entryModeField; }
             set
@@ -30,10 +31,10 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        private posCardholderIdTypeEnum _cardholderIdField;
+        private PosCardholderIdTypeEnum _cardholderIdField;
         private bool _cardholderIdSet;
 
-        public posCardholderIdTypeEnum CardholderId
+        public PosCardholderIdTypeEnum CardholderId
         {
             get { return _cardholderIdField; }
             set
@@ -45,10 +46,10 @@ namespace Litle.Sdk.Requests
 
         public string TerminalId;
 
-        private posCatLevelEnum _catLevelField;
+        private PosCatLevelEnum _catLevelField;
         private bool _catLevelSet;
 
-        public posCatLevelEnum CatLevel
+        public PosCatLevelEnum CatLevel
         {
             get { return _catLevelField; }
             set

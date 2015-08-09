@@ -1,3 +1,5 @@
+using Litle.Sdk.Responses;
+
 namespace Litle.Sdk.Requests
 {
     public class HealthcareIIAS

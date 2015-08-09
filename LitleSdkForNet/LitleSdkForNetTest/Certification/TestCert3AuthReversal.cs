@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -53,25 +54,25 @@ namespace Litle.Sdk.Test.Certification
             card.Type = MethodOfPaymentTypeEnum.VI;
             auth.Card = card;
 
-            authorizationResponse authorizeResponse = litle.Authorize(auth);
-            Assert.AreEqual("000", authorizeResponse.response);
-            Assert.AreEqual("Approved", authorizeResponse.message);
-            Assert.AreEqual("11111 ", authorizeResponse.authCode);
-            Assert.AreEqual("01", authorizeResponse.fraudResult.avsResult);
-            Assert.AreEqual("M", authorizeResponse.fraudResult.cardValidationResult);
+            AuthorizationResponse authorizeResponse = litle.Authorize(auth);
+            Assert.AreEqual("000", authorizeResponse.Response);
+            Assert.AreEqual("Approved", authorizeResponse.Message);
+            Assert.AreEqual("11111 ", authorizeResponse.AuthCode);
+            Assert.AreEqual("01", authorizeResponse.FraudResult.AvsResult);
+            Assert.AreEqual("M", authorizeResponse.FraudResult.CardValidationResult);
 
             Capture capture = new Capture();
-            capture.LitleTxnId = authorizeResponse.litleTxnId;
+            capture.LitleTxnId = authorizeResponse.LitleTxnId;
             capture.Amount = 5005;
-            captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("000", captureResponse.response);
-            Assert.AreEqual("Approved", captureResponse.message);
+            CaptureResponse captureResponse = litle.Capture(capture);
+            Assert.AreEqual("000", captureResponse.Response);
+            Assert.AreEqual("Approved", captureResponse.Message);
 
             AuthReversal reversal = new AuthReversal();
-            reversal.LitleTxnId = authorizeResponse.litleTxnId;
-            authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("111", reversalResponse.response);
-            Assert.AreEqual("Authorization amount has already been depleted", reversalResponse.message);
+            reversal.LitleTxnId = authorizeResponse.LitleTxnId;
+            AuthReversalResponse reversalResponse = litle.AuthReversal(reversal);
+            Assert.AreEqual("111", reversalResponse.Response);
+            Assert.AreEqual("Authorization amount has already been depleted", reversalResponse.Message);
         }
 
         [Test]
@@ -100,18 +101,18 @@ namespace Litle.Sdk.Test.Certification
             fraud.AuthenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
             auth.CardholderAuthentication = fraud;
 
-            authorizationResponse authorizeResponse = litle.Authorize(auth);
-            Assert.AreEqual("000", authorizeResponse.response);
-            Assert.AreEqual("Approved", authorizeResponse.message);
-            Assert.AreEqual("22222", authorizeResponse.authCode);
-            Assert.AreEqual("10", authorizeResponse.fraudResult.avsResult);
-            Assert.AreEqual("M", authorizeResponse.fraudResult.cardValidationResult);
+            AuthorizationResponse authorizeResponse = litle.Authorize(auth);
+            Assert.AreEqual("000", authorizeResponse.Response);
+            Assert.AreEqual("Approved", authorizeResponse.Message);
+            Assert.AreEqual("22222", authorizeResponse.AuthCode);
+            Assert.AreEqual("10", authorizeResponse.FraudResult.AvsResult);
+            Assert.AreEqual("M", authorizeResponse.FraudResult.CardValidationResult);
 
             AuthReversal reversal = new AuthReversal();
-            reversal.LitleTxnId = authorizeResponse.litleTxnId;
-            authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("000", reversalResponse.response);
-            Assert.AreEqual("Approved", reversalResponse.message);
+            reversal.LitleTxnId = authorizeResponse.LitleTxnId;
+            AuthReversalResponse reversalResponse = litle.AuthReversal(reversal);
+            Assert.AreEqual("000", reversalResponse.Response);
+            Assert.AreEqual("Approved", reversalResponse.Message);
         }
 
         [Test]
@@ -136,18 +137,18 @@ namespace Litle.Sdk.Test.Certification
             card.Type = MethodOfPaymentTypeEnum.DI;
             auth.Card = card;
 
-            authorizationResponse authorizeResponse = litle.Authorize(auth);
-            Assert.AreEqual("000", authorizeResponse.response);
-            Assert.AreEqual("Approved", authorizeResponse.message);
-            Assert.AreEqual("33333", authorizeResponse.authCode);
-            Assert.AreEqual("10", authorizeResponse.fraudResult.avsResult);
-            Assert.AreEqual("M", authorizeResponse.fraudResult.cardValidationResult);
+            AuthorizationResponse authorizeResponse = litle.Authorize(auth);
+            Assert.AreEqual("000", authorizeResponse.Response);
+            Assert.AreEqual("Approved", authorizeResponse.Message);
+            Assert.AreEqual("33333", authorizeResponse.AuthCode);
+            Assert.AreEqual("10", authorizeResponse.FraudResult.AvsResult);
+            Assert.AreEqual("M", authorizeResponse.FraudResult.CardValidationResult);
 
             AuthReversal reversal = new AuthReversal();
-            reversal.LitleTxnId = authorizeResponse.litleTxnId;
-            authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("000", reversalResponse.response);
-            Assert.AreEqual("Approved", reversalResponse.message);
+            reversal.LitleTxnId = authorizeResponse.LitleTxnId;
+            AuthReversalResponse reversalResponse = litle.AuthReversal(reversal);
+            Assert.AreEqual("000", reversalResponse.Response);
+            Assert.AreEqual("Approved", reversalResponse.Message);
         }
 
         [Test]
@@ -171,25 +172,25 @@ namespace Litle.Sdk.Test.Certification
             card.Type = MethodOfPaymentTypeEnum.AX;
             auth.Card = card;
 
-            authorizationResponse authorizeResponse = litle.Authorize(auth);
-            Assert.AreEqual("000", authorizeResponse.response);
-            Assert.AreEqual("Approved", authorizeResponse.message);
-            Assert.AreEqual("44444", authorizeResponse.authCode);
-            Assert.AreEqual("12", authorizeResponse.fraudResult.avsResult);
+            AuthorizationResponse authorizeResponse = litle.Authorize(auth);
+            Assert.AreEqual("000", authorizeResponse.Response);
+            Assert.AreEqual("Approved", authorizeResponse.Message);
+            Assert.AreEqual("44444", authorizeResponse.AuthCode);
+            Assert.AreEqual("12", authorizeResponse.FraudResult.AvsResult);
 
             Capture capture = new Capture();
-            capture.LitleTxnId = authorizeResponse.litleTxnId;
+            capture.LitleTxnId = authorizeResponse.LitleTxnId;
             capture.Amount = 20020;
-            captureResponse captureResponse = litle.Capture(capture);
-            Assert.AreEqual("000", captureResponse.response);
-            Assert.AreEqual("Approved", captureResponse.message);
+            CaptureResponse captureResponse = litle.Capture(capture);
+            Assert.AreEqual("000", captureResponse.Response);
+            Assert.AreEqual("Approved", captureResponse.Message);
 
             AuthReversal reversal = new AuthReversal();
-            reversal.LitleTxnId = authorizeResponse.litleTxnId;
+            reversal.LitleTxnId = authorizeResponse.LitleTxnId;
             reversal.Amount = 20020;
-            authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("000", reversalResponse.response);
-            Assert.AreEqual("Approved", reversalResponse.message);
+            AuthReversalResponse reversalResponse = litle.AuthReversal(reversal);
+            Assert.AreEqual("000", reversalResponse.Response);
+            Assert.AreEqual("Approved", reversalResponse.Message);
         }
 
         [Test]
@@ -205,16 +206,16 @@ namespace Litle.Sdk.Test.Certification
             card.Type = MethodOfPaymentTypeEnum.AX;
             auth.Card = card;
 
-            authorizationResponse authorizeResponse = litle.Authorize(auth);
-            Assert.AreEqual("000", authorizeResponse.response);
-            Assert.AreEqual("Approved", authorizeResponse.message);
+            AuthorizationResponse authorizeResponse = litle.Authorize(auth);
+            Assert.AreEqual("000", authorizeResponse.Response);
+            Assert.AreEqual("Approved", authorizeResponse.Message);
 
             AuthReversal reversal = new AuthReversal();
-            reversal.LitleTxnId = authorizeResponse.litleTxnId;
+            reversal.LitleTxnId = authorizeResponse.LitleTxnId;
             reversal.Amount = 10000;
-            authReversalResponse reversalResponse = litle.AuthReversal(reversal);
-            Assert.AreEqual("336", reversalResponse.response);
-            Assert.AreEqual("Reversal Amount does not match Authorization amount", reversalResponse.message);
+            AuthReversalResponse reversalResponse = litle.AuthReversal(reversal);
+            Assert.AreEqual("336", reversalResponse.Response);
+            Assert.AreEqual("Reversal Amount does not match Authorization amount", reversalResponse.Message);
         }            
     }
 }

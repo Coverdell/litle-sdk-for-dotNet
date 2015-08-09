@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
-    public class UpdateSubscription : recurringTransactionType
+    public class UpdateSubscription : RecurringTransactionType
     {
         private long _subscriptionIdField;
         private bool _subscriptionIdSet;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -99,7 +100,7 @@ merchantId=""01234"">
         public void testAddAuthorization()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -122,7 +123,7 @@ merchantId=""01234"">
         public void testAddAccountUpdate()
         {
             AccountUpdate accountUpdate = new AccountUpdate();
-            accountUpdate.reportGroup = "Planets";
+            accountUpdate.ReportGroup = "Planets";
             accountUpdate.OrderId = "12344";
             CardType card = new CardType();
             card.Type = MethodOfPaymentTypeEnum.VI;
@@ -240,7 +241,7 @@ merchantId=""01234"">
         public void testEcheckRedeposit()
         {
             EcheckRedeposit echeckredeposit = new EcheckRedeposit();
-            echeckredeposit.litleTxnId = 123456;
+            echeckredeposit.LitleTxnId = 123456;
 
             batchRequest.AddEcheckRedeposit(echeckredeposit);
 
@@ -258,7 +259,7 @@ merchantId=""01234"">
             echecksale.Amount = 123456;
             echecksale.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -287,7 +288,7 @@ merchantId=""01234"">
             echeckverification.Amount = 123456;
             echeckverification.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -537,7 +538,7 @@ merchantId=""01234"">
             echeckPreNoteSale.OrderId = "12345";
             echeckPreNoteSale.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -564,7 +565,7 @@ merchantId=""01234"">
             echeckPreNoteCredit.OrderId = "12345";
             echeckPreNoteCredit.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -593,7 +594,7 @@ merchantId=""01234"">
             submerchantCredit.FundsTransferId = "123467";
             submerchantCredit.Amount = 106L;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -651,7 +652,7 @@ merchantId=""01234"">
             vendorCredit.FundsTransferId = "123467";
             vendorCredit.Amount = 106L;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -692,7 +693,7 @@ merchantId=""01234"">
             submerchantDebit.FundsTransferId = "123467";
             submerchantDebit.Amount = 106L;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -750,7 +751,7 @@ merchantId=""01234"">
             vendorDebit.FundsTransferId = "123467";
             vendorDebit.Amount = 106L;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";

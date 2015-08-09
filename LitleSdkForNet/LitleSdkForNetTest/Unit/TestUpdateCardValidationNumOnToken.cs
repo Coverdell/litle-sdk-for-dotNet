@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -29,8 +30,8 @@ namespace Litle.Sdk.Test.Unit
             update.OrderId = "12344";
             update.LitleToken = "1111222233334444";
             update.CardValidationNum = "321";
-            update.id = "123";
-            update.reportGroup = "Default Report Group";
+            update.ID = "123";
+            update.ReportGroup = "Default Report Group";
            
             var mock = new Mock<Communications>();
 
@@ -49,8 +50,8 @@ namespace Litle.Sdk.Test.Unit
             update.OrderId = null;
             update.LitleToken = "1111222233334444";
             update.CardValidationNum = "321";
-            update.id = "123";
-            update.reportGroup = "Default Report Group";
+            update.ID = "123";
+            update.ReportGroup = "Default Report Group";
 
             var mock = new Mock<Communications>();
 
@@ -60,9 +61,9 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            updateCardValidationNumOnTokenResponse response = litle.UpdateCardValidationNumOnToken(update);
+            UpdateCardValidationNumOnTokenResponse response = litle.UpdateCardValidationNumOnToken(update);
             Assert.IsNotNull(response);
-            Assert.IsNull(response.orderId);
+            Assert.IsNull(response.OrderId);
 
         }
 

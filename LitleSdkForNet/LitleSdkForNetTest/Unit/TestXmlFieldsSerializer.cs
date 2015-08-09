@@ -473,8 +473,8 @@ namespace Litle.Sdk.Test.Unit
             activate.OrderId = "12345";
             activate.Amount = 200;
             activate.OrderSource = OrderSourceType.Ecommerce;
-            activate.id = "theId";
-            activate.reportGroup = "theReportGroup";
+            activate.ID = "theId";
+            activate.ReportGroup = "theReportGroup";
             activate.Card = new CardType();
 
             String actual = activate.Serialize();
@@ -497,8 +497,8 @@ namespace Litle.Sdk.Test.Unit
             activate.OrderId = "12345";
             activate.Amount = 200;
             activate.OrderSource = OrderSourceType.Ecommerce;
-            activate.id = "theId";
-            activate.reportGroup = "theReportGroup";
+            activate.ID = "theId";
+            activate.ReportGroup = "theReportGroup";
             activate.VirtualGiftCard = new VirtualGiftCardType();
 
             String actual = activate.Serialize();
@@ -534,8 +534,8 @@ namespace Litle.Sdk.Test.Unit
             deactivate.OrderId = "12345";
             deactivate.OrderSource = OrderSourceType.Ecommerce;
             deactivate.Card = new CardType();
-            deactivate.id = "theId";
-            deactivate.reportGroup = "theReportGroup";
+            deactivate.ID = "theId";
+            deactivate.ReportGroup = "theReportGroup";
 
             String actual = deactivate.Serialize();
             String expected = @"
@@ -556,8 +556,8 @@ namespace Litle.Sdk.Test.Unit
             deactivate.OrderId = "12345";
             deactivate.OrderSource = OrderSourceType.Ecommerce;
             deactivate.Card = new CardType();
-            deactivate.id = "theId";
-            deactivate.reportGroup = "theReportGroup";
+            deactivate.ID = "theId";
+            deactivate.ReportGroup = "theReportGroup";
 
             String actual = deactivate.Serialize();
             String expected = @"
@@ -579,8 +579,8 @@ namespace Litle.Sdk.Test.Unit
             load.Amount = 200;
             load.OrderSource = OrderSourceType.Ecommerce;
             load.Card = new CardType();
-            load.id = "theId";
-            load.reportGroup = "theReportGroup";
+            load.ID = "theId";
+            load.ReportGroup = "theReportGroup";
 
             String actual = load.Serialize();
             String expected = @"
@@ -603,8 +603,8 @@ namespace Litle.Sdk.Test.Unit
             load.Amount = 200;
             load.OrderSource = OrderSourceType.Ecommerce;
             load.Card = new CardType();
-            load.id = "theId";
-            load.reportGroup = "theReportGroup";
+            load.ID = "theId";
+            load.ReportGroup = "theReportGroup";
 
             String actual = load.Serialize();
             String expected = @"
@@ -627,8 +627,8 @@ namespace Litle.Sdk.Test.Unit
             unload.Amount = 200;
             unload.OrderSource = OrderSourceType.Ecommerce;
             unload.Card = new CardType();
-            unload.id = "theId";
-            unload.reportGroup = "theReportGroup";
+            unload.ID = "theId";
+            unload.ReportGroup = "theReportGroup";
 
             String actual = unload.Serialize();
             String expected = @"
@@ -651,8 +651,8 @@ namespace Litle.Sdk.Test.Unit
             unload.Amount = 200;
             unload.OrderSource = OrderSourceType.Ecommerce;
             unload.Card = new CardType();
-            unload.id = "theId";
-            unload.reportGroup = "theReportGroup";
+            unload.ID = "theId";
+            unload.ReportGroup = "theReportGroup";
 
             String actual = unload.Serialize();
             String expected = @"
@@ -674,8 +674,8 @@ namespace Litle.Sdk.Test.Unit
             balanceInquiry.OrderId = "12345";
             balanceInquiry.OrderSource = OrderSourceType.Ecommerce;
             balanceInquiry.Card = new CardType();
-            balanceInquiry.id = "theId";
-            balanceInquiry.reportGroup = "theReportGroup";
+            balanceInquiry.ID = "theId";
+            balanceInquiry.ReportGroup = "theReportGroup";
 
             String actual = balanceInquiry.Serialize();
             String expected = @"
@@ -696,8 +696,8 @@ namespace Litle.Sdk.Test.Unit
             balanceInquiry.OrderId = "12345";
             balanceInquiry.OrderSource = OrderSourceType.Ecommerce;
             balanceInquiry.Card = new CardType();
-            balanceInquiry.id = "theId";
-            balanceInquiry.reportGroup = "theReportGroup";
+            balanceInquiry.ID = "theId";
+            balanceInquiry.ReportGroup = "theReportGroup";
 
             String actual = balanceInquiry.Serialize();
             String expected = @"
@@ -926,9 +926,9 @@ namespace Litle.Sdk.Test.Unit
         public void testDepositReversal_Full()
         {
             DepositReversal depositReversal = new DepositReversal();
-            depositReversal.id = "theId";
-            depositReversal.reportGroup = "theReportGroup";
-            depositReversal.customerId = "theCustomerId";
+            depositReversal.ID = "theId";
+            depositReversal.ReportGroup = "theReportGroup";
+            depositReversal.CustomerId = "theCustomerId";
             depositReversal.LitleTxnId = "123";
 
             String actual = depositReversal.Serialize();
@@ -943,9 +943,9 @@ namespace Litle.Sdk.Test.Unit
         public void testRefundReversal_Full()
         {
             RefundReversal refundReversal = new RefundReversal();
-            refundReversal.id = "theId";
-            refundReversal.reportGroup = "theReportGroup";
-            refundReversal.customerId = "theCustomerId";
+            refundReversal.ID = "theId";
+            refundReversal.ReportGroup = "theReportGroup";
+            refundReversal.CustomerId = "theCustomerId";
             refundReversal.LitleTxnId = "123";
 
             String actual = refundReversal.Serialize();
@@ -960,9 +960,9 @@ namespace Litle.Sdk.Test.Unit
         public void testActivateReversal_Full()
         {
             ActivateReversal activateReversal = new ActivateReversal();
-            activateReversal.id = "theId";
-            activateReversal.reportGroup = "theReportGroup";
-            activateReversal.customerId = "theCustomerId";
+            activateReversal.ID = "theId";
+            activateReversal.ReportGroup = "theReportGroup";
+            activateReversal.CustomerId = "theCustomerId";
             activateReversal.LitleTxnId = "123";
 
             String actual = activateReversal.Serialize();
@@ -977,9 +977,9 @@ namespace Litle.Sdk.Test.Unit
         public void testDeactivateReversal_Full()
         {
             DeactivateReversal deactivateReversal = new DeactivateReversal();
-            deactivateReversal.id = "theId";
-            deactivateReversal.reportGroup = "theReportGroup";
-            deactivateReversal.customerId = "theCustomerId";
+            deactivateReversal.ID = "theId";
+            deactivateReversal.ReportGroup = "theReportGroup";
+            deactivateReversal.CustomerId = "theCustomerId";
             deactivateReversal.LitleTxnId = "123";
 
             String actual = deactivateReversal.Serialize();
@@ -994,9 +994,9 @@ namespace Litle.Sdk.Test.Unit
         public void testLoadReversal_Full()
         {
             LoadReversal loadReversal = new LoadReversal();
-            loadReversal.id = "theId";
-            loadReversal.reportGroup = "theReportGroup";
-            loadReversal.customerId = "theCustomerId";
+            loadReversal.ID = "theId";
+            loadReversal.ReportGroup = "theReportGroup";
+            loadReversal.CustomerId = "theCustomerId";
             loadReversal.LitleTxnId = "123";
 
             String actual = loadReversal.Serialize();
@@ -1011,9 +1011,9 @@ namespace Litle.Sdk.Test.Unit
         public void testUnloadReversal_Full()
         {
             UnloadReversal unloadReversal = new UnloadReversal();
-            unloadReversal.id = "theId";
-            unloadReversal.reportGroup = "theReportGroup";
-            unloadReversal.customerId = "theCustomerId";
+            unloadReversal.ID = "theId";
+            unloadReversal.ReportGroup = "theReportGroup";
+            unloadReversal.CustomerId = "theCustomerId";
             unloadReversal.LitleTxnId = "123";
 
             String actual = unloadReversal.Serialize();
@@ -1028,9 +1028,9 @@ namespace Litle.Sdk.Test.Unit
         public void testSpecialCharacters_RefundReversal()
         {
             RefundReversal refundReversal = new RefundReversal();
-            refundReversal.id = "theId";
-            refundReversal.reportGroup = "<'&\">";
-            refundReversal.customerId = "theCustomerId";
+            refundReversal.ID = "theId";
+            refundReversal.ReportGroup = "<'&\">";
+            refundReversal.CustomerId = "theCustomerId";
             refundReversal.LitleTxnId = "123";
 
             String actual = refundReversal.Serialize();

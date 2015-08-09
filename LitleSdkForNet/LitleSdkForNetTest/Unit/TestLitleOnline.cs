@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -27,7 +28,7 @@ namespace Litle.Sdk.Test.Unit
         public void TestAuth()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -44,8 +45,8 @@ namespace Litle.Sdk.Test.Unit
      
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorize = litle.Authorize(authorization);
-            Assert.AreEqual(123, authorize.litleTxnId);
+            AuthorizationResponse authorize = litle.Authorize(authorization);
+            Assert.AreEqual(123, authorize.LitleTxnId);
         }
 
         [Test]
@@ -64,8 +65,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authReversalResponse authreversalresponse = litle.AuthReversal(authreversal);
-            Assert.AreEqual(123, authreversalresponse.litleTxnId);
+            AuthReversalResponse authreversalresponse = litle.AuthReversal(authreversal);
+            Assert.AreEqual(123, authreversalresponse.LitleTxnId);
         }
 
         [Test]
@@ -84,8 +85,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            captureResponse captureresponse = litle.Capture(caputure);
-            Assert.AreEqual(123, captureresponse.litleTxnId);
+            CaptureResponse captureresponse = litle.Capture(caputure);
+            Assert.AreEqual(123, captureresponse.LitleTxnId);
         }
 
         [Test]
@@ -113,8 +114,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            captureGivenAuthResponse caputregivenauthresponse = litle.CaptureGivenAuth(capturegivenauth);
-            Assert.AreEqual(123, caputregivenauthresponse.litleTxnId);
+            CaptureGivenAuthResponse caputregivenauthresponse = litle.CaptureGivenAuth(capturegivenauth);
+            Assert.AreEqual(123, caputregivenauthresponse.LitleTxnId);
         }
 
         [Test]
@@ -137,8 +138,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            creditResponse creditresponse = litle.Credit(credit);
-            Assert.AreEqual(123, creditresponse.litleTxnId);
+            CreditResponse creditresponse = litle.Credit(credit);
+            Assert.AreEqual(123, creditresponse.LitleTxnId);
         }
 
         [Test]
@@ -155,15 +156,15 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            echeckCreditResponse echeckcreditresponse = litle.EcheckCredit(echeckcredit);
-            Assert.AreEqual(123, echeckcreditresponse.litleTxnId);
+            EcheckCreditResponse echeckcreditresponse = litle.EcheckCredit(echeckcredit);
+            Assert.AreEqual(123, echeckcreditresponse.LitleTxnId);
         }
 
         [Test]
         public void testEcheckRedeposit()
         {
             EcheckRedeposit echeckredeposit = new EcheckRedeposit();
-            echeckredeposit.litleTxnId = 123456;
+            echeckredeposit.LitleTxnId = 123456;
 
             var mock = new Mock<Communications>();
 
@@ -172,8 +173,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            echeckRedepositResponse echeckredepositresponse = litle.EcheckRedeposit(echeckredeposit);
-            Assert.AreEqual(123, echeckredepositresponse.litleTxnId);
+            EcheckRedepositResponse echeckredepositresponse = litle.EcheckRedeposit(echeckredeposit);
+            Assert.AreEqual(123, echeckredepositresponse.LitleTxnId);
         }
 
         [Test]
@@ -184,7 +185,7 @@ namespace Litle.Sdk.Test.Unit
             echecksale.Amount = 123456;
             echecksale.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -204,8 +205,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            echeckSalesResponse echecksaleresponse = litle.EcheckSale(echecksale);
-            Assert.AreEqual(123, echecksaleresponse.litleTxnId);
+            EcheckSalesResponse echecksaleresponse = litle.EcheckSale(echecksale);
+            Assert.AreEqual(123, echecksaleresponse.LitleTxnId);
         }
 
         [Test]
@@ -216,7 +217,7 @@ namespace Litle.Sdk.Test.Unit
             echeckverification.Amount = 123456;
             echeckverification.OrderSource = OrderSourceType.Ecommerce;
             EcheckType echeck = new EcheckType();
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.AccNum = "12345657890";
             echeck.RoutingNum = "123456789";
             echeck.CheckNum = "123455";
@@ -236,8 +237,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            echeckVerificationResponse echeckverificaitonresponse = litle.EcheckVerification(echeckverification);
-            Assert.AreEqual(123, echeckverificaitonresponse.litleTxnId);
+            EcheckVerificationResponse echeckverificaitonresponse = litle.EcheckVerification(echeckverification);
+            Assert.AreEqual(123, echeckverificaitonresponse.LitleTxnId);
         }
 
         [Test]
@@ -260,8 +261,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            forceCaptureResponse forcecaptureresponse = litle.ForceCapture(forcecapture);
-            Assert.AreEqual(123, forcecaptureresponse.litleTxnId);
+            ForceCaptureResponse forcecaptureresponse = litle.ForceCapture(forcecapture);
+            Assert.AreEqual(123, forcecaptureresponse.LitleTxnId);
         }
 
         [Test]
@@ -284,8 +285,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            saleResponse saleresponse = litle.Sale(sale);
-            Assert.AreEqual(123, saleresponse.litleTxnId);
+            SaleResponse saleresponse = litle.Sale(sale);
+            Assert.AreEqual(123, saleresponse.LitleTxnId);
         }
 
         [Test]
@@ -303,9 +304,9 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            registerTokenResponse registertokenresponse = litle.RegisterToken(token);
-            Assert.AreEqual(123, registertokenresponse.litleTxnId);
-            Assert.IsNull(registertokenresponse.type);
+            RegisterTokenResponse registertokenresponse = litle.RegisterToken(token);
+            Assert.AreEqual(123, registertokenresponse.LitleTxnId);
+            Assert.IsNull(registertokenresponse.Type);
         }
 
         [Test]
@@ -323,8 +324,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            activateResponse activateResponse = litle.Activate(activate);
-            Assert.AreEqual("123", activateResponse.litleTxnId);
+            ActivateResponse activateResponse = litle.Activate(activate);
+            Assert.AreEqual("123", activateResponse.LitleTxnId);
         }
 
         [Test]
@@ -342,8 +343,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            deactivateResponse deactivateResponse = litle.Deactivate(deactivate);
-            Assert.AreEqual("123", deactivateResponse.litleTxnId);
+            DeactivateResponse deactivateResponse = litle.Deactivate(deactivate);
+            Assert.AreEqual("123", deactivateResponse.LitleTxnId);
         }
 
         [Test]
@@ -361,8 +362,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            loadResponse loadResponse = litle.Load(load);
-            Assert.AreEqual("123", loadResponse.litleTxnId);
+            LoadResponse loadResponse = litle.Load(load);
+            Assert.AreEqual("123", loadResponse.LitleTxnId);
         }
 
         [Test]
@@ -380,8 +381,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            unloadResponse unloadResponse = litle.Unload(unload);
-            Assert.AreEqual("123", unloadResponse.litleTxnId);
+            UnloadResponse unloadResponse = litle.Unload(unload);
+            Assert.AreEqual("123", unloadResponse.LitleTxnId);
         }
 
         [Test]
@@ -399,8 +400,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            balanceInquiryResponse balanceInquiryResponse = litle.BalanceInquiry(balanceInquiry);
-            Assert.AreEqual("123", balanceInquiryResponse.litleTxnId);
+            BalanceInquiryResponse balanceInquiryResponse = litle.BalanceInquiry(balanceInquiry);
+            Assert.AreEqual("123", balanceInquiryResponse.LitleTxnId);
         }
 
         [Test]
@@ -416,8 +417,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            createPlanResponse createPlanResponse = litle.CreatePlan(createPlan);
-            Assert.AreEqual("theCode", createPlanResponse.planCode);
+            CreatePlanResponse createPlanResponse = litle.CreatePlan(createPlan);
+            Assert.AreEqual("theCode", createPlanResponse.PlanCode);
         }
 
         [Test]
@@ -433,15 +434,15 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            updatePlanResponse updatePlanResponse = litle.UpdatePlan(updatePlan);
-            Assert.AreEqual("theCode", updatePlanResponse.planCode);
+            UpdatePlanResponse updatePlanResponse = litle.UpdatePlan(updatePlan);
+            Assert.AreEqual("theCode", updatePlanResponse.PlanCode);
         }
 
         [Test]
         public void testLitleOnlineException()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -472,7 +473,7 @@ namespace Litle.Sdk.Test.Unit
         public void testInvalidOperationException()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -519,8 +520,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorize = litle.Authorize(authorization);
-            Assert.AreEqual("Default Report Group", authorize.reportGroup);
+            AuthorizationResponse authorize = litle.Authorize(authorization);
+            Assert.AreEqual("Default Report Group", authorize.ReportGroup);
         }
 
         [Test]

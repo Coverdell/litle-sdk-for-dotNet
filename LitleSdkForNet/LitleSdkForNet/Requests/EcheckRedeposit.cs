@@ -1,6 +1,8 @@
+using Litle.Sdk.Responses;
+
 namespace Litle.Sdk.Requests
 {
-    public class EcheckRedeposit : baseRequestTransactionEcheckRedeposit
+    public class EcheckRedeposit : BaseRequestTransactionEcheckRedeposit
     {
         //litleTxnIdField and set are in super
         public EcheckType Echeck;
@@ -10,13 +12,13 @@ namespace Litle.Sdk.Requests
         public override string Serialize()
         {
             var xml = "\r\n<echeckRedeposit";
-            xml += " id=\"" + id + "\"";
-            if (customerId != null)
+            xml += " id=\"" + ID + "\"";
+            if (CustomerId != null)
             {
-                xml += " customerId=\"" + customerId + "\"";
+                xml += " customerId=\"" + CustomerId + "\"";
             }
-            xml += " reportGroup=\"" + reportGroup + "\">";
-            if (litleTxnIdSet) xml += "\r\n<litleTxnId>" + litleTxnIdField + "</litleTxnId>";
+            xml += " reportGroup=\"" + ReportGroup + "\">";
+            if (LitleTxnIdSet) xml += "\r\n<litleTxnId>" + LitleTxnIdField + "</litleTxnId>";
             if (Echeck != null) xml += "\r\n<echeck>" + Echeck.Serialize() + "</echeck>";
             else if (Token != null) xml += "\r\n<echeckToken>" + Token.Serialize() + "</echeckToken>";
             if (MerchantData != null)

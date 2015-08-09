@@ -1,4 +1,5 @@
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
@@ -6,10 +7,10 @@ namespace Litle.Sdk.Requests
     {
         public string LitleToken;
         public string RoutingNum;
-        private echeckAccountTypeEnum _accTypeField;
+        private EcheckAccountTypeEnum _accTypeField;
         private bool _accTypeSet;
 
-        public echeckAccountTypeEnum AccType
+        public EcheckAccountTypeEnum AccType
         {
             get { return _accTypeField; }
             set

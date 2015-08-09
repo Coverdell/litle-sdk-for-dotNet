@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -47,11 +48,11 @@ namespace Litle.Sdk.Test.Unit
      
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            updateSubscriptionResponse response = litle.UpdateSubscription(update);
-            Assert.AreEqual("12345", response.subscriptionId);
-            Assert.AreEqual("456", response.litleTxnId);
-            Assert.AreEqual("000", response.response);
-            Assert.NotNull(response.responseTime);
+            UpdateSubscriptionResponse response = litle.UpdateSubscription(update);
+            Assert.AreEqual("12345", response.SubscriptionId);
+            Assert.AreEqual("456", response.LitleTxnId);
+            Assert.AreEqual("000", response.Response);
+            Assert.NotNull(response.ResponseTime);
         }
 
 

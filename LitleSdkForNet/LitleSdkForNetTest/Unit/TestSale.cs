@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -29,7 +30,7 @@ namespace Litle.Sdk.Test.Unit
             sale.OrderId = "12344";
             sale.Amount = 2;
             sale.OrderSource = OrderSourceType.Ecommerce;
-            sale.reportGroup = "Planets";
+            sale.ReportGroup = "Planets";
             sale.FraudFilterOverride = false;
            
             var mock = new Mock<Communications>();
@@ -49,7 +50,7 @@ namespace Litle.Sdk.Test.Unit
             sale.Amount = 2;
             sale.SurchargeAmount = 1;
             sale.OrderSource = OrderSourceType.Ecommerce;
-            sale.reportGroup = "Planets";
+            sale.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -67,7 +68,7 @@ namespace Litle.Sdk.Test.Unit
             Sale sale = new Sale();
             sale.Amount = 2;
             sale.OrderSource = OrderSourceType.Ecommerce;
-            sale.reportGroup = "Planets";
+            sale.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -109,28 +110,28 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecurringResponse_Full() {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage><recurringTxnId>678</recurringTxnId></recurringResponse></saleResponse></litleOnlineResponse>";
-            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
-            saleResponse saleResponse = (saleResponse)litleOnlineResponse.saleResponse;
+            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            SaleResponse saleResponse = (SaleResponse)litleOnlineResponse.SaleResponse;
 
-            Assert.AreEqual(123, saleResponse.litleTxnId);
-            Assert.AreEqual(12, saleResponse.recurringResponse.subscriptionId);
-            Assert.AreEqual("345", saleResponse.recurringResponse.responseCode);
-            Assert.AreEqual("Foo", saleResponse.recurringResponse.responseMessage);
-            Assert.AreEqual(678, saleResponse.recurringResponse.recurringTxnId);
+            Assert.AreEqual(123, saleResponse.LitleTxnId);
+            Assert.AreEqual(12, saleResponse.RecurringResponse.SubscriptionId);
+            Assert.AreEqual("345", saleResponse.RecurringResponse.ResponseCode);
+            Assert.AreEqual("Foo", saleResponse.RecurringResponse.ResponseMessage);
+            Assert.AreEqual(678, saleResponse.RecurringResponse.RecurringTxnId);
         }
 
         [Test]
         public void TestRecurringResponse_NoRecurringTxnId()
         {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage></recurringResponse></saleResponse></litleOnlineResponse>";
-            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
-            saleResponse saleResponse = (saleResponse)litleOnlineResponse.saleResponse;
+            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            SaleResponse saleResponse = (SaleResponse)litleOnlineResponse.SaleResponse;
 
-            Assert.AreEqual(123, saleResponse.litleTxnId);
-            Assert.AreEqual(12, saleResponse.recurringResponse.subscriptionId);
-            Assert.AreEqual("345", saleResponse.recurringResponse.responseCode);
-            Assert.AreEqual("Foo", saleResponse.recurringResponse.responseMessage);
-            Assert.AreEqual(0,saleResponse.recurringResponse.recurringTxnId);
+            Assert.AreEqual(123, saleResponse.LitleTxnId);
+            Assert.AreEqual(12, saleResponse.RecurringResponse.SubscriptionId);
+            Assert.AreEqual("345", saleResponse.RecurringResponse.ResponseCode);
+            Assert.AreEqual("Foo", saleResponse.RecurringResponse.ResponseMessage);
+            Assert.AreEqual(0,saleResponse.RecurringResponse.RecurringTxnId);
         }
 
         [Test]
@@ -261,7 +262,7 @@ namespace Litle.Sdk.Test.Unit
             sale.Amount = 2;
             sale.SecondaryAmount = 1;
             sale.OrderSource = OrderSourceType.Ecommerce;
-            sale.reportGroup = "Planets";
+            sale.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 

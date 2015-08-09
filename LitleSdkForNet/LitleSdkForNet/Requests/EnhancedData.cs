@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
@@ -20,10 +21,10 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        private enhancedDataDeliveryType _deliveryTypeField;
+        private EnhancedDataDeliveryType _deliveryTypeField;
         private bool _deliveryTypeSet;
 
-        public enhancedDataDeliveryType DeliveryType
+        public EnhancedDataDeliveryType DeliveryType
         {
             get { return _deliveryTypeField; }
             set

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -36,7 +37,7 @@ namespace Litle.Sdk.Test.Functional
         public void SimpleAuthWithCard()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -49,14 +50,14 @@ namespace Litle.Sdk.Test.Functional
             CustomBilling cb = new CustomBilling();
             cb.Phone = "1112223333"; //This needs to compile too            
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
         }
         [Test]
         public void SimpleAuthWithMpos()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 200;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -69,8 +70,8 @@ namespace Litle.Sdk.Test.Functional
             authorization.Mpos = mpos; //This needs to compile
        
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
         }
          [Test]
         public void AuthWithAmpersand()
@@ -93,14 +94,14 @@ namespace Litle.Sdk.Test.Functional
             card.ExpDate = "0112";
              card.CardValidationNum = "349";
              authorization.Card = card;
-             authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
+             AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
          }
         [Test]
         public void simpleAuthWithPaypal()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "123456";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -113,15 +114,15 @@ namespace Litle.Sdk.Test.Functional
             CustomBilling cb = new CustomBilling();
             cb.Phone = "1112223333"; //This needs to compile too            
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("Approved", response.message);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
         public void simpleAuthWithApplepayAndSecondaryAmountAndWallet()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "123456";
             authorization.Amount = 110;
             authorization.SecondaryAmount = 50;
@@ -143,21 +144,21 @@ namespace Litle.Sdk.Test.Functional
             wallet.WalletSourceType = WalletWalletSourceType.MasterPass;
             authorization.Wallet = wallet;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("Insufficient Funds", response.message);
-            Assert.AreEqual("110", response.applepayResponse.transactionAmount);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Insufficient Funds", response.Message);
+            Assert.AreEqual("110", response.ApplepayResponse.TransactionAmount);
         }
 
         [Test]
         public void posWithoutCapabilityAndEntryMode()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
             Pos pos = new Pos();
-            pos.CardholderId = posCardholderIdTypeEnum.pin;
+            pos.CardholderId = PosCardholderIdTypeEnum.Pin;
             authorization.Pos = pos;
             CardType card = new CardType();
             card.Type = MethodOfPaymentTypeEnum.VI;
@@ -183,8 +184,8 @@ namespace Litle.Sdk.Test.Functional
         public void trackData()
         {
             Authorization authorization = new Authorization();
-            authorization.id = "AX54321678";
-            authorization.reportGroup = "RG27";
+            authorization.ID = "AX54321678";
+            authorization.ReportGroup = "RG27";
             authorization.OrderId = "12z58743y1";
             authorization.Amount = 12522L;
             authorization.OrderSource = OrderSourceType.Retail;
@@ -195,20 +196,20 @@ namespace Litle.Sdk.Test.Functional
             card.Track = "%B40000001^Doe/JohnP^06041...?;40001=0604101064200?";
             authorization.Card = card;
             Pos pos = new Pos();
-            pos.Capability = posCapabilityTypeEnum.magstripe;
-            pos.EntryMode = posEntryModeTypeEnum.completeread;
-            pos.CardholderId = posCardholderIdTypeEnum.signature;
+            pos.Capability = PosCapabilityTypeEnum.Magstripe;
+            pos.EntryMode = PosEntryModeTypeEnum.Completeread;
+            pos.CardholderId = PosCardholderIdTypeEnum.Signature;
             authorization.Pos = pos;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("Approved", response.message);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
         public void testAuthHandleSpecialCharacters()
         {
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "<'&\">";
+            authorization.ReportGroup = "<'&\">";
             authorization.OrderId = "123456";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -221,8 +222,8 @@ namespace Litle.Sdk.Test.Functional
             CustomBilling cb = new CustomBilling();
             cb.Phone = "<'&\">"; //This needs to compile too            
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("Approved", response.message);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -231,7 +232,7 @@ namespace Litle.Sdk.Test.Functional
             config.Remove("logFile");
 
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -241,8 +242,8 @@ namespace Litle.Sdk.Test.Functional
             card.ExpDate = "1210";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
         }
 
         [Test]
@@ -251,7 +252,7 @@ namespace Litle.Sdk.Test.Functional
             config.Remove("neuterAccountNums");
 
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -261,8 +262,8 @@ namespace Litle.Sdk.Test.Functional
             card.ExpDate = "1210";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
         }
 
         [Test]
@@ -271,7 +272,7 @@ namespace Litle.Sdk.Test.Functional
             config.Remove("printxml");
 
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -281,8 +282,8 @@ namespace Litle.Sdk.Test.Functional
             card.ExpDate = "1210";
             authorization.Card = card;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
         }
 
         [Test]
@@ -291,7 +292,7 @@ namespace Litle.Sdk.Test.Functional
             config.Remove("printxml");
 
             Authorization authorization = new Authorization();
-            authorization.reportGroup = "Planets";
+            authorization.ReportGroup = "Planets";
             authorization.OrderId = "12344";
             authorization.Amount = 106;
             authorization.OrderSource = OrderSourceType.Ecommerce;
@@ -309,8 +310,8 @@ namespace Litle.Sdk.Test.Functional
             advancedFraudChecks.CustomAttribute5 = "testAttribute5";
             authorization.AdvancedFraudChecks = advancedFraudChecks;
 
-            authorizationResponse response = litle.Authorize(authorization);
-            Assert.AreEqual("000", response.response);
+            AuthorizationResponse response = litle.Authorize(authorization);
+            Assert.AreEqual("000", response.Response);
         }
     }
 }

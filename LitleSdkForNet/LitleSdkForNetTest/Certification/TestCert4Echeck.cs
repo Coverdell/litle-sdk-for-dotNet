@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -44,13 +45,13 @@ namespace Litle.Sdk.Test.Certification
             verification.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "10@BC99999";
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.RoutingNum = "053100300";
             verification.Echeck = echeck;
 
-            echeckVerificationResponse response = litle.EcheckVerification(verification);
-            Assert.AreEqual("301", response.response);
-            Assert.AreEqual("Invalid Account Number", response.message);
+            EcheckVerificationResponse response = litle.EcheckVerification(verification);
+            Assert.AreEqual("301", response.Response);
+            Assert.AreEqual("Invalid Account Number", response.Message);
         }
 
         [Test]
@@ -67,13 +68,13 @@ namespace Litle.Sdk.Test.Certification
             verification.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "1099999999";
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.RoutingNum = "053000219";
             verification.Echeck = echeck;
 
-            echeckVerificationResponse response = litle.EcheckVerification(verification);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            EcheckVerificationResponse response = litle.EcheckVerification(verification);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -91,13 +92,13 @@ namespace Litle.Sdk.Test.Certification
             verification.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "3099999999";
-            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.AccType = EcheckAccountTypeEnum.Corporate;
             echeck.RoutingNum = "053100300";
             verification.Echeck = echeck;
 
-            echeckVerificationResponse response = litle.EcheckVerification(verification);
-            Assert.AreEqual("950", response.response);
-            Assert.AreEqual("Declined - Negative Information on File", response.message);
+            EcheckVerificationResponse response = litle.EcheckVerification(verification);
+            Assert.AreEqual("950", response.Response);
+            Assert.AreEqual("Declined - Negative Information on File", response.Message);
         }
 
         [Test]
@@ -115,13 +116,13 @@ namespace Litle.Sdk.Test.Certification
             verification.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "8099999999";
-            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.AccType = EcheckAccountTypeEnum.Corporate;
             echeck.RoutingNum = "063102152";
             verification.Echeck = echeck;
 
-            echeckVerificationResponse response = litle.EcheckVerification(verification);
-            Assert.AreEqual("951", response.response);
-            Assert.AreEqual("Absolute Decline", response.message);
+            EcheckVerificationResponse response = litle.EcheckVerification(verification);
+            Assert.AreEqual("951", response.Response);
+            Assert.AreEqual("Absolute Decline", response.Message);
         }
 
         [Test]
@@ -138,13 +139,13 @@ namespace Litle.Sdk.Test.Certification
             sale.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "10@BC99999";
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.RoutingNum = "053100300";
             sale.Echeck = echeck;
 
-            echeckSalesResponse response = litle.EcheckSale(sale);
-            Assert.AreEqual("301", response.response);
-            Assert.AreEqual("Invalid Account Number", response.message);
+            EcheckSalesResponse response = litle.EcheckSale(sale);
+            Assert.AreEqual("301", response.Response);
+            Assert.AreEqual("Invalid Account Number", response.Message);
         }
 
         [Test]
@@ -160,13 +161,13 @@ namespace Litle.Sdk.Test.Certification
             sale.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "4099999992";
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.RoutingNum = "211370545";
             sale.Echeck = echeck;
 
-            echeckSalesResponse response = litle.EcheckSale(sale);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            EcheckSalesResponse response = litle.EcheckSale(sale);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -183,13 +184,13 @@ namespace Litle.Sdk.Test.Certification
             sale.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "6099999992";
-            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.AccType = EcheckAccountTypeEnum.Corporate;
             echeck.RoutingNum = "211370545";
             sale.Echeck = echeck;
 
-            echeckSalesResponse response = litle.EcheckSale(sale);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            EcheckSalesResponse response = litle.EcheckSale(sale);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -206,13 +207,13 @@ namespace Litle.Sdk.Test.Certification
             sale.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "9099999992";
-            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.AccType = EcheckAccountTypeEnum.Corporate;
             echeck.RoutingNum = "053133052";
             sale.Echeck = echeck;
 
-            echeckSalesResponse response = litle.EcheckSale(sale);
-            Assert.AreEqual("900", response.response);
-            Assert.AreEqual("Invalid Bank Routing Number", response.message);
+            EcheckSalesResponse response = litle.EcheckSale(sale);
+            Assert.AreEqual("900", response.Response);
+            Assert.AreEqual("Invalid Bank Routing Number", response.Message);
         }
 
         [Test]
@@ -228,13 +229,13 @@ namespace Litle.Sdk.Test.Certification
             credit.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "10@BC99999";
-            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccType = EcheckAccountTypeEnum.Checking;
             echeck.RoutingNum = "053100300";
             credit.Echeck = echeck;
 
-            echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("301", response.response);
-            Assert.AreEqual("Invalid Account Number", response.message);
+            EcheckCreditResponse response = litle.EcheckCredit(credit);
+            Assert.AreEqual("301", response.Response);
+            Assert.AreEqual("Invalid Account Number", response.Message);
         }
 
         [Test]
@@ -251,13 +252,13 @@ namespace Litle.Sdk.Test.Certification
             credit.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "3099999999";
-            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.AccType = EcheckAccountTypeEnum.Corporate;
             echeck.RoutingNum = "063102152";
             credit.Echeck = echeck;
 
-            echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            EcheckCreditResponse response = litle.EcheckCredit(credit);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -274,13 +275,13 @@ namespace Litle.Sdk.Test.Certification
             credit.BillToAddress = billToAddress;
             EcheckType echeck = new EcheckType();
             echeck.AccNum = "6099999993";
-            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.AccType = EcheckAccountTypeEnum.Corporate;
             echeck.RoutingNum = "211370545";
             credit.Echeck = echeck;
 
-            echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            EcheckCreditResponse response = litle.EcheckCredit(credit);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -289,9 +290,9 @@ namespace Litle.Sdk.Test.Certification
             EcheckCredit credit = new EcheckCredit();
             credit.LitleTxnId = 430000000000000001L;
 
-            echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("000", response.response);
-            Assert.AreEqual("Approved", response.message);
+            EcheckCreditResponse response = litle.EcheckCredit(credit);
+            Assert.AreEqual("000", response.Response);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -300,9 +301,9 @@ namespace Litle.Sdk.Test.Certification
             EcheckCredit credit = new EcheckCredit();
             credit.LitleTxnId = 2L;
 
-            echeckCreditResponse response = litle.EcheckCredit(credit);
-            Assert.AreEqual("360", response.response);
-            Assert.AreEqual("No transaction found with specified litleTxnId", response.message);
+            EcheckCreditResponse response = litle.EcheckCredit(credit);
+            Assert.AreEqual("360", response.Response);
+            Assert.AreEqual("No transaction found with specified litleTxnId", response.Message);
         }
             
     }

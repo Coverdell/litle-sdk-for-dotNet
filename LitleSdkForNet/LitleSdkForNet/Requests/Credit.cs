@@ -1,9 +1,10 @@
 using System;
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
-    public class Credit : transactionTypeWithReportGroup
+    public class Credit : TransactionTypeWithReportGroup
     {
         private long _litleTxnIdField;
         private bool _litleTxnIdSet;
@@ -68,10 +69,10 @@ namespace Litle.Sdk.Requests
         public CardTokenType Token;
         public CardPaypageType Paypage;
         public PayPal Paypal;
-        private taxTypeIdentifierEnum _taxTypeField;
+        private TaxTypeIdentifierEnum _taxTypeField;
         private bool _taxTypeSet;
 
-        public taxTypeIdentifierEnum TaxType
+        public TaxTypeIdentifierEnum TaxType
         {
             get { return _taxTypeField; }
             set
@@ -91,12 +92,12 @@ namespace Litle.Sdk.Requests
         public override string Serialize()
         {
             var xml = "\r\n<credit";
-            xml += " id=\"" + SecurityElement.Escape(id) + "\"";
-            if (customerId != null)
+            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
+            if (CustomerId != null)
             {
-                xml += " customerId=\"" + SecurityElement.Escape(customerId) + "\"";
+                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
             }
-            xml += " reportGroup=\"" + SecurityElement.Escape(reportGroup) + "\"";
+            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\"";
             xml += ">";
 
             if (_litleTxnIdSet)

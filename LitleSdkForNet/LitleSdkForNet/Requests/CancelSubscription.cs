@@ -1,8 +1,9 @@
 using System;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
-    public class CancelSubscription : recurringTransactionType
+    public class CancelSubscription : RecurringTransactionType
     {
         private long _subscriptionIdField;
         private bool _subscriptionIdSet;

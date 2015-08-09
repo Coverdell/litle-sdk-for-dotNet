@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -51,8 +52,8 @@ namespace Litle.Sdk.Test.Unit
             card.Number = "4100000000000001";
             card.ExpDate = "1210";
             forcecapture.Card = card;
-            forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Approved", response.message);
+            ForceCaptureResponse response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.Message);
         }
     }
 }

@@ -1,9 +1,10 @@
 using System;
 using System.Security;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
-    public class CreatePlan : recurringTransactionType
+    public class CreatePlan : RecurringTransactionType
     {
         public string PlanCode;
         public string Name;

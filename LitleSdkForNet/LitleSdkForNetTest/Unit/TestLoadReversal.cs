@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -25,8 +26,8 @@ namespace Litle.Sdk.Test.Unit
         public void TestSimple()
         {
             LoadReversal loadReversal = new LoadReversal();
-            loadReversal.id = "a";
-            loadReversal.reportGroup = "b";
+            loadReversal.ID = "a";
+            loadReversal.ReportGroup = "b";
             loadReversal.LitleTxnId = "123";
 
             var mock = new Mock<Communications>();
@@ -36,8 +37,8 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            loadReversalResponse response = litle.LoadReversal(loadReversal);
-            Assert.AreEqual("123", response.litleTxnId);
+            LoadReversalResponse response = litle.LoadReversal(loadReversal);
+            Assert.AreEqual("123", response.LitleTxnId);
         }
 
 

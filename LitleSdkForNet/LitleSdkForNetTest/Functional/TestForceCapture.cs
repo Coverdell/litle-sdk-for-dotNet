@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -42,8 +43,8 @@ namespace Litle.Sdk.Test.Functional
             card.Number = "4100000000000001";
             card.ExpDate = "1210";
             forcecapture.Card = card;
-            forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Approved", response.message);
+            ForceCaptureResponse response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -60,8 +61,8 @@ namespace Litle.Sdk.Test.Functional
             forcecapture.OrderId = "12344";
             forcecapture.OrderSource = OrderSourceType.Ecommerce;
             forcecapture.Mpos = mpos;
-            forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Approved", response.message);
+            ForceCaptureResponse response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
@@ -76,8 +77,8 @@ namespace Litle.Sdk.Test.Functional
             token.CardValidationNum = "555";
             token.Type = MethodOfPaymentTypeEnum.VI;
             forcecapture.Token = token;
-            forceCaptureResponse response = litle.ForceCapture(forcecapture);
-            Assert.AreEqual("Approved", response.message); ;
+            ForceCaptureResponse response = litle.ForceCapture(forcecapture);
+            Assert.AreEqual("Approved", response.Message); ;
         }
             
     }

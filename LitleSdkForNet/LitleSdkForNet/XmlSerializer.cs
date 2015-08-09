@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk
 {
@@ -24,12 +25,12 @@ namespace Litle.Sdk
             return Encoding.UTF8.GetString(ms.GetBuffer()); //return string is UTF8 encoded.
         } // serialize the xml
 
-        public virtual litleResponse DeserializeObjectFromFile(string filePath)
+        public virtual LitleResponse DeserializeObjectFromFile(string filePath)
         {
-            litleResponse i;
+            LitleResponse i;
             try
             {
-                i = new litleResponse(filePath);
+                i = new LitleResponse(filePath);
             }
             catch (XmlException e)
             {

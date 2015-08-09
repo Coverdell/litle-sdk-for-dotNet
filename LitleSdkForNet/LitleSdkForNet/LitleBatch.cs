@@ -5,6 +5,7 @@ using System.IO;
 using System.Security.Cryptography;
 using Litle.Sdk.Properties;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 
 namespace Litle.Sdk
 {
@@ -179,7 +180,7 @@ namespace Litle.Sdk
             _numOfRfrRequest++;
         }
 
-        public litleResponse SendToLitleWithStream()
+        public LitleResponse SendToLitleWithStream()
         {
             var requestFilePath = Serialize();
             var responseFilePath = _communication.SocketStream(requestFilePath, _responseDirectory, _config);
@@ -198,7 +199,7 @@ namespace Litle.Sdk
             _communication.FtpPoll(fileName, timeOut, _config);
         }
 
-        public litleResponse ReceiveFromLitle(string batchFileName)
+        public LitleResponse ReceiveFromLitle(string batchFileName)
         {
             _litleFile.CreateDirectory(_responseDirectory);
             _communication.FtpPickUp(_responseDirectory + batchFileName, _config, batchFileName);

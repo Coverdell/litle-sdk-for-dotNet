@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Responses;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -29,7 +30,7 @@ namespace Litle.Sdk.Test.Unit
             auth.OrderId = "12344";
             auth.Amount = 2;
             auth.OrderSource = OrderSourceType.Ecommerce;
-            auth.reportGroup = "Planets";
+            auth.ReportGroup = "Planets";
             auth.FraudFilterOverride = true;
 
             var mock = new Mock<Communications>();
@@ -39,10 +40,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -52,7 +53,7 @@ namespace Litle.Sdk.Test.Unit
             auth.OrderId = "12344";
             auth.Amount = 2;
             auth.OrderSource = OrderSourceType.Ecommerce;
-            auth.reportGroup = "Planets";
+            auth.ReportGroup = "Planets";
             Contact billToAddress = new Contact();
             billToAddress.Email = "gdake@litle.com";
             billToAddress.Zip = "12345";
@@ -65,10 +66,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -78,7 +79,7 @@ namespace Litle.Sdk.Test.Unit
             auth.OrderId = "12344";
             auth.Amount = 2;
             auth.OrderSource = OrderSourceType.Item3DsAttempted;
-            auth.reportGroup = "Planets";
+            auth.ReportGroup = "Planets";
             Contact billToAddress = new Contact();
             billToAddress.Email = "gdake@litle.com";
             billToAddress.Zip = "12345";
@@ -91,10 +92,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -104,7 +105,7 @@ namespace Litle.Sdk.Test.Unit
             auth.OrderId = "12344";
             auth.Amount = 2;
             auth.OrderSource = OrderSourceType.Item3DsAuthenticated;
-            auth.reportGroup = "Planets";
+            auth.ReportGroup = "Planets";
             Contact billToAddress = new Contact();
             billToAddress.Email = "gdake@litle.com";
             billToAddress.Zip = "12345";
@@ -117,10 +118,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -131,7 +132,7 @@ namespace Litle.Sdk.Test.Unit
             auth.Amount = 2;
             auth.SecondaryAmount = 1;
             auth.OrderSource = OrderSourceType.Ecommerce;
-            auth.reportGroup = "Planets";
+            auth.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -140,10 +141,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -154,7 +155,7 @@ namespace Litle.Sdk.Test.Unit
             auth.Amount = 2;
             auth.SurchargeAmount = 1;
             auth.OrderSource = OrderSourceType.Ecommerce;
-            auth.reportGroup = "Planets";
+            auth.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -163,10 +164,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -176,7 +177,7 @@ namespace Litle.Sdk.Test.Unit
             auth.OrderId = "12344";
             auth.Amount = 2;
             auth.OrderSource = OrderSourceType.Ecommerce;
-            auth.reportGroup = "Planets";
+            auth.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>();
 
@@ -185,10 +186,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -198,7 +199,7 @@ namespace Litle.Sdk.Test.Unit
             auth.OrderId = "12344";
             auth.Amount = 2;
             auth.OrderSource = OrderSourceType.Ecommerce;
-            auth.reportGroup = "Planets";
+            auth.ReportGroup = "Planets";
             CardType card = new CardType();
             card.Type = MethodOfPaymentTypeEnum.GC;
             card.Number = "414100000000000000";
@@ -212,10 +213,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -225,7 +226,7 @@ namespace Litle.Sdk.Test.Unit
             auth.OrderId = "12344";
             auth.Amount = 2;
             auth.OrderSource = OrderSourceType.Applepay;
-            auth.reportGroup = "Planets";
+            auth.ReportGroup = "Planets";
             ApplepayType applepay = new ApplepayType();
             ApplepayHeaderType applepayHeaderType = new ApplepayHeaderType();
             applepayHeaderType.ApplicationData = "454657413164";
@@ -249,10 +250,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -279,10 +280,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -306,38 +307,38 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
         public void TestRecurringResponse_Full()
         {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage><recurringTxnId>678</recurringTxnId></recurringResponse></authorizationResponse></litleOnlineResponse>";
-            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
-            authorizationResponse authorizationResponse = (authorizationResponse)litleOnlineResponse.authorizationResponse;
+            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            AuthorizationResponse authorizationResponse = (AuthorizationResponse)litleOnlineResponse.AuthorizationResponse;
 
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
-            Assert.AreEqual(12, authorizationResponse.recurringResponse.subscriptionId);
-            Assert.AreEqual("345", authorizationResponse.recurringResponse.responseCode);
-            Assert.AreEqual("Foo", authorizationResponse.recurringResponse.responseMessage);
-            Assert.AreEqual(678, authorizationResponse.recurringResponse.recurringTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
+            Assert.AreEqual(12, authorizationResponse.RecurringResponse.SubscriptionId);
+            Assert.AreEqual("345", authorizationResponse.RecurringResponse.ResponseCode);
+            Assert.AreEqual("Foo", authorizationResponse.RecurringResponse.ResponseMessage);
+            Assert.AreEqual(678, authorizationResponse.RecurringResponse.RecurringTxnId);
         }
 
         [Test]
         public void TestRecurringResponse_NoRecurringTxnId()
         {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage></recurringResponse></authorizationResponse></litleOnlineResponse>";
-            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
-            authorizationResponse authorizationResponse = (authorizationResponse)litleOnlineResponse.authorizationResponse;
+            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            AuthorizationResponse authorizationResponse = (AuthorizationResponse)litleOnlineResponse.AuthorizationResponse;
 
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
-            Assert.AreEqual(12, authorizationResponse.recurringResponse.subscriptionId);
-            Assert.AreEqual("345", authorizationResponse.recurringResponse.responseCode);
-            Assert.AreEqual("Foo", authorizationResponse.recurringResponse.responseMessage);
-            Assert.AreEqual(0, authorizationResponse.recurringResponse.recurringTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
+            Assert.AreEqual(12, authorizationResponse.RecurringResponse.SubscriptionId);
+            Assert.AreEqual("345", authorizationResponse.RecurringResponse.ResponseCode);
+            Assert.AreEqual("Foo", authorizationResponse.RecurringResponse.ResponseMessage);
+            Assert.AreEqual(0, authorizationResponse.RecurringResponse.RecurringTxnId);
         }
 
         [Test]
@@ -379,10 +380,10 @@ namespace Litle.Sdk.Test.Unit
             litle.SetCommunication(mockedCommunication);
             litle.Authorize(auth);
 
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -426,10 +427,10 @@ namespace Litle.Sdk.Test.Unit
             litle.SetCommunication(mockedCommunication);
             litle.Authorize(auth);
 
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -469,10 +470,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual("123", authorizationResponse.orderId);
+            Assert.AreEqual("123", authorizationResponse.OrderId);
         }
 
         [Test]
@@ -491,18 +492,18 @@ namespace Litle.Sdk.Test.Unit
 </authorizationResponse>
 </litleOnlineResponse>";
 
-            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
-            authorizationResponse authorizationResponse = (authorizationResponse)litleOnlineResponse.authorizationResponse;
+            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            AuthorizationResponse authorizationResponse = (AuthorizationResponse)litleOnlineResponse.AuthorizationResponse;
 
 
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
-            Assert.NotNull(authorizationResponse.fraudResult);
-            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults);
-            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
-            Assert.AreEqual("ReviewStatus", authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
-            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
-            Assert.AreEqual(800, authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
-            Assert.AreEqual("rule triggered", authorizationResponse.fraudResult.advancedFraudResults.triggeredRule);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
+            Assert.NotNull(authorizationResponse.FraudResult);
+            Assert.NotNull(authorizationResponse.FraudResult.AdvancedFraudResults);
+            Assert.NotNull(authorizationResponse.FraudResult.AdvancedFraudResults.DeviceReviewStatus);
+            Assert.AreEqual("ReviewStatus", authorizationResponse.FraudResult.AdvancedFraudResults.DeviceReviewStatus);
+            Assert.NotNull(authorizationResponse.FraudResult.AdvancedFraudResults.DeviceReputationScore);
+            Assert.AreEqual(800, authorizationResponse.FraudResult.AdvancedFraudResults.DeviceReputationScore);
+            Assert.AreEqual("rule triggered", authorizationResponse.FraudResult.AdvancedFraudResults.TriggeredRule);
         }
 
         [Test]
@@ -512,7 +513,7 @@ namespace Litle.Sdk.Test.Unit
             auth.Pos = new Pos();
             auth.OrderId = "ABC123";
             auth.Amount = 98700;
-            auth.Pos.CatLevel = posCatLevelEnum.selfservice;
+            auth.Pos.CatLevel = PosCatLevelEnum.Selfservice;
 
             String expectedResult = @"
 <authorization id="""" reportGroup="""">
@@ -531,10 +532,10 @@ namespace Litle.Sdk.Test.Unit
 
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
-            authorizationResponse authorizationResponse = litle.Authorize(auth);
+            AuthorizationResponse authorizationResponse = litle.Authorize(auth);
 
             Assert.NotNull(authorizationResponse);
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
         }
 
         [Test]
@@ -556,19 +557,19 @@ namespace Litle.Sdk.Test.Unit
 </authorizationResponse>
 </litleOnlineResponse>";
 
-            litleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
-            authorizationResponse authorizationResponse = (authorizationResponse)litleOnlineResponse.authorizationResponse;
+            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            AuthorizationResponse authorizationResponse = (AuthorizationResponse)litleOnlineResponse.AuthorizationResponse;
 
 
-            Assert.AreEqual(123, authorizationResponse.litleTxnId);
-            Assert.NotNull(authorizationResponse.fraudResult);
-            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults);
-            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
-            Assert.AreEqual("ReviewStatus", authorizationResponse.fraudResult.advancedFraudResults.deviceReviewStatus);
-            Assert.NotNull(authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
-            Assert.AreEqual(800, authorizationResponse.fraudResult.advancedFraudResults.deviceReputationScore);
-            Assert.AreEqual("rule triggered", authorizationResponse.fraudResult.advancedFraudResults.triggeredRule);
-            Assert.AreEqual(true, authorizationResponse.recycling.recycleEngineActive);
+            Assert.AreEqual(123, authorizationResponse.LitleTxnId);
+            Assert.NotNull(authorizationResponse.FraudResult);
+            Assert.NotNull(authorizationResponse.FraudResult.AdvancedFraudResults);
+            Assert.NotNull(authorizationResponse.FraudResult.AdvancedFraudResults.DeviceReviewStatus);
+            Assert.AreEqual("ReviewStatus", authorizationResponse.FraudResult.AdvancedFraudResults.DeviceReviewStatus);
+            Assert.NotNull(authorizationResponse.FraudResult.AdvancedFraudResults.DeviceReputationScore);
+            Assert.AreEqual(800, authorizationResponse.FraudResult.AdvancedFraudResults.DeviceReputationScore);
+            Assert.AreEqual("rule triggered", authorizationResponse.FraudResult.AdvancedFraudResults.TriggeredRule);
+            Assert.AreEqual(true, authorizationResponse.Recycling.RecycleEngineActive);
         }
 
     }
