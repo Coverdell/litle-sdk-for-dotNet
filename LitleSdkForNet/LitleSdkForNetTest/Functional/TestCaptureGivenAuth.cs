@@ -141,10 +141,10 @@ namespace Litle.Sdk.Test.Functional
             authInfo.AuthCode = "543216";
             authInfo.AuthAmount = 12345;
             FraudResult fraudresult = new FraudResult();
-            fraudresult.avsResult = "12";
-            fraudresult.cardValidationResult = "123";
-            fraudresult.authenticationResult = "1";
-            fraudresult.advancedAVSResult = "123";
+            fraudresult.AvsResult = "12";
+            fraudresult.CardValidationResult = "123";
+            fraudresult.AuthenticationResult = "1";
+            fraudresult.AdvancedAVSResult = "123";
             authInfo.FraudResult = fraudresult;
             capturegivenauth.AuthInformation = authInfo;
             capturegivenauth.OrderSource = OrderSourceType.Ecommerce;
