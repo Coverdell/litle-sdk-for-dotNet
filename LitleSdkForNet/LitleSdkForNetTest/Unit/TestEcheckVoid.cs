@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Litle.Sdk.Requests;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;

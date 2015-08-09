@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Litle.Sdk.Requests;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -289,7 +290,7 @@ namespace Litle.Sdk.Test.Unit
             sale.OrderId = "12344";
             sale.Amount = 2;
             sale.OrderSource = OrderSourceType.Ecommerce;
-            Wallet wallet = new Sdk.Wallet();
+            Wallet wallet = new Wallet();
             wallet.WalletSourceTypeId = "123";
             sale.Wallet = wallet;
 

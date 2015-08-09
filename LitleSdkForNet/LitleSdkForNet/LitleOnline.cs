@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using Litle.Sdk.Properties;
+using Litle.Sdk.Requests;
 
 namespace Litle.Sdk
 {

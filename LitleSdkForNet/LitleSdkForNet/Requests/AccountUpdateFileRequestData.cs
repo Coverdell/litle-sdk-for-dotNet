@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+using System.Security;
+using Litle.Sdk.Properties;
+
+namespace Litle.Sdk.Requests
+{
+    public class AccountUpdateFileRequestData
+    {
+        public string MerchantId;
+
+        public AccountUpdateFileRequestData()
+        {
+            MerchantId = Settings.Default.merchantId;
+        }
+
+        public AccountUpdateFileRequestData(IDictionary<string, string> config)
+        {
+            MerchantId = config["merchantId"];
+        }
+
+        public DateTime PostDay; //yyyy-MM-dd
+
+        public string Serialize()
+        {
+            var xml = "\r\n<merchantId>" + SecurityElement.Escape(MerchantId) + "</merchantId>";
+
+            xml += "\r\n<postDay>" + PostDay.ToString("yyyy-MM-dd") + "</postDay>";
+
+            return xml;
+        }
+    }
+}

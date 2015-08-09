@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Litle.Sdk.Requests;
 using NUnit.Framework;
 using Litle.Sdk;
 
@@ -105,7 +106,7 @@ namespace Litle.Sdk.Test.Functional
             applepay.Signature = "sign";
             applepay.Version = "1";
             saleObj.Applepay = applepay;
-            Wallet wallet = new Sdk.Wallet();
+            Wallet wallet = new Wallet();
             wallet.WalletSourceTypeId = "123";
             wallet.WalletSourceType = WalletWalletSourceType.MasterPass;
             saleObj.Wallet = wallet;

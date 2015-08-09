@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Litle.Sdk.Requests;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
+using Capture = Litle.Sdk.Requests.Capture;
 
 
 namespace Litle.Sdk.Test.Unit

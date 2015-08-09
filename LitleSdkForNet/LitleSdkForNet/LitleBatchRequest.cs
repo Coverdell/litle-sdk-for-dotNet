@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using Litle.Sdk.Properties;
+using Litle.Sdk.Requests;
 
 namespace Litle.Sdk
 {
