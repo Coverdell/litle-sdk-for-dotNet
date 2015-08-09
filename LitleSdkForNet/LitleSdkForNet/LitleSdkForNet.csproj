@@ -41,6 +41,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Requests\BatchRequest.cs" />
+    <Compile Include="Requests\EcheckPreNoteCredit.cs" />
     <Compile Include="FraudResult.cs" />
     <Compile Include="Requests\AccountUpdate.cs" />
     <Compile Include="Requests\AccountUpdateFileRequestData.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="Requests\DetailTax.cs" />
     <Compile Include="Requests\EcheckCredit.cs" />
     <Compile Include="Requests\EcheckForTokenType.cs" />
+    <Compile Include="Requests\EcheckPreNoteSale.cs" />
     <Compile Include="Requests\EcheckRedeposit.cs" />
     <Compile Include="Requests\EcheckSale.cs" />
     <Compile Include="Requests\EcheckTokenType.cs" />
@@ -102,14 +105,22 @@
     <Compile Include="Requests\MerchantDataType.cs" />
     <Compile Include="Requests\MposType.cs" />
     <Compile Include="Requests\OrderSourceType.cs" />
+    <Compile Include="Requests\PayFacCredit.cs" />
+    <Compile Include="Requests\PayFacDebit.cs" />
     <Compile Include="Requests\PayPal.cs" />
+    <Compile Include="Requests\PhysicalCheckCredit.cs" />
     <Compile Include="Requests\Pos.cs" />
     <Compile Include="Requests\ProcessingInstructions.cs" />
     <Compile Include="Requests\RecurringRequest.cs" />
     <Compile Include="Requests\RecyclingRequestType.cs" />
     <Compile Include="Requests\RefundReversal.cs" />
     <Compile Include="Requests\RegisterTokenRequestType.cs" />
+    <Compile Include="Requests\ReserveCredit.cs" />
+    <Compile Include="Requests\ReserveDebit.cs" />
+    <Compile Include="Requests\RfrRequest.cs" />
     <Compile Include="Requests\Sale.cs" />
+    <Compile Include="Requests\SubmerchantCredit.cs" />
+    <Compile Include="Requests\SubmerchantDebit.cs" />
     <Compile Include="Requests\Subscription.cs" />
     <Compile Include="Requests\TransactionTypeWithReportGroupAndPartial.cs" />
     <Compile Include="Requests\TrialIntervalType.cs" />
@@ -120,6 +131,8 @@
     <Compile Include="Requests\UpdateDiscount.cs" />
     <Compile Include="Requests\UpdatePlan.cs" />
     <Compile Include="Requests\UpdateSubscription.cs" />
+    <Compile Include="Requests\VendorCredit.cs" />
+    <Compile Include="Requests\VendorDebit.cs" />
     <Compile Include="Requests\VirtualGiftCardType.cs" />
     <Compile Include="Requests\VoidTxn.cs" />
     <Compile Include="Requests\Wallet.cs" />
@@ -225,7 +238,7 @@
     <Compile Include="Responses\VoidRecyclingResponseType.cs" />
     <Compile Include="XmlSerializer.cs" />
     <Compile Include="Communications.cs" />
-    <Compile Include="LitleBatchRequest.cs" />
+    <Compile Include="Requests\PhysicalCheckDebit.cs" />
     <Compile Include="LitleBatch.cs" />
     <Compile Include="LitleOnlineException.cs" />
     <Compile Include="LitleOnline.cs" />

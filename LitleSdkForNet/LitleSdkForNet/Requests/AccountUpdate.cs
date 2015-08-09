@@ -5,9 +5,9 @@ namespace Litle.Sdk.Requests
 {
     public class AccountUpdate : TransactionTypeWithReportGroup
     {
-        public string OrderId;
-        public CardType Card;
-        public CardTokenType Token;
+        public string OrderId { get; set; }
+        public CardType Card { get; set; }
+        public CardTokenType Token { get; set; }
 
         public override string Serialize()
         {
