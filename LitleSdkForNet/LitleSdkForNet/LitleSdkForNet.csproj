@@ -98,8 +98,10 @@
     <Compile Include="Requests\HealthcareIIAS.cs" />
     <Compile Include="Requests\IntervalType.cs" />
     <Compile Include="Requests\LineItemData.cs" />
+    <Compile Include="Requests\LitleFile.cs" />
     <Compile Include="Requests\LitleInternalRecurringRequest.cs" />
     <Compile Include="Requests\LitleOnlineRequest.cs" />
+    <Compile Include="Requests\LitleRequest.cs" />
     <Compile Include="Requests\Load.cs" />
     <Compile Include="Requests\LoadReversal.cs" />
     <Compile Include="Requests\MerchantDataType.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Requests\PhysicalCheckCredit.cs" />
     <Compile Include="Requests\Pos.cs" />
     <Compile Include="Requests\ProcessingInstructions.cs" />
+    <Compile Include="Requests\RandomGen.cs" />
     <Compile Include="Requests\RecurringRequest.cs" />
     <Compile Include="Requests\RecyclingRequestType.cs" />
     <Compile Include="Requests\RefundReversal.cs" />
@@ -239,7 +242,7 @@
     <Compile Include="XmlSerializer.cs" />
     <Compile Include="Communications.cs" />
     <Compile Include="Requests\PhysicalCheckDebit.cs" />
-    <Compile Include="LitleBatch.cs" />
+    <Compile Include="Requests\LitleTime.cs" />
     <Compile Include="LitleOnlineException.cs" />
     <Compile Include="LitleOnline.cs" />
     <Compile Include="Responses\PhysicalCheckDebitResponse.cs" />

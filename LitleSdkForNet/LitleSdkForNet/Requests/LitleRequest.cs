@@ -1,18 +1,14 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Security.Cryptography;
 using Litle.Sdk.Properties;
-using Litle.Sdk.Requests;
 using Litle.Sdk.Responses;
 
-namespace Litle.Sdk
+namespace Litle.Sdk.Requests
 {
     public class LitleRequest
     {
         private Authentication _authentication;
-        private readonly Dictionary<String, String> _config;
+        private readonly Dictionary<string, string> _config;
         private Communications _communication;
         private LitleXmlSerializer _litleXmlSerializer;
         private int _numOfLitleBatchRequest;
@@ -77,7 +73,7 @@ namespace Litle.Sdk
          * requestDirectory
          * responseDirectory
          */
-        public LitleRequest(Dictionary<String, String> config)
+        public LitleRequest(Dictionary<string, string> config)
         {
             _config = config;
             InitializeRequest();
@@ -229,8 +225,8 @@ namespace Litle.Sdk
         public string Serialize()
         {
             var xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.3\"" +
-                               " xmlns=\"http://www.litle.com/schema\" " +
-                               "numBatchRequests=\"" + _numOfLitleBatchRequest + "\">";
+                            " xmlns=\"http://www.litle.com/schema\" " +
+                            "numBatchRequests=\"" + _numOfLitleBatchRequest + "\">";
 
             const string xmlFooter = "\r\n</litleRequest>";
 
@@ -261,112 +257,6 @@ namespace Litle.Sdk
             {
                 litleBatchRequest.ReportGroup = _config["reportGroup"];
             }
-        }
-    }
-
-    public class LitleFile
-    {
-        public virtual string CreateRandomFile(string fileDirectory, string fileName, string fileExtension,
-            LitleTime litleTime)
-        {
-            string filePath;
-            if (string.IsNullOrEmpty(fileName))
-            {
-                if (!Directory.Exists(fileDirectory))
-                {
-                    Directory.CreateDirectory(fileDirectory);
-                }
-
-                fileName = litleTime.GetCurrentTime("MM-dd-yyyy_HH-mm-ss-ffff_") + RandomGen.NextString(8);
-                filePath = fileDirectory + fileName + fileExtension;
-
-                using (new FileStream(filePath, FileMode.Create))
-                {
-                }
-            }
-            else
-            {
-                filePath = fileDirectory + fileName;
-            }
-
-            return filePath;
-        }
-
-        public virtual string AppendLineToFile(string filePath, string lineToAppend)
-        {
-            using (var fs = new FileStream(filePath, FileMode.Append))
-            using (var sw = new StreamWriter(fs))
-            {
-                sw.Write(lineToAppend);
-            }
-
-            return filePath;
-        }
-        
-        public virtual string AppendFileToFile(string filePathToAppendTo, string filePathToAppend)
-        {
-            using (var fs = new FileStream(filePathToAppendTo, FileMode.Append))
-            using (var fsr = new FileStream(filePathToAppend, FileMode.Open))
-            {
-                var buffer = new byte[16];
-                int bytesRead;
-
-                do
-                {
-                    bytesRead = fsr.Read(buffer, 0, buffer.Length);
-                    fs.Write(buffer, 0, bytesRead);
-                } while (bytesRead > 0);
-            }
-
-            File.Delete(filePathToAppend);
-            return filePathToAppendTo;
-        }
-
-        public virtual void CreateDirectory(string destinationFilePath)
-        {
-            var destinationDirectory = Path.GetDirectoryName(destinationFilePath);
-
-            Debug.Assert(destinationDirectory != null, "destinationDirectory != null");
-            if (!Directory.Exists(destinationDirectory))
-            {
-                Directory.CreateDirectory(destinationDirectory);
-            }
-        }
-    }
-
-    public static class RandomGen
-    {
-        private static readonly RNGCryptoServiceProvider Global = new RNGCryptoServiceProvider();
-        private static Random _local;
-
-        public static int NextInt()
-        {
-            if (_local != null) return _local.Next();
-            var buffer = new byte[8];
-            Global.GetBytes(buffer);
-            _local = new Random(BitConverter.ToInt32(buffer, 0));
-
-            return _local.Next();
-        }
-
-        public static string NextString(int length)
-        {
-            var result = "";
-
-            for (var i = 0; i < length; i++)
-            {
-                result += Convert.ToChar(NextInt()%('Z' - 'A') + 'A');
-            }
-
-            return result;
-        }
-    }
-
-    public class LitleTime
-    {
-        public virtual String GetCurrentTime(String format)
-        {
-            return DateTime.Now.ToString(format);
         }
     }
 }
