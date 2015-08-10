@@ -4,21 +4,29 @@ using Litle.Sdk.Requests;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("accountUpdaterResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("accountUpdaterResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class AccountUpdateResponse : TransactionTypeWithReportGroup
     {
+        [XmlElement("litleTxnId")]
         public long LitleTxnId;
+        [XmlElement("orderId")]
         public string OrderId;
+        [XmlElement("response")]
         public string Response;
+        [XmlElement("responseTime")]
         public DateTime ResponseTime;
+        [XmlElement("message")]
         public string Message;
 
         //Optional child elements
+        [XmlElement("updatedCard")]
         public CardType UpdatedCard;
+        [XmlElement("originalCard")]
         public CardType OriginalCard;
+        [XmlElement("originalToken")]
         public AccountUpdateResponseCardTokenType OriginalToken;
+        [XmlElement("updatedToken")]
         public AccountUpdateResponseCardTokenType UpdatedToken;
     }
 }

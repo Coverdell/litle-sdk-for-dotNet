@@ -1,11 +1,9 @@
-using System;
 using System.Xml.Serialization;
 using Litle.Sdk.Requests;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlType("BaseRequestTransactionEcheckRedeposit", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot("echeckRedeposit", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class BaseRequestTransactionEcheckRedeposit : TransactionTypeWithReportGroup
     {
@@ -14,6 +12,7 @@ namespace Litle.Sdk.Responses
 
         private object _itemField;
 
+        [XmlElement("litleTxnId")]
         public long LitleTxnId
         {
             get { return LitleTxnIdField; }

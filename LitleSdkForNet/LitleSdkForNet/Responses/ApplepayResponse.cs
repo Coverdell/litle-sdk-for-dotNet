@@ -1,11 +1,9 @@
-using System;
 using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("applepayResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("applepayResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class ApplepayResponse
     {
         private string _applicationPrimaryAccountNumberField;
@@ -18,56 +16,63 @@ namespace Litle.Sdk.Responses
         private byte[] _onlinePaymentCryptogramField;
         private string _eciIndicatorField;
 
+        [XmlElement("applicationPrimaryAccountNumber")]
         public string ApplicationPrimaryAccountNumber
         {
             get { return _applicationPrimaryAccountNumberField; }
             set { _applicationPrimaryAccountNumberField = value; }
         }
 
+        [XmlElement("applicationExpirationDate")]
         public string ApplicationExpirationDate
         {
             get { return _applicationExpirationDateField; }
             set { _applicationExpirationDateField = value; }
         }
 
+        [XmlElement("currencyCode")]
         public string CurrencyCode
         {
             get { return _currencyCodeField; }
             set { _currencyCodeField = value; }
         }
 
-        [XmlElement(DataType = "integer")]
+        [XmlElement("transactionAmount", DataType = "integer")]
         public string TransactionAmount
         {
             get { return _transactionAmountField; }
             set { _transactionAmountField = value; }
         }
 
+        [XmlElement("cardholderName")]
         public string CardholderName
         {
             get { return _cardholderNameField; }
             set { _cardholderNameField = value; }
         }
 
+        [XmlElement("deviceManufacturerIdentifier")]
         public string DeviceManufacturerIdentifier
         {
             get { return _deviceManufacturerIdentifierField; }
             set { _deviceManufacturerIdentifierField = value; }
         }
 
+        [XmlElement("paymentDataType")]
         public string PaymentDataType
         {
             get { return _paymentDataTypeField; }
             set { _paymentDataTypeField = value; }
         }
 
-        [XmlElement(DataType = "base64Binary")]
+        [XmlElement("onlinePaymentCryptogram", DataType = "base64Binary")]
         public byte[] OnlinePaymentCryptogram
         {
             get { return _onlinePaymentCryptogramField; }
             set { _onlinePaymentCryptogramField = value; }
         }
 
+        [XmlElement("eciIndicator")]
         public string EciIndicator
         {
             get { return _eciIndicatorField; }

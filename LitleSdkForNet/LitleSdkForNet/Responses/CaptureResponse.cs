@@ -14,23 +14,14 @@ namespace Litle.Sdk.Responses
         public FraudResult FraudResult;
 
         private long _litleTxnIdField;
-
         private string _orderIdField;
-
         private string _responseField;
-
         private DateTime _responseTimeField;
-
         private DateTime _postDateField;
-
         private bool _postDateFieldSpecified;
-
         private string _messageField;
-
         private AccountUpdater _accountUpdaterField;
-
         private bool _duplicateField;
-
         private bool _duplicateFieldSpecified;
 
         [XmlElement("litleTxnId")]

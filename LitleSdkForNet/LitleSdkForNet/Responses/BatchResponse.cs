@@ -5,13 +5,15 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("batchResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("batchResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class BatchResponse
     {
+        [XmlElement("id")]
         public string ID;
+        [XmlElement("litleBatchId")]
         public long LitleBatchId;
+        [XmlElement("merchantId")]
         public string MerchantId;
 
         private XmlReader _originalXmlReader;
@@ -423,7 +425,7 @@ namespace Litle.Sdk.Responses
         public virtual AccountUpdateResponse NextAccountUpdateResponse()
         {
             if (_accountUpdateResponseReader.ReadState == ReadState.Closed) return null;
-            string response = _accountUpdateResponseReader.ReadOuterXml();
+            var response = _accountUpdateResponseReader.ReadOuterXml();
             var serializer = new XmlSerializer(typeof (AccountUpdateResponse));
             var reader = new StringReader(response);
             var i = (AccountUpdateResponse) serializer.Deserialize(reader);
@@ -439,7 +441,7 @@ namespace Litle.Sdk.Responses
         public virtual AuthorizationResponse NextAuthorizationResponse()
         {
             if (_authorizationResponseReader.ReadState == ReadState.Closed) return null;
-            string response = _authorizationResponseReader.ReadOuterXml();
+            var response = _authorizationResponseReader.ReadOuterXml();
             var serializer = new XmlSerializer(typeof (AuthorizationResponse));
             var reader = new StringReader(response);
             var i = (AuthorizationResponse) serializer.Deserialize(reader);
@@ -455,7 +457,7 @@ namespace Litle.Sdk.Responses
         public virtual AuthReversalResponse NextAuthReversalResponse()
         {
             if (_authReversalResponseReader.ReadState == ReadState.Closed) return null;
-            string response = _authReversalResponseReader.ReadOuterXml();
+            var response = _authReversalResponseReader.ReadOuterXml();
             var serializer = new XmlSerializer(typeof (AuthReversalResponse));
             var reader = new StringReader(response);
             var i = (AuthReversalResponse) serializer.Deserialize(reader);
@@ -471,7 +473,7 @@ namespace Litle.Sdk.Responses
         public virtual CaptureResponse NextCaptureResponse()
         {
             if (_captureResponseReader.ReadState == ReadState.Closed) return null;
-            string response = _captureResponseReader.ReadOuterXml();
+            var response = _captureResponseReader.ReadOuterXml();
             var serializer = new XmlSerializer(typeof (CaptureResponse));
             var reader = new StringReader(response);
             var i = (CaptureResponse) serializer.Deserialize(reader);
@@ -487,7 +489,7 @@ namespace Litle.Sdk.Responses
         public virtual CaptureGivenAuthResponse NextCaptureGivenAuthResponse()
         {
             if (_captureGivenAuthResponseReader.ReadState == ReadState.Closed) return null;
-            string response = _captureGivenAuthResponseReader.ReadOuterXml();
+            var response = _captureGivenAuthResponseReader.ReadOuterXml();
             var serializer = new XmlSerializer(typeof (CaptureGivenAuthResponse));
             var reader = new StringReader(response);
             var i = (CaptureGivenAuthResponse) serializer.Deserialize(reader);
@@ -503,7 +505,7 @@ namespace Litle.Sdk.Responses
         public virtual CreditResponse NextCreditResponse()
         {
             if (_creditResponseReader.ReadState == ReadState.Closed) return null;
-            string response = _creditResponseReader.ReadOuterXml();
+            var response = _creditResponseReader.ReadOuterXml();
             var serializer = new XmlSerializer(typeof (CreditResponse));
             var reader = new StringReader(response);
             var i = (CreditResponse) serializer.Deserialize(reader);

@@ -1,28 +1,29 @@
-using System;
 using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(Namespace = "http://www.litle.com/schema")]
+    [XmlType("cardAccountInfoType", Namespace = "http://www.litle.com/schema")]
     public class CardAccountInfoType
     {
         private MethodOfPaymentTypeEnum _typeField;
         private string _numberField;
         private string _expDateField;
 
+        [XmlElement("type")]
         public MethodOfPaymentTypeEnum Type
         {
             get { return _typeField; }
             set { _typeField = value; }
         }
 
+        [XmlElement("number")]
         public string Number
         {
             get { return _numberField; }
             set { _numberField = value; }
         }
 
+        [XmlElement("expDate")]
         public string ExpDate
         {
             get { return _expDateField; }
