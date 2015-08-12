@@ -3,8 +3,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlType("litleOnlineResponseTransactionResponseEcheckVoidResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot("echeckVoidResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class LitleOnlineResponseTransactionResponseEcheckVoidResponse : TransactionTypeWithReportGroup
     {
@@ -16,38 +15,42 @@ namespace Litle.Sdk.Responses
         private bool _duplicateField;
         private bool _duplicateFieldSpecified;
 
+        [XmlElement("litleTxnId")]
         public long LitleTxnId
         {
             get { return _litleTxnIdField; }
             set { _litleTxnIdField = value; }
         }
 
+        [XmlElement("response")]
         public string Response
         {
             get { return _responseField; }
             set { _responseField = value; }
         }
 
+        [XmlElement("responseTime")]
         public DateTime ResponseTime
         {
             get { return _responseTimeField; }
             set { _responseTimeField = value; }
         }
 
-        [XmlElement(DataType = "date")]
+        [XmlElement("postDate", DataType = "date")]
         public DateTime PostDate
         {
             get { return _postDateField; }
             set { _postDateField = value; }
         }
 
+        [XmlElement("message")]
         public string Message
         {
             get { return _messageField; }
             set { _messageField = value; }
         }
 
-        [XmlAttribute]
+        [XmlAttribute("duplicate")]
         public bool Duplicate
         {
             get { return _duplicateField; }

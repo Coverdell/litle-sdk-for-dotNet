@@ -3,19 +3,27 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("loadResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("loadResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class LoadResponse : TransactionTypeWithReportGroup
     {
-        [XmlAttribute] public bool Duplicate;
+        [XmlAttribute("duplicate")] 
+        public bool Duplicate;
+        [XmlElement("litleTxnId")]
         public string LitleTxnId;
+        [XmlElement("orderId")]
         public string OrderId;
+        [XmlElement("response")]
         public string Response;
+        [XmlElement("responseTime")]
         public DateTime ResponseTime;
+        [XmlElement("postDate")]
         public DateTime PostDate;
+        [XmlElement("message")]
         public string Message;
+        [XmlElement("fraudResult")]
         public FraudResult FraudResult;
+        [XmlElement("giftCardResponse")]
         public GiftCardResponse GiftCardResponse;
     }
 }

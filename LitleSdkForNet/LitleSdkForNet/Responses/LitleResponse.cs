@@ -5,16 +5,22 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
     [XmlRoot("litleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class LitleResponse
     {
+        [XmlElement("id")]
         public string ID;
+        [XmlElement("litleBatchId")]
         public long LitleBatchId;
+        [XmlElement("litleSessionId")]
         public long LitleSessionId;
+        [XmlElement("merchantId")]
         public string MerchantId;
+        [XmlElement("response")]
         public string Response;
+        [XmlElement("message")]
         public string Message;
+        [XmlElement("version")]
         public string Version;
 
         private XmlReader _originalXmlReader;
