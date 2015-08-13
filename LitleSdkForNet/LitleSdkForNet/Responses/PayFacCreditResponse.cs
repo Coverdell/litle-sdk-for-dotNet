@@ -3,9 +3,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("payFacCreditResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("payFacCreditResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class PayFacCreditResponse : TransactionTypeWithReportGroup
     {
         private long _litleTxnIdField;
@@ -13,31 +12,36 @@ namespace Litle.Sdk.Responses
         private string _responseField;
         private DateTime _responseTimeField;
         private string _messageField;
-
+        
+        [XmlElement("litleTxnId")]
         public long LitleTxnId
         {
             get { return _litleTxnIdField; }
             set { _litleTxnIdField = value; }
         }
 
+        [XmlElement("fundTransferId")]
         public string FundsTransferId
         {
             get { return _fundsTransferIdField; }
             set { _fundsTransferIdField = value; }
         }
 
+        [XmlElement("response")]
         public string Response
         {
             get { return _responseField; }
             set { _responseField = value; }
         }
 
+        [XmlElement("responseTime")]
         public DateTime ResponseTime
         {
             get { return _responseTimeField; }
             set { _responseTimeField = value; }
         }
 
+        [XmlElement("message")]
         public string Message
         {
             get { return _messageField; }
