@@ -4,8 +4,8 @@ using System.Xml.Serialization;
 namespace Litle.Sdk.Responses
 {
     [Serializable]
-    [XmlType(TypeName = "captureResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("captureResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("captureResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class CaptureResponse : TransactionTypeWithReportGroup
     {
         [XmlElement("giftCardResponse")]

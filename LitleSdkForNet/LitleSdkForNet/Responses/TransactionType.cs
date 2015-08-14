@@ -9,20 +9,20 @@ namespace Litle.Sdk.Responses
     [XmlInclude(typeof (TransactionTypeWithReportGroup))]
     [XmlInclude(typeof (RegisterTokenRequestType))]
     [Serializable]
-    [XmlType(Namespace = "http://www.litle.com/schema")]
+    [XmlType("transactionType", Namespace = "http://www.litle.com/schema")]
     public class TransactionType : TransactionRequest
     {
         private string _idField;
         private string _customerIdField;
 
-        [XmlAttribute]
+        [XmlAttribute("id")]
         public string ID
         {
             get { return _idField; }
             set { _idField = value; }
         }
 
-        [XmlAttribute]
+        [XmlAttribute("customerId")]
         public string CustomerId
         {
             get { return _customerIdField; }

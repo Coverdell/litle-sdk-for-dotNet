@@ -6,8 +6,8 @@ using Litle.Sdk.Responses;
 namespace Litle.Sdk
 {
     [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("fraudResult", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("fraudResult", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class FraudResult
     {
         private string _avsResultField;
@@ -15,26 +15,31 @@ namespace Litle.Sdk
         private string _authenticationResultField;
         private string _advancedAvsResultField;
 
+        [XmlElement("advancedFraudResults")]
         public AdvancedFraudResultsType AdvancedFraudResults;
 
+        [XmlElement("avsResult")]
         public string AvsResult
         {
             get { return _avsResultField; }
             set { _avsResultField = value; }
         }
 
+        [XmlElement("cardValidationResult")]
         public string CardValidationResult
         {
             get { return _cardValidationResultField; }
             set { _cardValidationResultField = value; }
         }
 
+        [XmlElement("authenticationResult")]
         public string AuthenticationResult
         {
             get { return _authenticationResultField; }
             set { _authenticationResultField = value; }
         }
 
+        [XmlElement("advancedAvsResult")]
         public string AdvancedAVSResult
         {
             get { return _advancedAvsResultField; }

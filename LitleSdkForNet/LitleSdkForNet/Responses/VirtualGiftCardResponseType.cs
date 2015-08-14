@@ -3,11 +3,12 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlType("virtualGiftCardResponseType", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     public class VirtualGiftCardResponseType
     {
+        [XmlElement("accountNumber")]
         public String AccountNumber;
+        [XmlElement("cardValidationNum")]
         public String CardValidationNum;
     }
 }

@@ -3,12 +3,11 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(Namespace = "http://www.litle.com/schema")]
+    [XmlType("recurringTransactionResponseType", Namespace = "http://www.litle.com/schema")]
     public class RecurringTransactionResponseType : TransactionResponse
     {
         private string _litleTxnIdField;
-
+        [XmlElement("litleTxnId")]
         public string LitleTxnId
         {
             get { return _litleTxnIdField; }
@@ -16,7 +15,7 @@ namespace Litle.Sdk.Responses
         }
 
         private string _responseField;
-
+        [XmlElement("repsonse")]
         public string Response
         {
             get { return _responseField; }
@@ -24,7 +23,7 @@ namespace Litle.Sdk.Responses
         }
 
         private string _messageField;
-
+        [XmlElement("message")]
         public string Message
         {
             get { return _messageField; }
@@ -32,7 +31,7 @@ namespace Litle.Sdk.Responses
         }
 
         private DateTime _responseTimeField;
-
+        [XmlElement("responseTime")]
         public DateTime ResponseTime
         {
             get { return _responseTimeField; }

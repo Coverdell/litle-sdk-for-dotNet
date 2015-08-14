@@ -61,10 +61,13 @@ namespace Litle.Sdk.Requests
 
         public string Serialize()
         {
+            var capability = EnumUtility.GetXmlEnum(_capabilityField.ToString(), typeof (PosCapabilityTypeEnum));
+            var cardholderType = EnumUtility.GetXmlEnum(_cardholderIdField.ToString(), typeof (PosCardholderIdTypeEnum));
+            var entryMode = EnumUtility.GetXmlEnum(_entryModeField.ToString(), typeof (PosEntryModeTypeEnum));
             var xml = "";
-            if (_capabilitySet) xml += "\r\n<capability>" + _capabilityField + "</capability>";
-            if (_entryModeSet) xml += "\r\n<entryMode>" + _entryModeField + "</entryMode>";
-            if (_cardholderIdSet) xml += "\r\n<cardholderId>" + _cardholderIdField + "</cardholderId>";
+            if (_capabilitySet) xml += "\r\n<capability>" + capability.Name + "</capability>";
+            if (_entryModeSet) xml += "\r\n<entryMode>" + entryMode.Name + "</entryMode>";
+            if (_cardholderIdSet) xml += "\r\n<cardholderId>" + cardholderType.Name + "</cardholderId>";
             if (TerminalId != null) xml += "\r\n<terminalId>" + SecurityElement.Escape(TerminalId) + "</terminalId>";
             if (_catLevelSet) xml += "\r\n<catLevel>" + _catLevelField.Serialize() + "</catLevel>";
             return xml;

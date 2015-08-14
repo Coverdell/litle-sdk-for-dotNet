@@ -6,7 +6,7 @@ namespace Litle.Sdk.Responses
     [XmlInclude(typeof (RegisterTokenRequestType))]
     public class TransactionTypeWithReportGroup : TransactionType
     {
-        [XmlAttribute]
+        [XmlAttribute("reportGroup")]
         public string ReportGroup { get; set; }
     }
 }

@@ -3,8 +3,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(Namespace = "http://www.litle.com/schema")]
+    [XmlType("recycleAdviceType", Namespace = "http://www.litle.com/schema")]
     public class RecycleAdviceType
     {
         private object _itemField;

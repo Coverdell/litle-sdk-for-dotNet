@@ -93,6 +93,7 @@
     <Compile Include="Requests\EcheckVerification.cs" />
     <Compile Include="Requests\EcheckVoid.cs" />
     <Compile Include="Requests\EnhancedData.cs" />
+    <Compile Include="Requests\EnumUtility.cs" />
     <Compile Include="Requests\FilteringType.cs" />
     <Compile Include="Requests\ForceCapture.cs" />
     <Compile Include="Requests\FraudCheckType.cs" />

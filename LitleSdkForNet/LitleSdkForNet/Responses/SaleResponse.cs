@@ -3,9 +3,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("saleResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("saleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class SaleResponse : TransactionTypeWithReportGroup
     {
         private long _litleTxnIdField;
@@ -32,37 +31,42 @@ namespace Litle.Sdk.Responses
         private bool _duplicateField;
         private bool _duplicateFieldSpecified;
 
+        [XmlElement("litleTxnId")]
         public long LitleTxnId
         {
             get { return _litleTxnIdField; }
             set { _litleTxnIdField = value; }
         }
 
+        [XmlElement("orderId")]
         public string OrderId
         {
             get { return _orderIdField; }
             set { _orderIdField = value; }
         }
 
+        [XmlElement("response")]
         public string Response
         {
             get { return _responseField; }
             set { _responseField = value; }
         }
 
+        [XmlElement("responseTime")]
         public DateTime ResponseTime
         {
             get { return _responseTimeField; }
             set { _responseTimeField = value; }
         }
 
+        [XmlElement("cardProductId")]
         public string CardProductId
         {
             get { return _cardProductIdField; }
             set { _cardProductIdField = value; }
         }
 
-        [XmlElement(DataType = "date")]
+        [XmlElement("postDate", DataType = "date")]
         public DateTime PostDate
         {
             get { return _postDateField; }
@@ -76,92 +80,105 @@ namespace Litle.Sdk.Responses
             set { _postDateFieldSpecified = value; }
         }
 
+        [XmlElement("message")]
         public string Message
         {
             get { return _messageField; }
             set { _messageField = value; }
         }
 
+        [XmlElement("authCode")]
         public string AuthCode
         {
             get { return _authCodeField; }
             set { _authCodeField = value; }
         }
 
+        [XmlElement("authorizationResponseSubCode")]
         public string AuthorizationResponseSubCode
         {
             get { return _authorizationResponseSubCodeField; }
             set { _authorizationResponseSubCodeField = value; }
         }
 
-        [XmlElement(DataType = "integer")]
+        [XmlElement("approvedAmount", DataType = "integer")]
         public string ApprovedAmount
         {
             get { return _approvedAmountField; }
             set { _approvedAmountField = value; }
         }
 
+        [XmlElement("accountInformation")]
         public AccountInfoType AccountInformation
         {
             get { return _accountInformationField; }
             set { _accountInformationField = value; }
         }
 
+        [XmlElement("fraudResult")]
         public FraudResult FraudResult
         {
             get { return _fraudResultField; }
             set { _fraudResultField = value; }
         }
 
+        [XmlElement("billMeLaterResponseData")]
         public BillMeLaterResponseData BillMeLaterResponseData
         {
             get { return _billMeLaterResponseDataField; }
             set { _billMeLaterResponseDataField = value; }
         }
 
+        [XmlElement("tokenResponse")]
         public TokenResponseType TokenResponse
         {
             get { return _tokenResponseField; }
             set { _tokenResponseField = value; }
         }
 
+        [XmlElement("enhancedAuthResponse")]
         public EnhancedAuthResponse EnhancedAuthResponse
         {
             get { return _enhancedAuthResponseField; }
             set { _enhancedAuthResponseField = value; }
         }
 
+        [XmlElement("accountUpdater")]
         public AccountUpdater AccountUpdater
         {
             get { return _accountUpdaterField; }
             set { _accountUpdaterField = value; }
         }
 
+        [XmlElement("recycling")]
         public RecyclingType Recycling
         {
             get { return _recyclingField; }
             set { _recyclingField = value; }
         }
 
+        [XmlElement("recurringResponse")]
         public RecurringResponse RecurringResponse
         {
             get { return _recurringResponseField; }
             set { _recurringResponseField = value; }
         }
 
+        [XmlElement("giftCardResponse")]
         public GiftCardResponse GiftCardResponse
         {
             get { return _giftCardResponseField; }
             set { _giftCardResponseField = value; }
         }
 
+        [XmlElement("applepayResponse")]
         public ApplepayResponse ApplepayResponse
         {
             get { return _applepayResponseField; }
             set { _applepayResponseField = value; }
         }
 
-        [XmlAttribute]
+        [XmlAttribute("duplicate")]
         public bool Duplicate
         {
             get { return _duplicateField; }

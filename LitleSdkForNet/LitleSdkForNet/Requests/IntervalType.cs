@@ -7,10 +7,15 @@ namespace Litle.Sdk.Requests
     [XmlType(Namespace = "http://www.litle.com/schema")]
     public enum IntervalType
     {
+        [XmlEnum("ANNUAL")]
         Annual,
+        [XmlEnum("SEMIANNUAL")]
         Semiannual,
+        [XmlEnum("QUARTERLY")]
         Quarterly,
+        [XmlEnum("MONTHLY")]
         Monthly,
+        [XmlEnum("WEEKLY")]
         Weekly
     }
 }

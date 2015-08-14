@@ -1,13 +1,15 @@
-using System;
 using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType(Namespace = "http://www.litle.com/schema")]
+    [XmlType("posCapabilityTypeEnum", Namespace = "http://www.litle.com/schema")]
     public enum PosCapabilityTypeEnum
     {
+        [XmlEnum("notused")]
         Notused,
+        [XmlEnum("magstripe")]
         Magstripe,
+        [XmlEnum("keyedonly")]
         Keyedonly,
     }
 }

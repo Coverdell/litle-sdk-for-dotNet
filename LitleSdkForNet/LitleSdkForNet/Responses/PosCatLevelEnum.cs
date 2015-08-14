@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
+
     public sealed class PosCatLevelEnum
     {
         [XmlElement("selfservice")]

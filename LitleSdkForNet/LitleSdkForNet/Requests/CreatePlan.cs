@@ -79,18 +79,22 @@ namespace Litle.Sdk.Requests
 
         public override String Serialize()
         {
+            var intervalTypeAttribute = EnumUtility.GetXmlEnum(
+                IntervalType.ToString(), typeof(IntervalType));
+            var trialIntervalTypeAttribute = EnumUtility.GetXmlEnum(
+                TrialIntervalType.ToString(), typeof(TrialIntervalType));
             var xml = "\r\n<createPlan>";
             xml += "\r\n<planCode>" + SecurityElement.Escape(PlanCode) + "</planCode>";
             xml += "\r\n<name>" + SecurityElement.Escape(Name) + "</name>";
             if (_descriptionSet)
                 xml += "\r\n<description>" + SecurityElement.Escape(_descriptionField) + "</description>";
-            xml += "\r\n<intervalType>" + IntervalType + "</intervalType>";
+            xml += "\r\n<intervalType>" + intervalTypeAttribute.Name + "</intervalType>";
             xml += "\r\n<amount>" + Amount + "</amount>";
             if (NumberOfPaymentsSet) xml += "\r\n<numberOfPayments>" + NumberOfPaymentsField + "</numberOfPayments>";
             if (TrialNumberOfIntervalsSet)
                 xml += "\r\n<trialNumberOfIntervals>" + TrialNumberOfIntervalsField + "</trialNumberOfIntervals>";
             if (_trialIntervalTypeSet)
-                xml += "\r\n<trialIntervalType>" + _trialIntervalTypeField + "</trialIntervalType>";
+                xml += "\r\n<trialIntervalType>" + trialIntervalTypeAttribute.Name + "</trialIntervalType>";
             if (_activeSet) xml += "\r\n<active>" + _activeField.ToString().ToLower() + "</active>";
             xml += "\r\n</createPlan>";
             return xml;

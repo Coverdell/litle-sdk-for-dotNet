@@ -1,10 +1,8 @@
-using System;
 using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(Namespace = "http://www.litle.com/schema")]
+    [XmlType("tokenResponseType", Namespace = "http://www.litle.com/schema")]
     public class TokenResponseType
     {
         private string _litleTokenField;
@@ -15,24 +13,28 @@ namespace Litle.Sdk.Responses
         private string _binField;
         private string _eCheckAccountSuffixField;
 
+        [XmlElement("litleToken")]
         public string LitleToken
         {
             get { return _litleTokenField; }
             set { _litleTokenField = value; }
         }
 
+        [XmlElement("tokenResponseCode")]
         public string TokenResponseCode
         {
             get { return _tokenResponseCodeField; }
             set { _tokenResponseCodeField = value; }
         }
 
+        [XmlElement("tokenMessage")]
         public string TokenMessage
         {
             get { return _tokenMessageField; }
             set { _tokenMessageField = value; }
         }
 
+        [XmlElement("type")]
         public MethodOfPaymentTypeEnum Type
         {
             get { return _typeField; }
@@ -46,12 +48,14 @@ namespace Litle.Sdk.Responses
             set { _typeFieldSpecified = value; }
         }
 
+        [XmlElement("bin")]
         public string Bin
         {
             get { return _binField; }
             set { _binField = value; }
         }
 
+        [XmlElement("echeckAccountSuffix")]
         public string ECheckAccountSuffix
         {
             get { return _eCheckAccountSuffixField; }

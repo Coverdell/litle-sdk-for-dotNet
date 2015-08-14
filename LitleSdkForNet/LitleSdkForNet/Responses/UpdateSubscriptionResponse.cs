@@ -3,13 +3,12 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("updateSubscriptionResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("updateSubscriptionResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class UpdateSubscriptionResponse
     {
         private string _subscriptionIdField;
-
+        [XmlElement("subscriptionId")]
         public string SubscriptionId
         {
             get { return _subscriptionIdField; }
@@ -17,7 +16,7 @@ namespace Litle.Sdk.Responses
         }
 
         private string _litleTxnIdField;
-
+        [XmlElement("litleTxnId")]
         public string LitleTxnId
         {
             get { return _litleTxnIdField; }
@@ -25,7 +24,7 @@ namespace Litle.Sdk.Responses
         }
 
         private string _responseField;
-
+        [XmlElement("response")]
         public string Response
         {
             get { return _responseField; }
@@ -33,7 +32,7 @@ namespace Litle.Sdk.Responses
         }
 
         private string _messageField;
-
+        [XmlElement("message")]
         public string Message
         {
             get { return _messageField; }
@@ -41,13 +40,14 @@ namespace Litle.Sdk.Responses
         }
 
         private DateTime _responseTimeField;
-
+        [XmlElement("responseTime")]
         public DateTime ResponseTime
         {
             get { return _responseTimeField; }
             set { _responseTimeField = value; }
         }
 
+        [XmlElement("tokenResponse")]
         public TokenResponseType TokenResponse;
     }
 }

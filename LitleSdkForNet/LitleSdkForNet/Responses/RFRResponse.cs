@@ -1,14 +1,14 @@
-using System;
 using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [Serializable]
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("RFRResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("RFRResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class RFRResponse
     {
-        [XmlAttribute] public string Response;
-        [XmlAttribute] public string Message;
+        [XmlAttribute("response")] 
+        public string Response;
+        [XmlAttribute("message")] 
+        public string Message;
     }
 }
