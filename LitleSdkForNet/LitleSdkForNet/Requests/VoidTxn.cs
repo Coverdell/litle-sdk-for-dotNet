@@ -5,8 +5,8 @@ namespace Litle.Sdk.Requests
 {
     public class VoidTxn : TransactionTypeWithReportGroup
     {
-        public long LitleTxnId;
-        public ProcessingInstructions ProcessingInstructions;
+        public long LitleTxnId { get; set; }
+        public ProcessingInstructions ProcessingInstructions { get; set; }
 
         public override string Serialize()
         {

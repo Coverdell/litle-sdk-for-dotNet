@@ -4,7 +4,7 @@ namespace Litle.Sdk.Requests
 {
     public class FraudCheck : TransactionTypeWithReportGroup
     {
-        public AdvancedFraudChecksType AdvancedFraudChecks;
+        public AdvancedFraudChecksType AdvancedFraudChecks { get; set; }
 
         private Contact _billToAddressField;
         private bool _billToAddressSet;

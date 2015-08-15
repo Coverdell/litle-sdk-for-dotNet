@@ -5,7 +5,7 @@ namespace Litle.Sdk.Requests
 {
     public class UpdateDiscount
     {
-        public string DiscountCode;
+        public string DiscountCode { get; set; }
 
         private string _nameField;
         private bool _nameSet;

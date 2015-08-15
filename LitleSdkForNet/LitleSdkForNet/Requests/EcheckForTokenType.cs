@@ -4,8 +4,8 @@ namespace Litle.Sdk.Requests
 {
     public class EcheckForTokenType
     {
-        public string AccNum;
-        public string RoutingNum;
+        public string AccNum { get; set; }
+        public string RoutingNum { get; set; }
 
         public string Serialize()
         {

@@ -6,7 +6,7 @@ namespace Litle.Sdk.Requests
 {
     public class UpdatePlan : RecurringTransactionType
     {
-        public string PlanCode;
+        public string PlanCode { get; set; }
 
         private bool _activeField;
         private bool _activeSet;

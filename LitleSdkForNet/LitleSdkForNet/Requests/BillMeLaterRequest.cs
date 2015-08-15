@@ -43,7 +43,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string PreapprovalNumber;
+        public string PreapprovalNumber { get; set; }
         private int _merchantPromotionalCodeField;
         private bool _merchantPromotionalCodeSet;
 
@@ -57,8 +57,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string VirtualAuthenticationKeyPresenceIndicator;
-        public string VirtualAuthenticationKeyData;
+        public string VirtualAuthenticationKeyPresenceIndicator { get; set; }
+        public string VirtualAuthenticationKeyData { get; set; }
         private int _itemCategoryCodeField;
         private bool _itemCategoryCodeSet;
 

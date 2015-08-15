@@ -2,15 +2,15 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot(Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlType("advancedFraudResultsType", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlRoot("advancedFraudResultsType", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class AdvancedFraudResultsType
     {
         [XmlElement("deviceReviewStatus")]
-        public string DeviceReviewStatus;
+        public string DeviceReviewStatus { get; set; }
         [XmlElement("deviceReputationScore")]
-        public int DeviceReputationScore;
+        public int DeviceReputationScore { get; set; }
         [XmlElement("triggeredRule")]
-        public string TriggeredRule;
+        public string TriggeredRule { get; set; }
     }
 }

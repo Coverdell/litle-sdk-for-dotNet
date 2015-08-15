@@ -8,13 +8,13 @@ namespace Litle.Sdk.Requests
 {
     public class BatchRequest
     {
-        public string ID;
-        public string MerchantId;
-        public string ReportGroup;
+        public string ID { get; set; }
+        public string MerchantId { get; set; }
+        public string ReportGroup { get; set; }
 
-        public Dictionary<string, string> Config;
+        public Dictionary<string, string> Config { get; set; }
 
-        public string BatchFilePath;
+        public string BatchFilePath { get; set; }
         private string _tempBatchFilePath;
         private LitleFile _litleFile;
         private LitleTime _litleTime;

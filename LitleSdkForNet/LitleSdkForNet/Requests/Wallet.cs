@@ -4,8 +4,8 @@ namespace Litle.Sdk.Requests
 {
     public class Wallet
     {
-        public WalletWalletSourceType WalletSourceType;
-        public string WalletSourceTypeId;
+        public WalletWalletSourceType WalletSourceType { get; set; }
+        public string WalletSourceTypeId { get; set; }
 
         public string Serialize()
         {

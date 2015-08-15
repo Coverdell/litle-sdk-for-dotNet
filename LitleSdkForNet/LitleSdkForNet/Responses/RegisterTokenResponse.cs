@@ -7,93 +7,34 @@ namespace Litle.Sdk.Responses
     [XmlRoot("registerTokenResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class RegisterTokenResponse : TransactionTypeWithReportGroup
     {
-        private long _litleTxnIdField;
-        private string _orderIdField;
-        private string _litleTokenField;
-        private string _binField;
-        private MethodOfPaymentTypeEnum? _typeField;
-        private bool _typeFieldSpecified;
-        private string _eCheckAccountSuffixField;
-        private string _responseField;
-        private string _messageField;
-        private DateTime _responseTimeField;
-        private ApplepayResponse _applepayResponseField;
-
         [XmlElement("litleTxnId")]
-        public long LitleTxnId
-        {
-            get { return _litleTxnIdField; }
-            set { _litleTxnIdField = value; }
-        }
+        public long LitleTxnId { get; set; }
 
         [XmlElement("orderId")]
-        public string OrderId
-        {
-            get { return _orderIdField; }
-            set { _orderIdField = value; }
-        }
+        public string OrderId { get; set; }
 
         [XmlElement("litleToken")]
-        public string LitleToken
-        {
-            get { return _litleTokenField; }
-            set { _litleTokenField = value; }
-        }
+        public string LitleToken { get; set; }
 
         [XmlElement("bin")]
-        public string Bin
-        {
-            get { return _binField; }
-            set { _binField = value; }
-        }
+        public string Bin { get; set; }
 
         [XmlElement("type")]
-        public MethodOfPaymentTypeEnum? Type
-        {
-            get { return _typeFieldSpecified ? _typeField : null; }
-            set { _typeField = value; }
-        }
-
-        [XmlIgnore]
-        public bool TypeSpecified
-        {
-            get { return _typeFieldSpecified; }
-            set { _typeFieldSpecified = value; }
-        }
+        public MethodOfPaymentTypeEnum? Type { get; set; }
 
         [XmlElement("eCheckAccountSuffix")]
-        public string ECheckAccountSuffix
-        {
-            get { return _eCheckAccountSuffixField; }
-            set { _eCheckAccountSuffixField = value; }
-        }
+        public string ECheckAccountSuffix { get; set; }
 
         [XmlElement("response")]
-        public string Response
-        {
-            get { return _responseField; }
-            set { _responseField = value; }
-        }
+        public string Response { get; set; }
 
         [XmlElement("message")]
-        public string Message
-        {
-            get { return _messageField; }
-            set { _messageField = value; }
-        }
+        public string Message { get; set; }
 
         [XmlElement("responseTime")]
-        public DateTime ResponseTime
-        {
-            get { return _responseTimeField; }
-            set { _responseTimeField = value; }
-        }
+        public DateTime ResponseTime { get; set; }
 
         [XmlElement("applepayResponse")]
-        public ApplepayResponse ApplepayResponse
-        {
-            get { return _applepayResponseField; }
-            set { _applepayResponseField = value; }
-        }
+        public ApplepayResponse ApplepayResponse { get; set; }
     }
 }

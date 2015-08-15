@@ -2,7 +2,7 @@ namespace Litle.Sdk.Requests
 {
     public class RecurringRequest
     {
-        public Subscription Subscription;
+        public Subscription Subscription { get; set; }
 
         public string Serialize()
         {

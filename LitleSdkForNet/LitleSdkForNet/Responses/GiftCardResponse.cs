@@ -7,12 +7,12 @@ namespace Litle.Sdk.Responses
     public class GiftCardResponse
     {
         [XmlElement("availableBalance")]
-        public String AvailableBalance;
+        public String AvailableBalance { get; set; }
         [XmlElement("beginningBalance")]
-        public String BeginningBalance;
+        public String BeginningBalance { get; set; }
         [XmlElement("endingBalance")]
-        public String EndingBalance;
+        public String EndingBalance { get; set; }
         [XmlElement("cashBackAmount")]
-        public String CashBackAmount;
+        public String CashBackAmount { get; set; }
     }
 }

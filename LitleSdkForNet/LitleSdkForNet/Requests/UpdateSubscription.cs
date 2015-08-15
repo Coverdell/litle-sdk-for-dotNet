@@ -20,11 +20,11 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string PlanCode;
-        public Contact BillToAddress;
-        public CardType Card;
-        public CardTokenType Token;
-        public CardPaypageType Paypage;
+        public string PlanCode { get; set; }
+        public Contact BillToAddress { get; set; }
+        public CardType Card { get; set; }
+        public CardTokenType Token { get; set; }
+        public CardPaypageType Paypage { get; set; }
         private DateTime _billingDateField;
         private bool _billingDateSet;
 
@@ -38,12 +38,12 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public List<CreateDiscount> CreateDiscounts;
-        public List<UpdateDiscount> UpdateDiscounts;
-        public List<DeleteDiscount> DeleteDiscounts;
-        public List<CreateAddOn> CreateAddOns;
-        public List<UpdateAddOn> UpdateAddOns;
-        public List<DeleteAddOn> DeleteAddOns;
+        public List<CreateDiscount> CreateDiscounts { get; set; }
+        public List<UpdateDiscount> UpdateDiscounts { get; set; }
+        public List<DeleteDiscount> DeleteDiscounts { get; set; }
+        public List<CreateAddOn> CreateAddOns { get; set; }
+        public List<UpdateAddOn> UpdateAddOns { get; set; }
+        public List<DeleteAddOn> DeleteAddOns { get; set; }
 
         public UpdateSubscription()
         {

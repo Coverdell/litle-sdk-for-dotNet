@@ -45,11 +45,11 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public CustomBilling CustomBilling;
-        public string OrderId;
-        public OrderSourceType OrderSource;
-        public Contact BillToAddress;
-        public EcheckType Echeck;
+        public CustomBilling CustomBilling { get; set; }
+        public string OrderId { get; set; }
+        public OrderSourceType OrderSource { get; set; }
+        public Contact BillToAddress { get; set; }
+        public EcheckType Echeck { get; set; }
 
         [Obsolete]
         public EcheckTokenType Token
@@ -58,9 +58,9 @@ namespace Litle.Sdk.Requests
             set { EcheckToken = value; }
         }
 
-        public EcheckTokenType EcheckToken;
+        public EcheckTokenType EcheckToken { get; set; }
 
-        public MerchantDataType MerchantData;
+        public MerchantDataType MerchantData { get; set; }
 
         public override string Serialize()
         {

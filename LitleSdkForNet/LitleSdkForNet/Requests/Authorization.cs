@@ -19,8 +19,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string OrderId;
-        public long Amount;
+        public string OrderId { get; set; }
+        public long Amount { get; set; }
         private bool _secondaryAmountSet;
         private long _secondaryAmountField;
 
@@ -47,21 +47,21 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public OrderSourceType OrderSource;
-        public CustomerInfo CustomerInfo;
-        public Contact BillToAddress;
-        public Contact ShipToAddress;
-        public CardType Card;
-        public MposType Mpos;
-        public PayPal Paypal;
-        public CardTokenType Token;
-        public CardPaypageType Paypage;
-        public ApplepayType Applepay;
-        public BillMeLaterRequest BillMeLaterRequest;
-        public FraudCheckType CardholderAuthentication;
-        public ProcessingInstructions ProcessingInstructions;
-        public Pos Pos;
-        public CustomBilling CustomBilling;
+        public OrderSourceType OrderSource { get; set; }
+        public CustomerInfo CustomerInfo { get; set; }
+        public Contact BillToAddress { get; set; }
+        public Contact ShipToAddress { get; set; }
+        public CardType Card { get; set; }
+        public MposType Mpos { get; set; }
+        public PayPal Paypal { get; set; }
+        public CardTokenType Token { get; set; }
+        public CardPaypageType Paypage { get; set; }
+        public ApplepayType Applepay { get; set; }
+        public BillMeLaterRequest BillMeLaterRequest { get; set; }
+        public FraudCheckType CardholderAuthentication { get; set; }
+        public ProcessingInstructions ProcessingInstructions { get; set; }
+        public Pos Pos { get; set; }
+        public CustomBilling CustomBilling { get; set; }
         private GovtTaxTypeEnum _taxTypeField;
         private bool _taxTypeSet;
 
@@ -75,8 +75,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public EnhancedData EnhancedData;
-        public AmexAggregatorData AmexAggregatorData;
+        public EnhancedData EnhancedData { get; set; }
+        public AmexAggregatorData AmexAggregatorData { get; set; }
         private bool _allowPartialAuthField;
         private bool _allowPartialAuthSet;
 
@@ -90,10 +90,10 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public HealthcareIIAS HealthcareIIAS;
-        public FilteringType Filtering;
-        public MerchantDataType MerchantData;
-        public RecyclingRequestType RecyclingRequest;
+        public HealthcareIIAS HealthcareIIAS { get; set; }
+        public FilteringType Filtering { get; set; }
+        public MerchantDataType MerchantData { get; set; }
+        public RecyclingRequestType RecyclingRequest { get; set; }
         private bool _fraudFilterOverrideField;
         private bool _fraudFilterOverrideSet;
 
@@ -107,7 +107,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public RecurringRequest RecurringRequest;
+        public RecurringRequest RecurringRequest { get; set; }
         private bool _debtRepaymentField;
         private bool _debtRepaymentSet;
 
@@ -121,8 +121,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public AdvancedFraudChecksType AdvancedFraudChecks;
-        public Wallet Wallet;
+        public AdvancedFraudChecksType AdvancedFraudChecks { get; set; }
+        public Wallet Wallet { get; set; }
 
         public override String Serialize()
         {

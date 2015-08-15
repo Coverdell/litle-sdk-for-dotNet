@@ -4,10 +4,10 @@ namespace Litle.Sdk.Requests
 {
     public class ApplepayHeaderType
     {
-        public string ApplicationData;
-        public string EphemeralPublicKey;
-        public string PublicKeyHash;
-        public string TransactionId;
+        public string ApplicationData { get; set; }
+        public string EphemeralPublicKey { get; set; }
+        public string PublicKeyHash { get; set; }
+        public string TransactionId { get; set; }
 
         public string Serialize()
         {

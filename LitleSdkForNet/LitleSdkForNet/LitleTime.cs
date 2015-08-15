@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Litle.Sdk.Requests
+namespace Litle.Sdk
 {
     public class LitleTime
     {

@@ -2,39 +2,39 @@ namespace Litle.Sdk.Requests
 {
     public class LitleOnlineRequest
     {
-        public string MerchantId;
-        public string MerchantSdk;
-        public Authentication Authentication;
-        public Authorization Authorization;
-        public Capture Capture;
-        public Credit Credit;
-        public VoidTxn VoidTxn;
-        public Sale Sale;
-        public AuthReversal AuthReversal;
-        public EcheckCredit EcheckCredit;
-        public EcheckVerification EcheckVerification;
-        public EcheckSale EcheckSale;
-        public RegisterTokenRequestType RegisterTokenRequest;
-        public ForceCapture ForceCapture;
-        public CaptureGivenAuth CaptureGivenAuth;
-        public EcheckRedeposit EcheckRedeposit;
-        public EcheckVoid EcheckVoid;
-        public UpdateCardValidationNumOnToken UpdateCardValidationNumOnToken;
-        public UpdateSubscription UpdateSubscription;
-        public CancelSubscription CancelSubscription;
-        public Activate Activate;
-        public Deactivate Deactivate;
-        public Load Load;
-        public Unload Unload;
-        public BalanceInquiry BalanceInquiry;
-        public CreatePlan CreatePlan;
-        public UpdatePlan UpdatePlan;
-        public RefundReversal RefundReversal;
-        public LoadReversal LoadReversal;
-        public DepositReversal DepositReversal;
-        public ActivateReversal ActivateReversal;
-        public DeactivateReversal DeactivateReversal;
-        public UnloadReversal UnloadReversal;
+        public string MerchantId { get; set; }
+        public string MerchantSdk { get; set; }
+        public Authentication Authentication { get; set; }
+        public Authorization Authorization { get; set; }
+        public Capture Capture { get; set; }
+        public Credit Credit { get; set; }
+        public VoidTxn VoidTxn { get; set; }
+        public Sale Sale { get; set; }
+        public AuthReversal AuthReversal { get; set; }
+        public EcheckCredit EcheckCredit { get; set; }
+        public EcheckVerification EcheckVerification { get; set; }
+        public EcheckSale EcheckSale { get; set; }
+        public RegisterTokenRequestType RegisterTokenRequest { get; set; }
+        public ForceCapture ForceCapture { get; set; }
+        public CaptureGivenAuth CaptureGivenAuth { get; set; }
+        public EcheckRedeposit EcheckRedeposit { get; set; }
+        public EcheckVoid EcheckVoid { get; set; }
+        public UpdateCardValidationNumOnToken UpdateCardValidationNumOnToken { get; set; }
+        public UpdateSubscription UpdateSubscription { get; set; }
+        public CancelSubscription CancelSubscription { get; set; }
+        public Activate Activate { get; set; }
+        public Deactivate Deactivate { get; set; }
+        public Load Load { get; set; }
+        public Unload Unload { get; set; }
+        public BalanceInquiry BalanceInquiry { get; set; }
+        public CreatePlan CreatePlan { get; set; }
+        public UpdatePlan UpdatePlan { get; set; }
+        public RefundReversal RefundReversal { get; set; }
+        public LoadReversal LoadReversal { get; set; }
+        public DepositReversal DepositReversal { get; set; }
+        public ActivateReversal ActivateReversal { get; set; }
+        public DeactivateReversal DeactivateReversal { get; set; }
+        public UnloadReversal UnloadReversal { get; set; }
 
         public string Serialize()
         {

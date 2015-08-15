@@ -5,90 +5,74 @@ namespace Litle.Sdk.Responses
     [XmlRoot("litleOnlineResponse", Namespace = "http://www.litle.com/schema", IsNullable = false, ElementName = "litleOnlineResponse")]
     public class LitleOnlineResponse
     {
-        private string _responseField;
-        private string _messageField;
-        private string _versionField;
-
         [XmlElement("authReversalResponse")]
-        public AuthReversalResponse AuthReversalResponse;
+        public AuthReversalResponse AuthReversalResponse { get; set; }
         [XmlElement("authorizationResponse")]
-        public AuthorizationResponse AuthorizationResponse;
+        public AuthorizationResponse AuthorizationResponse { get; set; }
         [XmlElement("captureGivenAuthResponse")]
-        public CaptureGivenAuthResponse CaptureGivenAuthResponse;
+        public CaptureGivenAuthResponse CaptureGivenAuthResponse { get; set; }
         [XmlElement("captureResponse")]
-        public CaptureResponse CaptureResponse;
+        public CaptureResponse CaptureResponse { get; set; }
         [XmlElement("creditResponse")]
-        public CreditResponse CreditResponse;
+        public CreditResponse CreditResponse { get; set; }
         [XmlElement("echeckCreditResponse")]
-        public EcheckCreditResponse EcheckCreditResponse;
+        public EcheckCreditResponse EcheckCreditResponse { get; set; }
         [XmlElement("echeckRedepositResponse")]
-        public EcheckRedepositResponse EcheckRedepositResponse;
+        public EcheckRedepositResponse EcheckRedepositResponse { get; set; }
         [XmlElement("echeckSalesResponse")]
-        public EcheckSalesResponse EcheckSalesResponse;
+        public EcheckSalesResponse EcheckSalesResponse { get; set; }
         [XmlElement("echeckVerificationResponse")]
-        public EcheckVerificationResponse EcheckVerificationResponse;
+        public EcheckVerificationResponse EcheckVerificationResponse { get; set; }
         [XmlElement("echeckVoidResponse")]
-        public LitleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoidResponse;
+        public LitleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoidResponse { get; set; }
         [XmlElement("forceCaptureResponse")]
-        public ForceCaptureResponse ForceCaptureResponse;
+        public ForceCaptureResponse ForceCaptureResponse { get; set; }
         [XmlElement("registerTokenResponse")]
-        public RegisterTokenResponse RegisterTokenResponse;
+        public RegisterTokenResponse RegisterTokenResponse { get; set; }
         [XmlElement("saleResponse")]
-        public SaleResponse SaleResponse;
+        public SaleResponse SaleResponse { get; set; }
         [XmlElement("voidResponse")]
-        public LitleOnlineResponseTransactionResponseVoidResponse VoidResponse;
+        public LitleOnlineResponseTransactionResponseVoidResponse VoidResponse { get; set; }
         [XmlElement("updateCardValidationNumOnTokenResponse")]
-        public UpdateCardValidationNumOnTokenResponse UpdateCardValidationNumOnTokenResponse;
+        public UpdateCardValidationNumOnTokenResponse UpdateCardValidationNumOnTokenResponse { get; set; }
         [XmlElement("cancelSubscriptionResponse")]
-        public CancelSubscriptionResponse CancelSubscriptionResponse;
+        public CancelSubscriptionResponse CancelSubscriptionResponse { get; set; }
         [XmlElement("updateSubscriptionResponse")]
-        public UpdateSubscriptionResponse UpdateSubscriptionResponse;
+        public UpdateSubscriptionResponse UpdateSubscriptionResponse { get; set; }
         [XmlElement("activateResponse")]
-        public ActivateResponse ActivateResponse;
+        public ActivateResponse ActivateResponse { get; set; }
         [XmlElement("deactivateResponse")]
-        public DeactivateResponse DeactivateResponse;
+        public DeactivateResponse DeactivateResponse { get; set; }
         [XmlElement("loadResponse")]
-        public LoadResponse LoadResponse;
+        public LoadResponse LoadResponse { get; set; }
         [XmlElement("unloadResponse")]
-        public UnloadResponse UnloadResponse;
+        public UnloadResponse UnloadResponse { get; set; }
         [XmlElement("balanceInquiryResponse")]
-        public BalanceInquiryResponse BalanceInquiryResponse;
+        public BalanceInquiryResponse BalanceInquiryResponse { get; set; }
         [XmlElement("createPlanResponse")]
-        public CreatePlanResponse CreatePlanResponse;
+        public CreatePlanResponse CreatePlanResponse { get; set; }
         [XmlElement("updatePlanResponse")]
-        public UpdatePlanResponse UpdatePlanResponse;
+        public UpdatePlanResponse UpdatePlanResponse { get; set; }
         [XmlElement("refundReversalResponse")]
-        public RefundReversalResponse RefundReversalResponse;
+        public RefundReversalResponse RefundReversalResponse { get; set; }
         [XmlElement("depositReversalResponse")]
-        public DepositReversalResponse DepositReversalResponse;
+        public DepositReversalResponse DepositReversalResponse { get; set; }
         [XmlElement("activateReversalResponse")]
-        public ActivateReversalResponse ActivateReversalResponse;
+        public ActivateReversalResponse ActivateReversalResponse { get; set; }
         [XmlElement("deactivateReversalResponse")]
-        public DeactivateReversalResponse DeactivateReversalResponse;
+        public DeactivateReversalResponse DeactivateReversalResponse { get; set; }
         [XmlElement("loadReversalResponse")]
-        public LoadReversalResponse LoadReversalResponse;
+        public LoadReversalResponse LoadReversalResponse { get; set; }
         [XmlElement("unloadReversalResponse")]
-        public UnloadReversalResponse UnloadReversalResponse;
+        public UnloadReversalResponse UnloadReversalResponse { get; set; }
 
         [XmlAttribute("response")]
-        public string Response
-        {
-            get { return _responseField; }
-            set { _responseField = value; }
-        }
+        public string Response { get; set; }
 
         [XmlAttribute("message")]
-        public string Message
-        {
-            get { return _messageField; }
-            set { _messageField = value; }
-        }
+        public string Message { get; set; }
 
         [XmlAttribute("version")]
-        public string Version
-        {
-            get { return _versionField; }
-            set { _versionField = value; }
-        }
+        public string Version { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Litle.Sdk.Requests
 
         public override string Serialize()
         {
-            string xml = "\r\n<submerchantCredit ";
+            var xml = "\r\n<submerchantCredit ";
 
             if (ID != null)
                 xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";

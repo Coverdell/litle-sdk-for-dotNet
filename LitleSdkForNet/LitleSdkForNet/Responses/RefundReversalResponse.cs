@@ -8,20 +8,20 @@ namespace Litle.Sdk.Responses
     public class RefundReversalResponse : TransactionTypeWithReportGroup
     {
         [XmlElement("litleTxnId")]
-        public string LitleTxnId;
+        public string LitleTxnId { get; set; }
         [XmlElement("orderId")]
-        public string OrderId;
+        public string OrderId { get; set; }
         [XmlElement("response")]
-        public string Response;
+        public string Response { get; set; }
         [XmlElement("responesTime")]
-        public DateTime ResponseTime;
+        public DateTime ResponseTime { get; set; }
         [XmlElement("postDate")]
-        public DateTime PostDate;
+        public DateTime PostDate { get; set; }
         [XmlElement("message")]
-        public string Message;
+        public string Message { get; set; }
         [XmlElement("fraudResult")]
-        public FraudResult FraudResult;
+        public FraudResult FraudResult { get; set; }
         [XmlElement("giftCardResponse")]
-        public GiftCardResponse GiftCardResponse;
+        public GiftCardResponse GiftCardResponse { get; set; }
     }
 }

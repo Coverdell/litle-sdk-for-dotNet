@@ -10,41 +10,20 @@ namespace Litle.Sdk
     [XmlRoot("fraudResult", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class FraudResult
     {
-        private string _avsResultField;
-        private string _cardValidationResultField;
-        private string _authenticationResultField;
-        private string _advancedAvsResultField;
-
         [XmlElement("advancedFraudResults")]
-        public AdvancedFraudResultsType AdvancedFraudResults;
+        public AdvancedFraudResultsType AdvancedFraudResults { get; set; }
 
         [XmlElement("avsResult")]
-        public string AvsResult
-        {
-            get { return _avsResultField; }
-            set { _avsResultField = value; }
-        }
+        public string AvsResult { get; set; }
 
         [XmlElement("cardValidationResult")]
-        public string CardValidationResult
-        {
-            get { return _cardValidationResultField; }
-            set { _cardValidationResultField = value; }
-        }
+        public string CardValidationResult { get; set; }
 
         [XmlElement("authenticationResult")]
-        public string AuthenticationResult
-        {
-            get { return _authenticationResultField; }
-            set { _authenticationResultField = value; }
-        }
+        public string AuthenticationResult { get; set; }
 
         [XmlElement("advancedAvsResult")]
-        public string AdvancedAVSResult
-        {
-            get { return _advancedAvsResultField; }
-            set { _advancedAvsResultField = value; }
-        }
+        public string AdvancedAVSResult { get; set; }
     }
 
     public partial class FraudResult

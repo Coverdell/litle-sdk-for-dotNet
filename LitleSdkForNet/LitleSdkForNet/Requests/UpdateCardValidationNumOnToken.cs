@@ -5,9 +5,9 @@ namespace Litle.Sdk.Requests
 {
     public class UpdateCardValidationNumOnToken : TransactionTypeWithReportGroup
     {
-        public string OrderId;
-        public string LitleToken;
-        public string CardValidationNum;
+        public string OrderId { get; set; }
+        public string LitleToken { get; set; }
+        public string CardValidationNum { get; set; }
 
         public override string Serialize()
         {

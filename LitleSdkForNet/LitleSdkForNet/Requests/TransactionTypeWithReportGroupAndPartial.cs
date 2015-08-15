@@ -4,7 +4,7 @@ namespace Litle.Sdk.Requests
 {
     public class TransactionTypeWithReportGroupAndPartial : TransactionType
     {
-        public string ReportGroup;
+        public string ReportGroup { get; set; }
         private bool _partialField;
         protected bool PartialSet;
 

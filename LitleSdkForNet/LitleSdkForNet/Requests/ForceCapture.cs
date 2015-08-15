@@ -6,8 +6,8 @@ namespace Litle.Sdk.Requests
 {
     public class ForceCapture : TransactionTypeWithReportGroup
     {
-        public string OrderId;
-        public long Amount;
+        public string OrderId { get; set; }
+        public long Amount { get; set; }
         private bool _secondaryAmountSet;
         private long _secondaryAmountField;
 
@@ -34,13 +34,13 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public OrderSourceType OrderSource;
-        public Contact BillToAddress;
-        public CardType Card;
-        public MposType Mpos;
-        public CardTokenType Token;
-        public CardPaypageType Paypage;
-        public CustomBilling CustomBilling;
+        public OrderSourceType OrderSource { get; set; }
+        public Contact BillToAddress { get; set; }
+        public CardType Card { get; set; }
+        public MposType Mpos { get; set; }
+        public CardTokenType Token { get; set; }
+        public CardPaypageType Paypage { get; set; }
+        public CustomBilling CustomBilling { get; set; }
         private GovtTaxTypeEnum _taxTypeField;
         private bool _taxTypeSet;
 
@@ -54,11 +54,11 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public EnhancedData EnhancedData;
-        public ProcessingInstructions ProcessingInstructions;
-        public Pos Pos;
-        public AmexAggregatorData AmexAggregatorData;
-        public MerchantDataType MerchantData;
+        public EnhancedData EnhancedData { get; set; }
+        public ProcessingInstructions ProcessingInstructions { get; set; }
+        public Pos Pos { get; set; }
+        public AmexAggregatorData AmexAggregatorData { get; set; }
+        public MerchantDataType MerchantData { get; set; }
         private bool _debtRepaymentField;
         private bool _debtRepaymentSet;
 

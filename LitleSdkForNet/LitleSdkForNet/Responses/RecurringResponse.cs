@@ -5,37 +5,16 @@ namespace Litle.Sdk.Responses
     [XmlType("recurringResponse", Namespace = "http://www.litle.com/schema")]
     public class RecurringResponse
     {
-        private long _subscriptionIdField;
-        private string _responseCodeField;
-        private string _responseMessageField;
-        private long _recurringTxnIdField;
-
         [XmlElement("subscriptionId")]
-        public long SubscriptionId
-        {
-            get { return _subscriptionIdField; }
-            set { _subscriptionIdField = value; }
-        }
+        public long SubscriptionId { get; set; }
 
         [XmlElement("responseCode")]
-        public string ResponseCode
-        {
-            get { return _responseCodeField; }
-            set { _responseCodeField = value; }
-        }
+        public string ResponseCode { get; set; }
 
         [XmlElement("responseMessage")]
-        public string ResponseMessage
-        {
-            get { return _responseMessageField; }
-            set { _responseMessageField = value; }
-        }
+        public string ResponseMessage { get; set; }
 
         [XmlElement("recurringTxnId")]
-        public long RecurringTxnId
-        {
-            get { return _recurringTxnIdField; }
-            set { _recurringTxnIdField = value; }
-        }
+        public long RecurringTxnId { get; set; }
     }
 }

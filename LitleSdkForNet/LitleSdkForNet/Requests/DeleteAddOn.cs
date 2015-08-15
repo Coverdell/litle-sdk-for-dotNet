@@ -4,7 +4,7 @@ namespace Litle.Sdk.Requests
 {
     public class DeleteAddOn
     {
-        public string AddOnCode;
+        public string AddOnCode { get; set; }
 
         public string Serialize()
         {

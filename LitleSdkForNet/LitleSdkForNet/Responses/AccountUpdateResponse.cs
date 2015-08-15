@@ -9,24 +9,24 @@ namespace Litle.Sdk.Responses
     public class AccountUpdateResponse : TransactionTypeWithReportGroup
     {
         [XmlElement("litleTxnId")]
-        public long LitleTxnId;
+        public long LitleTxnId { get; set; }
         [XmlElement("orderId")]
-        public string OrderId;
+        public string OrderId { get; set; }
         [XmlElement("response")]
-        public string Response;
+        public string Response { get; set; }
         [XmlElement("responseTime")]
-        public DateTime ResponseTime;
+        public DateTime ResponseTime { get; set; }
         [XmlElement("message")]
-        public string Message;
+        public string Message { get; set; }
 
         //Optional child elements
         [XmlElement("updatedCard")]
-        public CardType UpdatedCard;
+        public CardType UpdatedCard { get; set; }
         [XmlElement("originalCard")]
-        public CardType OriginalCard;
+        public CardType OriginalCard { get; set; }
         [XmlElement("originalToken")]
-        public AccountUpdateResponseCardTokenType OriginalToken;
+        public AccountUpdateResponseCardTokenType OriginalToken { get; set; }
         [XmlElement("updatedToken")]
-        public AccountUpdateResponseCardTokenType UpdatedToken;
+        public AccountUpdateResponseCardTokenType UpdatedToken { get; set; }
     }
 }

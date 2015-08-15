@@ -5,7 +5,7 @@ namespace Litle.Sdk.Requests
 {
     public class UpdateAddOn
     {
-        public string AddOnCode;
+        public string AddOnCode { get; set; }
 
         private string _nameField;
         private bool _nameSet;

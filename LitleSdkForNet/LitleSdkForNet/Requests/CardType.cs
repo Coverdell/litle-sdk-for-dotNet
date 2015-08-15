@@ -4,11 +4,11 @@ namespace Litle.Sdk.Requests
 {
     public class CardType
     {
-        public MethodOfPaymentTypeEnum Type;
-        public string Number;
-        public string ExpDate;
-        public string Track;
-        public string CardValidationNum;
+        public MethodOfPaymentTypeEnum Type { get; set; }
+        public string Number { get; set; }
+        public string ExpDate { get; set; }
+        public string Track { get; set; }
+        public string CardValidationNum { get; set; }
 
         public string Serialize()
         {

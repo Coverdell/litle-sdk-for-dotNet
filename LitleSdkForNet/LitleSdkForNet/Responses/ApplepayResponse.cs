@@ -6,77 +6,31 @@ namespace Litle.Sdk.Responses
     [XmlRoot("applepayResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class ApplepayResponse
     {
-        private string _applicationPrimaryAccountNumberField;
-        private string _applicationExpirationDateField;
-        private string _currencyCodeField;
-        private string _transactionAmountField;
-        private string _cardholderNameField;
-        private string _deviceManufacturerIdentifierField;
-        private string _paymentDataTypeField;
-        private byte[] _onlinePaymentCryptogramField;
-        private string _eciIndicatorField;
-
         [XmlElement("applicationPrimaryAccountNumber")]
-        public string ApplicationPrimaryAccountNumber
-        {
-            get { return _applicationPrimaryAccountNumberField; }
-            set { _applicationPrimaryAccountNumberField = value; }
-        }
+        public string ApplicationPrimaryAccountNumber { get; set; }
 
         [XmlElement("applicationExpirationDate")]
-        public string ApplicationExpirationDate
-        {
-            get { return _applicationExpirationDateField; }
-            set { _applicationExpirationDateField = value; }
-        }
+        public string ApplicationExpirationDate { get; set; }
 
         [XmlElement("currencyCode")]
-        public string CurrencyCode
-        {
-            get { return _currencyCodeField; }
-            set { _currencyCodeField = value; }
-        }
+        public string CurrencyCode { get; set; }
 
         [XmlElement("transactionAmount", DataType = "integer")]
-        public string TransactionAmount
-        {
-            get { return _transactionAmountField; }
-            set { _transactionAmountField = value; }
-        }
+        public string TransactionAmount { get; set; }
 
         [XmlElement("cardholderName")]
-        public string CardholderName
-        {
-            get { return _cardholderNameField; }
-            set { _cardholderNameField = value; }
-        }
+        public string CardholderName { get; set; }
 
         [XmlElement("deviceManufacturerIdentifier")]
-        public string DeviceManufacturerIdentifier
-        {
-            get { return _deviceManufacturerIdentifierField; }
-            set { _deviceManufacturerIdentifierField = value; }
-        }
+        public string DeviceManufacturerIdentifier { get; set; }
 
         [XmlElement("paymentDataType")]
-        public string PaymentDataType
-        {
-            get { return _paymentDataTypeField; }
-            set { _paymentDataTypeField = value; }
-        }
+        public string PaymentDataType { get; set; }
 
         [XmlElement("onlinePaymentCryptogram", DataType = "base64Binary")]
-        public byte[] OnlinePaymentCryptogram
-        {
-            get { return _onlinePaymentCryptogramField; }
-            set { _onlinePaymentCryptogramField = value; }
-        }
+        public byte[] OnlinePaymentCryptogram { get; set; }
 
         [XmlElement("eciIndicator")]
-        public string EciIndicator
-        {
-            get { return _eciIndicatorField; }
-            set { _eciIndicatorField = value; }
-        }
+        public string EciIndicator { get; set; }
     }
 }

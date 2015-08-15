@@ -7,7 +7,7 @@ namespace Litle.Sdk.Requests
 {
     public class EnhancedData
     {
-        public string CustomerReference;
+        public string CustomerReference { get; set; }
         private long _salesTaxField;
         private bool _salesTaxSet;
 
@@ -34,8 +34,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public bool TaxExemptField;
-        public bool TaxExemptSet;
+        public bool TaxExemptField { get; set; }
+        public bool TaxExemptSet { get; set; }
 
         public bool TaxExempt
         {
@@ -86,8 +86,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string ShipFromPostalCode;
-        public string DestinationPostalCode;
+        public string ShipFromPostalCode { get; set; }
+        public string DestinationPostalCode { get; set; }
         private CountryTypeEnum _destinationCountryCodeField;
         private bool _destinationCountryCodeSet;
 
@@ -101,7 +101,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string InvoiceReferenceNumber;
+        public string InvoiceReferenceNumber { get; set; }
         private DateTime _orderDateField;
         private bool _orderDateSet;
 
@@ -115,8 +115,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public List<DetailTax> DetailTaxes;
-        public List<LineItemData> LineItems;
+        public List<DetailTax> DetailTaxes { get; set; }
+        public List<LineItemData> LineItems { get; set; }
 
         public EnhancedData()
         {

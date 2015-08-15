@@ -1,7 +1,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Litle.Sdk.Requests
+namespace Litle.Sdk
 {
     public static class RandomGen
     {

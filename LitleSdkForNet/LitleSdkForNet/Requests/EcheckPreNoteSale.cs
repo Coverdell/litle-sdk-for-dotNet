@@ -22,7 +22,7 @@ namespace Litle.Sdk.Requests
 
         public override string Serialize()
         {
-            string xml = "\r\n<echeckPreNoteSale ";
+            var xml = "\r\n<echeckPreNoteSale ";
 
             if (ID != null)
             {

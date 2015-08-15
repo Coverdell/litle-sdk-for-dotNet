@@ -160,7 +160,7 @@ namespace Litle.Sdk
                 tcpClient = new TcpClient(url, port);
                 sslStream = new SslStream(tcpClient.GetStream(), false, ValidateServerCertificate, null);
             }
-             catch (SocketException e)
+            catch (SocketException e)
             {
                 throw new LitleOnlineException("Error establishing a network connection", e);
             }

@@ -5,8 +5,8 @@ namespace Litle.Sdk.Requests
 {
     public class EcheckTokenType
     {
-        public string LitleToken;
-        public string RoutingNum;
+        public string LitleToken { get; set; }
+        public string RoutingNum { get; set; }
         private EcheckAccountTypeEnum _accTypeField;
         private bool _accTypeSet;
 
@@ -20,7 +20,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string CheckNum;
+        public string CheckNum { get; set; }
 
         public string Serialize()
         {

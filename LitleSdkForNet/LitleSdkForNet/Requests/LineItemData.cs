@@ -18,10 +18,10 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string ItemDescription;
-        public string ProductCode;
-        public string Quantity;
-        public string UnitOfMeasure;
+        public string ItemDescription { get; set; }
+        public string ProductCode { get; set; }
+        public string Quantity { get; set; }
+        public string UnitOfMeasure { get; set; }
         private long _taxAmountField;
         private bool _taxAmountSet;
 
@@ -74,9 +74,9 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string CommodityCode;
-        public string UnitCost;
-        public List<DetailTax> DetailTaxes;
+        public string CommodityCode { get; set; }
+        public string UnitCost { get; set; }
+        public List<DetailTax> DetailTaxes { get; set; }
 
         public LineItemData()
         {

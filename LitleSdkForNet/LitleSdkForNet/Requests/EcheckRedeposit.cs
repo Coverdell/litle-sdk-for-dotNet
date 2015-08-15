@@ -5,9 +5,9 @@ namespace Litle.Sdk.Requests
     public class EcheckRedeposit : BaseRequestTransactionEcheckRedeposit
     {
         //litleTxnIdField and set are in super
-        public EcheckType Echeck;
-        public EcheckTokenType Token;
-        public MerchantDataType MerchantData;
+        public EcheckType Echeck { get; set; }
+        public EcheckTokenType Token { get; set; }
+        public MerchantDataType MerchantData { get; set; }
 
         public override string Serialize()
         {

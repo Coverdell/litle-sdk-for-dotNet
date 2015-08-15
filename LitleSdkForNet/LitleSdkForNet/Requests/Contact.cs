@@ -4,17 +4,17 @@ namespace Litle.Sdk.Requests
 {
     public class Contact
     {
-        public string Name;
-        public string FirstName;
-        public string MiddleInitial;
-        public string LastName;
-        public string CompanyName;
-        public string AddressLine1;
-        public string AddressLine2;
-        public string AddressLine3;
-        public string City;
-        public string State;
-        public string Zip;
+        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string MiddleInitial { get; set; }
+        public string LastName { get; set; }
+        public string CompanyName { get; set; }
+        public string AddressLine1 { get; set; }
+        public string AddressLine2 { get; set; }
+        public string AddressLine3 { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zip { get; set; }
         private CountryTypeEnum _countryField;
         private bool _countrySpecified;
 
@@ -28,8 +28,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string Email;
-        public string Phone;
+        public string Email { get; set; }
+        public string Phone { get; set; }
 
         public string Serialize()
         {

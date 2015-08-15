@@ -18,7 +18,7 @@ namespace Litle.Sdk.Requests
         private int _accountNumberLengthField;
         private bool _accountNumberLengthSet;
 
-        public string GiftCardBin;
+        public string GiftCardBin { get; set; }
 
         public String Serialize()
         {

@@ -4,10 +4,18 @@ namespace Litle.Sdk.Requests
 {
     public class AdvancedFraudChecksType
     {
-        public string ThreatMetrixSessionId;
         private string _customAttribute1Field;
         private bool _customAttribute1Set;
+        private string _customAttribute2Field;
+        private bool _customAttribute2Set;
+        private string _customAttribute3Field;
+        private bool _customAttribute3Set;
+        private string _customAttribute4Field;
+        private bool _customAttribute4Set;
+        private string _customAttribute5Field;
+        private bool _customAttribute5Set;
 
+        public string ThreatMetrixSessionId { get; set; }
         public string CustomAttribute1
         {
             get { return _customAttribute1Field; }
@@ -17,9 +25,6 @@ namespace Litle.Sdk.Requests
                 _customAttribute1Set = true;
             }
         }
-
-        private string _customAttribute2Field;
-        private bool _customAttribute2Set;
 
         public string CustomAttribute2
         {
@@ -31,9 +36,6 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        private string _customAttribute3Field;
-        private bool _customAttribute3Set;
-
         public string CustomAttribute3
         {
             get { return _customAttribute3Field; }
@@ -44,9 +46,6 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        private string _customAttribute4Field;
-        private bool _customAttribute4Set;
-
         public string CustomAttribute4
         {
             get { return _customAttribute4Field; }
@@ -56,9 +55,6 @@ namespace Litle.Sdk.Requests
                 _customAttribute4Set = true;
             }
         }
-
-        private string _customAttribute5Field;
-        private bool _customAttribute5Set;
 
         public string CustomAttribute5
         {

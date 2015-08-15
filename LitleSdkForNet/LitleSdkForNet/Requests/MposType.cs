@@ -4,11 +4,11 @@ namespace Litle.Sdk.Requests
 {
     public class MposType
     {
-        public string Ksn;
-        public string FormatId;
-        public string EncryptedTrack;
-        public int Track1Status;
-        public int Track2Status;
+        public string Ksn { get; set; }
+        public string FormatId { get; set; }
+        public string EncryptedTrack { get; set; }
+        public int Track1Status { get; set; }
+        public int Track2Status { get; set; }
 
         public string Serialize()
         {

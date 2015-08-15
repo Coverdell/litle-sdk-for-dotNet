@@ -4,8 +4,8 @@ namespace Litle.Sdk.Requests
 {
     public class AmexAggregatorData
     {
-        public string SellerId;
-        public string SellerMerchantCategoryCode;
+        public string SellerId { get; set; }
+        public string SellerMerchantCategoryCode { get; set; }
 
         public string Serialize()
         {

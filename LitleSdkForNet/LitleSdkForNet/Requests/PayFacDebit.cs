@@ -13,7 +13,7 @@ namespace Litle.Sdk.Requests
 
         public override string Serialize()
         {
-            string xml = "\r\n<payFacDebit ";
+            var xml = "\r\n<payFacDebit ";
 
             if (ID != null)
                 xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";

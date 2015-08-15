@@ -5,9 +5,9 @@ namespace Litle.Sdk.Requests
 {
     public class Deactivate : TransactionTypeWithReportGroup
     {
-        public string OrderId;
-        public OrderSourceType OrderSource;
-        public CardType Card;
+        public string OrderId { get; set; }
+        public OrderSourceType OrderSource { get; set; }
+        public CardType Card { get; set; }
 
         public override string Serialize()
         {

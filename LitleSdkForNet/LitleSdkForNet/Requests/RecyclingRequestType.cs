@@ -18,7 +18,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string RecycleId;
+        public string RecycleId { get; set; }
 
         public string Serialize()
         {

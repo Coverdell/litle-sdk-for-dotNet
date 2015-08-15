@@ -10,8 +10,6 @@ namespace Litle.Sdk.Responses
         protected long LitleTxnIdField;
         protected bool LitleTxnIdSet;
 
-        private object _itemField;
-
         [XmlElement("litleTxnId")]
         public long LitleTxnId
         {
@@ -23,12 +21,7 @@ namespace Litle.Sdk.Responses
             }
         }
 
-        [XmlElement("echeck", typeof (EcheckType))]
-        [XmlElement("echeckToken", typeof (EcheckTokenType))]
-        public object Item
-        {
-            get { return _itemField; }
-            set { _itemField = value; }
-        }
+        [XmlElement("echeck", typeof (EcheckType)), XmlElement("echeckToken", typeof (EcheckTokenType))]
+        public object Item { get; set; }
     }
 }

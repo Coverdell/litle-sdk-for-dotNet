@@ -10,11 +10,11 @@ namespace Litle.Sdk.Responses
     public class BatchResponse
     {
         [XmlElement("id")]
-        public string ID;
+        public string ID { get; set; }
         [XmlElement("litleBatchId")]
-        public long LitleBatchId;
+        public long LitleBatchId { get; set; }
         [XmlElement("merchantId")]
-        public string MerchantId;
+        public string MerchantId { get; set; }
 
         private XmlReader _originalXmlReader;
         private XmlReader _accountUpdateResponseReader;

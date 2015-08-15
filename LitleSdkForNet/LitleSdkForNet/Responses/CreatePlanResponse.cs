@@ -7,6 +7,6 @@ namespace Litle.Sdk.Responses
     public class CreatePlanResponse : RecurringTransactionResponseType
     {
         [XmlElement("planCode")]
-        public string PlanCode;
+        public string PlanCode { get; set; }
     }
 }

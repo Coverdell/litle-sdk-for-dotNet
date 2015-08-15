@@ -13,7 +13,7 @@ namespace Litle.Sdk.Requests
         private LitleXmlSerializer _litleXmlSerializer;
         private int _numOfLitleBatchRequest;
         private int _numOfRfrRequest;
-        public string FinalFilePath = null;
+        public string FinalFilePath { get; set; }
         private string _batchFilePath;
         private string _requestDirectory;
         private string _responseDirectory;

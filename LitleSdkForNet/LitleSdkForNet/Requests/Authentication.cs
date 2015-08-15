@@ -5,8 +5,8 @@ namespace Litle.Sdk.Requests
 {
     public class Authentication
     {
-        public string User;
-        public string Password;
+        public string User { get; set; }
+        public string Password { get; set; }
 
         public String Serialize()
         {

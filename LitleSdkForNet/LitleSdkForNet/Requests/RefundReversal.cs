@@ -6,7 +6,7 @@ namespace Litle.Sdk.Requests
 {
     public class RefundReversal : TransactionTypeWithReportGroup
     {
-        public String LitleTxnId;
+        public String LitleTxnId { get; set; }
 
         public override string Serialize()
         {

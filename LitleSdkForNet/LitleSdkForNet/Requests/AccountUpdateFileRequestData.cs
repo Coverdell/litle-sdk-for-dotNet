@@ -7,7 +7,8 @@ namespace Litle.Sdk.Requests
 {
     public class AccountUpdateFileRequestData
     {
-        public string MerchantId;
+        public string MerchantId { get; set; }
+        public DateTime PostDay { get; set; } //yyyy-MM-dd
 
         public AccountUpdateFileRequestData()
         {
@@ -19,14 +20,10 @@ namespace Litle.Sdk.Requests
             MerchantId = config["merchantId"];
         }
 
-        public DateTime PostDay; //yyyy-MM-dd
-
         public string Serialize()
         {
             var xml = "\r\n<merchantId>" + SecurityElement.Escape(MerchantId) + "</merchantId>";
-
             xml += "\r\n<postDay>" + PostDay.ToString("yyyy-MM-dd") + "</postDay>";
-
             return xml;
         }
     }

@@ -5,8 +5,8 @@ namespace Litle.Sdk.Requests
 {
     public class RfrRequest
     {
-        public long LitleSessionId;
-        public AccountUpdateFileRequestData AccountUpdateFileRequestData;
+        public long LitleSessionId { get; set; }
+        public AccountUpdateFileRequestData AccountUpdateFileRequestData { get; set; }
 
         private LitleTime _litleTime;
         private LitleFile _litleFile;

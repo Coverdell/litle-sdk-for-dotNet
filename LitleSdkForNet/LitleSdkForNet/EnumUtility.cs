@@ -1,7 +1,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace Litle.Sdk.Requests
+namespace Litle.Sdk
 {
     public static class EnumUtility
     {

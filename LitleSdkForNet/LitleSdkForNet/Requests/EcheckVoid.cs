@@ -5,7 +5,7 @@ namespace Litle.Sdk.Requests
 {
     public class EcheckVoid : TransactionTypeWithReportGroup
     {
-        public long LitleTxnId;
+        public long LitleTxnId { get; set; }
 
         public override string Serialize()
         {

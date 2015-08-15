@@ -93,7 +93,7 @@
     <Compile Include="Requests\EcheckVerification.cs" />
     <Compile Include="Requests\EcheckVoid.cs" />
     <Compile Include="Requests\EnhancedData.cs" />
-    <Compile Include="Requests\EnumUtility.cs" />
+    <Compile Include="EnumUtility.cs" />
     <Compile Include="Requests\FilteringType.cs" />
     <Compile Include="Requests\ForceCapture.cs" />
     <Compile Include="Requests\FraudCheckType.cs" />
@@ -101,7 +101,7 @@
     <Compile Include="Requests\HealthcareIIAS.cs" />
     <Compile Include="Requests\IntervalType.cs" />
     <Compile Include="Requests\LineItemData.cs" />
-    <Compile Include="Requests\LitleFile.cs" />
+    <Compile Include="LitleFile.cs" />
     <Compile Include="Requests\LitleInternalRecurringRequest.cs" />
     <Compile Include="Requests\LitleOnlineRequest.cs" />
     <Compile Include="Requests\LitleRequest.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Requests\PhysicalCheckCredit.cs" />
     <Compile Include="Requests\Pos.cs" />
     <Compile Include="Requests\ProcessingInstructions.cs" />
-    <Compile Include="Requests\RandomGen.cs" />
+    <Compile Include="RandomGen.cs" />
     <Compile Include="Requests\RecurringRequest.cs" />
     <Compile Include="Requests\RecyclingRequestType.cs" />
     <Compile Include="Requests\RefundReversal.cs" />
@@ -143,7 +143,7 @@
     <Compile Include="Requests\VoidTxn.cs" />
     <Compile Include="Requests\Wallet.cs" />
     <Compile Include="Requests\WalletWalletSourceType.cs" />
-    <Compile Include="Requests\XmlUtil.cs" />
+    <Compile Include="XmlUtil.cs" />
     <Compile Include="Responses\AccountInfoType.cs" />
     <Compile Include="Responses\AccountUpdater.cs" />
     <Compile Include="Responses\AccountUpdateResponse.cs" />
@@ -245,7 +245,7 @@
     <Compile Include="XmlSerializer.cs" />
     <Compile Include="Communications.cs" />
     <Compile Include="Requests\PhysicalCheckDebit.cs" />
-    <Compile Include="Requests\LitleTime.cs" />
+    <Compile Include="LitleTime.cs" />
     <Compile Include="LitleOnlineException.cs" />
     <Compile Include="LitleOnline.cs" />
     <Compile Include="Responses\PhysicalCheckDebitResponse.cs" />

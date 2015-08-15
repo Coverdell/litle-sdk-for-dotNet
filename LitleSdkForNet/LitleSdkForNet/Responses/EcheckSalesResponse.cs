@@ -7,101 +7,40 @@ namespace Litle.Sdk.Responses
     [XmlRoot("echeckSalesResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class EcheckSalesResponse : TransactionTypeWithReportGroup
     {
-        private long _litleTxnIdField;
-        private string _orderIdField;
-        private string _responseField;
-        private DateTime _responseTimeField;
-        private string _messageField;
-        private string _verificationCodeField;
-        private DateTime _postDateField;
-        private bool _postDateFieldSpecified;
-        private AccountUpdater _accountUpdaterField;
-        private TokenResponseType _tokenResponseField;
-        private bool _duplicateField;
-        private bool _duplicateFieldSpecified;
-
         [XmlElement("litleTxnId")]
-        public long LitleTxnId
-        {
-            get { return _litleTxnIdField; }
-            set { _litleTxnIdField = value; }
-        }
+        public long LitleTxnId { get; set; }
 
         [XmlElement("orderId")]
-        public string OrderId
-        {
-            get { return _orderIdField; }
-            set { _orderIdField = value; }
-        }
+        public string OrderId { get; set; }
 
         [XmlElement("response")]
-        public string Response
-        {
-            get { return _responseField; }
-            set { _responseField = value; }
-        }
+        public string Response { get; set; }
 
         [XmlElement("responseTime")]
-        public DateTime ResponseTime
-        {
-            get { return _responseTimeField; }
-            set { _responseTimeField = value; }
-        }
+        public DateTime ResponseTime { get; set; }
 
         [XmlElement("message")]
-        public string Message
-        {
-            get { return _messageField; }
-            set { _messageField = value; }
-        }
+        public string Message { get; set; }
 
         [XmlElement("verificationCode")]
-        public string VerificationCode
-        {
-            get { return _verificationCodeField; }
-            set { _verificationCodeField = value; }
-        }
+        public string VerificationCode { get; set; }
 
         [XmlElement("postDate", DataType = "date")]
-        public DateTime PostDate
-        {
-            get { return _postDateField; }
-            set { _postDateField = value; }
-        }
+        public DateTime PostDate { get; set; }
 
         [XmlIgnore]
-        public bool PostDateSpecified
-        {
-            get { return _postDateFieldSpecified; }
-            set { _postDateFieldSpecified = value; }
-        }
+        public bool PostDateSpecified { get; set; }
 
         [XmlElement("accountUpdater")]
-        public AccountUpdater AccountUpdater
-        {
-            get { return _accountUpdaterField; }
-            set { _accountUpdaterField = value; }
-        }
+        public AccountUpdater AccountUpdater { get; set; }
 
         [XmlElement("tokenResponse")]
-        public TokenResponseType TokenResponse
-        {
-            get { return _tokenResponseField; }
-            set { _tokenResponseField = value; }
-        }
+        public TokenResponseType TokenResponse { get; set; }
 
         [XmlAttribute("duplicate")]
-        public bool Duplicate
-        {
-            get { return _duplicateField; }
-            set { _duplicateField = value; }
-        }
+        public bool Duplicate { get; set; }
 
         [XmlIgnore]
-        public bool DuplicateSpecified
-        {
-            get { return _duplicateFieldSpecified; }
-            set { _duplicateFieldSpecified = value; }
-        }
+        public bool DuplicateSpecified { get; set; }
     }
 }

@@ -4,7 +4,7 @@ namespace Litle.Sdk.Requests
 {
     public class Capture : TransactionTypeWithReportGroupAndPartial
     {
-        public long LitleTxnId;
+        public long LitleTxnId { get; set; }
         private long _amountField;
         private bool _amountSet;
 
@@ -31,8 +31,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public EnhancedData EnhancedData;
-        public ProcessingInstructions ProcessingInstructions;
+        public EnhancedData EnhancedData { get; set; }
+        public ProcessingInstructions ProcessingInstructions { get; set; }
         private bool _payPalOrderCompleteField;
         private bool _payPalOrderCompleteSet;
 
@@ -46,7 +46,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string PayPalNotes;
+        public string PayPalNotes { get; set; }
 
         public override string Serialize()
         {

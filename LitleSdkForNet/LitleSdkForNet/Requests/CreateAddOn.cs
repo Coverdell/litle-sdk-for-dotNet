@@ -5,11 +5,11 @@ namespace Litle.Sdk.Requests
 {
     public class CreateAddOn
     {
-        public string AddOnCode;
-        public string Name;
-        public long Amount;
-        public DateTime StartDate;
-        public DateTime EndDate;
+        public string AddOnCode { get; set; }
+        public string Name { get; set; }
+        public long Amount { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         public string Serialize()
         {

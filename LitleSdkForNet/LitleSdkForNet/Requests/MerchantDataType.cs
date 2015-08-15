@@ -4,9 +4,9 @@ namespace Litle.Sdk.Requests
 {
     public class MerchantDataType
     {
-        public string Campaign;
-        public string Affiliate;
-        public string MerchantGroupingId;
+        public string Campaign { get; set; }
+        public string Affiliate { get; set; }
+        public string MerchantGroupingId { get; set; }
 
         public string Serialize()
         {

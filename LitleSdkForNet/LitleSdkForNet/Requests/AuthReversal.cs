@@ -5,7 +5,7 @@ namespace Litle.Sdk.Requests
 {
     public class AuthReversal : TransactionTypeWithReportGroup
     {
-        public long LitleTxnId;
+        public long LitleTxnId { get; set; }
         private long _amountField;
         private bool _amountSet;
 
@@ -32,8 +32,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string PayPalNotes;
-        public string ActionReason;
+        public string PayPalNotes { get; set; }
+        public string ActionReason { get; set; }
 
         public override string Serialize()
         {

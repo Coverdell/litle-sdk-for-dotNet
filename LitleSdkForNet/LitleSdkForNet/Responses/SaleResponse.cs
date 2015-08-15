@@ -7,189 +7,70 @@ namespace Litle.Sdk.Responses
     [XmlRoot("saleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class SaleResponse : TransactionTypeWithReportGroup
     {
-        private long _litleTxnIdField;
-        private string _orderIdField;
-        private string _responseField;
-        private DateTime _responseTimeField;
-        private string _cardProductIdField;
-        private DateTime _postDateField;
-        private bool _postDateFieldSpecified;
-        private string _messageField;
-        private string _authCodeField;
-        private string _authorizationResponseSubCodeField;
-        private string _approvedAmountField;
-        private AccountInfoType _accountInformationField;
-        private FraudResult _fraudResultField;
-        private BillMeLaterResponseData _billMeLaterResponseDataField;
-        private TokenResponseType _tokenResponseField;
-        private EnhancedAuthResponse _enhancedAuthResponseField;
-        private AccountUpdater _accountUpdaterField;
-        private RecyclingType _recyclingField;
-        private RecurringResponse _recurringResponseField;
-        private GiftCardResponse _giftCardResponseField;
-        private ApplepayResponse _applepayResponseField;
-        private bool _duplicateField;
-        private bool _duplicateFieldSpecified;
-
         [XmlElement("litleTxnId")]
-        public long LitleTxnId
-        {
-            get { return _litleTxnIdField; }
-            set { _litleTxnIdField = value; }
-        }
+        public long LitleTxnId { get; set; }
 
         [XmlElement("orderId")]
-        public string OrderId
-        {
-            get { return _orderIdField; }
-            set { _orderIdField = value; }
-        }
+        public string OrderId { get; set; }
 
         [XmlElement("response")]
-        public string Response
-        {
-            get { return _responseField; }
-            set { _responseField = value; }
-        }
+        public string Response { get; set; }
 
         [XmlElement("responseTime")]
-        public DateTime ResponseTime
-        {
-            get { return _responseTimeField; }
-            set { _responseTimeField = value; }
-        }
+        public DateTime ResponseTime { get; set; }
 
         [XmlElement("cardProductId")]
-        public string CardProductId
-        {
-            get { return _cardProductIdField; }
-            set { _cardProductIdField = value; }
-        }
+        public string CardProductId { get; set; }
 
-        [XmlElement("postDate", DataType = "date")]
-        public DateTime PostDate
-        {
-            get { return _postDateField; }
-            set { _postDateField = value; }
-        }
-
-        [XmlIgnore]
-        public bool PostDateSpecified
-        {
-            get { return _postDateFieldSpecified; }
-            set { _postDateFieldSpecified = value; }
-        }
-
+        [XmlElement("postDate", DataType = "date", IsNullable = true)]
+        public DateTime? PostDate { get; set; }
+        
         [XmlElement("message")]
-        public string Message
-        {
-            get { return _messageField; }
-            set { _messageField = value; }
-        }
+        public string Message { get; set; }
 
         [XmlElement("authCode")]
-        public string AuthCode
-        {
-            get { return _authCodeField; }
-            set { _authCodeField = value; }
-        }
+        public string AuthCode { get; set; }
 
         [XmlElement("authorizationResponseSubCode")]
-        public string AuthorizationResponseSubCode
-        {
-            get { return _authorizationResponseSubCodeField; }
-            set { _authorizationResponseSubCodeField = value; }
-        }
+        public string AuthorizationResponseSubCode { get; set; }
 
         [XmlElement("approvedAmount", DataType = "integer")]
-        public string ApprovedAmount
-        {
-            get { return _approvedAmountField; }
-            set { _approvedAmountField = value; }
-        }
+        public string ApprovedAmount { get; set; }
 
         [XmlElement("accountInformation")]
-        public AccountInfoType AccountInformation
-        {
-            get { return _accountInformationField; }
-            set { _accountInformationField = value; }
-        }
+        public AccountInfoType AccountInformation { get; set; }
 
         [XmlElement("fraudResult")]
-        public FraudResult FraudResult
-        {
-            get { return _fraudResultField; }
-            set { _fraudResultField = value; }
-        }
+        public FraudResult FraudResult { get; set; }
 
         [XmlElement("billMeLaterResponseData")]
-        public BillMeLaterResponseData BillMeLaterResponseData
-        {
-            get { return _billMeLaterResponseDataField; }
-            set { _billMeLaterResponseDataField = value; }
-        }
+        public BillMeLaterResponseData BillMeLaterResponseData { get; set; }
 
         [XmlElement("tokenResponse")]
-        public TokenResponseType TokenResponse
-        {
-            get { return _tokenResponseField; }
-            set { _tokenResponseField = value; }
-        }
+        public TokenResponseType TokenResponse { get; set; }
 
         [XmlElement("enhancedAuthResponse")]
-        public EnhancedAuthResponse EnhancedAuthResponse
-        {
-            get { return _enhancedAuthResponseField; }
-            set { _enhancedAuthResponseField = value; }
-        }
+        public EnhancedAuthResponse EnhancedAuthResponse { get; set; }
 
         [XmlElement("accountUpdater")]
-        public AccountUpdater AccountUpdater
-        {
-            get { return _accountUpdaterField; }
-            set { _accountUpdaterField = value; }
-        }
+        public AccountUpdater AccountUpdater { get; set; }
 
         [XmlElement("recycling")]
-        public RecyclingType Recycling
-        {
-            get { return _recyclingField; }
-            set { _recyclingField = value; }
-        }
+        public RecyclingType Recycling { get; set; }
 
         [XmlElement("recurringResponse")]
-        public RecurringResponse RecurringResponse
-        {
-            get { return _recurringResponseField; }
-            set { _recurringResponseField = value; }
-        }
+        public RecurringResponse RecurringResponse { get; set; }
 
         [XmlElement("giftCardResponse")]
-        public GiftCardResponse GiftCardResponse
-        {
-            get { return _giftCardResponseField; }
-            set { _giftCardResponseField = value; }
-        }
+        public GiftCardResponse GiftCardResponse { get; set; }
 
         [XmlElement("applepayResponse")]
-        public ApplepayResponse ApplepayResponse
-        {
-            get { return _applepayResponseField; }
-            set { _applepayResponseField = value; }
-        }
+        public ApplepayResponse ApplepayResponse { get; set; }
 
         [XmlAttribute("duplicate")]
-        public bool Duplicate
-        {
-            get { return _duplicateField; }
-            set { _duplicateField = value; }
-        }
+        public bool Duplicate { get; set; }
 
         [XmlIgnore]
-        public bool DuplicateSpecified
-        {
-            get { return _duplicateFieldSpecified; }
-            set { _duplicateFieldSpecified = value; }
-        }
+        public bool DuplicateSpecified { get; set; }
     }
 }

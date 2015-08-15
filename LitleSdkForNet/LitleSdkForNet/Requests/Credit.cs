@@ -58,17 +58,17 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public CustomBilling CustomBilling;
-        public EnhancedData EnhancedData;
-        public ProcessingInstructions ProcessingInstructions;
-        public string OrderId;
-        public OrderSourceType OrderSource;
-        public Contact BillToAddress;
-        public CardType Card;
-        public MposType Mpos;
-        public CardTokenType Token;
-        public CardPaypageType Paypage;
-        public PayPal Paypal;
+        public CustomBilling CustomBilling { get; set; }
+        public EnhancedData EnhancedData { get; set; }
+        public ProcessingInstructions ProcessingInstructions { get; set; }
+        public string OrderId { get; set; }
+        public OrderSourceType OrderSource { get; set; }
+        public Contact BillToAddress { get; set; }
+        public CardType Card { get; set; }
+        public MposType Mpos { get; set; }
+        public CardTokenType Token { get; set; }
+        public CardPaypageType Paypage { get; set; }
+        public PayPal Paypal { get; set; }
         private TaxTypeIdentifierEnum _taxTypeField;
         private bool _taxTypeSet;
 
@@ -82,12 +82,12 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public BillMeLaterRequest BillMeLaterRequest;
-        public Pos Pos;
-        public AmexAggregatorData AmexAggregatorData;
-        public MerchantDataType MerchantData;
-        public String PayPalNotes;
-        public String ActionReason;
+        public BillMeLaterRequest BillMeLaterRequest { get; set; }
+        public Pos Pos { get; set; }
+        public AmexAggregatorData AmexAggregatorData { get; set; }
+        public MerchantDataType MerchantData { get; set; }
+        public String PayPalNotes { get; set; }
+        public String ActionReason { get; set; }
 
         public override string Serialize()
         {

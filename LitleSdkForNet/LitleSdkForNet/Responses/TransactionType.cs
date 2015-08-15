@@ -12,21 +12,10 @@ namespace Litle.Sdk.Responses
     [XmlType("transactionType", Namespace = "http://www.litle.com/schema")]
     public class TransactionType : TransactionRequest
     {
-        private string _idField;
-        private string _customerIdField;
-
         [XmlAttribute("id")]
-        public string ID
-        {
-            get { return _idField; }
-            set { _idField = value; }
-        }
+        public string ID { get; set; }
 
         [XmlAttribute("customerId")]
-        public string CustomerId
-        {
-            get { return _customerIdField; }
-            set { _customerIdField = value; }
-        }
+        public string CustomerId { get; set; }
     }
 }

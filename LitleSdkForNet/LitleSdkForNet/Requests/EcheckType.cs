@@ -19,10 +19,10 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string AccNum;
-        public string RoutingNum;
-        public string CheckNum;
-        public string CcdPaymentInformation;
+        public string AccNum { get; set; }
+        public string RoutingNum { get; set; }
+        public string CheckNum { get; set; }
+        public string CcdPaymentInformation { get; set; }
 
         public string Serialize()
         {

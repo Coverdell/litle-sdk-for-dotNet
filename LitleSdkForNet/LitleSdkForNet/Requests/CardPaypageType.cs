@@ -4,9 +4,9 @@ namespace Litle.Sdk.Requests
 {
     public class CardPaypageType
     {
-        public string PaypageRegistrationId;
-        public string ExpDate;
-        public string CardValidationNum;
+        public string PaypageRegistrationId { get; set; }
+        public string ExpDate { get; set; }
+        public string CardValidationNum { get; set; }
         private MethodOfPaymentTypeEnum _typeField;
         private bool _typeSet;
 

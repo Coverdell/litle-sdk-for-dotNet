@@ -18,7 +18,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string OrderId;
+        public string OrderId { get; set; }
         private long _amountField;
         private bool _amountSet;
 
@@ -32,11 +32,11 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public OrderSourceType OrderSource;
-        public Contact BillToAddress;
-        public EcheckType Echeck;
-        public EcheckTokenType Token;
-        public MerchantDataType MerchantData;
+        public OrderSourceType OrderSource { get; set; }
+        public Contact BillToAddress { get; set; }
+        public EcheckType Echeck { get; set; }
+        public EcheckTokenType Token { get; set; }
+        public MerchantDataType MerchantData { get; set; }
 
         public override string Serialize()
         {

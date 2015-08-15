@@ -4,9 +4,10 @@ using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
+    [Serializable]
     public class ActivateReversal : TransactionTypeWithReportGroup
     {
-        public String LitleTxnId;
+        public string LitleTxnId { get; set; }
 
         public override string Serialize()
         {

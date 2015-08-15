@@ -4,7 +4,7 @@ namespace Litle.Sdk.Requests
 {
     public class HealthcareIIAS
     {
-        public HealthcareAmounts HealthcareAmounts;
+        public HealthcareAmounts HealthcareAmounts { get; set; }
         private IIASFlagType _iiasFlagField;
         private bool _iiasFlagSet;
 

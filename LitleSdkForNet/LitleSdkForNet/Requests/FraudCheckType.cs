@@ -5,9 +5,9 @@ namespace Litle.Sdk.Requests
 {
     public class FraudCheckType
     {
-        public String AuthenticationValue;
-        public String AuthenticationTransactionId;
-        public String CustomerIpAddress;
+        public String AuthenticationValue { get; set; }
+        public String AuthenticationTransactionId { get; set; }
+        public String CustomerIpAddress { get; set; }
         private bool _authenticatedByMerchantField;
         private bool _authenticatedByMerchantSet;
 

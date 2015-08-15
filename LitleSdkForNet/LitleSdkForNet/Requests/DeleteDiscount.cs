@@ -4,7 +4,7 @@ namespace Litle.Sdk.Requests
 {
     public class DeleteDiscount
     {
-        public string DiscountCode;
+        public string DiscountCode { get; set; }
 
         public string Serialize()
         {

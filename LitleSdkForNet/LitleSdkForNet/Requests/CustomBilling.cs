@@ -4,10 +4,10 @@ namespace Litle.Sdk.Requests
 {
     public class CustomBilling
     {
-        public string Phone;
-        public string City;
-        public string Url;
-        public string Descriptor;
+        public string Phone { get; set; }
+        public string City { get; set; }
+        public string Url { get; set; }
+        public string Descriptor { get; set; }
 
         public string Serialize()
         {

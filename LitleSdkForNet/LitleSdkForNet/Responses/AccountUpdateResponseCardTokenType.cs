@@ -8,6 +8,6 @@ namespace Litle.Sdk.Responses
     public class AccountUpdateResponseCardTokenType : CardTokenType
     {
         [XmlElement("bin")]
-        public string Bin;
+        public string Bin { get; set; }
     }
 }

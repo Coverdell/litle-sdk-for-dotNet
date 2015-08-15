@@ -5,11 +5,11 @@ namespace Litle.Sdk.Requests
 {
     public class Activate : TransactionTypeWithReportGroup
     {
-        public string OrderId;
-        public long Amount;
-        public OrderSourceType OrderSource;
-        public CardType Card;
-        public VirtualGiftCardType VirtualGiftCard;
+        public string OrderId { get; set; }
+        public long Amount { get; set; }
+        public OrderSourceType OrderSource { get; set; }
+        public CardType Card { get; set; }
+        public VirtualGiftCardType VirtualGiftCard { get; set; }
 
         public override string Serialize()
         {

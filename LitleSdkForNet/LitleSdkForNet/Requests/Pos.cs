@@ -44,7 +44,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string TerminalId;
+        public string TerminalId { get; set; }
 
         private PosCatLevelEnum _catLevelField;
         private bool _catLevelSet;

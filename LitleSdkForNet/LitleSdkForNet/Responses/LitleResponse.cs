@@ -9,19 +9,19 @@ namespace Litle.Sdk.Responses
     public class LitleResponse
     {
         [XmlElement("id")]
-        public string ID;
+        public string ID { get; set; }
         [XmlElement("litleBatchId")]
-        public long LitleBatchId;
+        public long LitleBatchId { get; set; }
         [XmlElement("litleSessionId")]
-        public long LitleSessionId;
+        public long LitleSessionId { get; set; }
         [XmlElement("merchantId")]
-        public string MerchantId;
+        public string MerchantId { get; set; }
         [XmlElement("response")]
-        public string Response;
+        public string Response { get; set; }
         [XmlElement("message")]
-        public string Message;
+        public string Message { get; set; }
         [XmlElement("version")]
-        public string Version;
+        public string Version { get; set; }
 
         private XmlReader _originalXmlReader;
         private XmlReader _batchResponseReader;
@@ -61,7 +61,7 @@ namespace Litle.Sdk.Responses
                 Message = reader.GetAttribute("message");
                 Response = reader.GetAttribute("response");
 
-                string rawLitleSessionId = reader.GetAttribute("litleSessionId");
+                var rawLitleSessionId = reader.GetAttribute("litleSessionId");
                 if (rawLitleSessionId != null)
                 {
                     LitleSessionId = Int64.Parse(rawLitleSessionId);
@@ -103,7 +103,7 @@ namespace Litle.Sdk.Responses
         public virtual RFRResponse NextRFRResponse()
         {
             if (_rfrResponseReader.ReadState == ReadState.Closed) return null;
-            string response = _rfrResponseReader.ReadOuterXml();
+            var response = _rfrResponseReader.ReadOuterXml();
             var serializer = new XmlSerializer(typeof (RFRResponse));
             var reader = new StringReader(response);
             var rfrResponse = (RFRResponse) serializer.Deserialize(reader);

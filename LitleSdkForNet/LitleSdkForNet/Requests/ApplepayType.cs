@@ -4,10 +4,10 @@ namespace Litle.Sdk.Requests
 {
     public class ApplepayType
     {
-        public string Data;
-        public ApplepayHeaderType Header;
-        public string Signature;
-        public string Version;
+        public string Data { get; set; }
+        public ApplepayHeaderType Header { get; set; }
+        public string Signature { get; set; }
+        public string Version { get; set; }
 
         public string Serialize()
         {

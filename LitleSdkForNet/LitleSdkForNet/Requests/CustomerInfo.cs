@@ -5,11 +5,11 @@ namespace Litle.Sdk.Requests
 {
     public class CustomerInfo
     {
-        public string Ssn;
+        public string Ssn { get; set; }
 
-        public DateTime Dob;
+        public DateTime Dob { get; set; }
 
-        public DateTime CustomerRegistrationDate;
+        public DateTime CustomerRegistrationDate { get; set; }
 
         private CustomerInfoCustomerType _customerTypeField;
         private bool _customerTypeSet;
@@ -76,9 +76,9 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string EmployerName;
+        public string EmployerName { get; set; }
 
-        public string CustomerWorkTelephone;
+        public string CustomerWorkTelephone { get; set; }
 
         private CustomerInfoResidenceStatus _residenceStatusField;
         private bool _residenceStatusSet;

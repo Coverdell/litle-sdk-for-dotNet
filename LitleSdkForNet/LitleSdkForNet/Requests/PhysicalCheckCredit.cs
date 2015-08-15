@@ -13,7 +13,7 @@ namespace Litle.Sdk.Requests
 
         public override string Serialize()
         {
-            string xml = "\r\n<physicalCheckCredit ";
+            var xml = "\r\n<physicalCheckCredit ";
 
             if (ID != null)
                 xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";

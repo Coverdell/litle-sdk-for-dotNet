@@ -7,45 +7,19 @@ namespace Litle.Sdk.Responses
     [XmlRoot("fraudCheckResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class FraudCheckResponse : TransactionTypeWithReportGroup
     {
-        private long _litleTxnIdField;
-        private string _responseField;
-        private string _messageField;
-        private DateTime _responseTimeField;
-        private AdvancedFraudResultsType _advancedFraudResultsField;
-
         [XmlElement("litleTxnId")]
-        public long LitleTxnId
-        {
-            get { return _litleTxnIdField; }
-            set { _litleTxnIdField = value; }
-        }
+        public long LitleTxnId { get; set; }
 
         [XmlElement("response")]
-        public string Response
-        {
-            get { return _responseField; }
-            set { _responseField = value; }
-        }
+        public string Response { get; set; }
 
         [XmlElement("message")]
-        public string Message
-        {
-            get { return _messageField; }
-            set { _messageField = value; }
-        }
+        public string Message { get; set; }
 
         [XmlElement("responseTime")]
-        public DateTime ResponseTime
-        {
-            get { return _responseTimeField; }
-            set { _responseTimeField = value; }
-        }
+        public DateTime ResponseTime { get; set; }
 
         [XmlElement("advancedFraudResults")]
-        public AdvancedFraudResultsType AdvancedFraudResults
-        {
-            get { return _advancedFraudResultsField; }
-            set { _advancedFraudResultsField = value; }
-        }
+        public AdvancedFraudResultsType AdvancedFraudResults { get; set; }
     }
 }

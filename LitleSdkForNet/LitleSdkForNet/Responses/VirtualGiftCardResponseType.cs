@@ -7,8 +7,8 @@ namespace Litle.Sdk.Responses
     public class VirtualGiftCardResponseType
     {
         [XmlElement("accountNumber")]
-        public String AccountNumber;
+        public String AccountNumber { get; set; }
         [XmlElement("cardValidationNum")]
-        public String CardValidationNum;
+        public String CardValidationNum { get; set; }
     }
 }

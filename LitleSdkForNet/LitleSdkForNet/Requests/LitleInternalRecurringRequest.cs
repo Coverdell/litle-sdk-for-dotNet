@@ -4,8 +4,8 @@ namespace Litle.Sdk.Requests
 {
     public class LitleInternalRecurringRequest
     {
-        public string SubscriptionId;
-        public string RecurringTxnId;
+        public string SubscriptionId { get; set; }
+        public string RecurringTxnId { get; set; }
 
         private bool _finalPaymentField;
         private bool _finalPaymentSet;

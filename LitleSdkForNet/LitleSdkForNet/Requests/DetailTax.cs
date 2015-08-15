@@ -31,7 +31,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string TaxRate;
+        public string TaxRate { get; set; }
         private TaxTypeIdentifierEnum _taxTypeIdentifierField;
         private bool _taxTypeIdentifierSet;
 
@@ -45,7 +45,7 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public string CardAcceptorTaxId;
+        public string CardAcceptorTaxId { get; set; }
 
         public string Serialize()
         {

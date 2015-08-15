@@ -5,29 +5,13 @@ namespace Litle.Sdk.Responses
     [XmlType("cardAccountInfoType", Namespace = "http://www.litle.com/schema")]
     public class CardAccountInfoType
     {
-        private MethodOfPaymentTypeEnum _typeField;
-        private string _numberField;
-        private string _expDateField;
-
         [XmlElement("type")]
-        public MethodOfPaymentTypeEnum Type
-        {
-            get { return _typeField; }
-            set { _typeField = value; }
-        }
+        public MethodOfPaymentTypeEnum Type { get; set; }
 
         [XmlElement("number")]
-        public string Number
-        {
-            get { return _numberField; }
-            set { _numberField = value; }
-        }
+        public string Number { get; set; }
 
         [XmlElement("expDate")]
-        public string ExpDate
-        {
-            get { return _expDateField; }
-            set { _expDateField = value; }
-        }
+        public string ExpDate { get; set; }
     }
 }

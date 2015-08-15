@@ -5,11 +5,11 @@ namespace Litle.Sdk.Requests
 {
     public class CreateDiscount
     {
-        public string DiscountCode;
-        public string Name;
-        public long Amount;
-        public DateTime StartDate;
-        public DateTime EndDate;
+        public string DiscountCode { get; set; }
+        public string Name { get; set; }
+        public long Amount { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         public string Serialize()
         {

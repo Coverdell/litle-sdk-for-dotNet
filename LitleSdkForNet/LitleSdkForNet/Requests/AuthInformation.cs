@@ -5,9 +5,9 @@ namespace Litle.Sdk.Requests
 {
     public class AuthInformation
     {
-        public DateTime AuthDate;
-        public string AuthCode;
-        public FraudResult FraudResult;
+        public DateTime AuthDate { get; set; }
+        public string AuthCode { get; set; }
+        public FraudResult FraudResult { get; set; }
         private long _authAmountField;
         private bool _authAmountSet;
 

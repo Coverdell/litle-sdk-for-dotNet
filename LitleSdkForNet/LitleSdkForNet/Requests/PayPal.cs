@@ -4,10 +4,10 @@ namespace Litle.Sdk.Requests
 {
     public class PayPal
     {
-        public string PayerId;
-        public string PayerEmail;
-        public string Token;
-        public string TransactionId;
+        public string PayerId { get; set; }
+        public string PayerEmail { get; set; }
+        public string Token { get; set; }
+        public string TransactionId { get; set; }
 
         public string Serialize()
         {

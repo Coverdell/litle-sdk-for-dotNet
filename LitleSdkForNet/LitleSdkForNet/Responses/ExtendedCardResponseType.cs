@@ -5,21 +5,10 @@ namespace Litle.Sdk.Responses
     [XmlType("extendedCardResponseType", Namespace = "http://www.litle.com/schema")]
     public class ExtendedCardResponseType
     {
-        private string _messageField;
-        private string _codeField;
-
         [XmlElement("message")]
-        public string Message
-        {
-            get { return _messageField; }
-            set { _messageField = value; }
-        }
+        public string Message { get; set; }
 
         [XmlElement("code")]
-        public string Code
-        {
-            get { return _codeField; }
-            set { _codeField = value; }
-        }
+        public string Code { get; set; }
     }
 }

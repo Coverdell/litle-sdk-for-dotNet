@@ -6,8 +6,8 @@ namespace Litle.Sdk.Requests
 {
     public class CreatePlan : RecurringTransactionType
     {
-        public string PlanCode;
-        public string Name;
+        public string PlanCode { get; set; }
+        public string Name { get; set; }
 
         private string _descriptionField;
         private bool _descriptionSet;
@@ -22,11 +22,11 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public IntervalType IntervalType;
-        public long Amount;
+        public IntervalType IntervalType { get; set; }
+        public long Amount { get; set; }
 
-        public int NumberOfPaymentsField;
-        public bool NumberOfPaymentsSet;
+        public int NumberOfPaymentsField { get; set; }
+        public bool NumberOfPaymentsSet { get; set; }
 
         public int NumberOfPayments
         {
@@ -38,8 +38,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public int TrialNumberOfIntervalsField;
-        public bool TrialNumberOfIntervalsSet;
+        public int TrialNumberOfIntervalsField { get; set; }
+        public bool TrialNumberOfIntervalsSet { get; set; }
 
         public int TrialNumberOfIntervals
         {

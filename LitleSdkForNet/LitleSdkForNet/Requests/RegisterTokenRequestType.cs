@@ -1,16 +1,18 @@
+using System;
 using System.Security;
 using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
+    [Serializable]
     public class RegisterTokenRequestType : TransactionTypeWithReportGroup
     {
-        public string OrderId;
-        public string AccountNumber;
-        public EcheckForTokenType EcheckForToken;
-        public string PaypageRegistrationId;
-        public string CardValidationNum;
-        public ApplepayType Applepay;
+        public string OrderId { get; set; }
+        public string AccountNumber { get; set; }
+        public EcheckForTokenType EcheckForToken { get; set; }
+        public string PaypageRegistrationId { get; set; }
+        public string CardValidationNum { get; set; }
+        public ApplepayType Applepay { get; set; }
 
         public override string Serialize()
         {

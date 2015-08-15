@@ -5,7 +5,7 @@ namespace Litle.Sdk.Requests
 {
     public class Subscription
     {
-        public string PlanCode;
+        public string PlanCode { get; set; }
         private bool _numberOfPaymentsSet;
         private int _numberOfPaymentsField;
 
@@ -45,8 +45,8 @@ namespace Litle.Sdk.Requests
             }
         }
 
-        public List<CreateDiscount> CreateDiscounts;
-        public List<CreateAddOn> CreateAddOns;
+        public List<CreateDiscount> CreateDiscounts { get; set; }
+        public List<CreateAddOn> CreateAddOns { get; set; }
 
         public Subscription()
         {

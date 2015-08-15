@@ -5,10 +5,10 @@ namespace Litle.Sdk.Requests
 {
     public class Load : TransactionTypeWithReportGroup
     {
-        public string OrderId;
-        public long Amount;
-        public OrderSourceType OrderSource;
-        public CardType Card;
+        public string OrderId { get; set; }
+        public long Amount { get; set; }
+        public OrderSourceType OrderSource { get; set; }
+        public CardType Card { get; set; }
 
         public override string Serialize()
         {

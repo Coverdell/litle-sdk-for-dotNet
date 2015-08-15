@@ -6,36 +6,16 @@ namespace Litle.Sdk.Responses
     [XmlType("recurringTransactionResponseType", Namespace = "http://www.litle.com/schema")]
     public class RecurringTransactionResponseType : TransactionResponse
     {
-        private string _litleTxnIdField;
         [XmlElement("litleTxnId")]
-        public string LitleTxnId
-        {
-            get { return _litleTxnIdField; }
-            set { _litleTxnIdField = value; }
-        }
+        public string LitleTxnId { get; set; }
 
-        private string _responseField;
         [XmlElement("response")]
-        public string Response
-        {
-            get { return _responseField; }
-            set { _responseField = value; }
-        }
+        public string Response { get; set; }
 
-        private string _messageField;
         [XmlElement("message")]
-        public string Message
-        {
-            get { return _messageField; }
-            set { _messageField = value; }
-        }
+        public string Message { get; set; }
 
-        private DateTime _responseTimeField;
         [XmlElement("responseTime")]
-        public DateTime ResponseTime
-        {
-            get { return _responseTimeField; }
-            set { _responseTimeField = value; }
-        }
+        public DateTime ResponseTime { get; set; }
     }
 }
