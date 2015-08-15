@@ -15,7 +15,7 @@ namespace Litle.Sdk.Responses
         }
 
         private string _responseField;
-        [XmlElement("repsonse")]
+        [XmlElement("response")]
         public string Response
         {
             get { return _responseField; }

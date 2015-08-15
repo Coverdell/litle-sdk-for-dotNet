@@ -61,7 +61,7 @@ namespace Litle.Sdk.Responses
             set { _typeFieldSpecified = value; }
         }
 
-        [XmlElement("echeckAccountSuffix")]
+        [XmlElement("eCheckAccountSuffix")]
         public string ECheckAccountSuffix
         {
             get { return _eCheckAccountSuffixField; }

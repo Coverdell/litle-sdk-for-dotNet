@@ -55,7 +55,7 @@ namespace Litle.Sdk.Responses
             set { _binField = value; }
         }
 
-        [XmlElement("echeckAccountSuffix")]
+        [XmlElement("eCheckAccountSuffix")]
         public string ECheckAccountSuffix
         {
             get { return _eCheckAccountSuffixField; }
