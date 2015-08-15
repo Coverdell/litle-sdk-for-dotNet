@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using System.IO;
-using Litle.Sdk.Requests;
 
 namespace Litle.Sdk
 {

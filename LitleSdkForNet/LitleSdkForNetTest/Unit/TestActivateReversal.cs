@@ -38,9 +38,7 @@ namespace Litle.Sdk.Test.Unit
             Communications mockedCommunication = mock.Object;
             litle.SetCommunication(mockedCommunication);
             ActivateReversalResponse response = litle.ActivateReversal(activateReversal);
-            Assert.AreEqual("123", response.LitleTxnId);
+            Assert.AreEqual(123, response.LitleTxnId);
         }
-
-
     }
 }

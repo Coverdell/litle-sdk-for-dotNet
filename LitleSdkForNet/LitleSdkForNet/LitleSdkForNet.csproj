@@ -41,6 +41,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonTransactionTypeWithReportGroupAndOrder.cs" />
     <Compile Include="ILitleOnline.cs" />
     <Compile Include="MethodOfPaymentTypeEnum.cs" />
     <Compile Include="Requests\BatchRequest.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Requests\VoidTxn.cs" />
     <Compile Include="Requests\Wallet.cs" />
     <Compile Include="Requests\WalletWalletSourceType.cs" />
+    <Compile Include="CommonTransactionTypeWithReportGroup.cs" />
     <Compile Include="XmlUtil.cs" />
     <Compile Include="Responses\AccountInfoType.cs" />
     <Compile Include="Responses\AccountUpdater.cs" />

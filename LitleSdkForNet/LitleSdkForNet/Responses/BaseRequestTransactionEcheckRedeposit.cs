@@ -3,7 +3,7 @@ using Litle.Sdk.Requests;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("BaseRequestTransactionEcheckRedeposit", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlType("baseRequestTransactionEcheckRedeposit", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [XmlRoot("echeckRedeposit", Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public class BaseRequestTransactionEcheckRedeposit : TransactionTypeWithReportGroup
     {
