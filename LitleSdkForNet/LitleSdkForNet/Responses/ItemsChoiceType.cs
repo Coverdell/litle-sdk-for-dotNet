@@ -1,8 +1,6 @@
-using System.Xml.Serialization;
-
 namespace Litle.Sdk.Responses
 {
-    [XmlType("ItemsChoiceType", Namespace = "http://www.litle.com/schema", IncludeInSchema = false)]
+    [LitleXmlType("ItemsChoiceType", IncludeInSchema = false)]
     public enum ItemsChoiceType
     {
         ExpDate,

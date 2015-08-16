@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CommonTransactionTypeWithReportGroupAndOrder.cs" />
     <Compile Include="ILitleOnline.cs" />
+    <Compile Include="LitleXmlRoot.cs" />
     <Compile Include="MethodOfPaymentTypeEnum.cs" />
     <Compile Include="Requests\BatchRequest.cs" />
     <Compile Include="Requests\EcheckPreNoteCredit.cs" />

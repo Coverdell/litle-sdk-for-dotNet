@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("driversLicenseInfo", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("driversLicenseInfo")]
     public class DriversLicenseInfo
     {
         [XmlElement("licenseNumber")]

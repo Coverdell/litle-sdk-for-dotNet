@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("affluenceTypeEnum", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("affluenceTypeEnum")]
     public enum AffluenceTypeEnum
     {
         [XmlEnum("AFFLUENT")] Affluent,

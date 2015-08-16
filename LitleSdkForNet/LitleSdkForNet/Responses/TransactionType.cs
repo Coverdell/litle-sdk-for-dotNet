@@ -9,7 +9,7 @@ namespace Litle.Sdk.Responses
     [XmlInclude(typeof (TransactionTypeWithReportGroup))]
     [XmlInclude(typeof (RegisterTokenRequestType))]
     [Serializable]
-    [XmlType("transactionType", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("transactionType")]
     public class TransactionType : TransactionRequest
     {
         [XmlAttribute("id")]

@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("accountUpdater", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("accountUpdater", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("accountUpdater")]
+    [LitleXmlRoot("accountUpdater")]
     public class AccountUpdater
     {
         [XmlElement("extendedCardResponse")]

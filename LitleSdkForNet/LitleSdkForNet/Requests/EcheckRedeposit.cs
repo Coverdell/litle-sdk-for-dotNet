@@ -18,7 +18,7 @@ namespace Litle.Sdk.Requests
                 xml += " customerId=\"" + CustomerId + "\"";
             }
             xml += " reportGroup=\"" + ReportGroup + "\">";
-            if (LitleTxnIdSet) xml += "\r\n<litleTxnId>" + LitleTxnIdField + "</litleTxnId>";
+            if (LitleTxnId.HasValue) xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
             if (Echeck != null) xml += "\r\n<echeck>" + Echeck.Serialize() + "</echeck>";
             else if (Token != null) xml += "\r\n<echeckToken>" + Token.Serialize() + "</echeckToken>";
             if (MerchantData != null)

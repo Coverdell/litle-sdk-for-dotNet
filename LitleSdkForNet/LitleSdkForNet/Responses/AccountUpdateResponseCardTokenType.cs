@@ -3,8 +3,8 @@ using Litle.Sdk.Requests;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("accountUpdateResponseCardTokenType", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("accountUpdateResponseCardTokenType", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("accountUpdateResponseCardTokenType")]
+    [LitleXmlRoot("accountUpdateResponseCardTokenType")]
     public class AccountUpdateResponseCardTokenType : CardTokenType
     {
         [XmlElement("bin")]

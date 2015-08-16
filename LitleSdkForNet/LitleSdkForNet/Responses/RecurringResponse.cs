@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("recurringResponse", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("recurringResponse")]
     public class RecurringResponse
     {
         [XmlElement("subscriptionId")]

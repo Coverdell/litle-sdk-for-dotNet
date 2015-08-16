@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("echeckSalesResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("echeckSalesResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("echeckSalesResponse")]
+    [LitleXmlRoot("echeckSalesResponse")]
     public class EcheckSalesResponse : CommonTransactionTypeWithReportGroupAndPostDate
     {
         [XmlElement("verificationCode")]

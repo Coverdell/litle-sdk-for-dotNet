@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("taxTypeIdentifierEnum", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("taxTypeIdentifierEnum")]
     public enum TaxTypeIdentifierEnum
     {
         [XmlEnum("00")] Item00,

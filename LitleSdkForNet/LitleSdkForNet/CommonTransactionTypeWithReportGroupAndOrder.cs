@@ -20,6 +20,8 @@ namespace Litle.Sdk
         [XmlElement("giftCardResponse")]
         public GiftCardResponse GiftCardResponse { get; set; }
     }
+
+    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     public abstract class CommonTransactionTypeWithReportGroupAndOrderAndFraudAndPostDateAndGiftCardResponse : CommonTransactionTypeWithReportGroupAndOrderAndPostDateAndGiftCardResponse
     {
         [XmlElement("fraudResult")]

@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("transactionTypeOptionReportGroup", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("transactionTypeOptionReportGroup")]
     public class TransactionTypeOptionReportGroup : TransactionType
     {
         [XmlAttribute("reportGroup")]

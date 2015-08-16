@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("advancedFraudResultsType", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("advancedFraudResultsType", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("advancedFraudResultsType")]
+    [LitleXmlRoot("advancedFraudResultsType")]
     public class AdvancedFraudResultsType
     {
         [XmlElement("deviceReviewStatus")]

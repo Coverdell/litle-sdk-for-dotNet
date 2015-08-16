@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("authReversalResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("authReversalResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("authReversalResponse")]
+    [LitleXmlRoot("authReversalResponse")]
     public class AuthReversalResponse : CommonTransactionTypeWithReportGroupAndOrderAndPostDateAndGiftCardResponse
     {
         [XmlAttribute("duplicate")]

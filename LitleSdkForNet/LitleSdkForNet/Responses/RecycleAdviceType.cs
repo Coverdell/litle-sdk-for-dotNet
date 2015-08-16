@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("recycleAdviceType", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("recycleAdviceType")]
     public class RecycleAdviceType
     {
         [XmlElement("nextRecycleTime", typeof (DateTime)), XmlElement("recycleAdviceEnd", typeof (string))]

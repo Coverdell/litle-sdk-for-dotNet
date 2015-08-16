@@ -3,8 +3,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("cancelSubscriptionResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("cancelSubscriptionResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("cancelSubscriptionResponse")]
+    [LitleXmlRoot("cancelSubscriptionResponse")]
     public class CancelSubscriptionResponse
     {
         [XmlElement("subscriptionId")]

@@ -1,9 +1,6 @@
-using System.Xml.Serialization;
-
 namespace Litle.Sdk.Responses
 {
-    [XmlType("payFacCreditResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("payFacCreditResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlRoot("payFacCreditResponse")]
     public class PayFacCreditResponse : CommonTransactionTypeWithReportGroupAndFraud
     {
     }

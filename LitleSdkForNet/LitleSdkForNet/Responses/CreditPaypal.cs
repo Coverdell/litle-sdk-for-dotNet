@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("creditPaypal", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [XmlType("creditPaypal")]
     public class CreditPaypal
     {
         [XmlElement("payerEmail", typeof (string)), XmlElement("payerId", typeof (string)), XmlChoiceIdentifier("ItemElementName")]

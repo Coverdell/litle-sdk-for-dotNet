@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("posEntryModeTypeEnum", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("posEntryModeTypeEnum")]
     public enum PosEntryModeTypeEnum
     {
         [XmlEnum("notused")]

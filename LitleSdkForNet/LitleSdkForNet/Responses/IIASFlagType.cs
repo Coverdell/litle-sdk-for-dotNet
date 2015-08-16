@@ -1,8 +1,6 @@
-using System.Xml.Serialization;
-
 namespace Litle.Sdk.Responses
 {
-    [XmlType("IIASFlagType", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("IIASFlagType")]
     public enum IIASFlagType
     {
         Y,

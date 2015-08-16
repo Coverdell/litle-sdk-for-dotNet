@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("forceCaptureResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("forceCaptureResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("forceCaptureResponse")]
+    [LitleXmlRoot("forceCaptureResponse")]
     public class ForceCaptureResponse : CommonTransactionTypeWithReportGroupAndOrderAndFraudAndPostDateAndGiftCardResponse
     {
         [XmlElement("tokenResponse")]

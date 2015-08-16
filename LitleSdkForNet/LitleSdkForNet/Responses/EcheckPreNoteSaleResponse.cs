@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("echeckPreNoteSaleResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("echeckPreNoteSaleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("echeckPreNotSaleResponse")]
+    [LitleXmlRoot("echeckPreNoteSaleResponse")]
     public class EcheckPreNoteSaleResponse : CommonTransactionTypeWithReportGroupAndOrder
     {
         [XmlAttribute("duplicate")]

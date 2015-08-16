@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("virtualGiftCardResponseType", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("virtualGiftCardResponseType")]
     public class VirtualGiftCardResponseType
     {
         [XmlElement("accountNumber")]

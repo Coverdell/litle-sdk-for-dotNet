@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("enhancedAuthResponseFundingSource", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("enhancedAuthResponseFundingSource")]
     public class EnhancedAuthResponseFundingSource
     {
         [XmlElement("type")]

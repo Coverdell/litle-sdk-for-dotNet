@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("posCardholderIdTypeEnum", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("posCardholderIdTypeEnum")]
     public enum PosCardholderIdTypeEnum
     {
         [XmlEnum("signature")]

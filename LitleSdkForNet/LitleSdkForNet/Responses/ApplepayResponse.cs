@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("applepayResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("applepayResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("applepayResponse")]
+    [LitleXmlRoot("applepayResponse")]
     public class ApplepayResponse
     {
         [XmlElement("applicationPrimaryAccountNumber")]

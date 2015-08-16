@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("litleOnlineResponseTransactionResponseVoidResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("voidResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("litleOnlineResponseTransactionResponseVoidResponse")]
+    [LitleXmlRoot("voidResponse")]
     public class LitleOnlineResponseTransactionResponseVoidResponse : CommonTransactionTypeWithReportGroupAndPostDate
     {
         [XmlAttribute("duplicate")]

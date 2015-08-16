@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("fundingSourceTypeEnum", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("fundingSourceTypeEnum")]
     public enum FundingSourceTypeEnum
     {
         [XmlEnum("UNKNOWN")]

@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("recyclingType", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("recyclingType")]
     public class RecyclingType
     {
         [XmlElement("recycleAdvice")]

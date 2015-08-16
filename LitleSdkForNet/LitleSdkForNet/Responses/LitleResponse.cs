@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlRoot("litleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlRoot("litleResponse")]
     public class LitleResponse
     {
         [XmlElement("id")]

@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("cardProductTypeEnum", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("cardProductTypeEnum")]
     public enum CardProductTypeEnum
     {
         [XmlEnum("UNKNOWN")] 

@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlRoot("litleOnlineResponse", Namespace = "http://www.litle.com/schema", IsNullable = false, ElementName = "litleOnlineResponse")]
+    [LitleXmlRoot("litleOnlineResponse")]
     public class LitleOnlineResponse
     {
         [XmlElement("authReversalResponse")]

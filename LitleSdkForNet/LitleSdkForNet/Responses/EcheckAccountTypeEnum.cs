@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("echeckAccountTypeEnum", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("echeckAccountTypeEnum")]
     public enum EcheckAccountTypeEnum
     {
         Checking,

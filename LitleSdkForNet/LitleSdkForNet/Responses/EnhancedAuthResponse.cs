@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("enhancedAuthResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("enhancedAuthResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("enhancedAuthResponse")]
+    [LitleXmlRoot("enhancedAuthResponse")]
     public class EnhancedAuthResponse
     {
         [XmlElement("fundingSource")]

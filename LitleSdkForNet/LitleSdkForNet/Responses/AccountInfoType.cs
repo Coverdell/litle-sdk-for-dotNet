@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("accountInfoType", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("accountInfoType")]
     public class AccountInfoType
     {
         [XmlElement("type")]

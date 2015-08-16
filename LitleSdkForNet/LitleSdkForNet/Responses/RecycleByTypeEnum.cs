@@ -1,8 +1,6 @@
-using System.Xml.Serialization;
-
 namespace Litle.Sdk.Responses
 {
-    [XmlType("recycleTypeEnum", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("recycleTypeEnum")]
     public enum RecycleByTypeEnum
     {
         Merchant,

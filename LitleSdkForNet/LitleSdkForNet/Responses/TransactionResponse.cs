@@ -1,8 +1,6 @@
-using System.Xml.Serialization;
-
 namespace Litle.Sdk.Responses
 {
-    [XmlType("transactionResponse", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("transactionResponse")]
     public class TransactionResponse
     {
     }

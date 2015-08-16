@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("recurringTransactionResponseType", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("recurringTransactionResponseType")]
     public class RecurringTransactionResponseType : TransactionResponse
     {
         [XmlElement("litleTxnId")]

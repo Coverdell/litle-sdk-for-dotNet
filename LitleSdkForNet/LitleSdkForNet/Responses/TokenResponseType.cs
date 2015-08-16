@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("tokenResponseType", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("tokenResponseType")]
     public class TokenResponseType
     {
         [XmlElement("litleToken")]

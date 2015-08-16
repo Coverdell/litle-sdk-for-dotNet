@@ -2,8 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("saleResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("saleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlRoot("saleResponse")]
     public class SaleResponse : CommonTransactionTypeWithReportGroupAndOrderAndFraudAndPostDateAndGiftCardResponse
     {
         [XmlElement("cardProductId")]

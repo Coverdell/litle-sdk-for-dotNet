@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("posCapabilityTypeEnum", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("posCapabilityTypeEnum")]
     public enum PosCapabilityTypeEnum
     {
         [XmlEnum("notused")]

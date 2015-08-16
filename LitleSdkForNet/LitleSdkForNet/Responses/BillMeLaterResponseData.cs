@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("billMeLaterResponseData", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("billMeLaterResponseData", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("billMeLaterResponseData")]
+    [LitleXmlRoot("billMeLaterResponseData")]
     public class BillMeLaterResponseData
     {
         [XmlElement("bmlMerchantId")]
@@ -12,11 +12,8 @@ namespace Litle.Sdk.Responses
         [XmlElement("promotionalOfferCode")]
         public string PromotionalOfferCode { get; set; }
 
-        [XmlElement("approvedTermsCode")]
-        public int ApprovedTermsCode { get; set; }
-
-        [XmlIgnore]
-        public bool ApprovedTermsCodeSpecified { get; set; }
+        [XmlElement("approvedTermsCode", IsNullable = true)]
+        public int? ApprovedTermsCode { get; set; }
 
         [XmlElement("creditLine", DataType = "integer")]
         public string CreditLine { get; set; }

@@ -1,8 +1,6 @@
-using System.Xml.Serialization;
-
 namespace Litle.Sdk.Responses
 {
-    [XmlType(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("enhancedDataDeliveryType")]
     public enum EnhancedDataDeliveryType
     {
         CNC,

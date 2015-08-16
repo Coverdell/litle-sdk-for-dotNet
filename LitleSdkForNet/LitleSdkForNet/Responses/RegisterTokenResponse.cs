@@ -2,8 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("registerTokenResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("registerTokenResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlRoot("registerTokenResponse")]
     public class RegisterTokenResponse : CommonTransactionTypeWithReportGroupAndOrder
     {
         [XmlElement("litleToken")]

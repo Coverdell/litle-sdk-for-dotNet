@@ -2,8 +2,7 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("fraudCheckResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("fraudCheckResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [XmlRoot("fraudCheckResponse")]
     public class FraudCheckResponse : CommonTransactionTypeWithReportGroup
     {
         [XmlElement("advancedFraudResults")]

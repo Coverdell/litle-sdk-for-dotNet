@@ -3,8 +3,8 @@ using Litle.Sdk.Requests;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("accountUpdateResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("accountUpdateResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("accountUpdateResponse")]
+    [LitleXmlRoot("accountUpdateResponse")]
     public class AccountUpdateResponse : CommonTransactionTypeWithReportGroup
     {
         [XmlElement("updatedCard")]

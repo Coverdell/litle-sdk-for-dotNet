@@ -5,8 +5,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("batchResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("batchResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("batchResponse")]
+    [LitleXmlRoot("batchResponse")]
     public class BatchResponse
     {
         [XmlElement("id")]

@@ -1,8 +1,6 @@
-using System.Xml.Serialization;
-
 namespace Litle.Sdk.Responses
 {
-    [XmlType("recurringTransactionType", Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("recurringTransactionType")]
     public class RecurringTransactionType : TransactionRequest
     {
     }

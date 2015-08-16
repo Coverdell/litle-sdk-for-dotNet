@@ -2,8 +2,8 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk.Responses
 {
-    [XmlType("authorizationResponse", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("authorizationResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("authorizationResponse")]
+    [LitleXmlRoot("authorizationResponse")]
     public class AuthorizationResponse : CommonTransactionTypeWithReportGroupAndOrder
     {
         [XmlElement("cardProductId")]
