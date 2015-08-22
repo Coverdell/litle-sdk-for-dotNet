@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace Litle.Sdk
 {
     [Serializable]
-    [XmlType(Namespace = "http://www.litle.com/schema")]
+    [LitleXmlType("methodOfPaymentTypeEnum")]
     public enum MethodOfPaymentTypeEnum
     {
         MC,

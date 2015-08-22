@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="CommonTransactionTypeWithReportGroupAndOrder.cs" />
     <Compile Include="ILitleOnline.cs" />
-    <Compile Include="LitleXmlRoot.cs" />
+    <Compile Include="Xml\LitleXmlRoot.cs" />
     <Compile Include="MethodOfPaymentTypeEnum.cs" />
     <Compile Include="Requests\BatchRequest.cs" />
     <Compile Include="Requests\EcheckPreNoteCredit.cs" />
@@ -146,7 +146,7 @@
     <Compile Include="Requests\Wallet.cs" />
     <Compile Include="Requests\WalletWalletSourceType.cs" />
     <Compile Include="CommonTransactionTypeWithReportGroup.cs" />
-    <Compile Include="XmlUtil.cs" />
+    <Compile Include="Xml\XmlUtil.cs" />
     <Compile Include="Responses\AccountInfoType.cs" />
     <Compile Include="Responses\AccountUpdater.cs" />
     <Compile Include="Responses\AccountUpdateResponse.cs" />
@@ -245,7 +245,7 @@
     <Compile Include="Responses\VendorDebitResponse.cs" />
     <Compile Include="Responses\VirtualGiftCardResponseType.cs" />
     <Compile Include="Responses\VoidRecyclingResponseType.cs" />
-    <Compile Include="XmlSerializer.cs" />
+    <Compile Include="Xml\XmlSerializer.cs" />
     <Compile Include="Communications.cs" />
     <Compile Include="Requests\PhysicalCheckDebit.cs" />
     <Compile Include="LitleTime.cs" />
@@ -273,7 +273,9 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Web\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

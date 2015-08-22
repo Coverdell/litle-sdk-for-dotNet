@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Xml.Serialization;
 using Litle.Sdk.Properties;
 using Litle.Sdk.Requests;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk
 {
@@ -50,7 +48,6 @@ namespace Litle.Sdk
          * proxyPort
          * printxml (possible values "true" and "false" - defaults to false)
          */
-
         public LitleOnline(Dictionary<String, String> config)
         {
             _config = config;
@@ -354,7 +351,11 @@ namespace Litle.Sdk
             {
                 MerchantId = _config["merchantId"],
                 MerchantSdk = "DotNet;9.3.2",
-                Authentication = new Authentication {Password = _config["password"], User = _config["username"]}
+                Authentication = new Authentication
+                {
+                    Password = _config["password"], 
+                    User = _config["username"]
+                }
             };
         }
 
@@ -364,7 +365,7 @@ namespace Litle.Sdk
             var xmlResponse = _communication.HttpPost(xmlRequest, _config);
             try
             {
-                LitleOnlineResponse litleOnlineResponse = DeserializeObject(xmlResponse);
+                LitleOnlineResponse litleOnlineResponse = LitleXmlSerializer.DeserializeObject(xmlResponse);
                 if ("1".Equals(litleOnlineResponse.Response))
                 {
                     throw new LitleOnlineException(litleOnlineResponse.Message);
@@ -376,21 +377,6 @@ namespace Litle.Sdk
                 throw new LitleOnlineException("Error validating xml data against the schema", ioe);
             }
         }
-
-        public static String SerializeObject(LitleOnlineRequest req)
-        {
-            var serializer = new XmlSerializer(typeof (LitleOnlineRequest));
-            var ms = new MemoryStream();
-            serializer.Serialize(ms, req);
-            return Encoding.UTF8.GetString(ms.GetBuffer()); //return string is UTF8 encoded.
-        } // serialize the xml
-
-        public static LitleOnlineResponse DeserializeObject(string response)
-        {
-            var serializer = new XmlSerializer(typeof (LitleOnlineResponse), "litleOnlineResponse");
-            var reader = new StringReader(response);
-            return (LitleOnlineResponse) serializer.Deserialize(reader);
-        } // deserialize the object
 
         private void FillInReportGroup(TransactionTypeWithReportGroup txn)
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -317,7 +318,7 @@ namespace Litle.Sdk.Test.Unit
         public void TestRecurringResponse_Full()
         {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage><recurringTxnId>678</recurringTxnId></recurringResponse></authorizationResponse></litleOnlineResponse>";
-            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            LitleOnlineResponse litleOnlineResponse = LitleXmlSerializer.DeserializeObject(xmlResponse);
             AuthorizationResponse authorizationResponse = (AuthorizationResponse)litleOnlineResponse.AuthorizationResponse;
 
             Assert.AreEqual(123, authorizationResponse.LitleTxnId);
@@ -331,7 +332,7 @@ namespace Litle.Sdk.Test.Unit
         public void TestRecurringResponse_NoRecurringTxnId()
         {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage></recurringResponse></authorizationResponse></litleOnlineResponse>";
-            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            LitleOnlineResponse litleOnlineResponse = LitleXmlSerializer.DeserializeObject(xmlResponse);
             AuthorizationResponse authorizationResponse = (AuthorizationResponse)litleOnlineResponse.AuthorizationResponse;
 
             Assert.AreEqual(123, authorizationResponse.LitleTxnId);
@@ -492,7 +493,7 @@ namespace Litle.Sdk.Test.Unit
 </authorizationResponse>
 </litleOnlineResponse>";
 
-            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            LitleOnlineResponse litleOnlineResponse = LitleXmlSerializer.DeserializeObject(xmlResponse);
             AuthorizationResponse authorizationResponse = (AuthorizationResponse)litleOnlineResponse.AuthorizationResponse;
 
 
@@ -557,7 +558,7 @@ namespace Litle.Sdk.Test.Unit
 </authorizationResponse>
 </litleOnlineResponse>";
 
-            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            LitleOnlineResponse litleOnlineResponse = LitleXmlSerializer.DeserializeObject(xmlResponse);
             AuthorizationResponse authorizationResponse = (AuthorizationResponse)litleOnlineResponse.AuthorizationResponse;
 
 

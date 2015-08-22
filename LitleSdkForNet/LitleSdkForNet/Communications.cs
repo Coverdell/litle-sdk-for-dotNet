@@ -53,7 +53,7 @@ namespace Litle.Sdk
                     NeuterXml(ref logMessage);
                 }
                 var logWriter = new StreamWriter(logFile, true);
-                DateTime time = DateTime.Now;
+                var time = DateTime.Now;
                 logWriter.WriteLine(time.ToString(CultureInfo.InvariantCulture));
                 logWriter.WriteLine(logMessage + "\r\n");
                 logWriter.Close();
@@ -68,16 +68,16 @@ namespace Litle.Sdk
                 logFile = config["logFile"];
             }
 
-            string uri = config["url"];
+            var uri = config["url"];
             var req = (HttpWebRequest) WebRequest.Create(uri);
 
-            bool neuter = false;
+            var neuter = false;
             if (config.ContainsKey("neuterAccountNums"))
             {
                 neuter = ("true".Equals(config["neuterAccountNums"]));
             }
 
-            bool printxml = false;
+            var printxml = false;
             if (config.ContainsKey("printxml"))
             {
                 if ("true".Equals(config["printxml"]))
@@ -117,9 +117,9 @@ namespace Litle.Sdk
             }
 
             // read response
-            WebResponse resp = req.GetResponse();
+            var resp = req.GetResponse();
             string xmlResponse;
-            using (Stream stream = resp.GetResponseStream())
+            using (var stream = resp.GetResponseStream())
             {
                 if (stream == null) return null;
                 using (var reader = new StreamReader(stream))

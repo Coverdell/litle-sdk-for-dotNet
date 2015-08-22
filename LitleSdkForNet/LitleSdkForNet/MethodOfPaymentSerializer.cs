@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace Litle.Sdk
+﻿namespace Litle.Sdk
 {
     public abstract class MethodOfPaymentSerializer
     {
-        public static String Serialize(MethodOfPaymentTypeEnum mop)
+        public static string Serialize(MethodOfPaymentTypeEnum mop)
         {
             return mop == MethodOfPaymentTypeEnum.Item ? "" : mop.ToString();
         }

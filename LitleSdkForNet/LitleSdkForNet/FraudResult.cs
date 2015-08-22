@@ -6,8 +6,8 @@ using Litle.Sdk.Responses;
 namespace Litle.Sdk
 {
     [Serializable]
-    [XmlType("fraudResult", AnonymousType = true, Namespace = "http://www.litle.com/schema")]
-    [XmlRoot("fraudResult", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    [LitleXmlType("fraudResult")]
+    [LitleXmlRoot("fraudResult")]
     public partial class FraudResult
     {
         [XmlElement("advancedFraudResults")]
@@ -24,10 +24,7 @@ namespace Litle.Sdk
 
         [XmlElement("advancedAvsResult")]
         public string AdvancedAVSResult { get; set; }
-    }
 
-    public partial class FraudResult
-    {
         public string Serialize()
         {
             var xml = "";

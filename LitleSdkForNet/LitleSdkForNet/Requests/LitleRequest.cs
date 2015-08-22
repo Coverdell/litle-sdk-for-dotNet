@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using Litle.Sdk.Properties;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {

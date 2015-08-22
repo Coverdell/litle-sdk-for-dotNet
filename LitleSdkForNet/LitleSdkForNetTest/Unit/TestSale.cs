@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
@@ -110,7 +111,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecurringResponse_Full() {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage><recurringTxnId>678</recurringTxnId></recurringResponse></saleResponse></litleOnlineResponse>";
-            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            LitleOnlineResponse litleOnlineResponse = LitleXmlSerializer.DeserializeObject(xmlResponse);
             SaleResponse saleResponse = (SaleResponse)litleOnlineResponse.SaleResponse;
 
             Assert.AreEqual(123, saleResponse.LitleTxnId);
@@ -124,7 +125,7 @@ namespace Litle.Sdk.Test.Unit
         public void TestRecurringResponse_NoRecurringTxnId()
         {
             String xmlResponse = "<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId><recurringResponse><subscriptionId>12</subscriptionId><responseCode>345</responseCode><responseMessage>Foo</responseMessage></recurringResponse></saleResponse></litleOnlineResponse>";
-            LitleOnlineResponse litleOnlineResponse = LitleOnline.DeserializeObject(xmlResponse);
+            LitleOnlineResponse litleOnlineResponse = LitleXmlSerializer.DeserializeObject(xmlResponse);
             SaleResponse saleResponse = (SaleResponse)litleOnlineResponse.SaleResponse;
 
             Assert.AreEqual(123, saleResponse.LitleTxnId);

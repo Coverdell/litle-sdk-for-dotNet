@@ -8,8 +8,7 @@ namespace Litle.Sdk
         public static XmlEnumAttribute GetXmlEnum(string name, Type type)
         {
             var memberInfo = type.GetMember(name)[0];
-            var attr = (XmlEnumAttribute)Attribute.GetCustomAttribute(memberInfo, typeof(XmlEnumAttribute));
-            return attr;
+            return (XmlEnumAttribute)Attribute.GetCustomAttribute(memberInfo, typeof(XmlEnumAttribute));
         }
     }
 }

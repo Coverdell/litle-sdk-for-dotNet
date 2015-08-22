@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Litle.Sdk.Requests;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
