@@ -351,6 +351,7 @@ namespace Litle.Sdk
             {
                 MerchantId = _config["merchantId"],
                 MerchantSdk = "DotNet;9.3.2",
+                Version = "9.3",
                 Authentication = new Authentication
                 {
                     Password = _config["password"], 
@@ -361,10 +362,10 @@ namespace Litle.Sdk
 
         private LitleOnlineResponse SendToLitle(LitleOnlineRequest request)
         {
-            var xmlRequest = request.Serialize();
-            var xmlResponse = _communication.HttpPost(xmlRequest, _config);
             try
             {
+                var xmlRequest = request.Serialize();
+                var xmlResponse = _communication.HttpPost(xmlRequest, _config);
                 LitleOnlineResponse litleOnlineResponse = LitleXmlSerializer.DeserializeObject(xmlResponse);
                 if ("1".Equals(litleOnlineResponse.Response))
                 {
@@ -375,6 +376,10 @@ namespace Litle.Sdk
             catch (InvalidOperationException ioe)
             {
                 throw new LitleOnlineException("Error validating xml data against the schema", ioe);
+            }
+            catch (Exception e)
+            {
+                throw;
             }
         }
 

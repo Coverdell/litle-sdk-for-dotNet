@@ -1,64 +1,27 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("echeckVerification")]
     public class EcheckVerification : TransactionTypeWithReportGroup
     {
-        private long _litleTxnIdField;
-        private bool _litleTxnIdSet;
-
-        public long LitleTxnId
-        {
-            get { return _litleTxnIdField; }
-            set
-            {
-                _litleTxnIdField = value;
-                _litleTxnIdSet = true;
-            }
-        }
-
+        [XmlElement("litleTxnId")]
+        public long? LitleTxnId { get; set; }
+        [XmlElement("orderId")]
         public string OrderId { get; set; }
-        private long _amountField;
-        private bool _amountSet;
-
-        public long Amount
-        {
-            get { return _amountField; }
-            set
-            {
-                _amountField = value;
-                _amountSet = true;
-            }
-        }
-
+        [XmlElement("amount")]
+        public long? Amount { get; set; }
+        [XmlElement("orderSource")]
         public OrderSourceType OrderSource { get; set; }
+        [XmlElement("billToAddress")]
         public Contact BillToAddress { get; set; }
+        [XmlElement("echeck")]
         public EcheckType Echeck { get; set; }
+        [XmlElement("token")]
         public EcheckTokenType Token { get; set; }
+        [XmlElement("merchantData")]
         public MerchantDataType MerchantData { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<echeckVerification";
-            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
-            }
-            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\"";
-            xml += ">";
-
-            if (_litleTxnIdSet) xml += "\r\n<litleTxnId>" + _litleTxnIdField + "</litleTxnId>";
-            xml += "\r\n<orderId>" + OrderId + "</orderId>";
-            if (_amountSet) xml += "\r\n<amount>" + _amountField + "</amount>";
-            if (OrderSource != null) xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
-            if (BillToAddress != null) xml += "\r\n<billToAddress>" + BillToAddress.Serialize() + "</billToAddress>";
-            if (Echeck != null) xml += "\r\n<echeck>" + Echeck.Serialize() + "</echeck>";
-            else if (Token != null) xml += "\r\n<echeckToken>" + Token.Serialize() + "</echeckToken>";
-            if (MerchantData != null) xml += "\r\n<merchantData>" + MerchantData.Serialize() + "</merchantData>";
-            xml += "\r\n</echeckVerification>";
-            return xml;
-        }
     }
 }

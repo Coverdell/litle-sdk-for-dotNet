@@ -1,23 +1,23 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("payPal")]
     public class PayPal
     {
+        [XmlElement("payerId")]
         public string PayerId { get; set; }
+        [XmlElement("payerEmail")]
         public string PayerEmail { get; set; }
+        [XmlElement("token")]
         public string Token { get; set; }
+        [XmlElement("transactionId")]
         public string TransactionId { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (PayerId != null) xml += "\r\n<payerId>" + SecurityElement.Escape(PayerId) + "</payerId>";
-            if (PayerEmail != null) xml += "\r\n<payerEmail>" + SecurityElement.Escape(PayerEmail) + "</payerEmail>";
-            if (Token != null) xml += "\r\n<token>" + SecurityElement.Escape(Token) + "</token>";
-            if (TransactionId != null)
-                xml += "\r\n<transactionId>" + SecurityElement.Escape(TransactionId) + "</transactionId>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

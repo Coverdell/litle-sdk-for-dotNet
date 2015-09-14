@@ -9,19 +9,28 @@ namespace Litle.Sdk.Xml
 {
     public class LitleXmlSerializer
     {
-        public static string SerializeObject(object instance)
+        public static string SerializeObject<T>(T instance)
         {
-            var serializer = new XmlSerializer(instance.GetType());
-            var ms = new MemoryStream();
-            try
+            var type = typeof (T);
+            var serializable = new LitleXmlSerializable(type, instance);
+            using (var memoryStream = new MemoryStream())
             {
-                serializer.Serialize(ms, instance);
+                try
+                {
+                    var nodeType = typeof(LitleXmlRootAttribute);
+                    var attribute = Attribute.GetCustomAttribute(type, nodeType, true);
+                    var rootAttribute = (XmlRootAttribute)attribute;
+                    var serializableType = typeof(LitleXmlSerializable);
+                    var serializer = new XmlSerializer(serializableType, rootAttribute);
+                    serializer.Serialize(memoryStream, serializable);
+                }
+                catch (XmlException e)
+                {
+                    throw new LitleOnlineException("Error in sending request to Litle!", e);
+                }
+                var buffer = memoryStream.GetBuffer();
+                return Encoding.UTF8.GetString(buffer);
             }
-            catch (XmlException e)
-            {
-                throw new LitleOnlineException("Error in sending request to Litle!", e);
-            }
-            return Encoding.UTF8.GetString(ms.GetBuffer()); //return string is UTF8 encoded.
         }
 
         public static T DeserializeObjectFromFile<T>(string filePath)

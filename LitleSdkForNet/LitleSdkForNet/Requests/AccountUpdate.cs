@@ -1,46 +1,17 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("accountUpdate")]
     public class AccountUpdate : TransactionTypeWithReportGroup
     {
+        [XmlElement("orderId")]
         public string OrderId { get; set; }
+        [XmlElement("card", IsNullable = true)]
         public CardType Card { get; set; }
+        [XmlElement("token", IsNullable = true)]
         public CardTokenType Token { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<accountUpdate ";
-
-            if (ID != null)
-            {
-                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
-            }
-            if (CustomerId != null)
-            {
-                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
-            }
-            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
-
-            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
-
-            if (Card != null)
-            {
-                xml += "\r\n<card>";
-                xml += Card.Serialize();
-                xml += "\r\n</card>";
-            }
-            else if (Token != null)
-            {
-                xml += "\r\n<token>";
-                xml += Token.Serialize();
-                xml += "\r\n</token>";
-            }
-
-            xml += "\r\n</accountUpdate>";
-
-            return xml;
-        }
     }
 }

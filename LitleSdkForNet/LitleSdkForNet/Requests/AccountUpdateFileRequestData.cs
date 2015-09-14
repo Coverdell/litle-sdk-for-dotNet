@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Properties;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("accountUpdateFileRequestData")]
     public class AccountUpdateFileRequestData
     {
+        [XmlElement("merchantId")]
         public string MerchantId { get; set; }
+        [XmlElement("postDay", DataType = "date")]
         public DateTime PostDay { get; set; } //yyyy-MM-dd
 
         public AccountUpdateFileRequestData()
@@ -22,9 +26,7 @@ namespace Litle.Sdk.Requests
 
         public string Serialize()
         {
-            var xml = "\r\n<merchantId>" + SecurityElement.Escape(MerchantId) + "</merchantId>";
-            xml += "\r\n<postDay>" + PostDay.ToString("yyyy-MM-dd") + "</postDay>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

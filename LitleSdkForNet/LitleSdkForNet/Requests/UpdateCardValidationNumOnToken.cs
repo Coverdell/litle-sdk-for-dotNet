@@ -1,31 +1,17 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("updateCardValidationNumOnToken")]
     public class UpdateCardValidationNumOnToken : TransactionTypeWithReportGroup
     {
+        [XmlElement("orderId")]
         public string OrderId { get; set; }
+        [XmlElement("litleToken")]
         public string LitleToken { get; set; }
+        [XmlElement("cardValidationNum")]
         public string CardValidationNum { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<updateCardValidationNumOnToken";
-            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
-            }
-            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\"";
-            xml += ">";
-
-            if (OrderId != null) xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
-            if (LitleToken != null) xml += "\r\n<litleToken>" + SecurityElement.Escape(LitleToken) + "</litleToken>";
-            if (CardValidationNum != null)
-                xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(CardValidationNum) + "</cardValidationNum>";
-            xml += "\r\n</updateCardValidationNumOnToken>";
-            return xml;
-        }
     }
 }

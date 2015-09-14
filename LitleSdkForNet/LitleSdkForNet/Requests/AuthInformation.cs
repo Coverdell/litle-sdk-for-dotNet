@@ -1,34 +1,24 @@
 using System;
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("authInformation")]
     public class AuthInformation
     {
+        [XmlElement("authDate", DataType = "date")]
         public DateTime AuthDate { get; set; }
+        [XmlElement("authCode")]
         public string AuthCode { get; set; }
+        [XmlElement("fraudResult")]
         public FraudResult FraudResult { get; set; }
-        private long _authAmountField;
-        private bool _authAmountSet;
-
-        public long AuthAmount
-        {
-            get { return _authAmountField; }
-            set
-            {
-                _authAmountField = value;
-                _authAmountSet = true;
-            }
-        }
+        [XmlElement("authAmount", IsNullable = true)]
+        public long? AuthAmount { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            xml += "\r\n<authDate>" + XmlUtil.ToXsdDate(AuthDate) + "</authDate>";
-            if (AuthCode != null) xml += "\r\n<authCode>" + SecurityElement.Escape(AuthCode) + "</authCode>";
-            if (FraudResult != null) xml += "\r\n<fraudResult>" + FraudResult.Serialize() + "</fraudResult>";
-            if (_authAmountSet) xml += "\r\n<authAmount>" + _authAmountField + "</authAmount>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

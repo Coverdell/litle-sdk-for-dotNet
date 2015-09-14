@@ -1,18 +1,19 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("echeckForTokenType")]
     public class EcheckForTokenType
     {
+        [XmlElement("accNum")]
         public string AccNum { get; set; }
+        [XmlElement("routingNum")]
         public string RoutingNum { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (AccNum != null) xml += "\r\n<accNum>" + SecurityElement.Escape(AccNum) + "</accNum>";
-            if (RoutingNum != null) xml += "\r\n<routingNum>" + SecurityElement.Escape(RoutingNum) + "</routingNum>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

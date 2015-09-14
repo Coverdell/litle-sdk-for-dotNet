@@ -1,28 +1,17 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("balanceInquiry")]
     public class BalanceInquiry : TransactionTypeWithReportGroup
     {
+        [XmlElement("orderId")]
         public string OrderId { get; set; }
+        [XmlElement("orderSource")]
         public OrderSourceType OrderSource { get; set; }
+        [XmlElement("card")]
         public CardType Card { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<balanceInquiry";
-            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
-            }
-            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
-            xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
-            xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
-            xml += "\r\n</balanceInquiry>";
-            return xml;
-        }
     }
 }

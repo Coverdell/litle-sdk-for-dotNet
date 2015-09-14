@@ -1,22 +1,23 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("customBilling")]
     public class CustomBilling
     {
+        [XmlElement("phone")]
         public string Phone { get; set; }
+        [XmlElement("city")]
         public string City { get; set; }
+        [XmlElement("url")]
         public string Url { get; set; }
+        [XmlElement("descriptor")]
         public string Descriptor { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (Phone != null) xml += "\r\n<phone>" + SecurityElement.Escape(Phone) + "</phone>";
-            else if (City != null) xml += "\r\n<city>" + SecurityElement.Escape(City) + "</city>";
-            else if (Url != null) xml += "\r\n<url>" + SecurityElement.Escape(Url) + "</url>";
-            if (Descriptor != null) xml += "\r\n<descriptor>" + SecurityElement.Escape(Descriptor) + "</descriptor>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

@@ -1,13 +1,13 @@
-using System;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Responses
 {
     [LitleXmlType("transactionRequest")]
     public class TransactionRequest
     {
-        public virtual string Serialize()
+        public string Serialize()
         {
-            throw new NotImplementedException();
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

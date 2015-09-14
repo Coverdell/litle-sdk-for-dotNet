@@ -1,39 +1,25 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("cardType")]
     public class CardType
     {
+        [XmlElement("type")]
         public MethodOfPaymentTypeEnum Type { get; set; }
+        [XmlElement("number")]
         public string Number { get; set; }
+        [XmlElement("expDate")]
         public string ExpDate { get; set; }
+        [XmlElement("track")]
         public string Track { get; set; }
+        [XmlElement("cardValidationNum")]
         public string CardValidationNum { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (Track == null)
-            {
-                xml += "\r\n<type>" + MethodOfPaymentSerializer.Serialize(Type) + "</type>";
-                if (Number != null)
-                {
-                    xml += "\r\n<number>" + SecurityElement.Escape(Number) + "</number>";
-                }
-                if (ExpDate != null)
-                {
-                    xml += "\r\n<expDate>" + SecurityElement.Escape(ExpDate) + "</expDate>";
-                }
-            }
-            else
-            {
-                xml += "\r\n<track>" + SecurityElement.Escape(Track) + "</track>";
-            }
-            if (CardValidationNum != null)
-            {
-                xml += "\r\n<cardValidationNum>" + SecurityElement.Escape(CardValidationNum) + "</cardValidationNum>";
-            }
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

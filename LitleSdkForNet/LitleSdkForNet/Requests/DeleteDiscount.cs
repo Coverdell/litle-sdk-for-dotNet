@@ -1,16 +1,17 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("deleteDiscount")]
     public class DeleteDiscount
     {
+        [XmlElement("discountCode")]
         public string DiscountCode { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            xml += "\r\n<discountCode>" + SecurityElement.Escape(DiscountCode) + "</discountCode>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

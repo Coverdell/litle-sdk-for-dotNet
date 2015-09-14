@@ -1,25 +1,26 @@
 using System;
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("createDiscount")]
     public class CreateDiscount
     {
+        [XmlElement("discountCode")]
         public string DiscountCode { get; set; }
+        [XmlElement("name")]
         public string Name { get; set; }
+        [XmlElement("amount")]
         public long Amount { get; set; }
+        [XmlElement("startDate")]
         public DateTime StartDate { get; set; }
+        [XmlElement("endDate")]
         public DateTime EndDate { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            xml += "\r\n<discountCode>" + SecurityElement.Escape(DiscountCode) + "</discountCode>";
-            xml += "\r\n<name>" + SecurityElement.Escape(Name) + "</name>";
-            xml += "\r\n<amount>" + Amount + "</amount>";
-            xml += "\r\n<startDate>" + XmlUtil.ToXsdDate(StartDate) + "</startDate>";
-            xml += "\r\n<endDate>" + XmlUtil.ToXsdDate(EndDate) + "</endDate>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

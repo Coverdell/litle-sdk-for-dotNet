@@ -1,22 +1,23 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("applepay")]
     public class ApplepayType
     {
+        [XmlElement("data")]
         public string Data { get; set; }
+        [XmlElement("header")]
         public ApplepayHeaderType Header { get; set; }
+        [XmlElement("signature")]
         public string Signature { get; set; }
+        [XmlElement("version")]
         public string Version { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (Data != null) xml += "\r\n<data>" + SecurityElement.Escape(Data) + "</data>";
-            if (Header != null) xml += "\r\n<header>" + Header.Serialize() + "</header>";
-            if (Signature != null) xml += "\r\n<signature>" + SecurityElement.Escape(Signature) + "</signature>";
-            if (Version != null) xml += "\r\n<version>" + SecurityElement.Escape(Version) + "</version>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

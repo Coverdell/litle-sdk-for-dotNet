@@ -1,135 +1,113 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Litle.Sdk.Requests;
+﻿using Litle.Sdk.Requests;
 using NUnit.Framework;
-using Litle.Sdk;
-using Moq;
-using System.Text.RegularExpressions;
-
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    class TestForceCapture
+    class TestForceCapture : TestBase
     {
-        
-        private LitleOnline litle;
-
-        [TestFixtureSetUp]
-        public void SetUpLitle()
-        {
-            litle = new LitleOnline();
-        }
-
         [Test]
         public void TestSecondaryAmount()
         {
-            ForceCapture capture = new ForceCapture();
-            capture.Amount = 2;
-            capture.SecondaryAmount = 1;
-            capture.OrderSource = OrderSourceType.Ecommerce;
-            capture.ReportGroup = "Planets";
+            var capture = new ForceCapture
+            {
+                Amount = 2,
+                SecondaryAmount = 1,
+                OrderSource = OrderSourceType.Ecommerce,
+                ReportGroup = "Planets"
+            };
 
-            var mock = new Mock<Communications>();
-
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
-
-            Communications mockedCommunication = mock.Object;
-            litle.SetCommunication(mockedCommunication);
-            litle.ForceCapture(capture);
+            const string value = "<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>";
+            var regex = FormMatchExpression(
+                "<amount>2</amount>",
+                "<secondaryAmount>1</secondaryAmount>",
+                "<orderSource>ecommerce</orderSource>");
+            MockLitlePost(regex, value);
+            Litle.ForceCapture(capture);
         }
 
         [Test]
         public void TestSurchargeAmount()
         {
-            ForceCapture capture = new ForceCapture();
-            capture.Amount = 2;
-            capture.SurchargeAmount = 1;
-            capture.OrderSource = OrderSourceType.Ecommerce;
-            capture.ReportGroup = "Planets";
+            var capture = new ForceCapture
+            {
+                Amount = 2,
+                SurchargeAmount = 1,
+                OrderSource = OrderSourceType.Ecommerce,
+                ReportGroup = "Planets"
+            };
 
-            var mock = new Mock<Communications>();
-
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
-
-            Communications mockedCommunication = mock.Object;
-            litle.SetCommunication(mockedCommunication);
-            litle.ForceCapture(capture);
+            const string value = "<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>";
+            var regex = FormMatchExpression(
+                "<amount>2</amount>",
+                "<surchargeAmount>1</surchargeAmount>",
+                "<orderSource>ecommerce</orderSource>");
+            MockLitlePost(regex, value);
+            Litle.ForceCapture(capture);
         }
 
 
         [Test]
         public void TestSurchargeAmount_Optional()
         {
-            ForceCapture capture = new ForceCapture();
-            capture.Amount = 2;
-            capture.OrderSource = OrderSourceType.Ecommerce;
-            capture.ReportGroup = "Planets";
+            var capture = new ForceCapture
+            {
+                Amount = 2,
+                OrderSource = OrderSourceType.Ecommerce,
+                ReportGroup = "Planets"
+            };
 
-            var mock = new Mock<Communications>();
-
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
-
-            Communications mockedCommunication = mock.Object;
-            litle.SetCommunication(mockedCommunication);
-            litle.ForceCapture(capture);
+            const string value = "<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>";
+            var regex = FormMatchExpression(
+                "<amount>2</amount>",
+                "<orderSource>ecommerce</orderSource>");
+            MockLitlePost(regex, value);
+            Litle.ForceCapture(capture);
         }
 
         [Test]
         public void TestDebtRepayment_True()
         {
-            ForceCapture forceCapture = new ForceCapture();
-            forceCapture.MerchantData = new MerchantDataType();
-            forceCapture.DebtRepayment = true;
+            var forceCapture = new ForceCapture
+            {
+                MerchantData = new MerchantDataType(), 
+                DebtRepayment = true
+            };
 
-            var mock = new Mock<Communications>();
-
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*</merchantData>\r\n<debtRepayment>true</debtRepayment>\r\n</forceCapture>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
-
-            Communications mockedCommunication = mock.Object;
-            litle.SetCommunication(mockedCommunication);
-            litle.ForceCapture(forceCapture);
+            const string value = "<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>";
+            var regex = FormMatchExpression(
+                "<merchantData />",
+                "<debtRepayment>true</debtRepayment>",
+                "</forceCapture>");
+            MockLitlePost(regex, value);
+            Litle.ForceCapture(forceCapture);
         }
 
         [Test]
         public void TestDebtRepayment_False()
         {
-            ForceCapture forceCapture = new ForceCapture();
-            forceCapture.MerchantData = new MerchantDataType();
-            forceCapture.DebtRepayment = false;
+            var forceCapture = new ForceCapture {MerchantData = new MerchantDataType(), DebtRepayment = false};
 
-            var mock = new Mock<Communications>();
-
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*</merchantData>\r\n<debtRepayment>false</debtRepayment>\r\n</forceCapture>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
-
-            Communications mockedCommunication = mock.Object;
-            litle.SetCommunication(mockedCommunication);
-            litle.ForceCapture(forceCapture);
+            const string value = "<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>";
+            var regex = FormMatchExpression(
+                "<merchantData />",
+                "<debtRepayment>false</debtRepayment>",
+                "</forceCapture>");
+            MockLitlePost(regex, value);
+            Litle.ForceCapture(forceCapture);
         }
 
         [Test]
         public void TestDebtRepayment_Optional()
         {
-            ForceCapture forceCapture = new ForceCapture();
-            forceCapture.MerchantData = new MerchantDataType();
+            var forceCapture = new ForceCapture {MerchantData = new MerchantDataType()};
 
-            var mock = new Mock<Communications>();
-
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*</merchantData>\r\n</forceCapture>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
-
-            Communications mockedCommunication = mock.Object;
-            litle.SetCommunication(mockedCommunication);
-            litle.ForceCapture(forceCapture);
+            const string value = "<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>";
+            var regex = FormMatchExpression(
+                "<merchantData />",
+                "</forceCapture>");
+            MockLitlePost(regex, value);
+            Litle.ForceCapture(forceCapture);
         }
-
-
-
     }
 }

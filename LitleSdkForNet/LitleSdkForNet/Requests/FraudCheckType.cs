@@ -1,40 +1,23 @@
-using System;
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("fraudCheckType")]
     public class FraudCheckType
     {
-        public String AuthenticationValue { get; set; }
-        public String AuthenticationTransactionId { get; set; }
-        public String CustomerIpAddress { get; set; }
-        private bool _authenticatedByMerchantField;
-        private bool _authenticatedByMerchantSet;
-
-        public bool AuthenticatedByMerchant
-        {
-            get { return _authenticatedByMerchantField; }
-            set
-            {
-                _authenticatedByMerchantField = value;
-                _authenticatedByMerchantSet = true;
-            }
-        }
+        [XmlElement("authenticationValue")]
+        public string AuthenticationValue { get; set; }
+        [XmlElement("authenticationTransactionId")]
+        public string AuthenticationTransactionId { get; set; }
+        [XmlElement("customerIpAddress")]
+        public string CustomerIpAddress { get; set; }
+        [XmlElement("authenticatedByMerchant", IsNullable = true)]
+        public bool? AuthenticatedByMerchant { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (AuthenticationValue != null)
-                xml += "\r\n<authenticationValue>" + SecurityElement.Escape(AuthenticationValue) +
-                       "</authenticationValue>";
-            if (AuthenticationTransactionId != null)
-                xml += "\r\n<authenticationTransactionId>" + SecurityElement.Escape(AuthenticationTransactionId) +
-                       "</authenticationTransactionId>";
-            if (CustomerIpAddress != null)
-                xml += "\r\n<customerIpAddress>" + SecurityElement.Escape(CustomerIpAddress) + "</customerIpAddress>";
-            if (_authenticatedByMerchantSet)
-                xml += "\r\n<authenticatedByMerchant>" + _authenticatedByMerchantField + "</authenticatedByMerchant>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

@@ -168,7 +168,7 @@ namespace Litle.Sdk.Test.Unit
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<echeckRedeposit.*?<litleTxnId>123456</litleTxnId>.*?</echeckRedeposit>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex("<litleOnlineRequest.*?<echeckRedeposit.*?<litleTxnId>123456</litleTxnId>.*?</echeckRedeposit>", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckRedepositResponse><litleTxnId>123</litleTxnId></echeckRedepositResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
@@ -200,7 +200,7 @@ namespace Litle.Sdk.Test.Unit
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<echeckSale.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckSale>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex("<litleOnlineRequest.*?<echeckSale.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckSale>", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckSalesResponse><litleTxnId>123</litleTxnId></echeckSalesResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;
@@ -232,7 +232,7 @@ namespace Litle.Sdk.Test.Unit
 
             var mock = new Mock<Communications>();
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<echeckVerification.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckVerification>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex("<litleOnlineRequest.*?<echeckVerification.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckVerification>", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
 
             Communications mockedCommunication = mock.Object;

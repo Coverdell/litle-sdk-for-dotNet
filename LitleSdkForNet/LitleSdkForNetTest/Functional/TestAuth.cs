@@ -1,178 +1,184 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Litle.Sdk.Properties;
 using Litle.Sdk.Requests;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Test.Unit;
 using NUnit.Framework;
-using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    class TestAuth
+    internal class TestAuth : TestBase
     {
-        private LitleOnline litle;
-        private Dictionary<string, string> config;
-
-        [TestFixtureSetUp]
-        public void SetUpLitle()
+        private readonly Dictionary<string, string> _config = new Dictionary<string, string>
         {
-            config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "65");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
-            config.Add("printxml", "true");
-            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
-            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
-            config.Add("logFile", Properties.Settings.Default.logFile);
-            config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(config);
+            {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+            {"reportGroup", "Default Report Group"},
+            {"username", "DOTNET"},
+            {"version", "8.13"},
+            {"timeout", "65"},
+            {"merchantId", "101"},
+            {"password", "TESTCASE"},
+            {"printxml", "true"},
+            {"proxyHost", Settings.Default.proxyHost},
+            {"proxyPort", Settings.Default.proxyPort},
+            {"logFile", Settings.Default.logFile},
+            {"neuterAccountNums", "true"}
+        };
+
+        public override void SetUpLitle()
+        {
+            Litle = new LitleOnline(_config);
         }
 
         [Test]
         public void SimpleAuthWithCard()
         {
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "Planets";
-            authorization.OrderId = "12344";
-            authorization.Amount = 106;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            CardType card = new CardType();
-            card.Type = MethodOfPaymentTypeEnum.VI;
-            card.Number = "414100000000000000";
-            card.ExpDate = "1210";
-            authorization.Card = card; //This needs to compile
+            var authorization = new Authorization
+            {
+                ReportGroup = "Planets",
+                OrderId = "12344",
+                Amount = 106,
+                OrderSource = OrderSourceType.Ecommerce,
+                Card = new CardType
+                {
+                    Type = MethodOfPaymentTypeEnum.VI,
+                    Number = "414100000000000000",
+                    ExpDate = "1210"
+                },
+                CustomBilling = new CustomBilling {Phone = "1112223333"}
+            };
 
-            CustomBilling cb = new CustomBilling();
-            cb.Phone = "1112223333"; //This needs to compile too            
-
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("000", response.Response);
         }
+
         [Test]
         public void SimpleAuthWithMpos()
         {
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "Planets";
-            authorization.OrderId = "12344";
-            authorization.Amount = 200;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            MposType mpos = new MposType();
-            mpos.Ksn = "77853211300008E00016";
-            mpos.EncryptedTrack = "CASE1E185EADD6AFE78C9A214B21313DCD836FDD555FBE3A6C48D141FE80AB9172B963265AFF72111895FE415DEDA162CE8CB7AC4D91EDB611A2AB756AA9CB1A000000000000000000000000000000005A7AAF5E8885A9DB88ECD2430C497003F2646619A2382FFF205767492306AC804E8E64E8EA6981DD";
-            mpos.FormatId = "30";
-            mpos.Track1Status = 0;
-            mpos.Track2Status = 0;
-            authorization.Mpos = mpos; //This needs to compile
-       
+            var authorization = new Authorization
+            {
+                ReportGroup = "Planets",
+                OrderId = "12344",
+                Amount = 200,
+                OrderSource = OrderSourceType.Ecommerce,
+                Mpos = new MposType
+                {
+                    Ksn = "77853211300008E00016",
+                    EncryptedTrack =
+                        "CASE1E185EADD6AFE78C9A214B21313DCD836FDD555FBE3A6C48D141FE80AB9172B963265AFF72111895FE415DEDA162CE8CB7AC4D91EDB611A2AB756AA9CB1A000000000000000000000000000000005A7AAF5E8885A9DB88ECD2430C497003F2646619A2382FFF205767492306AC804E8E64E8EA6981DD",
+                    FormatId = "30",
+                    Track1Status = 0,
+                    Track2Status = 0
+                }
+            };
 
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("000", response.Response);
         }
-         [Test]
+
+        [Test]
         public void AuthWithAmpersand()
         {
-            Authorization authorization = new Authorization();
-            authorization.OrderId = "1";
-            authorization.Amount = 10010;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            Contact contact = new Contact();
-            contact.Name = "John & Jane Smith";
-            contact.AddressLine1 = "1 Main St.";
-            contact.City = "Burlington";
-            contact.State = "MA";
-            contact.Zip = "01803-3747";
-            contact.Country = CountryTypeEnum.US;
-            authorization.BillToAddress = contact;
-            CardType card = new CardType();
-            card.Type = MethodOfPaymentTypeEnum.VI;
-            card.Number = "4457010000000009";
-            card.ExpDate = "0112";
-             card.CardValidationNum = "349";
-             authorization.Card = card;
-             AuthorizationResponse response = litle.Authorize(authorization);
+            var authorization = new Authorization
+            {
+                ID = "",
+                OrderId = "1",
+                Amount = 10010,
+                OrderSource = OrderSourceType.Ecommerce,
+                BillToAddress = new Contact
+                {
+                    Name = "John & Jane Smith",
+                    AddressLine1 = "1 Main St.",
+                    City = "Burlington",
+                    State = "MA",
+                    Zip = "01803-3747",
+                    Country = CountryTypeEnum.US
+                },
+                Card = new CardType
+                {
+                    Type = MethodOfPaymentTypeEnum.VI,
+                    Number = "4457010000000009",
+                    ExpDate = "0112",
+                    CardValidationNum = "349"
+                }
+            };
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("000", response.Response);
-         }
+        }
+
         [Test]
-        public void simpleAuthWithPaypal()
+        public void SimpleAuthWithPaypal()
         {
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "Planets";
-            authorization.OrderId = "123456";
-            authorization.Amount = 106;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            PayPal paypal = new PayPal();
-            paypal.PayerId = "1234";
-            paypal.Token = "1234";
-            paypal.TransactionId = "123456";
-            authorization.Paypal = paypal; //This needs to compile
+            var authorization = new Authorization
+            {
+                ReportGroup = "Planets",
+                OrderId = "123456",
+                Amount = 106,
+                OrderSource = OrderSourceType.Ecommerce,
+                Paypal = new PayPal {PayerId = "1234", Token = "1234", TransactionId = "123456"}
+            };
 
-            CustomBilling cb = new CustomBilling();
-            cb.Phone = "1112223333"; //This needs to compile too            
-
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
-        public void simpleAuthWithApplepayAndSecondaryAmountAndWallet()
+        public void SimpleAuthWithApplepayAndSecondaryAmountAndWallet()
         {
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "Planets";
-            authorization.OrderId = "123456";
-            authorization.Amount = 110;
-            authorization.SecondaryAmount = 50;
-            authorization.OrderSource = OrderSourceType.Applepay;
-            ApplepayType applepay = new ApplepayType();
-            ApplepayHeaderType applepayHeaderType = new ApplepayHeaderType();
-            applepayHeaderType.ApplicationData = "454657413164";
-            applepayHeaderType.EphemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.PublicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.TransactionId = "1234";
-            applepay.Header = applepayHeaderType;
-            applepay.Data = "user";
-            applepay.Signature = "sign";
-            applepay.Version = "1";
-            authorization.Applepay = applepay;
+            var authorization = new Authorization
+            {
+                ReportGroup = "Planets",
+                OrderId = "123456",
+                Amount = 110,
+                SecondaryAmount = 50,
+                OrderSource = OrderSourceType.Applepay,
+                Applepay = new ApplepayType
+                {
+                    Header = new ApplepayHeaderType
+                    {
+                        ApplicationData = "454657413164",
+                        EphemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                        PublicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                        TransactionId = "1234"
+                    },
+                    Data = "user",
+                    Signature = "sign",
+                    Version = "1"
+                },
+                Wallet = new Wallet
+                {
+                    WalletSourceTypeId = "123",
+                    WalletSourceType = WalletWalletSourceType.MasterPass
+                }
+            };
 
-            Wallet wallet = new Wallet();
-            wallet.WalletSourceTypeId = "123";
-            wallet.WalletSourceType = WalletWalletSourceType.MasterPass;
-            authorization.Wallet = wallet;
-
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("Insufficient Funds", response.Message);
             Assert.AreEqual("110", response.ApplepayResponse.TransactionAmount);
         }
 
         [Test]
-        public void posWithoutCapabilityAndEntryMode()
+        public void PosWithoutCapabilityAndEntryMode()
         {
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "Planets";
-            authorization.OrderId = "12344";
-            authorization.Amount = 106;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            Pos pos = new Pos();
-            pos.CardholderId = PosCardholderIdTypeEnum.Pin;
-            authorization.Pos = pos;
-            CardType card = new CardType();
-            card.Type = MethodOfPaymentTypeEnum.VI;
-            card.Number = "4100000000000002";
-            card.ExpDate = "1210";
-            authorization.Card = card; //This needs to compile
-
-            CustomBilling cb = new CustomBilling();
-            cb.Phone = "1112223333"; //This needs to compile too            
+            var authorization = new Authorization
+            {
+                ReportGroup = "Planets",
+                OrderId = "12344",
+                Amount = 106,
+                OrderSource = OrderSourceType.Ecommerce,
+                Pos = new Pos {CardholderId = PosCardholderIdTypeEnum.Pin},
+                Card = new CardType
+                {
+                    Type = MethodOfPaymentTypeEnum.VI,
+                    Number = "4100000000000002",
+                    ExpDate = "1210"
+                }
+            };
 
             try
             {
-                litle.Authorize(authorization);
-                //expected exception;
+                Litle.Authorize(authorization);
             }
             catch (LitleOnlineException e)
             {
@@ -181,136 +187,151 @@ namespace Litle.Sdk.Test.Functional
         }
 
         [Test]
-        public void trackData()
+        public void TrackData()
         {
-            Authorization authorization = new Authorization();
-            authorization.ID = "AX54321678";
-            authorization.ReportGroup = "RG27";
-            authorization.OrderId = "12z58743y1";
-            authorization.Amount = 12522L;
-            authorization.OrderSource = OrderSourceType.Retail;
-            Contact billToAddress = new Contact();
-            billToAddress.Zip = "95032";
-            authorization.BillToAddress = billToAddress;
-            CardType card = new CardType();
-            card.Track = "%B40000001^Doe/JohnP^06041...?;40001=0604101064200?";
-            authorization.Card = card;
-            Pos pos = new Pos();
-            pos.Capability = PosCapabilityTypeEnum.Magstripe;
-            pos.EntryMode = PosEntryModeTypeEnum.Completeread;
-            pos.CardholderId = PosCardholderIdTypeEnum.Signature;
-            authorization.Pos = pos;
+            var authorization = new Authorization
+            {
+                ID = "AX54321678",
+                ReportGroup = "RG27",
+                OrderId = "12z58743y1",
+                Amount = 12522L,
+                OrderSource = OrderSourceType.Retail,
+                BillToAddress = new Contact {Zip = "95032"},
+                Card = new CardType
+                {
+                    Track = "%B40000001^Doe/JohnP^06041...?;40001=0604101064200?"
+                },
+                Pos = new Pos
+                {
+                    Capability = PosCapabilityTypeEnum.Magstripe,
+                    EntryMode = PosEntryModeTypeEnum.Completeread,
+                    CardholderId = PosCardholderIdTypeEnum.Signature
+                }
+            };
 
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
-        public void testAuthHandleSpecialCharacters()
+        public void TestAuthHandleSpecialCharacters()
         {
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "<'&\">";
-            authorization.OrderId = "123456";
-            authorization.Amount = 106;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            PayPal paypal = new PayPal();
-            paypal.PayerId = "1234";
-            paypal.Token = "1234";
-            paypal.TransactionId = "123456";
-            authorization.Paypal = paypal; //This needs to compile
+            var authorization = new Authorization
+            {
+                ReportGroup = "<'&\">",
+                OrderId = "123456",
+                Amount = 106,
+                OrderSource = OrderSourceType.Ecommerce,
+                Paypal = new PayPal
+                {
+                    PayerId = "1234",
+                    Token = "1234",
+                    TransactionId = "123456"
+                }
+            };
 
-            CustomBilling cb = new CustomBilling();
-            cb.Phone = "<'&\">"; //This needs to compile too            
-
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("Approved", response.Message);
         }
 
         [Test]
         public void TestNotHavingTheLogFileSettingShouldDefaultItsValueToNull()
         {
-            config.Remove("logFile");
+            _config.Remove("logFile");
 
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "Planets";
-            authorization.OrderId = "12344";
-            authorization.Amount = 106;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            CardType card = new CardType();
-            card.Type = MethodOfPaymentTypeEnum.VI;
-            card.Number = "414100000000000000";
-            card.ExpDate = "1210";
-            authorization.Card = card;
+            var authorization = new Authorization
+            {
+                ReportGroup = "Planets",
+                OrderId = "12344",
+                Amount = 106,
+                OrderSource = OrderSourceType.Ecommerce,
+                Card = new CardType
+                {
+                    Type = MethodOfPaymentTypeEnum.VI,
+                    Number = "414100000000000000",
+                    ExpDate = "1210"
+                }
+            };
 
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("000", response.Response);
         }
 
         [Test]
         public void TestNeuterAccountNumsShouldDefaultToFalse()
         {
-            config.Remove("neuterAccountNums");
+            _config.Remove("neuterAccountNums");
 
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "Planets";
-            authorization.OrderId = "12344";
-            authorization.Amount = 106;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            CardType card = new CardType();
-            card.Type = MethodOfPaymentTypeEnum.VI;
-            card.Number = "414100000000000000";
-            card.ExpDate = "1210";
-            authorization.Card = card;
+            var authorization = new Authorization
+            {
+                ReportGroup = "Planets",
+                OrderId = "12344",
+                Amount = 106,
+                OrderSource = OrderSourceType.Ecommerce,
+                Card = new CardType
+                {
+                    Type = MethodOfPaymentTypeEnum.VI,
+                    Number = "414100000000000000",
+                    ExpDate = "1210"
+                }
+            };
 
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("000", response.Response);
         }
 
         [Test]
         public void TestPrintxmlShouldDefaultToFalse()
         {
-            config.Remove("printxml");
+            _config.Remove("printxml");
 
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "Planets";
-            authorization.OrderId = "12344";
-            authorization.Amount = 106;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            CardType card = new CardType();
-            card.Type = MethodOfPaymentTypeEnum.VI;
-            card.Number = "414100000000000000";
-            card.ExpDate = "1210";
-            authorization.Card = card;
+            var authorization = new Authorization
+            {
+                ReportGroup = "Planets",
+                OrderId = "12344",
+                Amount = 106,
+                OrderSource = OrderSourceType.Ecommerce,
+                Card = new CardType
+                {
+                    Type = MethodOfPaymentTypeEnum.VI,
+                    Number = "414100000000000000",
+                    ExpDate = "1210"
+                }
+            };
 
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("000", response.Response);
         }
 
         [Test]
         public void TestWithAdvancedFraudCheck()
         {
-            config.Remove("printxml");
+            _config.Remove("printxml");
 
-            Authorization authorization = new Authorization();
-            authorization.ReportGroup = "Planets";
-            authorization.OrderId = "12344";
-            authorization.Amount = 106;
-            authorization.OrderSource = OrderSourceType.Ecommerce;
-            CardType card = new CardType();
-            card.Type = MethodOfPaymentTypeEnum.VI;
-            card.Number = "414100000000000000";
-            card.ExpDate = "1210";
-            authorization.Card = card;
-            AdvancedFraudChecksType advancedFraudChecks = new AdvancedFraudChecksType();
-            advancedFraudChecks.ThreatMetrixSessionId = "800";
-            advancedFraudChecks.CustomAttribute1 = "testAttribute1";
-            advancedFraudChecks.CustomAttribute2 = "testAttribute2";
-            advancedFraudChecks.CustomAttribute3 = "testAttribute3";
-            advancedFraudChecks.CustomAttribute4 = "testAttribute4";
-            advancedFraudChecks.CustomAttribute5 = "testAttribute5";
-            authorization.AdvancedFraudChecks = advancedFraudChecks;
+            var authorization = new Authorization
+            {
+                ReportGroup = "Planets",
+                OrderId = "12344",
+                Amount = 106,
+                OrderSource = OrderSourceType.Ecommerce,
+                Card = new CardType
+                {
+                    Type = MethodOfPaymentTypeEnum.VI,
+                    Number = "414100000000000000",
+                    ExpDate = "1210"
+                },
+                AdvancedFraudChecks = new AdvancedFraudChecksType
+                {
+                    ThreatMetrixSessionId = "800",
+                    CustomAttribute1 = "testAttribute1",
+                    CustomAttribute2 = "testAttribute2",
+                    CustomAttribute3 = "testAttribute3",
+                    CustomAttribute4 = "testAttribute4",
+                    CustomAttribute5 = "testAttribute5"
+                }
+            };
 
-            AuthorizationResponse response = litle.Authorize(authorization);
+            var response = Litle.Authorize(authorization);
             Assert.AreEqual("000", response.Response);
         }
     }

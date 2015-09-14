@@ -1,33 +1,19 @@
-using System;
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("virtualGiftCardType")]
     public class VirtualGiftCardType
     {
-        public int AccountNumberLength
-        {
-            get { return _accountNumberLengthField; }
-            set
-            {
-                _accountNumberLengthField = value;
-                _accountNumberLengthSet = true;
-            }
-        }
-
-        private int _accountNumberLengthField;
-        private bool _accountNumberLengthSet;
-
+        [XmlElement("accountNumberLength")]
+        public int? AccountNumberLength { get; set; }
+        [XmlElement("giftCardBin")]
         public string GiftCardBin { get; set; }
 
-        public String Serialize()
+        public string Serialize()
         {
-            var xml = "";
-            if (_accountNumberLengthSet)
-                xml += "\r\n<accountNumberLength>" + _accountNumberLengthField + "</accountNumberLength>";
-            if (GiftCardBin != null)
-                xml += "\r\n<giftCardBin>" + SecurityElement.Escape(GiftCardBin) + "</giftCardBin>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

@@ -1,24 +1,13 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("echeckVoid")]
     public class EcheckVoid : TransactionTypeWithReportGroup
     {
+        [XmlElement("litleTxnId")]
         public long LitleTxnId { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<echeckVoid";
-            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
-            }
-            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
-            xml += "\r\n</echeckVoid>";
-            return xml;
-        }
     }
 }

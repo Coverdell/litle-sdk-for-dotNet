@@ -1,80 +1,84 @@
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
+
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("litleOnlineRequest")]
+    [LitleXmlRoot("litleOnlineRequest")]
     public class LitleOnlineRequest
     {
+        [XmlAttribute("merchantId")]
         public string MerchantId { get; set; }
+        [XmlAttribute("version")]
+        public string Version { get; set; }
+        [XmlAttribute("merchantSdk")]
         public string MerchantSdk { get; set; }
+        [XmlElement("authentication")]
         public Authentication Authentication { get; set; }
+        [XmlElement("authorization")]
         public Authorization Authorization { get; set; }
+        [XmlElement("capture")]
         public Capture Capture { get; set; }
+        [XmlElement("credit")]
         public Credit Credit { get; set; }
+        [XmlElement("voidTxn")]
         public VoidTxn VoidTxn { get; set; }
+        [XmlElement("sale")]
         public Sale Sale { get; set; }
+        [XmlElement("authReversal")]
         public AuthReversal AuthReversal { get; set; }
+        [XmlElement("echeckCredit")]
         public EcheckCredit EcheckCredit { get; set; }
+        [XmlElement("echeckVerification")]
         public EcheckVerification EcheckVerification { get; set; }
+        [XmlElement("echeckSale")]
         public EcheckSale EcheckSale { get; set; }
+        [XmlElement("registerTokenRequest")]
         public RegisterTokenRequestType RegisterTokenRequest { get; set; }
+        [XmlElement("forceCapture")]
         public ForceCapture ForceCapture { get; set; }
+        [XmlElement("captureGivenAuth")]
         public CaptureGivenAuth CaptureGivenAuth { get; set; }
+        [XmlElement("echeckRedeposit")]
         public EcheckRedeposit EcheckRedeposit { get; set; }
+        [XmlElement("echeckVoid")]
         public EcheckVoid EcheckVoid { get; set; }
+        [XmlElement("updateCardValidationNumOnToken")]
         public UpdateCardValidationNumOnToken UpdateCardValidationNumOnToken { get; set; }
+        [XmlElement("updateSubscription")]
         public UpdateSubscription UpdateSubscription { get; set; }
+        [XmlElement("cancelSubscription")]
         public CancelSubscription CancelSubscription { get; set; }
+        [XmlElement("activate")]
         public Activate Activate { get; set; }
+        [XmlElement("deactivate")]
         public Deactivate Deactivate { get; set; }
+        [XmlElement("load")]
         public Load Load { get; set; }
+        [XmlElement("unload")]
         public Unload Unload { get; set; }
+        [XmlElement("balanceInquiry")]
         public BalanceInquiry BalanceInquiry { get; set; }
+        [XmlElement("createPlan")]
         public CreatePlan CreatePlan { get; set; }
+        [XmlElement("updatePlan")]
         public UpdatePlan UpdatePlan { get; set; }
+        [XmlElement("refundReversal")]
         public RefundReversal RefundReversal { get; set; }
+        [XmlElement("loadReversal")]
         public LoadReversal LoadReversal { get; set; }
+        [XmlElement("depositReversal")]
         public DepositReversal DepositReversal { get; set; }
+        [XmlElement("activateReversal")]
         public ActivateReversal ActivateReversal { get; set; }
+        [XmlElement("deactivateReversal")]
         public DeactivateReversal DeactivateReversal { get; set; }
+        [XmlElement("unloadReversal")]
         public UnloadReversal UnloadReversal { get; set; }
 
         public string Serialize()
         {
-            var xml = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleOnlineRequest merchantId=\"" + MerchantId +
-                      "\" version=\"9.3\" merchantSdk=\"" + MerchantSdk + "\" xmlns=\"http://www.litle.com/schema\">"
-                      + Authentication.Serialize();
-
-            if (Authorization != null) xml += Authorization.Serialize();
-            else if (Capture != null) xml += Capture.Serialize();
-            else if (Credit != null) xml += Credit.Serialize();
-            else if (VoidTxn != null) xml += VoidTxn.Serialize();
-            else if (Sale != null) xml += Sale.Serialize();
-            else if (AuthReversal != null) xml += AuthReversal.Serialize();
-            else if (EcheckCredit != null) xml += EcheckCredit.Serialize();
-            else if (EcheckVerification != null) xml += EcheckVerification.Serialize();
-            else if (EcheckSale != null) xml += EcheckSale.Serialize();
-            else if (RegisterTokenRequest != null) xml += RegisterTokenRequest.Serialize();
-            else if (ForceCapture != null) xml += ForceCapture.Serialize();
-            else if (CaptureGivenAuth != null) xml += CaptureGivenAuth.Serialize();
-            else if (EcheckRedeposit != null) xml += EcheckRedeposit.Serialize();
-            else if (EcheckVoid != null) xml += EcheckVoid.Serialize();
-            else if (UpdateCardValidationNumOnToken != null) xml += UpdateCardValidationNumOnToken.Serialize();
-            else if (UpdateSubscription != null) xml += UpdateSubscription.Serialize();
-            else if (CancelSubscription != null) xml += CancelSubscription.Serialize();
-            else if (Activate != null) xml += Activate.Serialize();
-            else if (Deactivate != null) xml += Deactivate.Serialize();
-            else if (Load != null) xml += Load.Serialize();
-            else if (Unload != null) xml += Unload.Serialize();
-            else if (BalanceInquiry != null) xml += BalanceInquiry.Serialize();
-            else if (CreatePlan != null) xml += CreatePlan.Serialize();
-            else if (UpdatePlan != null) xml += UpdatePlan.Serialize();
-            else if (RefundReversal != null) xml += RefundReversal.Serialize();
-            else if (LoadReversal != null) xml += LoadReversal.Serialize();
-            else if (DepositReversal != null) xml += DepositReversal.Serialize();
-            else if (ActivateReversal != null) xml += ActivateReversal.Serialize();
-            else if (DeactivateReversal != null) xml += DeactivateReversal.Serialize();
-            else if (UnloadReversal != null) xml += UnloadReversal.Serialize();
-            xml += "\r\n</litleOnlineRequest>";
-
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

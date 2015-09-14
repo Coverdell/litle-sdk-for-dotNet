@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Litle.Sdk
+namespace Litle.Sdk.Xml
 {
     public class LitleXmlRootAttribute : XmlRootAttribute
     {

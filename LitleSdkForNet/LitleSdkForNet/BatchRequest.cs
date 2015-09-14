@@ -1,15 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Serialization;
 using Litle.Sdk.Properties;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("batchRequest")]
     public class BatchRequest
     {
+        [XmlElement("id")]
         public string ID { get; set; }
+        [XmlElement("merchantId")]
         public string MerchantId { get; set; }
+        [XmlElement("reportGroup")]
         public string ReportGroup { get; set; }
 
         public Dictionary<string, string> Config { get; set; }
@@ -509,7 +515,7 @@ namespace Litle.Sdk.Requests
             if (_numAccountUpdates == 0)
             {
                 _numCapture++;
-                _sumOfCapture += capture.Amount;
+                _sumOfCapture += capture.Amount.GetValueOrDefault();
                 FillInReportGroup(capture);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, capture);
             }
@@ -524,7 +530,7 @@ namespace Litle.Sdk.Requests
             if (_numAccountUpdates == 0)
             {
                 _numCredit++;
-                _sumOfCredit += credit.Amount;
+                _sumOfCredit += credit.Amount.GetValueOrDefault();
                 FillInReportGroup(credit);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, credit);
             }
@@ -554,7 +560,7 @@ namespace Litle.Sdk.Requests
             if (_numAccountUpdates == 0)
             {
                 _numAuthReversal++;
-                _sumOfAuthReversal += authReversal.Amount;
+                _sumOfAuthReversal += authReversal.Amount.GetValueOrDefault(0);
                 FillInReportGroup(authReversal);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, authReversal);
             }
@@ -569,7 +575,7 @@ namespace Litle.Sdk.Requests
             if (_numAccountUpdates == 0)
             {
                 _numEcheckCredit++;
-                _sumOfEcheckCredit += echeckCredit.Amount;
+                _sumOfEcheckCredit += echeckCredit.Amount.GetValueOrDefault();
                 FillInReportGroup(echeckCredit);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckCredit);
             }
@@ -584,7 +590,7 @@ namespace Litle.Sdk.Requests
             if (_numAccountUpdates == 0)
             {
                 _numEcheckVerification++;
-                _sumOfEcheckVerification += echeckVerification.Amount;
+                _sumOfEcheckVerification += echeckVerification.Amount.GetValueOrDefault();
                 FillInReportGroup(echeckVerification);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckVerification);
             }
@@ -599,7 +605,7 @@ namespace Litle.Sdk.Requests
             if (_numAccountUpdates == 0)
             {
                 _numEcheckSale++;
-                _sumOfEcheckSale += echeckSale.Amount;
+                _sumOfEcheckSale += echeckSale.Amount.GetValueOrDefault();
                 FillInReportGroup(echeckSale);
                 _tempBatchFilePath = SaveElement(_litleFile, _litleTime, _tempBatchFilePath, echeckSale);
             }

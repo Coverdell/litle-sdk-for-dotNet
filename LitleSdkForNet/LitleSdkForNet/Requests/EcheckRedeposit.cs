@@ -1,32 +1,17 @@
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("echeckRedeposit")]
     public class EcheckRedeposit : BaseRequestTransactionEcheckRedeposit
     {
-        //litleTxnIdField and set are in super
+        [XmlElement("echeck")]
         public EcheckType Echeck { get; set; }
+        [XmlElement("token")]
         public EcheckTokenType Token { get; set; }
+        [XmlElement("merchantData")]
         public MerchantDataType MerchantData { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<echeckRedeposit";
-            xml += " id=\"" + ID + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + CustomerId + "\"";
-            }
-            xml += " reportGroup=\"" + ReportGroup + "\">";
-            if (LitleTxnId.HasValue) xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
-            if (Echeck != null) xml += "\r\n<echeck>" + Echeck.Serialize() + "</echeck>";
-            else if (Token != null) xml += "\r\n<echeckToken>" + Token.Serialize() + "</echeckToken>";
-            if (MerchantData != null)
-            {
-                xml += "\r\n<merchantData>" + MerchantData.Serialize() + "\r\n</merchantData>";
-            }
-            xml += "\r\n</echeckRedeposit>";
-            return xml;
-        }
     }
 }
