@@ -1,33 +1,21 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("activate")]
     public class Activate : TransactionTypeWithReportGroup
     {
+        [XmlElement("orderId")]
         public string OrderId { get; set; }
+        [XmlElement("amount")]
         public long Amount { get; set; }
+        [XmlElement("orderSource")]
         public OrderSourceType OrderSource { get; set; }
+        [XmlElement("card")]
         public CardType Card { get; set; }
+        [XmlElement("virtualGiftCard")]
         public VirtualGiftCardType VirtualGiftCard { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<activate";
-            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
-            }
-            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
-            xml += "\r\n<amount>" + Amount + "</amount>";
-            xml += "\r\n<orderSource>" + OrderSource.Serialize() + "</orderSource>";
-            if (Card != null) xml += "\r\n<card>" + Card.Serialize() + "\r\n</card>";
-            else if (VirtualGiftCard != null)
-                xml += "\r\n<virtualGiftCard>" + VirtualGiftCard.Serialize() + "\r\n</virtualGiftCard>";
-            xml += "\r\n</activate>";
-            return xml;
-        }
     }
 }

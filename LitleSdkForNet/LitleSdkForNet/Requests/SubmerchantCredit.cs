@@ -1,49 +1,21 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("submerchantCredit")]
     public class SubmerchantCredit : TransactionTypeWithReportGroup
     {
+        [XmlElement("fundingSubmerchantId")]
         public string FundingSubmerchantId { get; set; }
-
+        [XmlElement("submerchantName")]
         public string SubmerchantName { get; set; }
-
+        [XmlElement("fundsTransferId")]
         public string FundsTransferId { get; set; }
-
+        [XmlElement("amount")]
         public long? Amount { get; set; }
-
+        [XmlElement("accountInfo")]
         public EcheckType AccountInfo { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<submerchantCredit ";
-
-            if (ID != null)
-                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
-            if (CustomerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
-            if (FundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
-                       "</fundingSubmerchantId>";
-            if (SubmerchantName != null)
-                xml += "\r\n<submerchantName>" + SecurityElement.Escape(SubmerchantName) + "</submerchantName>";
-            if (FundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
-            if (Amount != null)
-                xml += "\r\n<amount>" + Amount + "</amount>";
-
-            if (AccountInfo != null)
-            {
-                xml += "\r\n<accountInfo>";
-                xml += AccountInfo.Serialize();
-                xml += "</accountInfo>";
-            }
-
-            xml += "\r\n</submerchantCredit>";
-
-            return xml;
-        }
     }
 }

@@ -1,5 +1,8 @@
+using Litle.Sdk.Xml;
+
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("countryTypeEnum")]
     public enum CountryTypeEnum
     {
         USA,

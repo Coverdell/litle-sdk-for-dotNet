@@ -1,30 +1,20 @@
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("helthcareIIAS")]
     public class HealthcareIIAS
     {
+        [XmlElement("healthcareAmounts")]
         public HealthcareAmounts HealthcareAmounts { get; set; }
-        private IIASFlagType _iiasFlagField;
-        private bool _iiasFlagSet;
-
-        public IIASFlagType IIASFlag
-        {
-            get { return _iiasFlagField; }
-            set
-            {
-                _iiasFlagField = value;
-                _iiasFlagSet = true;
-            }
-        }
+        [XmlElement("IIASFlag")]
+        public IIASFlagType? IIASFlag { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (HealthcareAmounts != null)
-                xml += "\r\n<healthcareAmounts>" + HealthcareAmounts.Serialize() + "</healthcareAmounts>";
-            if (_iiasFlagSet) xml += "\r\n<IIASFlag>" + _iiasFlagField + "</IIASFlag>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

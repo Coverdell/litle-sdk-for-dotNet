@@ -1,23 +1,12 @@
-using System;
 using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Responses
 {
-    public sealed class PosCatLevelEnum
+    [LitleXmlType("catLevel")]
+    public enum PosCatLevelEnum
     {
-        [XmlElement("selfservice")]
-        public static readonly PosCatLevelEnum Selfservice = new PosCatLevelEnum("self service");
-
-        private PosCatLevelEnum(String value)
-        {
-            _value = value;
-        }
-
-        public string Serialize()
-        {
-            return _value;
-        }
-
-        private readonly string _value;
+        [XmlEnum("self service")]
+        Selfservice
     }
 }

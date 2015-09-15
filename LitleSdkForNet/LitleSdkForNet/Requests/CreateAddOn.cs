@@ -1,25 +1,26 @@
 using System;
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("createAddOn")]
     public class CreateAddOn
     {
+        [XmlElement("addOnCode")]
         public string AddOnCode { get; set; }
+        [XmlElement("name")]
         public string Name { get; set; }
+        [XmlElement("amount")]
         public long Amount { get; set; }
+        [XmlElement("startDate", DataType = "date")]
         public DateTime StartDate { get; set; }
+        [XmlElement("endDate", DataType = "date")]
         public DateTime EndDate { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            xml += "\r\n<addOnCode>" + SecurityElement.Escape(AddOnCode) + "</addOnCode>";
-            xml += "\r\n<name>" + SecurityElement.Escape(Name) + "</name>";
-            xml += "\r\n<amount>" + Amount + "</amount>";
-            xml += "\r\n<startDate>" + XmlUtil.ToXsdDate(StartDate) + "</startDate>";
-            xml += "\r\n<endDate>" + XmlUtil.ToXsdDate(EndDate) + "</endDate>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

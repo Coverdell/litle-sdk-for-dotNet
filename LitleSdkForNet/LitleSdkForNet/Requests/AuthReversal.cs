@@ -1,65 +1,21 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("authReversal")]
     public class AuthReversal : TransactionTypeWithReportGroup
     {
+        [XmlElement("litleTxnId")]
         public long LitleTxnId { get; set; }
-        private long _amountField;
-        private bool _amountSet;
-
-        public long Amount
-        {
-            get { return _amountField; }
-            set
-            {
-                _amountField = value;
-                _amountSet = true;
-            }
-        }
-
-        private bool _surchargeAmountSet;
-        private long _surchargeAmountField;
-
-        public long SurchargeAmount
-        {
-            get { return _surchargeAmountField; }
-            set
-            {
-                _surchargeAmountField = value;
-                _surchargeAmountSet = true;
-            }
-        }
-
+        [XmlElement("amount", IsNullable = true)]
+        public long? Amount { get; set; }
+        [XmlElement("surchargeAmount", IsNullable = true)]
+        public long? SurchargeAmount { get; set; }
+        [XmlElement("payPalNotes")]
         public string PayPalNotes { get; set; }
+        [XmlElement("actionReason")]
         public string ActionReason { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<authReversal";
-            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
-            }
-            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
-            if (_amountSet)
-            {
-                xml += "\r\n<amount>" + _amountField + "</amount>";
-            }
-            if (_surchargeAmountSet) xml += "\r\n<surchargeAmount>" + _surchargeAmountField + "</surchargeAmount>";
-            if (PayPalNotes != null)
-            {
-                xml += "\r\n<payPalNotes>" + SecurityElement.Escape(PayPalNotes) + "</payPalNotes>";
-            }
-            if (ActionReason != null)
-            {
-                xml += "\r\n<actionReason>" + SecurityElement.Escape(ActionReason) + "</actionReason>";
-            }
-            xml += "\r\n</authReversal>";
-            return xml;
-        }
     }
 }

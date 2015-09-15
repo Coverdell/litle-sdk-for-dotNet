@@ -1,33 +1,15 @@
-using System;
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("updatePlan")]
     public class UpdatePlan : RecurringTransactionType
     {
+        [XmlElement("planCode")]
         public string PlanCode { get; set; }
-
-        private bool _activeField;
-        private bool _activeSet;
-
-        public bool Active
-        {
-            get { return _activeField; }
-            set
-            {
-                _activeField = value;
-                _activeSet = true;
-            }
-        }
-
-        public override String Serialize()
-        {
-            var xml = "\r\n<updatePlan>";
-            xml += "\r\n<planCode>" + SecurityElement.Escape(PlanCode) + "</planCode>";
-            if (_activeSet) xml += "\r\n<active>" + _activeField.ToString().ToLower() + "</active>";
-            xml += "\r\n</updatePlan>";
-            return xml;
-        }
+        [XmlElement("active")]
+        public bool? Active { get; set; }
     }
 }

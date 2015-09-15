@@ -45,7 +45,7 @@
     <Compile Include="ILitleOnline.cs" />
     <Compile Include="Xml\LitleXmlRoot.cs" />
     <Compile Include="MethodOfPaymentTypeEnum.cs" />
-    <Compile Include="Requests\BatchRequest.cs" />
+    <Compile Include="BatchRequest.cs" />
     <Compile Include="Requests\EcheckPreNoteCredit.cs" />
     <Compile Include="FraudResult.cs" />
     <Compile Include="Requests\AccountUpdate.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="LitleFile.cs" />
     <Compile Include="Requests\LitleInternalRecurringRequest.cs" />
     <Compile Include="Requests\LitleOnlineRequest.cs" />
-    <Compile Include="Requests\LitleRequest.cs" />
+    <Compile Include="LitleRequest.cs" />
     <Compile Include="Requests\Load.cs" />
     <Compile Include="Requests\LoadReversal.cs" />
     <Compile Include="Requests\MerchantDataType.cs" />
@@ -125,7 +125,7 @@
     <Compile Include="Requests\RegisterTokenRequestType.cs" />
     <Compile Include="Requests\ReserveCredit.cs" />
     <Compile Include="Requests\ReserveDebit.cs" />
-    <Compile Include="Requests\RfrRequest.cs" />
+    <Compile Include="RfrRequest.cs" />
     <Compile Include="Requests\Sale.cs" />
     <Compile Include="Requests\SubmerchantCredit.cs" />
     <Compile Include="Requests\SubmerchantDebit.cs" />
@@ -146,6 +146,7 @@
     <Compile Include="Requests\Wallet.cs" />
     <Compile Include="Requests\WalletWalletSourceType.cs" />
     <Compile Include="CommonTransactionTypeWithReportGroup.cs" />
+    <Compile Include="Xml\LitleXmlSerializable.cs" />
     <Compile Include="Xml\XmlUtil.cs" />
     <Compile Include="Responses\AccountInfoType.cs" />
     <Compile Include="Responses\AccountUpdater.cs" />
@@ -245,7 +246,7 @@
     <Compile Include="Responses\VendorDebitResponse.cs" />
     <Compile Include="Responses\VirtualGiftCardResponseType.cs" />
     <Compile Include="Responses\VoidRecyclingResponseType.cs" />
-    <Compile Include="Xml\XmlSerializer.cs" />
+    <Compile Include="Xml\LitleXmlSerializer.cs" />
     <Compile Include="Communications.cs" />
     <Compile Include="Requests\PhysicalCheckDebit.cs" />
     <Compile Include="LitleTime.cs" />

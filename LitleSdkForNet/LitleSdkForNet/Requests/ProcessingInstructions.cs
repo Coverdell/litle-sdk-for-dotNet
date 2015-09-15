@@ -1,27 +1,17 @@
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
+
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("processingInstructions")]
     public class ProcessingInstructions
     {
-        private bool _bypassVelocityCheckField;
-        private bool _bypassVelocityCheckSet;
-
-        public bool BypassVelocityCheck
-        {
-            get { return _bypassVelocityCheckField; }
-            set
-            {
-                _bypassVelocityCheckField = value;
-                _bypassVelocityCheckSet = true;
-            }
-        }
+        [XmlElement("bypassVelocityCheck")]
+        public bool? BypassVelocityCheck { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (_bypassVelocityCheckSet)
-                xml += "\r\n<bypassVelocityCheck>" + _bypassVelocityCheckField.ToString().ToLower() +
-                       "</bypassVelocityCheck>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

@@ -1,72 +1,21 @@
-﻿using System.Security;
-using Litle.Sdk.Requests;
+﻿using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
-namespace Litle.Sdk
+namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("echeckPreNoteCredit")]
     public class EcheckPreNoteCredit : TransactionTypeWithReportGroup
     {
-        /// <remarks />
+        [XmlElement("orderId")]
         public string OrderId { get; set; }
-
-        /// <remarks />
+        [XmlElement("orderSource")]
         public OrderSourceType OrderSource { get; set; }
-
-        /// <remarks />
+        [XmlElement("billToAddress")]
         public Contact BillToAddress { get; set; }
-
-        /// <remarks />
+        [XmlElement("echeck")]
         public EcheckType Echeck { get; set; }
-
-        /// <remarks />
+        [XmlElement("merchantData")]
         public MerchantDataType MerchantData { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<echeckPreNoteCredit ";
-
-            if (ID != null)
-            {
-                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
-            }
-            if (CustomerId != null)
-            {
-                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
-            }
-            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
-            xml += "\r\n<orderId>" + SecurityElement.Escape(OrderId) + "</orderId>";
-
-            if (OrderSource != null)
-            {
-                xml += "\r\n<orderSource>";
-                xml += OrderSource.Serialize();
-                xml += "</orderSource>";
-            }
-
-            if (BillToAddress != null)
-            {
-                xml += "\r\n<billToAddress>";
-                xml += BillToAddress.Serialize();
-                xml += "\r\n</billToAddress>";
-            }
-
-            if (Echeck != null)
-            {
-                xml += "\r\n<echeck>";
-                xml += Echeck.Serialize();
-                xml += "\r\n</echeck>";
-            }
-
-            if (MerchantData != null)
-            {
-                xml += "\r\n<merchantData>";
-                xml += MerchantData.Serialize();
-                xml += "\r\n</merchantData>";
-            }
-
-            xml += "\r\n</echeckPreNoteCredit>";
-
-            return xml;
-        }
     }
 }

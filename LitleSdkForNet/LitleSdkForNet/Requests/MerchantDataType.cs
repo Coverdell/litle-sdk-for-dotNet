@@ -1,21 +1,21 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("merchantDataType")]
     public class MerchantDataType
     {
+        [XmlElement("campaign")]
         public string Campaign { get; set; }
+        [XmlElement("affiliate")]
         public string Affiliate { get; set; }
+        [XmlElement("merchantGroupingId")]
         public string MerchantGroupingId { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (Campaign != null) xml += "\r\n<campaign>" + SecurityElement.Escape(Campaign) + "</campaign>";
-            if (Affiliate != null) xml += "\r\n<affiliate>" + SecurityElement.Escape(Affiliate) + "</affiliate>";
-            if (MerchantGroupingId != null)
-                xml += "\r\n<merchantGroupingId>" + SecurityElement.Escape(MerchantGroupingId) + "</merchantGroupingId>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

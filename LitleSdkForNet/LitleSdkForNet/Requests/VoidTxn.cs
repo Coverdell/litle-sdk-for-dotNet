@@ -1,30 +1,15 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("voidTxn")]
     public class VoidTxn : TransactionTypeWithReportGroup
     {
+        [XmlElement("litleTxnId")]
         public long LitleTxnId { get; set; }
+        [XmlElement("processingInstructions")]
         public ProcessingInstructions ProcessingInstructions { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<void";
-            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
-            }
-            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\"";
-            xml += ">";
-            xml += "\r\n<litleTxnId>" + LitleTxnId + "</litleTxnId>";
-            if (ProcessingInstructions != null)
-                xml += "\r\n<processingInstructions>" + ProcessingInstructions.Serialize() +
-                       "\r\n</processingInstructions>";
-            xml += "\r\n</void>";
-
-            return xml;
-        }
     }
 }

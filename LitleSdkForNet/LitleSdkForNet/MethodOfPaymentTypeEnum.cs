@@ -1,9 +1,8 @@
-﻿using System;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk
 {
-    [Serializable]
     [LitleXmlType("methodOfPaymentTypeEnum")]
     public enum MethodOfPaymentTypeEnum
     {

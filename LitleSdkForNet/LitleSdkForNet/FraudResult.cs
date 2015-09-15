@@ -1,14 +1,13 @@
-using System;
 using System.Security;
 using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk
 {
-    [Serializable]
     [LitleXmlType("fraudResult")]
     [LitleXmlRoot("fraudResult")]
-    public partial class FraudResult
+    public class FraudResult
     {
         [XmlElement("advancedFraudResults")]
         public AdvancedFraudResultsType AdvancedFraudResults { get; set; }

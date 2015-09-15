@@ -1,58 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Litle.Sdk.Requests;
-using Litle.Sdk.Responses;
+﻿using Litle.Sdk.Requests;
 using NUnit.Framework;
-using Litle.Sdk;
-using Moq;
-using System.Text.RegularExpressions;
-
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    class TestEcheckVoid
+    class TestEcheckVoid : TestBase
     {
-        
-        private LitleOnline litle;
-
-        [TestFixtureSetUp]
-        public void SetUpLitle()
-        {
-            litle = new LitleOnline();
-        }
-
         [Test]
         public void TestFraudFilterOverride()
         {
-            EcheckVoid echeckVoid = new EcheckVoid();
-            echeckVoid.LitleTxnId = 123456789;
-           
-            var mock = new Mock<Communications>();
+            var echeckVoid = new EcheckVoid {LitleTxnId = 123456789};
+            const string regex = ".*<echeckVoid.*<litleTxnId>123456789.*";
+            const string value = @"
+                <litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
+                    <echeckVoidResponse>
+                        <litleTxnId>123</litleTxnId>
+                    </echeckVoidResponse>
+                </litleOnlineResponse>";
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<echeckVoid.*<litleTxnId>123456789.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVoidResponse><litleTxnId>123</litleTxnId></echeckVoidResponse></litleOnlineResponse>");
-     
-            Communications mockedCommunication = mock.Object;
-            litle.SetCommunication(mockedCommunication);
-            litle.EcheckVoid(echeckVoid);
+            MockLitlePost(regex, value);
+            Litle.EcheckVoid(echeckVoid);
         }
 
         [Test]
-        public void simpleForceCaptureWithSecondaryAmount()
+        public void SimpleForceCaptureWithSecondaryAmount()
         {
-            ForceCapture forcecapture = new ForceCapture();
-            forcecapture.Amount = 106;
-            forcecapture.SecondaryAmount = 50;
-            forcecapture.OrderId = "12344";
-            forcecapture.OrderSource = OrderSourceType.Ecommerce;
-            CardType card = new CardType();
-            card.Type = MethodOfPaymentTypeEnum.VI;
-            card.Number = "4100000000000001";
-            card.ExpDate = "1210";
-            forcecapture.Card = card;
-            ForceCaptureResponse response = litle.ForceCapture(forcecapture);
+            var forcecapture = new ForceCapture
+            {
+                Amount = 106,
+                SecondaryAmount = 50,
+                OrderId = "12344",
+                OrderSource = OrderSourceType.Ecommerce,
+                Card = new CardType
+                {
+                    Type = MethodOfPaymentTypeEnum.VI,
+                    Number = "4100000000000001",
+                    ExpDate = "1210"
+                }
+            };
+            var regex = FormMatchExpression(
+                "<forceCapture.*>",
+                "<amount>106</amount>",
+                "<secondaryAmount>50</secondaryAmount>");
+            const string value = @"
+                <litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'>
+                    <forceCaptureResponse>
+                        <message>Approved</message>
+                    </forceCaptureResponse>
+                </litleOnlineResponse>";
+            MockLitlePost(regex, value);
+            var response = Litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.Message);
         }
     }

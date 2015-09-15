@@ -1,3 +1,5 @@
+using Litle.Sdk.Xml;
+
 namespace Litle.Sdk.Responses
 {
     [LitleXmlType("IIASFlagType")]

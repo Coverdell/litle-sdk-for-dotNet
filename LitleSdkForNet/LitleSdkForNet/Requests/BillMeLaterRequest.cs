@@ -1,97 +1,31 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("billMeLaterRequest")]
     public class BillMeLaterRequest
     {
-        private long _bmlMerchantIdField;
-        private bool _bmlMerchantIdSet;
-
-        public long BmlMerchantId
-        {
-            get { return _bmlMerchantIdField; }
-            set
-            {
-                _bmlMerchantIdField = value;
-                _bmlMerchantIdSet = true;
-            }
-        }
-
-        private long _bmlProductTypeField;
-        private bool _bmlProductTypeSet;
-
-        public long BmlProductType
-        {
-            get { return _bmlProductTypeField; }
-            set
-            {
-                _bmlProductTypeField = value;
-                _bmlProductTypeSet = true;
-            }
-        }
-
-        private int _termsAndConditionsField;
-        private bool _termsAndConditionsSet;
-
-        public int TermsAndConditions
-        {
-            get { return _termsAndConditionsField; }
-            set
-            {
-                _termsAndConditionsField = value;
-                _termsAndConditionsSet = true;
-            }
-        }
-
+        [XmlElement("bmlMerchantId", IsNullable = true)]
+        public long? BmlMerchantId { get; set; }
+        [XmlElement("bmlProductType", IsNullable = true)]
+        public long? BmlProductType { get; set; }
+        [XmlElement("termsAndConditions", IsNullable = true)]
+        public int? TermsAndConditions { get; set; }
+        [XmlElement("preapprovalNumber")]
         public string PreapprovalNumber { get; set; }
-        private int _merchantPromotionalCodeField;
-        private bool _merchantPromotionalCodeSet;
-
-        public int MerchantPromotionalCode
-        {
-            get { return _merchantPromotionalCodeField; }
-            set
-            {
-                _merchantPromotionalCodeField = value;
-                _merchantPromotionalCodeSet = true;
-            }
-        }
-
+        [XmlElement("merchantPromotionalCode", IsNullable = true)]
+        public int? MerchantPromotionalCode { get; set; }
+        [XmlElement("virtualAuthenticationKeyPresenceIndicator")]
         public string VirtualAuthenticationKeyPresenceIndicator { get; set; }
+        [XmlElement("virtualAuthenticationKeyData")]
         public string VirtualAuthenticationKeyData { get; set; }
-        private int _itemCategoryCodeField;
-        private bool _itemCategoryCodeSet;
-
-        public int ItemCategoryCode
-        {
-            get { return _itemCategoryCodeField; }
-            set
-            {
-                _itemCategoryCodeField = value;
-                _itemCategoryCodeSet = true;
-            }
-        }
+        [XmlElement("itemCategoryCode", IsNullable = true)]
+        public int? ItemCategoryCode { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (_bmlMerchantIdSet) xml += "\r\n<bmlMerchantId>" + _bmlMerchantIdField + "</bmlMerchantId>";
-            if (_bmlProductTypeSet) xml += "\r\n<bmlProductType>" + _bmlProductTypeField + "</bmlProductType>";
-            if (_termsAndConditionsSet)
-                xml += "\r\n<termsAndConditions>" + _termsAndConditionsField + "</termsAndConditions>";
-            if (PreapprovalNumber != null)
-                xml += "\r\n<preapprovalNumber>" + SecurityElement.Escape(PreapprovalNumber) + "</preapprovalNumber>";
-            if (_merchantPromotionalCodeSet)
-                xml += "\r\n<merchantPromotionalCode>" + _merchantPromotionalCodeField + "</merchantPromotionalCode>";
-            if (VirtualAuthenticationKeyPresenceIndicator != null)
-                xml += "\r\n<virtualAuthenticationKeyPresenceIndicator>" +
-                       SecurityElement.Escape(VirtualAuthenticationKeyPresenceIndicator) +
-                       "</virtualAuthenticationKeyPresenceIndicator>";
-            if (VirtualAuthenticationKeyData != null)
-                xml += "\r\n<virtualAuthenticationKeyData>" + SecurityElement.Escape(VirtualAuthenticationKeyData) +
-                       "</virtualAuthenticationKeyData>";
-            if (_itemCategoryCodeSet) xml += "\r\n<itemCategoryCode>" + _itemCategoryCodeField + "</itemCategoryCode>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

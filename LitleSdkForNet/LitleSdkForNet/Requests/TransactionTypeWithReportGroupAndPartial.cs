@@ -1,21 +1,13 @@
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
 
 namespace Litle.Sdk.Requests
 {
     public class TransactionTypeWithReportGroupAndPartial : TransactionType
     {
+        [XmlAttribute("reportGroup")]
         public string ReportGroup { get; set; }
-        private bool _partialField;
-        protected bool PartialSet;
-
-        public bool Partial
-        {
-            get { return _partialField; }
-            set
-            {
-                _partialField = value;
-                PartialSet = true;
-            }
-        }
+        [XmlElement("partial")]
+        public bool? Partial { get; set; }
     }
 }

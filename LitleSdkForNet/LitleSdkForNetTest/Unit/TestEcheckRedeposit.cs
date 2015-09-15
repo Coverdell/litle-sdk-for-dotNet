@@ -1,45 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Litle.Sdk.Requests;
+﻿using Litle.Sdk.Requests;
 using NUnit.Framework;
-using Litle.Sdk;
-using Moq;
-using System.Text.RegularExpressions;
-
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    class TestEcheckRedeposit
+    class TestEcheckRedeposit : TestBase
     {
-        
-        private LitleOnline litle;
-
-        [TestFixtureSetUp]
-        public void SetUpLitle()
-        {
-            litle = new LitleOnline();
-        }
-
         [Test]
         public void TestMerchantData()
         {
-            EcheckRedeposit echeckRedeposit = new EcheckRedeposit();
-            echeckRedeposit.LitleTxnId = 1;
-            echeckRedeposit.MerchantData = new MerchantDataType();
-            echeckRedeposit.MerchantData.Campaign = "camp";
-            echeckRedeposit.MerchantData.Affiliate = "affil";
-            echeckRedeposit.MerchantData.MerchantGroupingId = "mgi";
-           
-            var mock = new Mock<Communications>();
+            var echeckRedeposit = new EcheckRedeposit
+            {
+                LitleTxnId = 1,
+                MerchantData = new MerchantDataType
+                {
+                    Campaign = "camp",
+                    Affiliate = "affil",
+                    MerchantGroupingId = "mgi"
+                }
+            };
 
-            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<echeckRedeposit.*<litleTxnId>1</litleTxnId>.*<merchantData>.*<campaign>camp</campaign>.*<affiliate>affil</affiliate>.*<merchantGroupingId>mgi</merchantGroupingId>.*</merchantData>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
-                .Returns("<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckRedepositResponse><litleTxnId>123</litleTxnId></echeckRedepositResponse></litleOnlineResponse>");
-     
-            Communications mockedCommunication = mock.Object;
-            litle.SetCommunication(mockedCommunication);
-            litle.EcheckRedeposit(echeckRedeposit);
+            var regex = FormMatchExpression(
+                "<echeckRedeposit.*>",
+                "<merchantData>",
+                "<campaign>camp</campaign>",
+                "<affiliate>affil</affiliate>",
+                "<merchantGroupingId>mgi</merchantGroupingId>",
+                "</merchantData>",
+                "<litleTxnId>1</litleTxnId>");
+            const string value = "<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckRedepositResponse><litleTxnId>123</litleTxnId></echeckRedepositResponse></litleOnlineResponse>";
+
+            MockLitlePost(regex, value);
+            Litle.EcheckRedeposit(echeckRedeposit);
         }            
     }
 }

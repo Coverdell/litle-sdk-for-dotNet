@@ -1,6 +1,6 @@
-using System;
 using System.Xml.Serialization;
 using Litle.Sdk.Requests;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Responses
 {
@@ -8,7 +8,6 @@ namespace Litle.Sdk.Responses
     [XmlInclude(typeof (TransactionTypeWithReportGroupAndPartial))]
     [XmlInclude(typeof (TransactionTypeWithReportGroup))]
     [XmlInclude(typeof (RegisterTokenRequestType))]
-    [Serializable]
     [LitleXmlType("transactionType")]
     public class TransactionType : TransactionRequest
     {

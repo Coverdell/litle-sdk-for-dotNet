@@ -1,25 +1,13 @@
-using System;
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("loadReversal")]
     public class LoadReversal : TransactionTypeWithReportGroup
     {
-        public String LitleTxnId { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<loadReversal";
-            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
-            }
-            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
-            xml += "\r\n<litleTxnId>" + SecurityElement.Escape(LitleTxnId) + "</litleTxnId>";
-            xml += "\r\n</loadReversal>";
-            return xml;
-        }
+        [XmlElement("litleTxnId")]
+        public string LitleTxnId { get; set; }
     }
 }

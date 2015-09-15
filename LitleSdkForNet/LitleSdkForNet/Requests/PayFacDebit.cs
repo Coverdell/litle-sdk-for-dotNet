@@ -1,36 +1,17 @@
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("payFacDebit")]
     public class PayFacDebit : TransactionTypeWithReportGroup
     {
+        [XmlElement("fundingSubmerchantId")]
         public string FundingSubmerchantId { get; set; }
-
+        [XmlElement("fundsTransferId")]
         public string FundsTransferId { get; set; }
-
+        [XmlElement("amount")]
         public long? Amount { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<payFacDebit ";
-
-            if (ID != null)
-                xml += "id=\"" + SecurityElement.Escape(ID) + "\" ";
-            if (CustomerId != null)
-                xml += "customerId=\"" + SecurityElement.Escape(CustomerId) + "\" ";
-            xml += "reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\">";
-            if (FundingSubmerchantId != null)
-                xml += "\r\n<fundingSubmerchantId>" + SecurityElement.Escape(FundingSubmerchantId) +
-                       "</fundingSubmerchantId>";
-            if (FundsTransferId != null)
-                xml += "\r\n<fundsTransferId>" + SecurityElement.Escape(FundsTransferId) + "</fundsTransferId>";
-            if (Amount != null)
-                xml += "\r\n<amount>" + Amount + "</amount>";
-
-            xml += "\r\n</payFacDebit>";
-
-            return xml;
-        }
     }
 }

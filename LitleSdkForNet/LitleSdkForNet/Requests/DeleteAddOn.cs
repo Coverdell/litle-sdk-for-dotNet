@@ -1,16 +1,17 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("deleteAddOn")]
     public class DeleteAddOn
     {
+        [XmlElement("addOnCode")]
         public string AddOnCode { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            xml += "\r\n<addOnCode>" + SecurityElement.Escape(AddOnCode) + "</addOnCode>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

@@ -1,35 +1,21 @@
-using System.Security;
+using System.Xml.Serialization;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
+    [LitleXmlType("litleInternalRecurringRequest")]
     public class LitleInternalRecurringRequest
     {
+        [XmlElement("subsciptionId")]
         public string SubscriptionId { get; set; }
+        [XmlElement("recurringTxnId")]
         public string RecurringTxnId { get; set; }
-
-        private bool _finalPaymentField;
-        private bool _finalPaymentSet;
-
-        public bool FinalPayment
-        {
-            get { return _finalPaymentField; }
-            set
-            {
-                _finalPaymentField = value;
-                _finalPaymentSet = true;
-            }
-        }
+        [XmlElement("finalPayment")]
+        public bool? FinalPayment { get; set; }
 
         public string Serialize()
         {
-            var xml = "";
-            if (SubscriptionId != null)
-                xml += "\r\n<subscriptionId>" + SecurityElement.Escape(SubscriptionId) + "</subscriptionId>";
-            if (RecurringTxnId != null)
-                xml += "\r\n<recurringTxnId>" + SecurityElement.Escape(RecurringTxnId) + "</recurringTxnId>";
-            if (_finalPaymentSet)
-                xml += "\r\n<finalPayment>" + _finalPaymentField.ToString().ToLower() + "</finalPayment>";
-            return xml;
+            return LitleXmlSerializer.SerializeObject(this);
         }
     }
 }

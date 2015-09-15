@@ -1,41 +1,23 @@
-using System;
-using System.Security;
+using System.Xml.Serialization;
 using Litle.Sdk.Responses;
+using Litle.Sdk.Xml;
 
 namespace Litle.Sdk.Requests
 {
-    [Serializable]
+    [LitleXmlType("registerTokenRequestType")]
     public class RegisterTokenRequestType : TransactionTypeWithReportGroup
     {
+        [XmlElement("orderId")]
         public string OrderId { get; set; }
+        [XmlElement("accountNumber")]
         public string AccountNumber { get; set; }
+        [XmlElement("echeckForToken")]
         public EcheckForTokenType EcheckForToken { get; set; }
+        [XmlElement("paypageRegistrationId")]
         public string PaypageRegistrationId { get; set; }
+        [XmlElement("cardValidationNum")]
         public string CardValidationNum { get; set; }
+        [XmlElement("applepay")]
         public ApplepayType Applepay { get; set; }
-
-        public override string Serialize()
-        {
-            var xml = "\r\n<registerTokenRequest";
-            xml += " id=\"" + SecurityElement.Escape(ID) + "\"";
-            if (CustomerId != null)
-            {
-                xml += " customerId=\"" + SecurityElement.Escape(CustomerId) + "\"";
-            }
-            xml += " reportGroup=\"" + SecurityElement.Escape(ReportGroup) + "\"";
-            xml += ">";
-
-            xml += "\r\n<orderId>" + OrderId + "</orderId>";
-            if (AccountNumber != null) xml += "\r\n<accountNumber>" + AccountNumber + "</accountNumber>";
-            else if (EcheckForToken != null)
-                xml += "\r\n<echeckForToken>" + EcheckForToken.Serialize() + "</echeckForToken>";
-            else if (PaypageRegistrationId != null)
-                xml += "\r\n<paypageRegistrationId>" + PaypageRegistrationId + "</paypageRegistrationId>";
-            else if (Applepay != null) xml += "\r\n<applepay>" + Applepay.Serialize() + "\r\n</applepay>";
-            if (CardValidationNum != null)
-                xml += "\r\n<cardValidationNum>" + CardValidationNum + "</cardValidationNum>";
-            xml += "\r\n</registerTokenRequest>";
-            return xml;
-        }
     }
 }
