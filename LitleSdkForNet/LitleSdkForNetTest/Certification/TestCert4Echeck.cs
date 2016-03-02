@@ -34,19 +34,19 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test37()
         {
-            var verification = new echeckVerification();
-            verification.orderId = "37";
-            verification.amount = 3001;
-            verification.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Tom";
-            billToAddress.lastName = "Black";
-            verification.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "10@BC99999";
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.routingNum = "053100300";
-            verification.echeck = echeck;
+            var verification = new EcheckVerification();
+            verification.OrderId = "37";
+            verification.Amount = 3001;
+            verification.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Tom";
+            billToAddress.LastName = "Black";
+            verification.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "10@BC99999";
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.RoutingNum = "053100300";
+            verification.Echeck = echeck;
 
             var response = litle.EcheckVerification(verification);
             Assert.AreEqual("301", response.response);
@@ -56,20 +56,20 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test38()
         {
-            var verification = new echeckVerification();
-            verification.orderId = "38";
-            verification.amount = 3002;
-            verification.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "John";
-            billToAddress.lastName = "Smith";
-            billToAddress.phone = "999-999-9999";
-            verification.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "1099999999";
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.routingNum = "053000219";
-            verification.echeck = echeck;
+            var verification = new EcheckVerification();
+            verification.OrderId = "38";
+            verification.Amount = 3002;
+            verification.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "John";
+            billToAddress.LastName = "Smith";
+            billToAddress.Phone = "999-999-9999";
+            verification.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "1099999999";
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.RoutingNum = "053000219";
+            verification.Echeck = echeck;
 
             var response = litle.EcheckVerification(verification);
             Assert.AreEqual("000", response.response);
@@ -79,21 +79,21 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test39()
         {
-            var verification = new echeckVerification();
-            verification.orderId = "39";
-            verification.amount = 3003;
-            verification.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Robert";
-            billToAddress.lastName = "Jones";
-            billToAddress.companyName = "Good Goods Inc";
-            billToAddress.phone = "9999999999";
-            verification.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "3099999999";
-            echeck.accType = echeckAccountTypeEnum.Corporate;
-            echeck.routingNum = "053100300";
-            verification.echeck = echeck;
+            var verification = new EcheckVerification();
+            verification.OrderId = "39";
+            verification.Amount = 3003;
+            verification.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Robert";
+            billToAddress.LastName = "Jones";
+            billToAddress.CompanyName = "Good Goods Inc";
+            billToAddress.Phone = "9999999999";
+            verification.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "3099999999";
+            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.RoutingNum = "053100300";
+            verification.Echeck = echeck;
 
             var response = litle.EcheckVerification(verification);
             Assert.AreEqual("950", response.response);
@@ -103,21 +103,21 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test40()
         {
-            var verification = new echeckVerification();
-            verification.orderId = "40";
-            verification.amount = 3004;
-            verification.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Peter";
-            billToAddress.lastName = "Green";
-            billToAddress.companyName = "Green Co";
-            billToAddress.phone = "9999999999";
-            verification.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "8099999999";
-            echeck.accType = echeckAccountTypeEnum.Corporate;
-            echeck.routingNum = "063102152";
-            verification.echeck = echeck;
+            var verification = new EcheckVerification();
+            verification.OrderId = "40";
+            verification.Amount = 3004;
+            verification.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Peter";
+            billToAddress.LastName = "Green";
+            billToAddress.CompanyName = "Green Co";
+            billToAddress.Phone = "9999999999";
+            verification.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "8099999999";
+            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.RoutingNum = "063102152";
+            verification.Echeck = echeck;
 
             var response = litle.EcheckVerification(verification);
             Assert.AreEqual("951", response.response);
@@ -127,20 +127,20 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test41()
         {
-            var sale = new echeckSale();
-            sale.orderId = "41";
-            sale.amount = 2008;
-            sale.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Mike";
-            billToAddress.middleInitial = "J";
-            billToAddress.lastName = "Hammer";
-            sale.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "10@BC99999";
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.routingNum = "053100300";
-            sale.echeck = echeck;
+            var sale = new EcheckSale();
+            sale.OrderId = "41";
+            sale.Amount = 2008;
+            sale.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Mike";
+            billToAddress.MiddleInitial = "J";
+            billToAddress.LastName = "Hammer";
+            sale.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "10@BC99999";
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.RoutingNum = "053100300";
+            sale.Echeck = echeck;
 
             var response = litle.EcheckSale(sale);
             Assert.AreEqual("301", response.response);
@@ -150,19 +150,19 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test42()
         {
-            var sale = new echeckSale();
-            sale.orderId = "42";
-            sale.amount = 2004;
-            sale.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Tom";
-            billToAddress.lastName = "Black";
-            sale.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "4099999992";
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.routingNum = "211370545";
-            sale.echeck = echeck;
+            var sale = new EcheckSale();
+            sale.OrderId = "42";
+            sale.Amount = 2004;
+            sale.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Tom";
+            billToAddress.LastName = "Black";
+            sale.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "4099999992";
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.RoutingNum = "211370545";
+            sale.Echeck = echeck;
 
             var response = litle.EcheckSale(sale);
             Assert.AreEqual("000", response.response);
@@ -172,20 +172,20 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test43()
         {
-            var sale = new echeckSale();
-            sale.orderId = "43";
-            sale.amount = 2007;
-            sale.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Peter";
-            billToAddress.lastName = "Green";
-            billToAddress.companyName = "Green Co";
-            sale.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "6099999992";
-            echeck.accType = echeckAccountTypeEnum.Corporate;
-            echeck.routingNum = "211370545";
-            sale.echeck = echeck;
+            var sale = new EcheckSale();
+            sale.OrderId = "43";
+            sale.Amount = 2007;
+            sale.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Peter";
+            billToAddress.LastName = "Green";
+            billToAddress.CompanyName = "Green Co";
+            sale.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "6099999992";
+            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.RoutingNum = "211370545";
+            sale.Echeck = echeck;
 
             var response = litle.EcheckSale(sale);
             Assert.AreEqual("000", response.response);
@@ -195,20 +195,20 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test44()
         {
-            var sale = new echeckSale();
-            sale.orderId = "44";
-            sale.amount = 2009;
-            sale.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Peter";
-            billToAddress.lastName = "Green";
-            billToAddress.companyName = "Green Co";
-            sale.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "9099999992";
-            echeck.accType = echeckAccountTypeEnum.Corporate;
-            echeck.routingNum = "053133052";
-            sale.echeck = echeck;
+            var sale = new EcheckSale();
+            sale.OrderId = "44";
+            sale.Amount = 2009;
+            sale.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Peter";
+            billToAddress.LastName = "Green";
+            billToAddress.CompanyName = "Green Co";
+            sale.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "9099999992";
+            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.RoutingNum = "053133052";
+            sale.Echeck = echeck;
 
             var response = litle.EcheckSale(sale);
             Assert.AreEqual("900", response.response);
@@ -218,19 +218,19 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test45()
         {
-            var credit = new echeckCredit();
-            credit.orderId = "45";
-            credit.amount = 1001;
-            credit.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "John";
-            billToAddress.lastName = "Smith";
-            credit.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "10@BC99999";
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.routingNum = "053100300";
-            credit.echeck = echeck;
+            var credit = new EcheckCredit();
+            credit.OrderId = "45";
+            credit.Amount = 1001;
+            credit.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "John";
+            billToAddress.LastName = "Smith";
+            credit.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "10@BC99999";
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.RoutingNum = "053100300";
+            credit.Echeck = echeck;
 
             var response = litle.EcheckCredit(credit);
             Assert.AreEqual("301", response.response);
@@ -240,20 +240,20 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test46()
         {
-            var credit = new echeckCredit();
-            credit.orderId = "46";
-            credit.amount = 1003;
-            credit.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Robert";
-            billToAddress.lastName = "Jones";
-            billToAddress.companyName = "Widget Inc";
-            credit.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "3099999999";
-            echeck.accType = echeckAccountTypeEnum.Corporate;
-            echeck.routingNum = "063102152";
-            credit.echeck = echeck;
+            var credit = new EcheckCredit();
+            credit.OrderId = "46";
+            credit.Amount = 1003;
+            credit.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Robert";
+            billToAddress.LastName = "Jones";
+            billToAddress.CompanyName = "Widget Inc";
+            credit.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "3099999999";
+            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.RoutingNum = "063102152";
+            credit.Echeck = echeck;
 
             var response = litle.EcheckCredit(credit);
             Assert.AreEqual("000", response.response);
@@ -263,20 +263,20 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test47()
         {
-            var credit = new echeckCredit();
-            credit.orderId = "47";
-            credit.amount = 1007;
-            credit.orderSource = orderSourceType.telephone;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Peter";
-            billToAddress.lastName = "Green";
-            billToAddress.companyName = "Green Co";
-            credit.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accNum = "6099999993";
-            echeck.accType = echeckAccountTypeEnum.Corporate;
-            echeck.routingNum = "211370545";
-            credit.echeck = echeck;
+            var credit = new EcheckCredit();
+            credit.OrderId = "47";
+            credit.Amount = 1007;
+            credit.OrderSource = OrderSourceType.Telephone;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Peter";
+            billToAddress.LastName = "Green";
+            billToAddress.CompanyName = "Green Co";
+            credit.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccNum = "6099999993";
+            echeck.AccType = echeckAccountTypeEnum.Corporate;
+            echeck.RoutingNum = "211370545";
+            credit.Echeck = echeck;
 
             var response = litle.EcheckCredit(credit);
             Assert.AreEqual("000", response.response);
@@ -286,8 +286,8 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test48()
         {
-            var credit = new echeckCredit();
-            credit.litleTxnId = 430000000000000001L;
+            var credit = new EcheckCredit();
+            credit.LitleTxnId = 430000000000000001L;
 
             var response = litle.EcheckCredit(credit);
             Assert.AreEqual("000", response.response);
@@ -297,8 +297,8 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test49()
         {
-            var credit = new echeckCredit();
-            credit.litleTxnId = 2L;
+            var credit = new EcheckCredit();
+            credit.LitleTxnId = 2L;
 
             var response = litle.EcheckCredit(credit);
             Assert.AreEqual("360", response.response);

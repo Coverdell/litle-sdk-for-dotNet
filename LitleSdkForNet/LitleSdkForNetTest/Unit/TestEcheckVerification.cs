@@ -22,18 +22,18 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestMerchantData()
         {
-            var echeckVerification = new echeckVerification();
-            echeckVerification.orderId = "1";
-            echeckVerification.amount = 2;
-            echeckVerification.orderSource = orderSourceType.ecommerce;
-            echeckVerification.billToAddress = new contact();
-            echeckVerification.billToAddress.addressLine1 = "900";
-            echeckVerification.billToAddress.city = "ABC";
-            echeckVerification.billToAddress.state = "MA";
-            echeckVerification.merchantData = new merchantDataType();
-            echeckVerification.merchantData.campaign = "camp";
-            echeckVerification.merchantData.affiliate = "affil";
-            echeckVerification.merchantData.merchantGroupingId = "mgi";
+            var echeckVerification = new EcheckVerification();
+            echeckVerification.OrderId = "1";
+            echeckVerification.Amount = 2;
+            echeckVerification.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerification.BillToAddress = new Contact();
+            echeckVerification.BillToAddress.AddressLine1 = "900";
+            echeckVerification.BillToAddress.City = "ABC";
+            echeckVerification.BillToAddress.State = "MA";
+            echeckVerification.MerchantData = new MerchantDataType();
+            echeckVerification.MerchantData.Campaign = "camp";
+            echeckVerification.MerchantData.Affiliate = "affil";
+            echeckVerification.MerchantData.MerchantGroupingId = "mgi";
 
             var mock = new Mock<Communications>(_memoryStreams);
 

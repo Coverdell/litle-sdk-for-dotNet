@@ -23,16 +23,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestAuth()
         {
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -54,10 +54,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testAuthReversal()
         {
-            var authreversal = new authReversal();
-            authreversal.litleTxnId = 12345678000;
-            authreversal.amount = 106;
-            authreversal.payPalNotes = "Notes";
+            var authreversal = new AuthReversal();
+            authreversal.LitleTxnId = 12345678000;
+            authreversal.Amount = 106;
+            authreversal.PayPalNotes = "Notes";
 
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -80,10 +80,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCapture()
         {
-            var caputure = new capture();
-            caputure.litleTxnId = 123456000;
-            caputure.amount = 106;
-            caputure.payPalNotes = "Notes";
+            var caputure = new Capture();
+            caputure.LitleTxnId = 123456000;
+            caputure.Amount = 106;
+            caputure.PayPalNotes = "Notes";
 
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -106,20 +106,20 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCaptureGivenAuth()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.orderId = "12344";
-            capturegivenauth.amount = 106;
-            var authinfo = new authInformation();
-            authinfo.authDate = new DateTime(2002, 10, 9);
-            authinfo.authCode = "543216";
-            authinfo.authAmount = 12345;
-            capturegivenauth.authInformation = authinfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            capturegivenauth.card = card;
+            var capturegivenauth = new CaptureGivenAuth();
+            capturegivenauth.OrderId = "12344";
+            capturegivenauth.Amount = 106;
+            var authinfo = new AuthInformation();
+            authinfo.AuthDate = new DateTime(2002, 10, 9);
+            authinfo.AuthCode = "543216";
+            authinfo.AuthAmount = 12345;
+            capturegivenauth.AuthInformation = authinfo;
+            capturegivenauth.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            capturegivenauth.Card = card;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -141,15 +141,15 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCredit()
         {
-            var credit = new credit();
-            credit.orderId = "12344";
-            credit.amount = 106;
-            credit.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            credit.card = card;
+            var credit = new Credit();
+            credit.OrderId = "12344";
+            credit.Amount = 106;
+            credit.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            credit.Card = card;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -171,9 +171,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckCredit()
         {
-            var echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12;
-            echeckcredit.litleTxnId = 123456789101112;
+            var echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12;
+            echeckcredit.LitleTxnId = 123456789101112;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -195,7 +195,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckRedeposit()
         {
-            var echeckredeposit = new echeckRedeposit();
+            var echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -218,22 +218,22 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckSale()
         {
-            var echecksale = new echeckSale();
-            echecksale.orderId = "12345";
-            echecksale.amount = 123456;
-            echecksale.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echecksale.echeck = echeck;
-            var contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echecksale.billToAddress = contact;
+            var echecksale = new EcheckSale();
+            echecksale.OrderId = "12345";
+            echecksale.Amount = 123456;
+            echecksale.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echecksale.Echeck = echeck;
+            var contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
+            echecksale.BillToAddress = contact;
 
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -256,22 +256,22 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckVerification()
         {
-            var echeckverification = new echeckVerification();
-            echeckverification.orderId = "12345";
-            echeckverification.amount = 123456;
-            echeckverification.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echeckverification.echeck = echeck;
-            var contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echeckverification.billToAddress = contact;
+            var echeckverification = new EcheckVerification();
+            echeckverification.OrderId = "12345";
+            echeckverification.Amount = 123456;
+            echeckverification.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echeckverification.Echeck = echeck;
+            var contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
+            echeckverification.BillToAddress = contact;
 
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -294,15 +294,15 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testForceCapture()
         {
-            var forcecapture = new forceCapture();
-            forcecapture.orderId = "12344";
-            forcecapture.amount = 106;
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            forcecapture.card = card;
+            var forcecapture = new ForceCapture();
+            forcecapture.OrderId = "12344";
+            forcecapture.Amount = 106;
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            forcecapture.Card = card;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -324,15 +324,15 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testSale()
         {
-            var sale = new sale();
-            sale.orderId = "12344";
-            sale.amount = 106;
-            sale.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            sale.card = card;
+            var sale = new Sale();
+            sale.OrderId = "12344";
+            sale.Amount = 106;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            sale.Card = card;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -354,9 +354,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testToken()
         {
-            var token = new registerTokenRequestType();
-            token.orderId = "12344";
-            token.accountNumber = "1233456789103801";
+            var token = new RegisterTokenRequestType();
+            token.OrderId = "12344";
+            token.AccountNumber = "1233456789103801";
 
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -380,10 +380,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testActivate()
         {
-            var activate = new activate();
-            activate.orderId = "2";
-            activate.orderSource = orderSourceType.ecommerce;
-            activate.card = new cardType();
+            var activate = new Activate();
+            activate.OrderId = "2";
+            activate.OrderSource = OrderSourceType.Ecommerce;
+            activate.Card = new CardType();
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -404,10 +404,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testDeactivate()
         {
-            var deactivate = new deactivate();
-            deactivate.orderId = "2";
-            deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            var deactivate = new Deactivate();
+            deactivate.OrderId = "2";
+            deactivate.OrderSource = OrderSourceType.Ecommerce;
+            deactivate.Card = new CardType();
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -428,10 +428,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testLoad()
         {
-            var load = new load();
-            load.orderId = "2";
-            load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            var load = new Load();
+            load.OrderId = "2";
+            load.OrderSource = OrderSourceType.Ecommerce;
+            load.Card = new CardType();
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -452,10 +452,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUnload()
         {
-            var unload = new unload();
-            unload.orderId = "2";
-            unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            var unload = new Unload();
+            unload.OrderId = "2";
+            unload.OrderSource = OrderSourceType.Ecommerce;
+            unload.Card = new CardType();
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -476,10 +476,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testBalanceInquiry()
         {
-            var balanceInquiry = new balanceInquiry();
-            balanceInquiry.orderId = "2";
-            balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            var balanceInquiry = new BalanceInquiry();
+            balanceInquiry.OrderId = "2";
+            balanceInquiry.OrderSource = OrderSourceType.Ecommerce;
+            balanceInquiry.Card = new CardType();
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -501,8 +501,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCreatePlan()
         {
-            var createPlan = new createPlan();
-            createPlan.planCode = "theCode";
+            var createPlan = new CreatePlan();
+            createPlan.PlanCode = "theCode";
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -524,8 +524,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdatePlan()
         {
-            var updatePlan = new updatePlan();
-            updatePlan.planCode = "theCode";
+            var updatePlan = new UpdatePlan();
+            updatePlan.PlanCode = "theCode";
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -547,16 +547,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testLitleOnlineException()
         {
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -584,16 +584,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testInvalidOperationException()
         {
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -620,15 +620,15 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testDefaultReportGroup()
         {
-            var authorization = new authorization();
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            var authorization = new Authorization();
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             var mock = new Mock<Communications>(_memoryStreams);
 

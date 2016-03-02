@@ -22,10 +22,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimpleRequest()
         {
-            var update = new updateCardValidationNumOnToken();
-            update.orderId = "12344";
-            update.litleToken = "1111222233334444";
-            update.cardValidationNum = "321";
+            var update = new UpdateCardValidationNumOnToken();
+            update.OrderId = "12344";
+            update.LitleToken = "1111222233334444";
+            update.CardValidationNum = "321";
             update.id = "123";
             update.reportGroup = "Default Report Group";
 
@@ -48,10 +48,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestOrderIdIsOptional()
         {
-            var update = new updateCardValidationNumOnToken();
-            update.orderId = null;
-            update.litleToken = "1111222233334444";
-            update.cardValidationNum = "321";
+            var update = new UpdateCardValidationNumOnToken();
+            update.OrderId = null;
+            update.LitleToken = "1111222233334444";
+            update.CardValidationNum = "321";
             update.id = "123";
             update.reportGroup = "Default Report Group";
 

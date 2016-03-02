@@ -34,15 +34,15 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleForceCaptureWithCard()
         {
-            var forcecapture = new forceCapture();
-            forcecapture.amount = 106;
-            forcecapture.orderId = "12344";
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            forcecapture.card = card;
+            var forcecapture = new ForceCapture();
+            forcecapture.Amount = 106;
+            forcecapture.OrderId = "12344";
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            forcecapture.Card = card;
             var response = litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.message);
         }
@@ -50,18 +50,18 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleForceCaptureWithMpos()
         {
-            var mpos = new mposType();
-            mpos.ksn = "77853211300008E00016";
-            mpos.encryptedTrack =
+            var mpos = new MposType();
+            mpos.Ksn = "77853211300008E00016";
+            mpos.EncryptedTrack =
                 "CASE1E185EADD6AFE78C9A214B21313DCD836FDD555FBE3A6C48D141FE80AB9172B963265AFF72111895FE415DEDA162CE8CB7AC4D91EDB611A2AB756AA9CB1A000000000000000000000000000000005A7AAF5E8885A9DB88ECD2430C497003F2646619A2382FFF205767492306AC804E8E64E8EA6981DD";
-            mpos.formatId = "30";
-            mpos.track1Status = 0;
-            mpos.track2Status = 0;
-            var forcecapture = new forceCapture();
-            forcecapture.amount = 322;
-            forcecapture.orderId = "12344";
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            forcecapture.mpos = mpos;
+            mpos.FormatId = "30";
+            mpos.Track1Status = 0;
+            mpos.Track2Status = 0;
+            var forcecapture = new ForceCapture();
+            forcecapture.Amount = 322;
+            forcecapture.OrderId = "12344";
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            forcecapture.Mpos = mpos;
             var response = litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.message);
         }
@@ -69,16 +69,16 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleForceCaptureWithToken()
         {
-            var forcecapture = new forceCapture();
-            forcecapture.amount = 106;
-            forcecapture.orderId = "12344";
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            var token = new cardTokenType();
-            token.litleToken = "123456789101112";
-            token.expDate = "1210";
-            token.cardValidationNum = "555";
-            token.type = methodOfPaymentTypeEnum.VI;
-            forcecapture.token = token;
+            var forcecapture = new ForceCapture();
+            forcecapture.Amount = 106;
+            forcecapture.OrderId = "12344";
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            var token = new CardTokenType();
+            token.LitleToken = "123456789101112";
+            token.ExpDate = "1210";
+            token.CardValidationNum = "555";
+            token.Type = MethodOfPaymentTypeEnum.VI;
+            forcecapture.Token = token;
             var response = litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.message);
             ;

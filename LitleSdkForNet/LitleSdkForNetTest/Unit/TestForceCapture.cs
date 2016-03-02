@@ -22,10 +22,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSecondaryAmount()
         {
-            var capture = new forceCapture();
-            capture.amount = 2;
-            capture.secondaryAmount = 1;
-            capture.orderSource = orderSourceType.ecommerce;
+            var capture = new ForceCapture();
+            capture.Amount = 2;
+            capture.SecondaryAmount = 1;
+            capture.OrderSource = OrderSourceType.Ecommerce;
             capture.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -47,10 +47,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount()
         {
-            var capture = new forceCapture();
-            capture.amount = 2;
-            capture.surchargeAmount = 1;
-            capture.orderSource = orderSourceType.ecommerce;
+            var capture = new ForceCapture();
+            capture.Amount = 2;
+            capture.SurchargeAmount = 1;
+            capture.OrderSource = OrderSourceType.Ecommerce;
             capture.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -73,9 +73,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_Optional()
         {
-            var capture = new forceCapture();
-            capture.amount = 2;
-            capture.orderSource = orderSourceType.ecommerce;
+            var capture = new ForceCapture();
+            capture.Amount = 2;
+            capture.OrderSource = OrderSourceType.Ecommerce;
             capture.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -96,9 +96,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_True()
         {
-            var forceCapture = new forceCapture();
-            forceCapture.merchantData = new merchantDataType();
-            forceCapture.debtRepayment = true;
+            var forceCapture = new ForceCapture();
+            forceCapture.MerchantData = new MerchantDataType();
+            forceCapture.DebtRepayment = true;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -118,9 +118,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_False()
         {
-            var forceCapture = new forceCapture();
-            forceCapture.merchantData = new merchantDataType();
-            forceCapture.debtRepayment = false;
+            var forceCapture = new ForceCapture();
+            forceCapture.MerchantData = new MerchantDataType();
+            forceCapture.DebtRepayment = false;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -140,8 +140,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_Optional()
         {
-            var forceCapture = new forceCapture();
-            forceCapture.merchantData = new merchantDataType();
+            var forceCapture = new ForceCapture();
+            forceCapture.MerchantData = new MerchantDataType();
 
             var mock = new Mock<Communications>(_memoryStreams);
 

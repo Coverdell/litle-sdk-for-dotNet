@@ -34,13 +34,13 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test50()
         {
-            var request = new registerTokenRequestType();
-            request.orderId = "50";
-            request.accountNumber = "4457119922390123";
+            var request = new RegisterTokenRequestType();
+            request.OrderId = "50";
+            request.AccountNumber = "4457119922390123";
 
             var response = litle.RegisterToken(request);
             Assert.AreEqual("445711", response.bin);
-            Assert.AreEqual(methodOfPaymentTypeEnum.VI, response.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.VI, response.type);
             Assert.AreEqual("801", response.response);
             Assert.AreEqual("1111222233330123", response.litleToken);
             Assert.AreEqual("Account number was successfully registered", response.message);
@@ -49,9 +49,9 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test51()
         {
-            var request = new registerTokenRequestType();
-            request.orderId = "51";
-            request.accountNumber = "4457119999999999";
+            var request = new RegisterTokenRequestType();
+            request.OrderId = "51";
+            request.AccountNumber = "4457119999999999";
 
             var response = litle.RegisterToken(request);
             Assert.AreEqual("820", response.response);
@@ -61,13 +61,13 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test52()
         {
-            var request = new registerTokenRequestType();
-            request.orderId = "52";
-            request.accountNumber = "4457119922390123";
+            var request = new RegisterTokenRequestType();
+            request.OrderId = "52";
+            request.AccountNumber = "4457119922390123";
 
             var response = litle.RegisterToken(request);
             Assert.AreEqual("445711", response.bin);
-            Assert.AreEqual(methodOfPaymentTypeEnum.VI, response.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.VI, response.type);
             Assert.AreEqual("802", response.response);
             Assert.AreEqual("1111222233330123", response.litleToken);
             Assert.AreEqual("Account number was previously registered", response.message);
@@ -76,16 +76,16 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test53()
         {
-            var request = new registerTokenRequestType();
-            request.orderId = "53";
-            var echeck = new echeckForTokenType();
-            echeck.accNum = "1099999998";
-            echeck.routingNum = "114567895";
-            request.echeckForToken = echeck;
+            var request = new RegisterTokenRequestType();
+            request.OrderId = "53";
+            var echeck = new EcheckForTokenType();
+            echeck.AccNum = "1099999998";
+            echeck.RoutingNum = "114567895";
+            request.EcheckForToken = echeck;
             ;
 
             var response = litle.RegisterToken(request);
-            Assert.AreEqual(methodOfPaymentTypeEnum.EC, response.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.EC, response.type);
             Assert.AreEqual("998", response.eCheckAccountSuffix);
             Assert.AreEqual("801", response.response);
             Assert.AreEqual("Account number was successfully registered", response.message);
@@ -95,12 +95,12 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test54()
         {
-            var request = new registerTokenRequestType();
-            request.orderId = "54";
-            var echeck = new echeckForTokenType();
-            echeck.accNum = "1022222102";
-            echeck.routingNum = "1145_7895";
-            request.echeckForToken = echeck;
+            var request = new RegisterTokenRequestType();
+            request.OrderId = "54";
+            var echeck = new EcheckForTokenType();
+            echeck.AccNum = "1022222102";
+            echeck.RoutingNum = "1145_7895";
+            request.EcheckForToken = echeck;
             ;
 
             var response = litle.RegisterToken(request);
@@ -111,39 +111,39 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test55()
         {
-            var auth = new authorization();
-            auth.orderId = "55";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.number = "5435101234510196";
-            card.expDate = "1112";
-            card.cardValidationNum = "987";
-            card.type = methodOfPaymentTypeEnum.MC;
-            auth.card = card;
+            var auth = new Authorization();
+            auth.OrderId = "55";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Number = "5435101234510196";
+            card.ExpDate = "1112";
+            card.CardValidationNum = "987";
+            card.Type = MethodOfPaymentTypeEnum.MC;
+            auth.Card = card;
 
             var response = litle.Authorize(auth);
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("801", response.tokenResponse.tokenResponseCode);
             Assert.AreEqual("Account number was successfully registered", response.tokenResponse.tokenMessage);
-            Assert.AreEqual(methodOfPaymentTypeEnum.MC, response.tokenResponse.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.MC, response.tokenResponse.type);
             Assert.AreEqual("543510", response.tokenResponse.bin);
         }
 
         [Test]
         public void test56()
         {
-            var auth = new authorization();
-            auth.orderId = "56";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.number = "5435109999999999";
-            card.expDate = "1112";
-            card.cardValidationNum = "987";
-            card.type = methodOfPaymentTypeEnum.MC;
-            auth.card = card;
+            var auth = new Authorization();
+            auth.OrderId = "56";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Number = "5435109999999999";
+            card.ExpDate = "1112";
+            card.CardValidationNum = "987";
+            card.Type = MethodOfPaymentTypeEnum.MC;
+            auth.Card = card;
 
             var response = litle.Authorize(auth);
             Assert.AreEqual("301", response.response);
@@ -153,37 +153,37 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test57()
         {
-            var auth = new authorization();
-            auth.orderId = "57";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.number = "5435101234510196";
-            card.expDate = "1112";
-            card.cardValidationNum = "987";
-            card.type = methodOfPaymentTypeEnum.MC;
-            auth.card = card;
+            var auth = new Authorization();
+            auth.OrderId = "57";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Number = "5435101234510196";
+            card.ExpDate = "1112";
+            card.CardValidationNum = "987";
+            card.Type = MethodOfPaymentTypeEnum.MC;
+            auth.Card = card;
 
             var response = litle.Authorize(auth);
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("802", response.tokenResponse.tokenResponseCode);
             Assert.AreEqual("Account number was previously registered", response.tokenResponse.tokenMessage);
-            Assert.AreEqual(methodOfPaymentTypeEnum.MC, response.tokenResponse.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.MC, response.tokenResponse.type);
             Assert.AreEqual("543510", response.tokenResponse.bin);
         }
 
         [Test]
         public void test59()
         {
-            var auth = new authorization();
-            auth.orderId = "59";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            var token = new cardTokenType();
-            token.litleToken = "1712990000040196";
-            token.expDate = "1112";
-            auth.token = token;
+            var auth = new Authorization();
+            auth.OrderId = "59";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            var token = new CardTokenType();
+            token.LitleToken = "1712990000040196";
+            token.ExpDate = "1112";
+            auth.Token = token;
 
             var response = litle.Authorize(auth);
             Assert.AreEqual("822", response.response);
@@ -193,14 +193,14 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test60()
         {
-            var auth = new authorization();
-            auth.orderId = "60";
-            auth.amount = 15000;
-            auth.orderSource = orderSourceType.ecommerce;
-            var token = new cardTokenType();
-            token.litleToken = "1712999999999999";
-            token.expDate = "1112";
-            auth.token = token;
+            var auth = new Authorization();
+            auth.OrderId = "60";
+            auth.Amount = 15000;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            var token = new CardTokenType();
+            token.LitleToken = "1712999999999999";
+            token.ExpDate = "1112";
+            auth.Token = token;
 
             var response = litle.Authorize(auth);
             Assert.AreEqual("823", response.response);
@@ -210,50 +210,50 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test61()
         {
-            var sale = new echeckSale();
-            sale.orderId = "61";
-            sale.amount = 15000;
-            sale.orderSource = orderSourceType.ecommerce;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Tom";
-            billToAddress.lastName = "Black";
-            sale.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
+            var sale = new EcheckSale();
+            sale.OrderId = "61";
+            sale.Amount = 15000;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Tom";
+            billToAddress.LastName = "Black";
+            sale.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
             ;
-            echeck.accNum = "1099999003";
-            echeck.routingNum = "114567895";
-            sale.echeck = echeck;
+            echeck.AccNum = "1099999003";
+            echeck.RoutingNum = "114567895";
+            sale.Echeck = echeck;
 
             var response = litle.EcheckSale(sale);
             Assert.AreEqual("801", response.tokenResponse.tokenResponseCode);
             Assert.AreEqual("Account number was successfully registered", response.tokenResponse.tokenMessage);
-            Assert.AreEqual(methodOfPaymentTypeEnum.EC, response.tokenResponse.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.EC, response.tokenResponse.type);
             Assert.AreEqual("111922223333444003", response.tokenResponse.litleToken);
         }
 
         [Test]
         public void test62()
         {
-            var sale = new echeckSale();
-            sale.orderId = "62";
-            sale.amount = 15000;
-            sale.orderSource = orderSourceType.ecommerce;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Tom";
-            billToAddress.lastName = "Black";
-            sale.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
+            var sale = new EcheckSale();
+            sale.OrderId = "62";
+            sale.Amount = 15000;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Tom";
+            billToAddress.LastName = "Black";
+            sale.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
             ;
-            echeck.accNum = "1099999999";
-            echeck.routingNum = "114567895";
-            sale.echeck = echeck;
+            echeck.AccNum = "1099999999";
+            echeck.RoutingNum = "114567895";
+            sale.Echeck = echeck;
 
             var response = litle.EcheckSale(sale);
             Assert.AreEqual("801", response.tokenResponse.tokenResponseCode);
             Assert.AreEqual("Account number was successfully registered", response.tokenResponse.tokenMessage);
-            Assert.AreEqual(methodOfPaymentTypeEnum.EC, response.tokenResponse.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.EC, response.tokenResponse.type);
             Assert.AreEqual("999", response.tokenResponse.eCheckAccountSuffix);
             Assert.AreEqual("111922223333444999", response.tokenResponse.litleToken);
         }
@@ -261,25 +261,25 @@ namespace Litle.Sdk.Test.Certification
         [Test]
         public void test63()
         {
-            var sale = new echeckSale();
-            sale.orderId = "63";
-            sale.amount = 15000;
-            sale.orderSource = orderSourceType.ecommerce;
-            var billToAddress = new contact();
-            billToAddress.firstName = "Tom";
-            billToAddress.lastName = "Black";
-            sale.billToAddress = billToAddress;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
+            var sale = new EcheckSale();
+            sale.OrderId = "63";
+            sale.Amount = 15000;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            var billToAddress = new Contact();
+            billToAddress.FirstName = "Tom";
+            billToAddress.LastName = "Black";
+            sale.BillToAddress = billToAddress;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
             ;
-            echeck.accNum = "1099999999";
-            echeck.routingNum = "214567892";
-            sale.echeck = echeck;
+            echeck.AccNum = "1099999999";
+            echeck.RoutingNum = "214567892";
+            sale.Echeck = echeck;
 
             var response = litle.EcheckSale(sale);
             Assert.AreEqual("801", response.tokenResponse.tokenResponseCode);
             Assert.AreEqual("Account number was successfully registered", response.tokenResponse.tokenMessage);
-            Assert.AreEqual(methodOfPaymentTypeEnum.EC, response.tokenResponse.type);
+            Assert.AreEqual(MethodOfPaymentTypeEnum.EC, response.tokenResponse.type);
             Assert.AreEqual("999", response.tokenResponse.eCheckAccountSuffix);
             Assert.AreEqual("111922223333555999", response.tokenResponse.litleToken);
         }

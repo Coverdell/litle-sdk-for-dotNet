@@ -5,11 +5,11 @@ using System.Xml.Serialization;
 
 namespace Litle.Sdk
 {
-    public class litleXmlSerializer
+    public class LitleXmlSerializer
     {
-        public virtual string SerializeObject(litleOnlineRequest req)
+        public virtual string SerializeObject(LitleOnlineRequest req)
         {
-            var serializer = new XmlSerializer(typeof (litleOnlineRequest));
+            var serializer = new XmlSerializer(typeof (LitleOnlineRequest));
             var ms = new MemoryStream();
             try
             {

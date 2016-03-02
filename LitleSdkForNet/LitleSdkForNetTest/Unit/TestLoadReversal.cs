@@ -22,10 +22,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimple()
         {
-            var loadReversal = new loadReversal();
+            var loadReversal = new LoadReversal();
             loadReversal.id = "a";
             loadReversal.reportGroup = "b";
-            loadReversal.litleTxnId = "123";
+            loadReversal.LitleTxnId = "123";
 
             var mock = new Mock<Communications>(_memoryStreams);
 

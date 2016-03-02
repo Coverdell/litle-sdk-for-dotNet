@@ -22,12 +22,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestActionReasonOnOrphanedRefund()
         {
-            var credit = new credit();
-            credit.orderId = "12344";
-            credit.amount = 2;
-            credit.orderSource = orderSourceType.ecommerce;
+            var credit = new Credit();
+            credit.OrderId = "12344";
+            credit.Amount = 2;
+            credit.OrderSource = OrderSourceType.Ecommerce;
             credit.reportGroup = "Planets";
-            credit.actionReason = "SUSPECT_FRAUD";
+            credit.ActionReason = "SUSPECT_FRAUD";
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -47,10 +47,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestOrderSource_Set()
         {
-            var credit = new credit();
-            credit.orderId = "12344";
-            credit.amount = 2;
-            credit.orderSource = orderSourceType.ecommerce;
+            var credit = new Credit();
+            credit.OrderId = "12344";
+            credit.Amount = 2;
+            credit.OrderSource = OrderSourceType.Ecommerce;
             credit.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -71,11 +71,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSecondaryAmount_Orphan()
         {
-            var credit = new credit();
-            credit.amount = 2;
-            credit.secondaryAmount = 1;
-            credit.orderId = "3";
-            credit.orderSource = orderSourceType.ecommerce;
+            var credit = new Credit();
+            credit.Amount = 2;
+            credit.SecondaryAmount = 1;
+            credit.OrderId = "3";
+            credit.OrderSource = OrderSourceType.Ecommerce;
             credit.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -97,11 +97,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSecondaryAmount_Tied()
         {
-            var credit = new credit();
-            credit.amount = 2;
-            credit.secondaryAmount = 1;
-            credit.litleTxnId = 3;
-            credit.processingInstructions = new processingInstructions();
+            var credit = new Credit();
+            credit.Amount = 2;
+            credit.SecondaryAmount = 1;
+            credit.LitleTxnId = 3;
+            credit.ProcessingInstructions = new ProcessingInstructions();
             credit.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -123,11 +123,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_Tied()
         {
-            var credit = new credit();
-            credit.amount = 2;
-            credit.surchargeAmount = 1;
-            credit.litleTxnId = 3;
-            credit.processingInstructions = new processingInstructions();
+            var credit = new Credit();
+            credit.Amount = 2;
+            credit.SurchargeAmount = 1;
+            credit.LitleTxnId = 3;
+            credit.ProcessingInstructions = new ProcessingInstructions();
             credit.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -149,11 +149,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_TiedOptional()
         {
-            var credit = new credit();
-            credit.amount = 2;
-            credit.litleTxnId = 3;
+            var credit = new Credit();
+            credit.Amount = 2;
+            credit.LitleTxnId = 3;
             credit.reportGroup = "Planets";
-            credit.processingInstructions = new processingInstructions();
+            credit.ProcessingInstructions = new ProcessingInstructions();
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -173,11 +173,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_Orphan()
         {
-            var credit = new credit();
-            credit.amount = 2;
-            credit.surchargeAmount = 1;
-            credit.orderId = "3";
-            credit.orderSource = orderSourceType.ecommerce;
+            var credit = new Credit();
+            credit.Amount = 2;
+            credit.SurchargeAmount = 1;
+            credit.OrderId = "3";
+            credit.OrderSource = OrderSourceType.Ecommerce;
             credit.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -199,10 +199,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_OrphanOptional()
         {
-            var credit = new credit();
-            credit.amount = 2;
-            credit.orderId = "3";
-            credit.orderSource = orderSourceType.ecommerce;
+            var credit = new Credit();
+            credit.Amount = 2;
+            credit.OrderId = "3";
+            credit.OrderSource = OrderSourceType.Ecommerce;
             credit.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -224,13 +224,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestPos_Tied()
         {
-            var credit = new credit();
-            credit.amount = 2;
-            credit.pos = new pos();
-            credit.pos.terminalId = "abc123";
-            credit.litleTxnId = 3;
+            var credit = new Credit();
+            credit.Amount = 2;
+            credit.Pos = new Pos();
+            credit.Pos.TerminalId = "abc123";
+            credit.LitleTxnId = 3;
             credit.reportGroup = "Planets";
-            credit.payPalNotes = "notes";
+            credit.PayPalNotes = "notes";
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -251,11 +251,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestPos_TiedOptional()
         {
-            var credit = new credit();
-            credit.amount = 2;
-            credit.litleTxnId = 3;
+            var credit = new Credit();
+            credit.Amount = 2;
+            credit.LitleTxnId = 3;
             credit.reportGroup = "Planets";
-            credit.payPalNotes = "notes";
+            credit.PayPalNotes = "notes";
 
             var mock = new Mock<Communications>(_memoryStreams);
 

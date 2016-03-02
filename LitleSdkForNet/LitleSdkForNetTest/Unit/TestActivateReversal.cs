@@ -22,10 +22,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimple()
         {
-            var activateReversal = new activateReversal();
+            var activateReversal = new ActivateReversal();
             activateReversal.id = "a";
             activateReversal.reportGroup = "b";
-            activateReversal.litleTxnId = "123";
+            activateReversal.LitleTxnId = "123";
 
             var mock = new Mock<Communications>(new Dictionary<string, StringBuilder>());
 

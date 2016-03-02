@@ -34,10 +34,10 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleCapture()
         {
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "Notes";
+            var capture = new Capture();
+            capture.LitleTxnId = 123456000;
+            capture.Amount = 106;
+            capture.PayPalNotes = "Notes";
 
             var response = litle.Capture(capture);
             Assert.AreEqual("Approved", response.message);
@@ -46,11 +46,11 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleCaptureWithPartial()
         {
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.partial = true;
-            capture.payPalNotes = "Notes";
+            var capture = new Capture();
+            capture.LitleTxnId = 123456000;
+            capture.Amount = 106;
+            capture.Partial = true;
+            capture.PayPalNotes = "Notes";
 
             var response = litle.Capture(capture);
             Assert.AreEqual("Approved", response.message);
@@ -59,16 +59,16 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void complexCapture()
         {
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "Notes";
-            var enhanceddata = new enhancedData();
-            enhanceddata.customerReference = "Litle";
-            enhanceddata.salesTax = 50;
-            enhanceddata.deliveryType = enhancedDataDeliveryType.TBD;
-            capture.enhancedData = enhanceddata;
-            capture.payPalOrderComplete = true;
+            var capture = new Capture();
+            capture.LitleTxnId = 123456000;
+            capture.Amount = 106;
+            capture.PayPalNotes = "Notes";
+            var enhanceddata = new EnhancedData();
+            enhanceddata.CustomerReference = "Litle";
+            enhanceddata.SalesTax = 50;
+            enhanceddata.DeliveryType = enhancedDataDeliveryType.TBD;
+            capture.EnhancedData = enhanceddata;
+            capture.PayPalOrderComplete = true;
             var response = litle.Capture(capture);
             Assert.AreEqual("Approved", response.message);
         }
@@ -76,10 +76,10 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleCaptureWithSpecial()
         {
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "<'&\">";
+            var capture = new Capture();
+            capture.LitleTxnId = 123456000;
+            capture.Amount = 106;
+            capture.PayPalNotes = "<'&\">";
 
             var response = litle.Capture(capture);
             Assert.AreEqual("Approved", response.message);

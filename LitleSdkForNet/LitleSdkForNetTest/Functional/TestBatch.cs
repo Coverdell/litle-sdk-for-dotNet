@@ -9,7 +9,7 @@ namespace Litle.Sdk.Test.Functional
     [TestFixture]
     internal class TestBatch
     {
-        private litleRequest litle;
+        private LitleRequest litle;
         private Dictionary<string, string> invalidConfig;
         private Dictionary<string, string> invalidSftpConfig;
         private IDictionary<string, StringBuilder> memoryStreams;
@@ -58,296 +58,296 @@ namespace Litle.Sdk.Test.Functional
         [SetUp]
         public void setUpBeforeTest()
         {
-            litle = new litleRequest(memoryStreams);
+            litle = new LitleRequest(memoryStreams);
         }
 
         [Test]
         public void SimpleBatch()
         {
-            var litleBatchRequest = new batchRequest(memoryStreams);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
 
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
-            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
 
-            var authorization2 = new authorization();
+            var authorization2 = new Authorization();
             authorization2.reportGroup = "Planets";
-            authorization2.orderId = "12345";
-            authorization2.amount = 106;
-            authorization2.orderSource = orderSourceType.ecommerce;
-            var card2 = new cardType();
-            card2.type = methodOfPaymentTypeEnum.VI;
-            card2.number = "4242424242424242";
-            card2.expDate = "1210";
-            authorization2.card = card2;
+            authorization2.OrderId = "12345";
+            authorization2.Amount = 106;
+            authorization2.OrderSource = OrderSourceType.Ecommerce;
+            var card2 = new CardType();
+            card2.Type = MethodOfPaymentTypeEnum.VI;
+            card2.Number = "4242424242424242";
+            card2.ExpDate = "1210";
+            authorization2.Card = card2;
 
-            litleBatchRequest.addAuthorization(authorization2);
+            litleBatchRequest.AddAuthorization(authorization2);
 
-            var reversal = new authReversal();
-            reversal.litleTxnId = 12345678000L;
-            reversal.amount = 106;
-            reversal.payPalNotes = "Notes";
+            var reversal = new AuthReversal();
+            reversal.LitleTxnId = 12345678000L;
+            reversal.Amount = 106;
+            reversal.PayPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal);
+            litleBatchRequest.AddAuthReversal(reversal);
 
-            var reversal2 = new authReversal();
-            reversal2.litleTxnId = 12345678900L;
-            reversal2.amount = 106;
-            reversal2.payPalNotes = "Notes";
+            var reversal2 = new AuthReversal();
+            reversal2.LitleTxnId = 12345678900L;
+            reversal2.Amount = 106;
+            reversal2.PayPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal2);
+            litleBatchRequest.AddAuthReversal(reversal2);
 
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "Notes";
+            var capture = new Capture();
+            capture.LitleTxnId = 123456000;
+            capture.Amount = 106;
+            capture.PayPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture);
+            litleBatchRequest.AddCapture(capture);
 
-            var capture2 = new capture();
-            capture2.litleTxnId = 123456700;
-            capture2.amount = 106;
-            capture2.payPalNotes = "Notes";
+            var capture2 = new Capture();
+            capture2.LitleTxnId = 123456700;
+            capture2.Amount = 106;
+            capture2.PayPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture2);
+            litleBatchRequest.AddCapture(capture2);
 
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
+            var capturegivenauth = new CaptureGivenAuth();
+            capturegivenauth.Amount = 106;
+            capturegivenauth.OrderId = "12344";
+            var authInfo = new AuthInformation();
             var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            capturegivenauth.card = card;
+            authInfo.AuthDate = authDate;
+            authInfo.AuthCode = "543216";
+            authInfo.AuthAmount = 12345;
+            capturegivenauth.AuthInformation = authInfo;
+            capturegivenauth.OrderSource = OrderSourceType.Ecommerce;
+            capturegivenauth.Card = card;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
 
-            var capturegivenauth2 = new captureGivenAuth();
-            capturegivenauth2.amount = 106;
-            capturegivenauth2.orderId = "12344";
-            var authInfo2 = new authInformation();
+            var capturegivenauth2 = new CaptureGivenAuth();
+            capturegivenauth2.Amount = 106;
+            capturegivenauth2.OrderId = "12344";
+            var authInfo2 = new AuthInformation();
             authDate = new DateTime(2003, 10, 9);
-            authInfo2.authDate = authDate;
-            authInfo2.authCode = "543216";
-            authInfo2.authAmount = 12345;
-            capturegivenauth2.authInformation = authInfo;
-            capturegivenauth2.orderSource = orderSourceType.ecommerce;
-            capturegivenauth2.card = card2;
+            authInfo2.AuthDate = authDate;
+            authInfo2.AuthCode = "543216";
+            authInfo2.AuthAmount = 12345;
+            capturegivenauth2.AuthInformation = authInfo;
+            capturegivenauth2.OrderSource = OrderSourceType.Ecommerce;
+            capturegivenauth2.Card = card2;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth2);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth2);
 
-            var creditObj = new credit();
-            creditObj.amount = 106;
-            creditObj.orderId = "2111";
-            creditObj.orderSource = orderSourceType.ecommerce;
-            creditObj.card = card;
+            var creditObj = new Credit();
+            creditObj.Amount = 106;
+            creditObj.OrderId = "2111";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
+            creditObj.Card = card;
 
-            litleBatchRequest.addCredit(creditObj);
+            litleBatchRequest.AddCredit(creditObj);
 
-            var creditObj2 = new credit();
-            creditObj2.amount = 106;
-            creditObj2.orderId = "2111";
-            creditObj2.orderSource = orderSourceType.ecommerce;
-            creditObj2.card = card2;
+            var creditObj2 = new Credit();
+            creditObj2.Amount = 106;
+            creditObj2.OrderId = "2111";
+            creditObj2.OrderSource = OrderSourceType.Ecommerce;
+            creditObj2.Card = card2;
 
-            litleBatchRequest.addCredit(creditObj2);
+            litleBatchRequest.AddCredit(creditObj2);
 
-            var echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.orderId = "12345";
-            echeckcredit.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "1099999903";
-            echeck.routingNum = "011201995";
-            echeck.checkNum = "123455";
-            echeckcredit.echeck = echeck;
-            var billToAddress = new contact();
-            billToAddress.name = "Bob";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "litle.com";
-            echeckcredit.billToAddress = billToAddress;
+            var echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.OrderId = "12345";
+            echeckcredit.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "1099999903";
+            echeck.RoutingNum = "011201995";
+            echeck.CheckNum = "123455";
+            echeckcredit.Echeck = echeck;
+            var billToAddress = new Contact();
+            billToAddress.Name = "Bob";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "litle.com";
+            echeckcredit.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
 
-            var echeckcredit2 = new echeckCredit();
-            echeckcredit2.amount = 12L;
-            echeckcredit2.orderId = "12346";
-            echeckcredit2.orderSource = orderSourceType.ecommerce;
-            var echeck2 = new echeckType();
-            echeck2.accType = echeckAccountTypeEnum.Checking;
-            echeck2.accNum = "1099999903";
-            echeck2.routingNum = "011201995";
-            echeck2.checkNum = "123456";
-            echeckcredit2.echeck = echeck2;
-            var billToAddress2 = new contact();
-            billToAddress2.name = "Mike";
-            billToAddress2.city = "Lowell";
-            billToAddress2.state = "MA";
-            billToAddress2.email = "litle.com";
-            echeckcredit2.billToAddress = billToAddress2;
+            var echeckcredit2 = new EcheckCredit();
+            echeckcredit2.Amount = 12L;
+            echeckcredit2.OrderId = "12346";
+            echeckcredit2.OrderSource = OrderSourceType.Ecommerce;
+            var echeck2 = new EcheckType();
+            echeck2.AccType = echeckAccountTypeEnum.Checking;
+            echeck2.AccNum = "1099999903";
+            echeck2.RoutingNum = "011201995";
+            echeck2.CheckNum = "123456";
+            echeckcredit2.Echeck = echeck2;
+            var billToAddress2 = new Contact();
+            billToAddress2.Name = "Mike";
+            billToAddress2.City = "Lowell";
+            billToAddress2.State = "MA";
+            billToAddress2.Email = "litle.com";
+            echeckcredit2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit2);
+            litleBatchRequest.AddEcheckCredit(echeckcredit2);
 
-            var echeckredeposit = new echeckRedeposit();
+            var echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
-            echeckredeposit.echeck = echeck;
+            echeckredeposit.Echeck = echeck;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
 
-            var echeckredeposit2 = new echeckRedeposit();
+            var echeckredeposit2 = new EcheckRedeposit();
             echeckredeposit2.litleTxnId = 123457;
-            echeckredeposit2.echeck = echeck2;
+            echeckredeposit2.Echeck = echeck2;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit2);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit2);
 
-            var echeckSaleObj = new echeckSale();
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.orderId = "12345";
-            echeckSaleObj.orderSource = orderSourceType.ecommerce;
-            echeckSaleObj.echeck = echeck;
-            echeckSaleObj.billToAddress = billToAddress;
+            var echeckSaleObj = new EcheckSale();
+            echeckSaleObj.Amount = 123456;
+            echeckSaleObj.OrderId = "12345";
+            echeckSaleObj.OrderSource = OrderSourceType.Ecommerce;
+            echeckSaleObj.Echeck = echeck;
+            echeckSaleObj.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj);
 
-            var echeckSaleObj2 = new echeckSale();
-            echeckSaleObj2.amount = 123456;
-            echeckSaleObj2.orderId = "12346";
-            echeckSaleObj2.orderSource = orderSourceType.ecommerce;
-            echeckSaleObj2.echeck = echeck2;
-            echeckSaleObj2.billToAddress = billToAddress2;
+            var echeckSaleObj2 = new EcheckSale();
+            echeckSaleObj2.Amount = 123456;
+            echeckSaleObj2.OrderId = "12346";
+            echeckSaleObj2.OrderSource = OrderSourceType.Ecommerce;
+            echeckSaleObj2.Echeck = echeck2;
+            echeckSaleObj2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj2);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj2);
 
-            var echeckPreNoteSaleObj1 = new echeckPreNoteSale();
-            echeckPreNoteSaleObj1.orderId = "12345";
-            echeckPreNoteSaleObj1.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteSaleObj1.echeck = echeck;
-            echeckPreNoteSaleObj1.billToAddress = billToAddress;
+            var echeckPreNoteSaleObj1 = new EcheckPreNoteSale();
+            echeckPreNoteSaleObj1.OrderId = "12345";
+            echeckPreNoteSaleObj1.OrderSource = OrderSourceType.Ecommerce;
+            echeckPreNoteSaleObj1.Echeck = echeck;
+            echeckPreNoteSaleObj1.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleObj1);
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSaleObj1);
 
-            var echeckPreNoteSaleObj2 = new echeckPreNoteSale();
-            echeckPreNoteSaleObj2.orderId = "12345";
-            echeckPreNoteSaleObj2.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteSaleObj2.echeck = echeck2;
-            echeckPreNoteSaleObj2.billToAddress = billToAddress2;
+            var echeckPreNoteSaleObj2 = new EcheckPreNoteSale();
+            echeckPreNoteSaleObj2.OrderId = "12345";
+            echeckPreNoteSaleObj2.OrderSource = OrderSourceType.Ecommerce;
+            echeckPreNoteSaleObj2.Echeck = echeck2;
+            echeckPreNoteSaleObj2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSaleObj2);
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSaleObj2);
 
-            var echeckPreNoteCreditObj1 = new echeckPreNoteCredit();
-            echeckPreNoteCreditObj1.orderId = "12345";
-            echeckPreNoteCreditObj1.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteCreditObj1.echeck = echeck;
-            echeckPreNoteCreditObj1.billToAddress = billToAddress;
+            var echeckPreNoteCreditObj1 = new EcheckPreNoteCredit();
+            echeckPreNoteCreditObj1.OrderId = "12345";
+            echeckPreNoteCreditObj1.OrderSource = OrderSourceType.Ecommerce;
+            echeckPreNoteCreditObj1.Echeck = echeck;
+            echeckPreNoteCreditObj1.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCreditObj1);
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCreditObj1);
 
-            var echeckPreNoteCreditObj2 = new echeckPreNoteCredit();
-            echeckPreNoteCreditObj2.orderId = "12345";
-            echeckPreNoteCreditObj2.orderSource = orderSourceType.ecommerce;
-            echeckPreNoteCreditObj2.echeck = echeck2;
-            echeckPreNoteCreditObj2.billToAddress = billToAddress2;
+            var echeckPreNoteCreditObj2 = new EcheckPreNoteCredit();
+            echeckPreNoteCreditObj2.OrderId = "12345";
+            echeckPreNoteCreditObj2.OrderSource = OrderSourceType.Ecommerce;
+            echeckPreNoteCreditObj2.Echeck = echeck2;
+            echeckPreNoteCreditObj2.BillToAddress = billToAddress2;
 
-            var echeckVerificationObject = new echeckVerification();
-            echeckVerificationObject.amount = 123456;
-            echeckVerificationObject.orderId = "12345";
-            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
-            echeckVerificationObject.echeck = echeck;
-            echeckVerificationObject.billToAddress = billToAddress;
+            var echeckVerificationObject = new EcheckVerification();
+            echeckVerificationObject.Amount = 123456;
+            echeckVerificationObject.OrderId = "12345";
+            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerificationObject.Echeck = echeck;
+            echeckVerificationObject.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject);
 
-            var echeckVerificationObject2 = new echeckVerification();
-            echeckVerificationObject2.amount = 123456;
-            echeckVerificationObject2.orderId = "12346";
-            echeckVerificationObject2.orderSource = orderSourceType.ecommerce;
-            echeckVerificationObject2.echeck = echeck2;
-            echeckVerificationObject2.billToAddress = billToAddress2;
+            var echeckVerificationObject2 = new EcheckVerification();
+            echeckVerificationObject2.Amount = 123456;
+            echeckVerificationObject2.OrderId = "12346";
+            echeckVerificationObject2.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerificationObject2.Echeck = echeck2;
+            echeckVerificationObject2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject2);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject2);
 
-            var forcecapture = new forceCapture();
-            forcecapture.amount = 106;
-            forcecapture.orderId = "12344";
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            forcecapture.card = card;
+            var forcecapture = new ForceCapture();
+            forcecapture.Amount = 106;
+            forcecapture.OrderId = "12344";
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            forcecapture.Card = card;
 
-            litleBatchRequest.addForceCapture(forcecapture);
+            litleBatchRequest.AddForceCapture(forcecapture);
 
-            var forcecapture2 = new forceCapture();
-            forcecapture2.amount = 106;
-            forcecapture2.orderId = "12345";
-            forcecapture2.orderSource = orderSourceType.ecommerce;
-            forcecapture2.card = card2;
+            var forcecapture2 = new ForceCapture();
+            forcecapture2.Amount = 106;
+            forcecapture2.OrderId = "12345";
+            forcecapture2.OrderSource = OrderSourceType.Ecommerce;
+            forcecapture2.Card = card2;
 
-            litleBatchRequest.addForceCapture(forcecapture2);
+            litleBatchRequest.AddForceCapture(forcecapture2);
 
-            var saleObj = new sale();
-            saleObj.amount = 106;
-            saleObj.litleTxnId = 123456;
-            saleObj.orderId = "12344";
-            saleObj.orderSource = orderSourceType.ecommerce;
-            saleObj.card = card;
+            var saleObj = new Sale();
+            saleObj.Amount = 106;
+            saleObj.LitleTxnId = 123456;
+            saleObj.OrderId = "12344";
+            saleObj.OrderSource = OrderSourceType.Ecommerce;
+            saleObj.Card = card;
 
-            litleBatchRequest.addSale(saleObj);
+            litleBatchRequest.AddSale(saleObj);
 
-            var saleObj2 = new sale();
-            saleObj2.amount = 106;
-            saleObj2.litleTxnId = 123456;
-            saleObj2.orderId = "12345";
-            saleObj2.orderSource = orderSourceType.ecommerce;
-            saleObj2.card = card2;
+            var saleObj2 = new Sale();
+            saleObj2.Amount = 106;
+            saleObj2.LitleTxnId = 123456;
+            saleObj2.OrderId = "12345";
+            saleObj2.OrderSource = OrderSourceType.Ecommerce;
+            saleObj2.Card = card2;
 
-            litleBatchRequest.addSale(saleObj2);
+            litleBatchRequest.AddSale(saleObj2);
 
-            var registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
-            registerTokenRequest.accountNumber = "1233456789103801";
+            var registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
+            registerTokenRequest.AccountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
 
-            var registerTokenRequest2 = new registerTokenRequestType();
-            registerTokenRequest2.orderId = "12345";
-            registerTokenRequest2.accountNumber = "1233456789103801";
+            var registerTokenRequest2 = new RegisterTokenRequestType();
+            registerTokenRequest2.OrderId = "12345";
+            registerTokenRequest2.AccountNumber = "1233456789103801";
             registerTokenRequest2.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest2);
 
-            var updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
-            updateCardValidationNumOnToken.orderId = "12344";
-            updateCardValidationNumOnToken.cardValidationNum = "123";
-            updateCardValidationNumOnToken.litleToken = "4100000000000001";
+            var updateCardValidationNumOnToken = new UpdateCardValidationNumOnToken();
+            updateCardValidationNumOnToken.OrderId = "12344";
+            updateCardValidationNumOnToken.CardValidationNum = "123";
+            updateCardValidationNumOnToken.LitleToken = "4100000000000001";
 
-            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
+            litleBatchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
 
-            var updateCardValidationNumOnToken2 = new updateCardValidationNumOnToken();
-            updateCardValidationNumOnToken2.orderId = "12345";
-            updateCardValidationNumOnToken2.cardValidationNum = "123";
-            updateCardValidationNumOnToken2.litleToken = "4242424242424242";
+            var updateCardValidationNumOnToken2 = new UpdateCardValidationNumOnToken();
+            updateCardValidationNumOnToken2.OrderId = "12345";
+            updateCardValidationNumOnToken2.CardValidationNum = "123";
+            updateCardValidationNumOnToken2.LitleToken = "4242424242424242";
 
-            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
-            litle.addBatch(litleBatchRequest);
+            litleBatchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken2);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchName = litle.sendToLitle();
+            var batchName = litle.SendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2*2, 10*2));
+            litle.BlockAndWaitForResponse(batchName, estimatedResponseTime(2*2, 10*2));
 
-            var litleResponse = litle.receiveFromLitle(batchName);
+            var litleResponse = litle.ReceiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -485,30 +485,30 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void accountUpdateBatch()
         {
-            var litleBatchRequest = new batchRequest(memoryStreams);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
 
-            var accountUpdate1 = new accountUpdate();
-            accountUpdate1.orderId = "1111";
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "414100000000000000";
-            card.expDate = "1210";
-            accountUpdate1.card = card;
+            var accountUpdate1 = new AccountUpdate();
+            accountUpdate1.OrderId = "1111";
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "414100000000000000";
+            card.ExpDate = "1210";
+            accountUpdate1.Card = card;
 
-            litleBatchRequest.addAccountUpdate(accountUpdate1);
+            litleBatchRequest.AddAccountUpdate(accountUpdate1);
 
-            var accountUpdate2 = new accountUpdate();
-            accountUpdate2.orderId = "1112";
-            accountUpdate2.card = card;
+            var accountUpdate2 = new AccountUpdate();
+            accountUpdate2.OrderId = "1112";
+            accountUpdate2.Card = card;
 
-            litleBatchRequest.addAccountUpdate(accountUpdate2);
+            litleBatchRequest.AddAccountUpdate(accountUpdate2);
 
-            litle.addBatch(litleBatchRequest);
-            var batchName = litle.sendToLitle();
+            litle.AddBatch(litleBatchRequest);
+            var batchName = litle.SendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(0, 1*2));
+            litle.BlockAndWaitForResponse(batchName, estimatedResponseTime(0, 1*2));
 
-            var litleResponse = litle.receiveFromLitle(batchName);
+            var litleResponse = litle.ReceiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);
@@ -531,29 +531,29 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void RFRBatch()
         {
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.id = "1234567A";
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.Id = "1234567A";
 
-            var accountUpdate1 = new accountUpdate();
-            accountUpdate1.orderId = "1111";
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4242424242424242";
-            card.expDate = "1210";
-            accountUpdate1.card = card;
+            var accountUpdate1 = new AccountUpdate();
+            accountUpdate1.OrderId = "1111";
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4242424242424242";
+            card.ExpDate = "1210";
+            accountUpdate1.Card = card;
 
-            litleBatchRequest.addAccountUpdate(accountUpdate1);
+            litleBatchRequest.AddAccountUpdate(accountUpdate1);
 
-            var accountUpdate2 = new accountUpdate();
-            accountUpdate2.orderId = "1112";
-            accountUpdate2.card = card;
+            var accountUpdate2 = new AccountUpdate();
+            accountUpdate2.OrderId = "1112";
+            accountUpdate2.Card = card;
 
-            litleBatchRequest.addAccountUpdate(accountUpdate2);
-            litle.addBatch(litleBatchRequest);
+            litleBatchRequest.AddAccountUpdate(accountUpdate2);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchName = litle.sendToLitle();
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(0, 1*2));
-            var litleResponse = litle.receiveFromLitle(batchName);
+            var batchName = litle.SendToLitle();
+            litle.BlockAndWaitForResponse(batchName, estimatedResponseTime(0, 1*2));
+            var litleResponse = litle.ReceiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
 
@@ -572,21 +572,21 @@ namespace Litle.Sdk.Test.Functional
                 litleBatchResponse = litleResponse.nextBatchResponse();
             }
 
-            var litleRfr = new litleRequest(memoryStreams);
-            var rfrRequest = new RFRRequest(memoryStreams);
-            var accountUpdateFileRequestData = new accountUpdateFileRequestData();
-            accountUpdateFileRequestData.merchantId = Settings.Default.merchantId;
-            accountUpdateFileRequestData.postDay = DateTime.Now;
-            rfrRequest.accountUpdateFileRequestData = accountUpdateFileRequestData;
+            var litleRfr = new LitleRequest(memoryStreams);
+            var rfrRequest = new RfrRequest(memoryStreams);
+            var accountUpdateFileRequestData = new AccountUpdateFileRequestData();
+            accountUpdateFileRequestData.MerchantId = Settings.Default.merchantId;
+            accountUpdateFileRequestData.PostDay = DateTime.Now;
+            rfrRequest.AccountUpdateFileRequestData = accountUpdateFileRequestData;
 
-            litleRfr.addRFRRequest(rfrRequest);
+            litleRfr.AddRfrRequest(rfrRequest);
 
-            var rfrBatchName = litleRfr.sendToLitle();
+            var rfrBatchName = litleRfr.SendToLitle();
 
             try
             {
-                litle.blockAndWaitForResponse(rfrBatchName, 120000);
-                var litleRfrResponse = litle.receiveFromLitle(rfrBatchName);
+                litle.BlockAndWaitForResponse(rfrBatchName, 120000);
+                var litleRfrResponse = litle.ReceiveFromLitle(rfrBatchName);
                 Assert.NotNull(litleRfrResponse);
                 var rfrResponse = litleRfrResponse.nextRFRResponse();
                 Assert.NotNull(rfrResponse);
@@ -606,214 +606,214 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void nullBatchData()
         {
-            var litleBatchRequest = new batchRequest(memoryStreams);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
 
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "414100000000000000";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "414100000000000000";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
-            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
             try
             {
-                litleBatchRequest.addAuthorization(null);
+                litleBatchRequest.AddAuthorization(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var reversal = new authReversal();
-            reversal.litleTxnId = 12345678000L;
-            reversal.amount = 106;
-            reversal.payPalNotes = "Notes";
+            var reversal = new AuthReversal();
+            reversal.LitleTxnId = 12345678000L;
+            reversal.Amount = 106;
+            reversal.PayPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal);
+            litleBatchRequest.AddAuthReversal(reversal);
             try
             {
-                litleBatchRequest.addAuthReversal(null);
+                litleBatchRequest.AddAuthReversal(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "Notes";
+            var capture = new Capture();
+            capture.LitleTxnId = 123456000;
+            capture.Amount = 106;
+            capture.PayPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture);
+            litleBatchRequest.AddCapture(capture);
             try
             {
-                litleBatchRequest.addCapture(null);
+                litleBatchRequest.AddCapture(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
+            var capturegivenauth = new CaptureGivenAuth();
+            capturegivenauth.Amount = 106;
+            capturegivenauth.OrderId = "12344";
+            var authInfo = new AuthInformation();
             var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            capturegivenauth.card = card;
+            authInfo.AuthDate = authDate;
+            authInfo.AuthCode = "543216";
+            authInfo.AuthAmount = 12345;
+            capturegivenauth.AuthInformation = authInfo;
+            capturegivenauth.OrderSource = OrderSourceType.Ecommerce;
+            capturegivenauth.Card = card;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
             try
             {
-                litleBatchRequest.addCaptureGivenAuth(null);
+                litleBatchRequest.AddCaptureGivenAuth(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var creditObj = new credit();
-            creditObj.amount = 106;
-            creditObj.orderId = "2111";
-            creditObj.orderSource = orderSourceType.ecommerce;
-            creditObj.card = card;
+            var creditObj = new Credit();
+            creditObj.Amount = 106;
+            creditObj.OrderId = "2111";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
+            creditObj.Card = card;
 
-            litleBatchRequest.addCredit(creditObj);
+            litleBatchRequest.AddCredit(creditObj);
             try
             {
-                litleBatchRequest.addCredit(null);
+                litleBatchRequest.AddCredit(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.orderId = "12345";
-            echeckcredit.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "011201995";
-            echeck.checkNum = "123455";
-            echeckcredit.echeck = echeck;
-            var billToAddress = new contact();
-            billToAddress.name = "Bob";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "litle.com";
-            echeckcredit.billToAddress = billToAddress;
+            var echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.OrderId = "12345";
+            echeckcredit.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "011201995";
+            echeck.CheckNum = "123455";
+            echeckcredit.Echeck = echeck;
+            var billToAddress = new Contact();
+            billToAddress.Name = "Bob";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "litle.com";
+            echeckcredit.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
             try
             {
-                litleBatchRequest.addEcheckCredit(null);
+                litleBatchRequest.AddEcheckCredit(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var echeckredeposit = new echeckRedeposit();
+            var echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
-            echeckredeposit.echeck = echeck;
+            echeckredeposit.Echeck = echeck;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
             try
             {
-                litleBatchRequest.addEcheckRedeposit(null);
+                litleBatchRequest.AddEcheckRedeposit(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var echeckSaleObj = new echeckSale();
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.orderId = "12345";
-            echeckSaleObj.orderSource = orderSourceType.ecommerce;
-            echeckSaleObj.echeck = echeck;
-            echeckSaleObj.billToAddress = billToAddress;
+            var echeckSaleObj = new EcheckSale();
+            echeckSaleObj.Amount = 123456;
+            echeckSaleObj.OrderId = "12345";
+            echeckSaleObj.OrderSource = OrderSourceType.Ecommerce;
+            echeckSaleObj.Echeck = echeck;
+            echeckSaleObj.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj);
             try
             {
-                litleBatchRequest.addEcheckSale(null);
+                litleBatchRequest.AddEcheckSale(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var echeckVerificationObject = new echeckVerification();
-            echeckVerificationObject.amount = 123456;
-            echeckVerificationObject.orderId = "12345";
-            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
-            echeckVerificationObject.echeck = echeck;
-            echeckVerificationObject.billToAddress = billToAddress;
+            var echeckVerificationObject = new EcheckVerification();
+            echeckVerificationObject.Amount = 123456;
+            echeckVerificationObject.OrderId = "12345";
+            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerificationObject.Echeck = echeck;
+            echeckVerificationObject.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject);
             try
             {
-                litleBatchRequest.addEcheckVerification(null);
+                litleBatchRequest.AddEcheckVerification(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var forcecapture = new forceCapture();
-            forcecapture.amount = 106;
-            forcecapture.orderId = "12344";
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            forcecapture.card = card;
+            var forcecapture = new ForceCapture();
+            forcecapture.Amount = 106;
+            forcecapture.OrderId = "12344";
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            forcecapture.Card = card;
 
-            litleBatchRequest.addForceCapture(forcecapture);
+            litleBatchRequest.AddForceCapture(forcecapture);
             try
             {
-                litleBatchRequest.addForceCapture(null);
+                litleBatchRequest.AddForceCapture(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var saleObj = new sale();
-            saleObj.amount = 106;
-            saleObj.litleTxnId = 123456;
-            saleObj.orderId = "12344";
-            saleObj.orderSource = orderSourceType.ecommerce;
-            saleObj.card = card;
+            var saleObj = new Sale();
+            saleObj.Amount = 106;
+            saleObj.LitleTxnId = 123456;
+            saleObj.OrderId = "12344";
+            saleObj.OrderSource = OrderSourceType.Ecommerce;
+            saleObj.Card = card;
 
-            litleBatchRequest.addSale(saleObj);
+            litleBatchRequest.AddSale(saleObj);
             try
             {
-                litleBatchRequest.addSale(null);
+                litleBatchRequest.AddSale(null);
             }
             catch (NullReferenceException e)
             {
                 Assert.AreEqual("Object reference not set to an instance of an object.", e.Message);
             }
 
-            var registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
-            registerTokenRequest.accountNumber = "1233456789103801";
+            var registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
+            registerTokenRequest.AccountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
             try
             {
-                litleBatchRequest.addRegisterTokenRequest(null);
+                litleBatchRequest.AddRegisterTokenRequest(null);
             }
             catch (NullReferenceException e)
             {
@@ -822,7 +822,7 @@ namespace Litle.Sdk.Test.Functional
 
             try
             {
-                litle.addBatch(litleBatchRequest);
+                litle.AddBatch(litleBatchRequest);
             }
             catch (NullReferenceException e)
             {
@@ -833,251 +833,251 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidCredientialsBatch()
         {
-            var litleIC = new litleRequest(memoryStreams, invalidConfig);
+            var litleIC = new LitleRequest(memoryStreams, invalidConfig);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
 
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            authorization.card = card; //This needs to compile      
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            authorization.Card = card; //This needs to compile      
 
-            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
 
-            var authorization2 = new authorization();
+            var authorization2 = new Authorization();
             authorization2.reportGroup = "Planets";
-            authorization2.orderId = "12345";
-            authorization2.amount = 106;
-            authorization2.orderSource = orderSourceType.ecommerce;
-            var card2 = new cardType();
-            card2.type = methodOfPaymentTypeEnum.VI;
-            card2.number = "4242424242424242";
-            card2.expDate = "1210";
-            authorization2.card = card2; //This needs to compile
+            authorization2.OrderId = "12345";
+            authorization2.Amount = 106;
+            authorization2.OrderSource = OrderSourceType.Ecommerce;
+            var card2 = new CardType();
+            card2.Type = MethodOfPaymentTypeEnum.VI;
+            card2.Number = "4242424242424242";
+            card2.ExpDate = "1210";
+            authorization2.Card = card2; //This needs to compile
 
-            litleBatchRequest.addAuthorization(authorization2);
+            litleBatchRequest.AddAuthorization(authorization2);
 
-            var reversal = new authReversal();
-            reversal.litleTxnId = 12345678000L;
-            reversal.amount = 106;
-            reversal.payPalNotes = "Notes";
+            var reversal = new AuthReversal();
+            reversal.LitleTxnId = 12345678000L;
+            reversal.Amount = 106;
+            reversal.PayPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal);
+            litleBatchRequest.AddAuthReversal(reversal);
 
-            var reversal2 = new authReversal();
-            reversal2.litleTxnId = 12345678900L;
-            reversal2.amount = 106;
-            reversal2.payPalNotes = "Notes";
+            var reversal2 = new AuthReversal();
+            reversal2.LitleTxnId = 12345678900L;
+            reversal2.Amount = 106;
+            reversal2.PayPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal2);
+            litleBatchRequest.AddAuthReversal(reversal2);
 
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "Notes";
+            var capture = new Capture();
+            capture.LitleTxnId = 123456000;
+            capture.Amount = 106;
+            capture.PayPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture);
+            litleBatchRequest.AddCapture(capture);
 
-            var capture2 = new capture();
-            capture2.litleTxnId = 123456700;
-            capture2.amount = 106;
-            capture2.payPalNotes = "Notes";
+            var capture2 = new Capture();
+            capture2.LitleTxnId = 123456700;
+            capture2.Amount = 106;
+            capture2.PayPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture2);
+            litleBatchRequest.AddCapture(capture2);
 
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
+            var capturegivenauth = new CaptureGivenAuth();
+            capturegivenauth.Amount = 106;
+            capturegivenauth.OrderId = "12344";
+            var authInfo = new AuthInformation();
             var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            capturegivenauth.card = card;
+            authInfo.AuthDate = authDate;
+            authInfo.AuthCode = "543216";
+            authInfo.AuthAmount = 12345;
+            capturegivenauth.AuthInformation = authInfo;
+            capturegivenauth.OrderSource = OrderSourceType.Ecommerce;
+            capturegivenauth.Card = card;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
 
-            var capturegivenauth2 = new captureGivenAuth();
-            capturegivenauth2.amount = 106;
-            capturegivenauth2.orderId = "12344";
-            var authInfo2 = new authInformation();
+            var capturegivenauth2 = new CaptureGivenAuth();
+            capturegivenauth2.Amount = 106;
+            capturegivenauth2.OrderId = "12344";
+            var authInfo2 = new AuthInformation();
             authDate = new DateTime(2003, 10, 9);
-            authInfo2.authDate = authDate;
-            authInfo2.authCode = "543216";
-            authInfo2.authAmount = 12345;
-            capturegivenauth2.authInformation = authInfo;
-            capturegivenauth2.orderSource = orderSourceType.ecommerce;
-            capturegivenauth2.card = card2;
+            authInfo2.AuthDate = authDate;
+            authInfo2.AuthCode = "543216";
+            authInfo2.AuthAmount = 12345;
+            capturegivenauth2.AuthInformation = authInfo;
+            capturegivenauth2.OrderSource = OrderSourceType.Ecommerce;
+            capturegivenauth2.Card = card2;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth2);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth2);
 
-            var creditObj = new credit();
-            creditObj.amount = 106;
-            creditObj.orderId = "2111";
-            creditObj.orderSource = orderSourceType.ecommerce;
-            creditObj.card = card;
+            var creditObj = new Credit();
+            creditObj.Amount = 106;
+            creditObj.OrderId = "2111";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
+            creditObj.Card = card;
 
-            litleBatchRequest.addCredit(creditObj);
+            litleBatchRequest.AddCredit(creditObj);
 
-            var creditObj2 = new credit();
-            creditObj2.amount = 106;
-            creditObj2.orderId = "2111";
-            creditObj2.orderSource = orderSourceType.ecommerce;
-            creditObj2.card = card2;
+            var creditObj2 = new Credit();
+            creditObj2.Amount = 106;
+            creditObj2.OrderId = "2111";
+            creditObj2.OrderSource = OrderSourceType.Ecommerce;
+            creditObj2.Card = card2;
 
-            litleBatchRequest.addCredit(creditObj2);
+            litleBatchRequest.AddCredit(creditObj2);
 
-            var echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.orderId = "12345";
-            echeckcredit.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "1099999903";
-            echeck.routingNum = "011201995";
-            echeck.checkNum = "123455";
-            echeckcredit.echeck = echeck;
-            var billToAddress = new contact();
-            billToAddress.name = "Bob";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "litle.com";
-            echeckcredit.billToAddress = billToAddress;
+            var echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.OrderId = "12345";
+            echeckcredit.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "1099999903";
+            echeck.RoutingNum = "011201995";
+            echeck.CheckNum = "123455";
+            echeckcredit.Echeck = echeck;
+            var billToAddress = new Contact();
+            billToAddress.Name = "Bob";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "litle.com";
+            echeckcredit.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
 
-            var echeckcredit2 = new echeckCredit();
-            echeckcredit2.amount = 12L;
-            echeckcredit2.orderId = "12346";
-            echeckcredit2.orderSource = orderSourceType.ecommerce;
-            var echeck2 = new echeckType();
-            echeck2.accType = echeckAccountTypeEnum.Checking;
-            echeck2.accNum = "1099999903";
-            echeck2.routingNum = "011201995";
-            echeck2.checkNum = "123456";
-            echeckcredit2.echeck = echeck2;
-            var billToAddress2 = new contact();
-            billToAddress2.name = "Mike";
-            billToAddress2.city = "Lowell";
-            billToAddress2.state = "MA";
-            billToAddress2.email = "litle.com";
-            echeckcredit2.billToAddress = billToAddress2;
+            var echeckcredit2 = new EcheckCredit();
+            echeckcredit2.Amount = 12L;
+            echeckcredit2.OrderId = "12346";
+            echeckcredit2.OrderSource = OrderSourceType.Ecommerce;
+            var echeck2 = new EcheckType();
+            echeck2.AccType = echeckAccountTypeEnum.Checking;
+            echeck2.AccNum = "1099999903";
+            echeck2.RoutingNum = "011201995";
+            echeck2.CheckNum = "123456";
+            echeckcredit2.Echeck = echeck2;
+            var billToAddress2 = new Contact();
+            billToAddress2.Name = "Mike";
+            billToAddress2.City = "Lowell";
+            billToAddress2.State = "MA";
+            billToAddress2.Email = "litle.com";
+            echeckcredit2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit2);
+            litleBatchRequest.AddEcheckCredit(echeckcredit2);
 
-            var echeckredeposit = new echeckRedeposit();
+            var echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
-            echeckredeposit.echeck = echeck;
+            echeckredeposit.Echeck = echeck;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
 
-            var echeckredeposit2 = new echeckRedeposit();
+            var echeckredeposit2 = new EcheckRedeposit();
             echeckredeposit2.litleTxnId = 123457;
-            echeckredeposit2.echeck = echeck2;
+            echeckredeposit2.Echeck = echeck2;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit2);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit2);
 
-            var echeckSaleObj = new echeckSale();
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.orderId = "12345";
-            echeckSaleObj.orderSource = orderSourceType.ecommerce;
-            echeckSaleObj.echeck = echeck;
-            echeckSaleObj.billToAddress = billToAddress;
+            var echeckSaleObj = new EcheckSale();
+            echeckSaleObj.Amount = 123456;
+            echeckSaleObj.OrderId = "12345";
+            echeckSaleObj.OrderSource = OrderSourceType.Ecommerce;
+            echeckSaleObj.Echeck = echeck;
+            echeckSaleObj.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj);
 
-            var echeckSaleObj2 = new echeckSale();
-            echeckSaleObj2.amount = 123456;
-            echeckSaleObj2.orderId = "12346";
-            echeckSaleObj2.orderSource = orderSourceType.ecommerce;
-            echeckSaleObj2.echeck = echeck2;
-            echeckSaleObj2.billToAddress = billToAddress2;
+            var echeckSaleObj2 = new EcheckSale();
+            echeckSaleObj2.Amount = 123456;
+            echeckSaleObj2.OrderId = "12346";
+            echeckSaleObj2.OrderSource = OrderSourceType.Ecommerce;
+            echeckSaleObj2.Echeck = echeck2;
+            echeckSaleObj2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj2);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj2);
 
-            var echeckVerificationObject = new echeckVerification();
-            echeckVerificationObject.amount = 123456;
-            echeckVerificationObject.orderId = "12345";
-            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
-            echeckVerificationObject.echeck = echeck;
-            echeckVerificationObject.billToAddress = billToAddress;
+            var echeckVerificationObject = new EcheckVerification();
+            echeckVerificationObject.Amount = 123456;
+            echeckVerificationObject.OrderId = "12345";
+            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerificationObject.Echeck = echeck;
+            echeckVerificationObject.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject);
 
-            var echeckVerificationObject2 = new echeckVerification();
-            echeckVerificationObject2.amount = 123456;
-            echeckVerificationObject2.orderId = "12346";
-            echeckVerificationObject2.orderSource = orderSourceType.ecommerce;
-            echeckVerificationObject2.echeck = echeck2;
-            echeckVerificationObject2.billToAddress = billToAddress2;
+            var echeckVerificationObject2 = new EcheckVerification();
+            echeckVerificationObject2.Amount = 123456;
+            echeckVerificationObject2.OrderId = "12346";
+            echeckVerificationObject2.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerificationObject2.Echeck = echeck2;
+            echeckVerificationObject2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject2);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject2);
 
-            var forcecapture = new forceCapture();
-            forcecapture.amount = 106;
-            forcecapture.orderId = "12344";
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            forcecapture.card = card;
+            var forcecapture = new ForceCapture();
+            forcecapture.Amount = 106;
+            forcecapture.OrderId = "12344";
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            forcecapture.Card = card;
 
-            litleBatchRequest.addForceCapture(forcecapture);
+            litleBatchRequest.AddForceCapture(forcecapture);
 
-            var forcecapture2 = new forceCapture();
-            forcecapture2.amount = 106;
-            forcecapture2.orderId = "12345";
-            forcecapture2.orderSource = orderSourceType.ecommerce;
-            forcecapture2.card = card2;
+            var forcecapture2 = new ForceCapture();
+            forcecapture2.Amount = 106;
+            forcecapture2.OrderId = "12345";
+            forcecapture2.OrderSource = OrderSourceType.Ecommerce;
+            forcecapture2.Card = card2;
 
-            litleBatchRequest.addForceCapture(forcecapture2);
+            litleBatchRequest.AddForceCapture(forcecapture2);
 
-            var saleObj = new sale();
-            saleObj.amount = 106;
-            saleObj.litleTxnId = 123456;
-            saleObj.orderId = "12344";
-            saleObj.orderSource = orderSourceType.ecommerce;
-            saleObj.card = card;
+            var saleObj = new Sale();
+            saleObj.Amount = 106;
+            saleObj.LitleTxnId = 123456;
+            saleObj.OrderId = "12344";
+            saleObj.OrderSource = OrderSourceType.Ecommerce;
+            saleObj.Card = card;
 
-            litleBatchRequest.addSale(saleObj);
+            litleBatchRequest.AddSale(saleObj);
 
-            var saleObj2 = new sale();
-            saleObj2.amount = 106;
-            saleObj2.litleTxnId = 123456;
-            saleObj2.orderId = "12345";
-            saleObj2.orderSource = orderSourceType.ecommerce;
-            saleObj2.card = card2;
+            var saleObj2 = new Sale();
+            saleObj2.Amount = 106;
+            saleObj2.LitleTxnId = 123456;
+            saleObj2.OrderId = "12345";
+            saleObj2.OrderSource = OrderSourceType.Ecommerce;
+            saleObj2.Card = card2;
 
-            litleBatchRequest.addSale(saleObj2);
+            litleBatchRequest.AddSale(saleObj2);
 
-            var registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
-            registerTokenRequest.accountNumber = "1233456789103801";
+            var registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
+            registerTokenRequest.AccountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
 
-            var registerTokenRequest2 = new registerTokenRequestType();
-            registerTokenRequest2.orderId = "12345";
-            registerTokenRequest2.accountNumber = "1233456789103801";
+            var registerTokenRequest2 = new RegisterTokenRequestType();
+            registerTokenRequest2.OrderId = "12345";
+            registerTokenRequest2.AccountNumber = "1233456789103801";
             registerTokenRequest2.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest2);
 
-            litleIC.addBatch(litleBatchRequest);
+            litleIC.AddBatch(litleBatchRequest);
 
-            var batchName = litleIC.sendToLitle();
+            var batchName = litleIC.SendToLitle();
 
-            litleIC.blockAndWaitForResponse(batchName, 60*1000*5);
+            litleIC.BlockAndWaitForResponse(batchName, 60*1000*5);
 
             try
             {
-                var litleResponse = litleIC.receiveFromLitle(batchName);
+                var litleResponse = litleIC.ReceiveFromLitle(batchName);
                 Assert.Fail("Fail to throw a connection exception");
             }
             catch (LitleOnlineException e)
@@ -1089,247 +1089,247 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void InvalidSftpCredientialsBatch()
         {
-            var litleISC = new litleRequest(memoryStreams, invalidSftpConfig);
+            var litleISC = new LitleRequest(memoryStreams, invalidSftpConfig);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
 
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            authorization.card = card; //This needs to compile      
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            authorization.Card = card; //This needs to compile      
 
-            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
 
-            var authorization2 = new authorization();
+            var authorization2 = new Authorization();
             authorization2.reportGroup = "Planets";
-            authorization2.orderId = "12345";
-            authorization2.amount = 106;
-            authorization2.orderSource = orderSourceType.ecommerce;
-            var card2 = new cardType();
-            card2.type = methodOfPaymentTypeEnum.VI;
-            card2.number = "4242424242424242";
-            card2.expDate = "1210";
-            authorization2.card = card2; //This needs to compile
+            authorization2.OrderId = "12345";
+            authorization2.Amount = 106;
+            authorization2.OrderSource = OrderSourceType.Ecommerce;
+            var card2 = new CardType();
+            card2.Type = MethodOfPaymentTypeEnum.VI;
+            card2.Number = "4242424242424242";
+            card2.ExpDate = "1210";
+            authorization2.Card = card2; //This needs to compile
 
-            litleBatchRequest.addAuthorization(authorization2);
+            litleBatchRequest.AddAuthorization(authorization2);
 
-            var reversal = new authReversal();
-            reversal.litleTxnId = 12345678000L;
-            reversal.amount = 106;
-            reversal.payPalNotes = "Notes";
+            var reversal = new AuthReversal();
+            reversal.LitleTxnId = 12345678000L;
+            reversal.Amount = 106;
+            reversal.PayPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal);
+            litleBatchRequest.AddAuthReversal(reversal);
 
-            var reversal2 = new authReversal();
-            reversal2.litleTxnId = 12345678900L;
-            reversal2.amount = 106;
-            reversal2.payPalNotes = "Notes";
+            var reversal2 = new AuthReversal();
+            reversal2.LitleTxnId = 12345678900L;
+            reversal2.Amount = 106;
+            reversal2.PayPalNotes = "Notes";
 
-            litleBatchRequest.addAuthReversal(reversal2);
+            litleBatchRequest.AddAuthReversal(reversal2);
 
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "Notes";
+            var capture = new Capture();
+            capture.LitleTxnId = 123456000;
+            capture.Amount = 106;
+            capture.PayPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture);
+            litleBatchRequest.AddCapture(capture);
 
-            var capture2 = new capture();
-            capture2.litleTxnId = 123456700;
-            capture2.amount = 106;
-            capture2.payPalNotes = "Notes";
+            var capture2 = new Capture();
+            capture2.LitleTxnId = 123456700;
+            capture2.Amount = 106;
+            capture2.PayPalNotes = "Notes";
 
-            litleBatchRequest.addCapture(capture2);
+            litleBatchRequest.AddCapture(capture2);
 
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
+            var capturegivenauth = new CaptureGivenAuth();
+            capturegivenauth.Amount = 106;
+            capturegivenauth.OrderId = "12344";
+            var authInfo = new AuthInformation();
             var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            capturegivenauth.card = card;
+            authInfo.AuthDate = authDate;
+            authInfo.AuthCode = "543216";
+            authInfo.AuthAmount = 12345;
+            capturegivenauth.AuthInformation = authInfo;
+            capturegivenauth.OrderSource = OrderSourceType.Ecommerce;
+            capturegivenauth.Card = card;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
 
-            var capturegivenauth2 = new captureGivenAuth();
-            capturegivenauth2.amount = 106;
-            capturegivenauth2.orderId = "12344";
-            var authInfo2 = new authInformation();
+            var capturegivenauth2 = new CaptureGivenAuth();
+            capturegivenauth2.Amount = 106;
+            capturegivenauth2.OrderId = "12344";
+            var authInfo2 = new AuthInformation();
             authDate = new DateTime(2003, 10, 9);
-            authInfo2.authDate = authDate;
-            authInfo2.authCode = "543216";
-            authInfo2.authAmount = 12345;
-            capturegivenauth2.authInformation = authInfo;
-            capturegivenauth2.orderSource = orderSourceType.ecommerce;
-            capturegivenauth2.card = card2;
+            authInfo2.AuthDate = authDate;
+            authInfo2.AuthCode = "543216";
+            authInfo2.AuthAmount = 12345;
+            capturegivenauth2.AuthInformation = authInfo;
+            capturegivenauth2.OrderSource = OrderSourceType.Ecommerce;
+            capturegivenauth2.Card = card2;
 
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth2);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth2);
 
-            var creditObj = new credit();
-            creditObj.amount = 106;
-            creditObj.orderId = "2111";
-            creditObj.orderSource = orderSourceType.ecommerce;
-            creditObj.card = card;
+            var creditObj = new Credit();
+            creditObj.Amount = 106;
+            creditObj.OrderId = "2111";
+            creditObj.OrderSource = OrderSourceType.Ecommerce;
+            creditObj.Card = card;
 
-            litleBatchRequest.addCredit(creditObj);
+            litleBatchRequest.AddCredit(creditObj);
 
-            var creditObj2 = new credit();
-            creditObj2.amount = 106;
-            creditObj2.orderId = "2111";
-            creditObj2.orderSource = orderSourceType.ecommerce;
-            creditObj2.card = card2;
+            var creditObj2 = new Credit();
+            creditObj2.Amount = 106;
+            creditObj2.OrderId = "2111";
+            creditObj2.OrderSource = OrderSourceType.Ecommerce;
+            creditObj2.Card = card2;
 
-            litleBatchRequest.addCredit(creditObj2);
+            litleBatchRequest.AddCredit(creditObj2);
 
-            var echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12L;
-            echeckcredit.orderId = "12345";
-            echeckcredit.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "1099999903";
-            echeck.routingNum = "011201995";
-            echeck.checkNum = "123455";
-            echeckcredit.echeck = echeck;
-            var billToAddress = new contact();
-            billToAddress.name = "Bob";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "litle.com";
-            echeckcredit.billToAddress = billToAddress;
+            var echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12L;
+            echeckcredit.OrderId = "12345";
+            echeckcredit.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "1099999903";
+            echeck.RoutingNum = "011201995";
+            echeck.CheckNum = "123455";
+            echeckcredit.Echeck = echeck;
+            var billToAddress = new Contact();
+            billToAddress.Name = "Bob";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "litle.com";
+            echeckcredit.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
 
-            var echeckcredit2 = new echeckCredit();
-            echeckcredit2.amount = 12L;
-            echeckcredit2.orderId = "12346";
-            echeckcredit2.orderSource = orderSourceType.ecommerce;
-            var echeck2 = new echeckType();
-            echeck2.accType = echeckAccountTypeEnum.Checking;
-            echeck2.accNum = "1099999903";
-            echeck2.routingNum = "011201995";
-            echeck2.checkNum = "123456";
-            echeckcredit2.echeck = echeck2;
-            var billToAddress2 = new contact();
-            billToAddress2.name = "Mike";
-            billToAddress2.city = "Lowell";
-            billToAddress2.state = "MA";
-            billToAddress2.email = "litle.com";
-            echeckcredit2.billToAddress = billToAddress2;
+            var echeckcredit2 = new EcheckCredit();
+            echeckcredit2.Amount = 12L;
+            echeckcredit2.OrderId = "12346";
+            echeckcredit2.OrderSource = OrderSourceType.Ecommerce;
+            var echeck2 = new EcheckType();
+            echeck2.AccType = echeckAccountTypeEnum.Checking;
+            echeck2.AccNum = "1099999903";
+            echeck2.RoutingNum = "011201995";
+            echeck2.CheckNum = "123456";
+            echeckcredit2.Echeck = echeck2;
+            var billToAddress2 = new Contact();
+            billToAddress2.Name = "Mike";
+            billToAddress2.City = "Lowell";
+            billToAddress2.State = "MA";
+            billToAddress2.Email = "litle.com";
+            echeckcredit2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckCredit(echeckcredit2);
+            litleBatchRequest.AddEcheckCredit(echeckcredit2);
 
-            var echeckredeposit = new echeckRedeposit();
+            var echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
-            echeckredeposit.echeck = echeck;
+            echeckredeposit.Echeck = echeck;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
 
-            var echeckredeposit2 = new echeckRedeposit();
+            var echeckredeposit2 = new EcheckRedeposit();
             echeckredeposit2.litleTxnId = 123457;
-            echeckredeposit2.echeck = echeck2;
+            echeckredeposit2.Echeck = echeck2;
 
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit2);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit2);
 
-            var echeckSaleObj = new echeckSale();
-            echeckSaleObj.amount = 123456;
-            echeckSaleObj.orderId = "12345";
-            echeckSaleObj.orderSource = orderSourceType.ecommerce;
-            echeckSaleObj.echeck = echeck;
-            echeckSaleObj.billToAddress = billToAddress;
+            var echeckSaleObj = new EcheckSale();
+            echeckSaleObj.Amount = 123456;
+            echeckSaleObj.OrderId = "12345";
+            echeckSaleObj.OrderSource = OrderSourceType.Ecommerce;
+            echeckSaleObj.Echeck = echeck;
+            echeckSaleObj.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj);
 
-            var echeckSaleObj2 = new echeckSale();
-            echeckSaleObj2.amount = 123456;
-            echeckSaleObj2.orderId = "12346";
-            echeckSaleObj2.orderSource = orderSourceType.ecommerce;
-            echeckSaleObj2.echeck = echeck2;
-            echeckSaleObj2.billToAddress = billToAddress2;
+            var echeckSaleObj2 = new EcheckSale();
+            echeckSaleObj2.Amount = 123456;
+            echeckSaleObj2.OrderId = "12346";
+            echeckSaleObj2.OrderSource = OrderSourceType.Ecommerce;
+            echeckSaleObj2.Echeck = echeck2;
+            echeckSaleObj2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckSale(echeckSaleObj2);
+            litleBatchRequest.AddEcheckSale(echeckSaleObj2);
 
-            var echeckVerificationObject = new echeckVerification();
-            echeckVerificationObject.amount = 123456;
-            echeckVerificationObject.orderId = "12345";
-            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
-            echeckVerificationObject.echeck = echeck;
-            echeckVerificationObject.billToAddress = billToAddress;
+            var echeckVerificationObject = new EcheckVerification();
+            echeckVerificationObject.Amount = 123456;
+            echeckVerificationObject.OrderId = "12345";
+            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerificationObject.Echeck = echeck;
+            echeckVerificationObject.BillToAddress = billToAddress;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject);
 
-            var echeckVerificationObject2 = new echeckVerification();
-            echeckVerificationObject2.amount = 123456;
-            echeckVerificationObject2.orderId = "12346";
-            echeckVerificationObject2.orderSource = orderSourceType.ecommerce;
-            echeckVerificationObject2.echeck = echeck2;
-            echeckVerificationObject2.billToAddress = billToAddress2;
+            var echeckVerificationObject2 = new EcheckVerification();
+            echeckVerificationObject2.Amount = 123456;
+            echeckVerificationObject2.OrderId = "12346";
+            echeckVerificationObject2.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerificationObject2.Echeck = echeck2;
+            echeckVerificationObject2.BillToAddress = billToAddress2;
 
-            litleBatchRequest.addEcheckVerification(echeckVerificationObject2);
+            litleBatchRequest.AddEcheckVerification(echeckVerificationObject2);
 
-            var forcecapture = new forceCapture();
-            forcecapture.amount = 106;
-            forcecapture.orderId = "12344";
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            forcecapture.card = card;
+            var forcecapture = new ForceCapture();
+            forcecapture.Amount = 106;
+            forcecapture.OrderId = "12344";
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            forcecapture.Card = card;
 
-            litleBatchRequest.addForceCapture(forcecapture);
+            litleBatchRequest.AddForceCapture(forcecapture);
 
-            var forcecapture2 = new forceCapture();
-            forcecapture2.amount = 106;
-            forcecapture2.orderId = "12345";
-            forcecapture2.orderSource = orderSourceType.ecommerce;
-            forcecapture2.card = card2;
+            var forcecapture2 = new ForceCapture();
+            forcecapture2.Amount = 106;
+            forcecapture2.OrderId = "12345";
+            forcecapture2.OrderSource = OrderSourceType.Ecommerce;
+            forcecapture2.Card = card2;
 
-            litleBatchRequest.addForceCapture(forcecapture2);
+            litleBatchRequest.AddForceCapture(forcecapture2);
 
-            var saleObj = new sale();
-            saleObj.amount = 106;
-            saleObj.litleTxnId = 123456;
-            saleObj.orderId = "12344";
-            saleObj.orderSource = orderSourceType.ecommerce;
-            saleObj.card = card;
+            var saleObj = new Sale();
+            saleObj.Amount = 106;
+            saleObj.LitleTxnId = 123456;
+            saleObj.OrderId = "12344";
+            saleObj.OrderSource = OrderSourceType.Ecommerce;
+            saleObj.Card = card;
 
-            litleBatchRequest.addSale(saleObj);
+            litleBatchRequest.AddSale(saleObj);
 
-            var saleObj2 = new sale();
-            saleObj2.amount = 106;
-            saleObj2.litleTxnId = 123456;
-            saleObj2.orderId = "12345";
-            saleObj2.orderSource = orderSourceType.ecommerce;
-            saleObj2.card = card2;
+            var saleObj2 = new Sale();
+            saleObj2.Amount = 106;
+            saleObj2.LitleTxnId = 123456;
+            saleObj2.OrderId = "12345";
+            saleObj2.OrderSource = OrderSourceType.Ecommerce;
+            saleObj2.Card = card2;
 
-            litleBatchRequest.addSale(saleObj2);
+            litleBatchRequest.AddSale(saleObj2);
 
-            var registerTokenRequest = new registerTokenRequestType();
-            registerTokenRequest.orderId = "12344";
-            registerTokenRequest.accountNumber = "1233456789103801";
+            var registerTokenRequest = new RegisterTokenRequestType();
+            registerTokenRequest.OrderId = "12344";
+            registerTokenRequest.AccountNumber = "1233456789103801";
             registerTokenRequest.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest);
 
-            var registerTokenRequest2 = new registerTokenRequestType();
-            registerTokenRequest2.orderId = "12345";
-            registerTokenRequest2.accountNumber = "1233456789103801";
+            var registerTokenRequest2 = new RegisterTokenRequestType();
+            registerTokenRequest2.OrderId = "12345";
+            registerTokenRequest2.AccountNumber = "1233456789103801";
             registerTokenRequest2.reportGroup = "Planets";
 
-            litleBatchRequest.addRegisterTokenRequest(registerTokenRequest2);
+            litleBatchRequest.AddRegisterTokenRequest(registerTokenRequest2);
 
-            litleISC.addBatch(litleBatchRequest);
+            litleISC.AddBatch(litleBatchRequest);
 
             try
             {
-                var batchName = litleISC.sendToLitle();
+                var batchName = litleISC.SendToLitle();
                 Assert.Fail("Fail to throw a connection exception");
             }
             catch (LitleOnlineException e)
@@ -1341,28 +1341,28 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleBatchWithSpecialCharacters()
         {
-            var litleBatchRequest = new batchRequest(memoryStreams);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
 
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "<ReportGroup>";
-            authorization.orderId = "12344&'\"";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344&'\"";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
-            litleBatchRequest.addAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
 
-            litle.addBatch(litleBatchRequest);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchName = litle.sendToLitle();
+            var batchName = litle.SendToLitle();
 
-            litle.blockAndWaitForResponse(batchName, estimatedResponseTime(2*2, 10*2));
+            litle.BlockAndWaitForResponse(batchName, estimatedResponseTime(2*2, 10*2));
 
-            var litleResponse = litle.receiveFromLitle(batchName);
+            var litleResponse = litle.ReceiveFromLitle(batchName);
 
             Assert.NotNull(litleResponse);
             Assert.AreEqual("0", litleResponse.response);

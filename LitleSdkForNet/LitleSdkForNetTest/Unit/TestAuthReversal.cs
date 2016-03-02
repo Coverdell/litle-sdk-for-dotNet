@@ -22,11 +22,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount()
         {
-            var reversal = new authReversal();
-            reversal.litleTxnId = 3;
-            reversal.amount = 2;
-            reversal.surchargeAmount = 1;
-            reversal.payPalNotes = "note";
+            var reversal = new AuthReversal();
+            reversal.LitleTxnId = 3;
+            reversal.Amount = 2;
+            reversal.SurchargeAmount = 1;
+            reversal.PayPalNotes = "note";
             reversal.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(new Dictionary<string, StringBuilder>());
@@ -48,10 +48,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_Optional()
         {
-            var reversal = new authReversal();
-            reversal.litleTxnId = 3;
-            reversal.amount = 2;
-            reversal.payPalNotes = "note";
+            var reversal = new AuthReversal();
+            reversal.LitleTxnId = 3;
+            reversal.Amount = 2;
+            reversal.PayPalNotes = "note";
             reversal.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(new Dictionary<string, StringBuilder>());

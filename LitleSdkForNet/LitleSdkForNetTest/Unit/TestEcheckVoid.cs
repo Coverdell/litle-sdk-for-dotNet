@@ -22,8 +22,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestFraudFilterOverride()
         {
-            var echeckVoid = new echeckVoid();
-            echeckVoid.litleTxnId = 123456789;
+            var echeckVoid = new EcheckVoid();
+            echeckVoid.LitleTxnId = 123456789;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -43,16 +43,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void simpleForceCaptureWithSecondaryAmount()
         {
-            var forcecapture = new forceCapture();
-            forcecapture.amount = 106;
-            forcecapture.secondaryAmount = 50;
-            forcecapture.orderId = "12344";
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            forcecapture.card = card;
+            var forcecapture = new ForceCapture();
+            forcecapture.Amount = 106;
+            forcecapture.SecondaryAmount = 50;
+            forcecapture.OrderId = "12344";
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            forcecapture.Card = card;
             var response = litle.ForceCapture(forcecapture);
             Assert.AreEqual("Approved", response.message);
         }

@@ -22,12 +22,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestFraudFilterOverride()
         {
-            var auth = new authorization();
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.ecommerce;
+            var auth = new Authorization();
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Ecommerce;
             auth.reportGroup = "Planets";
-            auth.fraudFilterOverride = true;
+            auth.FraudFilterOverride = true;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -50,15 +50,15 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestContactShouldSendEmailForEmail_NotZip()
         {
-            var auth = new authorization();
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.ecommerce;
+            var auth = new Authorization();
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Ecommerce;
             auth.reportGroup = "Planets";
-            var billToAddress = new contact();
-            billToAddress.email = "gdake@litle.com";
-            billToAddress.zip = "12345";
-            auth.billToAddress = billToAddress;
+            var billToAddress = new Contact();
+            billToAddress.Email = "gdake@litle.com";
+            billToAddress.Zip = "12345";
+            auth.BillToAddress = billToAddress;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -81,15 +81,15 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void Test3dsAttemptedShouldNotSayItem()
         {
-            var auth = new authorization();
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.item3dsAttempted;
+            var auth = new Authorization();
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Item3DsAttempted;
             auth.reportGroup = "Planets";
-            var billToAddress = new contact();
-            billToAddress.email = "gdake@litle.com";
-            billToAddress.zip = "12345";
-            auth.billToAddress = billToAddress;
+            var billToAddress = new Contact();
+            billToAddress.Email = "gdake@litle.com";
+            billToAddress.Zip = "12345";
+            auth.BillToAddress = billToAddress;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -112,15 +112,15 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void Test3dsAuthenticatedShouldNotSayItem()
         {
-            var auth = new authorization();
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.item3dsAuthenticated;
+            var auth = new Authorization();
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Item3DsAuthenticated;
             auth.reportGroup = "Planets";
-            var billToAddress = new contact();
-            billToAddress.email = "gdake@litle.com";
-            billToAddress.zip = "12345";
-            auth.billToAddress = billToAddress;
+            var billToAddress = new Contact();
+            billToAddress.Email = "gdake@litle.com";
+            billToAddress.Zip = "12345";
+            auth.BillToAddress = billToAddress;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -143,11 +143,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSecondaryAmount()
         {
-            var auth = new authorization();
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.secondaryAmount = 1;
-            auth.orderSource = orderSourceType.ecommerce;
+            var auth = new Authorization();
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.SecondaryAmount = 1;
+            auth.OrderSource = OrderSourceType.Ecommerce;
             auth.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -172,11 +172,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount()
         {
-            var auth = new authorization();
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.surchargeAmount = 1;
-            auth.orderSource = orderSourceType.ecommerce;
+            var auth = new Authorization();
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.SurchargeAmount = 1;
+            auth.OrderSource = OrderSourceType.Ecommerce;
             auth.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -201,10 +201,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_Optional()
         {
-            var auth = new authorization();
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.ecommerce;
+            var auth = new Authorization();
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Ecommerce;
             auth.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -228,16 +228,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestMethodOfPaymentAllowsGiftCard()
         {
-            var auth = new authorization();
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.ecommerce;
+            var auth = new Authorization();
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Ecommerce;
             auth.reportGroup = "Planets";
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.GC;
-            card.number = "414100000000000000";
-            card.expDate = "1210";
-            auth.card = card;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.GC;
+            card.Number = "414100000000000000";
+            card.ExpDate = "1210";
+            auth.Card = card;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -261,26 +261,26 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestMethodOfPaymentApplepayAndWallet()
         {
-            var auth = new authorization();
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.applepay;
+            var auth = new Authorization();
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Applepay;
             auth.reportGroup = "Planets";
-            var applepay = new applepayType();
-            var applepayHeaderType = new applepayHeaderType();
-            applepayHeaderType.applicationData = "454657413164";
-            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.transactionId = "1234";
-            applepay.header = applepayHeaderType;
-            applepay.data = "user";
-            applepay.signature = "sign";
-            applepay.version = "1";
-            auth.applepay = applepay;
+            var applepay = new ApplepayType();
+            var applepayHeaderType = new ApplepayHeaderType();
+            applepayHeaderType.ApplicationData = "454657413164";
+            applepayHeaderType.EphemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.PublicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.TransactionId = "1234";
+            applepay.Header = applepayHeaderType;
+            applepay.Data = "user";
+            applepay.Signature = "sign";
+            applepay.Version = "1";
+            auth.Applepay = applepay;
 
-            var wallet = new wallet();
-            wallet.walletSourceTypeId = "123";
-            auth.wallet = wallet;
+            var wallet = new Wallet();
+            wallet.WalletSourceTypeId = "123";
+            auth.Wallet = wallet;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -304,19 +304,19 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecurringRequest()
         {
-            var auth = new authorization();
-            auth.card = new cardType();
-            auth.card.type = methodOfPaymentTypeEnum.VI;
-            auth.card.number = "4100000000000001";
-            auth.card.expDate = "1213";
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.ecommerce;
-            auth.fraudFilterOverride = true;
-            auth.recurringRequest = new recurringRequest();
-            auth.recurringRequest.subscription = new subscription();
-            auth.recurringRequest.subscription.planCode = "abc123";
-            auth.recurringRequest.subscription.numberOfPayments = 12;
+            var auth = new Authorization();
+            auth.Card = new CardType();
+            auth.Card.Type = MethodOfPaymentTypeEnum.VI;
+            auth.Card.Number = "4100000000000001";
+            auth.Card.ExpDate = "1213";
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            auth.FraudFilterOverride = true;
+            auth.RecurringRequest = new RecurringRequest();
+            auth.RecurringRequest.Subscription = new Subscription();
+            auth.RecurringRequest.Subscription.PlanCode = "abc123";
+            auth.RecurringRequest.Subscription.NumberOfPayments = 12;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -340,16 +340,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment()
         {
-            var auth = new authorization();
-            auth.card = new cardType();
-            auth.card.type = methodOfPaymentTypeEnum.VI;
-            auth.card.number = "4100000000000001";
-            auth.card.expDate = "1213";
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.ecommerce;
-            auth.fraudFilterOverride = true;
-            auth.debtRepayment = true;
+            var auth = new Authorization();
+            auth.Card = new CardType();
+            auth.Card.Type = MethodOfPaymentTypeEnum.VI;
+            auth.Card.Number = "4100000000000001";
+            auth.Card.ExpDate = "1213";
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            auth.FraudFilterOverride = true;
+            auth.DebtRepayment = true;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -403,16 +403,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimpleAuthWithFraudCheck()
         {
-            var auth = new authorization();
-            auth.card = new cardType();
-            auth.card.type = methodOfPaymentTypeEnum.VI;
-            auth.card.number = "4100000000000001";
-            auth.card.expDate = "1213";
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.ecommerce;
-            auth.cardholderAuthentication = new fraudCheckType();
-            auth.cardholderAuthentication.customerIpAddress = "192.168.1.1";
+            var auth = new Authorization();
+            auth.Card = new CardType();
+            auth.Card.Type = MethodOfPaymentTypeEnum.VI;
+            auth.Card.Number = "4100000000000001";
+            auth.Card.ExpDate = "1213";
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            auth.CardholderAuthentication = new FraudCheckType();
+            auth.CardholderAuthentication.CustomerIpAddress = "192.168.1.1";
 
             var expectedResult = @"
 <authorization id="""" reportGroup="""">
@@ -454,17 +454,17 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimpleAuthWithBillMeLaterRequest()
         {
-            var auth = new authorization();
-            auth.card = new cardType();
-            auth.card.type = methodOfPaymentTypeEnum.VI;
-            auth.card.number = "4100000000000001";
-            auth.card.expDate = "1213";
-            auth.orderId = "12344";
-            auth.amount = 2;
-            auth.orderSource = orderSourceType.ecommerce;
-            auth.billMeLaterRequest = new billMeLaterRequest();
-            auth.billMeLaterRequest.virtualAuthenticationKeyData = "Data";
-            auth.billMeLaterRequest.virtualAuthenticationKeyPresenceIndicator = "Presence";
+            var auth = new Authorization();
+            auth.Card = new CardType();
+            auth.Card.Type = MethodOfPaymentTypeEnum.VI;
+            auth.Card.Number = "4100000000000001";
+            auth.Card.ExpDate = "1213";
+            auth.OrderId = "12344";
+            auth.Amount = 2;
+            auth.OrderSource = OrderSourceType.Ecommerce;
+            auth.BillMeLaterRequest = new BillMeLaterRequest();
+            auth.BillMeLaterRequest.VirtualAuthenticationKeyData = "Data";
+            auth.BillMeLaterRequest.VirtualAuthenticationKeyPresenceIndicator = "Presence";
 
             var expectedResult = @"
 <authorization id="""" reportGroup="""">
@@ -507,16 +507,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestAuthWithAdvancedFraud()
         {
-            var auth = new authorization();
-            auth.orderId = "123";
-            auth.amount = 10;
-            auth.advancedFraudChecks = new advancedFraudChecksType();
-            auth.advancedFraudChecks.threatMetrixSessionId = "800";
-            auth.advancedFraudChecks.customAttribute1 = "testAttribute1";
-            auth.advancedFraudChecks.customAttribute2 = "testAttribute2";
-            auth.advancedFraudChecks.customAttribute3 = "testAttribute3";
-            auth.advancedFraudChecks.customAttribute4 = "testAttribute4";
-            auth.advancedFraudChecks.customAttribute5 = "testAttribute5";
+            var auth = new Authorization();
+            auth.OrderId = "123";
+            auth.Amount = 10;
+            auth.AdvancedFraudChecks = new AdvancedFraudChecksType();
+            auth.AdvancedFraudChecks.ThreatMetrixSessionId = "800";
+            auth.AdvancedFraudChecks.CustomAttribute1 = "testAttribute1";
+            auth.AdvancedFraudChecks.CustomAttribute2 = "testAttribute2";
+            auth.AdvancedFraudChecks.CustomAttribute3 = "testAttribute3";
+            auth.AdvancedFraudChecks.CustomAttribute4 = "testAttribute4";
+            auth.AdvancedFraudChecks.CustomAttribute5 = "testAttribute5";
 
 
             var expectedResult = @"
@@ -583,11 +583,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestAuthWithPosCatLevelEnum()
         {
-            var auth = new authorization();
-            auth.pos = new pos();
-            auth.orderId = "ABC123";
-            auth.amount = 98700;
-            auth.pos.catLevel = posCatLevelEnum.selfservice;
+            var auth = new Authorization();
+            auth.Pos = new Pos();
+            auth.OrderId = "ABC123";
+            auth.Amount = 98700;
+            auth.Pos.CatLevel = posCatLevelEnum.selfservice;
 
             var expectedResult = @"
 <authorization id="""" reportGroup="""">

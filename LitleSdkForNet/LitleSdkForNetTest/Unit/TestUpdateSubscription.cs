@@ -23,21 +23,21 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimple()
         {
-            var update = new updateSubscription();
-            update.billingDate = new DateTime(2002, 10, 9);
-            var billToAddress = new contact();
-            billToAddress.name = "Greg Dake";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "sdksupport@litle.com";
-            update.billToAddress = billToAddress;
-            var card = new cardType();
-            card.number = "4100000000000001";
-            card.expDate = "1215";
-            card.type = methodOfPaymentTypeEnum.VI;
-            update.card = card;
-            update.planCode = "abcdefg";
-            update.subscriptionId = 12345;
+            var update = new UpdateSubscription();
+            update.BillingDate = new DateTime(2002, 10, 9);
+            var billToAddress = new Contact();
+            billToAddress.Name = "Greg Dake";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "sdksupport@litle.com";
+            update.BillToAddress = billToAddress;
+            var card = new CardType();
+            card.Number = "4100000000000001";
+            card.ExpDate = "1215";
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            update.Card = card;
+            update.PlanCode = "abcdefg";
+            update.SubscriptionId = 12345;
 
             var mock = new Mock<Communications>(_memoryStreams);
 

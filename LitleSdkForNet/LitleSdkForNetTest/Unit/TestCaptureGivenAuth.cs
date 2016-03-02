@@ -22,10 +22,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSecondaryAmount()
         {
-            var capture = new captureGivenAuth();
-            capture.amount = 2;
-            capture.secondaryAmount = 1;
-            capture.orderSource = orderSourceType.ecommerce;
+            var capture = new CaptureGivenAuth();
+            capture.Amount = 2;
+            capture.SecondaryAmount = 1;
+            capture.OrderSource = OrderSourceType.Ecommerce;
             capture.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -47,10 +47,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount()
         {
-            var capture = new captureGivenAuth();
-            capture.amount = 2;
-            capture.surchargeAmount = 1;
-            capture.orderSource = orderSourceType.ecommerce;
+            var capture = new CaptureGivenAuth();
+            capture.Amount = 2;
+            capture.SurchargeAmount = 1;
+            capture.OrderSource = OrderSourceType.Ecommerce;
             capture.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -72,9 +72,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_Optional()
         {
-            var capture = new captureGivenAuth();
-            capture.amount = 2;
-            capture.orderSource = orderSourceType.ecommerce;
+            var capture = new CaptureGivenAuth();
+            capture.Amount = 2;
+            capture.OrderSource = OrderSourceType.Ecommerce;
             capture.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -95,9 +95,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_True()
         {
-            var captureGivenAuth = new captureGivenAuth();
-            captureGivenAuth.merchantData = new merchantDataType();
-            captureGivenAuth.debtRepayment = true;
+            var captureGivenAuth = new CaptureGivenAuth();
+            captureGivenAuth.MerchantData = new MerchantDataType();
+            captureGivenAuth.DebtRepayment = true;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -117,9 +117,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_False()
         {
-            var captureGivenAuth = new captureGivenAuth();
-            captureGivenAuth.merchantData = new merchantDataType();
-            captureGivenAuth.debtRepayment = false;
+            var captureGivenAuth = new CaptureGivenAuth();
+            captureGivenAuth.MerchantData = new MerchantDataType();
+            captureGivenAuth.DebtRepayment = false;
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -140,8 +140,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_Optional()
         {
-            var captureGivenAuth = new captureGivenAuth();
-            captureGivenAuth.merchantData = new merchantDataType();
+            var captureGivenAuth = new CaptureGivenAuth();
+            captureGivenAuth.MerchantData = new MerchantDataType();
 
             var mock = new Mock<Communications>(_memoryStreams);
 

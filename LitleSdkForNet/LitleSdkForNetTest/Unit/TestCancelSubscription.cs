@@ -22,8 +22,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimple()
         {
-            var update = new cancelSubscription();
-            update.subscriptionId = 12345;
+            var update = new CancelSubscription();
+            update.SubscriptionId = 12345;
 
             var mock = new Mock<Communications>(new Dictionary<string, StringBuilder>());
 

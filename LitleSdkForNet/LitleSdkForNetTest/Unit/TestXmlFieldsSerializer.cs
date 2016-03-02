@@ -15,12 +15,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecurringRequest_Full()
         {
-            var request = new recurringRequest();
-            request.subscription = new subscription();
-            request.subscription.planCode = "123abc";
-            request.subscription.numberOfPayments = 10;
-            request.subscription.startDate = new DateTime(2013, 7, 25);
-            request.subscription.amount = 102;
+            var request = new RecurringRequest();
+            request.Subscription = new Subscription();
+            request.Subscription.PlanCode = "123abc";
+            request.Subscription.NumberOfPayments = 10;
+            request.Subscription.StartDate = new DateTime(2013, 7, 25);
+            request.Subscription.Amount = 102;
 
             var xml = request.Serialize();
             var match = Regex.Match(xml,
@@ -31,9 +31,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecurringRequest_OnlyRequired()
         {
-            var request = new recurringRequest();
-            request.subscription = new subscription();
-            request.subscription.planCode = "123abc";
+            var request = new RecurringRequest();
+            request.Subscription = new Subscription();
+            request.Subscription.PlanCode = "123abc";
 
             var xml = request.Serialize();
             var match = Regex.Match(xml, "<subscription>\r\n<planCode>123abc</planCode>\r\n</subscription>");
@@ -43,25 +43,25 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSubscription_CanContainCreateDiscounts()
         {
-            var subscription = new subscription();
-            subscription.planCode = "123abc";
+            var subscription = new Subscription();
+            subscription.PlanCode = "123abc";
 
-            var cd1 = new createDiscount();
-            cd1.discountCode = "1";
-            cd1.name = "cheaper";
-            cd1.amount = 200;
-            cd1.startDate = new DateTime(2013, 9, 5);
-            cd1.endDate = new DateTime(2013, 9, 6);
+            var cd1 = new CreateDiscount();
+            cd1.DiscountCode = "1";
+            cd1.Name = "cheaper";
+            cd1.Amount = 200;
+            cd1.StartDate = new DateTime(2013, 9, 5);
+            cd1.EndDate = new DateTime(2013, 9, 6);
 
-            var cd2 = new createDiscount();
-            cd2.discountCode = "2";
-            cd2.name = "cheap";
-            cd2.amount = 100;
-            cd2.startDate = new DateTime(2013, 9, 3);
-            cd2.endDate = new DateTime(2013, 9, 4);
+            var cd2 = new CreateDiscount();
+            cd2.DiscountCode = "2";
+            cd2.Name = "cheap";
+            cd2.Amount = 100;
+            cd2.StartDate = new DateTime(2013, 9, 3);
+            cd2.EndDate = new DateTime(2013, 9, 4);
 
-            subscription.createDiscounts.Add(cd1);
-            subscription.createDiscounts.Add(cd2);
+            subscription.CreateDiscounts.Add(cd1);
+            subscription.CreateDiscounts.Add(cd2);
 
             var actual = subscription.Serialize();
             var expected = @"
@@ -86,25 +86,25 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSubscription_CanContainCreateAddOns()
         {
-            var subscription = new subscription();
-            subscription.planCode = "123abc";
+            var subscription = new Subscription();
+            subscription.PlanCode = "123abc";
 
-            var cao1 = new createAddOn();
-            cao1.addOnCode = "1";
-            cao1.name = "addOn1";
-            cao1.amount = 100;
-            cao1.startDate = new DateTime(2013, 9, 5);
-            cao1.endDate = new DateTime(2013, 9, 6);
+            var cao1 = new CreateAddOn();
+            cao1.AddOnCode = "1";
+            cao1.Name = "addOn1";
+            cao1.Amount = 100;
+            cao1.StartDate = new DateTime(2013, 9, 5);
+            cao1.EndDate = new DateTime(2013, 9, 6);
 
-            var cao2 = new createAddOn();
-            cao2.addOnCode = "2";
-            cao2.name = "addOn2";
-            cao2.amount = 200;
-            cao2.startDate = new DateTime(2013, 9, 4);
-            cao2.endDate = new DateTime(2013, 9, 5);
+            var cao2 = new CreateAddOn();
+            cao2.AddOnCode = "2";
+            cao2.Name = "addOn2";
+            cao2.Amount = 200;
+            cao2.StartDate = new DateTime(2013, 9, 4);
+            cao2.EndDate = new DateTime(2013, 9, 5);
 
-            subscription.createAddOns.Add(cao1);
-            subscription.createAddOns.Add(cao2);
+            subscription.CreateAddOns.Add(cao1);
+            subscription.CreateAddOns.Add(cao2);
 
             var actual = subscription.Serialize();
             var expected = @"
@@ -129,21 +129,21 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUpdateSubscription_Full()
         {
-            var update = new updateSubscription();
-            update.billingDate = new DateTime(2002, 10, 9);
-            var billToAddress = new contact();
-            billToAddress.name = "Greg Dake";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "sdksupport@litle.com";
-            update.billToAddress = billToAddress;
-            var card = new cardType();
-            card.number = "4100000000000001";
-            card.expDate = "1215";
-            card.type = methodOfPaymentTypeEnum.VI;
-            update.card = card;
-            update.planCode = "abcdefg";
-            update.subscriptionId = 12345;
+            var update = new UpdateSubscription();
+            update.BillingDate = new DateTime(2002, 10, 9);
+            var billToAddress = new Contact();
+            billToAddress.Name = "Greg Dake";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "sdksupport@litle.com";
+            update.BillToAddress = billToAddress;
+            var card = new CardType();
+            card.Number = "4100000000000001";
+            card.ExpDate = "1215";
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            update.Card = card;
+            update.PlanCode = "abcdefg";
+            update.SubscriptionId = 12345;
 
             var actual = update.Serialize();
             var expected =
@@ -154,8 +154,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription_OnlyRequired()
         {
-            var update = new updateSubscription();
-            update.subscriptionId = 12345;
+            var update = new UpdateSubscription();
+            update.SubscriptionId = 12345;
 
             var actual = update.Serialize();
             var expected = "\r\n<updateSubscription>\r\n<subscriptionId>12345</subscriptionId>\r\n</updateSubscription>";
@@ -165,24 +165,24 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription_CanContainCreateDiscounts()
         {
-            var cd1 = new createDiscount();
-            cd1.discountCode = "1";
-            cd1.name = "cheaper";
-            cd1.amount = 200;
-            cd1.startDate = new DateTime(2013, 9, 5);
-            cd1.endDate = new DateTime(2013, 9, 6);
+            var cd1 = new CreateDiscount();
+            cd1.DiscountCode = "1";
+            cd1.Name = "cheaper";
+            cd1.Amount = 200;
+            cd1.StartDate = new DateTime(2013, 9, 5);
+            cd1.EndDate = new DateTime(2013, 9, 6);
 
-            var cd2 = new createDiscount();
-            cd2.discountCode = "2";
-            cd2.name = "cheap";
-            cd2.amount = 100;
-            cd2.startDate = new DateTime(2013, 9, 3);
-            cd2.endDate = new DateTime(2013, 9, 4);
+            var cd2 = new CreateDiscount();
+            cd2.DiscountCode = "2";
+            cd2.Name = "cheap";
+            cd2.Amount = 100;
+            cd2.StartDate = new DateTime(2013, 9, 3);
+            cd2.EndDate = new DateTime(2013, 9, 4);
 
-            var update = new updateSubscription();
-            update.subscriptionId = 1;
-            update.createDiscounts.Add(cd1);
-            update.createDiscounts.Add(cd2);
+            var update = new UpdateSubscription();
+            update.SubscriptionId = 1;
+            update.CreateDiscounts.Add(cd1);
+            update.CreateDiscounts.Add(cd2);
 
             var actual = update.Serialize();
             var expected = @"
@@ -209,24 +209,24 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription_CanContainUpdateDiscounts()
         {
-            var ud1 = new updateDiscount();
-            ud1.discountCode = "1";
-            ud1.name = "cheaper";
-            ud1.amount = 200;
-            ud1.startDate = new DateTime(2013, 9, 5);
-            ud1.endDate = new DateTime(2013, 9, 6);
+            var ud1 = new UpdateDiscount();
+            ud1.DiscountCode = "1";
+            ud1.Name = "cheaper";
+            ud1.Amount = 200;
+            ud1.StartDate = new DateTime(2013, 9, 5);
+            ud1.EndDate = new DateTime(2013, 9, 6);
 
-            var ud2 = new updateDiscount();
-            ud2.discountCode = "2";
-            ud2.name = "cheap";
-            ud2.amount = 100;
-            ud2.startDate = new DateTime(2013, 9, 3);
-            ud2.endDate = new DateTime(2013, 9, 4);
+            var ud2 = new UpdateDiscount();
+            ud2.DiscountCode = "2";
+            ud2.Name = "cheap";
+            ud2.Amount = 100;
+            ud2.StartDate = new DateTime(2013, 9, 3);
+            ud2.EndDate = new DateTime(2013, 9, 4);
 
-            var update = new updateSubscription();
-            update.subscriptionId = 1;
-            update.updateDiscounts.Add(ud1);
-            update.updateDiscounts.Add(ud2);
+            var update = new UpdateSubscription();
+            update.SubscriptionId = 1;
+            update.UpdateDiscounts.Add(ud1);
+            update.UpdateDiscounts.Add(ud2);
 
             var actual = update.Serialize();
             var expected = @"
@@ -253,16 +253,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription_CanContainDeleteDiscounts()
         {
-            var dd1 = new deleteDiscount();
-            dd1.discountCode = "1";
+            var dd1 = new DeleteDiscount();
+            dd1.DiscountCode = "1";
 
-            var dd2 = new deleteDiscount();
-            dd2.discountCode = "2";
+            var dd2 = new DeleteDiscount();
+            dd2.DiscountCode = "2";
 
-            var update = new updateSubscription();
-            update.subscriptionId = 1;
-            update.deleteDiscounts.Add(dd1);
-            update.deleteDiscounts.Add(dd2);
+            var update = new UpdateSubscription();
+            update.SubscriptionId = 1;
+            update.DeleteDiscounts.Add(dd1);
+            update.DeleteDiscounts.Add(dd2);
 
             var actual = update.Serialize();
             var expected = @"
@@ -281,24 +281,24 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription_CanContainCreateAddOns()
         {
-            var cao1 = new createAddOn();
-            cao1.addOnCode = "1";
-            cao1.name = "addOn1";
-            cao1.amount = 100;
-            cao1.startDate = new DateTime(2013, 9, 5);
-            cao1.endDate = new DateTime(2013, 9, 6);
+            var cao1 = new CreateAddOn();
+            cao1.AddOnCode = "1";
+            cao1.Name = "addOn1";
+            cao1.Amount = 100;
+            cao1.StartDate = new DateTime(2013, 9, 5);
+            cao1.EndDate = new DateTime(2013, 9, 6);
 
-            var cao2 = new createAddOn();
-            cao2.addOnCode = "2";
-            cao2.name = "addOn2";
-            cao2.amount = 200;
-            cao2.startDate = new DateTime(2013, 9, 4);
-            cao2.endDate = new DateTime(2013, 9, 5);
+            var cao2 = new CreateAddOn();
+            cao2.AddOnCode = "2";
+            cao2.Name = "addOn2";
+            cao2.Amount = 200;
+            cao2.StartDate = new DateTime(2013, 9, 4);
+            cao2.EndDate = new DateTime(2013, 9, 5);
 
-            var update = new updateSubscription();
-            update.subscriptionId = 1;
-            update.createAddOns.Add(cao1);
-            update.createAddOns.Add(cao2);
+            var update = new UpdateSubscription();
+            update.SubscriptionId = 1;
+            update.CreateAddOns.Add(cao1);
+            update.CreateAddOns.Add(cao2);
 
             var actual = update.Serialize();
             var expected = @"
@@ -325,24 +325,24 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription_CanContainUpdateAddOns()
         {
-            var uao1 = new updateAddOn();
-            uao1.addOnCode = "1";
-            uao1.name = "addOn1";
-            uao1.amount = 100;
-            uao1.startDate = new DateTime(2013, 9, 5);
-            uao1.endDate = new DateTime(2013, 9, 6);
+            var uao1 = new UpdateAddOn();
+            uao1.AddOnCode = "1";
+            uao1.Name = "addOn1";
+            uao1.Amount = 100;
+            uao1.StartDate = new DateTime(2013, 9, 5);
+            uao1.EndDate = new DateTime(2013, 9, 6);
 
-            var uao2 = new updateAddOn();
-            uao2.addOnCode = "2";
-            uao2.name = "addOn2";
-            uao2.amount = 200;
-            uao2.startDate = new DateTime(2013, 9, 4);
-            uao2.endDate = new DateTime(2013, 9, 5);
+            var uao2 = new UpdateAddOn();
+            uao2.AddOnCode = "2";
+            uao2.Name = "addOn2";
+            uao2.Amount = 200;
+            uao2.StartDate = new DateTime(2013, 9, 4);
+            uao2.EndDate = new DateTime(2013, 9, 5);
 
-            var update = new updateSubscription();
-            update.subscriptionId = 1;
-            update.updateAddOns.Add(uao1);
-            update.updateAddOns.Add(uao2);
+            var update = new UpdateSubscription();
+            update.SubscriptionId = 1;
+            update.UpdateAddOns.Add(uao1);
+            update.UpdateAddOns.Add(uao2);
 
             var actual = update.Serialize();
             var expected = @"
@@ -369,16 +369,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription_CanContainDeleteAddOns()
         {
-            var dao1 = new deleteAddOn();
-            dao1.addOnCode = "1";
+            var dao1 = new DeleteAddOn();
+            dao1.AddOnCode = "1";
 
-            var dao2 = new deleteAddOn();
-            dao2.addOnCode = "2";
+            var dao2 = new DeleteAddOn();
+            dao2.AddOnCode = "2";
 
-            var update = new updateSubscription();
-            update.subscriptionId = 1;
-            update.deleteAddOns.Add(dao1);
-            update.deleteAddOns.Add(dao2);
+            var update = new UpdateSubscription();
+            update.SubscriptionId = 1;
+            update.DeleteAddOns.Add(dao1);
+            update.DeleteAddOns.Add(dao2);
 
             var actual = update.Serialize();
             var expected = @"
@@ -397,10 +397,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription_CanContainToken()
         {
-            var update = new updateSubscription();
-            update.subscriptionId = 1;
-            update.token = new cardTokenType();
-            update.token.litleToken = "123456";
+            var update = new UpdateSubscription();
+            update.SubscriptionId = 1;
+            update.Token = new CardTokenType();
+            update.Token.LitleToken = "123456";
 
             var actual = update.Serialize();
             var expected = @"
@@ -416,10 +416,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription_CanContainPaypage()
         {
-            var update = new updateSubscription();
-            update.subscriptionId = 1;
-            update.paypage = new cardPaypageType();
-            update.paypage.paypageRegistrationId = "abc123";
+            var update = new UpdateSubscription();
+            update.SubscriptionId = 1;
+            update.Paypage = new CardPaypageType();
+            update.Paypage.PaypageRegistrationId = "abc123";
 
             var actual = update.Serialize();
             var expected = @"
@@ -436,8 +436,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCancelSubscription_Full()
         {
-            var cancel = new cancelSubscription();
-            cancel.subscriptionId = 12345;
+            var cancel = new CancelSubscription();
+            cancel.SubscriptionId = 12345;
 
             var actual = cancel.Serialize();
             var expected = @"
@@ -450,8 +450,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCancelSubscription_OnlyRequired()
         {
-            var update = new cancelSubscription();
-            update.subscriptionId = 12345;
+            var update = new CancelSubscription();
+            update.SubscriptionId = 12345;
 
             var actual = update.Serialize();
             var expected = @"
@@ -464,13 +464,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testActivate_Full()
         {
-            var activate = new activate();
-            activate.orderId = "12345";
-            activate.amount = 200;
-            activate.orderSource = orderSourceType.ecommerce;
+            var activate = new Activate();
+            activate.OrderId = "12345";
+            activate.Amount = 200;
+            activate.OrderSource = OrderSourceType.Ecommerce;
             activate.id = "theId";
             activate.reportGroup = "theReportGroup";
-            activate.card = new cardType();
+            activate.Card = new CardType();
 
             var actual = activate.Serialize();
             var expected = @"
@@ -488,13 +488,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testActivate_VirtualGiftCard()
         {
-            var activate = new activate();
-            activate.orderId = "12345";
-            activate.amount = 200;
-            activate.orderSource = orderSourceType.ecommerce;
+            var activate = new Activate();
+            activate.OrderId = "12345";
+            activate.Amount = 200;
+            activate.OrderSource = OrderSourceType.Ecommerce;
             activate.id = "theId";
             activate.reportGroup = "theReportGroup";
-            activate.virtualGiftCard = new virtualGiftCardType();
+            activate.VirtualGiftCard = new VirtualGiftCardType();
 
             var actual = activate.Serialize();
             var expected = @"
@@ -511,9 +511,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testVirtualGiftCard_Full()
         {
-            var virtualGiftCard = new virtualGiftCardType();
-            virtualGiftCard.accountNumberLength = 16;
-            virtualGiftCard.giftCardBin = "123456";
+            var virtualGiftCard = new VirtualGiftCardType();
+            virtualGiftCard.AccountNumberLength = 16;
+            virtualGiftCard.GiftCardBin = "123456";
 
             var actual = virtualGiftCard.Serialize();
             var expected = @"
@@ -525,10 +525,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testDeactivate_Full()
         {
-            var deactivate = new deactivate();
-            deactivate.orderId = "12345";
-            deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            var deactivate = new Deactivate();
+            deactivate.OrderId = "12345";
+            deactivate.OrderSource = OrderSourceType.Ecommerce;
+            deactivate.Card = new CardType();
             deactivate.id = "theId";
             deactivate.reportGroup = "theReportGroup";
 
@@ -547,10 +547,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testDeactivate_OnlyRequired()
         {
-            var deactivate = new deactivate();
-            deactivate.orderId = "12345";
-            deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            var deactivate = new Deactivate();
+            deactivate.OrderId = "12345";
+            deactivate.OrderSource = OrderSourceType.Ecommerce;
+            deactivate.Card = new CardType();
             deactivate.id = "theId";
             deactivate.reportGroup = "theReportGroup";
 
@@ -569,11 +569,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testLoad_Full()
         {
-            var load = new load();
-            load.orderId = "12345";
-            load.amount = 200;
-            load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            var load = new Load();
+            load.OrderId = "12345";
+            load.Amount = 200;
+            load.OrderSource = OrderSourceType.Ecommerce;
+            load.Card = new CardType();
             load.id = "theId";
             load.reportGroup = "theReportGroup";
 
@@ -593,11 +593,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testLoad_OnlyRequired()
         {
-            var load = new load();
-            load.orderId = "12345";
-            load.amount = 200;
-            load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            var load = new Load();
+            load.OrderId = "12345";
+            load.Amount = 200;
+            load.OrderSource = OrderSourceType.Ecommerce;
+            load.Card = new CardType();
             load.id = "theId";
             load.reportGroup = "theReportGroup";
 
@@ -617,11 +617,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUnload_Full()
         {
-            var unload = new unload();
-            unload.orderId = "12345";
-            unload.amount = 200;
-            unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            var unload = new Unload();
+            unload.OrderId = "12345";
+            unload.Amount = 200;
+            unload.OrderSource = OrderSourceType.Ecommerce;
+            unload.Card = new CardType();
             unload.id = "theId";
             unload.reportGroup = "theReportGroup";
 
@@ -641,11 +641,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUnload_OnlyRequired()
         {
-            var unload = new unload();
-            unload.orderId = "12345";
-            unload.amount = 200;
-            unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            var unload = new Unload();
+            unload.OrderId = "12345";
+            unload.Amount = 200;
+            unload.OrderSource = OrderSourceType.Ecommerce;
+            unload.Card = new CardType();
             unload.id = "theId";
             unload.reportGroup = "theReportGroup";
 
@@ -665,10 +665,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testBalanceInquiry_Full()
         {
-            var balanceInquiry = new balanceInquiry();
-            balanceInquiry.orderId = "12345";
-            balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            var balanceInquiry = new BalanceInquiry();
+            balanceInquiry.OrderId = "12345";
+            balanceInquiry.OrderSource = OrderSourceType.Ecommerce;
+            balanceInquiry.Card = new CardType();
             balanceInquiry.id = "theId";
             balanceInquiry.reportGroup = "theReportGroup";
 
@@ -687,10 +687,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testBalanceInquiry_OnlyRequired()
         {
-            var balanceInquiry = new balanceInquiry();
-            balanceInquiry.orderId = "12345";
-            balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            var balanceInquiry = new BalanceInquiry();
+            balanceInquiry.OrderId = "12345";
+            balanceInquiry.OrderSource = OrderSourceType.Ecommerce;
+            balanceInquiry.Card = new CardType();
             balanceInquiry.id = "theId";
             balanceInquiry.reportGroup = "theReportGroup";
 
@@ -709,16 +709,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCreatePlan_Full()
         {
-            var create = new createPlan();
-            create.planCode = "abc";
-            create.name = "thePlan";
-            create.description = "theDescription";
-            create.intervalType = intervalType.ANNUAL;
-            create.amount = 100;
-            create.numberOfPayments = 3;
-            create.trialNumberOfIntervals = 2;
-            create.trialIntervalType = trialIntervalType.MONTH;
-            create.active = true;
+            var create = new CreatePlan();
+            create.PlanCode = "abc";
+            create.Name = "thePlan";
+            create.Description = "theDescription";
+            create.IntervalType = IntervalType.ANNUAL;
+            create.Amount = 100;
+            create.NumberOfPayments = 3;
+            create.TrialNumberOfIntervals = 2;
+            create.TrialIntervalType = TrialIntervalType.MONTH;
+            create.Active = true;
 
             var actual = create.Serialize();
             var expected = @"
@@ -740,11 +740,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCreatePlan_OnlyRequired()
         {
-            var create = new createPlan();
-            create.planCode = "abc";
-            create.name = "thePlan";
-            create.intervalType = intervalType.ANNUAL;
-            create.amount = 100;
+            var create = new CreatePlan();
+            create.PlanCode = "abc";
+            create.Name = "thePlan";
+            create.IntervalType = IntervalType.ANNUAL;
+            create.Amount = 100;
 
             var actual = create.Serialize();
             var expected = @"
@@ -760,9 +760,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUpdatePlan_Full()
         {
-            var update = new updatePlan();
-            update.planCode = "abc";
-            update.active = true;
+            var update = new UpdatePlan();
+            update.PlanCode = "abc";
+            update.Active = true;
 
             var actual = update.Serialize();
             var expected = @"
@@ -776,10 +776,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TesLitleInternalRecurringRequestMustContainFinalPayment()
         {
-            var litleInternalRecurringRequest = new litleInternalRecurringRequest();
-            litleInternalRecurringRequest.subscriptionId = "123";
-            litleInternalRecurringRequest.recurringTxnId = "456";
-            litleInternalRecurringRequest.finalPayment = true;
+            var litleInternalRecurringRequest = new LitleInternalRecurringRequest();
+            litleInternalRecurringRequest.SubscriptionId = "123";
+            litleInternalRecurringRequest.RecurringTxnId = "456";
+            litleInternalRecurringRequest.FinalPayment = true;
 
             var actual = litleInternalRecurringRequest.Serialize();
             var expected = @"
@@ -792,12 +792,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCreateDiscount_Full()
         {
-            var cd = new createDiscount();
-            cd.discountCode = "1";
-            cd.name = "cheaper";
-            cd.amount = 200;
-            cd.startDate = new DateTime(2013, 9, 5);
-            cd.endDate = new DateTime(2013, 9, 6);
+            var cd = new CreateDiscount();
+            cd.DiscountCode = "1";
+            cd.Name = "cheaper";
+            cd.Amount = 200;
+            cd.StartDate = new DateTime(2013, 9, 5);
+            cd.EndDate = new DateTime(2013, 9, 6);
 
             var actual = cd.Serialize();
             var expected = @"
@@ -812,12 +812,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUpdateDiscount_Full()
         {
-            var ud = new updateDiscount();
-            ud.discountCode = "1";
-            ud.name = "cheaper";
-            ud.amount = 200;
-            ud.startDate = new DateTime(2013, 9, 5);
-            ud.endDate = new DateTime(2013, 9, 6);
+            var ud = new UpdateDiscount();
+            ud.DiscountCode = "1";
+            ud.Name = "cheaper";
+            ud.Amount = 200;
+            ud.StartDate = new DateTime(2013, 9, 5);
+            ud.EndDate = new DateTime(2013, 9, 6);
 
             var actual = ud.Serialize();
             var expected = @"
@@ -832,8 +832,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUpdateDiscount_OnlyRequired()
         {
-            var ud = new updateDiscount();
-            ud.discountCode = "1";
+            var ud = new UpdateDiscount();
+            ud.DiscountCode = "1";
 
             var actual = ud.Serialize();
             var expected = @"
@@ -844,8 +844,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDeleteDiscount()
         {
-            var ud = new deleteDiscount();
-            ud.discountCode = "1";
+            var ud = new DeleteDiscount();
+            ud.DiscountCode = "1";
 
             var actual = ud.Serialize();
             var expected = @"
@@ -856,12 +856,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCreateAddOn()
         {
-            var cao = new createAddOn();
-            cao.addOnCode = "1";
-            cao.name = "addOn1";
-            cao.amount = 100;
-            cao.startDate = new DateTime(2013, 9, 5);
-            cao.endDate = new DateTime(2013, 9, 6);
+            var cao = new CreateAddOn();
+            cao.AddOnCode = "1";
+            cao.Name = "addOn1";
+            cao.Amount = 100;
+            cao.StartDate = new DateTime(2013, 9, 5);
+            cao.EndDate = new DateTime(2013, 9, 6);
 
             var actual = cao.Serialize();
             var expected = @"
@@ -876,12 +876,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUpdateAddOn_Full()
         {
-            var uao = new updateAddOn();
-            uao.addOnCode = "1";
-            uao.name = "addOn1";
-            uao.amount = 100;
-            uao.startDate = new DateTime(2013, 9, 5);
-            uao.endDate = new DateTime(2013, 9, 6);
+            var uao = new UpdateAddOn();
+            uao.AddOnCode = "1";
+            uao.Name = "addOn1";
+            uao.Amount = 100;
+            uao.StartDate = new DateTime(2013, 9, 5);
+            uao.EndDate = new DateTime(2013, 9, 6);
 
             var actual = uao.Serialize();
             var expected = @"
@@ -896,8 +896,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestUpdateAddOn_OnlyRequired()
         {
-            var uao = new updateAddOn();
-            uao.addOnCode = "1";
+            var uao = new UpdateAddOn();
+            uao.AddOnCode = "1";
 
             var actual = uao.Serialize();
             var expected = @"
@@ -908,8 +908,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDeleteAddOn()
         {
-            var dao = new deleteAddOn();
-            dao.addOnCode = "1";
+            var dao = new DeleteAddOn();
+            dao.AddOnCode = "1";
 
             var actual = dao.Serialize();
             var expected = @"
@@ -920,11 +920,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testDepositReversal_Full()
         {
-            var depositReversal = new depositReversal();
+            var depositReversal = new DepositReversal();
             depositReversal.id = "theId";
             depositReversal.reportGroup = "theReportGroup";
             depositReversal.customerId = "theCustomerId";
-            depositReversal.litleTxnId = "123";
+            depositReversal.LitleTxnId = "123";
 
             var actual = depositReversal.Serialize();
             var expected = @"
@@ -937,11 +937,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testRefundReversal_Full()
         {
-            var refundReversal = new refundReversal();
+            var refundReversal = new RefundReversal();
             refundReversal.id = "theId";
             refundReversal.reportGroup = "theReportGroup";
             refundReversal.customerId = "theCustomerId";
-            refundReversal.litleTxnId = "123";
+            refundReversal.LitleTxnId = "123";
 
             var actual = refundReversal.Serialize();
             var expected = @"
@@ -954,11 +954,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testActivateReversal_Full()
         {
-            var activateReversal = new activateReversal();
+            var activateReversal = new ActivateReversal();
             activateReversal.id = "theId";
             activateReversal.reportGroup = "theReportGroup";
             activateReversal.customerId = "theCustomerId";
-            activateReversal.litleTxnId = "123";
+            activateReversal.LitleTxnId = "123";
 
             var actual = activateReversal.Serialize();
             var expected = @"
@@ -971,11 +971,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testDeactivateReversal_Full()
         {
-            var deactivateReversal = new deactivateReversal();
+            var deactivateReversal = new DeactivateReversal();
             deactivateReversal.id = "theId";
             deactivateReversal.reportGroup = "theReportGroup";
             deactivateReversal.customerId = "theCustomerId";
-            deactivateReversal.litleTxnId = "123";
+            deactivateReversal.LitleTxnId = "123";
 
             var actual = deactivateReversal.Serialize();
             var expected = @"
@@ -988,11 +988,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testLoadReversal_Full()
         {
-            var loadReversal = new loadReversal();
+            var loadReversal = new LoadReversal();
             loadReversal.id = "theId";
             loadReversal.reportGroup = "theReportGroup";
             loadReversal.customerId = "theCustomerId";
-            loadReversal.litleTxnId = "123";
+            loadReversal.LitleTxnId = "123";
 
             var actual = loadReversal.Serialize();
             var expected = @"
@@ -1005,11 +1005,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUnloadReversal_Full()
         {
-            var unloadReversal = new unloadReversal();
+            var unloadReversal = new UnloadReversal();
             unloadReversal.id = "theId";
             unloadReversal.reportGroup = "theReportGroup";
             unloadReversal.customerId = "theCustomerId";
-            unloadReversal.litleTxnId = "123";
+            unloadReversal.LitleTxnId = "123";
 
             var actual = unloadReversal.Serialize();
             var expected = @"
@@ -1022,11 +1022,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testSpecialCharacters_RefundReversal()
         {
-            var refundReversal = new refundReversal();
+            var refundReversal = new RefundReversal();
             refundReversal.id = "theId";
             refundReversal.reportGroup = "<'&\">";
             refundReversal.customerId = "theCustomerId";
-            refundReversal.litleTxnId = "123";
+            refundReversal.LitleTxnId = "123";
 
             var actual = refundReversal.Serialize();
             var expected = @"
@@ -1039,10 +1039,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestEmptyMethodOfPayment()
         {
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.Item;
-            card.number = "4100000000000001";
-            card.expDate = "1250";
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.Item;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1250";
 
             var actual = card.Serialize();
             var expected = @"

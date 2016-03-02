@@ -22,9 +22,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimpleRequest()
         {
-            var register = new registerTokenRequestType();
-            register.orderId = "12344";
-            register.accountNumber = "4100000000000001";
+            var register = new RegisterTokenRequestType();
+            register.OrderId = "12344";
+            register.AccountNumber = "4100000000000001";
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -45,10 +45,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestCanContainCardValidationNum()
         {
-            var register = new registerTokenRequestType();
-            register.orderId = "12344";
-            register.accountNumber = "4100000000000001";
-            register.cardValidationNum = "123";
+            var register = new RegisterTokenRequestType();
+            register.OrderId = "12344";
+            register.AccountNumber = "4100000000000001";
+            register.CardValidationNum = "123";
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -69,19 +69,19 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSimpleRequestWithApplepay()
         {
-            var register = new registerTokenRequestType();
-            register.orderId = "12344";
-            var applepay = new applepayType();
-            var applepayHeaderType = new applepayHeaderType();
-            applepayHeaderType.applicationData = "454657413164";
-            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.transactionId = "1234";
-            applepay.header = applepayHeaderType;
-            applepay.data = "user";
-            applepay.signature = "sign";
-            applepay.version = "1";
-            register.applepay = applepay;
+            var register = new RegisterTokenRequestType();
+            register.OrderId = "12344";
+            var applepay = new ApplepayType();
+            var applepayHeaderType = new ApplepayHeaderType();
+            applepayHeaderType.ApplicationData = "454657413164";
+            applepayHeaderType.EphemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.PublicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.TransactionId = "1234";
+            applepay.Header = applepayHeaderType;
+            applepay.Data = "user";
+            applepay.Signature = "sign";
+            applepay.Version = "1";
+            register.Applepay = applepay;
 
             var mock = new Mock<Communications>(_memoryStreams);
 

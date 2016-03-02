@@ -11,15 +11,15 @@ namespace Litle.Sdk.Test.Unit
     [TestFixture]
     internal class TestBatch
     {
-        private litleRequest litle;
+        private LitleRequest litle;
         private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";
         private const string timeRegex = "[0-1][0-9]-[0-3][0-9]-[0-9]{4}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{4}_";
         private const string batchNameRegex = timeRegex + "[A-Z]{8}";
         private const string mockFileName = "TheRainbow.xml";
         private const string mockFilePath = "C:\\Somewhere\\Over\\" + mockFileName;
 
-        private Mock<litleTime> mockLitleTime;
-        private Mock<litleFile> mockLitleFile;
+        private Mock<LitleTime> mockLitleTime;
+        private Mock<LitleFile> mockLitleFile;
         private Mock<Communications> mockCommunications;
         private Mock<XmlReader> mockXmlReader;
         private IDictionary<string, StringBuilder> memoryStreams;
@@ -28,15 +28,15 @@ namespace Litle.Sdk.Test.Unit
         public void setUp()
         {
             memoryStreams = new Dictionary<string, StringBuilder>();
-            mockLitleTime = new Mock<litleTime>();
+            mockLitleTime = new Mock<LitleTime>();
             mockLitleTime.Setup(
-                litleTime => litleTime.getCurrentTime(It.Is<string>(resultFormat => resultFormat == timeFormat)))
+                litleTime => litleTime.GetCurrentTime(It.Is<string>(resultFormat => resultFormat == timeFormat)))
                 .Returns("01-01-1960_01-22-30-1234_");
 
-            mockLitleFile = new Mock<litleFile>(memoryStreams);
+            mockLitleFile = new Mock<LitleFile>(memoryStreams);
             mockLitleFile.Setup(
                 litleFile =>
-                    litleFile.createRandomFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
+                    litleFile.CreateRandomFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
                         mockLitleTime.Object)).Returns(mockFilePath);
             mockLitleFile.Setup(litleFile => litleFile.AppendFileToFile(mockFilePath, It.IsAny<string>()))
                 .Returns(mockFilePath);
@@ -49,7 +49,7 @@ namespace Litle.Sdk.Test.Unit
         [SetUp]
         public void setUpBeforeEachTest()
         {
-            litle = new litleRequest(memoryStreams);
+            litle = new LitleRequest(memoryStreams);
 
             mockXmlReader = new Mock<XmlReader>();
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadToFollowing(It.IsAny<string>()))
@@ -85,31 +85,31 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            litle = new litleRequest(memoryStreams, mockConfig);
+            litle = new LitleRequest(memoryStreams, mockConfig);
 
-            Assert.AreEqual("C:\\MockRequests\\Requests\\", litle.getRequestDirectory());
-            Assert.AreEqual("C:\\MockResponses\\Responses\\", litle.getResponseDirectory());
+            Assert.AreEqual("C:\\MockRequests\\Requests\\", litle.GetRequestDirectory());
+            Assert.AreEqual("C:\\MockResponses\\Responses\\", litle.GetResponseDirectory());
 
-            Assert.NotNull(litle.getCommunication());
-            Assert.NotNull(litle.getLitleTime());
-            Assert.NotNull(litle.getLitleFile());
-            Assert.NotNull(litle.getLitleXmlSerializer());
+            Assert.NotNull(litle.GetCommunication());
+            Assert.NotNull(litle.GetLitleTime());
+            Assert.NotNull(litle.GetLitleFile());
+            Assert.NotNull(litle.GetLitleXmlSerializer());
         }
 
         [Test]
         public void testAccountUpdate()
         {
-            var accountUpdate = new accountUpdate();
+            var accountUpdate = new AccountUpdate();
             accountUpdate.reportGroup = "Planets";
-            accountUpdate.orderId = "12344";
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            accountUpdate.card = card;
+            accountUpdate.OrderId = "12344";
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            accountUpdate.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -124,7 +124,7 @@ namespace Litle.Sdk.Test.Unit
             var mockedLitleResponse = mockLitleResponse.Object;
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             mockLitleXmlSerializer.Setup(
                 litleXmlSerializer =>
@@ -133,22 +133,22 @@ namespace Litle.Sdk.Test.Unit
 
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addAccountUpdate(accountUpdate);
-            litleBatchRequest.addAccountUpdate(accountUpdate);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddAccountUpdate(accountUpdate);
+            litleBatchRequest.AddAccountUpdate(accountUpdate);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualAccountUpdateResponse1 = actualLitleBatchResponse.nextAccountUpdateResponse();
             var actualAccountUpdateResponse2 = actualLitleBatchResponse.nextAccountUpdateResponse();
@@ -172,19 +172,19 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testAuth()
         {
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -204,25 +204,25 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addAuthorization(authorization);
-            litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -241,13 +241,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testAuthReversal()
         {
-            var authreversal = new authReversal();
-            authreversal.litleTxnId = 12345678000;
-            authreversal.amount = 106;
-            authreversal.payPalNotes = "Notes";
+            var authreversal = new AuthReversal();
+            authreversal.LitleTxnId = 12345678000;
+            authreversal.Amount = 106;
+            authreversal.PayPalNotes = "Notes";
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -267,26 +267,26 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunications = mockCommunications.Object;
-            litle.setCommunication(mockedCommunications);
+            litle.SetCommunication(mockedCommunications);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addAuthReversal(authreversal);
-            litleBatchRequest.addAuthReversal(authreversal);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddAuthReversal(authreversal);
+            litleBatchRequest.AddAuthReversal(authreversal);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualAuthReversalResponse1 = actualLitleBatchResponse.nextAuthReversalResponse();
             var actualAuthReversalResponse2 = actualLitleBatchResponse.nextAuthReversalResponse();
@@ -307,12 +307,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCapture()
         {
-            var capture = new capture();
-            capture.litleTxnId = 12345678000;
-            capture.amount = 106;
+            var capture = new Capture();
+            capture.LitleTxnId = 12345678000;
+            capture.Amount = 106;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -337,21 +337,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCapture(capture);
-            litleBatchRequest.addCapture(capture);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCapture(capture);
+            litleBatchRequest.AddCapture(capture);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualCaptureResponse1 = actualLitleBatchResponse.nextCaptureResponse();
             var actualCaptureResponse2 = actualLitleBatchResponse.nextCaptureResponse();
@@ -372,23 +372,23 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCaptureGivenAuth()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.orderId = "12344";
-            capturegivenauth.amount = 106;
-            var authinfo = new authInformation();
-            authinfo.authDate = new DateTime(2002, 10, 9);
-            authinfo.authCode = "543216";
-            authinfo.authAmount = 12345;
-            capturegivenauth.authInformation = authinfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            capturegivenauth.card = card;
+            var capturegivenauth = new CaptureGivenAuth();
+            capturegivenauth.OrderId = "12344";
+            capturegivenauth.Amount = 106;
+            var authinfo = new AuthInformation();
+            authinfo.AuthDate = new DateTime(2002, 10, 9);
+            authinfo.AuthCode = "543216";
+            authinfo.AuthAmount = 12345;
+            capturegivenauth.AuthInformation = authinfo;
+            capturegivenauth.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            capturegivenauth.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -413,21 +413,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
-            litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
+            litleBatchRequest.AddCaptureGivenAuth(capturegivenauth);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualCaptureGivenAuthReponse1 = actualLitleBatchResponse.nextCaptureGivenAuthResponse();
             var actualCaptureGivenAuthReponse2 = actualLitleBatchResponse.nextCaptureGivenAuthResponse();
@@ -448,18 +448,18 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCredit()
         {
-            var credit = new credit();
-            credit.orderId = "12344";
-            credit.amount = 106;
-            credit.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            credit.card = card;
+            var credit = new Credit();
+            credit.OrderId = "12344";
+            credit.Amount = 106;
+            credit.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            credit.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -484,21 +484,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCredit(credit);
-            litleBatchRequest.addCredit(credit);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCredit(credit);
+            litleBatchRequest.AddCredit(credit);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualCreditReponse1 = actualLitleBatchResponse.nextCreditResponse();
             var actualCreditReponse2 = actualLitleBatchResponse.nextCreditResponse();
@@ -519,12 +519,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckCredit()
         {
-            var echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12;
-            echeckcredit.litleTxnId = 123456789101112;
+            var echeckcredit = new EcheckCredit();
+            echeckcredit.Amount = 12;
+            echeckcredit.LitleTxnId = 123456789101112;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -549,21 +549,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckCredit(echeckcredit);
-            litleBatchRequest.addEcheckCredit(echeckcredit);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
+            litleBatchRequest.AddEcheckCredit(echeckcredit);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualEcheckCreditResponse1 = actualLitleBatchResponse.nextEcheckCreditResponse();
             var actualEcheckCreditResponse2 = actualLitleBatchResponse.nextEcheckCreditResponse();
@@ -584,11 +584,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckRedeposit()
         {
-            var echeckredeposit = new echeckRedeposit();
+            var echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -613,21 +613,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
-            litleBatchRequest.addEcheckRedeposit(echeckredeposit);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
+            litleBatchRequest.AddEcheckRedeposit(echeckredeposit);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualEcheckRedepositResponse1 = actualLitleBatchResponse.nextEcheckRedepositResponse();
             var actualEcheckRedepositResponse2 = actualLitleBatchResponse.nextEcheckRedepositResponse();
@@ -648,25 +648,25 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckSale()
         {
-            var echecksale = new echeckSale();
-            echecksale.orderId = "12345";
-            echecksale.amount = 123456;
-            echecksale.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echecksale.echeck = echeck;
-            var contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echecksale.billToAddress = contact;
+            var echecksale = new EcheckSale();
+            echecksale.OrderId = "12345";
+            echecksale.Amount = 123456;
+            echecksale.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echecksale.Echeck = echeck;
+            var contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
+            echecksale.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -691,21 +691,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckSale(echecksale);
-            litleBatchRequest.addEcheckSale(echecksale);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckSale(echecksale);
+            litleBatchRequest.AddEcheckSale(echecksale);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualEcheckSalesResponse1 = actualLitleBatchResponse.nextEcheckSalesResponse();
             var actualEcheckSalesResponse2 = actualLitleBatchResponse.nextEcheckSalesResponse();
@@ -726,25 +726,25 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckVerification()
         {
-            var echeckverification = new echeckVerification();
-            echeckverification.orderId = "12345";
-            echeckverification.amount = 123456;
-            echeckverification.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echeckverification.echeck = echeck;
-            var contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echeckverification.billToAddress = contact;
+            var echeckverification = new EcheckVerification();
+            echeckverification.OrderId = "12345";
+            echeckverification.Amount = 123456;
+            echeckverification.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echeckverification.Echeck = echeck;
+            var contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
+            echeckverification.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -769,21 +769,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckVerification(echeckverification);
-            litleBatchRequest.addEcheckVerification(echeckverification);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckVerification(echeckverification);
+            litleBatchRequest.AddEcheckVerification(echeckverification);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualEcheckVerificationResponse1 = actualLitleBatchResponse.nextEcheckVerificationResponse();
             var actualEcheckVerificationResponse2 = actualLitleBatchResponse.nextEcheckVerificationResponse();
@@ -804,18 +804,18 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testForceCapture()
         {
-            var forcecapture = new forceCapture();
-            forcecapture.orderId = "12344";
-            forcecapture.amount = 106;
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            forcecapture.card = card;
+            var forcecapture = new ForceCapture();
+            forcecapture.OrderId = "12344";
+            forcecapture.Amount = 106;
+            forcecapture.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000001";
+            card.ExpDate = "1210";
+            forcecapture.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -840,21 +840,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addForceCapture(forcecapture);
-            litleBatchRequest.addForceCapture(forcecapture);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddForceCapture(forcecapture);
+            litleBatchRequest.AddForceCapture(forcecapture);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualForceCaptureResponse1 = actualLitleBatchResponse.nextForceCaptureResponse();
             var actualForceCaptureResponse2 = actualLitleBatchResponse.nextForceCaptureResponse();
@@ -875,18 +875,18 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testSale()
         {
-            var sale = new sale();
-            sale.orderId = "12344";
-            sale.amount = 106;
-            sale.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            sale.card = card;
+            var sale = new Sale();
+            sale.OrderId = "12344";
+            sale.Amount = 106;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            sale.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns("<saleResponse xmlns='http://www.litle.com/schema'><litleTxnId>123</litleTxnId></saleResponse>")
@@ -909,21 +909,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addSale(sale);
-            litleBatchRequest.addSale(sale);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddSale(sale);
+            litleBatchRequest.AddSale(sale);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualSaleResponse1 = actualLitleBatchResponse.nextSaleResponse();
             var actualSaleResponse2 = actualLitleBatchResponse.nextSaleResponse();
@@ -944,12 +944,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testToken()
         {
-            var token = new registerTokenRequestType();
-            token.orderId = "12344";
-            token.accountNumber = "1233456789103801";
+            var token = new RegisterTokenRequestType();
+            token.OrderId = "12344";
+            token.AccountNumber = "1233456789103801";
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -974,21 +974,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addRegisterTokenRequest(token);
-            litleBatchRequest.addRegisterTokenRequest(token);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddRegisterTokenRequest(token);
+            litleBatchRequest.AddRegisterTokenRequest(token);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualRegisterTokenResponse1 = actualLitleBatchResponse.nextRegisterTokenResponse();
             var actualRegisterTokenResponse2 = actualLitleBatchResponse.nextRegisterTokenResponse();
@@ -1009,12 +1009,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateCardValidationNumOnToken()
         {
-            var updateCardValidationNumOnToken = new updateCardValidationNumOnToken();
-            updateCardValidationNumOnToken.orderId = "12344";
-            updateCardValidationNumOnToken.litleToken = "123";
+            var updateCardValidationNumOnToken = new UpdateCardValidationNumOnToken();
+            updateCardValidationNumOnToken.OrderId = "12344";
+            updateCardValidationNumOnToken.LitleToken = "123";
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1039,21 +1039,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
-            litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
+            litleBatchRequest.AddUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualUpdateCardValidationNumOnTokenResponse1 =
                 actualLitleBatchResponse.nextUpdateCardValidationNumOnTokenResponse();
@@ -1077,20 +1077,20 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testLitleOnlineException()
         {
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
             var mockLitleBatchResponse = new Mock<batchResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             var mockAuthorizationResponse1 = new authorizationResponse();
             mockAuthorizationResponse1.litleTxnId = 123;
@@ -1118,20 +1118,20 @@ namespace Litle.Sdk.Test.Unit
 
             try
             {
-                litle.setCommunication(mockedCommunications);
-                litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-                litle.setLitleFile(mockedLitleFile);
-                litle.setLitleTime(mockLitleTime.Object);
-                var litleBatchRequest = new batchRequest(memoryStreams);
-                litleBatchRequest.setLitleFile(mockedLitleFile);
-                litleBatchRequest.setLitleTime(mockLitleTime.Object);
+                litle.SetCommunication(mockedCommunications);
+                litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+                litle.SetLitleFile(mockedLitleFile);
+                litle.SetLitleTime(mockLitleTime.Object);
+                var litleBatchRequest = new BatchRequest(memoryStreams);
+                litleBatchRequest.SetLitleFile(mockedLitleFile);
+                litleBatchRequest.SetLitleTime(mockLitleTime.Object);
 
-                litleBatchRequest.addAuthorization(authorization);
-                litleBatchRequest.addAuthorization(authorization);
-                litle.addBatch(litleBatchRequest);
+                litleBatchRequest.AddAuthorization(authorization);
+                litleBatchRequest.AddAuthorization(authorization);
+                litle.AddBatch(litleBatchRequest);
 
-                var batchFileName = litle.sendToLitle();
-                var litleResponse = litle.receiveFromLitle(batchFileName);
+                var batchFileName = litle.SendToLitle();
+                var litleResponse = litle.ReceiveFromLitle(batchFileName);
             }
             catch (LitleOnlineException e)
             {
@@ -1142,20 +1142,20 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testInvalidOperationException()
         {
-            var authorization = new authorization();
+            var authorization = new Authorization();
             authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             litleResponse mockLitleResponse = null;
 
-            var mockXml = new Mock<litleXmlSerializer>();
+            var mockXml = new Mock<LitleXmlSerializer>();
 
             var mockedCommunications = mockCommunications.Object;
 
@@ -1169,20 +1169,20 @@ namespace Litle.Sdk.Test.Unit
 
             try
             {
-                litle.setCommunication(mockedCommunications);
-                litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-                litle.setLitleFile(mockedLitleFile);
-                litle.setLitleTime(mockLitleTime.Object);
-                var litleBatchRequest = new batchRequest(memoryStreams);
-                litleBatchRequest.setLitleFile(mockedLitleFile);
-                litleBatchRequest.setLitleTime(mockLitleTime.Object);
+                litle.SetCommunication(mockedCommunications);
+                litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+                litle.SetLitleFile(mockedLitleFile);
+                litle.SetLitleTime(mockLitleTime.Object);
+                var litleBatchRequest = new BatchRequest(memoryStreams);
+                litleBatchRequest.SetLitleFile(mockedLitleFile);
+                litleBatchRequest.SetLitleTime(mockLitleTime.Object);
 
-                litleBatchRequest.addAuthorization(authorization);
-                litleBatchRequest.addAuthorization(authorization);
-                litle.addBatch(litleBatchRequest);
+                litleBatchRequest.AddAuthorization(authorization);
+                litleBatchRequest.AddAuthorization(authorization);
+                litle.AddBatch(litleBatchRequest);
 
-                var batchFileName = litle.sendToLitle();
-                var litleResponse = litle.receiveFromLitle(batchFileName);
+                var batchFileName = litle.SendToLitle();
+                var litleResponse = litle.ReceiveFromLitle(batchFileName);
             }
             catch (LitleOnlineException e)
             {
@@ -1193,18 +1193,18 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testDefaultReportGroup()
         {
-            var authorization = new authorization();
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            var authorization = new Authorization();
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1229,20 +1229,20 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addAuthorization(authorization);
-            litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddAuthorization(authorization);
+            litleBatchRequest.AddAuthorization(authorization);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualAuthorizationResponse1 = actualLitleBatchResponse.nextAuthorizationResponse();
             var actualAuthorizationResponse2 = actualLitleBatchResponse.nextAuthorizationResponse();
@@ -1269,26 +1269,26 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testSerialize()
         {
-            var authorization = new authorization();
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            var authorization = new Authorization();
+            authorization.OrderId = "12344";
+            authorization.Amount = 106;
+            authorization.OrderSource = OrderSourceType.Ecommerce;
+            var card = new CardType();
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            card.Number = "4100000000000002";
+            card.ExpDate = "1210";
+            authorization.Card = card;
 
             var mockedLitleFile = mockLitleFile.Object;
             var mockedLitleTime = mockLitleTime.Object;
 
-            litle.setLitleTime(mockedLitleTime);
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockedLitleTime);
+            litle.SetLitleFile(mockedLitleFile);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.addAuthorization(authorization);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.AddAuthorization(authorization);
+            litle.AddBatch(litleBatchRequest);
 
             var resultFile = litle.Serialize();
 
@@ -1300,8 +1300,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testRFRRequest()
         {
-            var rfrRequest = new RFRRequest(memoryStreams);
-            rfrRequest.litleSessionId = 123456789;
+            var rfrRequest = new RfrRequest(memoryStreams);
+            rfrRequest.LitleSessionId = 123456789;
 
             var mockBatchXmlReader = new Mock<XmlReader>();
             mockBatchXmlReader.Setup(XmlReader => XmlReader.ReadState).Returns(ReadState.Closed);
@@ -1317,7 +1317,7 @@ namespace Litle.Sdk.Test.Unit
             mockedLitleResponse.setRfrResponseReader(mockXmlReader.Object);
             mockedLitleResponse.setBatchResponseReader(mockBatchXmlReader.Object);
 
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
             mockLitleXmlSerializer.Setup(
                 litleXmlSerializer =>
                     litleXmlSerializer.DeserializeObjectFromFile(mockCommunications.Object, It.IsAny<string>()))
@@ -1328,19 +1328,19 @@ namespace Litle.Sdk.Test.Unit
             var mockedLitleTime = mockLitleTime.Object;
             var mockedCommunications = mockCommunications.Object;
 
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockedLitleTime);
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockedLitleTime);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
-            rfrRequest.setLitleFile(mockedLitleFile);
-            rfrRequest.setLitleTime(mockedLitleTime);
+            rfrRequest.SetLitleFile(mockedLitleFile);
+            rfrRequest.SetLitleTime(mockedLitleTime);
 
-            litle.addRFRRequest(rfrRequest);
+            litle.AddRfrRequest(rfrRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var nullLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualRFRResponse = actualLitleResponse.nextRFRResponse();
             var nullRFRResponse = actualLitleResponse.nextRFRResponse();
@@ -1363,11 +1363,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCancelSubscription()
         {
-            var cancel = new cancelSubscription();
-            cancel.subscriptionId = 12345;
+            var cancel = new CancelSubscription();
+            cancel.SubscriptionId = 12345;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1387,24 +1387,24 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCancelSubscription(cancel);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCancelSubscription(cancel);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1423,24 +1423,24 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdateSubscription()
         {
-            var update = new updateSubscription();
-            update.billingDate = new DateTime(2002, 10, 9);
-            var billToAddress = new contact();
-            billToAddress.name = "Greg Dake";
-            billToAddress.city = "Lowell";
-            billToAddress.state = "MA";
-            billToAddress.email = "sdksupport@litle.com";
-            update.billToAddress = billToAddress;
-            var card = new cardType();
-            card.number = "4100000000000001";
-            card.expDate = "1215";
-            card.type = methodOfPaymentTypeEnum.VI;
-            update.card = card;
-            update.planCode = "abcdefg";
-            update.subscriptionId = 12345;
+            var update = new UpdateSubscription();
+            update.BillingDate = new DateTime(2002, 10, 9);
+            var billToAddress = new Contact();
+            billToAddress.Name = "Greg Dake";
+            billToAddress.City = "Lowell";
+            billToAddress.State = "MA";
+            billToAddress.Email = "sdksupport@litle.com";
+            update.BillToAddress = billToAddress;
+            var card = new CardType();
+            card.Number = "4100000000000001";
+            card.ExpDate = "1215";
+            card.Type = MethodOfPaymentTypeEnum.VI;
+            update.Card = card;
+            update.PlanCode = "abcdefg";
+            update.SubscriptionId = 12345;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1460,24 +1460,24 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addUpdateSubscription(update);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddUpdateSubscription(update);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1496,14 +1496,14 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testCreatePlan()
         {
-            var createPlan = new createPlan();
-            createPlan.planCode = "thePlanCode";
-            createPlan.name = "theName";
-            createPlan.intervalType = intervalType.ANNUAL;
-            createPlan.amount = 100;
+            var createPlan = new CreatePlan();
+            createPlan.PlanCode = "thePlanCode";
+            createPlan.Name = "theName";
+            createPlan.IntervalType = IntervalType.ANNUAL;
+            createPlan.Amount = 100;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1523,25 +1523,25 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addCreatePlan(createPlan);
-            litleBatchRequest.addCreatePlan(createPlan);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddCreatePlan(createPlan);
+            litleBatchRequest.AddCreatePlan(createPlan);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1560,12 +1560,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUpdatePlan()
         {
-            var updatePlan = new updatePlan();
-            updatePlan.planCode = "thePlanCode";
-            updatePlan.active = true;
+            var updatePlan = new UpdatePlan();
+            updatePlan.PlanCode = "thePlanCode";
+            updatePlan.Active = true;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1585,25 +1585,25 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addUpdatePlan(updatePlan);
-            litleBatchRequest.addUpdatePlan(updatePlan);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddUpdatePlan(updatePlan);
+            litleBatchRequest.AddUpdatePlan(updatePlan);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1622,13 +1622,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testActivate()
         {
-            var activate = new activate();
-            activate.orderId = "theOrderId";
-            activate.orderSource = orderSourceType.ecommerce;
-            activate.card = new cardType();
+            var activate = new Activate();
+            activate.OrderId = "theOrderId";
+            activate.OrderSource = OrderSourceType.Ecommerce;
+            activate.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1648,25 +1648,25 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addActivate(activate);
-            litleBatchRequest.addActivate(activate);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddActivate(activate);
+            litleBatchRequest.AddActivate(activate);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1685,13 +1685,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testDeactivate()
         {
-            var deactivate = new deactivate();
-            deactivate.orderId = "theOrderId";
-            deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            var deactivate = new Deactivate();
+            deactivate.OrderId = "theOrderId";
+            deactivate.OrderSource = OrderSourceType.Ecommerce;
+            deactivate.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1711,25 +1711,25 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addDeactivate(deactivate);
-            litleBatchRequest.addDeactivate(deactivate);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddDeactivate(deactivate);
+            litleBatchRequest.AddDeactivate(deactivate);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1748,13 +1748,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testLoad()
         {
-            var load = new load();
-            load.orderId = "theOrderId";
-            load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            var load = new Load();
+            load.OrderId = "theOrderId";
+            load.OrderSource = OrderSourceType.Ecommerce;
+            load.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1774,25 +1774,25 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addLoad(load);
-            litleBatchRequest.addLoad(load);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddLoad(load);
+            litleBatchRequest.AddLoad(load);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1811,13 +1811,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testUnload()
         {
-            var unload = new unload();
-            unload.orderId = "theOrderId";
-            unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            var unload = new Unload();
+            unload.OrderId = "theOrderId";
+            unload.OrderSource = OrderSourceType.Ecommerce;
+            unload.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1837,25 +1837,25 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addUnload(unload);
-            litleBatchRequest.addUnload(unload);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddUnload(unload);
+            litleBatchRequest.AddUnload(unload);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1874,13 +1874,13 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testBalanceInquiry()
         {
-            var balanceInquiry = new balanceInquiry();
-            balanceInquiry.orderId = "theOrderId";
-            balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            var balanceInquiry = new BalanceInquiry();
+            balanceInquiry.OrderId = "theOrderId";
+            balanceInquiry.OrderSource = OrderSourceType.Ecommerce;
+            balanceInquiry.Card = new CardType();
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1900,25 +1900,25 @@ namespace Litle.Sdk.Test.Unit
                 .Returns(mockedLitleResponse);
 
             var mockedCommunication = mockCommunications.Object;
-            litle.setCommunication(mockedCommunication);
+            litle.SetCommunication(mockedCommunication);
 
             var mockedLitleXmlSerializer = mockLitleXmlSerializer.Object;
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
 
             var mockedLitleFile = mockLitleFile.Object;
-            litle.setLitleFile(mockedLitleFile);
+            litle.SetLitleFile(mockedLitleFile);
 
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addBalanceInquiry(balanceInquiry);
-            litleBatchRequest.addBalanceInquiry(balanceInquiry);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddBalanceInquiry(balanceInquiry);
+            litleBatchRequest.AddBalanceInquiry(balanceInquiry);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var batchFileName = litle.SendToLitle();
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
 
             Assert.AreSame(mockLitleBatchResponse, actualLitleBatchResponse);
@@ -1937,24 +1937,24 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckPreNoteSale()
         {
-            var echeckPreNoteSale = new echeckPreNoteSale();
-            echeckPreNoteSale.orderId = "12345";
-            echeckPreNoteSale.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echeckPreNoteSale.echeck = echeck;
-            var contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echeckPreNoteSale.billToAddress = contact;
+            var echeckPreNoteSale = new EcheckPreNoteSale();
+            echeckPreNoteSale.OrderId = "12345";
+            echeckPreNoteSale.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echeckPreNoteSale.Echeck = echeck;
+            var contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
+            echeckPreNoteSale.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -1979,21 +1979,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSale);
-            litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSale);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSale);
+            litleBatchRequest.AddEcheckPreNoteSale(echeckPreNoteSale);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualEcheckPreNoteSaleResponse1 = actualLitleBatchResponse.nextEcheckPreNoteSaleResponse();
             var actualEcheckPreNoteSaleResponse2 = actualLitleBatchResponse.nextEcheckPreNoteSaleResponse();
@@ -2014,24 +2014,24 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testEcheckPreNoteCredit()
         {
-            var echeckPreNoteCredit = new echeckPreNoteCredit();
-            echeckPreNoteCredit.orderId = "12345";
-            echeckPreNoteCredit.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.CorpSavings;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echeckPreNoteCredit.echeck = echeck;
-            var contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echeckPreNoteCredit.billToAddress = contact;
+            var echeckPreNoteCredit = new EcheckPreNoteCredit();
+            echeckPreNoteCredit.OrderId = "12345";
+            echeckPreNoteCredit.OrderSource = OrderSourceType.Ecommerce;
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.CorpSavings;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
+            echeckPreNoteCredit.Echeck = echeck;
+            var contact = new Contact();
+            contact.Name = "Bob";
+            contact.City = "lowell";
+            contact.State = "MA";
+            contact.Email = "litle.com";
+            echeckPreNoteCredit.BillToAddress = contact;
 
             var mockLitleResponse = new Mock<litleResponse>();
-            var mockLitleXmlSerializer = new Mock<litleXmlSerializer>();
+            var mockLitleXmlSerializer = new Mock<LitleXmlSerializer>();
 
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadOuterXml())
                 .Returns(
@@ -2056,21 +2056,21 @@ namespace Litle.Sdk.Test.Unit
 
             var mockedLitleFile = mockLitleFile.Object;
 
-            litle.setCommunication(mockedCommunications);
-            litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
-            litle.setLitleFile(mockedLitleFile);
-            litle.setLitleTime(mockLitleTime.Object);
+            litle.SetCommunication(mockedCommunications);
+            litle.SetLitleXmlSerializer(mockedLitleXmlSerializer);
+            litle.SetLitleFile(mockedLitleFile);
+            litle.SetLitleTime(mockLitleTime.Object);
 
-            var litleBatchRequest = new batchRequest(memoryStreams);
-            litleBatchRequest.setLitleFile(mockedLitleFile);
-            litleBatchRequest.setLitleTime(mockLitleTime.Object);
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCredit);
-            litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCredit);
-            litle.addBatch(litleBatchRequest);
+            var litleBatchRequest = new BatchRequest(memoryStreams);
+            litleBatchRequest.SetLitleFile(mockedLitleFile);
+            litleBatchRequest.SetLitleTime(mockLitleTime.Object);
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCredit);
+            litleBatchRequest.AddEcheckPreNoteCredit(echeckPreNoteCredit);
+            litle.AddBatch(litleBatchRequest);
 
-            var batchFileName = litle.sendToLitle();
+            var batchFileName = litle.SendToLitle();
 
-            var actualLitleResponse = litle.receiveFromLitle(batchFileName);
+            var actualLitleResponse = litle.ReceiveFromLitle(batchFileName);
             var actualLitleBatchResponse = actualLitleResponse.nextBatchResponse();
             var actualEcheckPreNoteCreditResponse1 = actualLitleBatchResponse.nextEcheckPreNoteCreditResponse();
             var actualEcheckPreNoteCreditResponse2 = actualLitleBatchResponse.nextEcheckPreNoteCreditResponse();

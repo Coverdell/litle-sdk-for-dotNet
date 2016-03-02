@@ -22,7 +22,7 @@ namespace Litle.Sdk
 
 
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(registerTokenRequestType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RegisterTokenRequestType))]
     //[System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     //[System.SerializableAttribute()]
     //[System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -74,9 +74,9 @@ namespace Litle.Sdk
 
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(transactionTypeOptionReportGroup))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(transactionTypeWithReportGroupAndPartial))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(TransactionTypeWithReportGroupAndPartial))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(transactionTypeWithReportGroup))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(registerTokenRequestType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(RegisterTokenRequestType))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -470,7 +470,7 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public partial class fraudResult
+    public partial class FraudResult
     {
 
         private string avsResultField;
@@ -755,8 +755,8 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(echeckType))]
-        [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(echeckTokenType))]
+        [System.Xml.Serialization.XmlElementAttribute("echeck", typeof(EcheckType))]
+        [System.Xml.Serialization.XmlElementAttribute("echeckToken", typeof(EcheckTokenType))]
         public object Item
         {
             get
@@ -1055,7 +1055,7 @@ namespace Litle.Sdk
 
         private string tokenMessageField;
 
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
 
         private bool typeFieldSpecified;
 
@@ -1103,7 +1103,7 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get
             {
@@ -1167,7 +1167,7 @@ namespace Litle.Sdk
 
         private string litleTokenField;
 
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
 
         private string expDateField;
 
@@ -1187,7 +1187,7 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get
             {
@@ -1275,14 +1275,14 @@ namespace Litle.Sdk
     public partial class cardAccountInfoType
     {
 
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
 
         private string numberField;
 
         private string expDateField;
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get
             {
@@ -1440,12 +1440,12 @@ namespace Litle.Sdk
     public partial class accountInfoType
     {
 
-        private methodOfPaymentTypeEnum typeField;
+        private MethodOfPaymentTypeEnum typeField;
 
         private string numberField;
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum type
+        public MethodOfPaymentTypeEnum type
         {
             get
             {
@@ -1637,7 +1637,7 @@ namespace Litle.Sdk
 
         private string binField;
 
-        private methodOfPaymentTypeEnum? typeField;
+        private MethodOfPaymentTypeEnum? typeField;
 
         private bool typeFieldSpecified;
 
@@ -1704,7 +1704,7 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public methodOfPaymentTypeEnum? type
+        public MethodOfPaymentTypeEnum? type
         {
             get
             {
@@ -1918,7 +1918,7 @@ namespace Litle.Sdk
 
         private accountUpdater accountUpdaterField;
 
-        private fraudResult fraudResultField;
+        private FraudResult fraudResultField;
 
         private billMeLaterResponseData billMeLaterResponseDataField;
 
@@ -2107,7 +2107,7 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public fraudResult fraudResult
+        public FraudResult fraudResult
         {
             get
             {
@@ -2866,7 +2866,7 @@ namespace Litle.Sdk
     public partial class captureResponse : transactionTypeWithReportGroup
     {
         public giftCardResponse giftCardResponse;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
 
         private long litleTxnIdField;
 
@@ -3033,7 +3033,7 @@ namespace Litle.Sdk
     public partial class forceCaptureResponse : transactionTypeWithReportGroup
     {
         public giftCardResponse giftCardResponse;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -3182,7 +3182,7 @@ namespace Litle.Sdk
     public partial class captureGivenAuthResponse : transactionTypeWithReportGroup
     {
         public giftCardResponse giftCardResponse;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         private long litleTxnIdField;
 
         private string orderIdField;
@@ -3340,7 +3340,7 @@ namespace Litle.Sdk
 
         private accountInfoType accountInformationField;
 
-        private fraudResult fraudResultField;
+        private FraudResult fraudResultField;
 
         private billMeLaterResponseData billMeLaterResponseDataField;
 
@@ -3522,7 +3522,7 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
-        public fraudResult fraudResult
+        public FraudResult fraudResult
         {
             get
             {
@@ -3676,7 +3676,7 @@ namespace Litle.Sdk
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
     public partial class creditResponse : transactionTypeWithReportGroup
     {
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
         private long litleTxnIdField;
 
@@ -5815,7 +5815,7 @@ namespace Litle.Sdk
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
     [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://www.litle.com/schema", IsNullable = false)]
-    public class accountUpdateResponseCardTokenType : cardTokenType
+    public class accountUpdateResponseCardTokenType : CardTokenType
     {
         public string bin;
     }
@@ -5833,8 +5833,8 @@ namespace Litle.Sdk
         public string message;
 
         //Optional child elements
-        public cardType updatedCard;
-        public cardType originalCard;
+        public CardType updatedCard;
+        public CardType originalCard;
         public accountUpdateResponseCardTokenType originalToken;
         public accountUpdateResponseCardTokenType updatedToken;
     }
@@ -6133,7 +6133,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
         public virtualGiftCardResponseType virtualGiftCardResponse;
     }
@@ -6154,7 +6154,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 
@@ -6174,7 +6174,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 
@@ -6192,7 +6192,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 
@@ -6210,7 +6210,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 
@@ -6250,7 +6250,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 
@@ -6268,7 +6268,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 
@@ -6286,7 +6286,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 
@@ -6304,7 +6304,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 
@@ -6322,7 +6322,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 
@@ -6340,7 +6340,7 @@ namespace Litle.Sdk
         public DateTime responseTime;
         public DateTime postDate;
         public string message;
-        public fraudResult fraudResult;
+        public FraudResult fraudResult;
         public giftCardResponse giftCardResponse;
     }
 

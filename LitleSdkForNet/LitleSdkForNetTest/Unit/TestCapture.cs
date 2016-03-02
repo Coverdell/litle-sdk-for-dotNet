@@ -22,12 +22,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount()
         {
-            var capture = new capture();
-            capture.litleTxnId = 3;
-            capture.amount = 2;
-            capture.surchargeAmount = 1;
-            capture.payPalNotes = "note";
-            capture.reportGroup = "Planets";
+            var capture = new Capture();
+            capture.LitleTxnId = 3;
+            capture.Amount = 2;
+            capture.SurchargeAmount = 1;
+            capture.PayPalNotes = "note";
+            capture.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
 
@@ -48,11 +48,11 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_Optional()
         {
-            var capture = new capture();
-            capture.litleTxnId = 3;
-            capture.amount = 2;
-            capture.payPalNotes = "note";
-            capture.reportGroup = "Planets";
+            var capture = new Capture();
+            capture.LitleTxnId = 3;
+            capture.Amount = 2;
+            capture.PayPalNotes = "note";
+            capture.ReportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
 

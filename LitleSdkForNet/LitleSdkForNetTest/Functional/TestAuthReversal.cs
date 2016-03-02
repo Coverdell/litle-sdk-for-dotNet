@@ -34,10 +34,10 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void SimpleAuthReversal()
         {
-            var reversal = new authReversal();
-            reversal.litleTxnId = 12345678000L;
-            reversal.amount = 106;
-            reversal.payPalNotes = "Notes";
+            var reversal = new AuthReversal();
+            reversal.LitleTxnId = 12345678000L;
+            reversal.Amount = 106;
+            reversal.PayPalNotes = "Notes";
 
             var response = litle.AuthReversal(reversal);
             Assert.AreEqual("Approved", response.message);
@@ -46,10 +46,10 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void testAuthReversalHandleSpecialCharacters()
         {
-            var reversal = new authReversal();
-            reversal.litleTxnId = 12345678000L;
-            reversal.amount = 106;
-            reversal.payPalNotes = "<'&\">";
+            var reversal = new AuthReversal();
+            reversal.LitleTxnId = 12345678000L;
+            reversal.Amount = 106;
+            reversal.PayPalNotes = "<'&\">";
 
             var response = litle.AuthReversal(reversal);
             Assert.AreEqual("Approved", response.message);

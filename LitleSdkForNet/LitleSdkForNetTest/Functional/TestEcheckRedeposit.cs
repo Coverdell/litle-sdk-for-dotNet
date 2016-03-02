@@ -35,7 +35,7 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void simpleEcheckRedeposit()
         {
-            var echeckredeposit = new echeckRedeposit();
+            var echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
             var response = litle.EcheckRedeposit(echeckredeposit);
             Assert.AreEqual("Approved", response.message);
@@ -44,15 +44,15 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void echeckRedepositWithEcheck()
         {
-            var echeckredeposit = new echeckRedeposit();
+            var echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
+            var echeck = new EcheckType();
+            echeck.AccType = echeckAccountTypeEnum.Checking;
+            echeck.AccNum = "12345657890";
+            echeck.RoutingNum = "123456789";
+            echeck.CheckNum = "123455";
 
-            echeckredeposit.echeck = echeck;
+            echeckredeposit.Echeck = echeck;
             var response = litle.EcheckRedeposit(echeckredeposit);
             Assert.AreEqual("Approved", response.message);
         }
@@ -60,15 +60,15 @@ namespace Litle.Sdk.Test.Functional
         [Test]
         public void echeckRedepositWithEcheckToken()
         {
-            var echeckredeposit = new echeckRedeposit();
+            var echeckredeposit = new EcheckRedeposit();
             echeckredeposit.litleTxnId = 123456;
-            var echeckToken = new echeckTokenType();
-            echeckToken.accType = echeckAccountTypeEnum.Checking;
-            echeckToken.litleToken = "1234565789012";
-            echeckToken.routingNum = "123456789";
-            echeckToken.checkNum = "123455";
+            var echeckToken = new EcheckTokenType();
+            echeckToken.AccType = echeckAccountTypeEnum.Checking;
+            echeckToken.LitleToken = "1234565789012";
+            echeckToken.RoutingNum = "123456789";
+            echeckToken.CheckNum = "123455";
 
-            echeckredeposit.token = echeckToken;
+            echeckredeposit.Token = echeckToken;
             var response = litle.EcheckRedeposit(echeckredeposit);
             Assert.AreEqual("Approved", response.message);
         }

@@ -22,12 +22,12 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestFraudFilterOverride()
         {
-            var sale = new sale();
-            sale.orderId = "12344";
-            sale.amount = 2;
-            sale.orderSource = orderSourceType.ecommerce;
+            var sale = new Sale();
+            sale.OrderId = "12344";
+            sale.Amount = 2;
+            sale.OrderSource = OrderSourceType.Ecommerce;
             sale.reportGroup = "Planets";
-            sale.fraudFilterOverride = false;
+            sale.FraudFilterOverride = false;
 
             var mock = new Mock<Communications>(_memoryStreams);
             ;
@@ -48,10 +48,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount()
         {
-            var sale = new sale();
-            sale.amount = 2;
-            sale.surchargeAmount = 1;
-            sale.orderSource = orderSourceType.ecommerce;
+            var sale = new Sale();
+            sale.Amount = 2;
+            sale.SurchargeAmount = 1;
+            sale.OrderSource = OrderSourceType.Ecommerce;
             sale.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -74,9 +74,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_Optional()
         {
-            var sale = new sale();
-            sale.amount = 2;
-            sale.orderSource = orderSourceType.ecommerce;
+            var sale = new Sale();
+            sale.Amount = 2;
+            sale.OrderSource = OrderSourceType.Ecommerce;
             sale.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -98,19 +98,19 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecurringRequest()
         {
-            var sale = new sale();
-            sale.card = new cardType();
-            sale.card.type = methodOfPaymentTypeEnum.VI;
-            sale.card.number = "4100000000000001";
-            sale.card.expDate = "1213";
-            sale.orderId = "12344";
-            sale.amount = 2;
-            sale.orderSource = orderSourceType.ecommerce;
-            sale.fraudFilterOverride = true;
-            sale.recurringRequest = new recurringRequest();
-            sale.recurringRequest.subscription = new subscription();
-            sale.recurringRequest.subscription.planCode = "abc123";
-            sale.recurringRequest.subscription.numberOfPayments = 12;
+            var sale = new Sale();
+            sale.Card = new CardType();
+            sale.Card.Type = MethodOfPaymentTypeEnum.VI;
+            sale.Card.Number = "4100000000000001";
+            sale.Card.ExpDate = "1213";
+            sale.OrderId = "12344";
+            sale.Amount = 2;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            sale.FraudFilterOverride = true;
+            sale.RecurringRequest = new RecurringRequest();
+            sale.RecurringRequest.Subscription = new Subscription();
+            sale.RecurringRequest.Subscription.PlanCode = "abc123";
+            sale.RecurringRequest.Subscription.NumberOfPayments = 12;
 
             var mock = new Mock<Communications>(_memoryStreams);
             ;
@@ -162,15 +162,15 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestRecurringRequest_Optional()
         {
-            var sale = new sale();
-            sale.card = new cardType();
-            sale.card.type = methodOfPaymentTypeEnum.VI;
-            sale.card.number = "4100000000000001";
-            sale.card.expDate = "1213";
-            sale.orderId = "12344";
-            sale.amount = 2;
-            sale.orderSource = orderSourceType.ecommerce;
-            sale.fraudFilterOverride = true;
+            var sale = new Sale();
+            sale.Card = new CardType();
+            sale.Card.Type = MethodOfPaymentTypeEnum.VI;
+            sale.Card.Number = "4100000000000001";
+            sale.Card.ExpDate = "1213";
+            sale.OrderId = "12344";
+            sale.Amount = 2;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            sale.FraudFilterOverride = true;
 
             var mock = new Mock<Communications>(_memoryStreams);
             ;
@@ -191,18 +191,18 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void Test_LitleInternalRecurringRequest()
         {
-            var sale = new sale();
-            sale.card = new cardType();
-            sale.card.type = methodOfPaymentTypeEnum.VI;
-            sale.card.number = "4100000000000001";
-            sale.card.expDate = "1213";
-            sale.orderId = "12344";
-            sale.amount = 2;
-            sale.orderSource = orderSourceType.ecommerce;
-            sale.fraudFilterOverride = true;
-            sale.litleInternalRecurringRequest = new litleInternalRecurringRequest();
-            sale.litleInternalRecurringRequest.subscriptionId = "123";
-            sale.litleInternalRecurringRequest.recurringTxnId = "456";
+            var sale = new Sale();
+            sale.Card = new CardType();
+            sale.Card.Type = MethodOfPaymentTypeEnum.VI;
+            sale.Card.Number = "4100000000000001";
+            sale.Card.ExpDate = "1213";
+            sale.OrderId = "12344";
+            sale.Amount = 2;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            sale.FraudFilterOverride = true;
+            sale.LitleInternalRecurringRequest = new LitleInternalRecurringRequest();
+            sale.LitleInternalRecurringRequest.SubscriptionId = "123";
+            sale.LitleInternalRecurringRequest.RecurringTxnId = "456";
 
             var mock = new Mock<Communications>(_memoryStreams);
             ;
@@ -223,15 +223,15 @@ namespace Litle.Sdk.Test.Unit
 
         public void Test_LitleInternalRecurringRequest_Optional()
         {
-            var sale = new sale();
-            sale.card = new cardType();
-            sale.card.type = methodOfPaymentTypeEnum.VI;
-            sale.card.number = "4100000000000001";
-            sale.card.expDate = "1213";
-            sale.orderId = "12344";
-            sale.amount = 2;
-            sale.orderSource = orderSourceType.ecommerce;
-            sale.fraudFilterOverride = true;
+            var sale = new Sale();
+            sale.Card = new CardType();
+            sale.Card.Type = MethodOfPaymentTypeEnum.VI;
+            sale.Card.Number = "4100000000000001";
+            sale.Card.ExpDate = "1213";
+            sale.OrderId = "12344";
+            sale.Amount = 2;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            sale.FraudFilterOverride = true;
 
             var mock = new Mock<Communications>(_memoryStreams);
             ;
@@ -252,9 +252,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_True()
         {
-            var sale = new sale();
-            sale.litleInternalRecurringRequest = new litleInternalRecurringRequest();
-            sale.debtRepayment = true;
+            var sale = new Sale();
+            sale.LitleInternalRecurringRequest = new LitleInternalRecurringRequest();
+            sale.DebtRepayment = true;
 
             var mock = new Mock<Communications>(_memoryStreams);
             ;
@@ -276,9 +276,9 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_False()
         {
-            var sale = new sale();
-            sale.litleInternalRecurringRequest = new litleInternalRecurringRequest();
-            sale.debtRepayment = false;
+            var sale = new Sale();
+            sale.LitleInternalRecurringRequest = new LitleInternalRecurringRequest();
+            sale.DebtRepayment = false;
 
             var mock = new Mock<Communications>(_memoryStreams);
             ;
@@ -300,8 +300,8 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_Optional()
         {
-            var sale = new sale();
-            sale.litleInternalRecurringRequest = new litleInternalRecurringRequest();
+            var sale = new Sale();
+            sale.LitleInternalRecurringRequest = new LitleInternalRecurringRequest();
 
             var mock = new Mock<Communications>(_memoryStreams);
             ;
@@ -322,10 +322,10 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSecondaryAmount()
         {
-            var sale = new sale();
-            sale.amount = 2;
-            sale.secondaryAmount = 1;
-            sale.orderSource = orderSourceType.ecommerce;
+            var sale = new Sale();
+            sale.Amount = 2;
+            sale.SecondaryAmount = 1;
+            sale.OrderSource = OrderSourceType.Ecommerce;
             sale.reportGroup = "Planets";
 
             var mock = new Mock<Communications>(_memoryStreams);
@@ -348,23 +348,23 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestApplepayAndWallet()
         {
-            var sale = new sale();
-            sale.applepay = new applepayType();
-            var applepayHeaderType = new applepayHeaderType();
-            applepayHeaderType.applicationData = "454657413164";
-            applepayHeaderType.ephemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.publicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
-            applepayHeaderType.transactionId = "1234";
-            sale.applepay.header = applepayHeaderType;
-            sale.applepay.data = "user";
-            sale.applepay.signature = "sign";
-            sale.applepay.version = "1";
-            sale.orderId = "12344";
-            sale.amount = 2;
-            sale.orderSource = orderSourceType.ecommerce;
-            var wallet = new wallet();
-            wallet.walletSourceTypeId = "123";
-            sale.wallet = wallet;
+            var sale = new Sale();
+            sale.Applepay = new ApplepayType();
+            var applepayHeaderType = new ApplepayHeaderType();
+            applepayHeaderType.ApplicationData = "454657413164";
+            applepayHeaderType.EphemeralPublicKey = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.PublicKeyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+            applepayHeaderType.TransactionId = "1234";
+            sale.Applepay.Header = applepayHeaderType;
+            sale.Applepay.Data = "user";
+            sale.Applepay.Signature = "sign";
+            sale.Applepay.Version = "1";
+            sale.OrderId = "12344";
+            sale.Amount = 2;
+            sale.OrderSource = OrderSourceType.Ecommerce;
+            var wallet = new Wallet();
+            wallet.WalletSourceTypeId = "123";
+            sale.Wallet = wallet;
 
             var mock = new Mock<Communications>(_memoryStreams);
             ;

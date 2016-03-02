@@ -8,7 +8,7 @@ namespace Litle.Sdk
     [GeneratedCode("xsd", "2.0.50727.42")]
     [Serializable]
     [XmlType(Namespace = "http://www.litle.com/schema")]
-    public enum methodOfPaymentTypeEnum
+    public enum MethodOfPaymentTypeEnum
     {
         /// <remarks />
         MC,
@@ -44,15 +44,11 @@ namespace Litle.Sdk
         [XmlEnum("")] Item
     }
 
-    public abstract class methodOfPaymentSerializer
+    public abstract class MethodOfPaymentSerializer
     {
-        public static string Serialize(methodOfPaymentTypeEnum mop)
+        public static string Serialize(MethodOfPaymentTypeEnum mop)
         {
-            if (mop == methodOfPaymentTypeEnum.Item)
-            {
-                return "";
-            }
-            return mop.ToString();
+            return mop == MethodOfPaymentTypeEnum.Item ? "" : mop.ToString();
         }
     }
 }
