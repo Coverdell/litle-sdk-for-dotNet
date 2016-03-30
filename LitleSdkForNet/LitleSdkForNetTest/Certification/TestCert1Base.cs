@@ -1,108 +1,97 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using Litle.Sdk.Properties;
 using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Certification
 {
     [TestFixture]
-    internal class TestCert1Base
+    internal class TestCert1Base : LitleOnlineTestBase
     {
-        private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryCache;
-
-        [TestFixtureSetUp]
-        public void setUp()
+        protected override Dictionary<string, string> SetupConfig() => new Dictionary<string, string>
         {
-            _memoryCache = new Dictionary<string, StringBuilder>();
-            var config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "9.00");
-            config.Add("timeout", Settings.Default.timeout);
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
-            config.Add("printxml", "true");
-            config.Add("logFile", null);
-            config.Add("neuterAccountNums", null);
-            config.Add("proxyHost", Settings.Default.proxyHost);
-            config.Add("proxyPort", Settings.Default.proxyPort);
-            litle = new LitleOnline(_memoryCache, config);
-        }
-
+            {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+            {"reportGroup", "Default Report Group"},
+            {"username", "DOTNET"},
+            {"version", "9.00"},
+            {"timeout", Settings.Default.timeout},
+            {"merchantId", "101"},
+            {"password", "TESTCASE"},
+            {"printxml", "true"},
+            {"logFile", null},
+            {"neuterAccountNums", null},
+            {"proxyHost", Settings.Default.proxyHost},
+            {"proxyPort", Settings.Default.proxyPort}
+        };
 
         [Test]
         public void Test1Auth()
         {
-            var authorization = new authorization();
-            authorization.orderId = "1";
-            authorization.amount = 10010;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "John Smith";
-            contact.addressLine1 = "1 Main St.";
-            contact.city = "Burlington";
-            contact.state = "MA";
-            contact.zip = "01803-3747";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010000000009";
-            card.expDate = "0112";
-            card.cardValidationNum = "349";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "1",
+                amount = 10010,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "John Smith",
+                    addressLine1 = "1 Main St.",
+                    city = "Burlington",
+                    state = "MA",
+                    zip = "01803-3747",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010000000009",
+                    expDate = "0112",
+                    cardValidationNum = "349"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("11111 ", response.authCode);
             Assert.AreEqual("01", response.fraudResult.avsResult);
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
-            var capture = new capture();
-            capture.litleTxnId = response.litleTxnId;
-            var captureResponse = litle.Capture(capture);
+            var captureResponse = Litle.Capture(new capture {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", captureResponse.response);
             Assert.AreEqual("Approved", captureResponse.message);
 
-            var credit = new credit();
-            credit.litleTxnId = captureResponse.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = captureResponse.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void Test1AVS()
+        public void Test1Avs()
         {
-            var authorization = new authorization();
-            authorization.orderId = "1";
-            authorization.amount = 0;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "John Smith";
-            contact.addressLine1 = "1 Main St.";
-            contact.city = "Burlington";
-            contact.state = "MA";
-            contact.zip = "01803-3747";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010000000009";
-            card.expDate = "0112";
-            card.cardValidationNum = "349";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "1",
+                amount = 0,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "John Smith",
+                    addressLine1 = "1 Main St.",
+                    city = "Burlington",
+                    state = "MA",
+                    zip = "01803-3747",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010000000009",
+                    expDate = "0112",
+                    cardValidationNum = "349"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("11111 ", response.authCode);
@@ -111,127 +100,118 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test1Sale()
+        public void Test1Sale()
         {
-            var sale = new sale();
-            sale.orderId = "1";
-            sale.amount = 10010;
-            sale.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "John Smith";
-            contact.addressLine1 = "1 Main St.";
-            contact.city = "Burlington";
-            contact.state = "MA";
-            contact.zip = "01803-3747";
-            contact.country = countryTypeEnum.US;
-            sale.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010000000009";
-            card.expDate = "0112";
-            card.cardValidationNum = "349";
-            sale.card = card;
-
-            var response = litle.Sale(sale);
+            var response = Litle.Sale(new sale
+            {
+                orderId = "1",
+                amount = 10010,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "John Smith",
+                    addressLine1 = "1 Main St.",
+                    city = "Burlington",
+                    state = "MA",
+                    zip = "01803-3747",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010000000009",
+                    expDate = "0112",
+                    cardValidationNum = "349"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("11111 ", response.authCode);
             Assert.AreEqual("01", response.fraudResult.avsResult);
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
-            var credit = new credit();
-            credit.litleTxnId = response.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void test2Auth()
+        public void Test2Auth()
         {
-            var authorization = new authorization();
-            authorization.orderId = "2";
-            authorization.amount = 20020;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Mike J. Hammer";
-            contact.addressLine1 = "2 Main St.";
-            contact.addressLine2 = "Apt. 222";
-            contact.city = "Riverside";
-            contact.state = "RI";
-            contact.zip = "02915";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5112010000000003";
-            card.expDate = "0212";
-            card.cardValidationNum = "261";
-            authorization.card = card;
-            var authenticationvalue = new fraudCheckType();
-            authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-            authorization.cardholderAuthentication = authenticationvalue;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "2",
+                amount = 20020,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Mike J. Hammer",
+                    addressLine1 = "2 Main St.",
+                    addressLine2 = "Apt. 222",
+                    city = "Riverside",
+                    state = "RI",
+                    zip = "02915",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5112010000000003",
+                    expDate = "0212",
+                    cardValidationNum = "261"
+                },
+                cardholderAuthentication = new fraudCheckType {authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA="}
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("22222", response.authCode);
             Assert.AreEqual("10", response.fraudResult.avsResult);
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
-            var capture = new capture();
-            capture.litleTxnId = response.litleTxnId;
-            var captureresponse = litle.Capture(capture);
+            var captureresponse = Litle.Capture(new capture {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", captureresponse.response);
             Assert.AreEqual("Approved", captureresponse.message);
 
-            var credit = new credit();
-            credit.litleTxnId = captureresponse.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = captureresponse.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void test2AVS()
+        public void Test2Avs()
         {
-            var authorization = new authorization();
-            authorization.orderId = "2";
-            authorization.amount = 0;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Mike J. Hammer";
-            contact.addressLine1 = "2 Main St.";
-            contact.addressLine2 = "Apt. 222";
-            contact.city = "Riverside";
-            contact.state = "RI";
-            contact.zip = "02915";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5112010000000003";
-            card.expDate = "0212";
-            card.cardValidationNum = "261";
-            authorization.card = card;
-            var authenticationvalue = new fraudCheckType();
-            authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-            authorization.cardholderAuthentication = authenticationvalue;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "2",
+                amount = 0,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Mike J. Hammer",
+                    addressLine1 = "2 Main St.",
+                    addressLine2 = "Apt. 222",
+                    city = "Riverside",
+                    state = "RI",
+                    zip = "02915",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5112010000000003",
+                    expDate = "0212",
+                    cardValidationNum = "261"
+                },
+                cardholderAuthentication = new fraudCheckType {authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA="}
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("22222", response.authCode);
@@ -240,122 +220,116 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test2Sale()
+        public void Test2Sale()
         {
-            var sale = new sale();
-            sale.orderId = "2";
-            sale.amount = 20020;
-            sale.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Mike J. Hammer";
-            contact.addressLine1 = "2 Main St.";
-            contact.addressLine2 = "Apt. 222";
-            contact.city = "Riverside";
-            contact.state = "RI";
-            contact.zip = "02915";
-            contact.country = countryTypeEnum.US;
-            sale.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5112010000000003";
-            card.expDate = "0212";
-            card.cardValidationNum = "261";
-            sale.card = card;
-            var authenticationvalue = new fraudCheckType();
-            authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-            sale.cardholderAuthentication = authenticationvalue;
-
-            var response = litle.Sale(sale);
+            var response = Litle.Sale(new sale
+            {
+                orderId = "2",
+                amount = 20020,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Mike J. Hammer",
+                    addressLine1 = "2 Main St.",
+                    addressLine2 = "Apt. 222",
+                    city = "Riverside",
+                    state = "RI",
+                    zip = "02915",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5112010000000003",
+                    expDate = "0212",
+                    cardValidationNum = "261"
+                },
+                cardholderAuthentication = new fraudCheckType {authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA="}
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("22222", response.authCode);
             Assert.AreEqual("10", response.fraudResult.avsResult);
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
-            var credit = new credit();
-            credit.litleTxnId = response.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void test3Auth()
+        public void Test3Auth()
         {
-            var authorization = new authorization();
-            authorization.orderId = "3";
-            authorization.amount = 30030;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Eileen Jones";
-            contact.addressLine1 = "3 Main St.";
-            contact.city = "Bloomfield";
-            contact.state = "CT";
-            contact.zip = "06002";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
-            card.number = "6011010000000003";
-            card.expDate = "0312";
-            card.cardValidationNum = "758";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "3",
+                amount = 30030,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Eileen Jones",
+                    addressLine1 = "3 Main St.",
+                    city = "Bloomfield",
+                    state = "CT",
+                    zip = "06002",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.DI,
+                    number = "6011010000000003",
+                    expDate = "0312",
+                    cardValidationNum = "758"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("33333", response.authCode);
             Assert.AreEqual("10", response.fraudResult.avsResult);
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
-            var capture = new capture();
-            capture.litleTxnId = response.litleTxnId;
-            var captureResponse = litle.Capture(capture);
+            var captureResponse = Litle.Capture(new capture {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", captureResponse.response);
             Assert.AreEqual("Approved", captureResponse.message);
 
-            var credit = new credit();
-            credit.litleTxnId = captureResponse.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = captureResponse.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void test3AVS()
+        public void Test3Avs()
         {
-            var authorization = new authorization();
-            authorization.orderId = "3";
-            authorization.amount = 0;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Eileen Jones";
-            contact.addressLine1 = "3 Main St.";
-            contact.city = "Bloomfield";
-            contact.state = "CT";
-            contact.zip = "06002";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
-            card.number = "6011010000000003";
-            card.expDate = "0312";
-            card.cardValidationNum = "758";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "3",
+                amount = 0,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Eileen Jones",
+                    addressLine1 = "3 Main St.",
+                    city = "Bloomfield",
+                    state = "CT",
+                    zip = "06002",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.DI,
+                    number = "6011010000000003",
+                    expDate = "0312",
+                    cardValidationNum = "758"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("33333", response.authCode);
@@ -364,117 +338,113 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test3Sale()
+        public void Test3Sale()
         {
-            var sale = new sale();
-            sale.orderId = "3";
-            sale.amount = 30030;
-            sale.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Eileen Jones";
-            contact.addressLine1 = "3 Main St.";
-            contact.city = "Bloomfield";
-            contact.state = "CT";
-            contact.zip = "06002";
-            contact.country = countryTypeEnum.US;
-            sale.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
-            card.number = "6011010000000003";
-            card.expDate = "0312";
-            card.cardValidationNum = "758";
-            sale.card = card;
-
-            var response = litle.Sale(sale);
+            var response = Litle.Sale(new sale
+            {
+                orderId = "3",
+                amount = 30030,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Eileen Jones",
+                    addressLine1 = "3 Main St.",
+                    city = "Bloomfield",
+                    state = "CT",
+                    zip = "06002",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.DI,
+                    number = "6011010000000003",
+                    expDate = "0312",
+                    cardValidationNum = "758"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("33333", response.authCode);
             Assert.AreEqual("10", response.fraudResult.avsResult);
             Assert.AreEqual("M", response.fraudResult.cardValidationResult);
 
-            var credit = new credit();
-            credit.litleTxnId = response.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void test4Auth()
+        public void Test4Auth()
         {
-            var authorization = new authorization();
-            authorization.orderId = "4";
-            authorization.amount = 40040;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Bob Black";
-            contact.addressLine1 = "4 Main St.";
-            contact.city = "Laurel";
-            contact.state = "MD";
-            contact.zip = "20708";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
-            card.number = "375001000000005";
-            card.expDate = "0412";
-            card.cardValidationNum = "758";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "4",
+                amount = 40040,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Bob Black",
+                    addressLine1 = "4 Main St.",
+                    city = "Laurel",
+                    state = "MD",
+                    zip = "20708",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.AX,
+                    number = "375001000000005",
+                    expDate = "0412",
+                    cardValidationNum = "758"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("44444", response.authCode);
             Assert.AreEqual("12", response.fraudResult.avsResult);
 
-            var capture = new capture();
-            capture.litleTxnId = response.litleTxnId;
-            var captureresponse = litle.Capture(capture);
+            var captureresponse = Litle.Capture(new capture {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", captureresponse.response);
             Assert.AreEqual("Approved", captureresponse.message);
 
-            var credit = new credit();
-            credit.litleTxnId = captureresponse.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = captureresponse.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void test4AVS()
+        public void Test4Avs()
         {
-            var authorization = new authorization();
-            authorization.orderId = "4";
-            authorization.amount = 0;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Bob Black";
-            contact.addressLine1 = "4 Main St.";
-            contact.city = "Laurel";
-            contact.state = "MD";
-            contact.zip = "20708";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
-            card.number = "375001000000005";
-            card.expDate = "0412";
-            card.cardValidationNum = "758";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "4",
+                amount = 0,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Bob Black",
+                    addressLine1 = "4 Main St.",
+                    city = "Laurel",
+                    state = "MD",
+                    zip = "20708",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.AX,
+                    number = "375001000000005",
+                    expDate = "0412",
+                    cardValidationNum = "758"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("44444", response.authCode);
@@ -482,107 +452,97 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test4Sale()
+        public void Test4Sale()
         {
-            var sale = new sale();
-            sale.orderId = "4";
-            sale.amount = 40040;
-            sale.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Bob Black";
-            contact.addressLine1 = "4 Main St.";
-            contact.city = "Laurel";
-            contact.state = "MD";
-            contact.zip = "20708";
-            contact.country = countryTypeEnum.US;
-            sale.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
-            card.number = "375001000000005";
-            card.expDate = "0412";
-            card.cardValidationNum = "758";
-            sale.card = card;
-
-            var response = litle.Sale(sale);
+            var response = Litle.Sale(new sale
+            {
+                orderId = "4",
+                amount = 40040,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Bob Black",
+                    addressLine1 = "4 Main St.",
+                    city = "Laurel",
+                    state = "MD",
+                    zip = "20708",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.AX,
+                    number = "375001000000005",
+                    expDate = "0412",
+                    cardValidationNum = "758"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("44444", response.authCode);
             Assert.AreEqual("12", response.fraudResult.avsResult);
 
-            var credit = new credit();
-            credit.litleTxnId = response.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void test5Auth()
+        public void Test5Auth()
         {
-            var authorization = new authorization();
-            authorization.orderId = "5";
-            authorization.amount = 50050;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010200000007";
-            card.expDate = "0512";
-            card.cardValidationNum = "463";
-            authorization.card = card;
-            var authenticationvalue = new fraudCheckType();
-            authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-            authorization.cardholderAuthentication = authenticationvalue;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "5",
+                amount = 50050,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010200000007",
+                    expDate = "0512",
+                    cardValidationNum = "463"
+                },
+                cardholderAuthentication = new fraudCheckType {authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA="}
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("55555 ", response.authCode);
             Assert.AreEqual("32", response.fraudResult.avsResult);
             Assert.AreEqual("N", response.fraudResult.cardValidationResult);
 
-            var capture = new capture();
-            capture.litleTxnId = response.litleTxnId;
-            var captureresponse = litle.Capture(capture);
+            var captureresponse = Litle.Capture(new capture {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", captureresponse.response);
             Assert.AreEqual("Approved", captureresponse.message);
 
-            var credit = new credit();
-            credit.litleTxnId = captureresponse.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = captureresponse.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void test5AVS()
+        public void Test5Avs()
         {
-            var authorization = new authorization();
-            authorization.orderId = "5";
-            authorization.amount = 0;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010200000007";
-            card.expDate = "0512";
-            card.cardValidationNum = "463";
-            authorization.card = card;
-            var authenticationvalue = new fraudCheckType();
-            authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-            authorization.cardholderAuthentication = authenticationvalue;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "5",
+                amount = 0,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010200000007",
+                    expDate = "0512",
+                    cardValidationNum = "463"
+                },
+                cardholderAuthentication = new fraudCheckType {authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA="}
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("55555 ", response.authCode);
@@ -591,65 +551,62 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test5Sale()
+        public void Test5Sale()
         {
-            var sale = new sale();
-            sale.orderId = "5";
-            sale.amount = 50050;
-            sale.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010200000007";
-            card.expDate = "0512";
-            card.cardValidationNum = "463";
-            sale.card = card;
-            var authenticationvalue = new fraudCheckType();
-            authenticationvalue.authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA=";
-            sale.cardholderAuthentication = authenticationvalue;
-
-            var response = litle.Sale(sale);
+            var response = Litle.Sale(new sale
+            {
+                orderId = "5",
+                amount = 50050,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010200000007",
+                    expDate = "0512",
+                    cardValidationNum = "463"
+                },
+                cardholderAuthentication = new fraudCheckType {authenticationValue = "BwABBJQ1AgAAAAAgJDUCAAAAAAA="}
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("55555 ", response.authCode);
             Assert.AreEqual("32", response.fraudResult.avsResult);
             Assert.AreEqual("N", response.fraudResult.cardValidationResult);
 
-            var credit = new credit();
-            credit.litleTxnId = response.litleTxnId;
-            var creditResponse = litle.Credit(credit);
+            var creditResponse = Litle.Credit(new credit {litleTxnId = response.litleTxnId});
             Assert.AreEqual("000", creditResponse.response);
             Assert.AreEqual("Approved", creditResponse.message);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = creditResponse.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = creditResponse.litleTxnId});
             Assert.AreEqual("000", voidResponse.response);
             Assert.AreEqual("Approved", voidResponse.message);
         }
 
         [Test]
-        public void test6Auth()
+        public void Test6Auth()
         {
-            var authorization = new authorization();
-            authorization.orderId = "6";
-            authorization.amount = 60060;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Joe Green";
-            contact.addressLine1 = "6 Main St.";
-            contact.city = "Derry";
-            contact.state = "NH";
-            contact.zip = "03038";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010100000008";
-            card.expDate = "0612";
-            card.cardValidationNum = "992";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "6",
+                amount = 60060,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Joe Green",
+                    addressLine1 = "6 Main St.",
+                    city = "Derry",
+                    state = "NH",
+                    zip = "03038",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010100000008",
+                    expDate = "0612",
+                    cardValidationNum = "992"
+                }
+            });
             Assert.AreEqual("110", response.response);
             Assert.AreEqual("Insufficient Funds", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
@@ -657,63 +614,65 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test6Sale()
+        public void Test6Sale()
         {
-            var sale = new sale();
-            sale.orderId = "6";
-            sale.amount = 60060;
-            sale.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Joe Green";
-            contact.addressLine1 = "6 Main St.";
-            contact.city = "Derry";
-            contact.state = "NH";
-            contact.zip = "03038";
-            contact.country = countryTypeEnum.US;
-            sale.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010100000008";
-            card.expDate = "0612";
-            card.cardValidationNum = "992";
-            sale.card = card;
-
-            var response = litle.Sale(sale);
+            var response = Litle.Sale(new sale
+            {
+                orderId = "6",
+                amount = 60060,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Joe Green",
+                    addressLine1 = "6 Main St.",
+                    city = "Derry",
+                    state = "NH",
+                    zip = "03038",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010100000008",
+                    expDate = "0612",
+                    cardValidationNum = "992"
+                }
+            });
             Assert.AreEqual("110", response.response);
             Assert.AreEqual("Insufficient Funds", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
             Assert.AreEqual("P", response.fraudResult.cardValidationResult);
 
-            var newvoid = new voidTxn();
-            newvoid.litleTxnId = response.litleTxnId;
-            var voidResponse = litle.DoVoid(newvoid);
+            var voidResponse = Litle.DoVoid(new voidTxn {litleTxnId = response.litleTxnId});
             Assert.AreEqual("360", voidResponse.response);
             Assert.AreEqual("No transaction found with specified litleTxnId", voidResponse.message);
         }
 
         [Test]
-        public void test7Auth()
+        public void Test7Auth()
         {
-            var authorization = new authorization();
-            authorization.orderId = "7";
-            authorization.amount = 70070;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Jane Murray";
-            contact.addressLine1 = "7 Main St.";
-            contact.city = "Amesbury";
-            contact.state = "MA";
-            contact.zip = "01913";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5112010100000002";
-            card.expDate = "0712";
-            card.cardValidationNum = "251";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "7",
+                amount = 70070,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Jane Murray",
+                    addressLine1 = "7 Main St.",
+                    city = "Amesbury",
+                    state = "MA",
+                    zip = "01913",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5112010100000002",
+                    expDate = "0712",
+                    cardValidationNum = "251"
+                }
+            });
             Assert.AreEqual("301", response.response);
             Assert.AreEqual("Invalid Account Number", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
@@ -721,28 +680,30 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test7AVS()
+        public void Test7Avs()
         {
-            var authorization = new authorization();
-            authorization.orderId = "7";
-            authorization.amount = 0;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Jane Murray";
-            contact.addressLine1 = "7 Main St.";
-            contact.city = "Amesbury";
-            contact.state = "MA";
-            contact.zip = "01913";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5112010100000002";
-            card.expDate = "0712";
-            card.cardValidationNum = "251";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "7",
+                amount = 0,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Jane Murray",
+                    addressLine1 = "7 Main St.",
+                    city = "Amesbury",
+                    state = "MA",
+                    zip = "01913",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5112010100000002",
+                    expDate = "0712",
+                    cardValidationNum = "251"
+                }
+            });
             Assert.AreEqual("301", response.response);
             Assert.AreEqual("Invalid Account Number", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
@@ -750,28 +711,30 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test7Sale()
+        public void Test7Sale()
         {
-            var sale = new sale();
-            sale.orderId = "7";
-            sale.amount = 70070;
-            sale.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Jane Murray";
-            contact.addressLine1 = "7 Main St.";
-            contact.city = "Amesbury";
-            contact.state = "MA";
-            contact.zip = "01913";
-            contact.country = countryTypeEnum.US;
-            sale.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5112010100000002";
-            card.expDate = "0712";
-            card.cardValidationNum = "251";
-            sale.card = card;
-
-            var response = litle.Sale(sale);
+            var response = Litle.Sale(new sale
+            {
+                orderId = "7",
+                amount = 70070,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Jane Murray",
+                    addressLine1 = "7 Main St.",
+                    city = "Amesbury",
+                    state = "MA",
+                    zip = "01913",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5112010100000002",
+                    expDate = "0712",
+                    cardValidationNum = "251"
+                }
+            });
             Assert.AreEqual("301", response.response);
             Assert.AreEqual("Invalid Account Number", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
@@ -779,28 +742,30 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test8Auth()
+        public void Test8Auth()
         {
-            var authorization = new authorization();
-            authorization.orderId = "8";
-            authorization.amount = 80080;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Mark Johnson";
-            contact.addressLine1 = "8 Main St.";
-            contact.city = "Manchester";
-            contact.state = "NH";
-            contact.zip = "03101";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
-            card.number = "6011010100000002";
-            card.expDate = "0812";
-            card.cardValidationNum = "184";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "8",
+                amount = 80080,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Mark Johnson",
+                    addressLine1 = "8 Main St.",
+                    city = "Manchester",
+                    state = "NH",
+                    zip = "03101",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.DI,
+                    number = "6011010100000002",
+                    expDate = "0812",
+                    cardValidationNum = "184"
+                }
+            });
             Assert.AreEqual("123", response.response);
             Assert.AreEqual("Call Discover", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
@@ -808,28 +773,30 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test8AVS()
+        public void Test8Avs()
         {
-            var authorization = new authorization();
-            authorization.orderId = "8";
-            authorization.amount = 0;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Mark Johnson";
-            contact.addressLine1 = "8 Main St.";
-            contact.city = "Manchester";
-            contact.state = "NH";
-            contact.zip = "03101";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
-            card.number = "6011010100000002";
-            card.expDate = "0812";
-            card.cardValidationNum = "184";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "8",
+                amount = 0,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Mark Johnson",
+                    addressLine1 = "8 Main St.",
+                    city = "Manchester",
+                    state = "NH",
+                    zip = "03101",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.DI,
+                    number = "6011010100000002",
+                    expDate = "0812",
+                    cardValidationNum = "184"
+                }
+            });
             Assert.AreEqual("123", response.response);
             Assert.AreEqual("Call Discover", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
@@ -837,28 +804,30 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test8Sale()
+        public void Test8Sale()
         {
-            var sale = new sale();
-            sale.orderId = "8";
-            sale.amount = 80080;
-            sale.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "Mark Johnson";
-            contact.addressLine1 = "8 Main St.";
-            contact.city = "Manchester";
-            contact.state = "NH";
-            contact.zip = "03101";
-            contact.country = countryTypeEnum.US;
-            sale.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
-            card.number = "6011010100000002";
-            card.expDate = "0812";
-            card.cardValidationNum = "184";
-            sale.card = card;
-
-            var response = litle.Sale(sale);
+            var response = Litle.Sale(new sale
+            {
+                orderId = "8",
+                amount = 80080,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "Mark Johnson",
+                    addressLine1 = "8 Main St.",
+                    city = "Manchester",
+                    state = "NH",
+                    zip = "03101",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.DI,
+                    number = "6011010100000002",
+                    expDate = "0812",
+                    cardValidationNum = "184"
+                }
+            });
             Assert.AreEqual("123", response.response);
             Assert.AreEqual("Call Discover", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
@@ -866,164 +835,174 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test9Auth()
+        public void Test9Auth()
         {
-            var authorization = new authorization();
-            authorization.orderId = "9";
-            authorization.amount = 90090;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "James Miller";
-            contact.addressLine1 = "9 Main St.";
-            contact.city = "Boston";
-            contact.state = "MA";
-            contact.zip = "02134";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
-            card.number = "375001010000003";
-            card.expDate = "0912";
-            card.cardValidationNum = "0421";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "9",
+                amount = 90090,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "James Miller",
+                    addressLine1 = "9 Main St.",
+                    city = "Boston",
+                    state = "MA",
+                    zip = "02134",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.AX,
+                    number = "375001010000003",
+                    expDate = "0912",
+                    cardValidationNum = "0421"
+                }
+            });
             Assert.AreEqual("303", response.response);
             Assert.AreEqual("Pick Up Card", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
         }
 
         [Test]
-        public void test9AVS()
+        public void Test9Avs()
         {
-            var authorization = new authorization();
-            authorization.orderId = "9";
-            authorization.amount = 0;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "James Miller";
-            contact.addressLine1 = "9 Main St.";
-            contact.city = "Boston";
-            contact.state = "MA";
-            contact.zip = "02134";
-            contact.country = countryTypeEnum.US;
-            authorization.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
-            card.number = "375001010000003";
-            card.expDate = "0912";
-            card.cardValidationNum = "0421";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "9",
+                amount = 0,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "James Miller",
+                    addressLine1 = "9 Main St.",
+                    city = "Boston",
+                    state = "MA",
+                    zip = "02134",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.AX,
+                    number = "375001010000003",
+                    expDate = "0912",
+                    cardValidationNum = "0421"
+                }
+            });
             Assert.AreEqual("303", response.response);
             Assert.AreEqual("Pick Up Card", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
         }
 
         [Test]
-        public void test9Sale()
+        public void Test9Sale()
         {
-            var sale = new sale();
-            sale.orderId = "9";
-            sale.amount = 90090;
-            sale.orderSource = orderSourceType.ecommerce;
-            var contact = new contact();
-            contact.name = "James Miller";
-            contact.addressLine1 = "9 Main St.";
-            contact.city = "Boston";
-            contact.state = "MA";
-            contact.zip = "02134";
-            contact.country = countryTypeEnum.US;
-            sale.billToAddress = contact;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
-            card.number = "375001010000003";
-            card.expDate = "0912";
-            card.cardValidationNum = "0421";
-            sale.card = card;
-
-            var response = litle.Sale(sale);
+            var response = Litle.Sale(new sale
+            {
+                orderId = "9",
+                amount = 90090,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    name = "James Miller",
+                    addressLine1 = "9 Main St.",
+                    city = "Boston",
+                    state = "MA",
+                    zip = "02134",
+                    country = countryTypeEnum.US
+                },
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.AX,
+                    number = "375001010000003",
+                    expDate = "0912",
+                    cardValidationNum = "0421"
+                }
+            });
             Assert.AreEqual("303", response.response);
             Assert.AreEqual("Pick Up Card", response.message);
             Assert.AreEqual("34", response.fraudResult.avsResult);
         }
 
         [Test]
-        public void test10()
+        public void Test10()
         {
-            var authorization = new authorization();
-            authorization.orderId = "10";
-            authorization.amount = 40000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010140000141";
-            card.expDate = "0912";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "10",
+                amount = 40000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010140000141",
+                    expDate = "0912"
+                },
+                allowPartialAuth = true
+            });
             Assert.AreEqual("010", response.response);
             Assert.AreEqual("Partially Approved", response.message);
             Assert.AreEqual("32000", response.approvedAmount);
         }
 
         [Test]
-        public void test11()
+        public void Test11()
         {
-            var authorization = new authorization();
-            authorization.orderId = "11";
-            authorization.amount = 60000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5112010140000004";
-            card.expDate = "1111";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "11",
+                amount = 60000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5112010140000004",
+                    expDate = "1111"
+                },
+                allowPartialAuth = true
+            });
             Assert.AreEqual("010", response.response);
             Assert.AreEqual("Partially Approved", response.message);
             Assert.AreEqual("48000", response.approvedAmount);
         }
 
         [Test]
-        public void test12()
+        public void Test12()
         {
-            var authorization = new authorization();
-            authorization.orderId = "12";
-            authorization.amount = 50000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.AX;
-            card.number = "375001014000009";
-            card.expDate = "0412";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "12",
+                amount = 50000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.AX,
+                    number = "375001014000009",
+                    expDate = "0412"
+                },
+                allowPartialAuth = true
+            });
             Assert.AreEqual("010", response.response);
             Assert.AreEqual("Partially Approved", response.message);
             Assert.AreEqual("40000", response.approvedAmount);
         }
 
         [Test]
-        public void test13()
+        public void Test13()
         {
-            var authorization = new authorization();
-            authorization.orderId = "13";
-            authorization.amount = 15000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.DI;
-            card.number = "6011010140000004";
-            card.expDate = "0812";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "13",
+                amount = 15000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.DI,
+                    number = "6011010140000004",
+                    expDate = "0812"
+                },
+                allowPartialAuth = true
+            });
             Assert.AreEqual("010", response.response);
             Assert.AreEqual("Partially Approved", response.message);
             Assert.AreEqual("12000", response.approvedAmount);

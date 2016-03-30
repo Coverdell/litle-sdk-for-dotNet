@@ -7,121 +7,113 @@ using NUnit.Framework;
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    internal class TestRFRRequest
+    internal class TestRfrRequest
     {
-        private RFRRequest rfrRequest;
+        #region Setup
 
-        private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";
-        private const string timeRegex = "[0-1][0-9]-[0-3][0-9]-[0-9]{4}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{4}_";
-        private const string batchNameRegex = timeRegex + "[A-Z]{8}";
-        private const string mockFileName = "TheRainbow.xml";
-        private const string mockFilePath = "C:\\Somewhere\\\\Over\\\\" + mockFileName;
+        private RFRRequest _rfrRequest;
 
-        private Mock<litleFile> mockLitleFile;
-        private Mock<litleTime> mockLitleTime;
+        private const string MockFileName = "TheRainbow.xml",
+            MockFilePath = "C:\\Somewhere\\\\Over\\\\" + MockFileName;
+
+        private Mock<litleFile> _mockLitleFile;
+        private Mock<litleTime> _mockLitleTime;
         private IDictionary<string, StringBuilder> _memoryCache;
 
         [TestFixtureSetUp]
-        public void setUp()
+        public void SetUp()
         {
             _memoryCache = new Dictionary<string, StringBuilder>();
-            mockLitleFile = new Mock<litleFile>(_memoryCache);
-            mockLitleTime = new Mock<litleTime>();
+            _mockLitleFile = new Mock<litleFile>(_memoryCache);
+            _mockLitleTime = new Mock<litleTime>();
 
-            mockLitleFile.Setup(
-                litleFile =>
+            _mockLitleFile.Setup(litleFile => 
                     litleFile.createRandomFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
-                        mockLitleTime.Object)).Returns(mockFilePath);
-            mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<string>()))
-                .Returns(mockFilePath);
+                    _mockLitleTime.Object))
+                .Returns(MockFilePath);
+            _mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(MockFilePath, It.IsAny<string>()))
+                .Returns(MockFilePath);
         }
 
         [SetUp]
-        public void setUpBeforeTest()
+        public void SetUpBeforeTest() => _rfrRequest = new RFRRequest(_memoryCache);
+
+        #endregion Setup
+
+        [Test]
+        public void TestInitialization()
         {
-            rfrRequest = new RFRRequest(_memoryCache);
+            _rfrRequest = new RFRRequest(_memoryCache, new Dictionary<string, string>
+            {
+                ["url"] = "https://www.mockurl.com",
+                ["reportGroup"] = "Mock Report Group",
+                ["username"] = "mockUser",
+                ["printxml"] = "false",
+                ["timeout"] = "35",
+                ["proxyHost"] = "www.mockproxy.com",
+                ["merchantId"] = "MOCKID",
+                ["password"] = "mockPassword",
+                ["proxyPort"] = "3000",
+                ["sftpUrl"] = "www.mockftp.com",
+                ["sftpUsername"] = "mockFtpUser",
+                ["sftpPassword"] = "mockFtpPassword",
+                ["knownHostsFile"] = "C:\\MockKnownHostsFile",
+                ["onlineBatchUrl"] = "www.mockbatch.com",
+                ["onlineBatchPort"] = "4000",
+                ["requestDirectory"] = "C:\\MockRequests",
+                ["responseDirectory"] = "C:\\MockResponses"
+            });
+
+            Assert.AreEqual("C:\\MockRequests\\Requests\\", _rfrRequest.getRequestDirectory());
+            Assert.AreEqual("C:\\MockResponses\\Responses\\", _rfrRequest.getResponseDirectory());
+
+            Assert.NotNull(_rfrRequest.getLitleTime());
+            Assert.NotNull(_rfrRequest.getLitleFile());
         }
 
         [Test]
-        public void testInitialization()
+        public void TestSerialize()
         {
-            var mockConfig = new Dictionary<string, string>();
+            _rfrRequest.litleSessionId = 123456789;
+            _rfrRequest.setLitleFile(_mockLitleFile.Object);
+            _rfrRequest.setLitleTime(_mockLitleTime.Object);
 
-            mockConfig["url"] = "https://www.mockurl.com";
-            mockConfig["reportGroup"] = "Mock Report Group";
-            mockConfig["username"] = "mockUser";
-            mockConfig["printxml"] = "false";
-            mockConfig["timeout"] = "35";
-            mockConfig["proxyHost"] = "www.mockproxy.com";
-            mockConfig["merchantId"] = "MOCKID";
-            mockConfig["password"] = "mockPassword";
-            mockConfig["proxyPort"] = "3000";
-            mockConfig["sftpUrl"] = "www.mockftp.com";
-            mockConfig["sftpUsername"] = "mockFtpUser";
-            mockConfig["sftpPassword"] = "mockFtpPassword";
-            mockConfig["knownHostsFile"] = "C:\\MockKnownHostsFile";
-            mockConfig["onlineBatchUrl"] = "www.mockbatch.com";
-            mockConfig["onlineBatchPort"] = "4000";
-            mockConfig["requestDirectory"] = "C:\\MockRequests";
-            mockConfig["responseDirectory"] = "C:\\MockResponses";
+            Assert.AreEqual(MockFilePath, _rfrRequest.Serialize());
 
-            rfrRequest = new RFRRequest(_memoryCache, mockConfig);
-
-            Assert.AreEqual("C:\\MockRequests\\Requests\\", rfrRequest.getRequestDirectory());
-            Assert.AreEqual("C:\\MockResponses\\Responses\\", rfrRequest.getResponseDirectory());
-
-            Assert.NotNull(rfrRequest.getLitleTime());
-            Assert.NotNull(rfrRequest.getLitleFile());
+            _mockLitleFile.Verify(litleFile =>
+                litleFile.AppendLineToFile(MockFilePath, "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">"));
+            _mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(MockFilePath, "\r\n<litleSessionId>123456789</litleSessionId>"));
+            _mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(MockFilePath, "\r\n</RFRRequest>"));
         }
 
         [Test]
-        public void testSerialize()
+        public void TestAccountUpdateFileRequestData()
         {
-            var mockedLitleFile = mockLitleFile.Object;
-            var mockedLitleTime = mockLitleTime.Object;
-
-            rfrRequest.litleSessionId = 123456789;
-            rfrRequest.setLitleFile(mockedLitleFile);
-            rfrRequest.setLitleTime(mockedLitleTime);
-
-            Assert.AreEqual(mockFilePath, rfrRequest.Serialize());
-
-            mockLitleFile.Verify(
-                litleFile =>
-                    litleFile.AppendLineToFile(mockFilePath, "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">"));
-            mockLitleFile.Verify(
-                litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n<litleSessionId>123456789</litleSessionId>"));
-            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n</RFRRequest>"));
-        }
-
-        [Test]
-        public void testAccountUpdateFileRequestData()
-        {
-            var mockConfig = new Dictionary<string, string>();
-
-            mockConfig["url"] = "https://www.mockurl.com";
-            mockConfig["reportGroup"] = "Mock Report Group";
-            mockConfig["username"] = "mockUser";
-            mockConfig["printxml"] = "false";
-            mockConfig["timeout"] = "35";
-            mockConfig["proxyHost"] = "www.mockproxy.com";
-            mockConfig["merchantId"] = "MOCKID";
-            mockConfig["password"] = "mockPassword";
-            mockConfig["proxyPort"] = "3000";
-            mockConfig["sftpUrl"] = "www.mockftp.com";
-            mockConfig["sftpUsername"] = "mockFtpUser";
-            mockConfig["sftpPassword"] = "mockFtpPassword";
-            mockConfig["knownHostsFile"] = "C:\\MockKnownHostsFile";
-            mockConfig["onlineBatchUrl"] = "www.mockbatch.com";
-            mockConfig["onlineBatchPort"] = "4000";
-            mockConfig["requestDirectory"] = "C:\\MockRequests";
-            mockConfig["responseDirectory"] = "C:\\MockResponses";
-
-            var accountUpdateFileRequest = new accountUpdateFileRequestData(mockConfig);
+            const string mockid = "MOCKID";
             var accountUpdateFileRequestDefault = new accountUpdateFileRequestData();
+            var accountUpdateFileRequest = new accountUpdateFileRequestData(new Dictionary<string, string>
+            {
+                ["url"] = "https://www.mockurl.com",
+                ["reportGroup"] = "Mock Report Group",
+                ["username"] = "mockUser",
+                ["printxml"] = "false",
+                ["timeout"] = "35",
+                ["proxyHost"] = "www.mockproxy.com",
+                ["merchantId"] = mockid,
+                ["password"] = "mockPassword",
+                ["proxyPort"] = "3000",
+                ["sftpUrl"] = "www.mockftp.com",
+                ["sftpUsername"] = "mockFtpUser",
+                ["sftpPassword"] = "mockFtpPassword",
+                ["knownHostsFile"] = "C:\\MockKnownHostsFile",
+                ["onlineBatchUrl"] = "www.mockbatch.com",
+                ["onlineBatchPort"] = "4000",
+                ["requestDirectory"] = "C:\\MockRequests",
+                ["responseDirectory"] = "C:\\MockResponses"
+            });
 
             Assert.AreEqual(accountUpdateFileRequestDefault.merchantId, Settings.Default.merchantId);
-            Assert.AreEqual(accountUpdateFileRequest.merchantId, mockConfig["merchantId"]);
+            Assert.AreEqual(accountUpdateFileRequest.merchantId, mockid);
         }
     }
 }

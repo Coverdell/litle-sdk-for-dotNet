@@ -1,54 +1,36 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using Moq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    internal class TestEcheckVerification
+    internal class TestEcheckVerification : LitleOnlineTestBase
     {
-        private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
-
-        [TestFixtureSetUp]
-        public void SetUpLitle()
-        {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
-        }
-
         [Test]
         public void TestMerchantData()
         {
-            var echeckVerification = new echeckVerification();
-            echeckVerification.orderId = "1";
-            echeckVerification.amount = 2;
-            echeckVerification.orderSource = orderSourceType.ecommerce;
-            echeckVerification.billToAddress = new contact();
-            echeckVerification.billToAddress.addressLine1 = "900";
-            echeckVerification.billToAddress.city = "ABC";
-            echeckVerification.billToAddress.state = "MA";
-            echeckVerification.merchantData = new merchantDataType();
-            echeckVerification.merchantData.campaign = "camp";
-            echeckVerification.merchantData.affiliate = "affil";
-            echeckVerification.merchantData.merchantGroupingId = "mgi";
+            SetupCommunications(".*<echeckVerification.*<orderId>1</orderId>.*<amount>2</amount.*<merchantData>.*<campaign>camp</campaign>.*<affiliate>affil</affiliate>.*<merchantGroupingId>mgi</merchantGroupingId>.*</merchantData>.*",
+                "<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            Litle.EcheckVerification(new echeckVerification
+            {
+                orderId = "1",
+                amount = 2,
+                orderSource = orderSourceType.ecommerce,
+                billToAddress = new contact
+                {
+                    addressLine1 = "900",
+                    city = "ABC",
+                    state = "MA"
+                },
+                merchantData = new merchantDataType
+                {
+                    campaign = "camp",
+                    affiliate = "affil",
+                    merchantGroupingId = "mgi"
+                }
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*<echeckVerification.*<orderId>1</orderId>.*<amount>2</amount.*<merchantData>.*<campaign>camp</campaign>.*<affiliate>affil</affiliate>.*<merchantGroupingId>mgi</merchantGroupingId>.*</merchantData>.*",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            litle.EcheckVerification(echeckVerification);
+            //TODO: Write assertions!
         }
     }
 }

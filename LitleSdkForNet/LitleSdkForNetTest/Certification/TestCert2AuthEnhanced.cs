@@ -1,50 +1,43 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using Litle.Sdk.Properties;
 using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Certification
 {
     [TestFixture]
-    internal class TestCert2AuthEnhanced
+    internal class TestCert2AuthEnhanced : LitleOnlineTestBase
     {
-        private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryCache;
-
-        [TestFixtureSetUp]
-        public void setUp()
+        protected override Dictionary<string, string> SetupConfig() => new Dictionary<string, string>
         {
-            _memoryCache = new Dictionary<string, StringBuilder>();
-            var config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "5000");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
-            config.Add("printxml", "true");
-            config.Add("logFile", null);
-            config.Add("neuterAccountNums", null);
-            config.Add("proxyHost", Settings.Default.proxyHost);
-            config.Add("proxyPort", Settings.Default.proxyPort);
-            litle = new LitleOnline(_memoryCache, config);
-        }
+            {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+            {"reportGroup", "Default Report Group"},
+            {"username", "DOTNET"},
+            {"version", "8.13"},
+            {"timeout", "5000"},
+            {"merchantId", "101"},
+            {"password", "TESTCASE"},
+            {"printxml", "true"},
+            {"logFile", null},
+            {"neuterAccountNums", null},
+            {"proxyHost", Settings.Default.proxyHost},
+            {"proxyPort", Settings.Default.proxyPort}
+        };
 
         [Test]
-        public void test14()
+        public void Test14()
         {
-            var authorization = new authorization();
-            authorization.orderId = "14";
-            authorization.amount = 3000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010200000247";
-            card.expDate = "0812";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "14",
+                amount = 3000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010200000247",
+                    expDate = "0812"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
@@ -54,19 +47,20 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test15()
+        public void Test15()
         {
-            var authorization = new authorization();
-            authorization.orderId = "15";
-            authorization.amount = 3000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5500000254444445";
-            card.expDate = "0312";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "15",
+                amount = 3000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5500000254444445",
+                    expDate = "0312"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
@@ -76,19 +70,20 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test16()
+        public void Test16()
         {
-            var authorization = new authorization();
-            authorization.orderId = "16";
-            authorization.amount = 3000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5592106621450897";
-            card.expDate = "0312";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "16",
+                amount = 3000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5592106621450897",
+                    expDate = "0312"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
@@ -98,19 +93,20 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test17()
+        public void Test17()
         {
-            var authorization = new authorization();
-            authorization.orderId = "17";
-            authorization.amount = 3000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5590409551104142";
-            card.expDate = "0312";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "17",
+                amount = 3000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5590409551104142",
+                    expDate = "0312"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
@@ -120,19 +116,20 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test18()
+        public void Test18()
         {
-            var authorization = new authorization();
-            authorization.orderId = "18";
-            authorization.amount = 3000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5587755665222179";
-            card.expDate = "0312";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "18",
+                amount = 3000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5587755665222179",
+                    expDate = "0312"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
@@ -142,19 +139,20 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test19()
+        public void Test19()
         {
-            var authorization = new authorization();
-            authorization.orderId = "19";
-            authorization.amount = 3000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5445840176552850";
-            card.expDate = "0312";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "19",
+                amount = 3000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5445840176552850",
+                    expDate = "0312"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
@@ -164,19 +162,20 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test20()
+        public void Test20()
         {
-            var authorization = new authorization();
-            authorization.orderId = "20";
-            authorization.amount = 3000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5390016478904678";
-            card.expDate = "0312";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "20",
+                amount = 3000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5390016478904678",
+                    expDate = "0312"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(fundingSourceTypeEnum.PREPAID, response.enhancedAuthResponse.fundingSource.type);
@@ -186,258 +185,278 @@ namespace Litle.Sdk.Test.Certification
         }
 
         [Test]
-        public void test21()
+        public void Test21()
         {
-            var authorization = new authorization();
-            authorization.orderId = "21";
-            authorization.amount = 5000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010201000246";
-            card.expDate = "0912";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "21",
+                amount = 5000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010201000246",
+                    expDate = "0912"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(affluenceTypeEnum.AFFLUENT, response.enhancedAuthResponse.affluence);
         }
 
         [Test]
-        public void test22()
+        public void Test22()
         {
-            var authorization = new authorization();
-            authorization.orderId = "22";
-            authorization.amount = 5000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4457010202000245";
-            card.expDate = "1111";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "22",
+                amount = 5000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4457010202000245",
+                    expDate = "1111"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(affluenceTypeEnum.MASSAFFLUENT, response.enhancedAuthResponse.affluence);
         }
 
         [Test]
-        public void test23()
+        public void Test23()
         {
-            var authorization = new authorization();
-            authorization.orderId = "23";
-            authorization.amount = 5000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5112010201000109";
-            card.expDate = "0412";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "23",
+                amount = 5000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5112010201000109",
+                    expDate = "0412"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(affluenceTypeEnum.AFFLUENT, response.enhancedAuthResponse.affluence);
         }
 
         [Test]
-        public void test24()
+        public void Test24()
         {
-            var authorization = new authorization();
-            authorization.orderId = "24";
-            authorization.amount = 5000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5112010202000108";
-            card.expDate = "0812";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "24",
+                amount = 5000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5112010202000108",
+                    expDate = "0812"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual(affluenceTypeEnum.MASSAFFLUENT, response.enhancedAuthResponse.affluence);
         }
 
         [Test]
-        public void test25()
+        public void Test25()
         {
-            var authorization = new authorization();
-            authorization.orderId = "25";
-            authorization.amount = 5000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100204446270000";
-            card.expDate = "1112";
-            authorization.card = card;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "25",
+                amount = 5000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100204446270000",
+                    expDate = "1112"
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
             Assert.AreEqual("BRA", response.enhancedAuthResponse.issuerCountry);
         }
 
         [Test]
-        public void test26()
+        public void Test26()
         {
-            var authorization = new authorization();
-            authorization.orderId = "26";
-            authorization.amount = 18698;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5194560012341234";
-            card.expDate = "1212";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-            var healthcareiias = new healthcareIIAS();
-            var healthcareamounts = new healthcareAmounts();
-            healthcareamounts.totalHealthcareAmount = 20000;
-            healthcareiias.healthcareAmounts = healthcareamounts;
-            healthcareiias.IIASFlag = IIASFlagType.Y;
-            authorization.healthcareIIAS = healthcareiias;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "26",
+                amount = 18698,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5194560012341234",
+                    expDate = "1212"
+                },
+                allowPartialAuth = true,
+                healthcareIIAS = new healthcareIIAS
+                {
+                    healthcareAmounts = new healthcareAmounts {totalHealthcareAmount = 20000},
+                    IIASFlag = IIASFlagType.Y
+                }
+            });
             Assert.AreEqual("341", response.response);
             Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
         [Test]
-        public void test27()
+        public void Test27()
         {
-            var authorization = new authorization();
-            authorization.orderId = "27";
-            authorization.amount = 18698;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5194560012341234";
-            card.expDate = "1212";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-            var healthcareiias = new healthcareIIAS();
-            var healthcareamounts = new healthcareAmounts();
-            healthcareamounts.totalHealthcareAmount = 15000;
-            healthcareamounts.RxAmount = 16000;
-            healthcareiias.healthcareAmounts = healthcareamounts;
-            healthcareiias.IIASFlag = IIASFlagType.Y;
-            authorization.healthcareIIAS = healthcareiias;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "27",
+                amount = 18698,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5194560012341234",
+                    expDate = "1212"
+                },
+                allowPartialAuth = true,
+                healthcareIIAS = new healthcareIIAS
+                {
+                    healthcareAmounts = new healthcareAmounts
+                    {
+                        totalHealthcareAmount = 15000,
+                        RxAmount = 16000
+                    },
+                    IIASFlag = IIASFlagType.Y
+                }
+            });
             Assert.AreEqual("341", response.response);
             Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
         [Test]
-        public void test28()
+        public void Test28()
         {
-            var authorization = new authorization();
-            authorization.orderId = "28";
-            authorization.amount = 15000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.MC;
-            card.number = "5194560012341234";
-            card.expDate = "1212";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-            var healthcareiias = new healthcareIIAS();
-            var healthcareamounts = new healthcareAmounts();
-            healthcareamounts.totalHealthcareAmount = 15000;
-            healthcareamounts.RxAmount = 3698;
-            healthcareiias.healthcareAmounts = healthcareamounts;
-            healthcareiias.IIASFlag = IIASFlagType.Y;
-            authorization.healthcareIIAS = healthcareiias;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "28",
+                amount = 15000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.MC,
+                    number = "5194560012341234",
+                    expDate = "1212"
+                },
+                allowPartialAuth = true,
+                healthcareIIAS = new healthcareIIAS
+                {
+                    healthcareAmounts = new healthcareAmounts
+                    {
+                        totalHealthcareAmount = 15000,
+                        RxAmount = 3698
+                    },
+                    IIASFlag = IIASFlagType.Y
+                }
+            });
             Assert.AreEqual("000", response.response);
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void test29()
+        public void Test29()
         {
-            var authorization = new authorization();
-            authorization.orderId = "29";
-            authorization.amount = 18699;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4024720001231239";
-            card.expDate = "1212";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-            var healthcareiias = new healthcareIIAS();
-            var healthcareamounts = new healthcareAmounts();
-            healthcareamounts.totalHealthcareAmount = 31000;
-            healthcareamounts.RxAmount = 1000;
-            healthcareamounts.visionAmount = 19901;
-            healthcareamounts.clinicOtherAmount = 9050;
-            healthcareamounts.dentalAmount = 1049;
-            healthcareiias.healthcareAmounts = healthcareamounts;
-            healthcareiias.IIASFlag = IIASFlagType.Y;
-            authorization.healthcareIIAS = healthcareiias;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "29",
+                amount = 18699,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4024720001231239",
+                    expDate = "1212"
+                },
+                allowPartialAuth = true,
+                healthcareIIAS = new healthcareIIAS
+                {
+                    healthcareAmounts = new healthcareAmounts
+                    {
+                        totalHealthcareAmount = 31000,
+                        RxAmount = 1000,
+                        visionAmount = 19901,
+                        clinicOtherAmount = 9050,
+                        dentalAmount = 1049
+                    },
+                    IIASFlag = IIASFlagType.Y
+                }
+            });
             Assert.AreEqual("341", response.response);
             Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
         [Test]
-        public void test30()
+        public void Test30()
         {
-            var authorization = new authorization();
-            authorization.orderId = "30";
-            authorization.amount = 20000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4024720001231239";
-            card.expDate = "1212";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-            var healthcareiias = new healthcareIIAS();
-            var healthcareamounts = new healthcareAmounts();
-            healthcareamounts.totalHealthcareAmount = 20000;
-            healthcareamounts.RxAmount = 1000;
-            healthcareamounts.visionAmount = 19901;
-            healthcareamounts.clinicOtherAmount = 9050;
-            healthcareamounts.dentalAmount = 1049;
-            healthcareiias.healthcareAmounts = healthcareamounts;
-            healthcareiias.IIASFlag = IIASFlagType.Y;
-            authorization.healthcareIIAS = healthcareiias;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "30",
+                amount = 20000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4024720001231239",
+                    expDate = "1212"
+                },
+                allowPartialAuth = true,
+                healthcareIIAS = new healthcareIIAS
+                {
+                    healthcareAmounts = new healthcareAmounts
+                    {
+                        totalHealthcareAmount = 20000,
+                        RxAmount = 1000,
+                        visionAmount = 19901,
+                        clinicOtherAmount = 9050,
+                        dentalAmount = 1049
+                    },
+                    IIASFlag = IIASFlagType.Y
+                }
+            });
             Assert.AreEqual("341", response.response);
             Assert.AreEqual("Invalid healthcare amounts", response.message);
         }
 
         [Test]
-        public void test31()
+        public void Test31()
         {
-            var authorization = new authorization();
-            authorization.orderId = "31";
-            authorization.amount = 25000;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4024720001231239";
-            card.expDate = "1212";
-            authorization.card = card;
-            authorization.allowPartialAuth = true;
-            var healthcareiias = new healthcareIIAS();
-            var healthcareamounts = new healthcareAmounts();
-            healthcareamounts.totalHealthcareAmount = 18699;
-            healthcareamounts.RxAmount = 1000;
-            healthcareamounts.visionAmount = 15099;
-            healthcareiias.healthcareAmounts = healthcareamounts;
-            healthcareiias.IIASFlag = IIASFlagType.Y;
-            authorization.healthcareIIAS = healthcareiias;
-
-            var response = litle.Authorize(authorization);
+            var response = Litle.Authorize(new authorization
+            {
+                orderId = "31",
+                amount = 25000,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4024720001231239",
+                    expDate = "1212"
+                },
+                allowPartialAuth = true,
+                healthcareIIAS = new healthcareIIAS
+                {
+                    healthcareAmounts = new healthcareAmounts
+                    {
+                        totalHealthcareAmount = 18699,
+                        RxAmount = 1000,
+                        visionAmount = 15099
+                    },
+                    IIASFlag = IIASFlagType.Y
+                }
+            });
             Assert.AreEqual("010", response.response);
             Assert.AreEqual("Partially Approved", response.message);
             Assert.AreEqual("18699", response.approvedAmount);
