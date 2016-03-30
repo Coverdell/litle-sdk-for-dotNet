@@ -9,30 +9,30 @@ namespace Litle.Sdk
 {
     public class LitleOnline : ILitleOnline
     {
-        private readonly Dictionary<string, string> config;
-        private Communications communication;
-        private readonly IDictionary<string, StringBuilder> _cache;
+        internal static readonly Dictionary<string, string> DefaultConfig = new Dictionary<string, string>
+        {
+            ["url"] = Settings.Default.url,
+            ["reportGroup"] = Settings.Default.reportGroup,
+            ["username"] = Settings.Default.username,
+            ["printxml"] = Settings.Default.printxml,
+            ["timeout"] = Settings.Default.timeout,
+            ["proxyHost"] = Settings.Default.proxyHost,
+            ["merchantId"] = Settings.Default.merchantId,
+            ["password"] = Settings.Default.password,
+            ["proxyPort"] = Settings.Default.proxyPort,
+            ["logFile"] = Settings.Default.logFile,
+            ["neuterAccountNums"] = Settings.Default.neuterAccountNums
+        };
+
+        private readonly Dictionary<string, string> _config;
+        private Communications _communications;
 
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
          */
-
-        public LitleOnline(IDictionary<string, StringBuilder> cache)
+        public LitleOnline()
         {
-            _cache = cache;
-            config = new Dictionary<string, string>();
-            config["url"] = Settings.Default.url;
-            config["reportGroup"] = Settings.Default.reportGroup;
-            config["username"] = Settings.Default.username;
-            config["printxml"] = Settings.Default.printxml;
-            config["timeout"] = Settings.Default.timeout;
-            config["proxyHost"] = Settings.Default.proxyHost;
-            config["merchantId"] = Settings.Default.merchantId;
-            config["password"] = Settings.Default.password;
-            config["proxyPort"] = Settings.Default.proxyPort;
-            config["logFile"] = Settings.Default.logFile;
-            config["neuterAccountNums"] = Settings.Default.neuterAccountNums;
-            communication = new Communications(_cache);
+            _config = DefaultConfig;
         }
 
         /**
@@ -52,168 +52,179 @@ namespace Litle.Sdk
          * printxml (possible values "true" and "false" - defaults to false)
          */
 
-        public LitleOnline(IDictionary<string, StringBuilder> cache, Dictionary<string, string> config)
+        public LitleOnline(IDictionary<string, StringBuilder> cache) : this(new Communications(cache))
         {
-            _cache = cache;
-            this.config = config;
-            communication = new Communications(_cache);
+        }
+        public LitleOnline(Communications communications) : this()
+        {
+            _communications = communications;
         }
 
-        public void setCommunication(Communications communication)
+        public LitleOnline(Dictionary<string, string> config)
         {
-            this.communication = communication;
+            _config = config;
+        }
+        public LitleOnline(IDictionary<string, StringBuilder> cache, Dictionary<string, string> config)
+        {
+            _config = config;
+            _communications = new Communications(cache);
+        }
+
+        public void setCommunication(Communications communications)
+        {
+            _communications = communications;
         }
 
         public authorizationResponse Authorize(authorization auth)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(auth);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(auth);
             request.authorization = auth;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var authResponse = response.authorizationResponse;
             return authResponse;
         }
 
         public authReversalResponse AuthReversal(authReversal reversal)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(reversal);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(reversal);
             request.authReversal = reversal;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var reversalResponse = response.authReversalResponse;
             return reversalResponse;
         }
 
         public captureResponse Capture(capture capture)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(capture);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(capture);
             request.capture = capture;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var captureResponse = response.captureResponse;
             return captureResponse;
         }
 
         public captureGivenAuthResponse CaptureGivenAuth(captureGivenAuth captureGivenAuth)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(captureGivenAuth);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(captureGivenAuth);
             request.captureGivenAuth = captureGivenAuth;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var captureGivenAuthResponse = response.captureGivenAuthResponse;
             return captureGivenAuthResponse;
         }
 
         public creditResponse Credit(credit credit)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(credit);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(credit);
             request.credit = credit;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var creditResponse = response.creditResponse;
             return creditResponse;
         }
 
         public echeckCreditResponse EcheckCredit(echeckCredit echeckCredit)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(echeckCredit);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(echeckCredit);
             request.echeckCredit = echeckCredit;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var echeckCreditResponse = response.echeckCreditResponse;
             return echeckCreditResponse;
         }
 
         public echeckRedepositResponse EcheckRedeposit(echeckRedeposit echeckRedeposit)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(echeckRedeposit);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(echeckRedeposit);
             request.echeckRedeposit = echeckRedeposit;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var echeckRedepositResponse = response.echeckRedepositResponse;
             return echeckRedepositResponse;
         }
 
         public echeckSalesResponse EcheckSale(echeckSale echeckSale)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(echeckSale);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(echeckSale);
             request.echeckSale = echeckSale;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var echeckSalesResponse = response.echeckSalesResponse;
             return echeckSalesResponse;
         }
 
         public echeckVerificationResponse EcheckVerification(echeckVerification echeckVerification)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(echeckVerification);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(echeckVerification);
             request.echeckVerification = echeckVerification;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var echeckVerificationResponse = response.echeckVerificationResponse;
             return echeckVerificationResponse;
         }
 
         public forceCaptureResponse ForceCapture(forceCapture forceCapture)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(forceCapture);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(forceCapture);
             request.forceCapture = forceCapture;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var forceCaptureResponse = response.forceCaptureResponse;
             return forceCaptureResponse;
         }
 
         public saleResponse Sale(sale sale)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(sale);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(sale);
             request.sale = sale;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var saleResponse = response.saleResponse;
             return saleResponse;
         }
 
         public registerTokenResponse RegisterToken(registerTokenRequestType tokenRequest)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(tokenRequest);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(tokenRequest);
             request.registerTokenRequest = tokenRequest;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var registerTokenResponse = response.registerTokenResponse;
             return registerTokenResponse;
         }
 
         public litleOnlineResponseTransactionResponseVoidResponse DoVoid(voidTxn v)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(v);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(v);
             request.voidTxn = v;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var voidResponse = response.voidResponse;
             return voidResponse;
         }
 
         public litleOnlineResponseTransactionResponseEcheckVoidResponse EcheckVoid(echeckVoid v)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(v);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(v);
             request.echeckVoid = v;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var voidResponse = response.echeckVoidResponse;
             return voidResponse;
         }
@@ -221,181 +232,180 @@ namespace Litle.Sdk
         public updateCardValidationNumOnTokenResponse UpdateCardValidationNumOnToken(
             updateCardValidationNumOnToken updateCardValidationNumOnToken)
         {
-            var request = createLitleOnlineRequest();
-            fillInReportGroup(updateCardValidationNumOnToken);
+            var request = CreateLitleOnlineRequest();
+            FillInReportGroup(updateCardValidationNumOnToken);
             request.updateCardValidationNumOnToken = updateCardValidationNumOnToken;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var updateResponse = response.updateCardValidationNumOnTokenResponse;
             return updateResponse;
         }
 
         public cancelSubscriptionResponse CancelSubscription(cancelSubscription cancelSubscription)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.cancelSubscription = cancelSubscription;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var cancelResponse = response.cancelSubscriptionResponse;
             return cancelResponse;
         }
 
         public updateSubscriptionResponse UpdateSubscription(updateSubscription updateSubscription)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.updateSubscription = updateSubscription;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var updateResponse = response.updateSubscriptionResponse;
             return updateResponse;
         }
 
         public activateResponse Activate(activate activate)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.activate = activate;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var activateResponse = response.activateResponse;
             return activateResponse;
         }
 
         public deactivateResponse Deactivate(deactivate deactivate)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.deactivate = deactivate;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var deactivateResponse = response.deactivateResponse;
             return deactivateResponse;
         }
 
         public loadResponse Load(load load)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.load = load;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var loadResponse = response.loadResponse;
             return loadResponse;
         }
 
         public unloadResponse Unload(unload unload)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.unload = unload;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var unloadResponse = response.unloadResponse;
             return unloadResponse;
         }
 
         public balanceInquiryResponse BalanceInquiry(balanceInquiry balanceInquiry)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.balanceInquiry = balanceInquiry;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var balanceInquiryResponse = response.balanceInquiryResponse;
             return balanceInquiryResponse;
         }
 
         public createPlanResponse CreatePlan(createPlan createPlan)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.createPlan = createPlan;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var createPlanResponse = response.createPlanResponse;
             return createPlanResponse;
         }
 
         public updatePlanResponse UpdatePlan(updatePlan updatePlan)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.updatePlan = updatePlan;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var updatePlanResponse = response.updatePlanResponse;
             return updatePlanResponse;
         }
 
         public refundReversalResponse RefundReversal(refundReversal refundReversal)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.refundReversal = refundReversal;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var refundReversalResponse = response.refundReversalResponse;
             return refundReversalResponse;
         }
 
         public depositReversalResponse DepositReversal(depositReversal depositReversal)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.depositReversal = depositReversal;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var depositReversalResponse = response.depositReversalResponse;
             return depositReversalResponse;
         }
 
         public activateReversalResponse ActivateReversal(activateReversal activateReversal)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.activateReversal = activateReversal;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var activateReversalResponse = response.activateReversalResponse;
             return activateReversalResponse;
         }
 
         public deactivateReversalResponse DeactivateReversal(deactivateReversal deactivateReversal)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.deactivateReversal = deactivateReversal;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var deactivateReversalResponse = response.deactivateReversalResponse;
             return deactivateReversalResponse;
         }
 
         public loadReversalResponse LoadReversal(loadReversal loadReversal)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.loadReversal = loadReversal;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var loadReversalResponse = response.loadReversalResponse;
             return loadReversalResponse;
         }
 
         public unloadReversalResponse UnloadReversal(unloadReversal unloadReversal)
         {
-            var request = createLitleOnlineRequest();
+            var request = CreateLitleOnlineRequest();
             request.unloadReversal = unloadReversal;
 
-            var response = sendToLitle(request);
+            var response = SendToLitle(request);
             var unloadReversalResponse = response.unloadReversalResponse;
             return unloadReversalResponse;
         }
 
-        private litleOnlineRequest createLitleOnlineRequest()
+        private litleOnlineRequest CreateLitleOnlineRequest() => new litleOnlineRequest
         {
-            var request = new litleOnlineRequest();
-            request.merchantId = config["merchantId"];
-            request.merchantSdk = "DotNet;9.3.2";
-            var authentication = new authentication();
-            authentication.password = config["password"];
-            authentication.user = config["username"];
-            request.authentication = authentication;
-            return request;
-        }
+            merchantId = _config["merchantId"],
+            merchantSdk = "DotNet;9.3.2",
+            authentication = new authentication
+            {
+                password = _config["password"],
+                user = _config["username"]
+            }
+        };
 
-        private litleOnlineResponse sendToLitle(litleOnlineRequest request)
+        private litleOnlineResponse SendToLitle(litleOnlineRequest request)
         {
             var xmlRequest = request.Serialize();
-            var xmlResponse = communication.HttpPost(xmlRequest, config);
+            var xmlResponse = _communications.HttpPost(xmlRequest, _config);
             try
             {
                 var litleOnlineResponse = DeserializeObject(xmlResponse);
@@ -427,19 +437,19 @@ namespace Litle.Sdk
             return i;
         } // deserialize the object
 
-        private void fillInReportGroup(transactionTypeWithReportGroup txn)
+        private void FillInReportGroup(transactionTypeWithReportGroup txn)
         {
             if (txn.reportGroup == null)
             {
-                txn.reportGroup = config["reportGroup"];
+                txn.reportGroup = _config["reportGroup"];
             }
         }
 
-        private void fillInReportGroup(transactionTypeWithReportGroupAndPartial txn)
+        private void FillInReportGroup(transactionTypeWithReportGroupAndPartial txn)
         {
             if (txn.reportGroup == null)
             {
-                txn.reportGroup = config["reportGroup"];
+                txn.reportGroup = _config["reportGroup"];
             }
         }
     }

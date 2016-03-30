@@ -46,13 +46,7 @@ namespace Litle.Sdk
 
     public abstract class methodOfPaymentSerializer
     {
-        public static string Serialize(methodOfPaymentTypeEnum mop)
-        {
-            if (mop == methodOfPaymentTypeEnum.Item)
-            {
-                return "";
-            }
-            return mop.ToString();
-        }
+        public static string Serialize(methodOfPaymentTypeEnum mop) => 
+            mop == methodOfPaymentTypeEnum.Item ? string.Empty : mop.ToString();
     }
 }

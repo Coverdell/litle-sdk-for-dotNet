@@ -34,3 +34,4 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("9.3.2")]
 [assembly: AssemblyFileVersion("9.3.2")]
+[assembly: InternalsVisibleTo("LitleSdkForDotNetTest")]
