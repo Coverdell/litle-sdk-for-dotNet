@@ -30,44 +30,50 @@ namespace Litle.Sdk
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
          */
-        public LitleOnline()
-        {
-            _config = DefaultConfig;
-        }
-
-        /**
-         * Construct a LitleOnline specifying the configuration in code.  This should be used by integration that have another way
-         * to specify their configuration settings or where different configurations are needed for different instances of LitleOnline.
-         * 
-         * Properties that *must* be set are:
-         * url (eg https://payments.litle.com/vap/communicator/online)
-         * reportGroup (eg "Default Report Group")
-         * username
-         * merchantId
-         * password
-         * timeout (in seconds)
-         * Optional properties are:
-         * proxyHost
-         * proxyPort
-         * printxml (possible values "true" and "false" - defaults to false)
-         */
-
-        public LitleOnline(IDictionary<string, StringBuilder> cache) : this(new Communications(cache))
+        public LitleOnline() : this(DefaultConfig)
         {
         }
-        public LitleOnline(Communications communications) : this()
+
+        public LitleOnline(IDictionary<string, StringBuilder> cache) : this(cache, DefaultConfig)
         {
+        }
+
+        public LitleOnline(Communications communications) : this(communications, DefaultConfig)
+        {
+        }
+
+        /// <summary>
+        ///     Construct a LitleOnline specifying the configuration in code.  This should be used by integration that have another way
+        ///     to specify their configuration settings or where different configurations are needed for different instances of LitleOnline.
+        /// </summary>
+        /// 
+        /// <param name="config">
+        ///     Properties that *must* be set are:
+        ///         url (eg https://payments.litle.com/vap/communicator/online)
+        ///         reportGroup (eg "Default Report Group")
+        ///         username
+        ///         merchantId
+        ///         password
+        ///         timeout (in seconds)
+        ///     Optional properties are:
+        ///         proxyHost
+        ///         proxyPort
+        ///         printxml (possible values "true" and "false" - defaults to false)
+        /// </param>
+        public LitleOnline(Dictionary<string, string> config) 
+            : this(new Dictionary<string, StringBuilder>(), config)
+        {
+        }
+
+        public LitleOnline(IDictionary<string, StringBuilder> cache, Dictionary<string, string> config) 
+            : this(new Communications(cache), config)
+        {
+        }
+
+        public LitleOnline(Communications communications, Dictionary<string, string> config)
+        {
+            _config = config;
             _communications = communications;
-        }
-
-        public LitleOnline(Dictionary<string, string> config)
-        {
-            _config = config;
-        }
-        public LitleOnline(IDictionary<string, StringBuilder> cache, Dictionary<string, string> config)
-        {
-            _config = config;
-            _communications = new Communications(cache);
         }
 
         public void setCommunication(Communications communications)
