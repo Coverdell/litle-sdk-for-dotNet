@@ -5,9 +5,6 @@
     <Setting Name="reportGroup" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Default Report Group</Value>
     </Setting>
-    <Setting Name="printxml" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">true</Value>
-    </Setting>
     <Setting Name="timeout" Type="System.String" Scope="Application">
       <Value Profile="(Default)">500</Value>
     </Setting>
@@ -34,12 +31,6 @@
     </Setting>
     <Setting Name="responseDirectory" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Litle\</Value>
-    </Setting>
-    <Setting Name="logFile" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">null</Value>
-    </Setting>
-    <Setting Name="neuterAccountNums" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">true</Value>
     </Setting>
     <Setting Name="url" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://www.testlitle.com/sandbox/communicator/online</Value>

@@ -850,7 +850,6 @@ namespace Litle.Sdk.Test.Functional
                 ["url"] = Settings.Default.url,
                 ["reportGroup"] = Settings.Default.reportGroup,
                 ["username"] = "BATCHSDKA",
-                ["printxml"] = Settings.Default.printxml,
                 ["timeout"] = Settings.Default.timeout,
                 ["proxyHost"] = Settings.Default.proxyHost,
                 ["merchantId"] = "0180",

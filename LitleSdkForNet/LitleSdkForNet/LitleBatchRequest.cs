@@ -12,7 +12,7 @@ namespace Litle.Sdk
         public string merchantId;
         public string reportGroup;
 
-        public Dictionary<string, string> config;
+        public readonly Dictionary<string, string> config;
         private readonly IDictionary<string, StringBuilder> _cache;
 
         public string batchFilePath;
@@ -92,7 +92,6 @@ namespace Litle.Sdk
                 ["url"] = Settings.Default.url,
                 ["reportGroup"] = Settings.Default.reportGroup,
                 ["username"] = Settings.Default.username,
-                ["printxml"] = Settings.Default.printxml,
                 ["timeout"] = Settings.Default.timeout,
                 ["proxyHost"] = Settings.Default.proxyHost,
                 ["merchantId"] = Settings.Default.merchantId,
@@ -1113,7 +1112,6 @@ namespace Litle.Sdk
                 ["url"] = Settings.Default.url,
                 ["reportGroup"] = Settings.Default.reportGroup,
                 ["username"] = Settings.Default.username,
-                ["printxml"] = Settings.Default.printxml,
                 ["timeout"] = Settings.Default.timeout,
                 ["proxyHost"] = Settings.Default.proxyHost,
                 ["merchantId"] = Settings.Default.merchantId,

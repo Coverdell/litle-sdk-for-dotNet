@@ -19,8 +19,6 @@ namespace Litle.Sdk.Test.Functional
             {"printxml", "true"},
             {"proxyHost", Settings.Default.proxyHost},
             {"proxyPort", Settings.Default.proxyPort},
-            {"logFile", Settings.Default.logFile},
-            {"neuterAccountNums", "true"}
         };
 
         [Test]

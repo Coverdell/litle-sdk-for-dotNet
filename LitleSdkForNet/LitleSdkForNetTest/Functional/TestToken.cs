@@ -12,15 +12,12 @@ namespace Litle.Sdk.Test.Functional
             {"url", "https://www.testlitle.com/sandbox/communicator/online"},
             {"reportGroup", "Default Report Group"},
             {"username", "DOTNET"},
-            {"version", "8.13"},
+            {"version", "9.3.2"},
             {"timeout", "5000"},
             {"merchantId", "101"},
             {"password", "TESTCASE"},
-            {"printxml", "true"},
             {"proxyHost", Settings.Default.proxyHost},
             {"proxyPort", Settings.Default.proxyPort},
-            {"logFile", Settings.Default.logFile},
-            {"neuterAccountNums", "true"}
         };
 
         [Test]

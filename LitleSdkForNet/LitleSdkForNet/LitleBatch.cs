@@ -15,7 +15,6 @@ namespace Litle.Sdk
             ["url"] = Settings.Default.url,
             ["reportGroup"] = Settings.Default.reportGroup,
             ["username"] = Settings.Default.username,
-            ["printxml"] = Settings.Default.printxml,
             ["timeout"] = Settings.Default.timeout,
             ["proxyHost"] = Settings.Default.proxyHost,
             ["merchantId"] = Settings.Default.merchantId,
