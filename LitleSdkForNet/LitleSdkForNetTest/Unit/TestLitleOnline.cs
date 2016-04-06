@@ -1,579 +1,401 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-using Moq;
 using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    internal class TestLitleOnline
+    internal class TestLitleOnline : LitleOnlineTestBase
     {
-        private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
-
-        [TestFixtureSetUp]
-        public void SetUpLitle()
-        {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
-        }
-
         [Test]
         public void TestAuth()
         {
-            var authorization = new authorization();
-            authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            SetupCommunications(
+                ".*<litleOnlineRequest.*<authorization.*<card>.*<number>4100000000000002</number>.*</card>.*</authorization>.*",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var authorize = Litle.Authorize(new authorization
+            {
+                reportGroup = "Planets",
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000002",
+                    expDate = "1210"
+                }
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*<litleOnlineRequest.*<authorization.*<card>.*<number>4100000000000002</number>.*</card>.*</authorization>.*",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var authorize = litle.Authorize(authorization);
             Assert.AreEqual(123, authorize.litleTxnId);
         }
 
         [Test]
-        public void testAuthReversal()
+        public void TestAuthReversal()
         {
-            var authreversal = new authReversal();
-            authreversal.litleTxnId = 12345678000;
-            authreversal.amount = 106;
-            authreversal.payPalNotes = "Notes";
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<authReversal.*?<litleTxnId>12345678000</litleTxnId>.*?</authReversal>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authReversalResponse><litleTxnId>123</litleTxnId></authReversalResponse></litleOnlineResponse>");
 
+            var authreversalresponse = Litle.AuthReversal(new authReversal
+            {
+                litleTxnId = 12345678000,
+                amount = 106,
+                payPalNotes = "Notes"
+            });
 
-            var mock = new Mock<Communications>(_memoryStreams);
-
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<authReversal.*?<litleTxnId>12345678000</litleTxnId>.*?</authReversal>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authReversalResponse><litleTxnId>123</litleTxnId></authReversalResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var authreversalresponse = litle.AuthReversal(authreversal);
             Assert.AreEqual(123, authreversalresponse.litleTxnId);
         }
 
         [Test]
-        public void testCapture()
+        public void TestCapture()
         {
-            var caputure = new capture();
-            caputure.litleTxnId = 123456000;
-            caputure.amount = 106;
-            caputure.payPalNotes = "Notes";
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<capture.*?<litleTxnId>123456000</litleTxnId>.*?</capture>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureResponse><litleTxnId>123</litleTxnId></captureResponse></litleOnlineResponse>");
 
+            var captureresponse = Litle.Capture(new capture
+            {
+                litleTxnId = 123456000,
+                amount = 106,
+                payPalNotes = "Notes"
+            });
 
-            var mock = new Mock<Communications>(_memoryStreams);
-
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<capture.*?<litleTxnId>123456000</litleTxnId>.*?</capture>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureResponse><litleTxnId>123</litleTxnId></captureResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var captureresponse = litle.Capture(caputure);
             Assert.AreEqual(123, captureresponse.litleTxnId);
         }
 
         [Test]
-        public void testCaptureGivenAuth()
+        public void TestCaptureGivenAuth()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.orderId = "12344";
-            capturegivenauth.amount = 106;
-            var authinfo = new authInformation();
-            authinfo.authDate = new DateTime(2002, 10, 9);
-            authinfo.authCode = "543216";
-            authinfo.authAmount = 12345;
-            capturegivenauth.authInformation = authinfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            capturegivenauth.card = card;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<captureGivenAuth.*?<card>.*?<number>4100000000000001</number>.*?</card>.*?</captureGivenAuth>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var caputregivenauthresponse = Litle.CaptureGivenAuth(new captureGivenAuth
+            {
+                orderId = "12344",
+                amount = 106,
+                authInformation = new authInformation
+                {
+                    authDate = new DateTime(2002, 10, 9),
+                    authCode = "543216",
+                    authAmount = 12345
+                },
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<captureGivenAuth.*?<card>.*?<number>4100000000000001</number>.*?</card>.*?</captureGivenAuth>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var caputregivenauthresponse = litle.CaptureGivenAuth(capturegivenauth);
             Assert.AreEqual(123, caputregivenauthresponse.litleTxnId);
         }
 
         [Test]
-        public void testCredit()
+        public void TestCredit()
         {
-            var credit = new credit();
-            credit.orderId = "12344";
-            credit.amount = 106;
-            credit.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            credit.card = card;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<credit.*?<card>.*?<number>4100000000000001</number>.*?</card>.*?</credit>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var creditresponse = Litle.Credit(new credit
+            {
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<credit.*?<card>.*?<number>4100000000000001</number>.*?</card>.*?</credit>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><creditResponse><litleTxnId>123</litleTxnId></creditResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var creditresponse = litle.Credit(credit);
             Assert.AreEqual(123, creditresponse.litleTxnId);
         }
 
         [Test]
-        public void testEcheckCredit()
+        public void TestEcheckCredit()
         {
-            var echeckcredit = new echeckCredit();
-            echeckcredit.amount = 12;
-            echeckcredit.litleTxnId = 123456789101112;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<echeckCredit.*?<litleTxnId>123456789101112</litleTxnId>.*?</echeckCredit>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckCreditResponse><litleTxnId>123</litleTxnId></echeckCreditResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var echeckcreditresponse = Litle.EcheckCredit(new echeckCredit
+            {
+                amount = 12,
+                litleTxnId = 123456789101112
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<echeckCredit.*?<litleTxnId>123456789101112</litleTxnId>.*?</echeckCredit>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckCreditResponse><litleTxnId>123</litleTxnId></echeckCreditResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var echeckcreditresponse = litle.EcheckCredit(echeckcredit);
             Assert.AreEqual(123, echeckcreditresponse.litleTxnId);
         }
 
         [Test]
-        public void testEcheckRedeposit()
+        public void TestEcheckRedeposit()
         {
-            var echeckredeposit = new echeckRedeposit();
-            echeckredeposit.litleTxnId = 123456;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<echeckRedeposit.*?<litleTxnId>123456</litleTxnId>.*?</echeckRedeposit>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckRedepositResponse><litleTxnId>123</litleTxnId></echeckRedepositResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var echeckredepositresponse = Litle.EcheckRedeposit(new echeckRedeposit {litleTxnId = 123456});
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<echeckRedeposit.*?<litleTxnId>123456</litleTxnId>.*?</echeckRedeposit>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckRedepositResponse><litleTxnId>123</litleTxnId></echeckRedepositResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var echeckredepositresponse = litle.EcheckRedeposit(echeckredeposit);
             Assert.AreEqual(123, echeckredepositresponse.litleTxnId);
         }
 
         [Test]
-        public void testEcheckSale()
+        public void TestEcheckSale()
         {
-            var echecksale = new echeckSale();
-            echecksale.orderId = "12345";
-            echecksale.amount = 123456;
-            echecksale.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echecksale.echeck = echeck;
-            var contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echecksale.billToAddress = contact;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<echeckSale.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckSale>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckSalesResponse><litleTxnId>123</litleTxnId></echeckSalesResponse></litleOnlineResponse>");
 
+            var echecksaleresponse = Litle.EcheckSale(new echeckSale
+            {
+                orderId = "12345",
+                amount = 123456,
+                orderSource = orderSourceType.ecommerce,
+                echeck = new echeckType
+                {
+                    accType = echeckAccountTypeEnum.Checking,
+                    accNum = "12345657890",
+                    routingNum = "123456789",
+                    checkNum = "123455"
+                },
+                billToAddress = new contact
+                {
+                    name = "Bob",
+                    city = "lowell",
+                    state = "MA",
+                    email = "litle.com"
+                }
+            });
 
-            var mock = new Mock<Communications>(_memoryStreams);
-
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<echeckSale.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckSale>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckSalesResponse><litleTxnId>123</litleTxnId></echeckSalesResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var echecksaleresponse = litle.EcheckSale(echecksale);
             Assert.AreEqual(123, echecksaleresponse.litleTxnId);
         }
 
         [Test]
-        public void testEcheckVerification()
+        public void TestEcheckVerification()
         {
-            var echeckverification = new echeckVerification();
-            echeckverification.orderId = "12345";
-            echeckverification.amount = 123456;
-            echeckverification.orderSource = orderSourceType.ecommerce;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-            echeckverification.echeck = echeck;
-            var contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            echeckverification.billToAddress = contact;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<echeckVerification.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckVerification>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
 
+            var echeckverificaitonresponse = Litle.EcheckVerification(new echeckVerification
+            {
+                orderId = "12345",
+                amount = 123456,
+                orderSource = orderSourceType.ecommerce,
+                echeck = new echeckType
+                {
+                    accType = echeckAccountTypeEnum.Checking,
+                    accNum = "12345657890",
+                    routingNum = "123456789",
+                    checkNum = "123455"
+                },
+                billToAddress = new contact
+                {
+                    name = "Bob",
+                    city = "lowell",
+                    state = "MA",
+                    email = "litle.com"
+                }
+            });
 
-            var mock = new Mock<Communications>(_memoryStreams);
-
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<echeckVerification.*?<echeck>.*?<accNum>12345657890</accNum>.*?</echeck>.*?</echeckVerification>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var echeckverificaitonresponse = litle.EcheckVerification(echeckverification);
             Assert.AreEqual(123, echeckverificaitonresponse.litleTxnId);
         }
 
         [Test]
-        public void testForceCapture()
+        public void TestForceCapture()
         {
-            var forcecapture = new forceCapture();
-            forcecapture.orderId = "12344";
-            forcecapture.amount = 106;
-            forcecapture.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000001";
-            card.expDate = "1210";
-            forcecapture.card = card;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<forceCapture.*?<card>.*?<number>4100000000000001</number>.*?</card>.*?</forceCapture>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var forcecaptureresponse = Litle.ForceCapture(new forceCapture
+            {
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000001",
+                    expDate = "1210"
+                }
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<forceCapture.*?<card>.*?<number>4100000000000001</number>.*?</card>.*?</forceCapture>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><forceCaptureResponse><litleTxnId>123</litleTxnId></forceCaptureResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var forcecaptureresponse = litle.ForceCapture(forcecapture);
             Assert.AreEqual(123, forcecaptureresponse.litleTxnId);
         }
 
         [Test]
-        public void testSale()
+        public void TestSale()
         {
-            var sale = new sale();
-            sale.orderId = "12344";
-            sale.amount = 106;
-            sale.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            sale.card = card;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<sale.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</sale>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var saleresponse = Litle.Sale(new sale
+            {
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000002",
+                    expDate = "1210"
+                }
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<sale.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</sale>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><saleResponse><litleTxnId>123</litleTxnId></saleResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var saleresponse = litle.Sale(sale);
             Assert.AreEqual(123, saleresponse.litleTxnId);
         }
 
         [Test]
-        public void testToken()
+        public void TestToken()
         {
-            var token = new registerTokenRequestType();
-            token.orderId = "12344";
-            token.accountNumber = "1233456789103801";
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<registerTokenRequest.*?<accountNumber>1233456789103801</accountNumber>.*?</registerTokenRequest>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><registerTokenResponse><litleTxnId>123</litleTxnId></registerTokenResponse></litleOnlineResponse>");
 
+            var registertokenresponse = Litle.RegisterToken(new registerTokenRequestType
+            {
+                orderId = "12344",
+                accountNumber = "1233456789103801"
+            });
 
-            var mock = new Mock<Communications>(_memoryStreams);
-
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<registerTokenRequest.*?<accountNumber>1233456789103801</accountNumber>.*?</registerTokenRequest>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><registerTokenResponse><litleTxnId>123</litleTxnId></registerTokenResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var registertokenresponse = litle.RegisterToken(token);
             Assert.AreEqual(123, registertokenresponse.litleTxnId);
             Assert.IsNull(registertokenresponse.type);
         }
 
         [Test]
-        public void testActivate()
+        public void TestActivate()
         {
-            var activate = new activate();
-            activate.orderId = "2";
-            activate.orderSource = orderSourceType.ecommerce;
-            activate.card = new cardType();
+            SetupCommunications(".*?<litleOnlineRequest.*?<activate.*?<orderId>2</orderId>.*?</activate>.*?",
+                "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><activateResponse><litleTxnId>123</litleTxnId></activateResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var activateResponse = Litle.Activate(new activate
+            {
+                orderId = "2",
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType()
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(".*?<litleOnlineRequest.*?<activate.*?<orderId>2</orderId>.*?</activate>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><activateResponse><litleTxnId>123</litleTxnId></activateResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var activateResponse = litle.Activate(activate);
             Assert.AreEqual("123", activateResponse.litleTxnId);
         }
 
         [Test]
-        public void testDeactivate()
+        public void TestDeactivate()
         {
-            var deactivate = new deactivate();
-            deactivate.orderId = "2";
-            deactivate.orderSource = orderSourceType.ecommerce;
-            deactivate.card = new cardType();
+            SetupCommunications(".*?<litleOnlineRequest.*?<deactivate.*?<orderId>2</orderId>.*?</deactivate>.*?",
+                "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><deactivateResponse><litleTxnId>123</litleTxnId></deactivateResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var deactivateResponse = Litle.Deactivate(new deactivate
+            {
+                orderId = "2",
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType()
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(".*?<litleOnlineRequest.*?<deactivate.*?<orderId>2</orderId>.*?</deactivate>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><deactivateResponse><litleTxnId>123</litleTxnId></deactivateResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var deactivateResponse = litle.Deactivate(deactivate);
             Assert.AreEqual("123", deactivateResponse.litleTxnId);
         }
 
         [Test]
-        public void testLoad()
+        public void TestLoad()
         {
-            var load = new load();
-            load.orderId = "2";
-            load.orderSource = orderSourceType.ecommerce;
-            load.card = new cardType();
+            SetupCommunications(".*?<litleOnlineRequest.*?<load.*?<orderId>2</orderId>.*?</load>.*?",
+                "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><loadResponse><litleTxnId>123</litleTxnId></loadResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var loadResponse = Litle.Load(new load
+            {
+                orderId = "2",
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType()
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(".*?<litleOnlineRequest.*?<load.*?<orderId>2</orderId>.*?</load>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><loadResponse><litleTxnId>123</litleTxnId></loadResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var loadResponse = litle.Load(load);
             Assert.AreEqual("123", loadResponse.litleTxnId);
         }
 
         [Test]
-        public void testUnload()
+        public void TestUnload()
         {
-            var unload = new unload();
-            unload.orderId = "2";
-            unload.orderSource = orderSourceType.ecommerce;
-            unload.card = new cardType();
+            SetupCommunications(".*?<litleOnlineRequest.*?<unload.*?<orderId>2</orderId>.*?</unload>.*?",
+                "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><unloadResponse><litleTxnId>123</litleTxnId></unloadResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var unloadResponse = Litle.Unload(new unload
+            {
+                orderId = "2",
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType()
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(".*?<litleOnlineRequest.*?<unload.*?<orderId>2</orderId>.*?</unload>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><unloadResponse><litleTxnId>123</litleTxnId></unloadResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var unloadResponse = litle.Unload(unload);
             Assert.AreEqual("123", unloadResponse.litleTxnId);
         }
 
         [Test]
-        public void testBalanceInquiry()
+        public void TestBalanceInquiry()
         {
-            var balanceInquiry = new balanceInquiry();
-            balanceInquiry.orderId = "2";
-            balanceInquiry.orderSource = orderSourceType.ecommerce;
-            balanceInquiry.card = new cardType();
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<balanceInquiry.*?<orderId>2</orderId>.*?</balanceInquiry>.*?",
+                "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><balanceInquiryResponse><litleTxnId>123</litleTxnId></balanceInquiryResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var balanceInquiryResponse = Litle.BalanceInquiry(new balanceInquiry
+            {
+                orderId = "2",
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType()
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<balanceInquiry.*?<orderId>2</orderId>.*?</balanceInquiry>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><balanceInquiryResponse><litleTxnId>123</litleTxnId></balanceInquiryResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var balanceInquiryResponse = litle.BalanceInquiry(balanceInquiry);
             Assert.AreEqual("123", balanceInquiryResponse.litleTxnId);
         }
 
         [Test]
-        public void testCreatePlan()
+        public void TestCreatePlan()
         {
-            var createPlan = new createPlan();
-            createPlan.planCode = "theCode";
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<createPlan.*?<planCode>theCode</planCode>.*?</createPlan>.*?",
+                "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><createPlanResponse><planCode>theCode</planCode></createPlanResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var createPlanResponse = Litle.CreatePlan(new createPlan {planCode = "theCode"});
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<createPlan.*?<planCode>theCode</planCode>.*?</createPlan>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><createPlanResponse><planCode>theCode</planCode></createPlanResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var createPlanResponse = litle.CreatePlan(createPlan);
             Assert.AreEqual("theCode", createPlanResponse.planCode);
         }
 
         [Test]
-        public void testUpdatePlan()
+        public void TestUpdatePlan()
         {
-            var updatePlan = new updatePlan();
-            updatePlan.planCode = "theCode";
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<updatePlan.*?<planCode>theCode</planCode>.*?</updatePlan>.*?",
+                "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><updatePlanResponse><planCode>theCode</planCode></updatePlanResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var updatePlanResponse = Litle.UpdatePlan(new updatePlan {planCode = "theCode"});
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<updatePlan.*?<planCode>theCode</planCode>.*?</updatePlan>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.21' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><updatePlanResponse><planCode>theCode</planCode></updatePlanResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var updatePlanResponse = litle.UpdatePlan(updatePlan);
             Assert.AreEqual("theCode", updatePlanResponse.planCode);
         }
 
         [Test]
-        public void testLitleOnlineException()
+        public void TestLitleOnlineException()
         {
-            var authorization = new authorization();
-            authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<authorization.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</authorization>.*?",
+                "<litleOnlineResponse version='8.10' response='1' message='Error validating xml data against the schema' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
-
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<authorization.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</authorization>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='1' message='Error validating xml data against the schema' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            try
+            try //TODO: Should the test fail if the concern is successfully executed?
             {
-                litle.Authorize(authorization);
+                Litle.Authorize(new authorization
+                {
+                    reportGroup = "Planets",
+                    orderId = "12344",
+                    amount = 106,
+                    orderSource = orderSourceType.ecommerce,
+                    card = new cardType
+                    {
+                        type = methodOfPaymentTypeEnum.VI,
+                        number = "4100000000000002",
+                        expDate = "1210"
+                    }
+                });
             }
             catch (LitleOnlineException e)
             {
@@ -582,34 +404,27 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testInvalidOperationException()
+        public void TestInvalidOperationException()
         {
-            var authorization = new authorization();
-            authorization.reportGroup = "Planets";
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<authorization.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</authorization>.*?",
+                "no xml");
 
-            var mock = new Mock<Communications>(_memoryStreams);
-
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<authorization.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</authorization>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns("no xml");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            try
+            try //TODO: Should the test fail if the concern is successfully executed?
             {
-                litle.Authorize(authorization);
+                Litle.Authorize(new authorization
+                {
+                    reportGroup = "Planets",
+                    orderId = "12344",
+                    amount = 106,
+                    orderSource = orderSourceType.ecommerce,
+                    card = new cardType
+                    {
+                        type = methodOfPaymentTypeEnum.VI,
+                        number = "4100000000000002",
+                        expDate = "1210"
+                    }
+                });
             }
             catch (LitleOnlineException e)
             {
@@ -618,38 +433,26 @@ namespace Litle.Sdk.Test.Unit
         }
 
         [Test]
-        public void testDefaultReportGroup()
+        public void TestDefaultReportGroup()
         {
-            var authorization = new authorization();
-            authorization.orderId = "12344";
-            authorization.amount = 106;
-            authorization.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000002";
-            card.expDate = "1210";
-            authorization.card = card;
+            SetupCommunications(
+                ".*?<litleOnlineRequest.*?<authorization.*? reportGroup=\"Default Report Group\">.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</authorization>.*?",
+                "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse reportGroup='Default Report Group'></authorizationResponse></litleOnlineResponse>");
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var authorize = Litle.Authorize(new authorization
+            {
+                orderId = "12344",
+                amount = 106,
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000002",
+                    expDate = "1210"
+                }
+            });
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*?<litleOnlineRequest.*?<authorization.*? reportGroup=\"Default Report Group\">.*?<card>.*?<number>4100000000000002</number>.*?</card>.*?</authorization>.*?",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse reportGroup='Default Report Group'></authorizationResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
-            litle.setCommunication(mockedCommunication);
-            var authorize = litle.Authorize(authorization);
             Assert.AreEqual("Default Report Group", authorize.reportGroup);
-        }
-
-        [Test]
-        public void testSetMerchantSdk()
-        {
         }
     }
 }

@@ -1,209 +1,212 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Litle.Sdk.Properties;
 using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    internal class TestCaptureGivenAuth
+    internal class TestCaptureGivenAuth : LitleOnlineTestBase
     {
-        private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryCache;
-
-        [TestFixtureSetUp]
-        public void setUp()
+        protected override Dictionary<string, string> SetupConfig() => new Dictionary<string, string>
         {
-            _memoryCache = new Dictionary<string, StringBuilder>();
-            var config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "5000");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
-            config.Add("printxml", "true");
-            config.Add("proxyHost", Settings.Default.proxyHost);
-            config.Add("proxyPort", Settings.Default.proxyPort);
-            config.Add("logFile", Settings.Default.logFile);
-            config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(_memoryCache, config);
-        }
+            {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+            {"reportGroup", "Default Report Group"},
+            {"username", "DOTNET"},
+            {"version", "9.3.2"},
+            {"timeout", "5000"},
+            {"merchantId", "101"},
+            {"password", "TESTCASE"},
+            {"proxyHost", Settings.Default.proxyHost},
+            {"proxyPort", Settings.Default.proxyPort},
+        };
 
         [Test]
-        public void simpleCaptureGivenAuthWithCard()
+        public void SimpleCaptureGivenAuthWithCard()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
-            var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000000";
-            card.expDate = "1210";
-            capturegivenauth.card = card;
-            var response = litle.CaptureGivenAuth(capturegivenauth);
+            var response = Litle.CaptureGivenAuth(new captureGivenAuth
+            {
+                amount = 106,
+                orderId = "12344",
+                authInformation = new authInformation
+                {
+                    authDate = new DateTime(2002, 10, 9),
+                    authCode = "543216",
+                    authAmount = 12345
+                },
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000000",
+                    expDate = "1210"
+                }
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void simpleCaptureGivenAuthWithMpos()
+        public void SimpleCaptureGivenAuthWithMpos()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 500;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
-            var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var mpos = new mposType();
-            mpos.ksn = "77853211300008E00016";
-            mpos.encryptedTrack =
-                "CASE1E185EADD6AFE78C9A214B21313DCD836FDD555FBE3A6C48D141FE80AB9172B963265AFF72111895FE415DEDA162CE8CB7AC4D91EDB611A2AB756AA9CB1A000000000000000000000000000000005A7AAF5E8885A9DB88ECD2430C497003F2646619A2382FFF205767492306AC804E8E64E8EA6981DD";
-            mpos.formatId = "30";
-            mpos.track1Status = 0;
-            mpos.track2Status = 0;
-            capturegivenauth.mpos = mpos;
-            var response = litle.CaptureGivenAuth(capturegivenauth);
+            var response = Litle.CaptureGivenAuth(new captureGivenAuth
+            {
+                amount = 500,
+                orderId = "12344",
+                authInformation = new authInformation
+                {
+                    authDate = new DateTime(2002, 10, 9),
+                    authCode = "543216",
+                    authAmount = 12345
+                },
+                orderSource = orderSourceType.ecommerce,
+                mpos = new mposType
+                {
+                    ksn = "77853211300008E00016",
+                    encryptedTrack =
+                        "CASE1E185EADD6AFE78C9A214B21313DCD836FDD555FBE3A6C48D141FE80AB9172B963265AFF72111895FE415DEDA162CE8CB7AC4D91EDB611A2AB756AA9CB1A000000000000000000000000000000005A7AAF5E8885A9DB88ECD2430C497003F2646619A2382FFF205767492306AC804E8E64E8EA6981DD",
+                    formatId = "30",
+                    track1Status = 0,
+                    track2Status = 0
+                }
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void simpleCaptureGivenAuthWithToken()
+        public void SimpleCaptureGivenAuthWithToken()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
-            var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var cardtoken = new cardTokenType();
-            cardtoken.litleToken = "123456789101112";
-            cardtoken.expDate = "1210";
-            cardtoken.cardValidationNum = "555";
-            cardtoken.type = methodOfPaymentTypeEnum.VI;
-            capturegivenauth.token = cardtoken;
-            var response = litle.CaptureGivenAuth(capturegivenauth);
+            var response = Litle.CaptureGivenAuth(new captureGivenAuth
+            {
+                amount = 106,
+                orderId = "12344",
+                authInformation = new authInformation
+                {
+                    authDate = new DateTime(2002, 10, 9),
+                    authCode = "543216",
+                    authAmount = 12345
+                },
+                orderSource = orderSourceType.ecommerce,
+                token = new cardTokenType
+                {
+                    litleToken = "123456789101112",
+                    expDate = "1210",
+                    cardValidationNum = "555",
+                    type = methodOfPaymentTypeEnum.VI
+                }
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void complexCaptureGivenAuth()
+        public void ComplexCaptureGivenAuth()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
-            var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            var contact = new contact();
-            contact.name = "Bob";
-            contact.city = "lowell";
-            contact.state = "MA";
-            contact.email = "litle.com";
-            capturegivenauth.billToAddress = contact;
-            var processinginstructions = new processingInstructions();
-            processinginstructions.bypassVelocityCheck = true;
-            capturegivenauth.processingInstructions = processinginstructions;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000000";
-            card.expDate = "1210";
-            capturegivenauth.card = card;
-            var response = litle.CaptureGivenAuth(capturegivenauth);
+            var response = Litle.CaptureGivenAuth(new captureGivenAuth
+            {
+                amount = 106,
+                orderId = "12344",
+                authInformation = new authInformation
+                {
+                    authDate = new DateTime(2002, 10, 9),
+                    authCode = "543216",
+                    authAmount = 12345
+                },
+                billToAddress = new contact
+                {
+                    name = "Bob",
+                    city = "lowell",
+                    state = "MA",
+                    email = "litle.com"
+                },
+                processingInstructions = new processingInstructions {bypassVelocityCheck = true},
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000000",
+                    expDate = "1210"
+                }
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void authInfo()
+        public void AuthInfo()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
-            var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            var fraudresult = new fraudResult();
-            fraudresult.avsResult = "12";
-            fraudresult.cardValidationResult = "123";
-            fraudresult.authenticationResult = "1";
-            fraudresult.advancedAVSResult = "123";
-            authInfo.fraudResult = fraudresult;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000000";
-            card.expDate = "1210";
-            capturegivenauth.card = card;
-            var response = litle.CaptureGivenAuth(capturegivenauth);
+            var response = Litle.CaptureGivenAuth(new captureGivenAuth
+            {
+                amount = 106,
+                orderId = "12344",
+                authInformation = new authInformation
+                {
+                    authDate = new DateTime(2002, 10, 9),
+                    authCode = "543216",
+                    authAmount = 12345,
+                    fraudResult = new fraudResult
+                    {
+                        avsResult = "12",
+                        cardValidationResult = "123",
+                        authenticationResult = "1",
+                        advancedAVSResult = "123"
+                    }
+                },
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000000",
+                    expDate = "1210"
+                }
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void simpleCaptureGivenAuthWithTokenAndSpecialCharacters()
+        public void SimpleCaptureGivenAuthWithTokenAndSpecialCharacters()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.orderId = "<'&\">";
-            var authInfo = new authInformation();
-            var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var cardtoken = new cardTokenType();
-            cardtoken.litleToken = "123456789101112";
-            cardtoken.expDate = "1210";
-            cardtoken.cardValidationNum = "555";
-            cardtoken.type = methodOfPaymentTypeEnum.VI;
-            capturegivenauth.token = cardtoken;
-            var response = litle.CaptureGivenAuth(capturegivenauth);
+            var response = Litle.CaptureGivenAuth(new captureGivenAuth
+            {
+                amount = 106,
+                orderId = "<'&\">",
+                authInformation = new authInformation
+                {
+                    authDate = new DateTime(2002, 10, 9),
+                    authCode = "543216",
+                    authAmount = 12345
+                },
+                orderSource = orderSourceType.ecommerce,
+                token = new cardTokenType
+                {
+                    litleToken = "123456789101112",
+                    expDate = "1210",
+                    cardValidationNum = "555",
+                    type = methodOfPaymentTypeEnum.VI
+                }
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void simpleCaptureGivenAuthWithSecondaryAmount()
+        public void SimpleCaptureGivenAuthWithSecondaryAmount()
         {
-            var capturegivenauth = new captureGivenAuth();
-            capturegivenauth.amount = 106;
-            capturegivenauth.secondaryAmount = 50;
-            capturegivenauth.orderId = "12344";
-            var authInfo = new authInformation();
-            var authDate = new DateTime(2002, 10, 9);
-            authInfo.authDate = authDate;
-            authInfo.authCode = "543216";
-            authInfo.authAmount = 12345;
-            capturegivenauth.authInformation = authInfo;
-            capturegivenauth.orderSource = orderSourceType.ecommerce;
-            var card = new cardType();
-            card.type = methodOfPaymentTypeEnum.VI;
-            card.number = "4100000000000000";
-            card.expDate = "1210";
-            capturegivenauth.card = card;
-            var response = litle.CaptureGivenAuth(capturegivenauth);
+            var response = Litle.CaptureGivenAuth(new captureGivenAuth
+            {
+                amount = 106,
+                secondaryAmount = 50,
+                orderId = "12344",
+                authInformation = new authInformation
+                {
+                    authDate = new DateTime(2002, 10, 9),
+                    authCode = "543216",
+                    authAmount = 12345
+                },
+                orderSource = orderSourceType.ecommerce,
+                card = new cardType
+                {
+                    type = methodOfPaymentTypeEnum.VI,
+                    number = "4100000000000000",
+                    expDate = "1210"
+                }
+            });
             Assert.AreEqual("Approved", response.message);
         }
     }

@@ -1,75 +1,63 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using Litle.Sdk.Properties;
 using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    internal class TestEcheckRedeposit
+    internal class TestEcheckRedeposit : LitleOnlineTestBase
     {
-        private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryCache;
-
-        [TestFixtureSetUp]
-        public void setUp()
+        protected override Dictionary<string, string> SetupConfig() => new Dictionary<string, string>
         {
-            _memoryCache = new Dictionary<string, StringBuilder>();
-            var config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "5000");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
-            config.Add("printxml", "true");
-            config.Add("proxyHost", Settings.Default.proxyHost);
-            config.Add("proxyPort", Settings.Default.proxyPort);
-            config.Add("logFile", Settings.Default.logFile);
-            config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(_memoryCache, config);
-        }
-
+            {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+            {"reportGroup", "Default Report Group"},
+            {"username", "DOTNET"},
+            {"version", "9.3.2"},
+            {"timeout", "5000"},
+            {"merchantId", "101"},
+            {"password", "TESTCASE"},
+            {"proxyHost", Settings.Default.proxyHost},
+            {"proxyPort", Settings.Default.proxyPort},
+        };
 
         [Test]
-        public void simpleEcheckRedeposit()
+        public void SimpleEcheckRedeposit()
         {
-            var echeckredeposit = new echeckRedeposit();
-            echeckredeposit.litleTxnId = 123456;
-            var response = litle.EcheckRedeposit(echeckredeposit);
+            var response = Litle.EcheckRedeposit(new echeckRedeposit {litleTxnId = 123456});
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void echeckRedepositWithEcheck()
+        public void EcheckRedepositWithEcheck()
         {
-            var echeckredeposit = new echeckRedeposit();
-            echeckredeposit.litleTxnId = 123456;
-            var echeck = new echeckType();
-            echeck.accType = echeckAccountTypeEnum.Checking;
-            echeck.accNum = "12345657890";
-            echeck.routingNum = "123456789";
-            echeck.checkNum = "123455";
-
-            echeckredeposit.echeck = echeck;
-            var response = litle.EcheckRedeposit(echeckredeposit);
+            var response = Litle.EcheckRedeposit(new echeckRedeposit
+            {
+                litleTxnId = 123456,
+                echeck = new echeckType
+                {
+                    accType = echeckAccountTypeEnum.Checking,
+                    accNum = "12345657890",
+                    routingNum = "123456789",
+                    checkNum = "123455"
+                }
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void echeckRedepositWithEcheckToken()
+        public void EcheckRedepositWithEcheckToken()
         {
-            var echeckredeposit = new echeckRedeposit();
-            echeckredeposit.litleTxnId = 123456;
-            var echeckToken = new echeckTokenType();
-            echeckToken.accType = echeckAccountTypeEnum.Checking;
-            echeckToken.litleToken = "1234565789012";
-            echeckToken.routingNum = "123456789";
-            echeckToken.checkNum = "123455";
-
-            echeckredeposit.token = echeckToken;
-            var response = litle.EcheckRedeposit(echeckredeposit);
+            var response = Litle.EcheckRedeposit(new echeckRedeposit
+            {
+                litleTxnId = 123456,
+                token = new echeckTokenType
+                {
+                    accType = echeckAccountTypeEnum.Checking,
+                    litleToken = "1234565789012",
+                    routingNum = "123456789",
+                    checkNum = "123455"
+                }
+            });
             Assert.AreEqual("Approved", response.message);
         }
     }

@@ -1,87 +1,78 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 using Litle.Sdk.Properties;
 using NUnit.Framework;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    internal class TestCapture
+    internal class TestCapture : LitleOnlineTestBase
     {
-        private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryCache;
-
-        [TestFixtureSetUp]
-        public void SetUpLitle()
+        protected override Dictionary<string, string> SetupConfig() => new Dictionary<string, string>
         {
-            _memoryCache = new Dictionary<string, StringBuilder>();
-            var config = new Dictionary<string, string>();
-            config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
-            config.Add("reportGroup", "Default Report Group");
-            config.Add("username", "DOTNET");
-            config.Add("version", "8.13");
-            config.Add("timeout", "5000");
-            config.Add("merchantId", "101");
-            config.Add("password", "TESTCASE");
-            config.Add("printxml", "true");
-            config.Add("proxyHost", Settings.Default.proxyHost);
-            config.Add("proxyPort", Settings.Default.proxyPort);
-            config.Add("logFile", Settings.Default.logFile);
-            config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(_memoryCache, config);
-        }
+            {"url", "https://www.testlitle.com/sandbox/communicator/online"},
+            {"reportGroup", "Default Report Group"},
+            {"username", "DOTNET"},
+            {"version", "9.3.2"},
+            {"timeout", "5000"},
+            {"merchantId", "101"},
+            {"password", "TESTCASE"},
+            {"proxyHost", Settings.Default.proxyHost},
+            {"proxyPort", Settings.Default.proxyPort},
+        };
 
         [Test]
         public void SimpleCapture()
         {
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "Notes";
-
-            var response = litle.Capture(capture);
+            var response = Litle.Capture(new capture
+            {
+                litleTxnId = 123456000,
+                amount = 106,
+                payPalNotes = "Notes"
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void simpleCaptureWithPartial()
+        public void SimpleCaptureWithPartial()
         {
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.partial = true;
-            capture.payPalNotes = "Notes";
-
-            var response = litle.Capture(capture);
+            var response = Litle.Capture(new capture
+            {
+                litleTxnId = 123456000,
+                amount = 106,
+                partial = true,
+                payPalNotes = "Notes"
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
-        public void complexCapture()
+        public void ComplexCapture()
         {
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "Notes";
-            var enhanceddata = new enhancedData();
-            enhanceddata.customerReference = "Litle";
-            enhanceddata.salesTax = 50;
-            enhanceddata.deliveryType = enhancedDataDeliveryType.TBD;
-            capture.enhancedData = enhanceddata;
-            capture.payPalOrderComplete = true;
-            var response = litle.Capture(capture);
+            var response = Litle.Capture(new capture
+            {
+                litleTxnId = 123456000,
+                amount = 106,
+                payPalNotes = "Notes",
+                enhancedData = new enhancedData
+                {
+                    customerReference = "Litle",
+                    salesTax = 50,
+                    deliveryType = enhancedDataDeliveryType.TBD
+                },
+                payPalOrderComplete = true
+            });
             Assert.AreEqual("Approved", response.message);
         }
 
         [Test]
         public void SimpleCaptureWithSpecial()
         {
-            var capture = new capture();
-            capture.litleTxnId = 123456000;
-            capture.amount = 106;
-            capture.payPalNotes = "<'&\">";
-
-            var response = litle.Capture(capture);
+            var response = Litle.Capture(new capture
+            {
+                litleTxnId = 123456000,
+                amount = 106,
+                payPalNotes = "<'&\">"
+            });
             Assert.AreEqual("Approved", response.message);
         }
     }
