@@ -1,54 +1,50 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
-using Moq;
 using NUnit.Framework;
+using Litle.Sdk;
+using Moq;
+using System.Text.RegularExpressions;
+
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    internal class TestEcheckVerification
+    class TestEcheckVerification
     {
+        
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
+            litle = new LitleOnline();
         }
 
         [Test]
         public void TestMerchantData()
         {
-            var echeckVerification = new EcheckVerification();
-            echeckVerification.OrderId = "1";
-            echeckVerification.Amount = 2;
-            echeckVerification.OrderSource = OrderSourceType.Ecommerce;
-            echeckVerification.BillToAddress = new Contact();
-            echeckVerification.BillToAddress.AddressLine1 = "900";
-            echeckVerification.BillToAddress.City = "ABC";
-            echeckVerification.BillToAddress.State = "MA";
-            echeckVerification.MerchantData = new MerchantDataType();
-            echeckVerification.MerchantData.Campaign = "camp";
-            echeckVerification.MerchantData.Affiliate = "affil";
-            echeckVerification.MerchantData.MerchantGroupingId = "mgi";
+            echeckVerification echeckVerification = new echeckVerification();
+            echeckVerification.orderId = "1";
+            echeckVerification.amount = 2;
+            echeckVerification.orderSource = orderSourceType.ecommerce;
+            echeckVerification.billToAddress = new contact();
+            echeckVerification.billToAddress.addressLine1 = "900";
+            echeckVerification.billToAddress.city = "ABC";
+            echeckVerification.billToAddress.state = "MA";
+            echeckVerification.merchantData = new merchantDataType();
+            echeckVerification.merchantData.campaign = "camp";
+            echeckVerification.merchantData.affiliate = "affil";
+            echeckVerification.merchantData.merchantGroupingId = "mgi";
+           
+            var mock = new Mock<Communications>();
 
-            var mock = new Mock<Communications>(_memoryStreams);
-
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*<echeckVerification.*<orderId>1</orderId>.*<amount>2</amount.*<merchantData>.*<campaign>camp</campaign>.*<affiliate>affil</affiliate>.*<merchantGroupingId>mgi</merchantGroupingId>.*</merchantData>.*",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
-
-            var mockedCommunication = mock.Object;
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<echeckVerification.*<orderId>1</orderId>.*<amount>2</amount.*<merchantData>.*<campaign>camp</campaign>.*<affiliate>affil</affiliate>.*<merchantGroupingId>mgi</merchantGroupingId>.*</merchantData>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVerificationResponse><litleTxnId>123</litleTxnId></echeckVerificationResponse></litleOnlineResponse>");
+     
+            Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litle.EcheckVerification(echeckVerification);
-        }
+        }            
     }
 }

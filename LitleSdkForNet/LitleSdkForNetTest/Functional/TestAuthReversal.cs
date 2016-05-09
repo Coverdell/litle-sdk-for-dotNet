@@ -1,21 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using Litle.Sdk.Properties;
 using NUnit.Framework;
+using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    internal class TestAuthReversal
+    class TestAuthReversal
     {
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryCache;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            _memoryCache = new Dictionary<string, StringBuilder>();
-            var config = new Dictionary<string, string>();
+            Dictionary<string, string> config = new Dictionary<string, string>();
             config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
@@ -24,35 +23,35 @@ namespace Litle.Sdk.Test.Functional
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
-            config.Add("proxyHost", Settings.Default.proxyHost);
-            config.Add("proxyPort", Settings.Default.proxyPort);
-            config.Add("logFile", Settings.Default.logFile);
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
+            config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(_memoryCache, config);
+            litle = new LitleOnline(config);
         }
 
         [Test]
         public void SimpleAuthReversal()
         {
-            var reversal = new AuthReversal();
-            reversal.LitleTxnId = 12345678000L;
-            reversal.Amount = 106;
-            reversal.PayPalNotes = "Notes";
+            authReversal reversal = new authReversal();
+            reversal.litleTxnId = 12345678000L;
+            reversal.amount = 106;
+            reversal.payPalNotes = "Notes";
 
-            var response = litle.AuthReversal(reversal);
+            authReversalResponse response = litle.AuthReversal(reversal);
             Assert.AreEqual("Approved", response.message);
         }
-
+            
         [Test]
         public void testAuthReversalHandleSpecialCharacters()
         {
-            var reversal = new AuthReversal();
-            reversal.LitleTxnId = 12345678000L;
-            reversal.Amount = 106;
-            reversal.PayPalNotes = "<'&\">";
+            authReversal reversal = new authReversal();
+            reversal.litleTxnId = 12345678000L;
+            reversal.amount = 106;
+            reversal.payPalNotes = "<'&\">";
 
-            var response = litle.AuthReversal(reversal);
+            authReversalResponse response = litle.AuthReversal(reversal);
             Assert.AreEqual("Approved", response.message);
-        }
+    }
     }
 }

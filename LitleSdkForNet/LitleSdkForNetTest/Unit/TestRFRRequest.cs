@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using Litle.Sdk.Properties;
-using Moq;
 using NUnit.Framework;
+using Litle.Sdk;
+using Moq;
+using System.Text.RegularExpressions;
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    internal class TestRFRRequest
+    class TestRFRRequest
     {
-        private RfrRequest rfrRequest;
+        private RFRRequest rfrRequest;
 
         private const string timeFormat = "MM-dd-yyyy_HH-mm-ss-ffff_";
         private const string timeRegex = "[0-1][0-9]-[0-3][0-9]-[0-9]{4}_[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{4}_";
@@ -17,35 +19,29 @@ namespace Litle.Sdk.Test.Unit
         private const string mockFileName = "TheRainbow.xml";
         private const string mockFilePath = "C:\\Somewhere\\\\Over\\\\" + mockFileName;
 
-        private Mock<LitleFile> mockLitleFile;
-        private Mock<LitleTime> mockLitleTime;
-        private IDictionary<string, StringBuilder> _memoryCache;
+        private Mock<litleFile> mockLitleFile;
+        private Mock<litleTime> mockLitleTime;
 
         [TestFixtureSetUp]
         public void setUp()
         {
-            _memoryCache = new Dictionary<string, StringBuilder>();
-            mockLitleFile = new Mock<LitleFile>(_memoryCache);
-            mockLitleTime = new Mock<LitleTime>();
+            mockLitleFile = new Mock<litleFile>();
+            mockLitleTime = new Mock<litleTime>();
 
-            mockLitleFile.Setup(
-                litleFile =>
-                    litleFile.CreateRandomFile(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<string>(),
-                        mockLitleTime.Object)).Returns(mockFilePath);
-            mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<string>()))
-                .Returns(mockFilePath);
+            mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
+            mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
         }
 
         [SetUp]
         public void setUpBeforeTest()
         {
-            rfrRequest = new RfrRequest(_memoryCache);
+            rfrRequest = new RFRRequest();
         }
 
         [Test]
         public void testInitialization()
         {
-            var mockConfig = new Dictionary<string, string>();
+            Dictionary<String, String> mockConfig = new Dictionary<string, string>();
 
             mockConfig["url"] = "https://www.mockurl.com";
             mockConfig["reportGroup"] = "Mock Report Group";
@@ -65,39 +61,36 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            rfrRequest = new RfrRequest(_memoryCache, mockConfig);
+            rfrRequest = new RFRRequest(mockConfig);
 
-            Assert.AreEqual("C:\\MockRequests\\Requests\\", rfrRequest.GetRequestDirectory());
-            Assert.AreEqual("C:\\MockResponses\\Responses\\", rfrRequest.GetResponseDirectory());
+            Assert.AreEqual("C:\\MockRequests\\Requests\\", rfrRequest.getRequestDirectory());
+            Assert.AreEqual("C:\\MockResponses\\Responses\\", rfrRequest.getResponseDirectory());
 
-            Assert.NotNull(rfrRequest.GetLitleTime());
-            Assert.NotNull(rfrRequest.GetLitleFile());
+            Assert.NotNull(rfrRequest.getLitleTime());
+            Assert.NotNull(rfrRequest.getLitleFile());
         }
 
         [Test]
         public void testSerialize()
         {
-            var mockedLitleFile = mockLitleFile.Object;
-            var mockedLitleTime = mockLitleTime.Object;
+            litleFile mockedLitleFile = mockLitleFile.Object;
+            litleTime mockedLitleTime = mockLitleTime.Object;
 
-            rfrRequest.LitleSessionId = 123456789;
-            rfrRequest.SetLitleFile(mockedLitleFile);
-            rfrRequest.SetLitleTime(mockedLitleTime);
+            rfrRequest.litleSessionId = 123456789;
+            rfrRequest.setLitleFile(mockedLitleFile);
+            rfrRequest.setLitleTime(mockedLitleTime);
 
             Assert.AreEqual(mockFilePath, rfrRequest.Serialize());
 
-            mockLitleFile.Verify(
-                litleFile =>
-                    litleFile.AppendLineToFile(mockFilePath, "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">"));
-            mockLitleFile.Verify(
-                litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n<litleSessionId>123456789</litleSessionId>"));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n<RFRRequest xmlns=\"http://www.litle.com/schema\">"));
+            mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n<litleSessionId>123456789</litleSessionId>"));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, "\r\n</RFRRequest>"));
         }
 
         [Test]
-        public void testAccountUpdateFileRequestData()
+        public void testAccountUpdateFileRequestData() 
         {
-            var mockConfig = new Dictionary<string, string>();
+            Dictionary<String, String> mockConfig = new Dictionary<string, string>();
 
             mockConfig["url"] = "https://www.mockurl.com";
             mockConfig["reportGroup"] = "Mock Report Group";
@@ -117,11 +110,11 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            var accountUpdateFileRequest = new AccountUpdateFileRequestData(mockConfig);
-            var accountUpdateFileRequestDefault = new AccountUpdateFileRequestData();
+            accountUpdateFileRequestData accountUpdateFileRequest = new accountUpdateFileRequestData(mockConfig);
+            accountUpdateFileRequestData accountUpdateFileRequestDefault = new accountUpdateFileRequestData();
 
-            Assert.AreEqual(accountUpdateFileRequestDefault.MerchantId, Settings.Default.merchantId);
-            Assert.AreEqual(accountUpdateFileRequest.MerchantId, mockConfig["merchantId"]);
+            Assert.AreEqual(accountUpdateFileRequestDefault.merchantId, Properties.Settings.Default.merchantId);
+            Assert.AreEqual(accountUpdateFileRequest.merchantId, mockConfig["merchantId"]);
         }
     }
 }

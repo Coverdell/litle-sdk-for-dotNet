@@ -1,45 +1,44 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
-using Moq;
 using NUnit.Framework;
+using Litle.Sdk;
+using Moq;
+using System.Text.RegularExpressions;
+
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    internal class TestLoadReversal
-    {
+    class TestLoadReversal
+    {        
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
+            litle = new LitleOnline();
         }
 
         [Test]
         public void TestSimple()
         {
-            var loadReversal = new LoadReversal();
+            loadReversal loadReversal = new loadReversal();
             loadReversal.id = "a";
             loadReversal.reportGroup = "b";
-            loadReversal.LitleTxnId = "123";
+            loadReversal.litleTxnId = "123";
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>();
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(It.IsRegex(".*<litleTxnId>123</litleTxnId>.*", RegexOptions.Singleline),
-                        It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.22' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><loadReversalResponse><litleTxnId>123</litleTxnId></loadReversalResponse></litleOnlineResponse>");
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<litleTxnId>123</litleTxnId>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.22' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><loadReversalResponse><litleTxnId>123</litleTxnId></loadReversalResponse></litleOnlineResponse>");
 
-            var mockedCommunication = mock.Object;
+            Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
-            var response = litle.LoadReversal(loadReversal);
+            loadReversalResponse response = litle.LoadReversal(loadReversal);
             Assert.AreEqual("123", response.litleTxnId);
         }
+
+
     }
 }

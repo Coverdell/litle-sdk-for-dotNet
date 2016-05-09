@@ -4586,15 +4586,15 @@ namespace Litle.Sdk
         {
         }
 
-        public litleResponse(MemoryStream stream)
+        public litleResponse(string filePath)
         {
-            XmlTextReader reader = new XmlTextReader(stream);
-            readXml(reader, stream);
+            XmlTextReader reader = new XmlTextReader(filePath);
+            readXml(reader, filePath);
         }
 
-        public litleResponse(XmlReader reader, MemoryStream stream)
+        public litleResponse(XmlReader reader, string filePath)
         {
-            readXml(reader, stream);
+            readXml(reader, filePath);
         }
 
         public void setBatchResponseReader(XmlReader xmlReader)
@@ -4607,7 +4607,7 @@ namespace Litle.Sdk
             this.rfrResponseReader = xmlReader;
         }
 
-        public void readXml(XmlReader reader, MemoryStream stream)
+        public void readXml(XmlReader reader, string filePath)
         {
             if (reader.ReadToFollowing("litleResponse"))
             {
@@ -4627,14 +4627,15 @@ namespace Litle.Sdk
             }
 
             this.originalXmlReader = reader;
+            this.filePath = filePath;
 
-            this.batchResponseReader = new XmlTextReader(stream);
+            this.batchResponseReader = new XmlTextReader(filePath);
             if (!batchResponseReader.ReadToFollowing("batchResponse"))
             {
                 batchResponseReader.Close();
             }
 
-            this.rfrResponseReader = new XmlTextReader(stream);
+            this.rfrResponseReader = new XmlTextReader(filePath);
             if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
             {
                 rfrResponseReader.Close();

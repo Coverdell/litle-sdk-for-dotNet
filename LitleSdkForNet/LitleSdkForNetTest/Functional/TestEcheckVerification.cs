@@ -1,21 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using Litle.Sdk.Properties;
 using NUnit.Framework;
+using Litle.Sdk;
 
 namespace Litle.Sdk.Test.Functional
 {
     [TestFixture]
-    internal class TestEcheckVerification
+    class TestEcheckVerification
     {
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryCache;
 
         [TestFixtureSetUp]
         public void setUp()
         {
-            _memoryCache = new Dictionary<string, StringBuilder>();
-            var config = new Dictionary<string, string>();
+            Dictionary<string, string> config = new Dictionary<string, string>();
             config.Add("url", "https://www.testlitle.com/sandbox/communicator/online");
             config.Add("reportGroup", "Default Report Group");
             config.Add("username", "DOTNET");
@@ -24,86 +23,86 @@ namespace Litle.Sdk.Test.Functional
             config.Add("merchantId", "101");
             config.Add("password", "TESTCASE");
             config.Add("printxml", "true");
-            config.Add("proxyHost", Settings.Default.proxyHost);
-            config.Add("proxyPort", Settings.Default.proxyPort);
-            config.Add("logFile", Settings.Default.logFile);
+            config.Add("proxyHost", Properties.Settings.Default.proxyHost);
+            config.Add("proxyPort", Properties.Settings.Default.proxyPort);
+            config.Add("logFile", Properties.Settings.Default.logFile);
             config.Add("neuterAccountNums", "true");
-            litle = new LitleOnline(_memoryCache, config);
+            litle = new LitleOnline(config);
         }
 
         [Test]
         public void SimpleEcheckVerification()
         {
-            var echeckVerificationObject = new EcheckVerification();
-            echeckVerificationObject.Amount = 123456;
-            echeckVerificationObject.OrderId = "12345";
-            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.amount = 123456;
+            echeckVerificationObject.orderId = "12345";
+            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
+            
+            echeckType echeckTypeObj = new echeckType();
+            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
+            echeckTypeObj.accNum = "12345657890";
+            echeckTypeObj.routingNum = "123456789";
+            echeckTypeObj.checkNum = "123455";
+            
+            contact contactObj = new contact();
+            contactObj.name = "Bob";
+            contactObj.city = "lowell";
+            contactObj.state = "MA";
+            contactObj.email = "litle.com";
 
-            var echeckTypeObj = new EcheckType();
-            echeckTypeObj.AccType = echeckAccountTypeEnum.Checking;
-            echeckTypeObj.AccNum = "12345657890";
-            echeckTypeObj.RoutingNum = "123456789";
-            echeckTypeObj.CheckNum = "123455";
+            echeckVerificationObject.echeck = echeckTypeObj;
+            echeckVerificationObject.billToAddress = contactObj;
 
-            var contactObj = new Contact();
-            contactObj.Name = "Bob";
-            contactObj.City = "lowell";
-            contactObj.State = "MA";
-            contactObj.Email = "litle.com";
-
-            echeckVerificationObject.Echeck = echeckTypeObj;
-            echeckVerificationObject.BillToAddress = contactObj;
-
-            var response = litle.EcheckVerification(echeckVerificationObject);
+            echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void EcheckVerificationWithEcheckToken()
         {
-            var echeckVerificationObject = new EcheckVerification();
-            echeckVerificationObject.Amount = 123456;
-            echeckVerificationObject.OrderId = "12345";
-            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerification echeckVerificationObject = new echeckVerification();
+            echeckVerificationObject.amount = 123456;
+            echeckVerificationObject.orderId = "12345";
+            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
 
-            var echeckTokenObj = new EcheckTokenType();
-            echeckTokenObj.AccType = echeckAccountTypeEnum.Checking;
-            echeckTokenObj.LitleToken = "1234565789012";
-            echeckTokenObj.RoutingNum = "123456789";
-            echeckTokenObj.CheckNum = "123455";
+            echeckTokenType echeckTokenObj = new echeckTokenType();
+            echeckTokenObj.accType = echeckAccountTypeEnum.Checking;
+            echeckTokenObj.litleToken = "1234565789012";
+            echeckTokenObj.routingNum = "123456789";
+            echeckTokenObj.checkNum = "123455";
 
-            var contactObj = new Contact();
-            contactObj.Name = "Bob";
-            contactObj.City = "lowell";
-            contactObj.State = "MA";
-            contactObj.Email = "litle.com";
+            contact contactObj = new contact();
+            contactObj.name = "Bob";
+            contactObj.city = "lowell";
+            contactObj.state = "MA";
+            contactObj.email = "litle.com";
 
-            echeckVerificationObject.Token = echeckTokenObj;
-            echeckVerificationObject.BillToAddress = contactObj;
+            echeckVerificationObject.token = echeckTokenObj;
+            echeckVerificationObject.billToAddress = contactObj;
 
-            var response = litle.EcheckVerification(echeckVerificationObject);
+            echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
             StringAssert.AreEqualIgnoringCase("Approved", response.message);
         }
 
         [Test]
         public void TestMissingBillingField()
         {
-            var echeckVerificationObject = new EcheckVerification();
+            echeckVerification echeckVerificationObject = new echeckVerification();
             echeckVerificationObject.reportGroup = "Planets";
-            echeckVerificationObject.Amount = 123;
-            echeckVerificationObject.OrderId = "12345";
-            echeckVerificationObject.OrderSource = OrderSourceType.Ecommerce;
+            echeckVerificationObject.amount = 123;
+            echeckVerificationObject.orderId = "12345";
+            echeckVerificationObject.orderSource = orderSourceType.ecommerce;
 
-            var echeckTypeObj = new EcheckType();
-            echeckTypeObj.AccType = echeckAccountTypeEnum.Checking;
-            echeckTypeObj.AccNum = "12345657890";
-            echeckTypeObj.RoutingNum = "123456789";
-            echeckTypeObj.CheckNum = "123455";
-            echeckVerificationObject.Echeck = echeckTypeObj;
+            echeckType echeckTypeObj = new echeckType();
+            echeckTypeObj.accType = echeckAccountTypeEnum.Checking;
+            echeckTypeObj.accNum = "12345657890";
+            echeckTypeObj.routingNum = "123456789";
+            echeckTypeObj.checkNum = "123455";
+            echeckVerificationObject.echeck = echeckTypeObj;
             try
             {
                 //expected exception;
-                var response = litle.EcheckVerification(echeckVerificationObject);
+                echeckVerificationResponse response = litle.EcheckVerification(echeckVerificationObject);
             }
             catch (LitleOnlineException e)
             {

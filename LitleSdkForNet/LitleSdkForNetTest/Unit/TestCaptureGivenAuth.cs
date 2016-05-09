@@ -1,45 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
-using Moq;
 using NUnit.Framework;
+using Litle.Sdk;
+using Moq;
+using System.Text.RegularExpressions;
+
 
 namespace Litle.Sdk.Test.Unit
 {
     [TestFixture]
-    internal class TestCaptureGivenAuth
+    class TestCaptureGivenAuth
     {
+        
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
+            litle = new LitleOnline();
         }
 
         [Test]
         public void TestSecondaryAmount()
         {
-            var capture = new CaptureGivenAuth();
-            capture.Amount = 2;
-            capture.SecondaryAmount = 1;
-            capture.OrderSource = OrderSourceType.Ecommerce;
+            captureGivenAuth capture = new captureGivenAuth();
+            capture.amount = 2;
+            capture.secondaryAmount = 1;
+            capture.orderSource = orderSourceType.ecommerce;
             capture.reportGroup = "Planets";
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>();
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
 
-            var mockedCommunication = mock.Object;
+            Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litle.CaptureGivenAuth(capture);
         }
@@ -47,24 +43,18 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount()
         {
-            var capture = new CaptureGivenAuth();
-            capture.Amount = 2;
-            capture.SurchargeAmount = 1;
-            capture.OrderSource = OrderSourceType.Ecommerce;
+            captureGivenAuth capture = new captureGivenAuth();
+            capture.amount = 2;
+            capture.surchargeAmount = 1;
+            capture.orderSource = orderSourceType.ecommerce;
             capture.reportGroup = "Planets";
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>();
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<orderSource>ecommerce</orderSource>.*",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
 
-            var mockedCommunication = mock.Object;
+            Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litle.CaptureGivenAuth(capture);
         }
@@ -72,22 +62,17 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestSurchargeAmount_Optional()
         {
-            var capture = new CaptureGivenAuth();
-            capture.Amount = 2;
-            capture.OrderSource = OrderSourceType.Ecommerce;
+            captureGivenAuth capture = new captureGivenAuth();
+            capture.amount = 2;
+            capture.orderSource = orderSourceType.ecommerce;
             capture.reportGroup = "Planets";
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>();
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(".*<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>.*",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
 
-            var mockedCommunication = mock.Object;
+            Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litle.CaptureGivenAuth(capture);
         }
@@ -95,21 +80,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_True()
         {
-            var captureGivenAuth = new CaptureGivenAuth();
-            captureGivenAuth.MerchantData = new MerchantDataType();
-            captureGivenAuth.DebtRepayment = true;
+            captureGivenAuth captureGivenAuth = new captureGivenAuth();
+            captureGivenAuth.merchantData = new merchantDataType();
+            captureGivenAuth.debtRepayment = true;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>();
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(".*</merchantData>\r\n<debtRepayment>true</debtRepayment>\r\n</captureGivenAuth>.*",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*</merchantData>\r\n<debtRepayment>true</debtRepayment>\r\n</captureGivenAuth>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
 
-            var mockedCommunication = mock.Object;
+            Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litle.CaptureGivenAuth(captureGivenAuth);
         }
@@ -117,22 +97,16 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_False()
         {
-            var captureGivenAuth = new CaptureGivenAuth();
-            captureGivenAuth.MerchantData = new MerchantDataType();
-            captureGivenAuth.DebtRepayment = false;
+            captureGivenAuth captureGivenAuth = new captureGivenAuth();
+            captureGivenAuth.merchantData = new merchantDataType();
+            captureGivenAuth.debtRepayment = false;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>();
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(
-                            ".*</merchantData>\r\n<debtRepayment>false</debtRepayment>\r\n</captureGivenAuth>.*",
-                            RegexOptions.Singleline), It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*</merchantData>\r\n<debtRepayment>false</debtRepayment>\r\n</captureGivenAuth>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
 
-            var mockedCommunication = mock.Object;
+            Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litle.CaptureGivenAuth(captureGivenAuth);
         }
@@ -140,22 +114,18 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void TestDebtRepayment_Optional()
         {
-            var captureGivenAuth = new CaptureGivenAuth();
-            captureGivenAuth.MerchantData = new MerchantDataType();
+            captureGivenAuth captureGivenAuth = new captureGivenAuth();
+            captureGivenAuth.merchantData = new merchantDataType();
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>();
 
-            mock.Setup(
-                Communications =>
-                    Communications.HttpPost(
-                        It.IsRegex(".*</merchantData>\r\n</captureGivenAuth>.*", RegexOptions.Singleline),
-                        It.IsAny<Dictionary<string, string>>()))
-                .Returns(
-                    "<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
+            mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*</merchantData>\r\n</captureGivenAuth>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
+                .Returns("<litleOnlineResponse version='8.19' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureGivenAuthResponse><litleTxnId>123</litleTxnId></captureGivenAuthResponse></litleOnlineResponse>");
 
-            var mockedCommunication = mock.Object;
+            Communications mockedCommunication = mock.Object;
             litle.setCommunication(mockedCommunication);
             litle.CaptureGivenAuth(captureGivenAuth);
         }
+
     }
 }
