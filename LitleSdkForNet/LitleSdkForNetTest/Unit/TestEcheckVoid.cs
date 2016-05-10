@@ -14,13 +14,13 @@ namespace Litle.Sdk.Test.Unit
     class TestEcheckVoid
     {
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
+        private IDictionary<string, StringBuilder> _cache;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
+            _cache = new Dictionary<string, StringBuilder>();
+            litle = new LitleOnline(_cache);
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace Litle.Sdk.Test.Unit
             echeckVoid echeckVoid = new echeckVoid();
             echeckVoid.litleTxnId = 123456789;
            
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<echeckVoid.*<litleTxnId>123456789.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckVoidResponse><litleTxnId>123</litleTxnId></echeckVoidResponse></litleOnlineResponse>");

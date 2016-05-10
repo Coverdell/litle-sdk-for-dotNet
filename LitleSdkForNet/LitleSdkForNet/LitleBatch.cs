@@ -10,7 +10,7 @@ namespace Litle.Sdk
 {
     public class litleRequest
     {
-        private IDictionary<string, StringBuilder> _memoryStreams; 
+        private IDictionary<string, StringBuilder> _cache; 
         private authentication authentication;
         private Dictionary<String, String> config;
         private Communications communication;
@@ -27,9 +27,9 @@ namespace Litle.Sdk
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
          */
-        public litleRequest(IDictionary<string, StringBuilder> memoryStreams)
+        public litleRequest(IDictionary<string, StringBuilder> cache)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             config = new Dictionary<string, string>();
 
             config["url"] = Properties.Settings.Default.url;
@@ -77,9 +77,9 @@ namespace Litle.Sdk
          * requestDirectory
          * responseDirectory
          */
-        public litleRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<String, String> config)
+        public litleRequest(IDictionary<string, StringBuilder> cache, Dictionary<String, String> config)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             this.config = config;
 
             initializeRequest();
@@ -87,7 +87,7 @@ namespace Litle.Sdk
 
         private void initializeRequest()
         {
-            communication = new Communications(_memoryStreams);
+            communication = new Communications(_cache);
 
             authentication = new authentication();
             authentication.user = config["username"];
@@ -98,7 +98,7 @@ namespace Litle.Sdk
 
             litleXmlSerializer = new litleXmlSerializer();
             litleTime = new litleTime();
-            litleFile = new litleFile(_memoryStreams);
+            litleFile = new litleFile(_cache);
         }
 
         public authentication getAuthenication()

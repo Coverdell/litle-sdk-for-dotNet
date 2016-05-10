@@ -23,13 +23,13 @@ namespace Litle.Sdk.Test.Unit
 
         private Mock<litleFile> mockLitleFile;
         private Mock<litleTime> mockLitleTime;
-        private IDictionary<string, StringBuilder> memoryStreams;
+        private IDictionary<string, StringBuilder> cache;
 
         [TestFixtureSetUp]
         public void setUp()
         {
 
-            memoryStreams = new Dictionary<string, StringBuilder>();
+            cache = new Dictionary<string, StringBuilder>();
             mockLitleFile = new Mock<litleFile>(new Dictionary<string, StringBuilder>());
             mockLitleTime = new Mock<litleTime>();
 
@@ -40,7 +40,7 @@ namespace Litle.Sdk.Test.Unit
         [SetUp]
         public void beforeTestSetup()
         {
-            batchRequest = new batchRequest(memoryStreams);
+            batchRequest = new batchRequest(cache);
             batchRequest.setLitleFile(mockLitleFile.Object);
             batchRequest.setLitleTime(mockLitleTime.Object);
         }
@@ -54,7 +54,7 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            batchRequest = new batchRequest(memoryStreams, mockConfig);
+            batchRequest = new batchRequest(cache, mockConfig);
 
             String actual = batchRequest.generateXmlHeader();
             String expected = @"
@@ -88,7 +88,7 @@ merchantId=""01234"">
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            batchRequest = new batchRequest(memoryStreams, mockConfig);
+            batchRequest = new batchRequest(cache, mockConfig);
 
             Assert.AreEqual("C:\\MockRequests\\Requests\\", batchRequest.getRequestDirectory());
             Assert.AreEqual("C:\\MockResponses\\Responses\\", batchRequest.getResponseDirectory());

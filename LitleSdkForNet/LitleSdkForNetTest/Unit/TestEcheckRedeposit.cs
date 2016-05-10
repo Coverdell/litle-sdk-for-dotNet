@@ -15,13 +15,13 @@ namespace Litle.Sdk.Test.Unit
     {
 
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
+        private IDictionary<string, StringBuilder> _cache;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
+            _cache = new Dictionary<string, StringBuilder>();
+            litle = new LitleOnline(_cache);
         }
         [Test]
         public void TestMerchantData()
@@ -33,7 +33,7 @@ namespace Litle.Sdk.Test.Unit
             echeckRedeposit.merchantData.affiliate = "affil";
             echeckRedeposit.merchantData.merchantGroupingId = "mgi";
            
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<echeckRedeposit.*<litleTxnId>1</litleTxnId>.*<merchantData>.*<campaign>camp</campaign>.*<affiliate>affil</affiliate>.*<merchantGroupingId>mgi</merchantGroupingId>.*</merchantData>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.13' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><echeckRedepositResponse><litleTxnId>123</litleTxnId></echeckRedepositResponse></litleOnlineResponse>");

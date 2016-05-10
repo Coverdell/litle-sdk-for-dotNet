@@ -14,13 +14,13 @@ namespace Litle.Sdk.Test.Unit
     class TestActivateReversal
     {        
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
+        private IDictionary<string, StringBuilder> _cache;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
+            _cache = new Dictionary<string, StringBuilder>();
+            litle = new LitleOnline(_cache);
         }
 
         [Test]

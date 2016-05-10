@@ -15,13 +15,13 @@ namespace Litle.Sdk.Test.Unit
     {
         
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
+        private IDictionary<string, StringBuilder> _cache;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
+            _cache = new Dictionary<string, StringBuilder>();
+            litle = new LitleOnline(_cache);
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace Litle.Sdk.Test.Unit
             capture.payPalNotes = "note";
             capture.reportGroup = "Planets";
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<payPalNotes>note</payPalNotes>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureResponse><litleTxnId>123</litleTxnId></captureResponse></litleOnlineResponse>");
@@ -53,7 +53,7 @@ namespace Litle.Sdk.Test.Unit
             capture.payPalNotes = "note";
             capture.reportGroup = "Planets";
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<payPalNotes>note</payPalNotes>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><captureResponse><litleTxnId>123</litleTxnId></captureResponse></litleOnlineResponse>");

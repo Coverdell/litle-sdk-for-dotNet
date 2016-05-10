@@ -13,7 +13,7 @@ namespace Litle.Sdk
         public string reportGroup;
 
         public Dictionary<String, String> config;
-        private IDictionary<string, StringBuilder> _memoryStreams; 
+        private IDictionary<string, StringBuilder> _cache; 
 
         public string batchFilePath;
         private string tempBatchFilePath;
@@ -84,9 +84,9 @@ namespace Litle.Sdk
 
         private const string accountUpdateErrorMessage = "Account Updates need to exist in their own batch request!";
 
-        public batchRequest(IDictionary<string, StringBuilder> memoryStreams)
+        public batchRequest(IDictionary<string, StringBuilder> cache)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             config = new Dictionary<String, String>();
 
             config["url"] = Properties.Settings.Default.url;
@@ -108,9 +108,9 @@ namespace Litle.Sdk
             initializeRequest();
         }
 
-        public batchRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<String, String> config)
+        public batchRequest(IDictionary<string, StringBuilder> cache, Dictionary<String, String> config)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             this.config = config;
 
             initializeRequest();
@@ -121,7 +121,7 @@ namespace Litle.Sdk
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
             
-            litleFile = new litleFile(_memoryStreams);
+            litleFile = new litleFile(_cache);
             litleTime = new litleTime();
 
             numAuthorization = 0;
@@ -1319,11 +1319,11 @@ namespace Litle.Sdk
         private string responseDirectory;
 
         private Dictionary<String, String> config;
-        private IDictionary<string, StringBuilder> _memoryStreams;
+        private IDictionary<string, StringBuilder> _cache;
 
-        public RFRRequest(IDictionary<string, StringBuilder> memoryStreams)
+        public RFRRequest(IDictionary<string, StringBuilder> cache)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             config = new Dictionary<String, String>();
 
             config["url"] = Properties.Settings.Default.url;
@@ -1343,15 +1343,15 @@ namespace Litle.Sdk
             config["responseDirectory"] = Properties.Settings.Default.responseDirectory;
 
             litleTime = new litleTime();
-            litleFile = new litleFile(_memoryStreams);
+            litleFile = new litleFile(_cache);
 
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
         }
 
-        public RFRRequest(IDictionary<string, StringBuilder> memoryStreams, Dictionary<String, String> config)
+        public RFRRequest(IDictionary<string, StringBuilder> cache, Dictionary<String, String> config)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             this.config = config;
 
             initializeRequest();
@@ -1362,7 +1362,7 @@ namespace Litle.Sdk
             requestDirectory = config["requestDirectory"] + "\\Requests\\";
             responseDirectory = config["responseDirectory"] + "\\Responses\\";
             
-            litleFile = new litleFile(_memoryStreams);
+            litleFile = new litleFile(_cache);
             litleTime = new litleTime();
         }
 

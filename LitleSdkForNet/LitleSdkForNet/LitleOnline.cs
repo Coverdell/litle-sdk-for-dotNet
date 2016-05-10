@@ -11,14 +11,14 @@ namespace Litle.Sdk
     {
         private Dictionary<String, String> config;
         private Communications communication;
-        private IDictionary<string, StringBuilder> _memoryStreams;
+        private IDictionary<string, StringBuilder> _cache;
 
         /**
          * Construct a Litle online using the configuration specified in LitleSdkForNet.dll.config
          */
-        public LitleOnline(IDictionary<string, StringBuilder> memoryStreams)
+        public LitleOnline(IDictionary<string, StringBuilder> cache)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             config = new Dictionary<String, String>();
             config["url"] = Properties.Settings.Default.url;
             config["reportGroup"] = Properties.Settings.Default.reportGroup;
@@ -31,7 +31,7 @@ namespace Litle.Sdk
             config["proxyPort"] = Properties.Settings.Default.proxyPort;
             config["logFile"] = Properties.Settings.Default.logFile;
             config["neuterAccountNums"] = Properties.Settings.Default.neuterAccountNums;
-            communication = new Communications(_memoryStreams);
+            communication = new Communications(_cache);
         }
 
         /**
@@ -50,11 +50,11 @@ namespace Litle.Sdk
          * proxyPort
          * printxml (possible values "true" and "false" - defaults to false)
          */
-        public LitleOnline(IDictionary<string, StringBuilder> memoryStreams, Dictionary<String, String> config)
+        public LitleOnline(IDictionary<string, StringBuilder> cache, Dictionary<String, String> config)
         {
-            _memoryStreams = memoryStreams;
+            _cache = cache;
             this.config = config;
-            communication = new Communications(_memoryStreams);
+            communication = new Communications(_cache);
         }
 
         public void setCommunication(Communications communication)

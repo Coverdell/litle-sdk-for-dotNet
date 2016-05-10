@@ -15,13 +15,13 @@ namespace Litle.Sdk.Test.Unit
     {
 
         private LitleOnline litle;
-        private IDictionary<string, StringBuilder> _memoryStreams;
+        private IDictionary<string, StringBuilder> _cache;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            _memoryStreams = new Dictionary<string, StringBuilder>();
-            litle = new LitleOnline(_memoryStreams);
+            _cache = new Dictionary<string, StringBuilder>();
+            litle = new LitleOnline(_cache);
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace Litle.Sdk.Test.Unit
             auth.reportGroup = "Planets";
             auth.fraudFilterOverride = true;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<fraudFilterOverride>true</fraudFilterOverride>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -60,7 +60,7 @@ namespace Litle.Sdk.Test.Unit
             billToAddress.zip = "12345";
             auth.billToAddress = billToAddress;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<zip>12345</zip>.*<email>gdake@litle.com</email>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -86,7 +86,7 @@ namespace Litle.Sdk.Test.Unit
             billToAddress.zip = "12345";
             auth.billToAddress = billToAddress;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>.*<orderSource>3dsAttempted</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -112,7 +112,7 @@ namespace Litle.Sdk.Test.Unit
             billToAddress.zip = "12345";
             auth.billToAddress = billToAddress;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>.*<orderSource>3dsAuthenticated</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -135,7 +135,7 @@ namespace Litle.Sdk.Test.Unit
             auth.orderSource = orderSourceType.ecommerce;
             auth.reportGroup = "Planets";
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<secondaryAmount>1</secondaryAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -158,7 +158,7 @@ namespace Litle.Sdk.Test.Unit
             auth.orderSource = orderSourceType.ecommerce;
             auth.reportGroup = "Planets";
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<surchargeAmount>1</surchargeAmount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -180,7 +180,7 @@ namespace Litle.Sdk.Test.Unit
             auth.orderSource = orderSourceType.ecommerce;
             auth.reportGroup = "Planets";
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<amount>2</amount>\r\n<orderSource>ecommerce</orderSource>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -207,7 +207,7 @@ namespace Litle.Sdk.Test.Unit
             card.expDate = "1210";
             auth.card = card;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<card>\r\n<type>GC</type>\r\n<number>414100000000000000</number>\r\n<expDate>1210</expDate>\r\n</card>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -244,7 +244,7 @@ namespace Litle.Sdk.Test.Unit
             wallet.walletSourceTypeId = "123";
             auth.wallet = wallet;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*?<litleOnlineRequest.*?<authorization.*?<orderSource>applepay</orderSource>.*?<applepay>.*?<data>user</data>.*?</applepay>.*?<wallet>.*?<walletSourceTypeId>123</walletSourceTypeId>.*?</wallet>.*?</authorization>.*?", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.10' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -274,7 +274,7 @@ namespace Litle.Sdk.Test.Unit
             auth.recurringRequest.subscription.planCode = "abc123";
             auth.recurringRequest.subscription.numberOfPayments = 12;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<fraudFilterOverride>true</fraudFilterOverride>\r\n<recurringRequest>\r\n<subscription>\r\n<planCode>abc123</planCode>\r\n<numberOfPayments>12</numberOfPayments>\r\n</subscription>\r\n</recurringRequest>\r\n</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.18' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -301,7 +301,7 @@ namespace Litle.Sdk.Test.Unit
             auth.fraudFilterOverride = true;
             auth.debtRepayment = true;
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
 
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<fraudFilterOverride>true</fraudFilterOverride>\r\n<debtRepayment>true</debtRepayment>\r\n</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
@@ -373,7 +373,7 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.AreEqual(expectedResult, auth.Serialize());
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<authorization id=\".*>.*<customerIpAddress>192.168.1.1</customerIpAddress>.*</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
@@ -420,7 +420,7 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.AreEqual(expectedResult, auth.Serialize());
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
             mock.Setup(Communications => Communications.HttpPost(It.IsRegex(".*<authorization id=\".*>.*<billMeLaterRequest>\r\n<virtualAuthenticationKeyPresenceIndicator>Presence</virtualAuthenticationKeyPresenceIndicator>\r\n<virtualAuthenticationKeyData>Data</virtualAuthenticationKeyData>\r\n</billMeLaterRequest>.*</authorization>.*", RegexOptions.Singleline), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.14' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 
@@ -465,7 +465,7 @@ namespace Litle.Sdk.Test.Unit
             string test = auth.Serialize();
             Assert.AreEqual(expectedResult, auth.Serialize());
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
             mock.Setup(Communications => Communications.HttpPost(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><orderId>123</orderId><fraudResult><advancedFraudResults><deviceReviewStatus>\"ReviewStatus\"</deviceReviewStatus><deviceReputationScore>800</deviceReputationScore></advancedFraudResults></fraudResult></authorizationResponse></litleOnlineResponse>");
 
@@ -527,7 +527,7 @@ namespace Litle.Sdk.Test.Unit
 
             Assert.AreEqual(expectedResult, auth.Serialize());
 
-            var mock = new Mock<Communications>(_memoryStreams);
+            var mock = new Mock<Communications>(_cache);
             mock.Setup(Communications => Communications.HttpPost(It.IsAny<String>(), It.IsAny<Dictionary<String, String>>()))
                 .Returns("<litleOnlineResponse version='8.23' response='0' message='Valid Format' xmlns='http://www.litle.com/schema'><authorizationResponse><litleTxnId>123</litleTxnId></authorizationResponse></litleOnlineResponse>");
 

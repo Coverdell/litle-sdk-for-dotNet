@@ -14,13 +14,13 @@ namespace Litle.Sdk.Test.Unit
     class TestCommunications
     {
         private Communications objectUnderTest;
-        private IDictionary<string, StringBuilder> memoryStreams;
+        private IDictionary<string, StringBuilder> cache;
 
         [TestFixtureSetUp]
         public void SetUpLitle()
         {
-            memoryStreams = new Dictionary<string, StringBuilder>();
-            objectUnderTest = new Communications(memoryStreams);
+            cache = new Dictionary<string, StringBuilder>();
+            objectUnderTest = new Communications(cache);
         }
 
         [Test]

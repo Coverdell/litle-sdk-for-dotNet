@@ -26,27 +26,27 @@ namespace Litle.Sdk.Test.Unit
         private Mock<litleFile> mockLitleFile;
         private Mock<Communications> mockCommunications;
         private Mock<XmlReader> mockXmlReader;
-        private IDictionary<string, StringBuilder> memoryStreams;
+        private IDictionary<string, StringBuilder> cache;
 
         [TestFixtureSetUp]
         public void setUp()
         {
-            memoryStreams = new Dictionary<string, StringBuilder>();
+            cache = new Dictionary<string, StringBuilder>();
             mockLitleTime = new Mock<litleTime>();
             mockLitleTime.Setup(litleTime => litleTime.getCurrentTime(It.Is<String>(resultFormat => resultFormat == timeFormat))).Returns("01-01-1960_01-22-30-1234_");
 
-            mockLitleFile = new Mock<litleFile>(memoryStreams);
+            mockLitleFile = new Mock<litleFile>(cache);
             mockLitleFile.Setup(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object)).Returns(mockFilePath);
             mockLitleFile.Setup(litleFile => litleFile.AppendFileToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
             mockLitleFile.Setup(litleFile => litleFile.AppendLineToFile(mockFilePath, It.IsAny<String>())).Returns(mockFilePath);
 
-            mockCommunications = new Mock<Communications>(memoryStreams);
+            mockCommunications = new Mock<Communications>(cache);
         }
 
         [SetUp]
         public void setUpBeforeEachTest()
         {
-            litle = new litleRequest(memoryStreams);
+            litle = new litleRequest(cache);
 
             mockXmlReader = new Mock<XmlReader>();
             mockXmlReader.SetupSequence(XmlReader => XmlReader.ReadToFollowing(It.IsAny<String>())).Returns(true).Returns(true).Returns(false);
@@ -76,7 +76,7 @@ namespace Litle.Sdk.Test.Unit
             mockConfig["requestDirectory"] = "C:\\MockRequests";
             mockConfig["responseDirectory"] = "C:\\MockResponses";
 
-            litle = new litleRequest(memoryStreams, mockConfig);
+            litle = new litleRequest(cache, mockConfig);
 
             Assert.AreEqual("C:\\MockRequests\\Requests\\", litle.getRequestDirectory());
             Assert.AreEqual("C:\\MockResponses\\Responses\\", litle.getResponseDirectory());
@@ -126,7 +126,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addAccountUpdate(accountUpdate);
@@ -191,7 +191,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addAuthorization(authorization);
@@ -245,7 +245,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addAuthReversal(authreversal);
@@ -300,7 +300,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCapture(capture);
@@ -366,7 +366,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCaptureGivenAuth(capturegivenauth);
@@ -427,7 +427,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCredit(credit);
@@ -482,7 +482,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckCredit(echeckcredit);
@@ -536,7 +536,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckRedeposit(echeckredeposit);
@@ -604,7 +604,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckSale(echecksale);
@@ -672,7 +672,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckVerification(echeckverification);
@@ -733,7 +733,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addForceCapture(forcecapture);
@@ -794,7 +794,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addSale(sale);
@@ -849,7 +849,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addRegisterTokenRequest(token);
@@ -904,7 +904,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addUpdateCardValidationNumOnToken(updateCardValidationNumOnToken);
@@ -972,7 +972,7 @@ namespace Litle.Sdk.Test.Unit
                 litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
                 litle.setLitleFile(mockedLitleFile);
                 litle.setLitleTime(mockLitleTime.Object);
-                batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+                batchRequest litleBatchRequest = new batchRequest(cache);
                 litleBatchRequest.setLitleFile(mockedLitleFile);
                 litleBatchRequest.setLitleTime(mockLitleTime.Object);
 
@@ -1020,7 +1020,7 @@ namespace Litle.Sdk.Test.Unit
                 litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
                 litle.setLitleFile(mockedLitleFile);
                 litle.setLitleTime(mockLitleTime.Object);
-                batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+                batchRequest litleBatchRequest = new batchRequest(cache);
                 litleBatchRequest.setLitleFile(mockedLitleFile);
                 litleBatchRequest.setLitleTime(mockLitleTime.Object);
 
@@ -1074,7 +1074,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleXmlSerializer(mockedLitleXmlSerializer);
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addAuthorization(authorization);
@@ -1119,7 +1119,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleTime(mockedLitleTime);
             litle.setLitleFile(mockedLitleFile);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.addAuthorization(authorization);
             litle.addBatch(litleBatchRequest);
@@ -1134,7 +1134,7 @@ namespace Litle.Sdk.Test.Unit
         [Test]
         public void testRFRRequest()
         {
-            RFRRequest rfrRequest = new RFRRequest(memoryStreams);
+            RFRRequest rfrRequest = new RFRRequest(cache);
             rfrRequest.litleSessionId = 123456789;
 
             var mockBatchXmlReader = new Mock<XmlReader>();
@@ -1214,7 +1214,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCancelSubscription(cancel);
@@ -1278,7 +1278,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addUpdateSubscription(update);
@@ -1332,7 +1332,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addCreatePlan(createPlan);
@@ -1385,7 +1385,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addUpdatePlan(updatePlan);
@@ -1439,7 +1439,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addActivate(activate);
@@ -1493,7 +1493,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addDeactivate(deactivate);
@@ -1547,7 +1547,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addLoad(load);
@@ -1601,7 +1601,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addUnload(unload);
@@ -1655,7 +1655,7 @@ namespace Litle.Sdk.Test.Unit
 
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addBalanceInquiry(balanceInquiry);
@@ -1719,7 +1719,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckPreNoteSale(echeckPreNoteSale);
@@ -1786,7 +1786,7 @@ namespace Litle.Sdk.Test.Unit
             litle.setLitleFile(mockedLitleFile);
             litle.setLitleTime(mockLitleTime.Object);
 
-            batchRequest litleBatchRequest = new batchRequest(memoryStreams);
+            batchRequest litleBatchRequest = new batchRequest(cache);
             litleBatchRequest.setLitleFile(mockedLitleFile);
             litleBatchRequest.setLitleTime(mockLitleTime.Object);
             litleBatchRequest.addEcheckPreNoteCredit(echeckPreNoteCredit);
