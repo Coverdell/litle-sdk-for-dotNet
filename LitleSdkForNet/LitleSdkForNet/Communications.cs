@@ -55,14 +55,35 @@ namespace Litle.Sdk
 
         public void neuterXML(ref string inputXml)
         {
-
             string pattern1 = "(?i)<number>.*?</number>";
             string pattern2 = "(?i)<accNum>.*?</accNum>";
 
+            //Note: The following values are required to be encrypted or scrubbed when persisting to disk
+            //      in order to comply with the PCI DSS.
             Regex rgx1 = new Regex(pattern1);
             Regex rgx2 = new Regex(pattern2);
             inputXml = rgx1.Replace(inputXml, "<number>xxxxxxxxxxxxxxxx</number>");
             inputXml = rgx2.Replace(inputXml, "<accNum>xxxxxxxxxx</accNum>");
+            inputXml = Replace(inputXml, "cardValidationNum", "xxx");
+            inputXml = Replace(inputXml, "track", "0x0000");
+
+            //Note: Though the following isn't required for PCI, sensitive user and consumer data shouldn't be
+            //      stored on disk in an unencrypted state.
+            inputXml = Replace(inputXml, "routingNum", "xxxxxxxxx");
+            inputXml = Replace(inputXml, "checkNum", "xxxxxxxxx");
+            inputXml = Replace(inputXml, "password", "xxxxxxxx");
+            inputXml = Replace(inputXml, "ssn", "xxx-xx-xxxx");
+            inputXml = Replace(inputXml, "cardAcceptorTaxId", "xxxxxxxxx");
+        }
+
+        private static string Replace(string input, string element, string text)
+        {
+            const RegexOptions regexOptions = RegexOptions.IgnoreCase | RegexOptions.Multiline | RegexOptions.CultureInvariant;
+            var formatString = $"<{element}>{{0}}</{element}>";
+            return Regex.Replace(input,
+                string.Format(formatString, ".*?"),
+                string.Format(formatString, text),
+                regexOptions);
         }
         
         public void log(String logMessage, String logFile, bool neuter)
