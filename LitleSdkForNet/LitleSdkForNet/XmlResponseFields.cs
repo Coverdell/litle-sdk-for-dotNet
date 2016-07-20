@@ -4583,21 +4583,22 @@ namespace Litle.Sdk
         private XmlReader originalXmlReader;
         private XmlReader batchResponseReader;
         private XmlReader rfrResponseReader;
-        private string filePath;
+
+        private MemoryStream _stream;
 
         public litleResponse()
         {
         }
 
-        public litleResponse(MemoryStream stream)
+        public litleResponse(MemoryStream stream) 
+            : this(new XmlTextReader(stream.Clone()), stream)
         {
-            XmlTextReader reader = new XmlTextReader(stream);
-            readXml(reader, stream);
         }
 
         public litleResponse(XmlReader reader, MemoryStream stream)
         {
-            readXml(reader, stream);
+            _stream = stream.Clone();
+            readXml(reader);
         }
 
         public void setBatchResponseReader(XmlReader xmlReader)
@@ -4610,7 +4611,7 @@ namespace Litle.Sdk
             this.rfrResponseReader = xmlReader;
         }
 
-        public void readXml(XmlReader reader, MemoryStream stream)
+        public void readXml(XmlReader reader)
         {
             if (reader.ReadToFollowing("litleResponse"))
             {
@@ -4631,13 +4632,13 @@ namespace Litle.Sdk
 
             this.originalXmlReader = reader;
 
-            this.batchResponseReader = new XmlTextReader(stream);
+            this.batchResponseReader = new XmlTextReader(_stream.Clone());
             if (!batchResponseReader.ReadToFollowing("batchResponse"))
             {
                 batchResponseReader.Close();
             }
 
-            this.rfrResponseReader = new XmlTextReader(stream);
+            this.rfrResponseReader = new XmlTextReader(_stream.Clone());
             if (!rfrResponseReader.ReadToFollowing("RFRResponse"))
             {
                 rfrResponseReader.Close();
@@ -4649,7 +4650,7 @@ namespace Litle.Sdk
         {
             if (batchResponseReader.ReadState != ReadState.Closed)
             {
-                batchResponse litleBatchResponse = new batchResponse(batchResponseReader, filePath);
+                batchResponse litleBatchResponse = new batchResponse(batchResponseReader, _stream.Clone());
                 if (!batchResponseReader.ReadToFollowing("batchResponse"))
                 {
                     batchResponseReader.Close();
@@ -4736,6 +4737,11 @@ namespace Litle.Sdk
         public batchResponse(XmlReader xmlReader, string filePath)
         {
             readXml(xmlReader, filePath);
+        }
+
+        public batchResponse(XmlReader xmlReader, MemoryStream stream)
+        {
+            readXml(xmlReader, stream);
         }
 
         public void setAccountUpdateResponseReader(XmlReader xmlReader)
@@ -4913,14 +4919,58 @@ namespace Litle.Sdk
             this.physicalCheckDebitResponseReader = xmlReader;
         }
 
-
-        public void readXml(XmlReader reader, string filePath)
+        private void readXml(XmlReader reader)
         {
             id = reader.GetAttribute("id");
             litleBatchId = Int64.Parse(reader.GetAttribute("litleBatchId"));
             merchantId = reader.GetAttribute("merchantId");
-
             originalXmlReader = reader;
+        }
+
+        public void readXml(XmlReader reader, MemoryStream stream)
+        {
+            readXml(reader);
+            accountUpdateResponseReader = new XmlTextReader(stream.Clone());
+            authorizationResponseReader = new XmlTextReader(stream.Clone());
+            authReversalResponseReader = new XmlTextReader(stream.Clone());
+            captureResponseReader = new XmlTextReader(stream.Clone());
+            captureGivenAuthResponseReader = new XmlTextReader(stream.Clone());
+            creditResponseReader = new XmlTextReader(stream.Clone());
+            forceCaptureResponseReader = new XmlTextReader(stream.Clone());
+            echeckCreditResponseReader = new XmlTextReader(stream.Clone());
+            echeckRedepositResponseReader = new XmlTextReader(stream.Clone());
+            echeckSalesResponseReader = new XmlTextReader(stream.Clone());
+            echeckVerificationResponseReader = new XmlTextReader(stream.Clone());
+            saleResponseReader = new XmlTextReader(stream.Clone());
+            registerTokenResponseReader = new XmlTextReader(stream.Clone());
+            updateCardValidationNumOnTokenResponseReader = new XmlTextReader(stream.Clone());
+            cancelSubscriptionResponseReader = new XmlTextReader(stream.Clone());
+            updateSubscriptionResponseReader = new XmlTextReader(stream.Clone());
+            createPlanResponseReader = new XmlTextReader(stream.Clone());
+            updatePlanResponseReader = new XmlTextReader(stream.Clone());
+            activateResponseReader = new XmlTextReader(stream.Clone());
+            deactivateResponseReader = new XmlTextReader(stream.Clone());
+            loadResponseReader = new XmlTextReader(stream.Clone());
+            echeckPreNoteSaleResponseReader = new XmlTextReader(stream.Clone());
+            echeckPreNoteCreditResponseReader = new XmlTextReader(stream.Clone());
+            unloadResponseReader = new XmlTextReader(stream.Clone());
+            balanceInquiryResponseReader = new XmlTextReader(stream.Clone());
+            submerchantCreditResponseReader = new XmlTextReader(stream.Clone());
+            payFacCreditResponseReader = new XmlTextReader(stream.Clone());
+            reserveCreditResponseReader = new XmlTextReader(stream.Clone());
+            vendorCreditResponseReader = new XmlTextReader(stream.Clone());
+            physicalCheckCreditResponseReader = new XmlTextReader(stream.Clone());
+            submerchantDebitResponseReader = new XmlTextReader(stream.Clone());
+            payFacDebitResponseReader = new XmlTextReader(stream.Clone());
+            reserveDebitResponseReader = new XmlTextReader(stream.Clone());
+            vendorDebitResponseReader = new XmlTextReader(stream.Clone());
+            physicalCheckDebitResponseReader = new XmlTextReader(stream.Clone());
+            parseNodes();
+        }
+
+        public void readXml(XmlReader reader, string filePath)
+        {
+            readXml(reader);
             accountUpdateResponseReader = new XmlTextReader(filePath);
             authorizationResponseReader = new XmlTextReader(filePath);
             authReversalResponseReader = new XmlTextReader(filePath);
@@ -4956,7 +5006,11 @@ namespace Litle.Sdk
             reserveDebitResponseReader = new XmlTextReader(filePath);
             vendorDebitResponseReader = new XmlTextReader(filePath);
             physicalCheckDebitResponseReader = new XmlTextReader(filePath);
+            parseNodes();
+        }
 
+        private void parseNodes()
+        {
             if (!accountUpdateResponseReader.ReadToFollowing("accountUpdateResponse"))
             {
                 accountUpdateResponseReader.Close();
@@ -5048,7 +5102,8 @@ namespace Litle.Sdk
             if (!echeckPreNoteCreditResponseReader.ReadToFollowing("echeckPreNoteCreditResponse"))
             {
                 echeckPreNoteCreditResponseReader.Close();
-            } if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
+            }
+            if (!unloadResponseReader.ReadToFollowing("unloadResponse"))
             {
                 unloadResponseReader.Close();
             }
