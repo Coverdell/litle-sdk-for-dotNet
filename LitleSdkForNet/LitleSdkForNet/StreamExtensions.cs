@@ -11,6 +11,7 @@ namespace Litle.Sdk
             source.Seek(0, SeekOrigin.Begin);
             source.CopyTo(result);
             source.Seek(position, SeekOrigin.Begin);
+            result.Seek(position, SeekOrigin.Begin);
             return result;
         }
     }
