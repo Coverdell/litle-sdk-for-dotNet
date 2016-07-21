@@ -243,23 +243,15 @@ namespace Litle.Sdk
             string xmlHeader = "<?xml version='1.0' encoding='utf-8'?>\r\n<litleRequest version=\"9.3\"" +
              " xmlns=\"http://www.litle.com/schema\" " +
              "numBatchRequests=\"" + numOfLitleBatchRequest + "\">";
-
             string xmlFooter = "\r\n</litleRequest>";
-
-            string filePath;
-
-            finalFilePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(finalFilePath), ".xml", litleTime);
-            filePath = finalFilePath;
+            string filePath = finalFilePath = litleFile.createRandomFile(requestDirectory, Path.GetFileName(finalFilePath), ".xml", litleTime);
 
             litleFile.AppendLineToFile(finalFilePath, xmlHeader);
-            var a = litleFile.ReadPosition(finalFilePath);
             litleFile.AppendLineToFile(finalFilePath, authentication.Serialize());
-            a = litleFile.ReadPosition(finalFilePath);
 
             if (batchFilePath != null)
             {
                 litleFile.AppendFileToFile(finalFilePath, batchFilePath);
-                a = litleFile.ReadPosition(finalFilePath);
             }
             else
             {
@@ -267,7 +259,6 @@ namespace Litle.Sdk
             }
 
             litleFile.AppendLineToFile(finalFilePath, xmlFooter);
-            a = litleFile.ReadPosition(finalFilePath);
             finalFilePath = null;
 
             return filePath;
@@ -307,7 +298,7 @@ namespace Litle.Sdk
             }
             if (_cache.ContainsKey(filePath))
             {
-                _cache[filePath] = new StringBuilder();
+                _cache[filePath] = _cache[filePath] ?? new StringBuilder();
             }
             else
             {
@@ -318,26 +309,23 @@ namespace Litle.Sdk
 
         public virtual string AppendLineToFile(string filePath, string lineToAppend)
         {
-            StringBuilder ms = _cache[filePath];
+            var ms = _cache[filePath];
             ms.Append(lineToAppend);
             return filePath;
         }
+
         public virtual string ReadPosition(string filepath)
         {
-            var s = _cache[filepath];
-            return s.ToString();
+            return _cache[filepath].ToString();
         }
 
         public virtual string AppendFileToFile(string filePathToAppendTo, string filePathToAppend)
         {
             var fs = _cache[filePathToAppendTo];
-            StringBuilder fsr = null;
             if (filePathToAppend != null)
             {
-                fsr = _cache[filePathToAppend];
-                fs.Append(fsr);
+                fs.Append(_cache[filePathToAppend]);
             }
-
             return filePathToAppendTo;
         }
     }

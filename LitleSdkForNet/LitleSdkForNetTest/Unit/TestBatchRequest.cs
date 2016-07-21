@@ -6,8 +6,10 @@ using NUnit.Framework;
 using Litle.Sdk;
 using Moq;
 using System.Text.RegularExpressions;
+using System.Xml;
 using Moq.Language.Flow;
-
+using System.Linq;
+using System.Xml.Linq;
 
 namespace Litle.Sdk.Test.Unit
 {
@@ -782,6 +784,33 @@ merchantId=""01234"">
 
             mockLitleFile.Verify(litleFile => litleFile.createRandomFile(It.IsAny<String>(), It.IsAny<String>(), It.IsAny<String>(), mockLitleTime.Object));
             mockLitleFile.Verify(litleFile => litleFile.AppendLineToFile(mockFilePath, physicalCheckDebit.Serialize()));
+        }
+
+        [Test]
+        public void testMultipleBatchRequestsSerialized()
+        {
+            var batchRequest1 = new batchRequest(cache) { id = "1" };
+            var batchRequest2 = new batchRequest(cache) { id = "2" };
+            var litleRequest = new litleRequest(cache);
+            litleRequest.addBatch(batchRequest1);
+            litleRequest.addBatch(batchRequest2);
+
+            var result = litleRequest.Serialize();
+            Assert.IsNotNull(result);
+
+            var xmlString = cache[result].ToString();
+            Assert.IsNotNull(xmlString);
+
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xmlString);
+            var rootNode = xmlDoc.DocumentElement;
+            Assert.IsNotNull(rootNode);
+            Assert.AreEqual("litleRequest", rootNode.Name);
+
+            var batchNodes = rootNode.ChildNodes.Cast<XmlNode>().Where(x => x.Name == "batchRequest").ToArray();
+            Assert.AreEqual(2, batchNodes.Length);
+            Assert.AreEqual(batchRequest1.id, batchNodes[0].Attributes["id"].Value);
+            Assert.AreEqual(batchRequest2.id, batchNodes[1].Attributes["id"].Value);
         }
     }
 }
