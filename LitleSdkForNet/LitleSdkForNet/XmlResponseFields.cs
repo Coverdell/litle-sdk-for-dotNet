@@ -1908,6 +1908,8 @@ namespace Litle.Sdk
 
         private string messageField;
 
+        private string cardSuffixField;
+
         private string authCodeField;
 
         private string authorizationResponseSubCodeField;
@@ -1933,6 +1935,10 @@ namespace Litle.Sdk
         private giftCardResponse giftCardResponseField;
 
         private applepayResponse applepayResponseField;
+
+        private androidpayResponse androidpayResponseField;
+
+        private string networkTransactionIdField;
 
         /// <remarks/>
         public long litleTxnId
@@ -2037,6 +2043,18 @@ namespace Litle.Sdk
             set
             {
                 this.messageField = value;
+            }
+        }
+
+        public string cardSuffix
+        {
+            get
+            {
+                return this.cardSuffixField;
+            }
+            set
+            {
+                this.cardSuffixField = value;
             }
         }
 
@@ -2209,7 +2227,34 @@ namespace Litle.Sdk
                 this.applepayResponseField = value;
             }
         }
+
+        /// <remarks/>
+        public androidpayResponse androidpayResponse
+        {
+            get
+            {
+                return this.androidpayResponseField;
+            }
+            set
+            {
+                this.androidpayResponseField = value;
+            }
+        }
+
+        public string networkTransactionId
+        {
+            get
+            {
+                return this.networkTransactionIdField;
+            }
+            set
+            {
+                this.networkTransactionIdField = value;
+            }
+        }
+
     }
+
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.42")]
@@ -6489,6 +6534,177 @@ namespace Litle.Sdk
             {
                 this.eciIndicatorField = value;
             }
+        }
+    }
+
+     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.3038")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://www.litle.com/schema")]
+    [System.Xml.Serialization.XmlRootAttribute("echeckPreNoteSaleResponse", Namespace = "http://www.litle.com/schema", IsNullable = false)]
+    public partial class androidpayResponse
+    {
+        private string cryptogramField;
+
+        private string expMonthField;
+
+        private string expYearField;
+
+        private string eciIndicatorField;
+
+        public string cryptogram
+        {
+            get
+            {
+                return this.cryptogramField;
+            }
+            set
+            {
+                this.cryptogramField = value;
+            }
+        }
+
+        public string expMonth
+        {
+            get
+            {
+                return this.expMonthField;
+            }
+            set
+            {
+                this.expMonthField = value;
+            }
+        }
+
+        public string expYear
+        {
+            get
+            {
+                return this.expYearField;
+            }
+            set
+            {
+                this.expYearField = value;
+            }
+        }
+
+        public string eciIndicator
+        {
+            get
+            {
+                return this.eciIndicatorField;
+            }
+            set
+            {
+                this.eciIndicatorField = value;
+            }
+        }
+    }
+
+    
+    public enum mandateProviderType
+    {
+        Merchant,
+        Vantiv
+    }
+    
+    public enum sequenceTypeType
+    {
+        OneTime,
+        FirstRecurring,
+        SubsequentRecurring,
+        FinalRecurring
+    }
+
+    public partial class sepaDirectDebitType
+    {
+        public mandateProviderType mandateProvider;
+        public sequenceTypeType sequenceType;
+        public string mandateReferenceField;
+        public bool mandateReferenceSet;
+        public string mandateReference
+        {
+            get
+            {
+                return mandateReferenceField;
+            }
+            set
+            {
+                mandateReferenceField = value;
+                mandateReferenceSet = true;
+            }
+        }
+        public string mandateUrlField;
+        public bool mandateUrlSet;
+        public string mandateUrl
+        {
+            get
+            {
+                return mandateUrlField;
+            }
+            set
+            {
+                mandateUrlField = value;
+                mandateUrlSet = true;
+            }
+        }
+        // CES does this work
+        public DateTime mandateSignatureDateField;
+        public bool mandateSignatureDateSet;
+        public DateTime mandateSignatureDate
+        {
+            get
+            {
+                return mandateSignatureDateField;
+            }
+            set
+            {
+                mandateSignatureDateField = value;
+                mandateSignatureDateSet = true;
+            }
+        }
+        public string iban;
+        public countryTypeEnum preferredLanguageField;
+        public bool preferredLanguageSet;
+        public countryTypeEnum preferredLanguage
+        {
+            get
+            {
+                return preferredLanguageField;
+            }
+            set
+            {
+                preferredLanguageField = value;
+                preferredLanguageSet = true;
+            }
+        }
+        public string Serialize()
+        {
+            var xml = "";
+            xml += "\r\n<mandateProvider>" + mandateProvider + "</mandateProvider>";
+            xml += "\r\n<sequenceType>" + sequenceType + "</sequenceType>";
+            if (mandateReferenceSet)
+            {
+                xml += "\r\n<mandateReference>" + mandateReference + "</mandateReference>";
+            }
+            if (mandateUrlSet)
+            {
+                xml += "\r\n<mandateUrl>" + mandateUrl + "</mandateUrl>";
+            }
+            if (mandateSignatureDateSet)
+            {
+                xml += "\r\n<mandateSignatureDate>" + mandateSignatureDate + "</mandateSignatureDate>";
+            }
+            if (iban != null)
+            {
+                xml += "\r\n<iban>" + iban + "</iban>";
+            }
+            if (preferredLanguageSet)
+            {
+                xml += "\r\n<preferredLanguage>" + preferredLanguage + "</preferredLanguage>";
+            }
+            return xml;
         }
     }
 
