@@ -2051,6 +2051,27 @@ namespace Litle.Sdk
 
         public advancedFraudChecksType advancedFraudChecks;
         public wallet wallet;
+        private processingTypeEnum processingTypeField;
+        private bool processingTypeSet;
+        public processingTypeEnum processingType
+        {
+            get { return processingTypeField; }
+            set { processingTypeField = value; processingTypeSet = true; }
+        }
+        private string originalNetworkTransactionIdField;
+        private bool originalNetworkTransactionIdSet;
+        public string originalNetworkTransactionId
+        {
+            get
+            {
+                return originalNetworkTransactionIdField;
+            }
+            set
+            {
+                originalNetworkTransactionIdField = value;
+                originalNetworkTransactionIdSet = true;
+            }
+        }
 
         public override string Serialize()
         {
@@ -2186,7 +2207,16 @@ namespace Litle.Sdk
             return xml;
         }
     }
-
+    
+    public enum processingTypeEnum
+    {
+        accountFunding,
+        initialRecurring,
+        initialInstallment,
+        initialCOF,
+        merchantInitiatedCOF,
+        cardholderInitiatedCOF
+    }
     public class forceCapture : transactionTypeWithReportGroup
     {
         public string orderId;

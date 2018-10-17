@@ -10,3 +10,4 @@ LitleSdkForNet/TestResult.xml
 *.zip
 *.suo
 Project.sln
+*/.vs
