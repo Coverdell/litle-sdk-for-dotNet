@@ -1938,8 +1938,6 @@ namespace Litle.Sdk
 
         private androidpayResponse androidpayResponseField;
 
-        private string networkTransactionIdField;
-
         /// <remarks/>
         public long litleTxnId
         {
@@ -2241,18 +2239,7 @@ namespace Litle.Sdk
             }
         }
 
-        public string networkTransactionId
-        {
-            get
-            {
-                return this.networkTransactionIdField;
-            }
-            set
-            {
-                this.networkTransactionIdField = value;
-            }
-        }
-
+        
     }
 
     
@@ -3407,6 +3394,8 @@ namespace Litle.Sdk
 
         private bool duplicateFieldSpecified;
 
+        private string networkTransactionIdField;
+
         /// <remarks/>
         public long litleTxnId
         {
@@ -3710,6 +3699,18 @@ namespace Litle.Sdk
                 this.duplicateFieldSpecified = value;
             }
         }
+        public string networkTransactionId
+        {
+            get
+            {
+                return this.networkTransactionIdField;
+            }
+            set
+            {
+                this.networkTransactionIdField = value;
+            }
+        }
+
     }
 
     /// <remarks/>
