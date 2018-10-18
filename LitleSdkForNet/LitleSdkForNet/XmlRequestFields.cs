@@ -1917,49 +1917,39 @@ namespace Litle.Sdk
         }
     }
 
-    public class sale : transactionTypeWithReportGroup
+    public partial class sale : transactionTypeWithReportGroup
     {
+
         private long litleTxnIdField;
         private bool litleTxnIdSet;
-
         public long litleTxnId
         {
-            get { return litleTxnIdField; }
+            get
+            {
+                return litleTxnIdField;
+            }
             set
             {
                 litleTxnIdField = value;
                 litleTxnIdSet = true;
             }
         }
-
         public string orderId;
         public long amount;
         private bool secondaryAmountSet;
         private long secondaryAmountField;
-
         public long secondaryAmount
         {
             get { return secondaryAmountField; }
-            set
-            {
-                secondaryAmountField = value;
-                secondaryAmountSet = true;
-            }
+            set { secondaryAmountField = value; secondaryAmountSet = true; }
         }
-
         private bool surchargeAmountSet;
         private long surchargeAmountField;
-
         public long surchargeAmount
         {
             get { return surchargeAmountField; }
-            set
-            {
-                surchargeAmountField = value;
-                surchargeAmountSet = true;
-            }
+            set { surchargeAmountField = value; surchargeAmountSet = true; }
         }
-
         public orderSourceType orderSource;
         public customerInfo customerInfo;
         public contact billToAddress;
@@ -1970,85 +1960,80 @@ namespace Litle.Sdk
         public cardTokenType token;
         public cardPaypageType paypage;
         public applepayType applepay;
+        public sepaDirectDebitType sepaDirectDebit;
+        public idealType ideal;
+        public giropayType giropay;
+        public sofortType sofort;
         public billMeLaterRequest billMeLaterRequest;
         public fraudCheckType cardholderAuthentication;
         public customBilling customBilling;
         private govtTaxTypeEnum taxTypeField;
         private bool taxTypeSet;
-
         public govtTaxTypeEnum taxType
         {
             get { return taxTypeField; }
-            set
-            {
-                taxTypeField = value;
-                taxTypeSet = true;
-            }
+            set { taxTypeField = value; taxTypeSet = true; }
         }
-
         public enhancedData enhancedData;
         public processingInstructions processingInstructions;
         public pos pos;
         private bool payPalOrderCompleteField;
         private bool payPalOrderCompleteSet;
-
         public bool payPalOrderComplete
         {
             get { return payPalOrderCompleteField; }
-            set
-            {
-                payPalOrderCompleteField = value;
-                payPalOrderCompleteSet = true;
-            }
+            set { payPalOrderCompleteField = value; payPalOrderCompleteSet = true; }
         }
-
         public string payPalNotes;
         public amexAggregatorData amexAggregatorData;
         private bool allowPartialAuthField;
         private bool allowPartialAuthSet;
-
         public bool allowPartialAuth
         {
-            get { return allowPartialAuthField; }
+            get
+            {
+                return allowPartialAuthField;
+            }
             set
             {
                 allowPartialAuthField = value;
                 allowPartialAuthSet = true;
             }
         }
-
         public healthcareIIAS healthcareIIAS;
         public filteringType filtering;
         public merchantDataType merchantData;
         public recyclingRequestType recyclingRequest;
         private bool fraudFilterOverrideField;
         private bool fraudFilterOverrideSet;
-
         public bool fraudFilterOverride
         {
-            get { return fraudFilterOverrideField; }
+            get
+            {
+                return fraudFilterOverrideField;
+            }
             set
             {
                 fraudFilterOverrideField = value;
                 fraudFilterOverrideSet = true;
             }
         }
-
         public recurringRequest recurringRequest;
         public litleInternalRecurringRequest litleInternalRecurringRequest;
         private bool debtRepaymentField;
         private bool debtRepaymentSet;
-
         public bool debtRepayment
         {
-            get { return debtRepaymentField; }
+            get
+            {
+                return debtRepaymentField;
+            }
             set
             {
                 debtRepaymentField = value;
                 debtRepaymentSet = true;
             }
         }
-
         public advancedFraudChecksType advancedFraudChecks;
         public wallet wallet;
         private processingTypeEnum processingTypeField;
@@ -2070,6 +2055,20 @@ namespace Litle.Sdk
             {
                 originalNetworkTransactionIdField = value;
                 originalNetworkTransactionIdSet = true;
+            }
+        }
+        private long originalTransactionAmountField;
+        private bool originalTransactionAmountSet;
+        public long originalTransactionAmount
+        {
+            get
+            {
+                return originalTransactionAmountField;
+            }
+            set
+            {
+                originalTransactionAmountField = value;
+                originalTransactionAmountSet = true;
             }
         }
 
@@ -2124,14 +2123,29 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<applepay>" + applepay.Serialize() + "\r\n</applepay>";
             }
+            else if (sepaDirectDebit != null)
+            {
+                xml += "\r\n<sepaDirectDebit>" + sepaDirectDebit.Serialize() + "\r\n</sepaDirectDebit>";
+            }
+            else if (ideal != null)
+            {
+                xml += "\r\n<ideal>" + ideal.Serialize() + "\r\n</ideal>";
+            }
+            else if (giropay != null)
+            {
+                xml += "\r\n<giropay>" + giropay.Serialize() + "\r\n</giropay>";
+            }
+            else if (sofort != null)
+            {
+                xml += "\r\n<sofort>" + sofort.Serialize() + "\r\n</sofort>";
+            }
             if (billMeLaterRequest != null)
             {
                 xml += "\r\n<billMeLaterRequest>" + billMeLaterRequest.Serialize() + "\r\n</billMeLaterRequest>";
             }
             if (cardholderAuthentication != null)
             {
-                xml += "\r\n<cardholderAuthentication>" + cardholderAuthentication.Serialize() +
-                       "\r\n</cardholderAuthentication>";
+                xml += "\r\n<cardholderAuthentication>" + cardholderAuthentication.Serialize() + "\r\n</cardholderAuthentication>";
             }
             if (customBilling != null)
             {
@@ -2147,18 +2161,14 @@ namespace Litle.Sdk
             }
             if (processingInstructions != null)
             {
-                xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() +
-                       "\r\n</processingInstructions>";
+                xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
             }
             if (pos != null)
             {
                 xml += "\r\n<pos>" + pos.Serialize() + "\r\n</pos>";
             }
-            if (payPalOrderCompleteSet)
-                xml += "\r\n<payPalOrderCompleteSet>" + payPalOrderCompleteField.ToString().ToLower() +
-                       "</payPalOrderCompleteSet>";
-            if (payPalNotes != null)
-                xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
+            if (payPalOrderCompleteSet) xml += "\r\n<payPalOrderCompleteSet>" + payPalOrderCompleteField.ToString().ToLower() + "</payPalOrderCompleteSet>";
+            if (payPalNotes != null) xml += "\r\n<payPalNotes>" + SecurityElement.Escape(payPalNotes) + "</payPalNotes>";
             if (amexAggregatorData != null)
             {
                 xml += "\r\n<amexAggregatorData>" + amexAggregatorData.Serialize() + "\r\n</amexAggregatorData>";
@@ -2183,31 +2193,121 @@ namespace Litle.Sdk
             {
                 xml += "\r\n<recyclingRequest>" + recyclingRequest.Serialize() + "\r\n</recyclingRequest>";
             }
-            if (fraudFilterOverrideSet)
-                xml += "\r\n<fraudFilterOverride>" + fraudFilterOverrideField.ToString().ToLower() +
-                       "</fraudFilterOverride>";
+            if (fraudFilterOverrideSet) xml += "\r\n<fraudFilterOverride>" + fraudFilterOverrideField.ToString().ToLower() + "</fraudFilterOverride>";
             if (recurringRequest != null)
             {
                 xml += "\r\n<recurringRequest>" + recurringRequest.Serialize() + "\r\n</recurringRequest>";
             }
             if (litleInternalRecurringRequest != null)
             {
-                xml += "\r\n<litleInternalRecurringRequest>" + litleInternalRecurringRequest.Serialize() +
-                       "\r\n</litleInternalRecurringRequest>";
+                xml += "\r\n<litleInternalRecurringRequest>" + litleInternalRecurringRequest.Serialize() + "\r\n</litleInternalRecurringRequest>";
             }
-            if (debtRepaymentSet)
-                xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
-            if (advancedFraudChecks != null)
-                xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
+            if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+            if (advancedFraudChecks != null) xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
             if (wallet != null)
             {
                 xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
+            }
+            if (processingTypeSet)
+            {
+                xml += "\r\n<processingType>" + processingType + "</processingType>";
+            }
+            if (originalNetworkTransactionIdSet)
+            {
+                xml += "\r\n<originalNetworkTransactionId>" + originalNetworkTransactionId + "</originalNetworkTransactionId>";
+            }
+            if (originalTransactionAmountSet)
+            {
+                xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
             }
             xml += "\r\n</sale>";
             return xml;
         }
     }
     
+    public class idealType
+    {
+        public countryTypeEnum preferredLanguageField;
+        public bool preferredLanguageSet;
+        public countryTypeEnum preferredLanguage
+        {
+            get
+            {
+                return preferredLanguageField;
+            }
+            set
+            {
+                preferredLanguageField = value;
+                preferredLanguageSet = true;
+            }
+        }
+
+        public string Serialize()
+        {
+            var xml = "";
+            if (preferredLanguageSet)
+            {
+                xml += "\r\n<preferredLanguage>" + preferredLanguage + "</preferredLanguage>";
+            }
+            return xml;
+        }
+    }
+
+    public class giropayType
+    {
+        public countryTypeEnum preferredLanguageField;
+        public bool preferredLanguageSet;
+        public countryTypeEnum preferredLanguage
+        {
+            get
+            {
+                return preferredLanguageField;
+            }
+            set
+            {
+                preferredLanguageField = value;
+                preferredLanguageSet = true;
+            }
+        }
+
+        public string Serialize()
+        {
+            var xml = "";
+            if (preferredLanguageSet)
+            {
+                xml += "\r\n<preferredLanguage>" + preferredLanguage + "</preferredLanguage>";
+            }
+            return xml;
+        }
+    }
+
+    public class sofortType
+    {
+        public countryTypeEnum preferredLanguageField;
+        public bool preferredLanguageSet;
+        public countryTypeEnum preferredLanguage
+        {
+            get
+            {
+                return preferredLanguageField;
+            }
+            set
+            {
+                preferredLanguageField = value;
+                preferredLanguageSet = true;
+            }
+        }
+
+        public string Serialize()
+        {
+            var xml = "";
+            if (preferredLanguageSet)
+            {
+                xml += "\r\n<preferredLanguage>" + preferredLanguage + "</preferredLanguage>";
+            }
+            return xml;
+        }
+    }
     public enum processingTypeEnum
     {
         accountFunding,
