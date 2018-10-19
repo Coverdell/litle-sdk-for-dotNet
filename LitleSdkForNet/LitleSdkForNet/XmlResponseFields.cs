@@ -3377,6 +3377,8 @@ namespace Litle.Sdk
 
         private string messageField;
 
+        private String cardSuffixField;
+
         private string authCodeField;
 
         private string authorizationResponseSubCodeField;
@@ -3403,9 +3405,21 @@ namespace Litle.Sdk
 
         private applepayResponse applepayResponseField;
 
+        private androidpayResponse androidpayResponseField;
+
+        private sepaDirectDebitResponse sepaDirectDebitResponseField;
+
+        private idealResponse idealResponseField;
+
+        private giropayResponse giropayResponseField;
+
+        private sofortResponse sofortResponseField;
+
         private bool duplicateField;
 
         private bool duplicateFieldSpecified;
+
+        private string networkTransactionIdField;
 
         /// <remarks/>
         public long litleTxnId
@@ -3510,6 +3524,20 @@ namespace Litle.Sdk
             set
             {
                 this.messageField = value;
+            }
+        }
+
+
+        /// <remarks/>
+        public string cardSuffix
+        {
+            get
+            {
+                return this.cardSuffixField;
+            }
+            set
+            {
+                this.cardSuffixField = value;
             }
         }
 
@@ -3684,6 +3712,71 @@ namespace Litle.Sdk
         }
 
         /// <remarks/>
+        public androidpayResponse androidpayResponse
+        {
+            get
+            {
+                return this.androidpayResponseField;
+            }
+            set
+            {
+                this.androidpayResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public sepaDirectDebitResponse sepaDirectDebitResponse
+        {
+            get
+            {
+                return this.sepaDirectDebitResponseField;
+            }
+            set
+            {
+                this.sepaDirectDebitResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public idealResponse idealResponse
+        {
+            get
+            {
+                return this.idealResponseField;
+            }
+            set
+            {
+                this.idealResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public giropayResponse giropayResponse
+        {
+            get
+            {
+                return this.giropayResponseField;
+            }
+            set
+            {
+                this.giropayResponseField = value;
+            }
+        }
+
+        /// <remarks/>
+        public sofortResponse sofortResponse
+        {
+            get
+            {
+                return this.sofortResponseField;
+            }
+            set
+            {
+                this.sofortResponseField = value;
+            }
+        }
+
+        /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool duplicate
         {
@@ -3708,6 +3801,19 @@ namespace Litle.Sdk
             set
             {
                 this.duplicateFieldSpecified = value;
+            }
+        }
+
+        /// <remarks/>
+        public string networkTransactionId
+        {
+            get
+            {
+                return this.networkTransactionIdField;
+            }
+            set
+            {
+                this.networkTransactionIdField = value;
             }
         }
     }
@@ -7870,6 +7976,176 @@ namespace Litle.Sdk
             set
             {
                 this.messageField = value;
+            }
+        }
+        
+    }
+    public partial class sepaDirectDebitResponse
+    {
+        private string redirectUrlField;
+
+        private string redirectTokenField;
+
+        private string mandateReferenceField;
+
+        public string redirectUrl
+        {
+            get
+            {
+                return this.redirectUrlField;
+            }
+            set
+            {
+                this.redirectUrlField = value;
+            }
+        }
+        public string redirectToken
+        {
+            get
+            {
+                return this.redirectTokenField;
+            }
+            set
+            {
+                this.redirectTokenField = value;
+            }
+        }
+        public string mandateReference
+        {
+            get
+            {
+                return this.mandateReferenceField;
+            }
+            set
+            {
+                this.mandateReferenceField = value;
+            }
+        }
+    }
+    public partial class idealResponse
+    {
+        private string redirectUrlField;
+        private string redirectTokenField;
+        private string paymentPurposeField;
+
+        public string redirectUrl
+        {
+            get
+            {
+                return this.redirectUrlField;
+            }
+            set
+            {
+                this.redirectUrlField = value;
+            }
+        }
+
+        public string redirectToken
+        {
+            get
+            {
+                return this.redirectTokenField;
+            }
+            set
+            {
+                this.redirectTokenField = value;
+            }
+        }
+
+        public string paymentPurpose
+        {
+            get
+            {
+                return this.paymentPurposeField;
+            }
+            set
+            {
+                this.paymentPurposeField = value;
+            }
+        }
+    }
+    public partial class giropayResponse
+    {
+        private string redirectUrlField;
+        private string redirectTokenField;
+        private string paymentPurposeField;
+
+        public string redirectUrl
+        {
+            get
+            {
+                return this.redirectUrlField;
+            }
+            set
+            {
+                this.redirectUrlField = value;
+            }
+        }
+
+        public string redirectToken
+        {
+            get
+            {
+                return this.redirectTokenField;
+            }
+            set
+            {
+                this.redirectTokenField = value;
+            }
+        }
+
+        public string paymentPurpose
+        {
+            get
+            {
+                return this.paymentPurposeField;
+            }
+            set
+            {
+                this.paymentPurposeField = value;
+            }
+        }
+    }
+
+    public partial class sofortResponse
+    {
+        private string redirectUrlField;
+        private string redirectTokenField;
+        private string paymentPurposeField;
+
+        public string redirectUrl
+        {
+            get
+            {
+                return this.redirectUrlField;
+            }
+            set
+            {
+                this.redirectUrlField = value;
+            }
+        }
+
+        public string redirectToken
+        {
+            get
+            {
+                return this.redirectTokenField;
+            }
+            set
+            {
+                this.redirectTokenField = value;
+            }
+        }
+
+        public string paymentPurpose
+        {
+            get
+            {
+                return this.paymentPurposeField;
+            }
+            set
+            {
+                this.paymentPurposeField = value;
             }
         }
     }
