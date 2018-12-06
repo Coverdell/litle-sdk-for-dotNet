@@ -1662,49 +1662,39 @@ namespace Litle.Sdk
         }
     }
 
-    public class authorization : transactionTypeWithReportGroup
+    public partial class authorization : transactionTypeWithReportGroup
     {
+
         private long litleTxnIdField;
         private bool litleTxnIdSet;
-
         public long litleTxnId
         {
-            get { return litleTxnIdField; }
+            get
+            {
+                return litleTxnIdField;
+            }
             set
             {
                 litleTxnIdField = value;
                 litleTxnIdSet = true;
             }
         }
-
         public string orderId;
         public long amount;
         private bool secondaryAmountSet;
         private long secondaryAmountField;
-
         public long secondaryAmount
         {
             get { return secondaryAmountField; }
-            set
-            {
-                secondaryAmountField = value;
-                secondaryAmountSet = true;
-            }
+            set { secondaryAmountField = value; secondaryAmountSet = true; }
         }
-
         private bool surchargeAmountSet;
         private long surchargeAmountField;
-
         public long surchargeAmount
         {
             get { return surchargeAmountField; }
-            set
-            {
-                surchargeAmountField = value;
-                surchargeAmountSet = true;
-            }
+            set { surchargeAmountField = value; surchargeAmountSet = true; }
         }
-
         public orderSourceType orderSource;
         public customerInfo customerInfo;
         public contact billToAddress;
@@ -1722,65 +1712,97 @@ namespace Litle.Sdk
         public customBilling customBilling;
         private govtTaxTypeEnum taxTypeField;
         private bool taxTypeSet;
-
         public govtTaxTypeEnum taxType
         {
             get { return taxTypeField; }
-            set
-            {
-                taxTypeField = value;
-                taxTypeSet = true;
-            }
+            set { taxTypeField = value; taxTypeSet = true; }
         }
-
+        private processingTypeEnum processingTypeField;
+        private bool processingTypeSet;
+        public processingTypeEnum processingType
+        {
+            get { return processingTypeField; }
+            set { processingTypeField = value;  processingTypeSet = true; }
+        }
         public enhancedData enhancedData;
         public amexAggregatorData amexAggregatorData;
         private bool allowPartialAuthField;
         private bool allowPartialAuthSet;
-
         public bool allowPartialAuth
         {
-            get { return allowPartialAuthField; }
+            get
+            {
+                return allowPartialAuthField;
+            }
             set
             {
                 allowPartialAuthField = value;
                 allowPartialAuthSet = true;
             }
         }
-
         public healthcareIIAS healthcareIIAS;
         public filteringType filtering;
         public merchantDataType merchantData;
         public recyclingRequestType recyclingRequest;
         private bool fraudFilterOverrideField;
         private bool fraudFilterOverrideSet;
-
         public bool fraudFilterOverride
         {
-            get { return fraudFilterOverrideField; }
+            get
+            {
+                return fraudFilterOverrideField;
+            }
             set
             {
                 fraudFilterOverrideField = value;
                 fraudFilterOverrideSet = true;
             }
         }
-
         public recurringRequest recurringRequest;
         private bool debtRepaymentField;
         private bool debtRepaymentSet;
-
         public bool debtRepayment
         {
-            get { return debtRepaymentField; }
+            get
+            {
+                return debtRepaymentField;
+            }
             set
             {
                 debtRepaymentField = value;
                 debtRepaymentSet = true;
             }
         }
-
         public advancedFraudChecksType advancedFraudChecks;
         public wallet wallet;
+        private string originalNetworkTransactionIdField;
+        private bool originalNetworkTransactionIdSet;
+        public string originalNetworkTransactionId
+        {
+            get
+            {
+                return originalNetworkTransactionIdField;
+            }
+            set
+            {
+                originalNetworkTransactionIdField = value;
+                originalNetworkTransactionIdSet = true;
+            }
+        }
+        private long originalTransactionAmountField;
+        private bool originalTransactionAmountSet;
+        public long originalTransactionAmount
+        {
+            get
+            {
+                return originalTransactionAmountField;
+            }
+            set
+            {
+                originalTransactionAmountField = value;
+                originalTransactionAmountSet = true;
+            }
+        }
 
         public override string Serialize()
         {
@@ -1845,13 +1867,11 @@ namespace Litle.Sdk
                 }
                 if (cardholderAuthentication != null)
                 {
-                    xml += "\r\n<cardholderAuthentication>" + cardholderAuthentication.Serialize() +
-                           "\r\n</cardholderAuthentication>";
+                    xml += "\r\n<cardholderAuthentication>" + cardholderAuthentication.Serialize() + "\r\n</cardholderAuthentication>";
                 }
                 if (processingInstructions != null)
                 {
-                    xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() +
-                           "\r\n</processingInstructions>";
+                    xml += "\r\n<processingInstructions>" + processingInstructions.Serialize() + "\r\n</processingInstructions>";
                 }
                 if (pos != null)
                 {
@@ -1893,15 +1913,12 @@ namespace Litle.Sdk
                 {
                     xml += "\r\n<recyclingRequest>" + recyclingRequest.Serialize() + "\r\n</recyclingRequest>";
                 }
-                if (fraudFilterOverrideSet)
-                    xml += "\r\n<fraudFilterOverride>" + fraudFilterOverrideField.ToString().ToLower() +
-                           "</fraudFilterOverride>";
+                if (fraudFilterOverrideSet) xml += "\r\n<fraudFilterOverride>" + fraudFilterOverrideField.ToString().ToLower() + "</fraudFilterOverride>";
                 if (recurringRequest != null)
                 {
                     xml += "\r\n<recurringRequest>" + recurringRequest.Serialize() + "\r\n</recurringRequest>";
                 }
-                if (debtRepaymentSet)
-                    xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
+                if (debtRepaymentSet) xml += "\r\n<debtRepayment>" + debtRepayment.ToString().ToLower() + "</debtRepayment>";
                 if (advancedFraudChecks != null)
                 {
                     xml += "\r\n<advancedFraudChecks>" + advancedFraudChecks.Serialize() + "\r\n</advancedFraudChecks>";
@@ -1910,8 +1927,21 @@ namespace Litle.Sdk
                 {
                     xml += "\r\n<wallet>" + wallet.Serialize() + "\r\n</wallet>";
                 }
-            }
+                if (processingTypeSet)
+                {
+                    xml += "\r\n<processingType>" + processingType + "</processingType>";
+                }
+                if (originalNetworkTransactionIdSet)
+                {
+                    xml += "\r\n<originalNetworkTransactionId>" + originalNetworkTransactionId + "</originalNetworkTransactionId>";
+                }
+                if (originalTransactionAmountSet)
+                {
+                    xml += "\r\n<originalTransactionAmount>" + originalTransactionAmount + "</originalTransactionAmount>";
+                }
 
+            }
+            
             xml += "\r\n</authorization>";
             return xml;
         }
